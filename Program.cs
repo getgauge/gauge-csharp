@@ -1,33 +1,34 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using gauge_csharp_lib;
 using Google.ProtocolBuffers;
 using main;
 
 namespace testApplication
 {
-    
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var port = System.Environment.GetEnvironmentVariable("GAUGE_INTERNAL_PORT");
+            string port = Environment.GetEnvironmentVariable("GAUGE_INTERNAL_PORT");
+            string apiPort = Environment.GetEnvironmentVariable("GAUGE_API_PORT");
+            var apiConnection = new GaugeConnection(Convert.ToInt32(apiPort));
+            Hashtable stepMethodTable = scanSteps(apiConnection);
             using (var tcpClient = new TcpClient())
             {
                 tcpClient.Connect(new IPEndPoint(IPAddress.Loopback, Convert.ToInt32(port)));
-                using (var networkStream = tcpClient.GetStream())
+                using (NetworkStream networkStream = tcpClient.GetStream())
                 {
                     while (tcpClient.Connected)
                     {
-                        Console.Out.WriteLine("getting message");
-                        var messageBytes = getBytes(networkStream);
-                        var message = Message.ParseFrom(messageBytes);
-                                                Console.Out.WriteLine(message.MessageType);
-                                                Message responseMessage;
+                        byte[] messageBytes = getBytes(networkStream);
+                        Message message = Message.ParseFrom(messageBytes);
+                        Message responseMessage;
 
                         switch (message.MessageType)
                         {
@@ -36,6 +37,11 @@ namespace testApplication
                                 break;
                             case Message.Types.MessageType.StepValidateRequest:
                                 responseMessage = getStepValidateResponseMessage();
+                                break;
+                            case Message.Types.MessageType.KillProcessRequest:
+                                return;
+                            case Message.Types.MessageType.ExecuteStep:
+                                responseMessage = excuteStep(message.ExecuteStepRequest, stepMethodTable);
                                 break;
                             default:
                                 responseMessage = getResponseMessage();
@@ -46,7 +52,43 @@ namespace testApplication
                     }
                 }
             }
-            
+            Console.ReadLine();
+        }
+
+        private static Message excuteStep(ExecuteStepRequest executeStepRequest, Hashtable stepMethodDictionary)
+        {
+            string parsedStepText = executeStepRequest.ParsedStepText;
+            Console.Out.WriteLine("executing step {0}",parsedStepText);
+            if (stepMethodDictionary.ContainsKey(parsedStepText))
+            {
+                Console.Out.WriteLine("method was found");
+                var stepImpl = (MethodInfo) stepMethodDictionary[parsedStepText];
+                object instance = Activator.CreateInstance(stepImpl.DeclaringType);
+                stepImpl.Invoke(instance, null);
+            }
+            return getResponseMessage();
+        }
+
+        private static Hashtable scanSteps(GaugeConnection apiConnection)
+        {
+            var hashtable = new Hashtable();
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in assembly.GetTypes())
+                {
+                    foreach (MethodInfo method in type.GetMethods())
+                    {
+                        IEnumerable<Step> step = method.GetCustomAttributes(false).OfType<Step>();
+                        foreach (Step s in step)
+                        {
+                            string stepValue = apiConnection.getStepValue(s.Name, false);
+                            Console.Out.WriteLine("adding {0}",stepValue);
+                            hashtable.Add(stepValue, method);
+                        }
+                    }
+                }
+            }
+            return hashtable;
         }
 
         private static Message getStepValidateResponseMessage()
@@ -81,20 +123,20 @@ namespace testApplication
 
         private static Message getResponseMessage()
         {
-            var executionStatusResponseBuilder = ExecutionStatusResponse.CreateBuilder();
-            var executionStatusResponse =
+            ExecutionStatusResponse.Builder executionStatusResponseBuilder = ExecutionStatusResponse.CreateBuilder();
+            ExecutionStatusResponse executionStatusResponse =
                 executionStatusResponseBuilder.SetExecutionResult(
                     ProtoExecutionResult.CreateBuilder().SetFailed(false).SetExecutionTime(0)).Build();
-                return Message.CreateBuilder()
-                    .SetMessageId(1)
-                    .SetMessageType(Message.Types.MessageType.ExecutionStatusResponse)
-                    .SetExecutionStatusResponse(executionStatusResponse)
-                    .Build();
+            return Message.CreateBuilder()
+                .SetMessageId(1)
+                .SetMessageType(Message.Types.MessageType.ExecutionStatusResponse)
+                .SetExecutionStatusResponse(executionStatusResponse)
+                .Build();
         }
 
         private static byte[] getBytes(NetworkStream networkStream)
         {
-            var codedInputStream = CodedInputStream.CreateInstance(networkStream);
+            CodedInputStream codedInputStream = CodedInputStream.CreateInstance(networkStream);
             ulong messageLength = codedInputStream.ReadRawVarint64();
             var bytes = new List<byte>();
             for (ulong i = 0; i < messageLength; i++)
@@ -103,7 +145,5 @@ namespace testApplication
             }
             return bytes.ToArray();
         }
-
-       
     }
 }
