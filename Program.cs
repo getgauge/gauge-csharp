@@ -9,69 +9,81 @@ using gauge_csharp_lib;
 using Google.ProtocolBuffers;
 using main;
 
-namespace testApplication
+namespace gauge_csharp
 {
-    internal class Program
+    internal static class Program
     {
+        const string GAUGE_PORT_ENV = "GAUGE_INTERNAL_PORT";
+        const string GAUGE_API_PORT_ENV = "GAUGE_API_PORT";
+
+
         private static void Main(string[] args)
         {
-            string port = Environment.GetEnvironmentVariable("GAUGE_INTERNAL_PORT");
-            string apiPort = Environment.GetEnvironmentVariable("GAUGE_API_PORT");
+            var port = readEnvValue(GAUGE_PORT_ENV);
+            string apiPort = readEnvValue(GAUGE_API_PORT_ENV);
+
             var apiConnection = new GaugeConnection(Convert.ToInt32(apiPort));
-            Hashtable stepMethodTable = scanSteps(apiConnection);
+            var stepRegistry = new StepRegistry(ScanSteps(apiConnection));
+            Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher =
+                initializeMessageHandlers(stepRegistry);
             using (var tcpClient = new TcpClient())
             {
                 tcpClient.Connect(new IPEndPoint(IPAddress.Loopback, Convert.ToInt32(port)));
                 using (NetworkStream networkStream = tcpClient.GetStream())
                 {
-                    while (tcpClient.Connected)
-                    {
-                        byte[] messageBytes = getBytes(networkStream);
-                        Message message = Message.ParseFrom(messageBytes);
-                        Message responseMessage;
-
-                        switch (message.MessageType)
-                        {
-                            case Message.Types.MessageType.StepNamesRequest:
-                                responseMessage = getStepNamesResponseMessage();
-                                break;
-                            case Message.Types.MessageType.StepValidateRequest:
-                                responseMessage = getStepValidateResponseMessage();
-                                break;
-                            case Message.Types.MessageType.KillProcessRequest:
-                                return;
-                            case Message.Types.MessageType.ExecuteStep:
-                                responseMessage = excuteStep(message.ExecuteStepRequest, stepMethodTable);
-                                break;
-                            default:
-                                responseMessage = getResponseMessage();
-                                break;
-                        }
-
-                        writeResponse(responseMessage, networkStream);
-                    }
+                    keepProcessing(tcpClient, networkStream, messageDispacher);
                 }
             }
-            Console.ReadLine();
         }
 
-        private static Message excuteStep(ExecuteStepRequest executeStepRequest, Hashtable stepMethodDictionary)
+        private static void keepProcessing(TcpClient tcpClient, NetworkStream networkStream, Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher)
         {
-            string parsedStepText = executeStepRequest.ParsedStepText;
-            Console.Out.WriteLine("executing step {0}",parsedStepText);
-            if (stepMethodDictionary.ContainsKey(parsedStepText))
+            while (tcpClient.Connected)
             {
-                Console.Out.WriteLine("method was found");
-                var stepImpl = (MethodInfo) stepMethodDictionary[parsedStepText];
-                object instance = Activator.CreateInstance(stepImpl.DeclaringType);
-                stepImpl.Invoke(instance, null);
+                byte[] messageBytes = ReadFromStream(networkStream);
+                Message message = Message.ParseFrom(messageBytes);
+                if (messageDispacher.ContainsKey(message.MessageType))
+                {
+                    Message response = messageDispacher[message.MessageType].Process(message);
+                    WriteResponse(response, networkStream);
+                    if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    Message response = new DefaultProcessor().Process(message);
+                    WriteResponse(response,networkStream);
+                }
             }
-            return getResponseMessage();
         }
 
-        private static Hashtable scanSteps(GaugeConnection apiConnection)
+        private static string readEnvValue(string env)
+        {
+            string port = Environment.GetEnvironmentVariable(env);
+            if (string.IsNullOrEmpty(port))
+            {
+                throw new Exception(env + " is not set");
+            }
+            return port;
+        }
+
+        private static Dictionary<Message.Types.MessageType, IMessageProcessor> initializeMessageHandlers(
+            StepRegistry stepRegistry)
+        {
+            var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>();
+            messageHandlers.Add(Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry));
+            messageHandlers.Add(Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor());
+            messageHandlers.Add(Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry));
+            messageHandlers.Add(Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry));
+            return messageHandlers;
+        }
+
+        private static Hashtable ScanSteps(GaugeConnection apiConnection)
         {
             var hashtable = new Hashtable();
+
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 foreach (Type type in assembly.GetTypes())
@@ -79,10 +91,8 @@ namespace testApplication
                     foreach (MethodInfo method in type.GetMethods())
                     {
                         IEnumerable<Step> step = method.GetCustomAttributes(false).OfType<Step>();
-                        foreach (Step s in step)
+                        foreach (string stepValue in step.Select(s => apiConnection.getStepValue(s.Name, false)))
                         {
-                            string stepValue = apiConnection.getStepValue(s.Name, false);
-                            Console.Out.WriteLine("adding {0}",stepValue);
                             hashtable.Add(stepValue, method);
                         }
                     }
@@ -91,27 +101,8 @@ namespace testApplication
             return hashtable;
         }
 
-        private static Message getStepValidateResponseMessage()
-        {
-            StepValidateResponse stepValidateResponse = StepValidateResponse.CreateBuilder().SetIsValid(true).Build();
-            return
-                Message.CreateBuilder()
-                    .SetMessageId(1)
-                    .SetMessageType(Message.Types.MessageType.StepValidateResponse)
-                    .SetStepValidateResponse(stepValidateResponse)
-                    .Build();
-        }
 
-        private static Message getStepNamesResponseMessage()
-        {
-            StepNamesResponse stepNamesResponse = StepNamesResponse.CreateBuilder().AddSteps("foo").Build();
-            return Message.CreateBuilder()
-                .SetMessageId(1)
-                .SetMessageType(Message.Types.MessageType.StepNamesResponse)
-                .SetStepNamesResponse(stepNamesResponse).Build();
-        }
-
-        private static void writeResponse(Message responseMessage, NetworkStream networkStream)
+        private static void WriteResponse(Message responseMessage, NetworkStream networkStream)
         {
             byte[] byteArray = responseMessage.ToByteArray();
             CodedOutputStream cos = CodedOutputStream.CreateInstance(networkStream);
@@ -121,20 +112,8 @@ namespace testApplication
             networkStream.Flush();
         }
 
-        private static Message getResponseMessage()
-        {
-            ExecutionStatusResponse.Builder executionStatusResponseBuilder = ExecutionStatusResponse.CreateBuilder();
-            ExecutionStatusResponse executionStatusResponse =
-                executionStatusResponseBuilder.SetExecutionResult(
-                    ProtoExecutionResult.CreateBuilder().SetFailed(false).SetExecutionTime(0)).Build();
-            return Message.CreateBuilder()
-                .SetMessageId(1)
-                .SetMessageType(Message.Types.MessageType.ExecutionStatusResponse)
-                .SetExecutionStatusResponse(executionStatusResponse)
-                .Build();
-        }
 
-        private static byte[] getBytes(NetworkStream networkStream)
+        private static byte[] ReadFromStream(NetworkStream networkStream)
         {
             CodedInputStream codedInputStream = CodedInputStream.CreateInstance(networkStream);
             ulong messageLength = codedInputStream.ReadRawVarint64();

@@ -49,8 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassInstanceManager.cs" />
+    <Compile Include="DefaultProcessor.cs" />
+    <Compile Include="ExecuteStepProcessor.cs" />
+    <Compile Include="IMessageProcessor.cs" />
+    <Compile Include="KillProcessProcessor.cs" />
+    <Compile Include="MethodExecutor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepNamesProcessor.cs" />
+    <Compile Include="StepRegistry.cs" />
+    <Compile Include="StepValidationProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
