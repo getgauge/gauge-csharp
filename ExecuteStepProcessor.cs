@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using gauge_csharp_lib;
 using main;
 
 namespace gauge_csharp
@@ -8,10 +9,13 @@ namespace gauge_csharp
     public class ExecuteStepProcessor : IMessageProcessor
     {
         private readonly StepRegistry _stepMethodHashtable;
+        private Dictionary<Type, IParamConverter> _paramConverters;
+
 
         public ExecuteStepProcessor(StepRegistry stepMethodHashtable)
         {
             _stepMethodHashtable = stepMethodHashtable;
+            initializeConverter();
         }
 
         public Message Process(Message request)
@@ -26,12 +30,29 @@ namespace gauge_csharp
                 IList<Parameter> stepParameter = executeStepRequest.ParametersList;
                 for (int i = 0; i < parameters.Length; i++)
                 {
-                    args[i] = stepParameter[i];
+                    Type paramType = parameters[i].ParameterType;
+                    if (_paramConverters.ContainsKey(paramType))
+                    {
+                        args[i] = _paramConverters[paramType].Convert(stepParameter[i]);
+                    }
+                    else
+                    {
+                        args[i] = stepParameter[i].Value;
+                    }
                 }
                 ProtoExecutionResult protoExecutionResult = executeMethod(method, args);
                 return wrapInMessage(protoExecutionResult, request);
             }
             return executionError("Step Implementation not found", request);
+        }
+
+        private void initializeConverter()
+        {
+            _paramConverters = new Dictionary<Type, IParamConverter>
+            {
+                {typeof (string), new StringParamConverter()},
+                {typeof (Table), new TableParamConverter()}
+            };
         }
 
         private Message executionError(string errorMessage, Message request)

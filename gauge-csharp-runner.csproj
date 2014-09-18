@@ -55,11 +55,14 @@
     <Compile Include="IMessageProcessor.cs" />
     <Compile Include="KillProcessProcessor.cs" />
     <Compile Include="MethodExecutor.cs" />
+    <Compile Include="ParamConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepNamesProcessor.cs" />
     <Compile Include="StepRegistry.cs" />
     <Compile Include="StepValidationProcessor.cs" />
+    <Compile Include="StringParamConverter.cs" />
+    <Compile Include="TableParamConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

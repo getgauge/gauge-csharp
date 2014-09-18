@@ -13,13 +13,13 @@ namespace gauge_csharp
 {
     internal static class Program
     {
-        const string GAUGE_PORT_ENV = "GAUGE_INTERNAL_PORT";
-        const string GAUGE_API_PORT_ENV = "GAUGE_API_PORT";
+        private const string GAUGE_PORT_ENV = "GAUGE_INTERNAL_PORT";
+        private const string GAUGE_API_PORT_ENV = "GAUGE_API_PORT";
 
 
         private static void Main(string[] args)
         {
-            var port = readEnvValue(GAUGE_PORT_ENV);
+            string port = readEnvValue(GAUGE_PORT_ENV);
             string apiPort = readEnvValue(GAUGE_API_PORT_ENV);
 
             var apiConnection = new GaugeConnection(Convert.ToInt32(apiPort));
@@ -31,12 +31,13 @@ namespace gauge_csharp
                 tcpClient.Connect(new IPEndPoint(IPAddress.Loopback, Convert.ToInt32(port)));
                 using (NetworkStream networkStream = tcpClient.GetStream())
                 {
-                    keepProcessing(tcpClient, networkStream, messageDispacher);
+                    ProcessTillDisconnect(tcpClient, networkStream, messageDispacher);
                 }
             }
         }
 
-        private static void keepProcessing(TcpClient tcpClient, NetworkStream networkStream, Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher)
+        private static void ProcessTillDisconnect(TcpClient tcpClient, NetworkStream networkStream,
+            Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher)
         {
             while (tcpClient.Connected)
             {
@@ -54,7 +55,7 @@ namespace gauge_csharp
                 else
                 {
                     Message response = new DefaultProcessor().Process(message);
-                    WriteResponse(response,networkStream);
+                    WriteResponse(response, networkStream);
                 }
             }
         }
@@ -72,11 +73,13 @@ namespace gauge_csharp
         private static Dictionary<Message.Types.MessageType, IMessageProcessor> initializeMessageHandlers(
             StepRegistry stepRegistry)
         {
-            var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>();
-            messageHandlers.Add(Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry));
-            messageHandlers.Add(Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor());
-            messageHandlers.Add(Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry));
-            messageHandlers.Add(Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry));
+            var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
+            {
+                {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry)},
+                {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
+                {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry)},
+                {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)}
+            };
             return messageHandlers;
         }
 
