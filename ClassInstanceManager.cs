@@ -4,17 +4,18 @@ using System.Runtime.InteropServices;
 
 namespace gauge_csharp
 {
-    internal class ClassInstanceManager
+    internal static class ClassInstanceManager
     {
-        private static Hashtable classInstanceMap = new Hashtable();
-        public static object get(Type declaringType)
+        private static readonly Hashtable ClassInstanceMap = new Hashtable();
+
+        public static object Get(Type declaringType)
         {
-            if (classInstanceMap.ContainsKey(declaringType))
+            if (ClassInstanceMap.ContainsKey(declaringType))
             {
-                return classInstanceMap[declaringType];
+                return ClassInstanceMap[declaringType];
             }
             object instance = Activator.CreateInstance(declaringType);
-            classInstanceMap.Add(declaringType,instance);
+            ClassInstanceMap.Add(declaringType, instance);
             return instance;
         }
     }

@@ -15,8 +15,8 @@ namespace gauge_csharp
 
         public Message Process(Message request)
         {
-            string stepToValidate = request.StepValidateRequest.StepText;
-            bool isValid = _stepMethodTable.ContainsStep(stepToValidate);
+            var stepToValidate = request.StepValidateRequest.StepText;
+            var isValid = _stepMethodTable.ContainsStep(stepToValidate);
             return GetStepValidateResponseMessage(isValid,request);
         }
 

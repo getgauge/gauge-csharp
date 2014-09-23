@@ -9,23 +9,21 @@ namespace gauge_csharp
     {
         public ProtoExecutionResult execute(MethodInfo method, Object[] args)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
+            var stopwatch = Stopwatch.StartNew();
             try
             {
-                object instance = ClassInstanceManager.get(method.DeclaringType);
+                object instance = ClassInstanceManager.Get(method.DeclaringType);
                 method.Invoke(instance, args);
-                return
-                    ProtoExecutionResult.CreateBuilder()
+                return ProtoExecutionResult.CreateBuilder()
                         .SetFailed(false)
                         .SetExecutionTime(stopwatch.ElapsedMilliseconds)
                         .Build();
             }
             catch (Exception e)
             {
-                long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+                var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 //todo: add screenshot
-                ProtoExecutionResult.Builder builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
+                var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
                 builder.SetErrorMessage(e.Message);
                 builder.SetStackTrace(e.StackTrace);
                 builder.SetRecoverableError(false);

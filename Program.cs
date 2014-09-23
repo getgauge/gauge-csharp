@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -13,23 +14,22 @@ namespace gauge_csharp
 {
     internal static class Program
     {
-        private const string GAUGE_PORT_ENV = "GAUGE_INTERNAL_PORT";
-        private const string GAUGE_API_PORT_ENV = "GAUGE_API_PORT";
-
+        private const string GaugePortEnv = "GAUGE_INTERNAL_PORT";
+        private const string GaugeApiPortEnv = "GAUGE_API_PORT";
+        private const string GaugeProjectRoot = "GAUGE_PROJECT_ROOT";
 
         private static void Main(string[] args)
         {
-            string port = readEnvValue(GAUGE_PORT_ENV);
-            string apiPort = readEnvValue(GAUGE_API_PORT_ENV);
+            var port = ReadEnvValue(GaugePortEnv);
+            var apiPort = ReadEnvValue(GaugeApiPortEnv);
 
             var apiConnection = new GaugeConnection(Convert.ToInt32(apiPort));
             var stepRegistry = new StepRegistry(ScanSteps(apiConnection));
-            Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher =
-                initializeMessageHandlers(stepRegistry);
+            var messageDispacher = initializeMessageHandlers(stepRegistry);
             using (var tcpClient = new TcpClient())
             {
                 tcpClient.Connect(new IPEndPoint(IPAddress.Loopback, Convert.ToInt32(port)));
-                using (NetworkStream networkStream = tcpClient.GetStream())
+                using (var networkStream = tcpClient.GetStream())
                 {
                     ProcessTillDisconnect(tcpClient, networkStream, messageDispacher);
                 }
@@ -37,15 +37,15 @@ namespace gauge_csharp
         }
 
         private static void ProcessTillDisconnect(TcpClient tcpClient, NetworkStream networkStream,
-            Dictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher)
+            IReadOnlyDictionary<Message.Types.MessageType, IMessageProcessor> messageDispacher)
         {
             while (tcpClient.Connected)
             {
-                byte[] messageBytes = ReadFromStream(networkStream);
-                Message message = Message.ParseFrom(messageBytes);
+                var messageBytes = ReadFromStream(networkStream);
+                var message = Message.ParseFrom(messageBytes);
                 if (messageDispacher.ContainsKey(message.MessageType))
                 {
-                    Message response = messageDispacher[message.MessageType].Process(message);
+                    var response = messageDispacher[message.MessageType].Process(message);
                     WriteResponse(response, networkStream);
                     if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
                     {
@@ -54,15 +54,16 @@ namespace gauge_csharp
                 }
                 else
                 {
-                    Message response = new DefaultProcessor().Process(message);
+                    var response = new DefaultProcessor().Process(message);
                     WriteResponse(response, networkStream);
                 }
             }
+            
         }
 
-        private static string readEnvValue(string env)
+        private static string ReadEnvValue(string env)
         {
-            string port = Environment.GetEnvironmentVariable(env);
+            var port = Environment.GetEnvironmentVariable(env);
             if (string.IsNullOrEmpty(port))
             {
                 throw new Exception(env + " is not set");
@@ -86,15 +87,16 @@ namespace gauge_csharp
         private static Hashtable ScanSteps(GaugeConnection apiConnection)
         {
             var hashtable = new Hashtable();
-
-            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            var enumerateFiles = Directory.EnumerateFiles(ReadEnvValue(GaugeProjectRoot), "*.dll", SearchOption.AllDirectories);
+            foreach (var specAssembly in enumerateFiles)
             {
-                foreach (Type type in assembly.GetTypes())
+                var assembly = Assembly.LoadFile(specAssembly);
+                foreach (var type in assembly.GetTypes())
                 {
-                    foreach (MethodInfo method in type.GetMethods())
+                    foreach (var method in type.GetMethods())
                     {
-                        IEnumerable<Step> step = method.GetCustomAttributes(false).OfType<Step>();
-                        foreach (string stepValue in step.Select(s => apiConnection.getStepValue(s.Name, false)))
+                        var step = method.GetCustomAttributes<Step>(false);
+                        foreach (var stepValue in step.SelectMany(s => apiConnection.GetStepValue(s.Names, false)))
                         {
                             hashtable.Add(stepValue, method);
                         }
@@ -107,8 +109,8 @@ namespace gauge_csharp
 
         private static void WriteResponse(Message responseMessage, NetworkStream networkStream)
         {
-            byte[] byteArray = responseMessage.ToByteArray();
-            CodedOutputStream cos = CodedOutputStream.CreateInstance(networkStream);
+            var byteArray = responseMessage.ToByteArray();
+            var cos = CodedOutputStream.CreateInstance(networkStream);
             cos.WriteRawVarint64((ulong) byteArray.Length);
             cos.Flush();
             networkStream.Write(byteArray, 0, byteArray.Length);
@@ -118,8 +120,8 @@ namespace gauge_csharp
 
         private static byte[] ReadFromStream(NetworkStream networkStream)
         {
-            CodedInputStream codedInputStream = CodedInputStream.CreateInstance(networkStream);
-            ulong messageLength = codedInputStream.ReadRawVarint64();
+            var codedInputStream = CodedInputStream.CreateInstance(networkStream);
+            var messageLength = codedInputStream.ReadRawVarint64();
             var bytes = new List<byte>();
             for (ulong i = 0; i < messageLength; i++)
             {
