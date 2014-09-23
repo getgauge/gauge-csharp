@@ -1,0 +1,7 @@
+lib/bin
+runner/bin
+*.suo
+*.sln.DotSettings
+*.psess
+packages
+.nuget
