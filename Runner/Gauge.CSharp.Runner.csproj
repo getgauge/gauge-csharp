@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\ParamConverter.cs" />
+    <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="Processors\DefaultProcessor.cs" />
     <Compile Include="Processors\ExecuteStepProcessor.cs" />
     <Compile Include="Processors\KillProcessProcessor.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Processors\StepValidationProcessor.cs" />
     <Compile Include="Converters\StringParamConverter.cs" />
     <Compile Include="Converters\TableParamConverter.cs" />
+    <Compile Include="StepScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

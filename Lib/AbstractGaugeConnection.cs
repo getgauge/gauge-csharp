@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Lib
             get { return TcpCilent.Connected; }
         }
 
-        protected void WriteMessage(IMessageLite request)
+        public void WriteMessage(IMessageLite request)
         {
             var bytes = request.ToByteArray();
             var cos = CodedOutputStream.CreateInstance(TcpCilent.GetStream());
@@ -40,8 +40,9 @@ namespace Gauge.CSharp.Lib
             TcpCilent.GetStream().Flush();
         }
 
-        protected static IEnumerable<byte> ReadBytes(Stream networkStream)
+        public IEnumerable<byte> ReadBytes()
         {
+            var networkStream = TcpCilent.GetStream();
             var codedInputStream = CodedInputStream.CreateInstance(networkStream);
             var messageLength = codedInputStream.ReadRawVarint64();
             for (ulong i = 0; i < messageLength; i++)

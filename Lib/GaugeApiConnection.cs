@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using Google.ProtocolBuffers;
 using main;
 
@@ -11,6 +11,7 @@ namespace Gauge.CSharp.Lib
         public GaugeApiConnection(int port) : base(port)
         {
         }
+
         public IEnumerable<string> GetStepValue(IEnumerable<string> stepTexts, bool hasInlineTable)
         {
             foreach (var stepText in stepTexts)
@@ -28,9 +29,10 @@ namespace Gauge.CSharp.Lib
                 yield return apiMessage.StepValueResponse.StepValue.StepValue;
             }
         }
-        private static APIMessage ReadMessage(Stream networkStream)
+
+        private APIMessage ReadMessage()
         {
-            var responseBytes = ReadBytes(networkStream);
+            var responseBytes = ReadBytes();
             return APIMessage.ParseFrom(responseBytes.ToArray());
         }
 
@@ -39,7 +41,7 @@ namespace Gauge.CSharp.Lib
             lock (TcpCilent)
             {
                 WriteMessage(stepValueRequestMessage);
-                return ReadMessage(TcpCilent.GetStream());
+                return ReadMessage();
             }
         }
     }
