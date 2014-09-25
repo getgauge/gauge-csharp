@@ -8,7 +8,7 @@ namespace Gauge.CSharp.Lib
 {
     public class GaugeConnection : AbstractGaugeConnection
     {
-        public GaugeConnection(int port) : base(port)
+        public GaugeConnection(ITcpClientWrapper tcpClientWrapper) : base(tcpClientWrapper)
         {
         }
     }

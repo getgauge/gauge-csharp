@@ -18,7 +18,7 @@ namespace Gauge.CSharp.Runner
 
         private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeProcessors()
         {
-            using (var apiConnection = new GaugeApiConnection(Convert.ToInt32(Utils.GaugeApiPort)))
+            using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
                 var stepScanner = new StepScanner(apiConnection);
                 var stepRegistry = stepScanner.CreateStepRegistry();

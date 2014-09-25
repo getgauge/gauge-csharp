@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{907810
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Lib.UnitTests", "Lib.UnitTests\Gauge.CSharp.Lib.UnitTests.csproj", "{05D35C70-438A-4FB2-97C2-90DE50D651AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D35C70-438A-4FB2-97C2-90DE50D651AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D35C70-438A-4FB2-97C2-90DE50D651AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D35C70-438A-4FB2-97C2-90DE50D651AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D35C70-438A-4FB2-97C2-90DE50D651AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

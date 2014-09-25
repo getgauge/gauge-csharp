@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using Google.ProtocolBuffers;
 using main;
 
@@ -8,7 +7,7 @@ namespace Gauge.CSharp.Lib
 {
     public class GaugeApiConnection : AbstractGaugeConnection
     {
-        public GaugeApiConnection(int port) : base(port)
+        public GaugeApiConnection(ITcpClientWrapper clientWrapper) : base(clientWrapper)
         {
         }
 
@@ -38,7 +37,7 @@ namespace Gauge.CSharp.Lib
 
         private APIMessage WriteAndReadApiMessage(IMessageLite stepValueRequestMessage)
         {
-            lock (TcpCilent)
+            lock (TcpClientWrapper)
             {
                 WriteMessage(stepValueRequestMessage);
                 return ReadMessage();

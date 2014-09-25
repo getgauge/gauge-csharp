@@ -1,1 +1,0 @@
-C:\Users\srikantv\projects\gauge\gauge-csharp\Runner\bin\Debug\gauge-csharp.exe.config

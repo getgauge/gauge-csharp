@@ -8,17 +8,17 @@ namespace Gauge.CSharp.Lib
         private const string GaugeApiPortEnv = "GAUGE_API_PORT";
         private const string GaugeProjectRootEnv = "GAUGE_PROJECT_ROOT";
 
-        public static string GaugePort {
-            get { return ReadEnvValue(GaugePortEnv); }
+        public static int GaugePort {
+            get { return Convert.ToInt32(ReadEnvValue(GaugePortEnv)); }
         }
         public static string GaugeProjectRoot
         {
             get { return ReadEnvValue(GaugeProjectRootEnv); }
         }
 
-        public static string GaugeApiPort
+        public static int GaugeApiPort
         {
-            get { return ReadEnvValue(GaugeApiPortEnv); }
+            get { return Convert.ToInt32(ReadEnvValue(GaugeApiPortEnv)); }
         }
 
         private static string ReadEnvValue(string env)

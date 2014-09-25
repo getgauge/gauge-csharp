@@ -14,7 +14,7 @@ namespace Gauge.CSharp.Runner
     {
         private static void Main(string[] args)
         {
-            using (var gaugeConnection = new GaugeConnection(Convert.ToInt32(Utils.GaugePort)))
+            using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
             {
                 while (gaugeConnection.Connected)
                 {

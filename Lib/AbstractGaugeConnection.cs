@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using Google.ProtocolBuffers;
@@ -9,40 +8,31 @@ namespace Gauge.CSharp.Lib
 {
     public abstract class AbstractGaugeConnection : IDisposable
     {
-        protected readonly TcpClient TcpCilent;
+        protected readonly ITcpClientWrapper TcpClientWrapper;
 
-        protected AbstractGaugeConnection(int port)
+        protected AbstractGaugeConnection(ITcpClientWrapper tcpClientWrapper)
         {
-            var tcpClient = new TcpClient();
-            try
-            {
-                tcpClient.Connect(new IPEndPoint(IPAddress.Loopback, port));
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Could not connect", e);
-            }
-            TcpCilent = tcpClient;
+            TcpClientWrapper = tcpClientWrapper;
         }
 
         public bool Connected
         {
-            get { return TcpCilent.Connected; }
+            get { return TcpClientWrapper.Connected; }
         }
 
         public void WriteMessage(IMessageLite request)
         {
             var bytes = request.ToByteArray();
-            var cos = CodedOutputStream.CreateInstance(TcpCilent.GetStream());
+            var cos = CodedOutputStream.CreateInstance(TcpClientWrapper.GetStream());
             cos.WriteRawVarint64((ulong) bytes.Length);
             cos.Flush();
-            TcpCilent.GetStream().Write(bytes, 0, bytes.Length);
-            TcpCilent.GetStream().Flush();
+            TcpClientWrapper.GetStream().Write(bytes, 0, bytes.Length);
+            TcpClientWrapper.GetStream().Flush();
         }
 
         public IEnumerable<byte> ReadBytes()
         {
-            var networkStream = TcpCilent.GetStream();
+            var networkStream = TcpClientWrapper.GetStream();
             var codedInputStream = CodedInputStream.CreateInstance(networkStream);
             var messageLength = codedInputStream.ReadRawVarint64();
             for (ulong i = 0; i < messageLength; i++)
@@ -58,7 +48,7 @@ namespace Gauge.CSharp.Lib
 
         public void Dispose()
         {
-            TcpCilent.Close();
+            TcpClientWrapper.Close();
         }
     }
 }

@@ -1,5 +1,5 @@
-lib/bin
-runner/bin
+bin
+obj
 *.suo
 *.sln.DotSettings
 *.psess
