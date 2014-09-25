@@ -2,7 +2,7 @@ using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    internal class DefaultProcessor : IMessageProcessor
+    public class DefaultProcessor : IMessageProcessor
     {
         public Message Process(Message request)
         {

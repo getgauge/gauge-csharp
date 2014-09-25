@@ -7,7 +7,7 @@ using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class ExecuteStepProcessor : IMessageProcessor
+    public class ExecuteStepProcessor : ExecutionProcessor, IMessageProcessor
     {
         private readonly StepRegistry _stepMethodHashtable;
         private Dictionary<Type, IParamConverter> _paramConverters;
@@ -67,20 +67,7 @@ namespace Gauge.CSharp.Runner.Processors
         private static ProtoExecutionResult ExecuteMethod(MethodInfo method, object[] args)
         {
             var methodExecutor = new MethodExecutor();
-            return methodExecutor.execute(method, args);
-        }
-
-        private static Message WrapInMessage(ProtoExecutionResult executionResult, Message request)
-        {
-            var executionStatusResponse = ExecutionStatusResponse
-                .CreateBuilder()
-                .SetExecutionResult(executionResult)
-                .Build();
-            return Message.CreateBuilder()
-                .SetMessageId(request.MessageId)
-                .SetMessageType(Message.Types.MessageType.ExecutionStatusResponse)
-                .SetExecutionStatusResponse(executionStatusResponse)
-                .Build();
+            return methodExecutor.Execute(method, args);
         }
     }
 }

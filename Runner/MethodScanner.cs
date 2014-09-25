@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Management.Instrumentation;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
