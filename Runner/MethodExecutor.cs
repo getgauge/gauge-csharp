@@ -15,9 +15,9 @@ namespace Gauge.CSharp.Runner
                 object instance = ClassInstanceManager.Get(method.DeclaringType);
                 method.Invoke(instance, args);
                 return ProtoExecutionResult.CreateBuilder()
-                        .SetFailed(false)
-                        .SetExecutionTime(stopwatch.ElapsedMilliseconds)
-                        .Build();
+                    .SetFailed(false)
+                    .SetExecutionTime(stopwatch.ElapsedMilliseconds)
+                    .Build();
             }
             catch (Exception e)
             {

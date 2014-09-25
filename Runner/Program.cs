@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Lib;
-using Gauge.CSharp.Runner.Processors;
 using main;
 
 namespace Gauge.CSharp.Runner

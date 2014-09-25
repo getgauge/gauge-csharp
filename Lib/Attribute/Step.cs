@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gauge.CSharp.Lib
+namespace Gauge.CSharp.Lib.Attribute
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class Step : Attribute
+    public class Step : System.Attribute
     {
         private readonly string[] _stepText ;
 

@@ -7,11 +7,11 @@ namespace Gauge.CSharp.Runner
 {
     public class StepRegistry
     {
-        private readonly Hashtable _scannedSteps;
+        private readonly Dictionary<string, MethodInfo> _scannedSteps;
 
-        public StepRegistry(Hashtable scannedSteps)
+        public StepRegistry(IEnumerable<KeyValuePair<string, MethodInfo>> scannedSteps)
         {
-            _scannedSteps = scannedSteps;
+            _scannedSteps = scannedSteps.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
         public bool ContainsStep(string parsedStepText)
@@ -21,12 +21,12 @@ namespace Gauge.CSharp.Runner
 
         public MethodInfo MethodFor(string parsedStepText)
         {
-            return (MethodInfo) _scannedSteps[parsedStepText];
+            return _scannedSteps[parsedStepText];
         }
 
         public IEnumerable<string> AllSteps()
         {
-            return _scannedSteps.Keys.Cast<string>();
+            return _scannedSteps.Keys;
         }
     }
 }

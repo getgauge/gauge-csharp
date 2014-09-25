@@ -15,7 +15,7 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var stepToValidate = request.StepValidateRequest.StepText;
             var isValid = _stepMethodTable.ContainsStep(stepToValidate);
-            return GetStepValidateResponseMessage(isValid,request);
+            return GetStepValidateResponseMessage(isValid, request);
         }
 
         private static Message GetStepValidateResponseMessage(bool isValid, Message request)
@@ -28,6 +28,5 @@ namespace Gauge.CSharp.Runner.Processors
                     .SetStepValidateResponse(stepValidateResponse)
                     .Build();
         }
-
     }
 }

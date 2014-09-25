@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.Processors
             var executeStepRequest = request.ExecuteStepRequest;
             if (!_stepMethodHashtable.ContainsStep(executeStepRequest.ParsedStepText))
                 return ExecutionError("Step Implementation not found", request);
-            
+
             var method = _stepMethodHashtable.MethodFor(executeStepRequest.ParsedStepText);
 
             var parameters = method.GetParameters();
@@ -58,9 +58,9 @@ namespace Gauge.CSharp.Runner.Processors
         private static Message ExecutionError(string errorMessage, Message request)
         {
             var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true)
-             .SetErrorMessage(errorMessage)
-             .SetRecoverableError(false)
-             .SetExecutionTime(0);
+                .SetErrorMessage(errorMessage)
+                .SetRecoverableError(false)
+                .SetExecutionTime(0);
             return WrapInMessage(builder.Build(), request);
         }
 

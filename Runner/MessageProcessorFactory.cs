@@ -20,8 +20,8 @@ namespace Gauge.CSharp.Runner
         {
             using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
-                var stepScanner = new StepScanner(apiConnection);
-                var stepRegistry = stepScanner.CreateStepRegistry();
+                var stepScanner = new MethodScanner(apiConnection);
+                var stepRegistry = stepScanner.GetStepRegistry();
                 return InitializeMessageHandlers(stepRegistry);
             }
         }

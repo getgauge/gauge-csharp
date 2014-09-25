@@ -15,8 +15,9 @@ namespace Gauge.CSharp.Runner.Processors
         public Message Process(Message request)
         {
             var allSteps = _stepRegistry.AllSteps();
-            return GetStepNamesResponseMessage(allSteps,request);
+            return GetStepNamesResponseMessage(allSteps, request);
         }
+
         private static Message GetStepNamesResponseMessage(IEnumerable<string> allSteps, Message request)
         {
             var stepNamesResponse = StepNamesResponse.CreateBuilder().AddRangeSteps(allSteps).Build();
@@ -25,6 +26,5 @@ namespace Gauge.CSharp.Runner.Processors
                 .SetMessageType(Message.Types.MessageType.StepNamesResponse)
                 .SetStepNamesResponse(stepNamesResponse).Build();
         }
-
     }
 }
