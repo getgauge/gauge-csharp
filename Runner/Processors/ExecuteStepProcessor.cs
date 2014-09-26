@@ -30,6 +30,13 @@ namespace Gauge.CSharp.Runner.Processors
             var parameters = method.GetParameters();
             var args = new Object[parameters.Length];
             var stepParameter = executeStepRequest.ParametersList;
+            if (parameters.Length != stepParameter.Count)
+            {
+                var argumentMismatchError = String.Format("Argument length mis match for {0}. Actual Count: {1}, Expected Count: {2}",
+                    executeStepRequest.ActualStepText,
+                    stepParameter.Count, parameters.Length);
+                return ExecutionError(argumentMismatchError, request);
+            }
             for (var i = 0; i < parameters.Length; i++)
             {
                 var paramType = parameters[i].ParameterType;

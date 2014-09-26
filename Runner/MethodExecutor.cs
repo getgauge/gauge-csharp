@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
+using Google.ProtocolBuffers;
 using main;
 
 namespace Gauge.CSharp.Runner
@@ -23,13 +28,29 @@ namespace Gauge.CSharp.Runner
             catch (Exception e)
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-                //todo: add screenshot
                 var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
+                builder.SetScreenShot(TakeScreenshot());
                 builder.SetErrorMessage(e.Message);
                 builder.SetStackTrace(e.StackTrace);
                 builder.SetRecoverableError(false);
                 builder.SetExecutionTime(elapsedMilliseconds);
                 return builder.Build();
+            }
+        }
+
+        private static ByteString TakeScreenshot()
+        {
+            var bounds = Screen.GetBounds(Point.Empty);
+            using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (var g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                }
+                var memoryStream = new MemoryStream();
+                bitmap.Save(memoryStream, ImageFormat.Png);
+                var takeScreenshot = ByteString.CopyFrom(memoryStream.ToArray());
+                return takeScreenshot;
             }
         }
 
