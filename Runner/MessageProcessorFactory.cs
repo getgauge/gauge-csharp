@@ -21,22 +21,24 @@ namespace Gauge.CSharp.Runner
             {
                 var stepScanner = new MethodScanner(apiConnection);
                 var stepRegistry = stepScanner.GetStepRegistry();
-                return InitializeMessageHandlers(stepRegistry);
+                var hookRegistry = stepScanner.GetHookRegistry();
+                return InitializeMessageHandlers(stepRegistry, hookRegistry);
             }
         }
 
-        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(StepRegistry stepRegistry)
+        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(StepRegistry stepRegistry,
+            HookRegistry hookRegistry)
         {
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
-                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor()},
-                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor()},
-                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor()},
-                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor()},
-                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor()},
-                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor()},
-                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor()},
-                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor()},
+                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry)},
+                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry)},
+                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(hookRegistry)},
+                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(hookRegistry)},
+                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(hookRegistry)},
+                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(hookRegistry)},
+                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(hookRegistry)},
+                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry)},
                 {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
                 {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry)},

@@ -6,14 +6,23 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
-        protected abstract HashSet<MethodInfo> GetHooks();
+        protected HookRegistry Hooks { get; private set; }
+
+        protected HookExecutionProcessor(HookRegistry hookRegistry)
+        {
+            Hooks = hookRegistry;
+        }
+
+        protected abstract IEnumerable<MethodInfo> GetHooks();
 
         public Message Process(Message request)
         {
-            var currentExecutionInfo = request.ExecutionStartingRequest.CurrentExecutionInfo;
+            var currentExecutionInfo = GetExecutionInfo(request);
             var hooks = GetHooks();
             var protoExecutionResult = new MethodExecutor().ExecuteHooks(hooks, currentExecutionInfo);
             return WrapInMessage(protoExecutionResult, request);
         }
+
+        protected abstract ExecutionInfo GetExecutionInfo(Message request);
     }
 }

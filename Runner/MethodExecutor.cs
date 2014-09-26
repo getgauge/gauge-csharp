@@ -64,7 +64,7 @@ namespace Gauge.CSharp.Runner
             for (var i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
-                if (arg.GetType() != method.GetParameters()[i].GetType())
+                if (arg.GetType() != method.GetParameters()[i].ParameterType)
                 {
                     return false;
                 }

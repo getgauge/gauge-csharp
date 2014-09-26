@@ -1,14 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Gauge.CSharp.Runner.Processors;
+using main;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Processors
 {
     internal class SpecExecutionEndingProcessor : HookExecutionProcessor
     {
-        protected override HashSet<MethodInfo> GetHooks()
+        public SpecExecutionEndingProcessor(HookRegistry hookRegistry) : base(hookRegistry)
         {
-            return HookRegistry.AfterSpecHooks;
+        }
+
+        protected override IEnumerable<MethodInfo> GetHooks()
+        {
+            return Hooks.AfterSpecHooks;
+        }
+
+        protected override ExecutionInfo GetExecutionInfo(Message request)
+        {
+            return request.SpecExecutionEndingRequest.CurrentExecutionInfo;
         }
     }
 }

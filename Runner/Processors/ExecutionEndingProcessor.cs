@@ -1,13 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecutionEndingProcessor : HookExecutionProcessor
     {
-        protected override HashSet<MethodInfo> GetHooks()
+        public ExecutionEndingProcessor(HookRegistry hookRegistry) : base(hookRegistry)
         {
-            return HookRegistry.AfterSuiteHooks;
+        }
+
+        protected override IEnumerable<MethodInfo> GetHooks()
+        {
+            return Hooks.AfterSuiteHooks;
+        }
+
+        protected override ExecutionInfo GetExecutionInfo(Message request)
+        {
+            return request.ExecutionEndingRequest.CurrentExecutionInfo;
         }
     }
 }

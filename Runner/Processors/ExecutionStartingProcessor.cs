@@ -6,9 +6,18 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecutionStartingProcessor : HookExecutionProcessor
     {
-        protected override HashSet<MethodInfo> GetHooks()
+        public ExecutionStartingProcessor(HookRegistry hookRegistry) : base(hookRegistry)
         {
-            return HookRegistry.BeforeSuiteHooks;
+        }
+
+        protected override IEnumerable<MethodInfo> GetHooks()
+        {
+            return Hooks.BeforeSuiteHooks;
+        }
+
+        protected override ExecutionInfo GetExecutionInfo(Message request)
+        {
+            return request.ExecutionStartingRequest.CurrentExecutionInfo;
         }
     }
 }

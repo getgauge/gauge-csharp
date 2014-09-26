@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,12 +11,9 @@ namespace Gauge.CSharp.Runner
     internal class MethodScanner
     {
         private readonly GaugeApiConnection _apiConnection;
-        private readonly HookRegistry _hookRegistry;
-
         public MethodScanner(GaugeApiConnection apiConnection)
         {
             _apiConnection = apiConnection;
-            _hookRegistry = new HookRegistry();
         }
 
         public StepRegistry GetStepRegistry()
@@ -39,15 +37,16 @@ namespace Gauge.CSharp.Runner
         public HookRegistry GetHookRegistry()
         {
             var allMethods = GetAllMethodsForSpecAssemblies();
-            HookRegistry.AddBeforeSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSuite>().Any()));
-            HookRegistry.AddAfterSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSuite>().Any()));
-            HookRegistry.AddBeforeSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSpec>().Any()));
-            HookRegistry.AddAfterSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSpec>().Any()));
-            HookRegistry.AddBeforeScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeScenario>().Any()));
-            HookRegistry.AddAfterScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterScenario>().Any()));
-            HookRegistry.AddBeforeStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeStep>().Any()));
-            HookRegistry.AddAfterStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterStep>().Any()));
-            return _hookRegistry;
+            var hookRegistry = new HookRegistry();
+            hookRegistry.AddBeforeSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSuite>().Any()));
+            hookRegistry.AddAfterSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSuite>().Any()));
+            hookRegistry.AddBeforeSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSpec>().Any()));
+            hookRegistry.AddAfterSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSpec>().Any()));
+            hookRegistry.AddBeforeScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeScenario>().Any()));
+            hookRegistry.AddAfterScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterScenario>().Any()));
+            hookRegistry.AddBeforeStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeStep>().Any()));
+            hookRegistry.AddAfterStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterStep>().Any()));
+            return hookRegistry;
         }
 
         private IEnumerable<MethodInfo> GetAllMethodsForSpecAssemblies()
