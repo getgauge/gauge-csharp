@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
-using Gauge.CSharp.Lib;
-using main;
+using System.Reflection;
 
 namespace Gauge.CSharp.Runner
 {
@@ -9,21 +7,14 @@ namespace Gauge.CSharp.Runner
     {
         private static void Main(string[] args)
         {
-            using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
+            if (args.Length == 0)
             {
-                while (gaugeConnection.Connected)
-                {
-                    var messageBytes = gaugeConnection.ReadBytes();
-                    var message = Message.ParseFrom(messageBytes.ToArray());
-                    var processor = MessageProcessorFactory.GetProcessor(message.MessageType);
-                    var response = processor.Process(message);
-                    gaugeConnection.WriteMessage(response);
-                    if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
-                    {
-                        return;
-                    }
-                }
+                Console.WriteLine("usage: {0} --<start|init>", AppDomain.CurrentDomain.FriendlyName);
+                Environment.Exit(1);
             }
+            var phase = args[0];
+            var phaseExecutor = PhaseExecutorFactory.GetExecutor(phase);
+            phaseExecutor.Execute();
         }
     }
 }

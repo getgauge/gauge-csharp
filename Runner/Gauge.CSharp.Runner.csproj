@@ -54,7 +54,9 @@
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\ParamConverter.cs" />
     <Compile Include="HookRegistry.cs" />
+    <Compile Include="IPhaseExecutor.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
+    <Compile Include="PhaseExecutorFactory.cs" />
     <Compile Include="Processors\DefaultProcessor.cs" />
     <Compile Include="Processors\ExecuteStepProcessor.cs" />
     <Compile Include="Processors\ExecutionEndingProcessor.cs" />
@@ -73,6 +75,8 @@
     <Compile Include="Processors\SpecExecutionStartingProcessor.cs" />
     <Compile Include="Processors\StepExecutionEndingProcessor.cs" />
     <Compile Include="Processors\StepExecutionStartingProcessor.cs" />
+    <Compile Include="SetupPhaseExecutor.cs" />
+    <Compile Include="StartPhaseExecutor.cs" />
     <Compile Include="StepRegistry.cs" />
     <Compile Include="Processors\StepValidationProcessor.cs" />
     <Compile Include="Converters\StringParamConverter.cs" />
@@ -81,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="csharp.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

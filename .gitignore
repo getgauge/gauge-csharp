@@ -2,6 +2,7 @@ bin
 obj
 *.suo
 *.sln.DotSettings
+*.sln.DotSettings.user
 *.psess
 packages
 .nuget

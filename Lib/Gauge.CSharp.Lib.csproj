@@ -77,6 +77,9 @@
     <Content Include="licenses\protoc-license.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gauge.CSharp.Lib.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
