@@ -38,14 +38,15 @@ namespace Gauge.CSharp.Runner
         {
             var allMethods = GetAllMethodsForSpecAssemblies();
             var hookRegistry = new HookRegistry();
-            hookRegistry.AddBeforeSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSuite>().Any()));
-            hookRegistry.AddAfterSuiteHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSuite>().Any()));
-            hookRegistry.AddBeforeSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeSpec>().Any()));
-            hookRegistry.AddAfterSpecHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterSpec>().Any()));
-            hookRegistry.AddBeforeScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeScenario>().Any()));
-            hookRegistry.AddAfterScenarioHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterScenario>().Any()));
-            hookRegistry.AddBeforeStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<BeforeStep>().Any()));
-            hookRegistry.AddAfterStepHooks(allMethods.Where(info => info.GetCustomAttributes().OfType<AfterStep>().Any()));
+            var methodInfos = allMethods as IList<MethodInfo> ?? allMethods.ToList();
+            hookRegistry.AddBeforeSuiteHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeSuite>().Any()));
+            hookRegistry.AddAfterSuiteHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterSuite>().Any()));
+            hookRegistry.AddBeforeSpecHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeSpec>().Any()));
+            hookRegistry.AddAfterSpecHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterSpec>().Any()));
+            hookRegistry.AddBeforeScenarioHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeScenario>().Any()));
+            hookRegistry.AddAfterScenarioHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterScenario>().Any()));
+            hookRegistry.AddBeforeStepHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeStep>().Any()));
+            hookRegistry.AddAfterStepHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterStep>().Any()));
             return hookRegistry;
         }
 
@@ -63,7 +64,7 @@ namespace Gauge.CSharp.Runner
 
         private static IEnumerable<string> GetAllAssemblyFiles()
         {
-            return Directory.EnumerateFiles(Utils.GaugeProjectRoot, "*.dll", SearchOption.AllDirectories);
+            return Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.AllDirectories);
         }
     }
 }

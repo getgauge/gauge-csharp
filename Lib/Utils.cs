@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Gauge.CSharp.Lib
 {
@@ -19,6 +20,11 @@ namespace Gauge.CSharp.Lib
         public static int GaugeApiPort
         {
             get { return Convert.ToInt32(ReadEnvValue(GaugeApiPortEnv)); }
+        }
+
+        public static string GaugeBinDir
+        {
+            get { return Path.Combine(GaugeProjectRoot, "gauge-bin"); }
         }
 
         private static string ReadEnvValue(string env)

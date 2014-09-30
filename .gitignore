@@ -6,3 +6,5 @@ obj
 *.psess
 packages
 .nuget
+*.nupkg
+*.csproj.user
