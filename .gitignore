@@ -8,3 +8,4 @@ packages
 .nuget
 *.nupkg
 *.csproj.user
+artifacts/
