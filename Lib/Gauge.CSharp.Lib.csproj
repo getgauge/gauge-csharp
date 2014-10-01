@@ -79,6 +79,7 @@
     <None Include="Gauge.CSharp.Lib.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Install.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

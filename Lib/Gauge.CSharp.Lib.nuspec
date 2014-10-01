@@ -17,4 +17,7 @@
       <dependency id="Google.ProtocolBuffers" version="2.4.1.521"/>
     </dependencies>
   </metadata>
+  <files>
+    <file src="Install.ps1" target="tools" />    
+  </files>
 </package>
