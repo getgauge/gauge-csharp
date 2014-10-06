@@ -5,10 +5,13 @@ call C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe Gauge.CSharp.sl
 set SKELDIR=%~dp0artifacts\skel
 
 mkdir %SKELDIR%
+mkdir %SKELDIR%\.nuget
 
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\AssemblyInfo.cs %SKELDIR%\Properties\ /y
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\Gauge.Spec.csproj %SKELDIR%\ /y
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\StepImplementation.cs %SKELDIR%\ /y
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\packages.config %SKELDIR%\ /y
+
+xcopy .nuget %SKELDIR%\.nuget /y
 
 exit /b %ERRORLEVEL%
