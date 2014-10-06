@@ -11,6 +11,7 @@ xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\AssemblyInfo.cs %SKELDIR
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\Gauge.Spec.csproj %SKELDIR%\ /y
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\StepImplementation.cs %SKELDIR%\ /y
 xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\packages.config %SKELDIR%\ /y
+xcopy ..\gauge-visualstudio\Gauge.VisualStudio.Template\Gauge.Spec.sln %SKELDIR%\ /y
 
 xcopy .nuget %SKELDIR%\.nuget /y
 

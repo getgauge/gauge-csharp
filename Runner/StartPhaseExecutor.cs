@@ -35,25 +35,26 @@ namespace Gauge.CSharp.Runner
         
         private static void BuildTargetGaugeProject()
         {
-            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Minimal);
-            var projectFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.csproj");
+            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
+            var solutionFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.sln");
 
-            if (!projectFileList.Any())
+            if (!solutionFileList.Any())
             {
                 Console.Out.WriteLine("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
                 Environment.Exit(0);
             }
-            var projectFullPath = projectFileList.First();
-
-            Console.WriteLine("Building Project: {0}", projectFullPath);
+            var solutionFullPath = solutionFileList.First();
+            Directory.CreateDirectory(Utils.GaugeBinDir);
+            Console.WriteLine("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string> {{"Configuration", "Release"}, {"Platform", "Any CPU"}, {"OutputPath", Utils.GaugeBinDir}};
 
-            var buildRequestData = new BuildRequestData(projectFullPath, globalProperty, null, new[] {"Rebuild"}, null);
+            var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Rebuild"}, null);
 
             var buildParameters = new BuildParameters(pc) {Loggers = new[] {consoleLogger}};
 
-            BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+            Console.Out.WriteLine(buildResult.OverallResult);
         }
     }
 }
