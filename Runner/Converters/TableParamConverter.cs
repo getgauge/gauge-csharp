@@ -6,7 +6,7 @@ using main;
 
 namespace Gauge.CSharp.Runner.Converters
 {
-    internal class TableParamConverter : IParamConverter
+    public class TableParamConverter : IParamConverter
     {
         public object Convert(Parameter parameter)
         {

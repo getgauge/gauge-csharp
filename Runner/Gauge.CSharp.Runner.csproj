@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassInstanceManager.cs" />
-    <Compile Include="Converters\ParamConverter.cs" />
+    <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>

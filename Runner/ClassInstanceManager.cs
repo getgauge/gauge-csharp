@@ -13,7 +13,7 @@ namespace Gauge.CSharp.Runner
             {
                 return ClassInstanceMap[declaringType];
             }
-            object instance = Activator.CreateInstance(declaringType);
+            var instance = Activator.CreateInstance(declaringType);
             ClassInstanceMap.Add(declaringType, instance);
             return instance;
         }
