@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 
@@ -10,17 +9,12 @@ namespace Gauge.CSharp.Runner
 {
     internal class SetupPhaseExecutor : IPhaseExecutor
     {
-        private const string ProjectName = "Gauge.Spec";
-        static readonly string ProjectRootDir = Path.Combine(Utils.GaugeProjectRoot, ProjectName);
+        private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
+        private static readonly string ProjectRootDir = Path.Combine(Utils.GaugeProjectRoot, ProjectName);
         public void Execute()
         {
-            Directory.CreateDirectory(ProjectRootDir);
-            if (Directory.EnumerateFiles(ProjectRootDir, "*.csproj").Any())
-            {
-                Console.Out.WriteLine("Directory is not empty, skipping Gauge initialization.");
-                Environment.Exit(1);
-            }
-            Directory.CreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
+            CheckAndCreateDirectory(ProjectRootDir);
+            CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
             
             new List<string>
             {
@@ -34,6 +28,19 @@ namespace Gauge.CSharp.Runner
             InstallDependencies();
         }
 
+        private static void CheckAndCreateDirectory(string directory)
+        {
+            if (Directory.Exists(directory))
+            {
+                Console.Out.WriteLine(" skip  {0}", ProjectName);
+            }
+            else
+            {
+                Console.Out.WriteLine(" create  {0}", ProjectName);
+                Directory.CreateDirectory(directory);
+            }
+        }
+
         private static void CopyFile(string filePath)
         {
             CopyFile(filePath, string.Empty);
@@ -42,15 +49,22 @@ namespace Gauge.CSharp.Runner
         private static void CopyFile(string filePath, string destPath, string rootDir = null)
         {
             var skeletonPath = Path.GetFullPath("skel");
-            var destFileName = Path.Combine(string.IsNullOrEmpty(rootDir) ? ProjectRootDir : rootDir,
-                string.IsNullOrEmpty(destPath) ? filePath : destPath);
-            File.Copy(Path.Combine(skeletonPath, filePath), destFileName, true);
-            var fileContent = File.ReadAllText(destFileName)
-                .Replace(@"$safeprojectname$", "Gauge.Spec")
-                .Replace("$guid1$", Guid.NewGuid().ToString())
-                .Replace("$guid2$", Guid.NewGuid().ToString());
-            File.WriteAllText(destFileName, fileContent);
-            Console.Out.WriteLine(" create  {0}", filePath);
+            var destFileName = string.IsNullOrEmpty(destPath) ? filePath : destPath;
+            var destFileNameFull = Path.Combine(string.IsNullOrEmpty(rootDir) ? ProjectRootDir : rootDir, destFileName);
+            if (File.Exists(destFileNameFull))
+            {
+                Console.Out.WriteLine(" skip  {0}", destFileName);
+            }
+            else
+            {
+                File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
+                var fileContent = File.ReadAllText(destFileNameFull)
+                    .Replace(@"$safeprojectname$", ProjectName)
+                    .Replace("$guid1$", Guid.NewGuid().ToString())
+                    .Replace("$guid2$", Guid.NewGuid().ToString());
+                File.WriteAllText(destFileNameFull, fileContent);
+                Console.Out.WriteLine(" create  {0}", filePath);
+            }
         }
 
         private static void InstallDependencies()
