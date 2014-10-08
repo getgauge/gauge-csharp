@@ -7,36 +7,26 @@ namespace Gauge.CSharp.Runner
 {
     public class HookRegistry
     {
-        private readonly IDictionary<Type, HashSet<MethodInfo>> Hooks = new Dictionary<Type, HashSet<MethodInfo>>()
+        private readonly IDictionary<Type, HashSet<MethodInfo>> _hooks = new Dictionary<Type, HashSet<MethodInfo>>()
         {
-            {typeof (BeforeSuite),new HashSet<MethodInfo>()},
-            {typeof (AfterSuite),new HashSet<MethodInfo>()},
-            {typeof (BeforeSpec),new HashSet<MethodInfo>()},
-            {typeof (AfterSpec),new HashSet<MethodInfo>()},
-            {typeof (BeforeScenario),new HashSet<MethodInfo>()},
-            {typeof (AfterScenario),new HashSet<MethodInfo>()},
-            {typeof (BeforeStep),new HashSet<MethodInfo>()},
-            {typeof (AfterStep),new HashSet<MethodInfo>()},
+            {typeof (BeforeSuite), new HashSet<MethodInfo>()},
+            {typeof (AfterSuite), new HashSet<MethodInfo>()},
+            {typeof (BeforeSpec), new HashSet<MethodInfo>()},
+            {typeof (AfterSpec), new HashSet<MethodInfo>()},
+            {typeof (BeforeScenario), new HashSet<MethodInfo>()},
+            {typeof (AfterScenario), new HashSet<MethodInfo>()},
+            {typeof (BeforeStep), new HashSet<MethodInfo>()},
+            {typeof (AfterStep), new HashSet<MethodInfo>()},
         };
 
-        public  HashSet<MethodInfo> BeforeSuiteHooks
+        public HashSet<MethodInfo> BeforeSuiteHooks
         {
             get { return GetHookOfType(typeof (BeforeSuite)); }
         }
-
-        private  HashSet<MethodInfo> GetHookOfType(Type type)
-        {
-            return new HashSet<MethodInfo>(Hooks[type]);
-        }
-
-        public  void AddBeforeSuiteHooks(IEnumerable<MethodInfo> beforeSuiteHook)
+ 
+        public void AddBeforeSuiteHooks(IEnumerable<MethodInfo> beforeSuiteHook)
         {
             AddHookOfType(typeof (BeforeSuite), beforeSuiteHook);
-        }
-
-        private  void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hook)
-        {
-            Hooks[hookType].UnionWith(hook);
         }
 
         public HashSet<MethodInfo> AfterSuiteHooks
@@ -89,24 +79,33 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (AfterScenario), afterScenarioHook);
         }
 
-        public  HashSet<MethodInfo> BeforeStepHooks
+        public HashSet<MethodInfo> BeforeStepHooks
         {
             get { return GetHookOfType(typeof (BeforeStep)); }
         }
 
-        public  void AddBeforeStepHooks(IEnumerable<MethodInfo> beforeStepHook)
+        public void AddBeforeStepHooks(IEnumerable<MethodInfo> beforeStepHook)
         {
             AddHookOfType(typeof (BeforeStep), beforeStepHook);
         }
 
-        public  HashSet<MethodInfo> AfterStepHooks
+        public HashSet<MethodInfo> AfterStepHooks
         {
             get { return GetHookOfType(typeof (AfterStep)); }
         }
 
-        public  void AddAfterStepHooks(IEnumerable<MethodInfo> afterStepHook)
+        public void AddAfterStepHooks(IEnumerable<MethodInfo> afterStepHook)
         {
             AddHookOfType(typeof (AfterStep), afterStepHook);
+        }
+
+        private void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hook)
+        {
+            _hooks[hookType].UnionWith(hook);
+        }
+        private HashSet<MethodInfo> GetHookOfType(Type type)
+        {
+            return new HashSet<MethodInfo>(_hooks[type]);
         }
     }
 }
