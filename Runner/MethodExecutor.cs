@@ -11,7 +11,7 @@ using main;
 
 namespace Gauge.CSharp.Runner
 {
-    public class MethodExecutor
+    public class MethodExecutor : IMethodExecutor
     {
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {

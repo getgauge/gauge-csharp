@@ -31,10 +31,11 @@ namespace Gauge.CSharp.Runner
         private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry,
             IHookRegistry hookRegistry)
         {
+            var methodExecutor = new MethodExecutor();
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
-                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry)},
-                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry)},
+                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry, methodExecutor)},
+                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry, methodExecutor)},
                 {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(hookRegistry)},
                 {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(hookRegistry)},
                 {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(hookRegistry)},

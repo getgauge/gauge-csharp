@@ -10,15 +10,20 @@ namespace Gauge.CSharp.Runner.Processors
     public class ExecuteStepProcessor : ExecutionProcessor, IMessageProcessor
     {
         private readonly IStepRegistry _stepRegistry;
+        private readonly IMethodExecutor _methodExecutor;
         private Dictionary<Type, IParamConverter> _paramConverters;
 
 
-        public ExecuteStepProcessor(IStepRegistry stepRegistry)
+        public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor)
         {
             _stepRegistry = stepRegistry;
+            _methodExecutor = methodExecutor;
             InitializeConverter();
         }
 
+        public ExecuteStepProcessor(IStepRegistry stepRegistry) : this(stepRegistry, new MethodExecutor())
+        {
+        }
         public Message Process(Message request)
         {
             var executeStepRequest = request.ExecuteStepRequest;
@@ -71,10 +76,9 @@ namespace Gauge.CSharp.Runner.Processors
             return WrapInMessage(builder.Build(), request);
         }
 
-        private static ProtoExecutionResult ExecuteMethod(MethodInfo method, object[] args)
+        private ProtoExecutionResult ExecuteMethod(MethodInfo method, object[] args)
         {
-            var methodExecutor = new MethodExecutor();
-            return methodExecutor.Execute(method, args);
+            return _methodExecutor.Execute(method, args);
         }
     }
 }
