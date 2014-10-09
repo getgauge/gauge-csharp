@@ -4,9 +4,9 @@ using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    internal class SpecExecutionStartingProcessor : HookExecutionProcessor
+    public class SpecExecutionStartingProcessor : HookExecutionProcessor
     {
-        public SpecExecutionStartingProcessor(HookRegistry hookRegistry) : base(hookRegistry)
+        public SpecExecutionStartingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
         {
         }
 

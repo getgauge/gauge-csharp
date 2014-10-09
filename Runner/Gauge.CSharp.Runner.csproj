@@ -76,9 +76,12 @@
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IHookRegistry.cs" />
+    <Compile Include="IMethodScanner.cs" />
     <Compile Include="IPhaseExecutor.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IStepRegistry.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="PhaseExecutorFactory.cs" />
     <Compile Include="Processors\DefaultProcessor.cs" />

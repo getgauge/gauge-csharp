@@ -3,11 +3,11 @@ using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    internal class StepNamesProcessor : IMessageProcessor
+    public class StepNamesProcessor : IMessageProcessor
     {
-        private readonly StepRegistry _stepRegistry;
+        private readonly IStepRegistry _stepRegistry;
 
-        public StepNamesProcessor(StepRegistry stepRegistry)
+        public StepNamesProcessor(IStepRegistry stepRegistry)
         {
             _stepRegistry = stepRegistry;
         }

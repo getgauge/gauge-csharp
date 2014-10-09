@@ -6,9 +6,9 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
-        protected HookRegistry Hooks { get; private set; }
+        protected IHookRegistry Hooks { get; private set; }
 
-        protected HookExecutionProcessor(HookRegistry hookRegistry)
+        protected HookExecutionProcessor(IHookRegistry hookRegistry)
         {
             Hooks = hookRegistry;
         }

@@ -9,23 +9,23 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecuteStepProcessor : ExecutionProcessor, IMessageProcessor
     {
-        private readonly StepRegistry _stepMethodHashtable;
+        private readonly IStepRegistry _stepRegistry;
         private Dictionary<Type, IParamConverter> _paramConverters;
 
 
-        public ExecuteStepProcessor(StepRegistry stepMethodHashtable)
+        public ExecuteStepProcessor(IStepRegistry stepRegistry)
         {
-            _stepMethodHashtable = stepMethodHashtable;
+            _stepRegistry = stepRegistry;
             InitializeConverter();
         }
 
         public Message Process(Message request)
         {
             var executeStepRequest = request.ExecuteStepRequest;
-            if (!_stepMethodHashtable.ContainsStep(executeStepRequest.ParsedStepText))
+            if (!_stepRegistry.ContainsStep(executeStepRequest.ParsedStepText))
                 return ExecutionError("Step Implementation not found", request);
 
-            var method = _stepMethodHashtable.MethodFor(executeStepRequest.ParsedStepText);
+            var method = _stepRegistry.MethodFor(executeStepRequest.ParsedStepText);
 
             var parameters = method.GetParameters();
             var args = new Object[parameters.Length];

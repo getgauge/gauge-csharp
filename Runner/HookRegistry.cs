@@ -5,7 +5,7 @@ using Gauge.CSharp.Lib.Attribute;
 
 namespace Gauge.CSharp.Runner
 {
-    public class HookRegistry
+    public class HookRegistry : IHookRegistry
     {
         private readonly IDictionary<Type, HashSet<MethodInfo>> _hooks = new Dictionary<Type, HashSet<MethodInfo>>()
         {

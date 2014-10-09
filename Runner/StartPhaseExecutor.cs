@@ -22,7 +22,7 @@ namespace Gauge.CSharp.Runner
                 {
                     var messageBytes = gaugeConnection.ReadBytes();
                     var message = Message.ParseFrom(messageBytes.ToArray());
-                    var processor = MessageProcessorFactory.GetProcessor(message.MessageType);
+                    var processor = new MessageProcessorFactory().GetProcessor(message.MessageType);
                     var response = processor.Process(message);
                     gaugeConnection.WriteMessage(response);
                     if (message.MessageType == Message.Types.MessageType.KillProcessRequest)

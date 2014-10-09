@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Gauge.CSharp.Runner
 {
-    public class StepRegistry
+    public class StepRegistry : IStepRegistry
     {
         private readonly Dictionary<string, MethodInfo> _scannedSteps;
 

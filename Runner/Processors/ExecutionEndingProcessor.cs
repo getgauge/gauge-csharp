@@ -6,7 +6,7 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecutionEndingProcessor : HookExecutionProcessor
     {
-        public ExecutionEndingProcessor(HookRegistry hookRegistry) : base(hookRegistry)
+        public ExecutionEndingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
         {
         }
 

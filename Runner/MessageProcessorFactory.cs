@@ -5,29 +5,31 @@ using main;
 
 namespace Gauge.CSharp.Runner
 {
-    public static class MessageProcessorFactory
+    public class MessageProcessorFactory
     {
-        private static readonly Dictionary<Message.Types.MessageType, IMessageProcessor> MessageProcessorsDictionary = InitializeProcessors();
+        private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
-        public static IMessageProcessor GetProcessor(Message.Types.MessageType messageType)
-        {
-            return MessageProcessorsDictionary.ContainsKey(messageType) ? MessageProcessorsDictionary[messageType] : new DefaultProcessor();
-        }
-
-
-        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeProcessors()
+        public MessageProcessorFactory()
         {
             using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
-                var stepScanner = new MethodScanner(apiConnection);
-                var stepRegistry = stepScanner.GetStepRegistry();
-                var hookRegistry = stepScanner.GetHookRegistry();
-                return InitializeMessageHandlers(stepRegistry, hookRegistry);
+                InitializeProcessors(new MethodScanner(apiConnection));
             }
         }
 
-        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(StepRegistry stepRegistry,
-            HookRegistry hookRegistry)
+        public MessageProcessorFactory(IMethodScanner stepScanner)
+        {
+            InitializeProcessors(stepScanner);
+        }
+
+        public IMessageProcessor GetProcessor(Message.Types.MessageType messageType)
+        {
+            return _messageProcessorsDictionary.ContainsKey(messageType) ? _messageProcessorsDictionary[messageType] : new DefaultProcessor();
+        }
+
+
+        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry,
+            IHookRegistry hookRegistry)
         {
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
@@ -45,6 +47,13 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)}
             };
             return messageHandlers;
+        }
+
+        private void InitializeProcessors(IMethodScanner stepScanner)
+        {
+            var stepRegistry = stepScanner.GetStepRegistry();
+            var hookRegistry = stepScanner.GetHookRegistry();
+            _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
         }
     }
 }

@@ -8,7 +8,7 @@ using Gauge.CSharp.Lib.Attribute;
 
 namespace Gauge.CSharp.Runner
 {
-    internal class MethodScanner
+    public class MethodScanner : IMethodScanner
     {
         private readonly GaugeApiConnection _apiConnection;
         public MethodScanner(GaugeApiConnection apiConnection)
@@ -16,7 +16,7 @@ namespace Gauge.CSharp.Runner
             _apiConnection = apiConnection;
         }
 
-        public StepRegistry GetStepRegistry()
+        public IStepRegistry GetStepRegistry()
         {
             return new StepRegistry(GetStepMethods());
         }
@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        public HookRegistry GetHookRegistry()
+        public IHookRegistry GetHookRegistry()
         {
             var allMethods = GetAllMethodsForSpecAssemblies();
             var hookRegistry = new HookRegistry();

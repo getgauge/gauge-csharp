@@ -2,11 +2,11 @@ using main;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    internal class StepValidationProcessor : IMessageProcessor
+    public class StepValidationProcessor : IMessageProcessor
     {
-        private readonly StepRegistry _stepMethodTable;
+        private readonly IStepRegistry _stepMethodTable;
 
-        public StepValidationProcessor(StepRegistry stepMethodTable)
+        public StepValidationProcessor(IStepRegistry stepMethodTable)
         {
             _stepMethodTable = stepMethodTable;
         }
