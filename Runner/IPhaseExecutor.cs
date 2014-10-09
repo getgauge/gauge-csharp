@@ -1,6 +1,6 @@
 ﻿namespace Gauge.CSharp.Runner
 {
-    internal interface IPhaseExecutor
+    public interface IPhaseExecutor
     {
         void Execute();
     }

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Gauge.CSharp.Runner
 {
-    internal static class ClassInstanceManager
+    public static class ClassInstanceManager
     {
         private static readonly Hashtable ClassInstanceMap = new Hashtable();
 

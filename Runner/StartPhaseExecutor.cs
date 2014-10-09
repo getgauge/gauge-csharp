@@ -11,7 +11,7 @@ using Microsoft.Build.Logging;
 
 namespace Gauge.CSharp.Runner
 {
-    internal class StartPhaseExecutor : IPhaseExecutor
+    public class StartPhaseExecutor : IPhaseExecutor
     {
         public void Execute()
         {

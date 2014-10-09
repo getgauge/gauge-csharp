@@ -7,7 +7,7 @@ using Gauge.CSharp.Lib;
 
 namespace Gauge.CSharp.Runner
 {
-    internal class SetupPhaseExecutor : IPhaseExecutor
+    public class SetupPhaseExecutor : IPhaseExecutor
     {
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Path.Combine(Utils.GaugeProjectRoot, ProjectName);

@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassInstanceManagerTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="Converter\TableParamConverterTests.cs" />
     <Compile Include="HookRegistryTests.cs" />
+    <Compile Include="PhaseExecutorFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepRegistryTests.cs" />
   </ItemGroup>

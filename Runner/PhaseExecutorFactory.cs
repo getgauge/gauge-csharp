@@ -1,6 +1,6 @@
 ﻿namespace Gauge.CSharp.Runner
 {
-    internal class PhaseExecutorFactory
+    public class PhaseExecutorFactory
     {
         public static IPhaseExecutor GetExecutor(string phase)
         {
