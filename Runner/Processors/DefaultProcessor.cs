@@ -6,10 +6,10 @@ namespace Gauge.CSharp.Runner.Processors
     {
         public Message Process(Message request)
         {
-            return getResponseMessage(request);
+            return GetResponseMessage(request);
         }
 
-        private Message getResponseMessage(Message request)
+        private static Message GetResponseMessage(Message request)
         {
             var executionStatusResponseBuilder = ExecutionStatusResponse.CreateBuilder();
             var executionStatusResponse =

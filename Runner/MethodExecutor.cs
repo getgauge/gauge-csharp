@@ -11,7 +11,7 @@ using main;
 
 namespace Gauge.CSharp.Runner
 {
-    internal class MethodExecutor
+    public class MethodExecutor
     {
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {
@@ -76,7 +76,7 @@ namespace Gauge.CSharp.Runner
             return HasArguments(method, objects) ? Execute(method, objects) : Execute(method);
         }
 
-        private bool HasArguments(MethodInfo method, object[] args)
+        private static bool HasArguments(MethodInfo method, object[] args)
         {
             if (method.GetParameters().Length != args.Length)
             {
@@ -84,8 +84,7 @@ namespace Gauge.CSharp.Runner
             }
             for (var i = 0; i < args.Length; i++)
             {
-                var arg = args[i];
-                if (arg.GetType() != method.GetParameters()[i].ParameterType)
+                if (args[i].GetType() != method.GetParameters()[i].ParameterType)
                 {
                     return false;
                 }

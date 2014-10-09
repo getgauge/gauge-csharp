@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.Processors
             var stepParameter = executeStepRequest.ParametersList;
             if (parameters.Length != stepParameter.Count)
             {
-                var argumentMismatchError = String.Format("Argument length mis match for {0}. Actual Count: {1}, Expected Count: {2}",
+                var argumentMismatchError = String.Format("Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
                     executeStepRequest.ActualStepText,
                     stepParameter.Count, parameters.Length);
                 return ExecutionError(argumentMismatchError, request);
