@@ -93,9 +93,9 @@
     <Compile Include="Processors\ExecutionEndingProcessor.cs" />
     <Compile Include="Processors\ExecutionStartingProcessor.cs" />
     <Compile Include="Processors\HookExecutionProcessor.cs" />
+    <Compile Include="Processors\IMessageProcessor.cs" />
     <Compile Include="Processors\KillProcessProcessor.cs" />
     <Compile Include="MethodExecutor.cs" />
-    <Compile Include="Processors\IMessageProcessor.cs" />
     <Compile Include="Processors\ExecutionProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
