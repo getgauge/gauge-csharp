@@ -45,7 +45,10 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
                 {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry)},
-                {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)}
+                {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)},
+                {Message.Types.MessageType.ScenarioDataStoreInit, new DataStoreInitProcessor()},
+                {Message.Types.MessageType.SpecDataStoreInit, new DataStoreInitProcessor()},
+                {Message.Types.MessageType.SuiteDataStoreInit, new DataStoreInitProcessor()},
             };
             return messageHandlers;
         }

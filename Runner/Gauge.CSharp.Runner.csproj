@@ -87,6 +87,7 @@
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="PhaseExecutorFactory.cs" />
+    <Compile Include="Processors\DataStoreInitProcessor.cs" />
     <Compile Include="Processors\DefaultProcessor.cs" />
     <Compile Include="Processors\ExecuteStepProcessor.cs" />
     <Compile Include="Processors\ExecutionEndingProcessor.cs" />

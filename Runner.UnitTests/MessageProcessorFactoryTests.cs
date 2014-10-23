@@ -116,5 +116,29 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             Assert.AreEqual(messageProcessor.GetType(), typeof(StepValidationProcessor));
         }
+
+        [Test]
+        public void ShouldGetProcessorForSpecDataStoreInitRequest()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecDataStoreInit);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+        }
+
+        [Test]
+        public void ShouldGetProcessorForSuiteDataStoreInitRequest()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SuiteDataStoreInit);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+        }
+
+        [Test]
+        public void ShouldGetProcessorForScenarioDataStoreInitRequest()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioDataStoreInit);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+        }
     }
 }
