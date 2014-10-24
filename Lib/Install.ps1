@@ -2,13 +2,18 @@
 
 Write-Host "Initializing a Gauge Project for" $project.Name
 
-gauge --init csharp
+$initScript = {param($path)
+Set-Location $path
 
-$solution = Get-Interface $dte.Solution ([EnvDTE80.Solution2])
+gauge --init java
 
-$specsFolder = $solution.AddSolutionFolder("specs")
-$specsSolutionItems = Get-Interface $specsFolder.ProjectItems ([EnvDTE.ProjectItems])
-resolve-path "specs\hello_world.spec" | %{ $specsSolutionItems.AddFromFile($_.Path) }
+$projectItems = Get-Interface $project.ProjectItems ([EnvDTE.ProjectItems])
 
-$stepImpl = $project.Name + "\StepImplementation.cs"
-resolve-path $stepImpl | %{ $project.ProjectItems.AddFromFile($_.Path) }
+@("env", "specs") | resolve-path | %{$projectItems.AddFromDirectory($_.Path)}
+
+@("StepImplementation.cs", "manifest.json") | resolve-path | %{$projectItems.AddFromFile($_.Path)}
+}
+
+$projectRootDir = Split-Path -parent $project.FullName
+
+Invoke-Command -ScriptBlock $initScript -ArgumentList $projectRootDir

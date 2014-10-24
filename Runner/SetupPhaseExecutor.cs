@@ -10,10 +10,9 @@ namespace Gauge.CSharp.Runner
     public class SetupPhaseExecutor : IPhaseExecutor
     {
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
-        private static readonly string ProjectRootDir = Path.Combine(Utils.GaugeProjectRoot, ProjectName);
+        private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
         public void Execute()
         {
-            CheckAndCreateDirectory(ProjectRootDir);
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
             
             new List<string>
@@ -80,7 +79,7 @@ namespace Gauge.CSharp.Runner
                     RedirectStandardOutput = true,
                     FileName = nugetExePath,
                     RedirectStandardError = true,
-                    Arguments = string.Format(@"install {0} -o packages", Path.Combine(ProjectName, "packages.config"))
+                    Arguments = string.Format(@"install {0} -o packages", "packages.config")
                 }
             };
             nugetProcess.OutputDataReceived += (sender, args) => Console.Out.WriteLine(args.Data);
