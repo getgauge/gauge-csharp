@@ -29,19 +29,19 @@ namespace Gauge.CSharp.Lib
             }
         }
 
-        private APIMessage ReadMessage()
-        {
-            var responseBytes = ReadBytes();
-            return APIMessage.ParseFrom(responseBytes.ToArray());
-        }
-
-        private APIMessage WriteAndReadApiMessage(IMessageLite stepValueRequestMessage)
+        public APIMessage WriteAndReadApiMessage(IMessageLite stepValueRequestMessage)
         {
             lock (TcpClientWrapper)
             {
                 WriteMessage(stepValueRequestMessage);
                 return ReadMessage();
             }
+        }
+
+        private APIMessage ReadMessage()
+        {
+            var responseBytes = ReadBytes();
+            return APIMessage.ParseFrom(responseBytes.ToArray());
         }
     }
 }
