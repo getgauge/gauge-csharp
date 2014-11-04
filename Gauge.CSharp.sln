@@ -16,6 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{907810
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner.UnitTests", "Runner.UnitTests\Gauge.CSharp.Runner.UnitTests.csproj", "{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge.Project.Skel", "{42CCF79A-CE5F-4FB8-ABD4-F7E747823504}"
+	ProjectSection(SolutionItems) = preProject
+		Gauge.Project.Skel\AssemblyInfo.cs = Gauge.Project.Skel\AssemblyInfo.cs
+		Gauge.Project.Skel\Gauge.Spec.csproj = Gauge.Project.Skel\Gauge.Spec.csproj
+		Gauge.Project.Skel\Gauge.Spec.sln = Gauge.Project.Skel\Gauge.Spec.sln
+		Gauge.Project.Skel\packages.config = Gauge.Project.Skel\packages.config
+		Gauge.Project.Skel\StepImplementation.cs = Gauge.Project.Skel\StepImplementation.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
