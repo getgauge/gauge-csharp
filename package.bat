@@ -18,6 +18,6 @@ xcopy .nuget %SKELDIR%\.nuget /y
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-call .nuget\NuGet.exe pack Lib\Gauge.CSharp.Lib.csproj /p Configuration=release -OutputDirectory artifacts -Verbosity detailed -ExcludeEmptyDirectories
+call .nuget\NuGet.exe pack Lib\Gauge.CSharp.Lib.csproj /p Configuration=release -OutputDirectory artifacts -Verbosity detailed -ExcludeEmptyDirectories -Build
 
 exit /b %ERRORLEVEL%
