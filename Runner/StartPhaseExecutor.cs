@@ -49,7 +49,7 @@ namespace Gauge.CSharp.Runner
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string> {{"Configuration", "Release"}, {"Platform", "Any CPU"}, {"OutputPath", Utils.GaugeBinDir}};
 
-            var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Rebuild"}, null);
+            var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
 
             var buildParameters = new BuildParameters(pc) {Loggers = new[] {consoleLogger}};
 
