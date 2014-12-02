@@ -7,17 +7,19 @@ $outputDir= "$($pwd)\artifacts\gauge-csharp"
 $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $skelDir="$($outputDir)\skel"
 $nugetDir = "$($pwd)\artifacts\gauge-csharp-nuget"
+$skelPropertiesDir = "$($skelDir)\Properties"
 
-@($skelDir, $nugetDir) | %{ New-Item -Itemtype directory $_ -Force}
+@($skelDir, $skelPropertiesDir, $nugetDir) | %{ New-Item -Itemtype directory $_ -Force}
 
 Write-host "Copying Skeleton files for Gauge CSharp project"
 
 # Copy the skeleton files
-Copy-Item "$($pwd)\Gauge.Project.Skel\AssemblyInfo.cs" -Destination "$($skelDir)\Properties" -Force
+Copy-Item "$($pwd)\Gauge.Project.Skel\AssemblyInfo.cs" -Destination $skelPropertiesDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.csproj" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force
+Copy-Item "$($pwd)\.nuget\NuGet.exe" -Destination $outputPath -Force
 
 # Copy the .nuget folder - this is required since the solution is configured to restore packages.
 Copy-Item "$($pwd)\.nuget" -Destination $skelDir -recurse
