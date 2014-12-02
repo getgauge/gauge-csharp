@@ -37,7 +37,8 @@ Import-Module Pscx
 # zip!
 $zipScript= {
     set-location $outputDir
-    gci -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp.zip"
+    $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
+    gci -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
 }
 
 Invoke-Command -ScriptBlock $zipScript
