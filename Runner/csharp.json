@@ -1,15 +1,15 @@
-﻿{
-    "id" : "csharp",
-	"version" : "0.0.2",
-    "description": "C# support for gauge",
-	"run": {
-		"windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
-		"linux": ["echo", "Coming Soon!"],
-		"darwin": ["echo", "Coming Soon!"]
-	},
-	"init": {
-        "windows": ["bin\\Gauge.Csharp.Runner.exe", "--init"],
-		"linux": ["echo", "Coming Soon!"],
-		"darwin": ["echo", "Coming Soon!"]
-    }
+{
+  "id" : "csharp",
+  "version" : "0.0.2",
+  "description": "C# support for gauge",
+  "run": {
+  "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
+  "linux": ["echo", "Coming Soon!"],
+    "darwin": ["echo", "Coming Soon!"]
+  },
+  "init": {
+    "windows": ["bin\\Gauge.Csharp.Runner.exe", "--init"],
+    "linux": ["echo", "Coming Soon!"],
+    "darwin": ["echo", "Coming Soon!"]
+  }
 }
