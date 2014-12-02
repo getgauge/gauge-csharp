@@ -5,7 +5,7 @@ Write-Host "Initializing a Gauge Project for" $project.Name
 $initScript = {param($path)
 Set-Location $path
 
-gauge --init java
+gauge --init csharp
 
 $projectItems = Get-Interface $project.ProjectItems ([EnvDTE.ProjectItems])
 
