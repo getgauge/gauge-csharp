@@ -4,11 +4,11 @@ namespace Gauge.CSharp.Runner
 {
     public class DataStore
     {
-        private Dictionary<string, object> _dictionary;
+        private Dictionary<object, object> _dictionary;
 
         public void Initialize()
         {
-            _dictionary = new Dictionary<string, object>();
+            _dictionary = new Dictionary<object, object>();
         }
 
         public object Get(string key)
