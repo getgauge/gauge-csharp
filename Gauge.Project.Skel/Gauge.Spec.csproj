@@ -33,7 +33,7 @@
 	<ItemGroup>
     <Reference Include="Gauge.CSharp.Lib, Version=0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Gauge.CSharp.Lib.0.0.3\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>packages\Gauge.CSharp.Lib.0.0.3.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers, Version=2.4.1.521, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
