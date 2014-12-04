@@ -12,7 +12,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected override IEnumerable<MethodInfo> GetHooks()
         {
-            return Hooks.BeforeStepHooks;
+            return Hooks.AfterStepHooks;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)
