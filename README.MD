@@ -14,12 +14,12 @@ This project uses [protobuf-csharp-port](https://code.google.com/p/protobuf-csha
 ## Gauge Lib
 `Lib` is a dll that brings in Gauge's data types to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
 
-Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/Lib/Readme.md).
+Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/master/Lib).
 
 ## Gauge CSharp Runner
 `Runner` is an executable that is invoked by Gauge Core. The `Runner` acts a bridge between C# test code and Gauge's API.
 
-Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/Runner/Readme.md).
+Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/master/Runner).
 
 ## Developer notes
 
