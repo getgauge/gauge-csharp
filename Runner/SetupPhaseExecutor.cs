@@ -62,7 +62,7 @@ namespace Gauge.CSharp.Runner
                     .Replace("$guid1$", Guid.NewGuid().ToString())
                     .Replace("$guid2$", Guid.NewGuid().ToString());
                 File.WriteAllText(destFileNameFull, fileContent);
-                Console.Out.WriteLine(" create  {0}", filePath);
+                Console.Out.WriteLine(" create  {0}", destFileName);
             }
         }
 
