@@ -51,10 +51,24 @@ namespace Gauge.CSharp.Runner
 
             var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
 
-            var buildParameters = new BuildParameters(pc) {Loggers = new[] {consoleLogger}};
+            var errorCodeAggregator = new ErrorCodeAggregator();
+            var buildParameters = new BuildParameters(pc) {Loggers = new ILogger[] {consoleLogger, errorCodeAggregator}};
 
             var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
-            Console.Out.WriteLine(buildResult.OverallResult);
+
+            if (buildResult.OverallResult == BuildResultCode.Success)
+            {
+                Console.Out.WriteLine(buildResult.OverallResult);
+                return;
+            }
+            if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
+            {
+                Console.WriteLine();
+                Console.WriteLine("You have chosen an invalid folder name to initialize a Gauge project.");
+                Console.WriteLine("Please choose a project name that complies with C# Project naming conventions.");
+                Console.WriteLine();
+            }
+            Environment.Exit(1);
         }
     }
 }
