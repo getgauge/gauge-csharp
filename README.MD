@@ -39,15 +39,15 @@ You will need Gauge and Gauge-csharp plugin installed before installing `Lib`.
 
 ### Build
 
-    go.bat build
+    run.bat build
 
 ### Test
 
-    go.bat test
+    run.bat test
 
 ### Package
 
-    go.bat package
+    run.bat package
 
 All artifacts are genereated in `./artifacts` folder.
 
