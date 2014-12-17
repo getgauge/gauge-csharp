@@ -7,4 +7,4 @@ if ($buildWithTest) {
     $sln="Gauge.CSharp.sln"
 }
 
-&$msbuild $sln /m /nologo /p:configuration=release /p:OutDir="$($outputPath)" /t:rebuild
+&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
