@@ -1,9 +1,9 @@
-param([bool]$buildWithTest=$false)
+param([string]$buildWithTest='')
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
 New-Item -Itemtype directory $outputPath -Force
 $msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
 $sln = "Gauge.CSharp.NoTests.sln"
-if ($buildWithTest) {
+if ($buildWithTest -eq 'true') {
     $sln="Gauge.CSharp.sln"
 }
 
