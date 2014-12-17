@@ -13,6 +13,14 @@ namespace Gauge.CSharp.Runner
 {
     public class StartPhaseExecutor : IPhaseExecutor
     {
+        private readonly MessageProcessorFactory _messageProcessorFactory;
+
+        public static StartPhaseExecutor DefaultInstance = new StartPhaseExecutor();
+        private StartPhaseExecutor()
+        {
+            _messageProcessorFactory = new MessageProcessorFactory();
+        }
+
         public void Execute()
         {
             BuildTargetGaugeProject();
@@ -22,7 +30,8 @@ namespace Gauge.CSharp.Runner
                 {
                     var messageBytes = gaugeConnection.ReadBytes();
                     var message = Message.ParseFrom(messageBytes.ToArray());
-                    var processor = new MessageProcessorFactory().GetProcessor(message.MessageType);
+                    
+                    var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
                     var response = processor.Process(message);
                     gaugeConnection.WriteMessage(response);
                     if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
