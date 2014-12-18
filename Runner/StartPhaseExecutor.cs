@@ -18,12 +18,12 @@ namespace Gauge.CSharp.Runner
         public static StartPhaseExecutor DefaultInstance = new StartPhaseExecutor();
         private StartPhaseExecutor()
         {
+            BuildTargetGaugeProject();
             _messageProcessorFactory = new MessageProcessorFactory();
         }
 
         public void Execute()
         {
-            BuildTargetGaugeProject();
             using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
             {
                 while (gaugeConnection.Connected)
