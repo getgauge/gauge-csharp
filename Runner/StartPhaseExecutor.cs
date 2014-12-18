@@ -15,7 +15,13 @@ namespace Gauge.CSharp.Runner
     {
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
-        public static StartPhaseExecutor DefaultInstance = new StartPhaseExecutor();
+        private static StartPhaseExecutor _instance;
+
+        public static StartPhaseExecutor GetDefaultInstance()
+        {
+            return _instance ?? (_instance = new StartPhaseExecutor());
+        }
+
         private StartPhaseExecutor()
         {
             BuildTargetGaugeProject();
@@ -56,7 +62,12 @@ namespace Gauge.CSharp.Runner
             Directory.CreateDirectory(Utils.GaugeBinDir);
             Console.WriteLine("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
-            var globalProperty = new Dictionary<string, string> {{"Configuration", "Release"}, {"Platform", "Any CPU"}, {"OutputPath", Utils.GaugeBinDir}};
+            var globalProperty = new Dictionary<string, string>
+            {
+                {"Configuration", "Release"},
+                {"Platform", "Any CPU"},
+                {"OutputPath", Utils.GaugeBinDir}
+            };
 
             var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
 

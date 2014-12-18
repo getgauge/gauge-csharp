@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner", "Runner\Gauge.CSharp.Runner.csproj", "{1027A646-4C10-44B9-939F-639D49D7CBF7}"
 EndProject
@@ -28,21 +28,31 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Debug|x86.ActiveCfg = Debug|x86
+		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Debug|x86.Build.0 = Debug|x86
 		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Release|x86.ActiveCfg = Release|x86
+		{1027A646-4C10-44B9-939F-639D49D7CBF7}.Release|x86.Build.0 = Release|x86
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

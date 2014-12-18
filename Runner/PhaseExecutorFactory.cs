@@ -9,7 +9,7 @@
                 case "--init":
                     return new SetupPhaseExecutor();
                 default:
-                    return StartPhaseExecutor.DefaultInstance;
+                    return StartPhaseExecutor.GetDefaultInstance();
             }
         }
     }
