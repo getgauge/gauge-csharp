@@ -40,17 +40,24 @@ namespace Gauge.CSharp.Runner
 
         private static ByteString TakeScreenshot()
         {
-            var bounds = Screen.GetBounds(Point.Empty);
-            using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+            try
             {
-                using (var g = Graphics.FromImage(bitmap))
+                var bounds = Screen.GetBounds(Point.Empty);
+                using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
                 {
-                    g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                    using (var g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                    }
+                    var memoryStream = new MemoryStream();
+                    bitmap.Save(memoryStream, ImageFormat.Png);
+                    var takeScreenshot = ByteString.CopyFrom(memoryStream.ToArray());
+                    return takeScreenshot;
                 }
-                var memoryStream = new MemoryStream();
-                bitmap.Save(memoryStream, ImageFormat.Png);
-                var takeScreenshot = ByteString.CopyFrom(memoryStream.ToArray());
-                return takeScreenshot;
+            }
+            catch
+            {
+                return ByteString.Empty;
             }
         }
 
