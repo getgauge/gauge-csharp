@@ -87,7 +87,7 @@ namespace main {
           "AyADKAsyDi5tYWluLkZyYWdtZW50EjsKE3N0ZXBFeGVjdXRpb25SZXN1bHQY" + 
           "BCABKAsyHi5tYWluLlByb3RvU3RlcEV4ZWN1dGlvblJlc3VsdCKUAQoMUHJv" + 
           "dG9Db25jZXB0EiQKC2NvbmNlcHRTdGVwGAEgAigLMg8ubWFpbi5Qcm90b1N0" + 
-          "ZXASHgoFc3RlcHMYAiADKAsyDy5tYWluLlByb3RvU3RlcBI+ChZjb25jZXB0" + 
+          "ZXASHgoFc3RlcHMYAiADKAsyDy5tYWluLlByb3RvSXRlbRI+ChZjb25jZXB0" + 
           "RXhlY3V0aW9uUmVzdWx0GAMgASgLMh4ubWFpbi5Qcm90b1N0ZXBFeGVjdXRp" + 
           "b25SZXN1bHQiGQoJUHJvdG9UYWdzEgwKBHRhZ3MYASADKAkimAEKCEZyYWdt" + 
           "ZW50EjEKDGZyYWdtZW50VHlwZRgBIAIoDjIbLm1haW4uRnJhZ21lbnQuRnJh" + 
@@ -3074,14 +3074,14 @@ namespace main {
     }
     
     public const int StepsFieldNumber = 2;
-    private pbc::PopsicleList<global::main.ProtoStep> steps_ = new pbc::PopsicleList<global::main.ProtoStep>();
-    public scg::IList<global::main.ProtoStep> StepsList {
+    private pbc::PopsicleList<global::main.ProtoItem> steps_ = new pbc::PopsicleList<global::main.ProtoItem>();
+    public scg::IList<global::main.ProtoItem> StepsList {
       get { return steps_; }
     }
     public int StepsCount {
       get { return steps_.Count; }
     }
-    public global::main.ProtoStep GetSteps(int index) {
+    public global::main.ProtoItem GetSteps(int index) {
       return steps_[index];
     }
     
@@ -3099,7 +3099,7 @@ namespace main {
       get {
         if (!hasConceptStep) return false;
         if (!ConceptStep.IsInitialized) return false;
-        foreach (global::main.ProtoStep element in StepsList) {
+        foreach (global::main.ProtoItem element in StepsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasConceptExecutionResult) {
@@ -3134,7 +3134,7 @@ namespace main {
         if (hasConceptStep) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, ConceptStep);
         }
-        foreach (global::main.ProtoStep element in StepsList) {
+        foreach (global::main.ProtoItem element in StepsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(2, element);
         }
         if (hasConceptExecutionResult) {
@@ -3327,7 +3327,7 @@ namespace main {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.steps_, global::main.ProtoStep.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.steps_, global::main.ProtoItem.DefaultInstance, extensionRegistry);
               break;
             }
             case 26: {
@@ -3389,40 +3389,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoStep> StepsList {
+      public pbc::IPopsicleList<global::main.ProtoItem> StepsList {
         get { return PrepareBuilder().steps_; }
       }
       public int StepsCount {
         get { return result.StepsCount; }
       }
-      public global::main.ProtoStep GetSteps(int index) {
+      public global::main.ProtoItem GetSteps(int index) {
         return result.GetSteps(index);
       }
-      public Builder SetSteps(int index, global::main.ProtoStep value) {
+      public Builder SetSteps(int index, global::main.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.steps_[index] = value;
         return this;
       }
-      public Builder SetSteps(int index, global::main.ProtoStep.Builder builderForValue) {
+      public Builder SetSteps(int index, global::main.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.steps_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddSteps(global::main.ProtoStep value) {
+      public Builder AddSteps(global::main.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.steps_.Add(value);
         return this;
       }
-      public Builder AddSteps(global::main.ProtoStep.Builder builderForValue) {
+      public Builder AddSteps(global::main.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.steps_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeSteps(scg::IEnumerable<global::main.ProtoStep> values) {
+      public Builder AddRangeSteps(scg::IEnumerable<global::main.ProtoItem> values) {
         PrepareBuilder();
         result.steps_.Add(values);
         return this;

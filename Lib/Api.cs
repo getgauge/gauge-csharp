@@ -32,6 +32,12 @@ namespace main {
     internal static pb::FieldAccess.FieldAccessorTable<global::main.GetAllSpecsRequest, global::main.GetAllSpecsRequest.Builder> internal__static_main_GetAllSpecsRequest__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_main_GetAllSpecsResponse__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::main.GetAllSpecsResponse, global::main.GetAllSpecsResponse.Builder> internal__static_main_GetAllSpecsResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_main_GetAllConceptsRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::main.GetAllConceptsRequest, global::main.GetAllConceptsRequest.Builder> internal__static_main_GetAllConceptsRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_main_GetAllConceptsResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::main.GetAllConceptsResponse, global::main.GetAllConceptsResponse.Builder> internal__static_main_GetAllConceptsResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_main_ConceptInfo__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::main.ConceptInfo, global::main.ConceptInfo.Builder> internal__static_main_ConceptInfo__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_main_GetStepValueRequest__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::main.GetStepValueRequest, global::main.GetStepValueRequest.Builder> internal__static_main_GetStepValueRequest__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_main_GetStepValueResponse__Descriptor;
@@ -60,40 +66,48 @@ namespace main {
           "b3QYASACKAkiFAoSR2V0QWxsU3RlcHNSZXF1ZXN0Ij0KE0dldEFsbFN0ZXBz" + 
           "UmVzcG9uc2USJgoIYWxsU3RlcHMYASADKAsyFC5tYWluLlByb3RvU3RlcFZh" + 
           "bHVlIhQKEkdldEFsbFNwZWNzUmVxdWVzdCI1ChNHZXRBbGxTcGVjc1Jlc3Bv" + 
-          "bnNlEh4KBXNwZWNzGAEgAygLMg8ubWFpbi5Qcm90b1NwZWMiPwoTR2V0U3Rl" + 
-          "cFZhbHVlUmVxdWVzdBIQCghzdGVwVGV4dBgBIAIoCRIWCg5oYXNJbmxpbmVU" + 
-          "YWJsZRgCIAEoCCI/ChRHZXRTdGVwVmFsdWVSZXNwb25zZRInCglzdGVwVmFs" + 
-          "dWUYASACKAsyFC5tYWluLlByb3RvU3RlcFZhbHVlIjMKH0dldExhbmd1YWdl" + 
-          "UGx1Z2luTGliUGF0aFJlcXVlc3QSEAoIbGFuZ3VhZ2UYASACKAkiMAogR2V0" + 
-          "TGFuZ3VhZ2VQbHVnaW5MaWJQYXRoUmVzcG9uc2USDAoEcGF0aBgBIAIoCSIe" + 
-          "Cg1FcnJvclJlc3BvbnNlEg0KBWVycm9yGAEgAigJIq4JCgpBUElNZXNzYWdl" + 
-          "EjQKC21lc3NhZ2VUeXBlGAEgAigOMh8ubWFpbi5BUElNZXNzYWdlLkFQSU1l" + 
-          "c3NhZ2VUeXBlEhEKCW1lc3NhZ2VJZBgCIAIoAxI3ChJwcm9qZWN0Um9vdFJl" + 
-          "cXVlc3QYAyABKAsyGy5tYWluLkdldFByb2plY3RSb290UmVxdWVzdBI5ChNw" + 
-          "cm9qZWN0Um9vdFJlc3BvbnNlGAQgASgLMhwubWFpbi5HZXRQcm9qZWN0Um9v" + 
-          "dFJlc3BvbnNlEkEKF2luc3RhbGxhdGlvblJvb3RSZXF1ZXN0GAUgASgLMiAu" + 
-          "bWFpbi5HZXRJbnN0YWxsYXRpb25Sb290UmVxdWVzdBJDChhpbnN0YWxsYXRp" + 
-          "b25Sb290UmVzcG9uc2UYBiABKAsyIS5tYWluLkdldEluc3RhbGxhdGlvblJv" + 
-          "b3RSZXNwb25zZRIxCg9hbGxTdGVwc1JlcXVlc3QYByABKAsyGC5tYWluLkdl" + 
-          "dEFsbFN0ZXBzUmVxdWVzdBIzChBhbGxTdGVwc1Jlc3BvbnNlGAggASgLMhku" + 
-          "bWFpbi5HZXRBbGxTdGVwc1Jlc3BvbnNlEjEKD2FsbFNwZWNzUmVxdWVzdBgJ" + 
-          "IAEoCzIYLm1haW4uR2V0QWxsU3BlY3NSZXF1ZXN0EjMKEGFsbFNwZWNzUmVz" + 
-          "cG9uc2UYCiABKAsyGS5tYWluLkdldEFsbFNwZWNzUmVzcG9uc2USMwoQc3Rl" + 
-          "cFZhbHVlUmVxdWVzdBgLIAEoCzIZLm1haW4uR2V0U3RlcFZhbHVlUmVxdWVz" + 
-          "dBI1ChFzdGVwVmFsdWVSZXNwb25zZRgMIAEoCzIaLm1haW4uR2V0U3RlcFZh" + 
-          "bHVlUmVzcG9uc2USPQoObGliUGF0aFJlcXVlc3QYDSABKAsyJS5tYWluLkdl" + 
-          "dExhbmd1YWdlUGx1Z2luTGliUGF0aFJlcXVlc3QSPwoPbGliUGF0aFJlc3Bv" + 
-          "bnNlGA4gASgLMiYubWFpbi5HZXRMYW5ndWFnZVBsdWdpbkxpYlBhdGhSZXNw" + 
-          "b25zZRIiCgVlcnJvchgPIAEoCzITLm1haW4uRXJyb3JSZXNwb25zZSL6AgoO" + 
-          "QVBJTWVzc2FnZVR5cGUSGQoVR2V0UHJvamVjdFJvb3RSZXF1ZXN0EAESGgoW" + 
-          "R2V0UHJvamVjdFJvb3RSZXNwb25zZRACEh4KGkdldEluc3RhbGxhdGlvblJv" + 
-          "b3RSZXF1ZXN0EAMSHwobR2V0SW5zdGFsbGF0aW9uUm9vdFJlc3BvbnNlEAQS" + 
-          "FgoSR2V0QWxsU3RlcHNSZXF1ZXN0EAUSFgoSR2V0QWxsU3RlcFJlc3BvbnNl" + 
-          "EAYSFgoSR2V0QWxsU3BlY3NSZXF1ZXN0EAcSFwoTR2V0QWxsU3BlY3NSZXNw" + 
-          "b25zZRAIEhcKE0dldFN0ZXBWYWx1ZVJlcXVlc3QQCRIYChRHZXRTdGVwVmFs" + 
-          "dWVSZXNwb25zZRAKEiMKH0dldExhbmd1YWdlUGx1Z2luTGliUGF0aFJlcXVl" + 
-          "c3QQCxIkCiBHZXRMYW5ndWFnZVBsdWdpbkxpYlBhdGhSZXNwb25zZRAMEhEK" + 
-          "DUVycm9yUmVzcG9uc2UQDQ==");
+          "bnNlEh4KBXNwZWNzGAEgAygLMg8ubWFpbi5Qcm90b1NwZWMiFwoVR2V0QWxs" + 
+          "Q29uY2VwdHNSZXF1ZXN0Ij0KFkdldEFsbENvbmNlcHRzUmVzcG9uc2USIwoI" + 
+          "Y29uY2VwdHMYASADKAsyES5tYWluLkNvbmNlcHRJbmZvIlwKC0NvbmNlcHRJ" + 
+          "bmZvEicKCXN0ZXBWYWx1ZRgBIAIoCzIULm1haW4uUHJvdG9TdGVwVmFsdWUS" + 
+          "EAoIZmlsZXBhdGgYAiACKAkSEgoKbGluZU51bWJlchgDIAIoBSI/ChNHZXRT" + 
+          "dGVwVmFsdWVSZXF1ZXN0EhAKCHN0ZXBUZXh0GAEgAigJEhYKDmhhc0lubGlu" + 
+          "ZVRhYmxlGAIgASgIIj8KFEdldFN0ZXBWYWx1ZVJlc3BvbnNlEicKCXN0ZXBW" + 
+          "YWx1ZRgBIAIoCzIULm1haW4uUHJvdG9TdGVwVmFsdWUiMwofR2V0TGFuZ3Vh" + 
+          "Z2VQbHVnaW5MaWJQYXRoUmVxdWVzdBIQCghsYW5ndWFnZRgBIAIoCSIwCiBH" + 
+          "ZXRMYW5ndWFnZVBsdWdpbkxpYlBhdGhSZXNwb25zZRIMCgRwYXRoGAEgAigJ" + 
+          "Ih4KDUVycm9yUmVzcG9uc2USDQoFZXJyb3IYASACKAki2QoKCkFQSU1lc3Nh" + 
+          "Z2USNAoLbWVzc2FnZVR5cGUYASACKA4yHy5tYWluLkFQSU1lc3NhZ2UuQVBJ" + 
+          "TWVzc2FnZVR5cGUSEQoJbWVzc2FnZUlkGAIgAigDEjcKEnByb2plY3RSb290" + 
+          "UmVxdWVzdBgDIAEoCzIbLm1haW4uR2V0UHJvamVjdFJvb3RSZXF1ZXN0EjkK" + 
+          "E3Byb2plY3RSb290UmVzcG9uc2UYBCABKAsyHC5tYWluLkdldFByb2plY3RS" + 
+          "b290UmVzcG9uc2USQQoXaW5zdGFsbGF0aW9uUm9vdFJlcXVlc3QYBSABKAsy" + 
+          "IC5tYWluLkdldEluc3RhbGxhdGlvblJvb3RSZXF1ZXN0EkMKGGluc3RhbGxh" + 
+          "dGlvblJvb3RSZXNwb25zZRgGIAEoCzIhLm1haW4uR2V0SW5zdGFsbGF0aW9u" + 
+          "Um9vdFJlc3BvbnNlEjEKD2FsbFN0ZXBzUmVxdWVzdBgHIAEoCzIYLm1haW4u" + 
+          "R2V0QWxsU3RlcHNSZXF1ZXN0EjMKEGFsbFN0ZXBzUmVzcG9uc2UYCCABKAsy" + 
+          "GS5tYWluLkdldEFsbFN0ZXBzUmVzcG9uc2USMQoPYWxsU3BlY3NSZXF1ZXN0" + 
+          "GAkgASgLMhgubWFpbi5HZXRBbGxTcGVjc1JlcXVlc3QSMwoQYWxsU3BlY3NS" + 
+          "ZXNwb25zZRgKIAEoCzIZLm1haW4uR2V0QWxsU3BlY3NSZXNwb25zZRIzChBz" + 
+          "dGVwVmFsdWVSZXF1ZXN0GAsgASgLMhkubWFpbi5HZXRTdGVwVmFsdWVSZXF1" + 
+          "ZXN0EjUKEXN0ZXBWYWx1ZVJlc3BvbnNlGAwgASgLMhoubWFpbi5HZXRTdGVw" + 
+          "VmFsdWVSZXNwb25zZRI9Cg5saWJQYXRoUmVxdWVzdBgNIAEoCzIlLm1haW4u" + 
+          "R2V0TGFuZ3VhZ2VQbHVnaW5MaWJQYXRoUmVxdWVzdBI/Cg9saWJQYXRoUmVz" + 
+          "cG9uc2UYDiABKAsyJi5tYWluLkdldExhbmd1YWdlUGx1Z2luTGliUGF0aFJl" + 
+          "c3BvbnNlEiIKBWVycm9yGA8gASgLMhMubWFpbi5FcnJvclJlc3BvbnNlEjcK" + 
+          "EmFsbENvbmNlcHRzUmVxdWVzdBgQIAEoCzIbLm1haW4uR2V0QWxsQ29uY2Vw" + 
+          "dHNSZXF1ZXN0EjkKE2FsbENvbmNlcHRzUmVzcG9uc2UYESABKAsyHC5tYWlu" + 
+          "LkdldEFsbENvbmNlcHRzUmVzcG9uc2UisQMKDkFQSU1lc3NhZ2VUeXBlEhkK" + 
+          "FUdldFByb2plY3RSb290UmVxdWVzdBABEhoKFkdldFByb2plY3RSb290UmVz" + 
+          "cG9uc2UQAhIeChpHZXRJbnN0YWxsYXRpb25Sb290UmVxdWVzdBADEh8KG0dl" + 
+          "dEluc3RhbGxhdGlvblJvb3RSZXNwb25zZRAEEhYKEkdldEFsbFN0ZXBzUmVx" + 
+          "dWVzdBAFEhYKEkdldEFsbFN0ZXBSZXNwb25zZRAGEhYKEkdldEFsbFNwZWNz" + 
+          "UmVxdWVzdBAHEhcKE0dldEFsbFNwZWNzUmVzcG9uc2UQCBIXChNHZXRTdGVw" + 
+          "VmFsdWVSZXF1ZXN0EAkSGAoUR2V0U3RlcFZhbHVlUmVzcG9uc2UQChIjCh9H" + 
+          "ZXRMYW5ndWFnZVBsdWdpbkxpYlBhdGhSZXF1ZXN0EAsSJAogR2V0TGFuZ3Vh" + 
+          "Z2VQbHVnaW5MaWJQYXRoUmVzcG9uc2UQDBIRCg1FcnJvclJlc3BvbnNlEA0S" + 
+          "GQoVR2V0QWxsQ29uY2VwdHNSZXF1ZXN0EA4SGgoWR2V0QWxsQ29uY2VwdHNS" + 
+          "ZXNwb25zZRAP");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_main_GetProjectRootRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -128,30 +142,42 @@ namespace main {
         internal__static_main_GetAllSpecsResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.GetAllSpecsResponse, global::main.GetAllSpecsResponse.Builder>(internal__static_main_GetAllSpecsResponse__Descriptor,
                 new string[] { "Specs", });
-        internal__static_main_GetStepValueRequest__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_main_GetAllConceptsRequest__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_main_GetAllConceptsRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::main.GetAllConceptsRequest, global::main.GetAllConceptsRequest.Builder>(internal__static_main_GetAllConceptsRequest__Descriptor,
+                new string[] { });
+        internal__static_main_GetAllConceptsResponse__Descriptor = Descriptor.MessageTypes[9];
+        internal__static_main_GetAllConceptsResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::main.GetAllConceptsResponse, global::main.GetAllConceptsResponse.Builder>(internal__static_main_GetAllConceptsResponse__Descriptor,
+                new string[] { "Concepts", });
+        internal__static_main_ConceptInfo__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_main_ConceptInfo__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::main.ConceptInfo, global::main.ConceptInfo.Builder>(internal__static_main_ConceptInfo__Descriptor,
+                new string[] { "StepValue", "Filepath", "LineNumber", });
+        internal__static_main_GetStepValueRequest__Descriptor = Descriptor.MessageTypes[11];
         internal__static_main_GetStepValueRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.GetStepValueRequest, global::main.GetStepValueRequest.Builder>(internal__static_main_GetStepValueRequest__Descriptor,
                 new string[] { "StepText", "HasInlineTable", });
-        internal__static_main_GetStepValueResponse__Descriptor = Descriptor.MessageTypes[9];
+        internal__static_main_GetStepValueResponse__Descriptor = Descriptor.MessageTypes[12];
         internal__static_main_GetStepValueResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.GetStepValueResponse, global::main.GetStepValueResponse.Builder>(internal__static_main_GetStepValueResponse__Descriptor,
                 new string[] { "StepValue", });
-        internal__static_main_GetLanguagePluginLibPathRequest__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_main_GetLanguagePluginLibPathRequest__Descriptor = Descriptor.MessageTypes[13];
         internal__static_main_GetLanguagePluginLibPathRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.GetLanguagePluginLibPathRequest, global::main.GetLanguagePluginLibPathRequest.Builder>(internal__static_main_GetLanguagePluginLibPathRequest__Descriptor,
                 new string[] { "Language", });
-        internal__static_main_GetLanguagePluginLibPathResponse__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_main_GetLanguagePluginLibPathResponse__Descriptor = Descriptor.MessageTypes[14];
         internal__static_main_GetLanguagePluginLibPathResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.GetLanguagePluginLibPathResponse, global::main.GetLanguagePluginLibPathResponse.Builder>(internal__static_main_GetLanguagePluginLibPathResponse__Descriptor,
                 new string[] { "Path", });
-        internal__static_main_ErrorResponse__Descriptor = Descriptor.MessageTypes[12];
+        internal__static_main_ErrorResponse__Descriptor = Descriptor.MessageTypes[15];
         internal__static_main_ErrorResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.ErrorResponse, global::main.ErrorResponse.Builder>(internal__static_main_ErrorResponse__Descriptor,
                 new string[] { "Error", });
-        internal__static_main_APIMessage__Descriptor = Descriptor.MessageTypes[13];
+        internal__static_main_APIMessage__Descriptor = Descriptor.MessageTypes[16];
         internal__static_main_APIMessage__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::main.APIMessage, global::main.APIMessage.Builder>(internal__static_main_APIMessage__Descriptor,
-                new string[] { "MessageType", "MessageId", "ProjectRootRequest", "ProjectRootResponse", "InstallationRootRequest", "InstallationRootResponse", "AllStepsRequest", "AllStepsResponse", "AllSpecsRequest", "AllSpecsResponse", "StepValueRequest", "StepValueResponse", "LibPathRequest", "LibPathResponse", "Error", });
+                new string[] { "MessageType", "MessageId", "ProjectRootRequest", "ProjectRootResponse", "InstallationRootRequest", "InstallationRootResponse", "AllStepsRequest", "AllStepsResponse", "AllSpecsRequest", "AllSpecsResponse", "StepValueRequest", "StepValueResponse", "LibPathRequest", "LibPathResponse", "Error", "AllConceptsRequest", "AllConceptsResponse", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -2216,6 +2242,919 @@ namespace main {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class GetAllConceptsRequest : pb::GeneratedMessage<GetAllConceptsRequest, GetAllConceptsRequest.Builder> {
+    private GetAllConceptsRequest() { }
+    private static readonly GetAllConceptsRequest defaultInstance = new GetAllConceptsRequest().MakeReadOnly();
+    private static readonly string[] _getAllConceptsRequestFieldNames = new string[] {  };
+    private static readonly uint[] _getAllConceptsRequestFieldTags = new uint[] {  };
+    public static GetAllConceptsRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override GetAllConceptsRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetAllConceptsRequest ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::main.Api.internal__static_main_GetAllConceptsRequest__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<GetAllConceptsRequest, GetAllConceptsRequest.Builder> InternalFieldAccessors {
+      get { return global::main.Api.internal__static_main_GetAllConceptsRequest__FieldAccessorTable; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getAllConceptsRequestFieldNames;
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static GetAllConceptsRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static GetAllConceptsRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetAllConceptsRequest MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(GetAllConceptsRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<GetAllConceptsRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetAllConceptsRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetAllConceptsRequest result;
+      
+      private GetAllConceptsRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetAllConceptsRequest original = result;
+          result = new GetAllConceptsRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetAllConceptsRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::main.GetAllConceptsRequest.Descriptor; }
+      }
+      
+      public override GetAllConceptsRequest DefaultInstanceForType {
+        get { return global::main.GetAllConceptsRequest.DefaultInstance; }
+      }
+      
+      public override GetAllConceptsRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is GetAllConceptsRequest) {
+          return MergeFrom((GetAllConceptsRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetAllConceptsRequest other) {
+        if (other == global::main.GetAllConceptsRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getAllConceptsRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getAllConceptsRequestFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+    }
+    static GetAllConceptsRequest() {
+      object.ReferenceEquals(global::main.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class GetAllConceptsResponse : pb::GeneratedMessage<GetAllConceptsResponse, GetAllConceptsResponse.Builder> {
+    private GetAllConceptsResponse() { }
+    private static readonly GetAllConceptsResponse defaultInstance = new GetAllConceptsResponse().MakeReadOnly();
+    private static readonly string[] _getAllConceptsResponseFieldNames = new string[] { "concepts" };
+    private static readonly uint[] _getAllConceptsResponseFieldTags = new uint[] { 10 };
+    public static GetAllConceptsResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override GetAllConceptsResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetAllConceptsResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::main.Api.internal__static_main_GetAllConceptsResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<GetAllConceptsResponse, GetAllConceptsResponse.Builder> InternalFieldAccessors {
+      get { return global::main.Api.internal__static_main_GetAllConceptsResponse__FieldAccessorTable; }
+    }
+    
+    public const int ConceptsFieldNumber = 1;
+    private pbc::PopsicleList<global::main.ConceptInfo> concepts_ = new pbc::PopsicleList<global::main.ConceptInfo>();
+    public scg::IList<global::main.ConceptInfo> ConceptsList {
+      get { return concepts_; }
+    }
+    public int ConceptsCount {
+      get { return concepts_.Count; }
+    }
+    public global::main.ConceptInfo GetConcepts(int index) {
+      return concepts_[index];
+    }
+    
+    public override bool IsInitialized {
+      get {
+        foreach (global::main.ConceptInfo element in ConceptsList) {
+          if (!element.IsInitialized) return false;
+        }
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getAllConceptsResponseFieldNames;
+      if (concepts_.Count > 0) {
+        output.WriteMessageArray(1, field_names[0], concepts_);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        foreach (global::main.ConceptInfo element in ConceptsList) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, element);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static GetAllConceptsResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static GetAllConceptsResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetAllConceptsResponse MakeReadOnly() {
+      concepts_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(GetAllConceptsResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<GetAllConceptsResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetAllConceptsResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetAllConceptsResponse result;
+      
+      private GetAllConceptsResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetAllConceptsResponse original = result;
+          result = new GetAllConceptsResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetAllConceptsResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::main.GetAllConceptsResponse.Descriptor; }
+      }
+      
+      public override GetAllConceptsResponse DefaultInstanceForType {
+        get { return global::main.GetAllConceptsResponse.DefaultInstance; }
+      }
+      
+      public override GetAllConceptsResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is GetAllConceptsResponse) {
+          return MergeFrom((GetAllConceptsResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetAllConceptsResponse other) {
+        if (other == global::main.GetAllConceptsResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.concepts_.Count != 0) {
+          result.concepts_.Add(other.concepts_);
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getAllConceptsResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getAllConceptsResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              input.ReadMessageArray(tag, field_name, result.concepts_, global::main.ConceptInfo.DefaultInstance, extensionRegistry);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public pbc::IPopsicleList<global::main.ConceptInfo> ConceptsList {
+        get { return PrepareBuilder().concepts_; }
+      }
+      public int ConceptsCount {
+        get { return result.ConceptsCount; }
+      }
+      public global::main.ConceptInfo GetConcepts(int index) {
+        return result.GetConcepts(index);
+      }
+      public Builder SetConcepts(int index, global::main.ConceptInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.concepts_[index] = value;
+        return this;
+      }
+      public Builder SetConcepts(int index, global::main.ConceptInfo.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.concepts_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddConcepts(global::main.ConceptInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.concepts_.Add(value);
+        return this;
+      }
+      public Builder AddConcepts(global::main.ConceptInfo.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.concepts_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeConcepts(scg::IEnumerable<global::main.ConceptInfo> values) {
+        PrepareBuilder();
+        result.concepts_.Add(values);
+        return this;
+      }
+      public Builder ClearConcepts() {
+        PrepareBuilder();
+        result.concepts_.Clear();
+        return this;
+      }
+    }
+    static GetAllConceptsResponse() {
+      object.ReferenceEquals(global::main.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class ConceptInfo : pb::GeneratedMessage<ConceptInfo, ConceptInfo.Builder> {
+    private ConceptInfo() { }
+    private static readonly ConceptInfo defaultInstance = new ConceptInfo().MakeReadOnly();
+    private static readonly string[] _conceptInfoFieldNames = new string[] { "filepath", "lineNumber", "stepValue" };
+    private static readonly uint[] _conceptInfoFieldTags = new uint[] { 18, 24, 10 };
+    public static ConceptInfo DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override ConceptInfo DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override ConceptInfo ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::main.Api.internal__static_main_ConceptInfo__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<ConceptInfo, ConceptInfo.Builder> InternalFieldAccessors {
+      get { return global::main.Api.internal__static_main_ConceptInfo__FieldAccessorTable; }
+    }
+    
+    public const int StepValueFieldNumber = 1;
+    private bool hasStepValue;
+    private global::main.ProtoStepValue stepValue_;
+    public bool HasStepValue {
+      get { return hasStepValue; }
+    }
+    public global::main.ProtoStepValue StepValue {
+      get { return stepValue_ ?? global::main.ProtoStepValue.DefaultInstance; }
+    }
+    
+    public const int FilepathFieldNumber = 2;
+    private bool hasFilepath;
+    private string filepath_ = "";
+    public bool HasFilepath {
+      get { return hasFilepath; }
+    }
+    public string Filepath {
+      get { return filepath_; }
+    }
+    
+    public const int LineNumberFieldNumber = 3;
+    private bool hasLineNumber;
+    private int lineNumber_;
+    public bool HasLineNumber {
+      get { return hasLineNumber; }
+    }
+    public int LineNumber {
+      get { return lineNumber_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasStepValue) return false;
+        if (!hasFilepath) return false;
+        if (!hasLineNumber) return false;
+        if (!StepValue.IsInitialized) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _conceptInfoFieldNames;
+      if (hasStepValue) {
+        output.WriteMessage(1, field_names[2], StepValue);
+      }
+      if (hasFilepath) {
+        output.WriteString(2, field_names[0], Filepath);
+      }
+      if (hasLineNumber) {
+        output.WriteInt32(3, field_names[1], LineNumber);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasStepValue) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, StepValue);
+        }
+        if (hasFilepath) {
+          size += pb::CodedOutputStream.ComputeStringSize(2, Filepath);
+        }
+        if (hasLineNumber) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, LineNumber);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static ConceptInfo ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static ConceptInfo ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static ConceptInfo ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static ConceptInfo ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private ConceptInfo MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(ConceptInfo prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<ConceptInfo, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(ConceptInfo cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private ConceptInfo result;
+      
+      private ConceptInfo PrepareBuilder() {
+        if (resultIsReadOnly) {
+          ConceptInfo original = result;
+          result = new ConceptInfo();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override ConceptInfo MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::main.ConceptInfo.Descriptor; }
+      }
+      
+      public override ConceptInfo DefaultInstanceForType {
+        get { return global::main.ConceptInfo.DefaultInstance; }
+      }
+      
+      public override ConceptInfo BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is ConceptInfo) {
+          return MergeFrom((ConceptInfo) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(ConceptInfo other) {
+        if (other == global::main.ConceptInfo.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasStepValue) {
+          MergeStepValue(other.StepValue);
+        }
+        if (other.HasFilepath) {
+          Filepath = other.Filepath;
+        }
+        if (other.HasLineNumber) {
+          LineNumber = other.LineNumber;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_conceptInfoFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _conceptInfoFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              global::main.ProtoStepValue.Builder subBuilder = global::main.ProtoStepValue.CreateBuilder();
+              if (result.hasStepValue) {
+                subBuilder.MergeFrom(StepValue);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              StepValue = subBuilder.BuildPartial();
+              break;
+            }
+            case 18: {
+              result.hasFilepath = input.ReadString(ref result.filepath_);
+              break;
+            }
+            case 24: {
+              result.hasLineNumber = input.ReadInt32(ref result.lineNumber_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasStepValue {
+       get { return result.hasStepValue; }
+      }
+      public global::main.ProtoStepValue StepValue {
+        get { return result.StepValue; }
+        set { SetStepValue(value); }
+      }
+      public Builder SetStepValue(global::main.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStepValue = true;
+        result.stepValue_ = value;
+        return this;
+      }
+      public Builder SetStepValue(global::main.ProtoStepValue.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasStepValue = true;
+        result.stepValue_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeStepValue(global::main.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasStepValue &&
+            result.stepValue_ != global::main.ProtoStepValue.DefaultInstance) {
+            result.stepValue_ = global::main.ProtoStepValue.CreateBuilder(result.stepValue_).MergeFrom(value).BuildPartial();
+        } else {
+          result.stepValue_ = value;
+        }
+        result.hasStepValue = true;
+        return this;
+      }
+      public Builder ClearStepValue() {
+        PrepareBuilder();
+        result.hasStepValue = false;
+        result.stepValue_ = null;
+        return this;
+      }
+      
+      public bool HasFilepath {
+        get { return result.hasFilepath; }
+      }
+      public string Filepath {
+        get { return result.Filepath; }
+        set { SetFilepath(value); }
+      }
+      public Builder SetFilepath(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasFilepath = true;
+        result.filepath_ = value;
+        return this;
+      }
+      public Builder ClearFilepath() {
+        PrepareBuilder();
+        result.hasFilepath = false;
+        result.filepath_ = "";
+        return this;
+      }
+      
+      public bool HasLineNumber {
+        get { return result.hasLineNumber; }
+      }
+      public int LineNumber {
+        get { return result.LineNumber; }
+        set { SetLineNumber(value); }
+      }
+      public Builder SetLineNumber(int value) {
+        PrepareBuilder();
+        result.hasLineNumber = true;
+        result.lineNumber_ = value;
+        return this;
+      }
+      public Builder ClearLineNumber() {
+        PrepareBuilder();
+        result.hasLineNumber = false;
+        result.lineNumber_ = 0;
+        return this;
+      }
+    }
+    static ConceptInfo() {
+      object.ReferenceEquals(global::main.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class GetStepValueRequest : pb::GeneratedMessage<GetStepValueRequest, GetStepValueRequest.Builder> {
     private GetStepValueRequest() { }
     private static readonly GetStepValueRequest defaultInstance = new GetStepValueRequest().MakeReadOnly();
@@ -3647,8 +4586,8 @@ namespace main {
   public sealed partial class APIMessage : pb::GeneratedMessage<APIMessage, APIMessage.Builder> {
     private APIMessage() { }
     private static readonly APIMessage defaultInstance = new APIMessage().MakeReadOnly();
-    private static readonly string[] _aPIMessageFieldNames = new string[] { "allSpecsRequest", "allSpecsResponse", "allStepsRequest", "allStepsResponse", "error", "installationRootRequest", "installationRootResponse", "libPathRequest", "libPathResponse", "messageId", "messageType", "projectRootRequest", "projectRootResponse", "stepValueRequest", "stepValueResponse" };
-    private static readonly uint[] _aPIMessageFieldTags = new uint[] { 74, 82, 58, 66, 122, 42, 50, 106, 114, 16, 8, 26, 34, 90, 98 };
+    private static readonly string[] _aPIMessageFieldNames = new string[] { "allConceptsRequest", "allConceptsResponse", "allSpecsRequest", "allSpecsResponse", "allStepsRequest", "allStepsResponse", "error", "installationRootRequest", "installationRootResponse", "libPathRequest", "libPathResponse", "messageId", "messageType", "projectRootRequest", "projectRootResponse", "stepValueRequest", "stepValueResponse" };
+    private static readonly uint[] _aPIMessageFieldTags = new uint[] { 130, 138, 74, 82, 58, 66, 122, 42, 50, 106, 114, 16, 8, 26, 34, 90, 98 };
     public static APIMessage DefaultInstance {
       get { return defaultInstance; }
     }
@@ -3686,6 +4625,8 @@ namespace main {
         GetLanguagePluginLibPathRequest = 11,
         GetLanguagePluginLibPathResponse = 12,
         ErrorResponse = 13,
+        GetAllConceptsRequest = 14,
+        GetAllConceptsResponse = 15,
       }
       
     }
@@ -3841,6 +4782,26 @@ namespace main {
       get { return error_ ?? global::main.ErrorResponse.DefaultInstance; }
     }
     
+    public const int AllConceptsRequestFieldNumber = 16;
+    private bool hasAllConceptsRequest;
+    private global::main.GetAllConceptsRequest allConceptsRequest_;
+    public bool HasAllConceptsRequest {
+      get { return hasAllConceptsRequest; }
+    }
+    public global::main.GetAllConceptsRequest AllConceptsRequest {
+      get { return allConceptsRequest_ ?? global::main.GetAllConceptsRequest.DefaultInstance; }
+    }
+    
+    public const int AllConceptsResponseFieldNumber = 17;
+    private bool hasAllConceptsResponse;
+    private global::main.GetAllConceptsResponse allConceptsResponse_;
+    public bool HasAllConceptsResponse {
+      get { return hasAllConceptsResponse; }
+    }
+    public global::main.GetAllConceptsResponse AllConceptsResponse {
+      get { return allConceptsResponse_ ?? global::main.GetAllConceptsResponse.DefaultInstance; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasMessageType) return false;
@@ -3872,6 +4833,9 @@ namespace main {
         if (HasError) {
           if (!Error.IsInitialized) return false;
         }
+        if (HasAllConceptsResponse) {
+          if (!AllConceptsResponse.IsInitialized) return false;
+        }
         return true;
       }
     }
@@ -3880,49 +4844,55 @@ namespace main {
       int size = SerializedSize;
       string[] field_names = _aPIMessageFieldNames;
       if (hasMessageType) {
-        output.WriteEnum(1, field_names[10], (int) MessageType, MessageType);
+        output.WriteEnum(1, field_names[12], (int) MessageType, MessageType);
       }
       if (hasMessageId) {
-        output.WriteInt64(2, field_names[9], MessageId);
+        output.WriteInt64(2, field_names[11], MessageId);
       }
       if (hasProjectRootRequest) {
-        output.WriteMessage(3, field_names[11], ProjectRootRequest);
+        output.WriteMessage(3, field_names[13], ProjectRootRequest);
       }
       if (hasProjectRootResponse) {
-        output.WriteMessage(4, field_names[12], ProjectRootResponse);
+        output.WriteMessage(4, field_names[14], ProjectRootResponse);
       }
       if (hasInstallationRootRequest) {
-        output.WriteMessage(5, field_names[5], InstallationRootRequest);
+        output.WriteMessage(5, field_names[7], InstallationRootRequest);
       }
       if (hasInstallationRootResponse) {
-        output.WriteMessage(6, field_names[6], InstallationRootResponse);
+        output.WriteMessage(6, field_names[8], InstallationRootResponse);
       }
       if (hasAllStepsRequest) {
-        output.WriteMessage(7, field_names[2], AllStepsRequest);
+        output.WriteMessage(7, field_names[4], AllStepsRequest);
       }
       if (hasAllStepsResponse) {
-        output.WriteMessage(8, field_names[3], AllStepsResponse);
+        output.WriteMessage(8, field_names[5], AllStepsResponse);
       }
       if (hasAllSpecsRequest) {
-        output.WriteMessage(9, field_names[0], AllSpecsRequest);
+        output.WriteMessage(9, field_names[2], AllSpecsRequest);
       }
       if (hasAllSpecsResponse) {
-        output.WriteMessage(10, field_names[1], AllSpecsResponse);
+        output.WriteMessage(10, field_names[3], AllSpecsResponse);
       }
       if (hasStepValueRequest) {
-        output.WriteMessage(11, field_names[13], StepValueRequest);
+        output.WriteMessage(11, field_names[15], StepValueRequest);
       }
       if (hasStepValueResponse) {
-        output.WriteMessage(12, field_names[14], StepValueResponse);
+        output.WriteMessage(12, field_names[16], StepValueResponse);
       }
       if (hasLibPathRequest) {
-        output.WriteMessage(13, field_names[7], LibPathRequest);
+        output.WriteMessage(13, field_names[9], LibPathRequest);
       }
       if (hasLibPathResponse) {
-        output.WriteMessage(14, field_names[8], LibPathResponse);
+        output.WriteMessage(14, field_names[10], LibPathResponse);
       }
       if (hasError) {
-        output.WriteMessage(15, field_names[4], Error);
+        output.WriteMessage(15, field_names[6], Error);
+      }
+      if (hasAllConceptsRequest) {
+        output.WriteMessage(16, field_names[0], AllConceptsRequest);
+      }
+      if (hasAllConceptsResponse) {
+        output.WriteMessage(17, field_names[1], AllConceptsResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3978,6 +4948,12 @@ namespace main {
         }
         if (hasError) {
           size += pb::CodedOutputStream.ComputeMessageSize(15, Error);
+        }
+        if (hasAllConceptsRequest) {
+          size += pb::CodedOutputStream.ComputeMessageSize(16, AllConceptsRequest);
+        }
+        if (hasAllConceptsResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(17, AllConceptsResponse);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -4147,6 +5123,12 @@ namespace main {
         }
         if (other.HasError) {
           MergeError(other.Error);
+        }
+        if (other.HasAllConceptsRequest) {
+          MergeAllConceptsRequest(other.AllConceptsRequest);
+        }
+        if (other.HasAllConceptsResponse) {
+          MergeAllConceptsResponse(other.AllConceptsResponse);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -4322,6 +5304,24 @@ namespace main {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               Error = subBuilder.BuildPartial();
+              break;
+            }
+            case 130: {
+              global::main.GetAllConceptsRequest.Builder subBuilder = global::main.GetAllConceptsRequest.CreateBuilder();
+              if (result.hasAllConceptsRequest) {
+                subBuilder.MergeFrom(AllConceptsRequest);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              AllConceptsRequest = subBuilder.BuildPartial();
+              break;
+            }
+            case 138: {
+              global::main.GetAllConceptsResponse.Builder subBuilder = global::main.GetAllConceptsResponse.CreateBuilder();
+              if (result.hasAllConceptsResponse) {
+                subBuilder.MergeFrom(AllConceptsResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              AllConceptsResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -4891,6 +5891,86 @@ namespace main {
         PrepareBuilder();
         result.hasError = false;
         result.error_ = null;
+        return this;
+      }
+      
+      public bool HasAllConceptsRequest {
+       get { return result.hasAllConceptsRequest; }
+      }
+      public global::main.GetAllConceptsRequest AllConceptsRequest {
+        get { return result.AllConceptsRequest; }
+        set { SetAllConceptsRequest(value); }
+      }
+      public Builder SetAllConceptsRequest(global::main.GetAllConceptsRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasAllConceptsRequest = true;
+        result.allConceptsRequest_ = value;
+        return this;
+      }
+      public Builder SetAllConceptsRequest(global::main.GetAllConceptsRequest.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasAllConceptsRequest = true;
+        result.allConceptsRequest_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeAllConceptsRequest(global::main.GetAllConceptsRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasAllConceptsRequest &&
+            result.allConceptsRequest_ != global::main.GetAllConceptsRequest.DefaultInstance) {
+            result.allConceptsRequest_ = global::main.GetAllConceptsRequest.CreateBuilder(result.allConceptsRequest_).MergeFrom(value).BuildPartial();
+        } else {
+          result.allConceptsRequest_ = value;
+        }
+        result.hasAllConceptsRequest = true;
+        return this;
+      }
+      public Builder ClearAllConceptsRequest() {
+        PrepareBuilder();
+        result.hasAllConceptsRequest = false;
+        result.allConceptsRequest_ = null;
+        return this;
+      }
+      
+      public bool HasAllConceptsResponse {
+       get { return result.hasAllConceptsResponse; }
+      }
+      public global::main.GetAllConceptsResponse AllConceptsResponse {
+        get { return result.AllConceptsResponse; }
+        set { SetAllConceptsResponse(value); }
+      }
+      public Builder SetAllConceptsResponse(global::main.GetAllConceptsResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasAllConceptsResponse = true;
+        result.allConceptsResponse_ = value;
+        return this;
+      }
+      public Builder SetAllConceptsResponse(global::main.GetAllConceptsResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasAllConceptsResponse = true;
+        result.allConceptsResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeAllConceptsResponse(global::main.GetAllConceptsResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasAllConceptsResponse &&
+            result.allConceptsResponse_ != global::main.GetAllConceptsResponse.DefaultInstance) {
+            result.allConceptsResponse_ = global::main.GetAllConceptsResponse.CreateBuilder(result.allConceptsResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.allConceptsResponse_ = value;
+        }
+        result.hasAllConceptsResponse = true;
+        return this;
+      }
+      public Builder ClearAllConceptsResponse() {
+        PrepareBuilder();
+        result.hasAllConceptsResponse = false;
+        result.allConceptsResponse_ = null;
         return this;
       }
     }
