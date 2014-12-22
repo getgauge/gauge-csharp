@@ -27,4 +27,4 @@ When you initialize a new gauge project from console, i.e. `gauge --init csharp`
 
 ## Sponsors
 
-This project is sponsored by [Thoughtworks Studios](http://www.thoughtworks.com/products).
+This project is sponsored by [Thoughtworks Inc.](http://www.thoughtworks.com/).

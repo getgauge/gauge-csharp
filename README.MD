@@ -21,6 +21,9 @@ Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/ma
 
 Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/master/Runner).
 
+## Gauge-Proto
+This is a submodule of the repository `https://github.com/getgauge/gauge-proto`. This repository holds the `.proto` files that act as contracts between Gauge and the plugins. This submodule needs to be fetched to generate the protobuf classes. 
+
 ## Developer notes
 
 ### Install
@@ -54,6 +57,18 @@ All artifacts are genereated in `./artifacts` folder.
 The plugin is zipped to `./artifacts/gauge-csharp-<version>.zip`
 The Nuget package is put at `./artigacts/gauge-csharp-nuget/`
 
+### Install the plugin
+
+    run.bat install
+
+### Regenerate the API messages (protocol buffer api changes)
+
+Update the submodule and run the `gen-proto` command:
+
+    git submodule update
+    run.bat gen-proto
+
+
 ## Sponsors
 
-This project is sponsored by [Thoughtworks Studios](http://www.thoughtworks.com/products).
+This project is sponsored by [Thoughtworks Inc.](http://www.thoughtworks.com/).

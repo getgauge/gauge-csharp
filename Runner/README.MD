@@ -31,4 +31,4 @@ This phase is invoked when gauge is executing specs. Gauge launches the runner a
 
 ## Sponsors
 
-This project is sponsored by [Thoughtworks Studios](http://www.thoughtworks.com/products).
+This project is sponsored by [Thoughtworks Inc.](http://www.thoughtworks.com/).
