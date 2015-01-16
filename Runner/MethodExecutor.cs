@@ -29,7 +29,11 @@ namespace Gauge.CSharp.Runner
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
-                builder.SetScreenShot(TakeScreenshot());
+                var isScreenShotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
+                if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
+                {
+                    builder.SetScreenShot(TakeScreenshot());
+                }
                 builder.SetErrorMessage(e.Message);
                 builder.SetStackTrace(e.StackTrace);
                 builder.SetRecoverableError(false);

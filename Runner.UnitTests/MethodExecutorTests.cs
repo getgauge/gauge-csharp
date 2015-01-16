@@ -39,6 +39,17 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         [Test]
+        public void ShouldNotTakeScreenShotWhenDisabled()
+        {
+            var screenshotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
+            Environment.SetEnvironmentVariable("screenshot_enabled", "false");
+            var executionResult = new MethodExecutor().Execute(GetType().GetMethod("ErrorFoo"), "Bar");
+            
+            Assert.False(executionResult.HasScreenShot);
+            Environment.SetEnvironmentVariable("screenshot_enabled", screenshotEnabled);
+        }
+
+        [Test]
         public void ShouldExecuteHooks()
         {
             var executionResult = new MethodExecutor().ExecuteHooks(new[] {GetType().GetMethod("Bar")},
