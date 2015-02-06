@@ -6,11 +6,6 @@ You can download Gauge [here](http://getgauge.io)
 
 This repository hosts two projects, `Lib` and `Runner`. 
 
-## License
-This project is released under [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt). 
-
-This project uses [protobuf-csharp-port](https://code.google.com/p/protobuf-csharp-port/) which is released under [New BSD License](http://opensource.org/licenses/BSD-3-Clause). These licenses is included in this repository [here](https://github.com/getgauge/gauge/Lib/licenses) and [here](https://github.com/getgauge/gauge/Runner/licenses), for `Lib` and `Runner` respectively.
-
 ## Gauge Lib
 `Lib` is a dll that brings in Gauge's data types to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
 
@@ -69,6 +64,11 @@ Update the submodule and run the `gen-proto` command:
     run.bat gen-proto
 
 
-## Sponsors
+## License
 
-This project is sponsored by [Thoughtworks Inc.](http://www.thoughtworks.com/).
+![GNU Public License version 3.0](http://www.gnu.org/graphics/gplv3-127x51.png)
+Gauge-csharp is released under [GNU Public License version 3.0](http://www.gnu.org/licenses/gpl-3.0.txt)
+
+## Copyright
+
+Copyright 2014 ThoughtWorks, Inc.
