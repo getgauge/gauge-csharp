@@ -1,6 +1,6 @@
 # C# support for Gauge
 
-This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/index.html). 
+This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html). 
 
 You can download Gauge [here](http://getgauge.io)
 
