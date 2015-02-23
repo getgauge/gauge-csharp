@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Windows.Forms;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
@@ -19,7 +20,6 @@ namespace Gauge.CSharp.Runner
             try
             {
                 var instance = ClassInstanceManager.Get(method.DeclaringType);
-                Console.WriteLine("Invoking method: {0}", method.Name);
                 try
                 {
                     method.Invoke(instance, args);
@@ -28,8 +28,8 @@ namespace Gauge.CSharp.Runner
                 {
                     // Throw inner exception, which is the exception that matters to the user
                     // This is the exception that is thrown by the user's code
-                    // and is fixable from the Step Implemente
-                    throw e.InnerException;
+                    // and is fixable from the Step Implemented
+                    ExceptionDispatchInfo.Capture(e.InnerException).Throw();
                 }
                 
                 return ProtoExecutionResult.CreateBuilder()
