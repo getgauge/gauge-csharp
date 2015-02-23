@@ -19,7 +19,19 @@ namespace Gauge.CSharp.Runner
             try
             {
                 var instance = ClassInstanceManager.Get(method.DeclaringType);
-                method.Invoke(instance, args);
+                Console.WriteLine("Invoking method: {0}", method.Name);
+                try
+                {
+                    method.Invoke(instance, args);
+                }
+                catch (TargetInvocationException e)
+                {
+                    // Throw inner exception, which is the exception that matters to the user
+                    // This is the exception that is thrown by the user's code
+                    // and is fixable from the Step Implemente
+                    throw e.InnerException;
+                }
+                
                 return ProtoExecutionResult.CreateBuilder()
                     .SetFailed(false)
                     .SetExecutionTime(stopwatch.ElapsedMilliseconds)

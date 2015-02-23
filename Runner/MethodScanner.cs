@@ -11,6 +11,8 @@ namespace Gauge.CSharp.Runner
     public class MethodScanner : IMethodScanner
     {
         private readonly GaugeApiConnection _apiConnection;
+        private static readonly IEnumerable<Assembly> ScannedAssemblies = GetAllAssemblyFiles();
+
         public MethodScanner(GaugeApiConnection apiConnection)
         {
             _apiConnection = apiConnection;
@@ -23,7 +25,7 @@ namespace Gauge.CSharp.Runner
 
         private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
         {
-            var stepMethods = GetAllMethodsForSpecAssemblies().Where(info => info.GetCustomAttributes().OfType<Step>().Any());
+            var stepMethods = GetAllMethodsForSpecAssemblies<Step>();
             foreach (var stepMethod in stepMethods)
             {
                 var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names, false);
@@ -36,35 +38,32 @@ namespace Gauge.CSharp.Runner
 
         public IHookRegistry GetHookRegistry()
         {
-            var allMethods = GetAllMethodsForSpecAssemblies();
             var hookRegistry = new HookRegistry();
-            var methodInfos = allMethods as IList<MethodInfo> ?? allMethods.ToList();
-            hookRegistry.AddBeforeSuiteHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeSuite>().Any()));
-            hookRegistry.AddAfterSuiteHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterSuite>().Any()));
-            hookRegistry.AddBeforeSpecHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeSpec>().Any()));
-            hookRegistry.AddAfterSpecHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterSpec>().Any()));
-            hookRegistry.AddBeforeScenarioHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeScenario>().Any()));
-            hookRegistry.AddAfterScenarioHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterScenario>().Any()));
-            hookRegistry.AddBeforeStepHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<BeforeStep>().Any()));
-            hookRegistry.AddAfterStepHooks(methodInfos.Where(info => info.GetCustomAttributes().OfType<AfterStep>().Any()));
+            hookRegistry.AddBeforeSuiteHooks(GetAllMethodsForSpecAssemblies<BeforeSuite>());
+            hookRegistry.AddAfterSuiteHooks(GetAllMethodsForSpecAssemblies<AfterSuite>());
+            hookRegistry.AddBeforeSpecHooks(GetAllMethodsForSpecAssemblies<BeforeSpec>());
+            hookRegistry.AddAfterSpecHooks(GetAllMethodsForSpecAssemblies<AfterSpec>());
+            hookRegistry.AddBeforeScenarioHooks(GetAllMethodsForSpecAssemblies<BeforeScenario>());
+            hookRegistry.AddAfterScenarioHooks(GetAllMethodsForSpecAssemblies<AfterScenario>());
+            hookRegistry.AddBeforeStepHooks(GetAllMethodsForSpecAssemblies<BeforeStep>());
+            hookRegistry.AddAfterStepHooks(GetAllMethodsForSpecAssemblies<AfterStep>());
             return hookRegistry;
         }
 
-        private IEnumerable<MethodInfo> GetAllMethodsForSpecAssemblies()
+        private IEnumerable<MethodInfo> GetAllMethodsForSpecAssemblies<T>() where T : Attribute
         {
-            var enumerateFiles = GetAllAssemblyFiles();
-            return enumerateFiles.SelectMany(GetMethodsFromAssembly);
+            return ScannedAssemblies.SelectMany(GetMethodsFromAssembly<T>);
         }
 
-        private IEnumerable<MethodInfo> GetMethodsFromAssembly(string specAssembly)
+        private static IEnumerable<MethodInfo> GetMethodsFromAssembly<T>(Assembly assembly) where T : Attribute
         {
-            var assembly = Assembly.LoadFile(specAssembly);
-            return assembly.GetTypes().SelectMany(type => type.GetMethods());
+            var isGaugeAssembly = assembly.GetReferencedAssemblies().Select(name => name.Name).Contains("Gauge.CSharp.Lib");
+            return isGaugeAssembly ? assembly.GetTypes().SelectMany(type => type.GetMethods().Where(info => info.GetCustomAttributes<T>().Any())) : Enumerable.Empty<MethodInfo>();
         }
 
-        private static IEnumerable<string> GetAllAssemblyFiles()
+        private static IEnumerable<Assembly> GetAllAssemblyFiles()
         {
-            return Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.AllDirectories);
+            return Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.AllDirectories).Select(Assembly.LoadFrom);
         }
     }
 }
