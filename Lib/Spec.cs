@@ -6,7 +6,7 @@ using pb = global::Google.ProtocolBuffers;
 using pbc = global::Google.ProtocolBuffers.Collections;
 using pbd = global::Google.ProtocolBuffers.Descriptors;
 using scg = global::System.Collections.Generic;
-namespace main {
+namespace Gauge.Messages {
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public static partial class Spec {
@@ -16,42 +16,42 @@ namespace main {
     }
     #endregion
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_main_ProtoSpec__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoSpec, global::main.ProtoSpec.Builder> internal__static_main_ProtoSpec__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoItem__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoItem, global::main.ProtoItem.Builder> internal__static_main_ProtoItem__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoScenario__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoScenario, global::main.ProtoScenario.Builder> internal__static_main_ProtoScenario__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoTableDrivenScenario__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoTableDrivenScenario, global::main.ProtoTableDrivenScenario.Builder> internal__static_main_ProtoTableDrivenScenario__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoStep__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoStep, global::main.ProtoStep.Builder> internal__static_main_ProtoStep__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoConcept__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoConcept, global::main.ProtoConcept.Builder> internal__static_main_ProtoConcept__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoTags__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoTags, global::main.ProtoTags.Builder> internal__static_main_ProtoTags__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_Fragment__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.Fragment, global::main.Fragment.Builder> internal__static_main_Fragment__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_Parameter__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.Parameter, global::main.Parameter.Builder> internal__static_main_Parameter__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoComment__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoComment, global::main.ProtoComment.Builder> internal__static_main_ProtoComment__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoTable__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoTable, global::main.ProtoTable.Builder> internal__static_main_ProtoTable__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoTableRow__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoTableRow, global::main.ProtoTableRow.Builder> internal__static_main_ProtoTableRow__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoStepExecutionResult__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoStepExecutionResult, global::main.ProtoStepExecutionResult.Builder> internal__static_main_ProtoStepExecutionResult__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoExecutionResult__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoExecutionResult, global::main.ProtoExecutionResult.Builder> internal__static_main_ProtoExecutionResult__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoHookFailure__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoHookFailure, global::main.ProtoHookFailure.Builder> internal__static_main_ProtoHookFailure__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoSuiteResult__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoSuiteResult, global::main.ProtoSuiteResult.Builder> internal__static_main_ProtoSuiteResult__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoSpecResult__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoSpecResult, global::main.ProtoSpecResult.Builder> internal__static_main_ProtoSpecResult__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ProtoStepValue__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ProtoStepValue, global::main.ProtoStepValue.Builder> internal__static_main_ProtoStepValue__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoSpec__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpec, global::Gauge.Messages.ProtoSpec.Builder> internal__static_gauge_messages_ProtoSpec__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoItem__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoItem, global::Gauge.Messages.ProtoItem.Builder> internal__static_gauge_messages_ProtoItem__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoScenario__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoScenario, global::Gauge.Messages.ProtoScenario.Builder> internal__static_gauge_messages_ProtoScenario__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTableDrivenScenario, global::Gauge.Messages.ProtoTableDrivenScenario.Builder> internal__static_gauge_messages_ProtoTableDrivenScenario__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoStep__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStep, global::Gauge.Messages.ProtoStep.Builder> internal__static_gauge_messages_ProtoStep__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoConcept__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoConcept, global::Gauge.Messages.ProtoConcept.Builder> internal__static_gauge_messages_ProtoConcept__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoTags__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTags, global::Gauge.Messages.ProtoTags.Builder> internal__static_gauge_messages_ProtoTags__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_Fragment__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Fragment, global::Gauge.Messages.Fragment.Builder> internal__static_gauge_messages_Fragment__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_Parameter__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Parameter, global::Gauge.Messages.Parameter.Builder> internal__static_gauge_messages_Parameter__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoComment__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoComment, global::Gauge.Messages.ProtoComment.Builder> internal__static_gauge_messages_ProtoComment__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoTable__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTable, global::Gauge.Messages.ProtoTable.Builder> internal__static_gauge_messages_ProtoTable__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoTableRow__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTableRow, global::Gauge.Messages.ProtoTableRow.Builder> internal__static_gauge_messages_ProtoTableRow__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoStepExecutionResult__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStepExecutionResult, global::Gauge.Messages.ProtoStepExecutionResult.Builder> internal__static_gauge_messages_ProtoStepExecutionResult__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoExecutionResult__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoExecutionResult, global::Gauge.Messages.ProtoExecutionResult.Builder> internal__static_gauge_messages_ProtoExecutionResult__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoHookFailure__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoHookFailure, global::Gauge.Messages.ProtoHookFailure.Builder> internal__static_gauge_messages_ProtoHookFailure__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoSuiteResult__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSuiteResult, global::Gauge.Messages.ProtoSuiteResult.Builder> internal__static_gauge_messages_ProtoSuiteResult__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoSpecResult__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpecResult, global::Gauge.Messages.ProtoSpecResult.Builder> internal__static_gauge_messages_ProtoSpecResult__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ProtoStepValue__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStepValue, global::Gauge.Messages.ProtoStepValue.Builder> internal__static_gauge_messages_ProtoStepValue__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -61,141 +61,149 @@ namespace main {
     
     static Spec() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "CgpzcGVjLnByb3RvEgRtYWluItgBCglQcm90b1NwZWMSEwoLc3BlY0hlYWRp" + 
-          "bmcYASACKAkSHgoFaXRlbXMYAiADKAsyDy5tYWluLlByb3RvSXRlbRIVCg1p" + 
-          "c1RhYmxlRHJpdmVuGAMgAigIEi4KDnByZUhvb2tGYWlsdXJlGAQgASgLMhYu" + 
-          "bWFpbi5Qcm90b0hvb2tGYWlsdXJlEi8KD3Bvc3RIb29rRmFpbHVyZRgFIAEo" + 
-          "CzIWLm1haW4uUHJvdG9Ib29rRmFpbHVyZRIQCghmaWxlTmFtZRgGIAIoCRIM" + 
-          "CgR0YWdzGAcgAygJIocDCglQcm90b0l0ZW0SKgoIaXRlbVR5cGUYASACKA4y" + 
-          "GC5tYWluLlByb3RvSXRlbS5JdGVtVHlwZRIdCgRzdGVwGAIgASgLMg8ubWFp" + 
-          "bi5Qcm90b1N0ZXASIwoHY29uY2VwdBgDIAEoCzISLm1haW4uUHJvdG9Db25j" + 
-          "ZXB0EiUKCHNjZW5hcmlvGAQgASgLMhMubWFpbi5Qcm90b1NjZW5hcmlvEjsK" + 
-          "E3RhYmxlRHJpdmVuU2NlbmFyaW8YBSABKAsyHi5tYWluLlByb3RvVGFibGVE" + 
-          "cml2ZW5TY2VuYXJpbxIjCgdjb21tZW50GAYgASgLMhIubWFpbi5Qcm90b0Nv" + 
-          "bW1lbnQSHwoFdGFibGUYByABKAsyEC5tYWluLlByb3RvVGFibGUiYAoISXRl" + 
-          "bVR5cGUSCAoEU3RlcBABEgsKB0NvbW1lbnQQAhILCgdDb25jZXB0EAMSDAoI" + 
-          "U2NlbmFyaW8QBBIXChNUYWJsZURyaXZlblNjZW5hcmlvEAUSCQoFVGFibGUQ" + 
-          "BiKJAgoNUHJvdG9TY2VuYXJpbxIXCg9zY2VuYXJpb0hlYWRpbmcYASACKAkS" + 
-          "DgoGZmFpbGVkGAIgAigIEiEKCGNvbnRleHRzGAMgAygLMg8ubWFpbi5Qcm90" + 
-          "b0l0ZW0SJgoNc2NlbmFyaW9JdGVtcxgEIAMoCzIPLm1haW4uUHJvdG9JdGVt" + 
-          "Ei4KDnByZUhvb2tGYWlsdXJlGAUgASgLMhYubWFpbi5Qcm90b0hvb2tGYWls" + 
-          "dXJlEi8KD3Bvc3RIb29rRmFpbHVyZRgGIAEoCzIWLm1haW4uUHJvdG9Ib29r" + 
-          "RmFpbHVyZRIMCgR0YWdzGAcgAygJEhUKDWV4ZWN1dGlvblRpbWUYCCABKAMi" + 
-          "QgoYUHJvdG9UYWJsZURyaXZlblNjZW5hcmlvEiYKCXNjZW5hcmlvcxgBIAMo" + 
-          "CzITLm1haW4uUHJvdG9TY2VuYXJpbyKTAQoJUHJvdG9TdGVwEhIKCmFjdHVh" + 
-          "bFRleHQYASACKAkSEgoKcGFyc2VkVGV4dBgCIAIoCRIhCglmcmFnbWVudHMY" + 
-          "AyADKAsyDi5tYWluLkZyYWdtZW50EjsKE3N0ZXBFeGVjdXRpb25SZXN1bHQY" + 
-          "BCABKAsyHi5tYWluLlByb3RvU3RlcEV4ZWN1dGlvblJlc3VsdCKUAQoMUHJv" + 
-          "dG9Db25jZXB0EiQKC2NvbmNlcHRTdGVwGAEgAigLMg8ubWFpbi5Qcm90b1N0" + 
-          "ZXASHgoFc3RlcHMYAiADKAsyDy5tYWluLlByb3RvSXRlbRI+ChZjb25jZXB0" + 
-          "RXhlY3V0aW9uUmVzdWx0GAMgASgLMh4ubWFpbi5Qcm90b1N0ZXBFeGVjdXRp" + 
-          "b25SZXN1bHQiGQoJUHJvdG9UYWdzEgwKBHRhZ3MYASADKAkimAEKCEZyYWdt" + 
-          "ZW50EjEKDGZyYWdtZW50VHlwZRgBIAIoDjIbLm1haW4uRnJhZ21lbnQuRnJh" + 
-          "Z21lbnRUeXBlEgwKBHRleHQYAiABKAkSIgoJcGFyYW1ldGVyGAMgASgLMg8u" + 
-          "bWFpbi5QYXJhbWV0ZXIiJwoMRnJhZ21lbnRUeXBlEggKBFRleHQQARINCglQ" + 
-          "YXJhbWV0ZXIQAiLbAQoJUGFyYW1ldGVyEjQKDXBhcmFtZXRlclR5cGUYASAC" + 
-          "KA4yHS5tYWluLlBhcmFtZXRlci5QYXJhbWV0ZXJUeXBlEg0KBXZhbHVlGAIg" + 
-          "ASgJEgwKBG5hbWUYAyABKAkSHwoFdGFibGUYBCABKAsyEC5tYWluLlByb3Rv" + 
-          "VGFibGUiWgoNUGFyYW1ldGVyVHlwZRIKCgZTdGF0aWMQARILCgdEeW5hbWlj" + 
-          "EAISEgoOU3BlY2lhbF9TdHJpbmcQAxIRCg1TcGVjaWFsX1RhYmxlEAQSCQoF" + 
-          "VGFibGUQBSIcCgxQcm90b0NvbW1lbnQSDAoEdGV4dBgBIAIoCSJVCgpQcm90" + 
-          "b1RhYmxlEiQKB2hlYWRlcnMYASACKAsyEy5tYWluLlByb3RvVGFibGVSb3cS" + 
-          "IQoEcm93cxgCIAMoCzITLm1haW4uUHJvdG9UYWJsZVJvdyIeCg1Qcm90b1Rh" + 
-          "YmxlUm93Eg0KBWNlbGxzGAEgAygJIrABChhQcm90b1N0ZXBFeGVjdXRpb25S" + 
-          "ZXN1bHQSMwoPZXhlY3V0aW9uUmVzdWx0GAEgAigLMhoubWFpbi5Qcm90b0V4" + 
-          "ZWN1dGlvblJlc3VsdBIuCg5wcmVIb29rRmFpbHVyZRgCIAEoCzIWLm1haW4u" + 
-          "UHJvdG9Ib29rRmFpbHVyZRIvCg9wb3N0SG9va0ZhaWx1cmUYAyABKAsyFi5t" + 
-          "YWluLlByb3RvSG9va0ZhaWx1cmUilQEKFFByb3RvRXhlY3V0aW9uUmVzdWx0" + 
-          "Eg4KBmZhaWxlZBgBIAIoCBIYChByZWNvdmVyYWJsZUVycm9yGAIgASgIEhQK" + 
-          "DGVycm9yTWVzc2FnZRgDIAEoCRISCgpzdGFja1RyYWNlGAQgASgJEhIKCnNj" + 
-          "cmVlblNob3QYBSABKAwSFQoNZXhlY3V0aW9uVGltZRgGIAIoAyJQChBQcm90" + 
-          "b0hvb2tGYWlsdXJlEhIKCnN0YWNrVHJhY2UYASACKAkSFAoMZXJyb3JNZXNz" + 
-          "YWdlGAIgAigJEhIKCnNjcmVlblNob3QYAyABKAwi9QEKEFByb3RvU3VpdGVS" + 
-          "ZXN1bHQSKgoLc3BlY1Jlc3VsdHMYASADKAsyFS5tYWluLlByb3RvU3BlY1Jl" + 
-          "c3VsdBIuCg5wcmVIb29rRmFpbHVyZRgCIAEoCzIWLm1haW4uUHJvdG9Ib29r" + 
-          "RmFpbHVyZRIvCg9wb3N0SG9va0ZhaWx1cmUYAyABKAsyFi5tYWluLlByb3Rv" + 
-          "SG9va0ZhaWx1cmUSDgoGZmFpbGVkGAQgAigIEhgKEHNwZWNzRmFpbGVkQ291" + 
-          "bnQYBSACKAUSFQoNZXhlY3V0aW9uVGltZRgGIAEoAxITCgtzdWNjZXNzUmF0" + 
-          "ZRgHIAIoAiKtAQoPUHJvdG9TcGVjUmVzdWx0EiIKCXByb3RvU3BlYxgBIAIo" + 
-          "CzIPLm1haW4uUHJvdG9TcGVjEhUKDXNjZW5hcmlvQ291bnQYAiACKAUSGwoT" + 
-          "c2NlbmFyaW9GYWlsZWRDb3VudBgDIAIoBRIOCgZmYWlsZWQYBCACKAgSGwoT" + 
-          "ZmFpbGVkRGF0YVRhYmxlUm93cxgFIAMoBRIVCg1leGVjdXRpb25UaW1lGAYg" + 
-          "ASgDIlcKDlByb3RvU3RlcFZhbHVlEhEKCXN0ZXBWYWx1ZRgBIAIoCRIeChZw" + 
-          "YXJhbWV0ZXJpemVkU3RlcFZhbHVlGAIgAigJEhIKCnBhcmFtZXRlcnMYAyAD" + 
-          "KAk=");
+          "CgpzcGVjLnByb3RvEg5nYXVnZS5tZXNzYWdlcyL2AQoJUHJvdG9TcGVjEhMK" + 
+          "C3NwZWNIZWFkaW5nGAEgAigJEigKBWl0ZW1zGAIgAygLMhkuZ2F1Z2UubWVz" + 
+          "c2FnZXMuUHJvdG9JdGVtEhUKDWlzVGFibGVEcml2ZW4YAyACKAgSOAoOcHJl" + 
+          "SG9va0ZhaWx1cmUYBCABKAsyIC5nYXVnZS5tZXNzYWdlcy5Qcm90b0hvb2tG" + 
+          "YWlsdXJlEjkKD3Bvc3RIb29rRmFpbHVyZRgFIAEoCzIgLmdhdWdlLm1lc3Nh" + 
+          "Z2VzLlByb3RvSG9va0ZhaWx1cmUSEAoIZmlsZU5hbWUYBiACKAkSDAoEdGFn" + 
+          "cxgHIAMoCSKABAoJUHJvdG9JdGVtEjQKCGl0ZW1UeXBlGAEgAigOMiIuZ2F1" + 
+          "Z2UubWVzc2FnZXMuUHJvdG9JdGVtLkl0ZW1UeXBlEicKBHN0ZXAYAiABKAsy" + 
+          "GS5nYXVnZS5tZXNzYWdlcy5Qcm90b1N0ZXASLQoHY29uY2VwdBgDIAEoCzIc" + 
+          "LmdhdWdlLm1lc3NhZ2VzLlByb3RvQ29uY2VwdBIvCghzY2VuYXJpbxgEIAEo" + 
+          "CzIdLmdhdWdlLm1lc3NhZ2VzLlByb3RvU2NlbmFyaW8SRQoTdGFibGVEcml2" + 
+          "ZW5TY2VuYXJpbxgFIAEoCzIoLmdhdWdlLm1lc3NhZ2VzLlByb3RvVGFibGVE" + 
+          "cml2ZW5TY2VuYXJpbxItCgdjb21tZW50GAYgASgLMhwuZ2F1Z2UubWVzc2Fn" + 
+          "ZXMuUHJvdG9Db21tZW50EikKBXRhYmxlGAcgASgLMhouZ2F1Z2UubWVzc2Fn" + 
+          "ZXMuUHJvdG9UYWJsZRInCgR0YWdzGAggASgLMhkuZ2F1Z2UubWVzc2FnZXMu" + 
+          "UHJvdG9UYWdzImoKCEl0ZW1UeXBlEggKBFN0ZXAQARILCgdDb21tZW50EAIS" + 
+          "CwoHQ29uY2VwdBADEgwKCFNjZW5hcmlvEAQSFwoTVGFibGVEcml2ZW5TY2Vu" + 
+          "YXJpbxAFEgkKBVRhYmxlEAYSCAoEVGFncxAHIrECCg1Qcm90b1NjZW5hcmlv" + 
+          "EhcKD3NjZW5hcmlvSGVhZGluZxgBIAIoCRIOCgZmYWlsZWQYAiACKAgSKwoI" + 
+          "Y29udGV4dHMYAyADKAsyGS5nYXVnZS5tZXNzYWdlcy5Qcm90b0l0ZW0SMAoN" + 
+          "c2NlbmFyaW9JdGVtcxgEIAMoCzIZLmdhdWdlLm1lc3NhZ2VzLlByb3RvSXRl" + 
+          "bRI4Cg5wcmVIb29rRmFpbHVyZRgFIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlBy" + 
+          "b3RvSG9va0ZhaWx1cmUSOQoPcG9zdEhvb2tGYWlsdXJlGAYgASgLMiAuZ2F1" + 
+          "Z2UubWVzc2FnZXMuUHJvdG9Ib29rRmFpbHVyZRIMCgR0YWdzGAcgAygJEhUK" + 
+          "DWV4ZWN1dGlvblRpbWUYCCABKAMiTAoYUHJvdG9UYWJsZURyaXZlblNjZW5h" + 
+          "cmlvEjAKCXNjZW5hcmlvcxgBIAMoCzIdLmdhdWdlLm1lc3NhZ2VzLlByb3Rv" + 
+          "U2NlbmFyaW8ipwEKCVByb3RvU3RlcBISCgphY3R1YWxUZXh0GAEgAigJEhIK" + 
+          "CnBhcnNlZFRleHQYAiACKAkSKwoJZnJhZ21lbnRzGAMgAygLMhguZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuRnJhZ21lbnQSRQoTc3RlcEV4ZWN1dGlvblJlc3VsdBgEIAEo" + 
+          "CzIoLmdhdWdlLm1lc3NhZ2VzLlByb3RvU3RlcEV4ZWN1dGlvblJlc3VsdCKy" + 
+          "AQoMUHJvdG9Db25jZXB0Ei4KC2NvbmNlcHRTdGVwGAEgAigLMhkuZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuUHJvdG9TdGVwEigKBXN0ZXBzGAIgAygLMhkuZ2F1Z2UubWVz" + 
+          "c2FnZXMuUHJvdG9JdGVtEkgKFmNvbmNlcHRFeGVjdXRpb25SZXN1bHQYAyAB" + 
+          "KAsyKC5nYXVnZS5tZXNzYWdlcy5Qcm90b1N0ZXBFeGVjdXRpb25SZXN1bHQi" + 
+          "GQoJUHJvdG9UYWdzEgwKBHRhZ3MYASADKAkirAEKCEZyYWdtZW50EjsKDGZy" + 
+          "YWdtZW50VHlwZRgBIAIoDjIlLmdhdWdlLm1lc3NhZ2VzLkZyYWdtZW50LkZy" + 
+          "YWdtZW50VHlwZRIMCgR0ZXh0GAIgASgJEiwKCXBhcmFtZXRlchgDIAEoCzIZ" + 
+          "LmdhdWdlLm1lc3NhZ2VzLlBhcmFtZXRlciInCgxGcmFnbWVudFR5cGUSCAoE" + 
+          "VGV4dBABEg0KCVBhcmFtZXRlchACIu8BCglQYXJhbWV0ZXISPgoNcGFyYW1l" + 
+          "dGVyVHlwZRgBIAIoDjInLmdhdWdlLm1lc3NhZ2VzLlBhcmFtZXRlci5QYXJh" + 
+          "bWV0ZXJUeXBlEg0KBXZhbHVlGAIgASgJEgwKBG5hbWUYAyABKAkSKQoFdGFi" + 
+          "bGUYBCABKAsyGi5nYXVnZS5tZXNzYWdlcy5Qcm90b1RhYmxlIloKDVBhcmFt" + 
+          "ZXRlclR5cGUSCgoGU3RhdGljEAESCwoHRHluYW1pYxACEhIKDlNwZWNpYWxf" + 
+          "U3RyaW5nEAMSEQoNU3BlY2lhbF9UYWJsZRAEEgkKBVRhYmxlEAUiHAoMUHJv" + 
+          "dG9Db21tZW50EgwKBHRleHQYASACKAkiaQoKUHJvdG9UYWJsZRIuCgdoZWFk" + 
+          "ZXJzGAEgAigLMh0uZ2F1Z2UubWVzc2FnZXMuUHJvdG9UYWJsZVJvdxIrCgRy" + 
+          "b3dzGAIgAygLMh0uZ2F1Z2UubWVzc2FnZXMuUHJvdG9UYWJsZVJvdyIeCg1Q" + 
+          "cm90b1RhYmxlUm93Eg0KBWNlbGxzGAEgAygJIs4BChhQcm90b1N0ZXBFeGVj" + 
+          "dXRpb25SZXN1bHQSPQoPZXhlY3V0aW9uUmVzdWx0GAEgAigLMiQuZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuUHJvdG9FeGVjdXRpb25SZXN1bHQSOAoOcHJlSG9va0ZhaWx1" + 
+          "cmUYAiABKAsyIC5nYXVnZS5tZXNzYWdlcy5Qcm90b0hvb2tGYWlsdXJlEjkK" + 
+          "D3Bvc3RIb29rRmFpbHVyZRgDIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlByb3Rv" + 
+          "SG9va0ZhaWx1cmUilQEKFFByb3RvRXhlY3V0aW9uUmVzdWx0Eg4KBmZhaWxl" + 
+          "ZBgBIAIoCBIYChByZWNvdmVyYWJsZUVycm9yGAIgASgIEhQKDGVycm9yTWVz" + 
+          "c2FnZRgDIAEoCRISCgpzdGFja1RyYWNlGAQgASgJEhIKCnNjcmVlblNob3QY" + 
+          "BSABKAwSFQoNZXhlY3V0aW9uVGltZRgGIAIoAyJQChBQcm90b0hvb2tGYWls" + 
+          "dXJlEhIKCnN0YWNrVHJhY2UYASACKAkSFAoMZXJyb3JNZXNzYWdlGAIgAigJ" + 
+          "EhIKCnNjcmVlblNob3QYAyABKAwikwIKEFByb3RvU3VpdGVSZXN1bHQSNAoL" + 
+          "c3BlY1Jlc3VsdHMYASADKAsyHy5nYXVnZS5tZXNzYWdlcy5Qcm90b1NwZWNS" + 
+          "ZXN1bHQSOAoOcHJlSG9va0ZhaWx1cmUYAiABKAsyIC5nYXVnZS5tZXNzYWdl" + 
+          "cy5Qcm90b0hvb2tGYWlsdXJlEjkKD3Bvc3RIb29rRmFpbHVyZRgDIAEoCzIg" + 
+          "LmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUSDgoGZmFpbGVkGAQg" + 
+          "AigIEhgKEHNwZWNzRmFpbGVkQ291bnQYBSACKAUSFQoNZXhlY3V0aW9uVGlt" + 
+          "ZRgGIAEoAxITCgtzdWNjZXNzUmF0ZRgHIAIoAiK3AQoPUHJvdG9TcGVjUmVz" + 
+          "dWx0EiwKCXByb3RvU3BlYxgBIAIoCzIZLmdhdWdlLm1lc3NhZ2VzLlByb3Rv" + 
+          "U3BlYxIVCg1zY2VuYXJpb0NvdW50GAIgAigFEhsKE3NjZW5hcmlvRmFpbGVk" + 
+          "Q291bnQYAyACKAUSDgoGZmFpbGVkGAQgAigIEhsKE2ZhaWxlZERhdGFUYWJs" + 
+          "ZVJvd3MYBSADKAUSFQoNZXhlY3V0aW9uVGltZRgGIAEoAyJXCg5Qcm90b1N0" + 
+          "ZXBWYWx1ZRIRCglzdGVwVmFsdWUYASACKAkSHgoWcGFyYW1ldGVyaXplZFN0" + 
+          "ZXBWYWx1ZRgCIAIoCRISCgpwYXJhbWV0ZXJzGAMgAygJ");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_main_ProtoSpec__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_main_ProtoSpec__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoSpec, global::main.ProtoSpec.Builder>(internal__static_main_ProtoSpec__Descriptor,
+        internal__static_gauge_messages_ProtoSpec__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_gauge_messages_ProtoSpec__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpec, global::Gauge.Messages.ProtoSpec.Builder>(internal__static_gauge_messages_ProtoSpec__Descriptor,
                 new string[] { "SpecHeading", "Items", "IsTableDriven", "PreHookFailure", "PostHookFailure", "FileName", "Tags", });
-        internal__static_main_ProtoItem__Descriptor = Descriptor.MessageTypes[1];
-        internal__static_main_ProtoItem__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoItem, global::main.ProtoItem.Builder>(internal__static_main_ProtoItem__Descriptor,
-                new string[] { "ItemType", "Step", "Concept", "Scenario", "TableDrivenScenario", "Comment", "Table", });
-        internal__static_main_ProtoScenario__Descriptor = Descriptor.MessageTypes[2];
-        internal__static_main_ProtoScenario__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoScenario, global::main.ProtoScenario.Builder>(internal__static_main_ProtoScenario__Descriptor,
+        internal__static_gauge_messages_ProtoItem__Descriptor = Descriptor.MessageTypes[1];
+        internal__static_gauge_messages_ProtoItem__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoItem, global::Gauge.Messages.ProtoItem.Builder>(internal__static_gauge_messages_ProtoItem__Descriptor,
+                new string[] { "ItemType", "Step", "Concept", "Scenario", "TableDrivenScenario", "Comment", "Table", "Tags", });
+        internal__static_gauge_messages_ProtoScenario__Descriptor = Descriptor.MessageTypes[2];
+        internal__static_gauge_messages_ProtoScenario__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoScenario, global::Gauge.Messages.ProtoScenario.Builder>(internal__static_gauge_messages_ProtoScenario__Descriptor,
                 new string[] { "ScenarioHeading", "Failed", "Contexts", "ScenarioItems", "PreHookFailure", "PostHookFailure", "Tags", "ExecutionTime", });
-        internal__static_main_ProtoTableDrivenScenario__Descriptor = Descriptor.MessageTypes[3];
-        internal__static_main_ProtoTableDrivenScenario__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoTableDrivenScenario, global::main.ProtoTableDrivenScenario.Builder>(internal__static_main_ProtoTableDrivenScenario__Descriptor,
+        internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor = Descriptor.MessageTypes[3];
+        internal__static_gauge_messages_ProtoTableDrivenScenario__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTableDrivenScenario, global::Gauge.Messages.ProtoTableDrivenScenario.Builder>(internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor,
                 new string[] { "Scenarios", });
-        internal__static_main_ProtoStep__Descriptor = Descriptor.MessageTypes[4];
-        internal__static_main_ProtoStep__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoStep, global::main.ProtoStep.Builder>(internal__static_main_ProtoStep__Descriptor,
+        internal__static_gauge_messages_ProtoStep__Descriptor = Descriptor.MessageTypes[4];
+        internal__static_gauge_messages_ProtoStep__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStep, global::Gauge.Messages.ProtoStep.Builder>(internal__static_gauge_messages_ProtoStep__Descriptor,
                 new string[] { "ActualText", "ParsedText", "Fragments", "StepExecutionResult", });
-        internal__static_main_ProtoConcept__Descriptor = Descriptor.MessageTypes[5];
-        internal__static_main_ProtoConcept__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoConcept, global::main.ProtoConcept.Builder>(internal__static_main_ProtoConcept__Descriptor,
+        internal__static_gauge_messages_ProtoConcept__Descriptor = Descriptor.MessageTypes[5];
+        internal__static_gauge_messages_ProtoConcept__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoConcept, global::Gauge.Messages.ProtoConcept.Builder>(internal__static_gauge_messages_ProtoConcept__Descriptor,
                 new string[] { "ConceptStep", "Steps", "ConceptExecutionResult", });
-        internal__static_main_ProtoTags__Descriptor = Descriptor.MessageTypes[6];
-        internal__static_main_ProtoTags__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoTags, global::main.ProtoTags.Builder>(internal__static_main_ProtoTags__Descriptor,
+        internal__static_gauge_messages_ProtoTags__Descriptor = Descriptor.MessageTypes[6];
+        internal__static_gauge_messages_ProtoTags__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTags, global::Gauge.Messages.ProtoTags.Builder>(internal__static_gauge_messages_ProtoTags__Descriptor,
                 new string[] { "Tags", });
-        internal__static_main_Fragment__Descriptor = Descriptor.MessageTypes[7];
-        internal__static_main_Fragment__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.Fragment, global::main.Fragment.Builder>(internal__static_main_Fragment__Descriptor,
+        internal__static_gauge_messages_Fragment__Descriptor = Descriptor.MessageTypes[7];
+        internal__static_gauge_messages_Fragment__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Fragment, global::Gauge.Messages.Fragment.Builder>(internal__static_gauge_messages_Fragment__Descriptor,
                 new string[] { "FragmentType", "Text", "Parameter", });
-        internal__static_main_Parameter__Descriptor = Descriptor.MessageTypes[8];
-        internal__static_main_Parameter__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.Parameter, global::main.Parameter.Builder>(internal__static_main_Parameter__Descriptor,
+        internal__static_gauge_messages_Parameter__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_gauge_messages_Parameter__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Parameter, global::Gauge.Messages.Parameter.Builder>(internal__static_gauge_messages_Parameter__Descriptor,
                 new string[] { "ParameterType", "Value", "Name", "Table", });
-        internal__static_main_ProtoComment__Descriptor = Descriptor.MessageTypes[9];
-        internal__static_main_ProtoComment__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoComment, global::main.ProtoComment.Builder>(internal__static_main_ProtoComment__Descriptor,
+        internal__static_gauge_messages_ProtoComment__Descriptor = Descriptor.MessageTypes[9];
+        internal__static_gauge_messages_ProtoComment__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoComment, global::Gauge.Messages.ProtoComment.Builder>(internal__static_gauge_messages_ProtoComment__Descriptor,
                 new string[] { "Text", });
-        internal__static_main_ProtoTable__Descriptor = Descriptor.MessageTypes[10];
-        internal__static_main_ProtoTable__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoTable, global::main.ProtoTable.Builder>(internal__static_main_ProtoTable__Descriptor,
+        internal__static_gauge_messages_ProtoTable__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_gauge_messages_ProtoTable__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTable, global::Gauge.Messages.ProtoTable.Builder>(internal__static_gauge_messages_ProtoTable__Descriptor,
                 new string[] { "Headers", "Rows", });
-        internal__static_main_ProtoTableRow__Descriptor = Descriptor.MessageTypes[11];
-        internal__static_main_ProtoTableRow__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoTableRow, global::main.ProtoTableRow.Builder>(internal__static_main_ProtoTableRow__Descriptor,
+        internal__static_gauge_messages_ProtoTableRow__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_gauge_messages_ProtoTableRow__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTableRow, global::Gauge.Messages.ProtoTableRow.Builder>(internal__static_gauge_messages_ProtoTableRow__Descriptor,
                 new string[] { "Cells", });
-        internal__static_main_ProtoStepExecutionResult__Descriptor = Descriptor.MessageTypes[12];
-        internal__static_main_ProtoStepExecutionResult__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoStepExecutionResult, global::main.ProtoStepExecutionResult.Builder>(internal__static_main_ProtoStepExecutionResult__Descriptor,
+        internal__static_gauge_messages_ProtoStepExecutionResult__Descriptor = Descriptor.MessageTypes[12];
+        internal__static_gauge_messages_ProtoStepExecutionResult__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStepExecutionResult, global::Gauge.Messages.ProtoStepExecutionResult.Builder>(internal__static_gauge_messages_ProtoStepExecutionResult__Descriptor,
                 new string[] { "ExecutionResult", "PreHookFailure", "PostHookFailure", });
-        internal__static_main_ProtoExecutionResult__Descriptor = Descriptor.MessageTypes[13];
-        internal__static_main_ProtoExecutionResult__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoExecutionResult, global::main.ProtoExecutionResult.Builder>(internal__static_main_ProtoExecutionResult__Descriptor,
+        internal__static_gauge_messages_ProtoExecutionResult__Descriptor = Descriptor.MessageTypes[13];
+        internal__static_gauge_messages_ProtoExecutionResult__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoExecutionResult, global::Gauge.Messages.ProtoExecutionResult.Builder>(internal__static_gauge_messages_ProtoExecutionResult__Descriptor,
                 new string[] { "Failed", "RecoverableError", "ErrorMessage", "StackTrace", "ScreenShot", "ExecutionTime", });
-        internal__static_main_ProtoHookFailure__Descriptor = Descriptor.MessageTypes[14];
-        internal__static_main_ProtoHookFailure__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoHookFailure, global::main.ProtoHookFailure.Builder>(internal__static_main_ProtoHookFailure__Descriptor,
+        internal__static_gauge_messages_ProtoHookFailure__Descriptor = Descriptor.MessageTypes[14];
+        internal__static_gauge_messages_ProtoHookFailure__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoHookFailure, global::Gauge.Messages.ProtoHookFailure.Builder>(internal__static_gauge_messages_ProtoHookFailure__Descriptor,
                 new string[] { "StackTrace", "ErrorMessage", "ScreenShot", });
-        internal__static_main_ProtoSuiteResult__Descriptor = Descriptor.MessageTypes[15];
-        internal__static_main_ProtoSuiteResult__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoSuiteResult, global::main.ProtoSuiteResult.Builder>(internal__static_main_ProtoSuiteResult__Descriptor,
+        internal__static_gauge_messages_ProtoSuiteResult__Descriptor = Descriptor.MessageTypes[15];
+        internal__static_gauge_messages_ProtoSuiteResult__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSuiteResult, global::Gauge.Messages.ProtoSuiteResult.Builder>(internal__static_gauge_messages_ProtoSuiteResult__Descriptor,
                 new string[] { "SpecResults", "PreHookFailure", "PostHookFailure", "Failed", "SpecsFailedCount", "ExecutionTime", "SuccessRate", });
-        internal__static_main_ProtoSpecResult__Descriptor = Descriptor.MessageTypes[16];
-        internal__static_main_ProtoSpecResult__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoSpecResult, global::main.ProtoSpecResult.Builder>(internal__static_main_ProtoSpecResult__Descriptor,
+        internal__static_gauge_messages_ProtoSpecResult__Descriptor = Descriptor.MessageTypes[16];
+        internal__static_gauge_messages_ProtoSpecResult__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpecResult, global::Gauge.Messages.ProtoSpecResult.Builder>(internal__static_gauge_messages_ProtoSpecResult__Descriptor,
                 new string[] { "ProtoSpec", "ScenarioCount", "ScenarioFailedCount", "Failed", "FailedDataTableRows", "ExecutionTime", });
-        internal__static_main_ProtoStepValue__Descriptor = Descriptor.MessageTypes[17];
-        internal__static_main_ProtoStepValue__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ProtoStepValue, global::main.ProtoStepValue.Builder>(internal__static_main_ProtoStepValue__Descriptor,
+        internal__static_gauge_messages_ProtoStepValue__Descriptor = Descriptor.MessageTypes[17];
+        internal__static_gauge_messages_ProtoStepValue__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStepValue, global::Gauge.Messages.ProtoStepValue.Builder>(internal__static_gauge_messages_ProtoStepValue__Descriptor,
                 new string[] { "StepValue", "ParameterizedStepValue", "Parameters", });
         return null;
       };
@@ -226,11 +234,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoSpec__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSpec__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoSpec, ProtoSpec.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoSpec__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSpec__FieldAccessorTable; }
     }
     
     public const int SpecHeadingFieldNumber = 1;
@@ -244,14 +252,14 @@ namespace main {
     }
     
     public const int ItemsFieldNumber = 2;
-    private pbc::PopsicleList<global::main.ProtoItem> items_ = new pbc::PopsicleList<global::main.ProtoItem>();
-    public scg::IList<global::main.ProtoItem> ItemsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoItem> items_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoItem>();
+    public scg::IList<global::Gauge.Messages.ProtoItem> ItemsList {
       get { return items_; }
     }
     public int ItemsCount {
       get { return items_.Count; }
     }
-    public global::main.ProtoItem GetItems(int index) {
+    public global::Gauge.Messages.ProtoItem GetItems(int index) {
       return items_[index];
     }
     
@@ -267,22 +275,22 @@ namespace main {
     
     public const int PreHookFailureFieldNumber = 4;
     private bool hasPreHookFailure;
-    private global::main.ProtoHookFailure preHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure preHookFailure_;
     public bool HasPreHookFailure {
       get { return hasPreHookFailure; }
     }
-    public global::main.ProtoHookFailure PreHookFailure {
-      get { return preHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
+      get { return preHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int PostHookFailureFieldNumber = 5;
     private bool hasPostHookFailure;
-    private global::main.ProtoHookFailure postHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure postHookFailure_;
     public bool HasPostHookFailure {
       get { return hasPostHookFailure; }
     }
-    public global::main.ProtoHookFailure PostHookFailure {
-      get { return postHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
+      get { return postHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int FileNameFieldNumber = 6;
@@ -312,7 +320,7 @@ namespace main {
         if (!hasSpecHeading) return false;
         if (!hasIsTableDriven) return false;
         if (!hasFileName) return false;
-        foreach (global::main.ProtoItem element in ItemsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ItemsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasPreHookFailure) {
@@ -362,7 +370,7 @@ namespace main {
         if (hasSpecHeading) {
           size += pb::CodedOutputStream.ComputeStringSize(1, SpecHeading);
         }
-        foreach (global::main.ProtoItem element in ItemsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ItemsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(2, element);
         }
         if (hasIsTableDriven) {
@@ -484,11 +492,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoSpec.Descriptor; }
+        get { return global::Gauge.Messages.ProtoSpec.Descriptor; }
       }
       
       public override ProtoSpec DefaultInstanceForType {
-        get { return global::main.ProtoSpec.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoSpec.DefaultInstance; }
       }
       
       public override ProtoSpec BuildPartial() {
@@ -509,7 +517,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoSpec other) {
-        if (other == global::main.ProtoSpec.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoSpec.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasSpecHeading) {
           SpecHeading = other.SpecHeading;
@@ -580,7 +588,7 @@ namespace main {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.items_, global::main.ProtoItem.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.items_, global::Gauge.Messages.ProtoItem.DefaultInstance, extensionRegistry);
               break;
             }
             case 24: {
@@ -588,7 +596,7 @@ namespace main {
               break;
             }
             case 34: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPreHookFailure) {
                 subBuilder.MergeFrom(PreHookFailure);
               }
@@ -597,7 +605,7 @@ namespace main {
               break;
             }
             case 42: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPostHookFailure) {
                 subBuilder.MergeFrom(PostHookFailure);
               }
@@ -644,40 +652,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoItem> ItemsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoItem> ItemsList {
         get { return PrepareBuilder().items_; }
       }
       public int ItemsCount {
         get { return result.ItemsCount; }
       }
-      public global::main.ProtoItem GetItems(int index) {
+      public global::Gauge.Messages.ProtoItem GetItems(int index) {
         return result.GetItems(index);
       }
-      public Builder SetItems(int index, global::main.ProtoItem value) {
+      public Builder SetItems(int index, global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.items_[index] = value;
         return this;
       }
-      public Builder SetItems(int index, global::main.ProtoItem.Builder builderForValue) {
+      public Builder SetItems(int index, global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.items_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddItems(global::main.ProtoItem value) {
+      public Builder AddItems(global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.items_.Add(value);
         return this;
       }
-      public Builder AddItems(global::main.ProtoItem.Builder builderForValue) {
+      public Builder AddItems(global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.items_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeItems(scg::IEnumerable<global::main.ProtoItem> values) {
+      public Builder AddRangeItems(scg::IEnumerable<global::Gauge.Messages.ProtoItem> values) {
         PrepareBuilder();
         result.items_.Add(values);
         return this;
@@ -711,30 +719,30 @@ namespace main {
       public bool HasPreHookFailure {
        get { return result.hasPreHookFailure; }
       }
-      public global::main.ProtoHookFailure PreHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
         get { return result.PreHookFailure; }
         set { SetPreHookFailure(value); }
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = value;
         return this;
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPreHookFailure &&
-            result.preHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.preHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
+            result.preHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.preHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.preHookFailure_ = value;
         }
@@ -751,30 +759,30 @@ namespace main {
       public bool HasPostHookFailure {
        get { return result.hasPostHookFailure; }
       }
-      public global::main.ProtoHookFailure PostHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
         get { return result.PostHookFailure; }
         set { SetPostHookFailure(value); }
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = value;
         return this;
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPostHookFailure &&
-            result.postHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.postHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
+            result.postHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.postHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.postHookFailure_ = value;
         }
@@ -842,7 +850,7 @@ namespace main {
       }
     }
     static ProtoSpec() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -850,8 +858,8 @@ namespace main {
   public sealed partial class ProtoItem : pb::GeneratedMessage<ProtoItem, ProtoItem.Builder> {
     private ProtoItem() { }
     private static readonly ProtoItem defaultInstance = new ProtoItem().MakeReadOnly();
-    private static readonly string[] _protoItemFieldNames = new string[] { "comment", "concept", "itemType", "scenario", "step", "table", "tableDrivenScenario" };
-    private static readonly uint[] _protoItemFieldTags = new uint[] { 50, 26, 8, 34, 18, 58, 42 };
+    private static readonly string[] _protoItemFieldNames = new string[] { "comment", "concept", "itemType", "scenario", "step", "table", "tableDrivenScenario", "tags" };
+    private static readonly uint[] _protoItemFieldTags = new uint[] { 50, 26, 8, 34, 18, 58, 42, 66 };
     public static ProtoItem DefaultInstance {
       get { return defaultInstance; }
     }
@@ -865,11 +873,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoItem__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoItem__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoItem, ProtoItem.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoItem__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoItem__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -882,6 +890,7 @@ namespace main {
         Scenario = 4,
         TableDrivenScenario = 5,
         Table = 6,
+        Tags = 7,
       }
       
     }
@@ -889,72 +898,82 @@ namespace main {
     
     public const int ItemTypeFieldNumber = 1;
     private bool hasItemType;
-    private global::main.ProtoItem.Types.ItemType itemType_ = global::main.ProtoItem.Types.ItemType.Step;
+    private global::Gauge.Messages.ProtoItem.Types.ItemType itemType_ = global::Gauge.Messages.ProtoItem.Types.ItemType.Step;
     public bool HasItemType {
       get { return hasItemType; }
     }
-    public global::main.ProtoItem.Types.ItemType ItemType {
+    public global::Gauge.Messages.ProtoItem.Types.ItemType ItemType {
       get { return itemType_; }
     }
     
     public const int StepFieldNumber = 2;
     private bool hasStep;
-    private global::main.ProtoStep step_;
+    private global::Gauge.Messages.ProtoStep step_;
     public bool HasStep {
       get { return hasStep; }
     }
-    public global::main.ProtoStep Step {
-      get { return step_ ?? global::main.ProtoStep.DefaultInstance; }
+    public global::Gauge.Messages.ProtoStep Step {
+      get { return step_ ?? global::Gauge.Messages.ProtoStep.DefaultInstance; }
     }
     
     public const int ConceptFieldNumber = 3;
     private bool hasConcept;
-    private global::main.ProtoConcept concept_;
+    private global::Gauge.Messages.ProtoConcept concept_;
     public bool HasConcept {
       get { return hasConcept; }
     }
-    public global::main.ProtoConcept Concept {
-      get { return concept_ ?? global::main.ProtoConcept.DefaultInstance; }
+    public global::Gauge.Messages.ProtoConcept Concept {
+      get { return concept_ ?? global::Gauge.Messages.ProtoConcept.DefaultInstance; }
     }
     
     public const int ScenarioFieldNumber = 4;
     private bool hasScenario;
-    private global::main.ProtoScenario scenario_;
+    private global::Gauge.Messages.ProtoScenario scenario_;
     public bool HasScenario {
       get { return hasScenario; }
     }
-    public global::main.ProtoScenario Scenario {
-      get { return scenario_ ?? global::main.ProtoScenario.DefaultInstance; }
+    public global::Gauge.Messages.ProtoScenario Scenario {
+      get { return scenario_ ?? global::Gauge.Messages.ProtoScenario.DefaultInstance; }
     }
     
     public const int TableDrivenScenarioFieldNumber = 5;
     private bool hasTableDrivenScenario;
-    private global::main.ProtoTableDrivenScenario tableDrivenScenario_;
+    private global::Gauge.Messages.ProtoTableDrivenScenario tableDrivenScenario_;
     public bool HasTableDrivenScenario {
       get { return hasTableDrivenScenario; }
     }
-    public global::main.ProtoTableDrivenScenario TableDrivenScenario {
-      get { return tableDrivenScenario_ ?? global::main.ProtoTableDrivenScenario.DefaultInstance; }
+    public global::Gauge.Messages.ProtoTableDrivenScenario TableDrivenScenario {
+      get { return tableDrivenScenario_ ?? global::Gauge.Messages.ProtoTableDrivenScenario.DefaultInstance; }
     }
     
     public const int CommentFieldNumber = 6;
     private bool hasComment;
-    private global::main.ProtoComment comment_;
+    private global::Gauge.Messages.ProtoComment comment_;
     public bool HasComment {
       get { return hasComment; }
     }
-    public global::main.ProtoComment Comment {
-      get { return comment_ ?? global::main.ProtoComment.DefaultInstance; }
+    public global::Gauge.Messages.ProtoComment Comment {
+      get { return comment_ ?? global::Gauge.Messages.ProtoComment.DefaultInstance; }
     }
     
     public const int TableFieldNumber = 7;
     private bool hasTable;
-    private global::main.ProtoTable table_;
+    private global::Gauge.Messages.ProtoTable table_;
     public bool HasTable {
       get { return hasTable; }
     }
-    public global::main.ProtoTable Table {
-      get { return table_ ?? global::main.ProtoTable.DefaultInstance; }
+    public global::Gauge.Messages.ProtoTable Table {
+      get { return table_ ?? global::Gauge.Messages.ProtoTable.DefaultInstance; }
+    }
+    
+    public const int TagsFieldNumber = 8;
+    private bool hasTags;
+    private global::Gauge.Messages.ProtoTags tags_;
+    public bool HasTags {
+      get { return hasTags; }
+    }
+    public global::Gauge.Messages.ProtoTags Tags {
+      get { return tags_ ?? global::Gauge.Messages.ProtoTags.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -1006,6 +1025,9 @@ namespace main {
       if (hasTable) {
         output.WriteMessage(7, field_names[5], Table);
       }
+      if (hasTags) {
+        output.WriteMessage(8, field_names[7], Tags);
+      }
       UnknownFields.WriteTo(output);
     }
     
@@ -1036,6 +1058,9 @@ namespace main {
         }
         if (hasTable) {
           size += pb::CodedOutputStream.ComputeMessageSize(7, Table);
+        }
+        if (hasTags) {
+          size += pb::CodedOutputStream.ComputeMessageSize(8, Tags);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -1134,11 +1159,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoItem.Descriptor; }
+        get { return global::Gauge.Messages.ProtoItem.Descriptor; }
       }
       
       public override ProtoItem DefaultInstanceForType {
-        get { return global::main.ProtoItem.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoItem.DefaultInstance; }
       }
       
       public override ProtoItem BuildPartial() {
@@ -1159,7 +1184,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoItem other) {
-        if (other == global::main.ProtoItem.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoItem.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasItemType) {
           ItemType = other.ItemType;
@@ -1181,6 +1206,9 @@ namespace main {
         }
         if (other.HasTable) {
           MergeTable(other.Table);
+        }
+        if (other.HasTags) {
+          MergeTags(other.Tags);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1238,7 +1266,7 @@ namespace main {
               break;
             }
             case 18: {
-              global::main.ProtoStep.Builder subBuilder = global::main.ProtoStep.CreateBuilder();
+              global::Gauge.Messages.ProtoStep.Builder subBuilder = global::Gauge.Messages.ProtoStep.CreateBuilder();
               if (result.hasStep) {
                 subBuilder.MergeFrom(Step);
               }
@@ -1247,7 +1275,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.ProtoConcept.Builder subBuilder = global::main.ProtoConcept.CreateBuilder();
+              global::Gauge.Messages.ProtoConcept.Builder subBuilder = global::Gauge.Messages.ProtoConcept.CreateBuilder();
               if (result.hasConcept) {
                 subBuilder.MergeFrom(Concept);
               }
@@ -1256,7 +1284,7 @@ namespace main {
               break;
             }
             case 34: {
-              global::main.ProtoScenario.Builder subBuilder = global::main.ProtoScenario.CreateBuilder();
+              global::Gauge.Messages.ProtoScenario.Builder subBuilder = global::Gauge.Messages.ProtoScenario.CreateBuilder();
               if (result.hasScenario) {
                 subBuilder.MergeFrom(Scenario);
               }
@@ -1265,7 +1293,7 @@ namespace main {
               break;
             }
             case 42: {
-              global::main.ProtoTableDrivenScenario.Builder subBuilder = global::main.ProtoTableDrivenScenario.CreateBuilder();
+              global::Gauge.Messages.ProtoTableDrivenScenario.Builder subBuilder = global::Gauge.Messages.ProtoTableDrivenScenario.CreateBuilder();
               if (result.hasTableDrivenScenario) {
                 subBuilder.MergeFrom(TableDrivenScenario);
               }
@@ -1274,7 +1302,7 @@ namespace main {
               break;
             }
             case 50: {
-              global::main.ProtoComment.Builder subBuilder = global::main.ProtoComment.CreateBuilder();
+              global::Gauge.Messages.ProtoComment.Builder subBuilder = global::Gauge.Messages.ProtoComment.CreateBuilder();
               if (result.hasComment) {
                 subBuilder.MergeFrom(Comment);
               }
@@ -1283,12 +1311,21 @@ namespace main {
               break;
             }
             case 58: {
-              global::main.ProtoTable.Builder subBuilder = global::main.ProtoTable.CreateBuilder();
+              global::Gauge.Messages.ProtoTable.Builder subBuilder = global::Gauge.Messages.ProtoTable.CreateBuilder();
               if (result.hasTable) {
                 subBuilder.MergeFrom(Table);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               Table = subBuilder.BuildPartial();
+              break;
+            }
+            case 66: {
+              global::Gauge.Messages.ProtoTags.Builder subBuilder = global::Gauge.Messages.ProtoTags.CreateBuilder();
+              if (result.hasTags) {
+                subBuilder.MergeFrom(Tags);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              Tags = subBuilder.BuildPartial();
               break;
             }
           }
@@ -1304,11 +1341,11 @@ namespace main {
       public bool HasItemType {
        get { return result.hasItemType; }
       }
-      public global::main.ProtoItem.Types.ItemType ItemType {
+      public global::Gauge.Messages.ProtoItem.Types.ItemType ItemType {
         get { return result.ItemType; }
         set { SetItemType(value); }
       }
-      public Builder SetItemType(global::main.ProtoItem.Types.ItemType value) {
+      public Builder SetItemType(global::Gauge.Messages.ProtoItem.Types.ItemType value) {
         PrepareBuilder();
         result.hasItemType = true;
         result.itemType_ = value;
@@ -1317,37 +1354,37 @@ namespace main {
       public Builder ClearItemType() {
         PrepareBuilder();
         result.hasItemType = false;
-        result.itemType_ = global::main.ProtoItem.Types.ItemType.Step;
+        result.itemType_ = global::Gauge.Messages.ProtoItem.Types.ItemType.Step;
         return this;
       }
       
       public bool HasStep {
        get { return result.hasStep; }
       }
-      public global::main.ProtoStep Step {
+      public global::Gauge.Messages.ProtoStep Step {
         get { return result.Step; }
         set { SetStep(value); }
       }
-      public Builder SetStep(global::main.ProtoStep value) {
+      public Builder SetStep(global::Gauge.Messages.ProtoStep value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStep = true;
         result.step_ = value;
         return this;
       }
-      public Builder SetStep(global::main.ProtoStep.Builder builderForValue) {
+      public Builder SetStep(global::Gauge.Messages.ProtoStep.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStep = true;
         result.step_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStep(global::main.ProtoStep value) {
+      public Builder MergeStep(global::Gauge.Messages.ProtoStep value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStep &&
-            result.step_ != global::main.ProtoStep.DefaultInstance) {
-            result.step_ = global::main.ProtoStep.CreateBuilder(result.step_).MergeFrom(value).BuildPartial();
+            result.step_ != global::Gauge.Messages.ProtoStep.DefaultInstance) {
+            result.step_ = global::Gauge.Messages.ProtoStep.CreateBuilder(result.step_).MergeFrom(value).BuildPartial();
         } else {
           result.step_ = value;
         }
@@ -1364,30 +1401,30 @@ namespace main {
       public bool HasConcept {
        get { return result.hasConcept; }
       }
-      public global::main.ProtoConcept Concept {
+      public global::Gauge.Messages.ProtoConcept Concept {
         get { return result.Concept; }
         set { SetConcept(value); }
       }
-      public Builder SetConcept(global::main.ProtoConcept value) {
+      public Builder SetConcept(global::Gauge.Messages.ProtoConcept value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasConcept = true;
         result.concept_ = value;
         return this;
       }
-      public Builder SetConcept(global::main.ProtoConcept.Builder builderForValue) {
+      public Builder SetConcept(global::Gauge.Messages.ProtoConcept.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasConcept = true;
         result.concept_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeConcept(global::main.ProtoConcept value) {
+      public Builder MergeConcept(global::Gauge.Messages.ProtoConcept value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasConcept &&
-            result.concept_ != global::main.ProtoConcept.DefaultInstance) {
-            result.concept_ = global::main.ProtoConcept.CreateBuilder(result.concept_).MergeFrom(value).BuildPartial();
+            result.concept_ != global::Gauge.Messages.ProtoConcept.DefaultInstance) {
+            result.concept_ = global::Gauge.Messages.ProtoConcept.CreateBuilder(result.concept_).MergeFrom(value).BuildPartial();
         } else {
           result.concept_ = value;
         }
@@ -1404,30 +1441,30 @@ namespace main {
       public bool HasScenario {
        get { return result.hasScenario; }
       }
-      public global::main.ProtoScenario Scenario {
+      public global::Gauge.Messages.ProtoScenario Scenario {
         get { return result.Scenario; }
         set { SetScenario(value); }
       }
-      public Builder SetScenario(global::main.ProtoScenario value) {
+      public Builder SetScenario(global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasScenario = true;
         result.scenario_ = value;
         return this;
       }
-      public Builder SetScenario(global::main.ProtoScenario.Builder builderForValue) {
+      public Builder SetScenario(global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasScenario = true;
         result.scenario_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeScenario(global::main.ProtoScenario value) {
+      public Builder MergeScenario(global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasScenario &&
-            result.scenario_ != global::main.ProtoScenario.DefaultInstance) {
-            result.scenario_ = global::main.ProtoScenario.CreateBuilder(result.scenario_).MergeFrom(value).BuildPartial();
+            result.scenario_ != global::Gauge.Messages.ProtoScenario.DefaultInstance) {
+            result.scenario_ = global::Gauge.Messages.ProtoScenario.CreateBuilder(result.scenario_).MergeFrom(value).BuildPartial();
         } else {
           result.scenario_ = value;
         }
@@ -1444,30 +1481,30 @@ namespace main {
       public bool HasTableDrivenScenario {
        get { return result.hasTableDrivenScenario; }
       }
-      public global::main.ProtoTableDrivenScenario TableDrivenScenario {
+      public global::Gauge.Messages.ProtoTableDrivenScenario TableDrivenScenario {
         get { return result.TableDrivenScenario; }
         set { SetTableDrivenScenario(value); }
       }
-      public Builder SetTableDrivenScenario(global::main.ProtoTableDrivenScenario value) {
+      public Builder SetTableDrivenScenario(global::Gauge.Messages.ProtoTableDrivenScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasTableDrivenScenario = true;
         result.tableDrivenScenario_ = value;
         return this;
       }
-      public Builder SetTableDrivenScenario(global::main.ProtoTableDrivenScenario.Builder builderForValue) {
+      public Builder SetTableDrivenScenario(global::Gauge.Messages.ProtoTableDrivenScenario.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasTableDrivenScenario = true;
         result.tableDrivenScenario_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeTableDrivenScenario(global::main.ProtoTableDrivenScenario value) {
+      public Builder MergeTableDrivenScenario(global::Gauge.Messages.ProtoTableDrivenScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasTableDrivenScenario &&
-            result.tableDrivenScenario_ != global::main.ProtoTableDrivenScenario.DefaultInstance) {
-            result.tableDrivenScenario_ = global::main.ProtoTableDrivenScenario.CreateBuilder(result.tableDrivenScenario_).MergeFrom(value).BuildPartial();
+            result.tableDrivenScenario_ != global::Gauge.Messages.ProtoTableDrivenScenario.DefaultInstance) {
+            result.tableDrivenScenario_ = global::Gauge.Messages.ProtoTableDrivenScenario.CreateBuilder(result.tableDrivenScenario_).MergeFrom(value).BuildPartial();
         } else {
           result.tableDrivenScenario_ = value;
         }
@@ -1484,30 +1521,30 @@ namespace main {
       public bool HasComment {
        get { return result.hasComment; }
       }
-      public global::main.ProtoComment Comment {
+      public global::Gauge.Messages.ProtoComment Comment {
         get { return result.Comment; }
         set { SetComment(value); }
       }
-      public Builder SetComment(global::main.ProtoComment value) {
+      public Builder SetComment(global::Gauge.Messages.ProtoComment value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasComment = true;
         result.comment_ = value;
         return this;
       }
-      public Builder SetComment(global::main.ProtoComment.Builder builderForValue) {
+      public Builder SetComment(global::Gauge.Messages.ProtoComment.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasComment = true;
         result.comment_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeComment(global::main.ProtoComment value) {
+      public Builder MergeComment(global::Gauge.Messages.ProtoComment value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasComment &&
-            result.comment_ != global::main.ProtoComment.DefaultInstance) {
-            result.comment_ = global::main.ProtoComment.CreateBuilder(result.comment_).MergeFrom(value).BuildPartial();
+            result.comment_ != global::Gauge.Messages.ProtoComment.DefaultInstance) {
+            result.comment_ = global::Gauge.Messages.ProtoComment.CreateBuilder(result.comment_).MergeFrom(value).BuildPartial();
         } else {
           result.comment_ = value;
         }
@@ -1524,30 +1561,30 @@ namespace main {
       public bool HasTable {
        get { return result.hasTable; }
       }
-      public global::main.ProtoTable Table {
+      public global::Gauge.Messages.ProtoTable Table {
         get { return result.Table; }
         set { SetTable(value); }
       }
-      public Builder SetTable(global::main.ProtoTable value) {
+      public Builder SetTable(global::Gauge.Messages.ProtoTable value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasTable = true;
         result.table_ = value;
         return this;
       }
-      public Builder SetTable(global::main.ProtoTable.Builder builderForValue) {
+      public Builder SetTable(global::Gauge.Messages.ProtoTable.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasTable = true;
         result.table_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeTable(global::main.ProtoTable value) {
+      public Builder MergeTable(global::Gauge.Messages.ProtoTable value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasTable &&
-            result.table_ != global::main.ProtoTable.DefaultInstance) {
-            result.table_ = global::main.ProtoTable.CreateBuilder(result.table_).MergeFrom(value).BuildPartial();
+            result.table_ != global::Gauge.Messages.ProtoTable.DefaultInstance) {
+            result.table_ = global::Gauge.Messages.ProtoTable.CreateBuilder(result.table_).MergeFrom(value).BuildPartial();
         } else {
           result.table_ = value;
         }
@@ -1560,9 +1597,49 @@ namespace main {
         result.table_ = null;
         return this;
       }
+      
+      public bool HasTags {
+       get { return result.hasTags; }
+      }
+      public global::Gauge.Messages.ProtoTags Tags {
+        get { return result.Tags; }
+        set { SetTags(value); }
+      }
+      public Builder SetTags(global::Gauge.Messages.ProtoTags value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasTags = true;
+        result.tags_ = value;
+        return this;
+      }
+      public Builder SetTags(global::Gauge.Messages.ProtoTags.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasTags = true;
+        result.tags_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeTags(global::Gauge.Messages.ProtoTags value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasTags &&
+            result.tags_ != global::Gauge.Messages.ProtoTags.DefaultInstance) {
+            result.tags_ = global::Gauge.Messages.ProtoTags.CreateBuilder(result.tags_).MergeFrom(value).BuildPartial();
+        } else {
+          result.tags_ = value;
+        }
+        result.hasTags = true;
+        return this;
+      }
+      public Builder ClearTags() {
+        PrepareBuilder();
+        result.hasTags = false;
+        result.tags_ = null;
+        return this;
+      }
     }
     static ProtoItem() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -1585,11 +1662,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoScenario__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoScenario__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoScenario, ProtoScenario.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoScenario__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoScenario__FieldAccessorTable; }
     }
     
     public const int ScenarioHeadingFieldNumber = 1;
@@ -1613,47 +1690,47 @@ namespace main {
     }
     
     public const int ContextsFieldNumber = 3;
-    private pbc::PopsicleList<global::main.ProtoItem> contexts_ = new pbc::PopsicleList<global::main.ProtoItem>();
-    public scg::IList<global::main.ProtoItem> ContextsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoItem> contexts_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoItem>();
+    public scg::IList<global::Gauge.Messages.ProtoItem> ContextsList {
       get { return contexts_; }
     }
     public int ContextsCount {
       get { return contexts_.Count; }
     }
-    public global::main.ProtoItem GetContexts(int index) {
+    public global::Gauge.Messages.ProtoItem GetContexts(int index) {
       return contexts_[index];
     }
     
     public const int ScenarioItemsFieldNumber = 4;
-    private pbc::PopsicleList<global::main.ProtoItem> scenarioItems_ = new pbc::PopsicleList<global::main.ProtoItem>();
-    public scg::IList<global::main.ProtoItem> ScenarioItemsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoItem> scenarioItems_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoItem>();
+    public scg::IList<global::Gauge.Messages.ProtoItem> ScenarioItemsList {
       get { return scenarioItems_; }
     }
     public int ScenarioItemsCount {
       get { return scenarioItems_.Count; }
     }
-    public global::main.ProtoItem GetScenarioItems(int index) {
+    public global::Gauge.Messages.ProtoItem GetScenarioItems(int index) {
       return scenarioItems_[index];
     }
     
     public const int PreHookFailureFieldNumber = 5;
     private bool hasPreHookFailure;
-    private global::main.ProtoHookFailure preHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure preHookFailure_;
     public bool HasPreHookFailure {
       get { return hasPreHookFailure; }
     }
-    public global::main.ProtoHookFailure PreHookFailure {
-      get { return preHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
+      get { return preHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int PostHookFailureFieldNumber = 6;
     private bool hasPostHookFailure;
-    private global::main.ProtoHookFailure postHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure postHookFailure_;
     public bool HasPostHookFailure {
       get { return hasPostHookFailure; }
     }
-    public global::main.ProtoHookFailure PostHookFailure {
-      get { return postHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
+      get { return postHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int TagsFieldNumber = 7;
@@ -1682,10 +1759,10 @@ namespace main {
       get {
         if (!hasScenarioHeading) return false;
         if (!hasFailed) return false;
-        foreach (global::main.ProtoItem element in ContextsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ContextsList) {
           if (!element.IsInitialized) return false;
         }
-        foreach (global::main.ProtoItem element in ScenarioItemsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ScenarioItemsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasPreHookFailure) {
@@ -1741,10 +1818,10 @@ namespace main {
         if (hasFailed) {
           size += pb::CodedOutputStream.ComputeBoolSize(2, Failed);
         }
-        foreach (global::main.ProtoItem element in ContextsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ContextsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(3, element);
         }
-        foreach (global::main.ProtoItem element in ScenarioItemsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in ScenarioItemsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(4, element);
         }
         if (hasPreHookFailure) {
@@ -1864,11 +1941,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoScenario.Descriptor; }
+        get { return global::Gauge.Messages.ProtoScenario.Descriptor; }
       }
       
       public override ProtoScenario DefaultInstanceForType {
-        get { return global::main.ProtoScenario.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoScenario.DefaultInstance; }
       }
       
       public override ProtoScenario BuildPartial() {
@@ -1889,7 +1966,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoScenario other) {
-        if (other == global::main.ProtoScenario.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoScenario.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasScenarioHeading) {
           ScenarioHeading = other.ScenarioHeading;
@@ -1967,15 +2044,15 @@ namespace main {
               break;
             }
             case 26: {
-              input.ReadMessageArray(tag, field_name, result.contexts_, global::main.ProtoItem.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.contexts_, global::Gauge.Messages.ProtoItem.DefaultInstance, extensionRegistry);
               break;
             }
             case 34: {
-              input.ReadMessageArray(tag, field_name, result.scenarioItems_, global::main.ProtoItem.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.scenarioItems_, global::Gauge.Messages.ProtoItem.DefaultInstance, extensionRegistry);
               break;
             }
             case 42: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPreHookFailure) {
                 subBuilder.MergeFrom(PreHookFailure);
               }
@@ -1984,7 +2061,7 @@ namespace main {
               break;
             }
             case 50: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPostHookFailure) {
                 subBuilder.MergeFrom(PostHookFailure);
               }
@@ -2051,40 +2128,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoItem> ContextsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoItem> ContextsList {
         get { return PrepareBuilder().contexts_; }
       }
       public int ContextsCount {
         get { return result.ContextsCount; }
       }
-      public global::main.ProtoItem GetContexts(int index) {
+      public global::Gauge.Messages.ProtoItem GetContexts(int index) {
         return result.GetContexts(index);
       }
-      public Builder SetContexts(int index, global::main.ProtoItem value) {
+      public Builder SetContexts(int index, global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.contexts_[index] = value;
         return this;
       }
-      public Builder SetContexts(int index, global::main.ProtoItem.Builder builderForValue) {
+      public Builder SetContexts(int index, global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.contexts_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddContexts(global::main.ProtoItem value) {
+      public Builder AddContexts(global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.contexts_.Add(value);
         return this;
       }
-      public Builder AddContexts(global::main.ProtoItem.Builder builderForValue) {
+      public Builder AddContexts(global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.contexts_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeContexts(scg::IEnumerable<global::main.ProtoItem> values) {
+      public Builder AddRangeContexts(scg::IEnumerable<global::Gauge.Messages.ProtoItem> values) {
         PrepareBuilder();
         result.contexts_.Add(values);
         return this;
@@ -2095,40 +2172,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoItem> ScenarioItemsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoItem> ScenarioItemsList {
         get { return PrepareBuilder().scenarioItems_; }
       }
       public int ScenarioItemsCount {
         get { return result.ScenarioItemsCount; }
       }
-      public global::main.ProtoItem GetScenarioItems(int index) {
+      public global::Gauge.Messages.ProtoItem GetScenarioItems(int index) {
         return result.GetScenarioItems(index);
       }
-      public Builder SetScenarioItems(int index, global::main.ProtoItem value) {
+      public Builder SetScenarioItems(int index, global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.scenarioItems_[index] = value;
         return this;
       }
-      public Builder SetScenarioItems(int index, global::main.ProtoItem.Builder builderForValue) {
+      public Builder SetScenarioItems(int index, global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.scenarioItems_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddScenarioItems(global::main.ProtoItem value) {
+      public Builder AddScenarioItems(global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.scenarioItems_.Add(value);
         return this;
       }
-      public Builder AddScenarioItems(global::main.ProtoItem.Builder builderForValue) {
+      public Builder AddScenarioItems(global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.scenarioItems_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeScenarioItems(scg::IEnumerable<global::main.ProtoItem> values) {
+      public Builder AddRangeScenarioItems(scg::IEnumerable<global::Gauge.Messages.ProtoItem> values) {
         PrepareBuilder();
         result.scenarioItems_.Add(values);
         return this;
@@ -2142,30 +2219,30 @@ namespace main {
       public bool HasPreHookFailure {
        get { return result.hasPreHookFailure; }
       }
-      public global::main.ProtoHookFailure PreHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
         get { return result.PreHookFailure; }
         set { SetPreHookFailure(value); }
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = value;
         return this;
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPreHookFailure &&
-            result.preHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.preHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
+            result.preHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.preHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.preHookFailure_ = value;
         }
@@ -2182,30 +2259,30 @@ namespace main {
       public bool HasPostHookFailure {
        get { return result.hasPostHookFailure; }
       }
-      public global::main.ProtoHookFailure PostHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
         get { return result.PostHookFailure; }
         set { SetPostHookFailure(value); }
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = value;
         return this;
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPostHookFailure &&
-            result.postHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.postHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
+            result.postHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.postHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.postHookFailure_ = value;
         }
@@ -2272,7 +2349,7 @@ namespace main {
       }
     }
     static ProtoScenario() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -2295,28 +2372,28 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoTableDrivenScenario__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoTableDrivenScenario, ProtoTableDrivenScenario.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoTableDrivenScenario__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTableDrivenScenario__FieldAccessorTable; }
     }
     
     public const int ScenariosFieldNumber = 1;
-    private pbc::PopsicleList<global::main.ProtoScenario> scenarios_ = new pbc::PopsicleList<global::main.ProtoScenario>();
-    public scg::IList<global::main.ProtoScenario> ScenariosList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoScenario> scenarios_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoScenario>();
+    public scg::IList<global::Gauge.Messages.ProtoScenario> ScenariosList {
       get { return scenarios_; }
     }
     public int ScenariosCount {
       get { return scenarios_.Count; }
     }
-    public global::main.ProtoScenario GetScenarios(int index) {
+    public global::Gauge.Messages.ProtoScenario GetScenarios(int index) {
       return scenarios_[index];
     }
     
     public override bool IsInitialized {
       get {
-        foreach (global::main.ProtoScenario element in ScenariosList) {
+        foreach (global::Gauge.Messages.ProtoScenario element in ScenariosList) {
           if (!element.IsInitialized) return false;
         }
         return true;
@@ -2339,7 +2416,7 @@ namespace main {
         if (size != -1) return size;
         
         size = 0;
-        foreach (global::main.ProtoScenario element in ScenariosList) {
+        foreach (global::Gauge.Messages.ProtoScenario element in ScenariosList) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, element);
         }
         size += UnknownFields.SerializedSize;
@@ -2440,11 +2517,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoTableDrivenScenario.Descriptor; }
+        get { return global::Gauge.Messages.ProtoTableDrivenScenario.Descriptor; }
       }
       
       public override ProtoTableDrivenScenario DefaultInstanceForType {
-        get { return global::main.ProtoTableDrivenScenario.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoTableDrivenScenario.DefaultInstance; }
       }
       
       public override ProtoTableDrivenScenario BuildPartial() {
@@ -2465,7 +2542,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoTableDrivenScenario other) {
-        if (other == global::main.ProtoTableDrivenScenario.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoTableDrivenScenario.DefaultInstance) return this;
         PrepareBuilder();
         if (other.scenarios_.Count != 0) {
           result.scenarios_.Add(other.scenarios_);
@@ -2514,7 +2591,7 @@ namespace main {
               break;
             }
             case 10: {
-              input.ReadMessageArray(tag, field_name, result.scenarios_, global::main.ProtoScenario.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.scenarios_, global::Gauge.Messages.ProtoScenario.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -2527,40 +2604,40 @@ namespace main {
       }
       
       
-      public pbc::IPopsicleList<global::main.ProtoScenario> ScenariosList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoScenario> ScenariosList {
         get { return PrepareBuilder().scenarios_; }
       }
       public int ScenariosCount {
         get { return result.ScenariosCount; }
       }
-      public global::main.ProtoScenario GetScenarios(int index) {
+      public global::Gauge.Messages.ProtoScenario GetScenarios(int index) {
         return result.GetScenarios(index);
       }
-      public Builder SetScenarios(int index, global::main.ProtoScenario value) {
+      public Builder SetScenarios(int index, global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.scenarios_[index] = value;
         return this;
       }
-      public Builder SetScenarios(int index, global::main.ProtoScenario.Builder builderForValue) {
+      public Builder SetScenarios(int index, global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.scenarios_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddScenarios(global::main.ProtoScenario value) {
+      public Builder AddScenarios(global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.scenarios_.Add(value);
         return this;
       }
-      public Builder AddScenarios(global::main.ProtoScenario.Builder builderForValue) {
+      public Builder AddScenarios(global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.scenarios_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeScenarios(scg::IEnumerable<global::main.ProtoScenario> values) {
+      public Builder AddRangeScenarios(scg::IEnumerable<global::Gauge.Messages.ProtoScenario> values) {
         PrepareBuilder();
         result.scenarios_.Add(values);
         return this;
@@ -2572,7 +2649,7 @@ namespace main {
       }
     }
     static ProtoTableDrivenScenario() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -2595,11 +2672,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoStep__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStep__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoStep, ProtoStep.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoStep__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStep__FieldAccessorTable; }
     }
     
     public const int ActualTextFieldNumber = 1;
@@ -2623,32 +2700,32 @@ namespace main {
     }
     
     public const int FragmentsFieldNumber = 3;
-    private pbc::PopsicleList<global::main.Fragment> fragments_ = new pbc::PopsicleList<global::main.Fragment>();
-    public scg::IList<global::main.Fragment> FragmentsList {
+    private pbc::PopsicleList<global::Gauge.Messages.Fragment> fragments_ = new pbc::PopsicleList<global::Gauge.Messages.Fragment>();
+    public scg::IList<global::Gauge.Messages.Fragment> FragmentsList {
       get { return fragments_; }
     }
     public int FragmentsCount {
       get { return fragments_.Count; }
     }
-    public global::main.Fragment GetFragments(int index) {
+    public global::Gauge.Messages.Fragment GetFragments(int index) {
       return fragments_[index];
     }
     
     public const int StepExecutionResultFieldNumber = 4;
     private bool hasStepExecutionResult;
-    private global::main.ProtoStepExecutionResult stepExecutionResult_;
+    private global::Gauge.Messages.ProtoStepExecutionResult stepExecutionResult_;
     public bool HasStepExecutionResult {
       get { return hasStepExecutionResult; }
     }
-    public global::main.ProtoStepExecutionResult StepExecutionResult {
-      get { return stepExecutionResult_ ?? global::main.ProtoStepExecutionResult.DefaultInstance; }
+    public global::Gauge.Messages.ProtoStepExecutionResult StepExecutionResult {
+      get { return stepExecutionResult_ ?? global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance; }
     }
     
     public override bool IsInitialized {
       get {
         if (!hasActualText) return false;
         if (!hasParsedText) return false;
-        foreach (global::main.Fragment element in FragmentsList) {
+        foreach (global::Gauge.Messages.Fragment element in FragmentsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasStepExecutionResult) {
@@ -2689,7 +2766,7 @@ namespace main {
         if (hasParsedText) {
           size += pb::CodedOutputStream.ComputeStringSize(2, ParsedText);
         }
-        foreach (global::main.Fragment element in FragmentsList) {
+        foreach (global::Gauge.Messages.Fragment element in FragmentsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(3, element);
         }
         if (hasStepExecutionResult) {
@@ -2793,11 +2870,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoStep.Descriptor; }
+        get { return global::Gauge.Messages.ProtoStep.Descriptor; }
       }
       
       public override ProtoStep DefaultInstanceForType {
-        get { return global::main.ProtoStep.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoStep.DefaultInstance; }
       }
       
       public override ProtoStep BuildPartial() {
@@ -2818,7 +2895,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoStep other) {
-        if (other == global::main.ProtoStep.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoStep.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasActualText) {
           ActualText = other.ActualText;
@@ -2884,11 +2961,11 @@ namespace main {
               break;
             }
             case 26: {
-              input.ReadMessageArray(tag, field_name, result.fragments_, global::main.Fragment.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.fragments_, global::Gauge.Messages.Fragment.DefaultInstance, extensionRegistry);
               break;
             }
             case 34: {
-              global::main.ProtoStepExecutionResult.Builder subBuilder = global::main.ProtoStepExecutionResult.CreateBuilder();
+              global::Gauge.Messages.ProtoStepExecutionResult.Builder subBuilder = global::Gauge.Messages.ProtoStepExecutionResult.CreateBuilder();
               if (result.hasStepExecutionResult) {
                 subBuilder.MergeFrom(StepExecutionResult);
               }
@@ -2948,40 +3025,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.Fragment> FragmentsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.Fragment> FragmentsList {
         get { return PrepareBuilder().fragments_; }
       }
       public int FragmentsCount {
         get { return result.FragmentsCount; }
       }
-      public global::main.Fragment GetFragments(int index) {
+      public global::Gauge.Messages.Fragment GetFragments(int index) {
         return result.GetFragments(index);
       }
-      public Builder SetFragments(int index, global::main.Fragment value) {
+      public Builder SetFragments(int index, global::Gauge.Messages.Fragment value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.fragments_[index] = value;
         return this;
       }
-      public Builder SetFragments(int index, global::main.Fragment.Builder builderForValue) {
+      public Builder SetFragments(int index, global::Gauge.Messages.Fragment.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.fragments_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddFragments(global::main.Fragment value) {
+      public Builder AddFragments(global::Gauge.Messages.Fragment value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.fragments_.Add(value);
         return this;
       }
-      public Builder AddFragments(global::main.Fragment.Builder builderForValue) {
+      public Builder AddFragments(global::Gauge.Messages.Fragment.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.fragments_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeFragments(scg::IEnumerable<global::main.Fragment> values) {
+      public Builder AddRangeFragments(scg::IEnumerable<global::Gauge.Messages.Fragment> values) {
         PrepareBuilder();
         result.fragments_.Add(values);
         return this;
@@ -2995,30 +3072,30 @@ namespace main {
       public bool HasStepExecutionResult {
        get { return result.hasStepExecutionResult; }
       }
-      public global::main.ProtoStepExecutionResult StepExecutionResult {
+      public global::Gauge.Messages.ProtoStepExecutionResult StepExecutionResult {
         get { return result.StepExecutionResult; }
         set { SetStepExecutionResult(value); }
       }
-      public Builder SetStepExecutionResult(global::main.ProtoStepExecutionResult value) {
+      public Builder SetStepExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepExecutionResult = true;
         result.stepExecutionResult_ = value;
         return this;
       }
-      public Builder SetStepExecutionResult(global::main.ProtoStepExecutionResult.Builder builderForValue) {
+      public Builder SetStepExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepExecutionResult = true;
         result.stepExecutionResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepExecutionResult(global::main.ProtoStepExecutionResult value) {
+      public Builder MergeStepExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepExecutionResult &&
-            result.stepExecutionResult_ != global::main.ProtoStepExecutionResult.DefaultInstance) {
-            result.stepExecutionResult_ = global::main.ProtoStepExecutionResult.CreateBuilder(result.stepExecutionResult_).MergeFrom(value).BuildPartial();
+            result.stepExecutionResult_ != global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance) {
+            result.stepExecutionResult_ = global::Gauge.Messages.ProtoStepExecutionResult.CreateBuilder(result.stepExecutionResult_).MergeFrom(value).BuildPartial();
         } else {
           result.stepExecutionResult_ = value;
         }
@@ -3033,7 +3110,7 @@ namespace main {
       }
     }
     static ProtoStep() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -3056,50 +3133,50 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoConcept__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoConcept__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoConcept, ProtoConcept.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoConcept__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoConcept__FieldAccessorTable; }
     }
     
     public const int ConceptStepFieldNumber = 1;
     private bool hasConceptStep;
-    private global::main.ProtoStep conceptStep_;
+    private global::Gauge.Messages.ProtoStep conceptStep_;
     public bool HasConceptStep {
       get { return hasConceptStep; }
     }
-    public global::main.ProtoStep ConceptStep {
-      get { return conceptStep_ ?? global::main.ProtoStep.DefaultInstance; }
+    public global::Gauge.Messages.ProtoStep ConceptStep {
+      get { return conceptStep_ ?? global::Gauge.Messages.ProtoStep.DefaultInstance; }
     }
     
     public const int StepsFieldNumber = 2;
-    private pbc::PopsicleList<global::main.ProtoItem> steps_ = new pbc::PopsicleList<global::main.ProtoItem>();
-    public scg::IList<global::main.ProtoItem> StepsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoItem> steps_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoItem>();
+    public scg::IList<global::Gauge.Messages.ProtoItem> StepsList {
       get { return steps_; }
     }
     public int StepsCount {
       get { return steps_.Count; }
     }
-    public global::main.ProtoItem GetSteps(int index) {
+    public global::Gauge.Messages.ProtoItem GetSteps(int index) {
       return steps_[index];
     }
     
     public const int ConceptExecutionResultFieldNumber = 3;
     private bool hasConceptExecutionResult;
-    private global::main.ProtoStepExecutionResult conceptExecutionResult_;
+    private global::Gauge.Messages.ProtoStepExecutionResult conceptExecutionResult_;
     public bool HasConceptExecutionResult {
       get { return hasConceptExecutionResult; }
     }
-    public global::main.ProtoStepExecutionResult ConceptExecutionResult {
-      get { return conceptExecutionResult_ ?? global::main.ProtoStepExecutionResult.DefaultInstance; }
+    public global::Gauge.Messages.ProtoStepExecutionResult ConceptExecutionResult {
+      get { return conceptExecutionResult_ ?? global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance; }
     }
     
     public override bool IsInitialized {
       get {
         if (!hasConceptStep) return false;
         if (!ConceptStep.IsInitialized) return false;
-        foreach (global::main.ProtoItem element in StepsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in StepsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasConceptExecutionResult) {
@@ -3134,7 +3211,7 @@ namespace main {
         if (hasConceptStep) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, ConceptStep);
         }
-        foreach (global::main.ProtoItem element in StepsList) {
+        foreach (global::Gauge.Messages.ProtoItem element in StepsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(2, element);
         }
         if (hasConceptExecutionResult) {
@@ -3238,11 +3315,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoConcept.Descriptor; }
+        get { return global::Gauge.Messages.ProtoConcept.Descriptor; }
       }
       
       public override ProtoConcept DefaultInstanceForType {
-        get { return global::main.ProtoConcept.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoConcept.DefaultInstance; }
       }
       
       public override ProtoConcept BuildPartial() {
@@ -3263,7 +3340,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoConcept other) {
-        if (other == global::main.ProtoConcept.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoConcept.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasConceptStep) {
           MergeConceptStep(other.ConceptStep);
@@ -3318,7 +3395,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoStep.Builder subBuilder = global::main.ProtoStep.CreateBuilder();
+              global::Gauge.Messages.ProtoStep.Builder subBuilder = global::Gauge.Messages.ProtoStep.CreateBuilder();
               if (result.hasConceptStep) {
                 subBuilder.MergeFrom(ConceptStep);
               }
@@ -3327,11 +3404,11 @@ namespace main {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.steps_, global::main.ProtoItem.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.steps_, global::Gauge.Messages.ProtoItem.DefaultInstance, extensionRegistry);
               break;
             }
             case 26: {
-              global::main.ProtoStepExecutionResult.Builder subBuilder = global::main.ProtoStepExecutionResult.CreateBuilder();
+              global::Gauge.Messages.ProtoStepExecutionResult.Builder subBuilder = global::Gauge.Messages.ProtoStepExecutionResult.CreateBuilder();
               if (result.hasConceptExecutionResult) {
                 subBuilder.MergeFrom(ConceptExecutionResult);
               }
@@ -3352,30 +3429,30 @@ namespace main {
       public bool HasConceptStep {
        get { return result.hasConceptStep; }
       }
-      public global::main.ProtoStep ConceptStep {
+      public global::Gauge.Messages.ProtoStep ConceptStep {
         get { return result.ConceptStep; }
         set { SetConceptStep(value); }
       }
-      public Builder SetConceptStep(global::main.ProtoStep value) {
+      public Builder SetConceptStep(global::Gauge.Messages.ProtoStep value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasConceptStep = true;
         result.conceptStep_ = value;
         return this;
       }
-      public Builder SetConceptStep(global::main.ProtoStep.Builder builderForValue) {
+      public Builder SetConceptStep(global::Gauge.Messages.ProtoStep.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasConceptStep = true;
         result.conceptStep_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeConceptStep(global::main.ProtoStep value) {
+      public Builder MergeConceptStep(global::Gauge.Messages.ProtoStep value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasConceptStep &&
-            result.conceptStep_ != global::main.ProtoStep.DefaultInstance) {
-            result.conceptStep_ = global::main.ProtoStep.CreateBuilder(result.conceptStep_).MergeFrom(value).BuildPartial();
+            result.conceptStep_ != global::Gauge.Messages.ProtoStep.DefaultInstance) {
+            result.conceptStep_ = global::Gauge.Messages.ProtoStep.CreateBuilder(result.conceptStep_).MergeFrom(value).BuildPartial();
         } else {
           result.conceptStep_ = value;
         }
@@ -3389,40 +3466,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoItem> StepsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoItem> StepsList {
         get { return PrepareBuilder().steps_; }
       }
       public int StepsCount {
         get { return result.StepsCount; }
       }
-      public global::main.ProtoItem GetSteps(int index) {
+      public global::Gauge.Messages.ProtoItem GetSteps(int index) {
         return result.GetSteps(index);
       }
-      public Builder SetSteps(int index, global::main.ProtoItem value) {
+      public Builder SetSteps(int index, global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.steps_[index] = value;
         return this;
       }
-      public Builder SetSteps(int index, global::main.ProtoItem.Builder builderForValue) {
+      public Builder SetSteps(int index, global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.steps_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddSteps(global::main.ProtoItem value) {
+      public Builder AddSteps(global::Gauge.Messages.ProtoItem value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.steps_.Add(value);
         return this;
       }
-      public Builder AddSteps(global::main.ProtoItem.Builder builderForValue) {
+      public Builder AddSteps(global::Gauge.Messages.ProtoItem.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.steps_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeSteps(scg::IEnumerable<global::main.ProtoItem> values) {
+      public Builder AddRangeSteps(scg::IEnumerable<global::Gauge.Messages.ProtoItem> values) {
         PrepareBuilder();
         result.steps_.Add(values);
         return this;
@@ -3436,30 +3513,30 @@ namespace main {
       public bool HasConceptExecutionResult {
        get { return result.hasConceptExecutionResult; }
       }
-      public global::main.ProtoStepExecutionResult ConceptExecutionResult {
+      public global::Gauge.Messages.ProtoStepExecutionResult ConceptExecutionResult {
         get { return result.ConceptExecutionResult; }
         set { SetConceptExecutionResult(value); }
       }
-      public Builder SetConceptExecutionResult(global::main.ProtoStepExecutionResult value) {
+      public Builder SetConceptExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasConceptExecutionResult = true;
         result.conceptExecutionResult_ = value;
         return this;
       }
-      public Builder SetConceptExecutionResult(global::main.ProtoStepExecutionResult.Builder builderForValue) {
+      public Builder SetConceptExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasConceptExecutionResult = true;
         result.conceptExecutionResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeConceptExecutionResult(global::main.ProtoStepExecutionResult value) {
+      public Builder MergeConceptExecutionResult(global::Gauge.Messages.ProtoStepExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasConceptExecutionResult &&
-            result.conceptExecutionResult_ != global::main.ProtoStepExecutionResult.DefaultInstance) {
-            result.conceptExecutionResult_ = global::main.ProtoStepExecutionResult.CreateBuilder(result.conceptExecutionResult_).MergeFrom(value).BuildPartial();
+            result.conceptExecutionResult_ != global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance) {
+            result.conceptExecutionResult_ = global::Gauge.Messages.ProtoStepExecutionResult.CreateBuilder(result.conceptExecutionResult_).MergeFrom(value).BuildPartial();
         } else {
           result.conceptExecutionResult_ = value;
         }
@@ -3474,7 +3551,7 @@ namespace main {
       }
     }
     static ProtoConcept() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -3497,11 +3574,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoTags__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTags__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoTags, ProtoTags.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoTags__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTags__FieldAccessorTable; }
     }
     
     public const int TagsFieldNumber = 1;
@@ -3644,11 +3721,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoTags.Descriptor; }
+        get { return global::Gauge.Messages.ProtoTags.Descriptor; }
       }
       
       public override ProtoTags DefaultInstanceForType {
-        get { return global::main.ProtoTags.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoTags.DefaultInstance; }
       }
       
       public override ProtoTags BuildPartial() {
@@ -3669,7 +3746,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoTags other) {
-        if (other == global::main.ProtoTags.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoTags.DefaultInstance) return this;
         PrepareBuilder();
         if (other.tags_.Count != 0) {
           result.tags_.Add(other.tags_);
@@ -3764,7 +3841,7 @@ namespace main {
       }
     }
     static ProtoTags() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -3787,11 +3864,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_Fragment__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_Fragment__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Fragment, Fragment.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_Fragment__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_Fragment__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -3807,11 +3884,11 @@ namespace main {
     
     public const int FragmentTypeFieldNumber = 1;
     private bool hasFragmentType;
-    private global::main.Fragment.Types.FragmentType fragmentType_ = global::main.Fragment.Types.FragmentType.Text;
+    private global::Gauge.Messages.Fragment.Types.FragmentType fragmentType_ = global::Gauge.Messages.Fragment.Types.FragmentType.Text;
     public bool HasFragmentType {
       get { return hasFragmentType; }
     }
-    public global::main.Fragment.Types.FragmentType FragmentType {
+    public global::Gauge.Messages.Fragment.Types.FragmentType FragmentType {
       get { return fragmentType_; }
     }
     
@@ -3827,12 +3904,12 @@ namespace main {
     
     public const int ParameterFieldNumber = 3;
     private bool hasParameter;
-    private global::main.Parameter parameter_;
+    private global::Gauge.Messages.Parameter parameter_;
     public bool HasParameter {
       get { return hasParameter; }
     }
-    public global::main.Parameter Parameter {
-      get { return parameter_ ?? global::main.Parameter.DefaultInstance; }
+    public global::Gauge.Messages.Parameter Parameter {
+      get { return parameter_ ?? global::Gauge.Messages.Parameter.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -3973,11 +4050,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.Fragment.Descriptor; }
+        get { return global::Gauge.Messages.Fragment.Descriptor; }
       }
       
       public override Fragment DefaultInstanceForType {
-        get { return global::main.Fragment.DefaultInstance; }
+        get { return global::Gauge.Messages.Fragment.DefaultInstance; }
       }
       
       public override Fragment BuildPartial() {
@@ -3998,7 +4075,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(Fragment other) {
-        if (other == global::main.Fragment.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.Fragment.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasFragmentType) {
           FragmentType = other.FragmentType;
@@ -4069,7 +4146,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.Parameter.Builder subBuilder = global::main.Parameter.CreateBuilder();
+              global::Gauge.Messages.Parameter.Builder subBuilder = global::Gauge.Messages.Parameter.CreateBuilder();
               if (result.hasParameter) {
                 subBuilder.MergeFrom(Parameter);
               }
@@ -4090,11 +4167,11 @@ namespace main {
       public bool HasFragmentType {
        get { return result.hasFragmentType; }
       }
-      public global::main.Fragment.Types.FragmentType FragmentType {
+      public global::Gauge.Messages.Fragment.Types.FragmentType FragmentType {
         get { return result.FragmentType; }
         set { SetFragmentType(value); }
       }
-      public Builder SetFragmentType(global::main.Fragment.Types.FragmentType value) {
+      public Builder SetFragmentType(global::Gauge.Messages.Fragment.Types.FragmentType value) {
         PrepareBuilder();
         result.hasFragmentType = true;
         result.fragmentType_ = value;
@@ -4103,7 +4180,7 @@ namespace main {
       public Builder ClearFragmentType() {
         PrepareBuilder();
         result.hasFragmentType = false;
-        result.fragmentType_ = global::main.Fragment.Types.FragmentType.Text;
+        result.fragmentType_ = global::Gauge.Messages.Fragment.Types.FragmentType.Text;
         return this;
       }
       
@@ -4131,30 +4208,30 @@ namespace main {
       public bool HasParameter {
        get { return result.hasParameter; }
       }
-      public global::main.Parameter Parameter {
+      public global::Gauge.Messages.Parameter Parameter {
         get { return result.Parameter; }
         set { SetParameter(value); }
       }
-      public Builder SetParameter(global::main.Parameter value) {
+      public Builder SetParameter(global::Gauge.Messages.Parameter value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasParameter = true;
         result.parameter_ = value;
         return this;
       }
-      public Builder SetParameter(global::main.Parameter.Builder builderForValue) {
+      public Builder SetParameter(global::Gauge.Messages.Parameter.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasParameter = true;
         result.parameter_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeParameter(global::main.Parameter value) {
+      public Builder MergeParameter(global::Gauge.Messages.Parameter value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasParameter &&
-            result.parameter_ != global::main.Parameter.DefaultInstance) {
-            result.parameter_ = global::main.Parameter.CreateBuilder(result.parameter_).MergeFrom(value).BuildPartial();
+            result.parameter_ != global::Gauge.Messages.Parameter.DefaultInstance) {
+            result.parameter_ = global::Gauge.Messages.Parameter.CreateBuilder(result.parameter_).MergeFrom(value).BuildPartial();
         } else {
           result.parameter_ = value;
         }
@@ -4169,7 +4246,7 @@ namespace main {
       }
     }
     static Fragment() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -4192,11 +4269,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_Parameter__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_Parameter__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Parameter, Parameter.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_Parameter__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_Parameter__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -4215,11 +4292,11 @@ namespace main {
     
     public const int ParameterTypeFieldNumber = 1;
     private bool hasParameterType;
-    private global::main.Parameter.Types.ParameterType parameterType_ = global::main.Parameter.Types.ParameterType.Static;
+    private global::Gauge.Messages.Parameter.Types.ParameterType parameterType_ = global::Gauge.Messages.Parameter.Types.ParameterType.Static;
     public bool HasParameterType {
       get { return hasParameterType; }
     }
-    public global::main.Parameter.Types.ParameterType ParameterType {
+    public global::Gauge.Messages.Parameter.Types.ParameterType ParameterType {
       get { return parameterType_; }
     }
     
@@ -4245,12 +4322,12 @@ namespace main {
     
     public const int TableFieldNumber = 4;
     private bool hasTable;
-    private global::main.ProtoTable table_;
+    private global::Gauge.Messages.ProtoTable table_;
     public bool HasTable {
       get { return hasTable; }
     }
-    public global::main.ProtoTable Table {
-      get { return table_ ?? global::main.ProtoTable.DefaultInstance; }
+    public global::Gauge.Messages.ProtoTable Table {
+      get { return table_ ?? global::Gauge.Messages.ProtoTable.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -4397,11 +4474,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.Parameter.Descriptor; }
+        get { return global::Gauge.Messages.Parameter.Descriptor; }
       }
       
       public override Parameter DefaultInstanceForType {
-        get { return global::main.Parameter.DefaultInstance; }
+        get { return global::Gauge.Messages.Parameter.DefaultInstance; }
       }
       
       public override Parameter BuildPartial() {
@@ -4422,7 +4499,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(Parameter other) {
-        if (other == global::main.Parameter.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.Parameter.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasParameterType) {
           ParameterType = other.ParameterType;
@@ -4500,7 +4577,7 @@ namespace main {
               break;
             }
             case 34: {
-              global::main.ProtoTable.Builder subBuilder = global::main.ProtoTable.CreateBuilder();
+              global::Gauge.Messages.ProtoTable.Builder subBuilder = global::Gauge.Messages.ProtoTable.CreateBuilder();
               if (result.hasTable) {
                 subBuilder.MergeFrom(Table);
               }
@@ -4521,11 +4598,11 @@ namespace main {
       public bool HasParameterType {
        get { return result.hasParameterType; }
       }
-      public global::main.Parameter.Types.ParameterType ParameterType {
+      public global::Gauge.Messages.Parameter.Types.ParameterType ParameterType {
         get { return result.ParameterType; }
         set { SetParameterType(value); }
       }
-      public Builder SetParameterType(global::main.Parameter.Types.ParameterType value) {
+      public Builder SetParameterType(global::Gauge.Messages.Parameter.Types.ParameterType value) {
         PrepareBuilder();
         result.hasParameterType = true;
         result.parameterType_ = value;
@@ -4534,7 +4611,7 @@ namespace main {
       public Builder ClearParameterType() {
         PrepareBuilder();
         result.hasParameterType = false;
-        result.parameterType_ = global::main.Parameter.Types.ParameterType.Static;
+        result.parameterType_ = global::Gauge.Messages.Parameter.Types.ParameterType.Static;
         return this;
       }
       
@@ -4583,30 +4660,30 @@ namespace main {
       public bool HasTable {
        get { return result.hasTable; }
       }
-      public global::main.ProtoTable Table {
+      public global::Gauge.Messages.ProtoTable Table {
         get { return result.Table; }
         set { SetTable(value); }
       }
-      public Builder SetTable(global::main.ProtoTable value) {
+      public Builder SetTable(global::Gauge.Messages.ProtoTable value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasTable = true;
         result.table_ = value;
         return this;
       }
-      public Builder SetTable(global::main.ProtoTable.Builder builderForValue) {
+      public Builder SetTable(global::Gauge.Messages.ProtoTable.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasTable = true;
         result.table_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeTable(global::main.ProtoTable value) {
+      public Builder MergeTable(global::Gauge.Messages.ProtoTable value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasTable &&
-            result.table_ != global::main.ProtoTable.DefaultInstance) {
-            result.table_ = global::main.ProtoTable.CreateBuilder(result.table_).MergeFrom(value).BuildPartial();
+            result.table_ != global::Gauge.Messages.ProtoTable.DefaultInstance) {
+            result.table_ = global::Gauge.Messages.ProtoTable.CreateBuilder(result.table_).MergeFrom(value).BuildPartial();
         } else {
           result.table_ = value;
         }
@@ -4621,7 +4698,7 @@ namespace main {
       }
     }
     static Parameter() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -4644,11 +4721,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoComment__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoComment__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoComment, ProtoComment.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoComment__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoComment__FieldAccessorTable; }
     }
     
     public const int TextFieldNumber = 1;
@@ -4784,11 +4861,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoComment.Descriptor; }
+        get { return global::Gauge.Messages.ProtoComment.Descriptor; }
       }
       
       public override ProtoComment DefaultInstanceForType {
-        get { return global::main.ProtoComment.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoComment.DefaultInstance; }
       }
       
       public override ProtoComment BuildPartial() {
@@ -4809,7 +4886,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoComment other) {
-        if (other == global::main.ProtoComment.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoComment.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasText) {
           Text = other.Text;
@@ -4893,7 +4970,7 @@ namespace main {
       }
     }
     static ProtoComment() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -4916,32 +4993,32 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoTable__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTable__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoTable, ProtoTable.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoTable__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTable__FieldAccessorTable; }
     }
     
     public const int HeadersFieldNumber = 1;
     private bool hasHeaders;
-    private global::main.ProtoTableRow headers_;
+    private global::Gauge.Messages.ProtoTableRow headers_;
     public bool HasHeaders {
       get { return hasHeaders; }
     }
-    public global::main.ProtoTableRow Headers {
-      get { return headers_ ?? global::main.ProtoTableRow.DefaultInstance; }
+    public global::Gauge.Messages.ProtoTableRow Headers {
+      get { return headers_ ?? global::Gauge.Messages.ProtoTableRow.DefaultInstance; }
     }
     
     public const int RowsFieldNumber = 2;
-    private pbc::PopsicleList<global::main.ProtoTableRow> rows_ = new pbc::PopsicleList<global::main.ProtoTableRow>();
-    public scg::IList<global::main.ProtoTableRow> RowsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoTableRow> rows_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoTableRow>();
+    public scg::IList<global::Gauge.Messages.ProtoTableRow> RowsList {
       get { return rows_; }
     }
     public int RowsCount {
       get { return rows_.Count; }
     }
-    public global::main.ProtoTableRow GetRows(int index) {
+    public global::Gauge.Messages.ProtoTableRow GetRows(int index) {
       return rows_[index];
     }
     
@@ -4974,7 +5051,7 @@ namespace main {
         if (hasHeaders) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, Headers);
         }
-        foreach (global::main.ProtoTableRow element in RowsList) {
+        foreach (global::Gauge.Messages.ProtoTableRow element in RowsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(2, element);
         }
         size += UnknownFields.SerializedSize;
@@ -5075,11 +5152,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoTable.Descriptor; }
+        get { return global::Gauge.Messages.ProtoTable.Descriptor; }
       }
       
       public override ProtoTable DefaultInstanceForType {
-        get { return global::main.ProtoTable.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoTable.DefaultInstance; }
       }
       
       public override ProtoTable BuildPartial() {
@@ -5100,7 +5177,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoTable other) {
-        if (other == global::main.ProtoTable.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoTable.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasHeaders) {
           MergeHeaders(other.Headers);
@@ -5152,7 +5229,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoTableRow.Builder subBuilder = global::main.ProtoTableRow.CreateBuilder();
+              global::Gauge.Messages.ProtoTableRow.Builder subBuilder = global::Gauge.Messages.ProtoTableRow.CreateBuilder();
               if (result.hasHeaders) {
                 subBuilder.MergeFrom(Headers);
               }
@@ -5161,7 +5238,7 @@ namespace main {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.rows_, global::main.ProtoTableRow.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.rows_, global::Gauge.Messages.ProtoTableRow.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -5177,30 +5254,30 @@ namespace main {
       public bool HasHeaders {
        get { return result.hasHeaders; }
       }
-      public global::main.ProtoTableRow Headers {
+      public global::Gauge.Messages.ProtoTableRow Headers {
         get { return result.Headers; }
         set { SetHeaders(value); }
       }
-      public Builder SetHeaders(global::main.ProtoTableRow value) {
+      public Builder SetHeaders(global::Gauge.Messages.ProtoTableRow value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasHeaders = true;
         result.headers_ = value;
         return this;
       }
-      public Builder SetHeaders(global::main.ProtoTableRow.Builder builderForValue) {
+      public Builder SetHeaders(global::Gauge.Messages.ProtoTableRow.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasHeaders = true;
         result.headers_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeHeaders(global::main.ProtoTableRow value) {
+      public Builder MergeHeaders(global::Gauge.Messages.ProtoTableRow value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasHeaders &&
-            result.headers_ != global::main.ProtoTableRow.DefaultInstance) {
-            result.headers_ = global::main.ProtoTableRow.CreateBuilder(result.headers_).MergeFrom(value).BuildPartial();
+            result.headers_ != global::Gauge.Messages.ProtoTableRow.DefaultInstance) {
+            result.headers_ = global::Gauge.Messages.ProtoTableRow.CreateBuilder(result.headers_).MergeFrom(value).BuildPartial();
         } else {
           result.headers_ = value;
         }
@@ -5214,40 +5291,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.ProtoTableRow> RowsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoTableRow> RowsList {
         get { return PrepareBuilder().rows_; }
       }
       public int RowsCount {
         get { return result.RowsCount; }
       }
-      public global::main.ProtoTableRow GetRows(int index) {
+      public global::Gauge.Messages.ProtoTableRow GetRows(int index) {
         return result.GetRows(index);
       }
-      public Builder SetRows(int index, global::main.ProtoTableRow value) {
+      public Builder SetRows(int index, global::Gauge.Messages.ProtoTableRow value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.rows_[index] = value;
         return this;
       }
-      public Builder SetRows(int index, global::main.ProtoTableRow.Builder builderForValue) {
+      public Builder SetRows(int index, global::Gauge.Messages.ProtoTableRow.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.rows_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddRows(global::main.ProtoTableRow value) {
+      public Builder AddRows(global::Gauge.Messages.ProtoTableRow value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.rows_.Add(value);
         return this;
       }
-      public Builder AddRows(global::main.ProtoTableRow.Builder builderForValue) {
+      public Builder AddRows(global::Gauge.Messages.ProtoTableRow.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.rows_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeRows(scg::IEnumerable<global::main.ProtoTableRow> values) {
+      public Builder AddRangeRows(scg::IEnumerable<global::Gauge.Messages.ProtoTableRow> values) {
         PrepareBuilder();
         result.rows_.Add(values);
         return this;
@@ -5259,7 +5336,7 @@ namespace main {
       }
     }
     static ProtoTable() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -5282,11 +5359,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoTableRow__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTableRow__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoTableRow, ProtoTableRow.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoTableRow__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTableRow__FieldAccessorTable; }
     }
     
     public const int CellsFieldNumber = 1;
@@ -5429,11 +5506,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoTableRow.Descriptor; }
+        get { return global::Gauge.Messages.ProtoTableRow.Descriptor; }
       }
       
       public override ProtoTableRow DefaultInstanceForType {
-        get { return global::main.ProtoTableRow.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoTableRow.DefaultInstance; }
       }
       
       public override ProtoTableRow BuildPartial() {
@@ -5454,7 +5531,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoTableRow other) {
-        if (other == global::main.ProtoTableRow.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoTableRow.DefaultInstance) return this;
         PrepareBuilder();
         if (other.cells_.Count != 0) {
           result.cells_.Add(other.cells_);
@@ -5549,7 +5626,7 @@ namespace main {
       }
     }
     static ProtoTableRow() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -5572,41 +5649,41 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoStepExecutionResult__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStepExecutionResult__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoStepExecutionResult, ProtoStepExecutionResult.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoStepExecutionResult__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStepExecutionResult__FieldAccessorTable; }
     }
     
     public const int ExecutionResultFieldNumber = 1;
     private bool hasExecutionResult;
-    private global::main.ProtoExecutionResult executionResult_;
+    private global::Gauge.Messages.ProtoExecutionResult executionResult_;
     public bool HasExecutionResult {
       get { return hasExecutionResult; }
     }
-    public global::main.ProtoExecutionResult ExecutionResult {
-      get { return executionResult_ ?? global::main.ProtoExecutionResult.DefaultInstance; }
+    public global::Gauge.Messages.ProtoExecutionResult ExecutionResult {
+      get { return executionResult_ ?? global::Gauge.Messages.ProtoExecutionResult.DefaultInstance; }
     }
     
     public const int PreHookFailureFieldNumber = 2;
     private bool hasPreHookFailure;
-    private global::main.ProtoHookFailure preHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure preHookFailure_;
     public bool HasPreHookFailure {
       get { return hasPreHookFailure; }
     }
-    public global::main.ProtoHookFailure PreHookFailure {
-      get { return preHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
+      get { return preHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int PostHookFailureFieldNumber = 3;
     private bool hasPostHookFailure;
-    private global::main.ProtoHookFailure postHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure postHookFailure_;
     public bool HasPostHookFailure {
       get { return hasPostHookFailure; }
     }
-    public global::main.ProtoHookFailure PostHookFailure {
-      get { return postHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
+      get { return postHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -5751,11 +5828,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoStepExecutionResult.Descriptor; }
+        get { return global::Gauge.Messages.ProtoStepExecutionResult.Descriptor; }
       }
       
       public override ProtoStepExecutionResult DefaultInstanceForType {
-        get { return global::main.ProtoStepExecutionResult.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance; }
       }
       
       public override ProtoStepExecutionResult BuildPartial() {
@@ -5776,7 +5853,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoStepExecutionResult other) {
-        if (other == global::main.ProtoStepExecutionResult.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoStepExecutionResult.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasExecutionResult) {
           MergeExecutionResult(other.ExecutionResult);
@@ -5831,7 +5908,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoExecutionResult.Builder subBuilder = global::main.ProtoExecutionResult.CreateBuilder();
+              global::Gauge.Messages.ProtoExecutionResult.Builder subBuilder = global::Gauge.Messages.ProtoExecutionResult.CreateBuilder();
               if (result.hasExecutionResult) {
                 subBuilder.MergeFrom(ExecutionResult);
               }
@@ -5840,7 +5917,7 @@ namespace main {
               break;
             }
             case 18: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPreHookFailure) {
                 subBuilder.MergeFrom(PreHookFailure);
               }
@@ -5849,7 +5926,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPostHookFailure) {
                 subBuilder.MergeFrom(PostHookFailure);
               }
@@ -5870,30 +5947,30 @@ namespace main {
       public bool HasExecutionResult {
        get { return result.hasExecutionResult; }
       }
-      public global::main.ProtoExecutionResult ExecutionResult {
+      public global::Gauge.Messages.ProtoExecutionResult ExecutionResult {
         get { return result.ExecutionResult; }
         set { SetExecutionResult(value); }
       }
-      public Builder SetExecutionResult(global::main.ProtoExecutionResult value) {
+      public Builder SetExecutionResult(global::Gauge.Messages.ProtoExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecutionResult = true;
         result.executionResult_ = value;
         return this;
       }
-      public Builder SetExecutionResult(global::main.ProtoExecutionResult.Builder builderForValue) {
+      public Builder SetExecutionResult(global::Gauge.Messages.ProtoExecutionResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecutionResult = true;
         result.executionResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecutionResult(global::main.ProtoExecutionResult value) {
+      public Builder MergeExecutionResult(global::Gauge.Messages.ProtoExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecutionResult &&
-            result.executionResult_ != global::main.ProtoExecutionResult.DefaultInstance) {
-            result.executionResult_ = global::main.ProtoExecutionResult.CreateBuilder(result.executionResult_).MergeFrom(value).BuildPartial();
+            result.executionResult_ != global::Gauge.Messages.ProtoExecutionResult.DefaultInstance) {
+            result.executionResult_ = global::Gauge.Messages.ProtoExecutionResult.CreateBuilder(result.executionResult_).MergeFrom(value).BuildPartial();
         } else {
           result.executionResult_ = value;
         }
@@ -5910,30 +5987,30 @@ namespace main {
       public bool HasPreHookFailure {
        get { return result.hasPreHookFailure; }
       }
-      public global::main.ProtoHookFailure PreHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
         get { return result.PreHookFailure; }
         set { SetPreHookFailure(value); }
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = value;
         return this;
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPreHookFailure &&
-            result.preHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.preHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
+            result.preHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.preHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.preHookFailure_ = value;
         }
@@ -5950,30 +6027,30 @@ namespace main {
       public bool HasPostHookFailure {
        get { return result.hasPostHookFailure; }
       }
-      public global::main.ProtoHookFailure PostHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
         get { return result.PostHookFailure; }
         set { SetPostHookFailure(value); }
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = value;
         return this;
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPostHookFailure &&
-            result.postHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.postHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
+            result.postHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.postHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.postHookFailure_ = value;
         }
@@ -5988,7 +6065,7 @@ namespace main {
       }
     }
     static ProtoStepExecutionResult() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -6011,11 +6088,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoExecutionResult__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoExecutionResult__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoExecutionResult, ProtoExecutionResult.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoExecutionResult__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoExecutionResult__FieldAccessorTable; }
     }
     
     public const int FailedFieldNumber = 1;
@@ -6232,11 +6309,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoExecutionResult.Descriptor; }
+        get { return global::Gauge.Messages.ProtoExecutionResult.Descriptor; }
       }
       
       public override ProtoExecutionResult DefaultInstanceForType {
-        get { return global::main.ProtoExecutionResult.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoExecutionResult.DefaultInstance; }
       }
       
       public override ProtoExecutionResult BuildPartial() {
@@ -6257,7 +6334,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoExecutionResult other) {
-        if (other == global::main.ProtoExecutionResult.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoExecutionResult.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasFailed) {
           Failed = other.Failed;
@@ -6478,7 +6555,7 @@ namespace main {
       }
     }
     static ProtoExecutionResult() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -6501,11 +6578,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoHookFailure__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoHookFailure__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoHookFailure, ProtoHookFailure.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoHookFailure__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoHookFailure__FieldAccessorTable; }
     }
     
     public const int StackTraceFieldNumber = 1;
@@ -6674,11 +6751,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoHookFailure.Descriptor; }
+        get { return global::Gauge.Messages.ProtoHookFailure.Descriptor; }
       }
       
       public override ProtoHookFailure DefaultInstanceForType {
-        get { return global::main.ProtoHookFailure.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
       }
       
       public override ProtoHookFailure BuildPartial() {
@@ -6699,7 +6776,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoHookFailure other) {
-        if (other == global::main.ProtoHookFailure.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoHookFailure.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasStackTrace) {
           StackTrace = other.StackTrace;
@@ -6839,7 +6916,7 @@ namespace main {
       }
     }
     static ProtoHookFailure() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -6862,43 +6939,43 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoSuiteResult__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSuiteResult__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoSuiteResult, ProtoSuiteResult.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoSuiteResult__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSuiteResult__FieldAccessorTable; }
     }
     
     public const int SpecResultsFieldNumber = 1;
-    private pbc::PopsicleList<global::main.ProtoSpecResult> specResults_ = new pbc::PopsicleList<global::main.ProtoSpecResult>();
-    public scg::IList<global::main.ProtoSpecResult> SpecResultsList {
+    private pbc::PopsicleList<global::Gauge.Messages.ProtoSpecResult> specResults_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoSpecResult>();
+    public scg::IList<global::Gauge.Messages.ProtoSpecResult> SpecResultsList {
       get { return specResults_; }
     }
     public int SpecResultsCount {
       get { return specResults_.Count; }
     }
-    public global::main.ProtoSpecResult GetSpecResults(int index) {
+    public global::Gauge.Messages.ProtoSpecResult GetSpecResults(int index) {
       return specResults_[index];
     }
     
     public const int PreHookFailureFieldNumber = 2;
     private bool hasPreHookFailure;
-    private global::main.ProtoHookFailure preHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure preHookFailure_;
     public bool HasPreHookFailure {
       get { return hasPreHookFailure; }
     }
-    public global::main.ProtoHookFailure PreHookFailure {
-      get { return preHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
+      get { return preHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int PostHookFailureFieldNumber = 3;
     private bool hasPostHookFailure;
-    private global::main.ProtoHookFailure postHookFailure_;
+    private global::Gauge.Messages.ProtoHookFailure postHookFailure_;
     public bool HasPostHookFailure {
       get { return hasPostHookFailure; }
     }
-    public global::main.ProtoHookFailure PostHookFailure {
-      get { return postHookFailure_ ?? global::main.ProtoHookFailure.DefaultInstance; }
+    public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
+      get { return postHookFailure_ ?? global::Gauge.Messages.ProtoHookFailure.DefaultInstance; }
     }
     
     public const int FailedFieldNumber = 4;
@@ -6946,7 +7023,7 @@ namespace main {
         if (!hasFailed) return false;
         if (!hasSpecsFailedCount) return false;
         if (!hasSuccessRate) return false;
-        foreach (global::main.ProtoSpecResult element in SpecResultsList) {
+        foreach (global::Gauge.Messages.ProtoSpecResult element in SpecResultsList) {
           if (!element.IsInitialized) return false;
         }
         if (HasPreHookFailure) {
@@ -6993,7 +7070,7 @@ namespace main {
         if (size != -1) return size;
         
         size = 0;
-        foreach (global::main.ProtoSpecResult element in SpecResultsList) {
+        foreach (global::Gauge.Messages.ProtoSpecResult element in SpecResultsList) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, element);
         }
         if (hasPreHookFailure) {
@@ -7112,11 +7189,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoSuiteResult.Descriptor; }
+        get { return global::Gauge.Messages.ProtoSuiteResult.Descriptor; }
       }
       
       public override ProtoSuiteResult DefaultInstanceForType {
-        get { return global::main.ProtoSuiteResult.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoSuiteResult.DefaultInstance; }
       }
       
       public override ProtoSuiteResult BuildPartial() {
@@ -7137,7 +7214,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoSuiteResult other) {
-        if (other == global::main.ProtoSuiteResult.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoSuiteResult.DefaultInstance) return this;
         PrepareBuilder();
         if (other.specResults_.Count != 0) {
           result.specResults_.Add(other.specResults_);
@@ -7204,11 +7281,11 @@ namespace main {
               break;
             }
             case 10: {
-              input.ReadMessageArray(tag, field_name, result.specResults_, global::main.ProtoSpecResult.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.specResults_, global::Gauge.Messages.ProtoSpecResult.DefaultInstance, extensionRegistry);
               break;
             }
             case 18: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPreHookFailure) {
                 subBuilder.MergeFrom(PreHookFailure);
               }
@@ -7217,7 +7294,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.ProtoHookFailure.Builder subBuilder = global::main.ProtoHookFailure.CreateBuilder();
+              global::Gauge.Messages.ProtoHookFailure.Builder subBuilder = global::Gauge.Messages.ProtoHookFailure.CreateBuilder();
               if (result.hasPostHookFailure) {
                 subBuilder.MergeFrom(PostHookFailure);
               }
@@ -7251,40 +7328,40 @@ namespace main {
       }
       
       
-      public pbc::IPopsicleList<global::main.ProtoSpecResult> SpecResultsList {
+      public pbc::IPopsicleList<global::Gauge.Messages.ProtoSpecResult> SpecResultsList {
         get { return PrepareBuilder().specResults_; }
       }
       public int SpecResultsCount {
         get { return result.SpecResultsCount; }
       }
-      public global::main.ProtoSpecResult GetSpecResults(int index) {
+      public global::Gauge.Messages.ProtoSpecResult GetSpecResults(int index) {
         return result.GetSpecResults(index);
       }
-      public Builder SetSpecResults(int index, global::main.ProtoSpecResult value) {
+      public Builder SetSpecResults(int index, global::Gauge.Messages.ProtoSpecResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.specResults_[index] = value;
         return this;
       }
-      public Builder SetSpecResults(int index, global::main.ProtoSpecResult.Builder builderForValue) {
+      public Builder SetSpecResults(int index, global::Gauge.Messages.ProtoSpecResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.specResults_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddSpecResults(global::main.ProtoSpecResult value) {
+      public Builder AddSpecResults(global::Gauge.Messages.ProtoSpecResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.specResults_.Add(value);
         return this;
       }
-      public Builder AddSpecResults(global::main.ProtoSpecResult.Builder builderForValue) {
+      public Builder AddSpecResults(global::Gauge.Messages.ProtoSpecResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.specResults_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeSpecResults(scg::IEnumerable<global::main.ProtoSpecResult> values) {
+      public Builder AddRangeSpecResults(scg::IEnumerable<global::Gauge.Messages.ProtoSpecResult> values) {
         PrepareBuilder();
         result.specResults_.Add(values);
         return this;
@@ -7298,30 +7375,30 @@ namespace main {
       public bool HasPreHookFailure {
        get { return result.hasPreHookFailure; }
       }
-      public global::main.ProtoHookFailure PreHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PreHookFailure {
         get { return result.PreHookFailure; }
         set { SetPreHookFailure(value); }
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = value;
         return this;
       }
-      public Builder SetPreHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPreHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPreHookFailure = true;
         result.preHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePreHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePreHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPreHookFailure &&
-            result.preHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.preHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
+            result.preHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.preHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.preHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.preHookFailure_ = value;
         }
@@ -7338,30 +7415,30 @@ namespace main {
       public bool HasPostHookFailure {
        get { return result.hasPostHookFailure; }
       }
-      public global::main.ProtoHookFailure PostHookFailure {
+      public global::Gauge.Messages.ProtoHookFailure PostHookFailure {
         get { return result.PostHookFailure; }
         set { SetPostHookFailure(value); }
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = value;
         return this;
       }
-      public Builder SetPostHookFailure(global::main.ProtoHookFailure.Builder builderForValue) {
+      public Builder SetPostHookFailure(global::Gauge.Messages.ProtoHookFailure.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPostHookFailure = true;
         result.postHookFailure_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePostHookFailure(global::main.ProtoHookFailure value) {
+      public Builder MergePostHookFailure(global::Gauge.Messages.ProtoHookFailure value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPostHookFailure &&
-            result.postHookFailure_ != global::main.ProtoHookFailure.DefaultInstance) {
-            result.postHookFailure_ = global::main.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
+            result.postHookFailure_ != global::Gauge.Messages.ProtoHookFailure.DefaultInstance) {
+            result.postHookFailure_ = global::Gauge.Messages.ProtoHookFailure.CreateBuilder(result.postHookFailure_).MergeFrom(value).BuildPartial();
         } else {
           result.postHookFailure_ = value;
         }
@@ -7456,7 +7533,7 @@ namespace main {
       }
     }
     static ProtoSuiteResult() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -7479,21 +7556,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoSpecResult__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSpecResult__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoSpecResult, ProtoSpecResult.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoSpecResult__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoSpecResult__FieldAccessorTable; }
     }
     
     public const int ProtoSpecFieldNumber = 1;
     private bool hasProtoSpec;
-    private global::main.ProtoSpec protoSpec_;
+    private global::Gauge.Messages.ProtoSpec protoSpec_;
     public bool HasProtoSpec {
       get { return hasProtoSpec; }
     }
-    public global::main.ProtoSpec ProtoSpec {
-      get { return protoSpec_ ?? global::main.ProtoSpec.DefaultInstance; }
+    public global::Gauge.Messages.ProtoSpec ProtoSpec {
+      get { return protoSpec_ ?? global::Gauge.Messages.ProtoSpec.DefaultInstance; }
     }
     
     public const int ScenarioCountFieldNumber = 2;
@@ -7711,11 +7788,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoSpecResult.Descriptor; }
+        get { return global::Gauge.Messages.ProtoSpecResult.Descriptor; }
       }
       
       public override ProtoSpecResult DefaultInstanceForType {
-        get { return global::main.ProtoSpecResult.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoSpecResult.DefaultInstance; }
       }
       
       public override ProtoSpecResult BuildPartial() {
@@ -7736,7 +7813,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoSpecResult other) {
-        if (other == global::main.ProtoSpecResult.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoSpecResult.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasProtoSpec) {
           MergeProtoSpec(other.ProtoSpec);
@@ -7800,7 +7877,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoSpec.Builder subBuilder = global::main.ProtoSpec.CreateBuilder();
+              global::Gauge.Messages.ProtoSpec.Builder subBuilder = global::Gauge.Messages.ProtoSpec.CreateBuilder();
               if (result.hasProtoSpec) {
                 subBuilder.MergeFrom(ProtoSpec);
               }
@@ -7842,30 +7919,30 @@ namespace main {
       public bool HasProtoSpec {
        get { return result.hasProtoSpec; }
       }
-      public global::main.ProtoSpec ProtoSpec {
+      public global::Gauge.Messages.ProtoSpec ProtoSpec {
         get { return result.ProtoSpec; }
         set { SetProtoSpec(value); }
       }
-      public Builder SetProtoSpec(global::main.ProtoSpec value) {
+      public Builder SetProtoSpec(global::Gauge.Messages.ProtoSpec value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasProtoSpec = true;
         result.protoSpec_ = value;
         return this;
       }
-      public Builder SetProtoSpec(global::main.ProtoSpec.Builder builderForValue) {
+      public Builder SetProtoSpec(global::Gauge.Messages.ProtoSpec.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasProtoSpec = true;
         result.protoSpec_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeProtoSpec(global::main.ProtoSpec value) {
+      public Builder MergeProtoSpec(global::Gauge.Messages.ProtoSpec value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasProtoSpec &&
-            result.protoSpec_ != global::main.ProtoSpec.DefaultInstance) {
-            result.protoSpec_ = global::main.ProtoSpec.CreateBuilder(result.protoSpec_).MergeFrom(value).BuildPartial();
+            result.protoSpec_ != global::Gauge.Messages.ProtoSpec.DefaultInstance) {
+            result.protoSpec_ = global::Gauge.Messages.ProtoSpec.CreateBuilder(result.protoSpec_).MergeFrom(value).BuildPartial();
         } else {
           result.protoSpec_ = value;
         }
@@ -7990,7 +8067,7 @@ namespace main {
       }
     }
     static ProtoSpecResult() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   
@@ -8013,11 +8090,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Spec.internal__static_main_ProtoStepValue__Descriptor; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStepValue__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ProtoStepValue, ProtoStepValue.Builder> InternalFieldAccessors {
-      get { return global::main.Spec.internal__static_main_ProtoStepValue__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoStepValue__FieldAccessorTable; }
     }
     
     public const int StepValueFieldNumber = 1;
@@ -8194,11 +8271,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ProtoStepValue.Descriptor; }
+        get { return global::Gauge.Messages.ProtoStepValue.Descriptor; }
       }
       
       public override ProtoStepValue DefaultInstanceForType {
-        get { return global::main.ProtoStepValue.DefaultInstance; }
+        get { return global::Gauge.Messages.ProtoStepValue.DefaultInstance; }
       }
       
       public override ProtoStepValue BuildPartial() {
@@ -8219,7 +8296,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ProtoStepValue other) {
-        if (other == global::main.ProtoStepValue.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ProtoStepValue.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasStepValue) {
           StepValue = other.StepValue;
@@ -8370,7 +8447,7 @@ namespace main {
       }
     }
     static ProtoStepValue() {
-      object.ReferenceEquals(global::main.Spec.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Spec.Descriptor, null);
     }
   }
   

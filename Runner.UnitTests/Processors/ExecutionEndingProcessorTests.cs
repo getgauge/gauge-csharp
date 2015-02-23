@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Gauge.CSharp.Runner.Processors;
-using main;
+using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
 

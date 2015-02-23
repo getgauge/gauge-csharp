@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Processors;
-using main;
+using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner
 {

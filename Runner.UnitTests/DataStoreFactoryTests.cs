@@ -1,4 +1,4 @@
-﻿using main;
+﻿using Gauge.Messages;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests

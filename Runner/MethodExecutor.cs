@@ -6,8 +6,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Gauge.Messages;
 using Google.ProtocolBuffers;
-using main;
 
 namespace Gauge.CSharp.Runner
 {

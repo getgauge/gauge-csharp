@@ -3,7 +3,7 @@ $protogen="$($protogenEx.FullName)"
 
 Write-Host "Generating Proto Classes.."
 
-$args = @('--proto_path=.\gauge-proto', '-output_directory=.\Lib', '--include_imports', '.\gauge-proto\api.proto', '.\gauge-proto\messages.proto')
+$args = @('--proto_path=.\gauge-proto', '-output_directory=.\Lib', '--include_imports', '.\gauge-proto\api.proto', '.\gauge-proto\messages.proto', '-namespace=Gauge.Messages')
 &$protogen $args
 
-Write-Host "Done!"
+Write-Host "Done!"git st

@@ -6,7 +6,7 @@ using pb = global::Google.ProtocolBuffers;
 using pbc = global::Google.ProtocolBuffers.Collections;
 using pbd = global::Google.ProtocolBuffers.Descriptors;
 using scg = global::System.Collections.Generic;
-namespace main {
+namespace Gauge.Messages {
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public static partial class Messages {
@@ -16,54 +16,64 @@ namespace main {
     }
     #endregion
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_main_KillProcessRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.KillProcessRequest, global::main.KillProcessRequest.Builder> internal__static_main_KillProcessRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ExecutionStatusResponse__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ExecutionStatusResponse, global::main.ExecutionStatusResponse.Builder> internal__static_main_ExecutionStatusResponse__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ExecutionStartingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ExecutionStartingRequest, global::main.ExecutionStartingRequest.Builder> internal__static_main_ExecutionStartingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SpecExecutionStartingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SpecExecutionStartingRequest, global::main.SpecExecutionStartingRequest.Builder> internal__static_main_SpecExecutionStartingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SpecExecutionEndingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SpecExecutionEndingRequest, global::main.SpecExecutionEndingRequest.Builder> internal__static_main_SpecExecutionEndingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ScenarioExecutionStartingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ScenarioExecutionStartingRequest, global::main.ScenarioExecutionStartingRequest.Builder> internal__static_main_ScenarioExecutionStartingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ScenarioExecutionEndingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ScenarioExecutionEndingRequest, global::main.ScenarioExecutionEndingRequest.Builder> internal__static_main_ScenarioExecutionEndingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepExecutionStartingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepExecutionStartingRequest, global::main.StepExecutionStartingRequest.Builder> internal__static_main_StepExecutionStartingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepExecutionEndingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepExecutionEndingRequest, global::main.StepExecutionEndingRequest.Builder> internal__static_main_StepExecutionEndingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ExecutionInfo__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ExecutionInfo, global::main.ExecutionInfo.Builder> internal__static_main_ExecutionInfo__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SpecInfo__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SpecInfo, global::main.SpecInfo.Builder> internal__static_main_SpecInfo__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ScenarioInfo__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ScenarioInfo, global::main.ScenarioInfo.Builder> internal__static_main_ScenarioInfo__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepInfo__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepInfo, global::main.StepInfo.Builder> internal__static_main_StepInfo__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ExecuteStepRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ExecuteStepRequest, global::main.ExecuteStepRequest.Builder> internal__static_main_ExecuteStepRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepValidateRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepValidateRequest, global::main.StepValidateRequest.Builder> internal__static_main_StepValidateRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepValidateResponse__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepValidateResponse, global::main.StepValidateResponse.Builder> internal__static_main_StepValidateResponse__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ExecutionEndingRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ExecutionEndingRequest, global::main.ExecutionEndingRequest.Builder> internal__static_main_ExecutionEndingRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SuiteExecutionResult__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SuiteExecutionResult, global::main.SuiteExecutionResult.Builder> internal__static_main_SuiteExecutionResult__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepNamesRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepNamesRequest, global::main.StepNamesRequest.Builder> internal__static_main_StepNamesRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_StepNamesResponse__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.StepNamesResponse, global::main.StepNamesResponse.Builder> internal__static_main_StepNamesResponse__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_ScenarioDataStoreInitRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.ScenarioDataStoreInitRequest, global::main.ScenarioDataStoreInitRequest.Builder> internal__static_main_ScenarioDataStoreInitRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SpecDataStoreInitRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SpecDataStoreInitRequest, global::main.SpecDataStoreInitRequest.Builder> internal__static_main_SpecDataStoreInitRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_SuiteDataStoreInitRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.SuiteDataStoreInitRequest, global::main.SuiteDataStoreInitRequest.Builder> internal__static_main_SuiteDataStoreInitRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_main_Message__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::main.Message, global::main.Message.Builder> internal__static_main_Message__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_KillProcessRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.KillProcessRequest, global::Gauge.Messages.KillProcessRequest.Builder> internal__static_gauge_messages_KillProcessRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ExecutionStatusResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionStatusResponse, global::Gauge.Messages.ExecutionStatusResponse.Builder> internal__static_gauge_messages_ExecutionStatusResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ExecutionStartingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionStartingRequest, global::Gauge.Messages.ExecutionStartingRequest.Builder> internal__static_gauge_messages_ExecutionStartingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SpecExecutionStartingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecExecutionStartingRequest, global::Gauge.Messages.SpecExecutionStartingRequest.Builder> internal__static_gauge_messages_SpecExecutionStartingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SpecExecutionEndingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecExecutionEndingRequest, global::Gauge.Messages.SpecExecutionEndingRequest.Builder> internal__static_gauge_messages_SpecExecutionEndingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ScenarioExecutionStartingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioExecutionStartingRequest, global::Gauge.Messages.ScenarioExecutionStartingRequest.Builder> internal__static_gauge_messages_ScenarioExecutionStartingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ScenarioExecutionEndingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioExecutionEndingRequest, global::Gauge.Messages.ScenarioExecutionEndingRequest.Builder> internal__static_gauge_messages_ScenarioExecutionEndingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepExecutionStartingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepExecutionStartingRequest, global::Gauge.Messages.StepExecutionStartingRequest.Builder> internal__static_gauge_messages_StepExecutionStartingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepExecutionEndingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepExecutionEndingRequest, global::Gauge.Messages.StepExecutionEndingRequest.Builder> internal__static_gauge_messages_StepExecutionEndingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ExecutionInfo__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionInfo, global::Gauge.Messages.ExecutionInfo.Builder> internal__static_gauge_messages_ExecutionInfo__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SpecInfo__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecInfo, global::Gauge.Messages.SpecInfo.Builder> internal__static_gauge_messages_SpecInfo__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ScenarioInfo__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioInfo, global::Gauge.Messages.ScenarioInfo.Builder> internal__static_gauge_messages_ScenarioInfo__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepInfo__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepInfo, global::Gauge.Messages.StepInfo.Builder> internal__static_gauge_messages_StepInfo__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ExecuteStepRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecuteStepRequest, global::Gauge.Messages.ExecuteStepRequest.Builder> internal__static_gauge_messages_ExecuteStepRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepValidateRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepValidateRequest, global::Gauge.Messages.StepValidateRequest.Builder> internal__static_gauge_messages_StepValidateRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepValidateResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepValidateResponse, global::Gauge.Messages.StepValidateResponse.Builder> internal__static_gauge_messages_StepValidateResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ExecutionEndingRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionEndingRequest, global::Gauge.Messages.ExecutionEndingRequest.Builder> internal__static_gauge_messages_ExecutionEndingRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SuiteExecutionResult__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SuiteExecutionResult, global::Gauge.Messages.SuiteExecutionResult.Builder> internal__static_gauge_messages_SuiteExecutionResult__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepNamesRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNamesRequest, global::Gauge.Messages.StepNamesRequest.Builder> internal__static_gauge_messages_StepNamesRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepNamesResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNamesResponse, global::Gauge.Messages.StepNamesResponse.Builder> internal__static_gauge_messages_StepNamesResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ScenarioDataStoreInitRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioDataStoreInitRequest, global::Gauge.Messages.ScenarioDataStoreInitRequest.Builder> internal__static_gauge_messages_ScenarioDataStoreInitRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SpecDataStoreInitRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecDataStoreInitRequest, global::Gauge.Messages.SpecDataStoreInitRequest.Builder> internal__static_gauge_messages_SpecDataStoreInitRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_SuiteDataStoreInitRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SuiteDataStoreInitRequest, global::Gauge.Messages.SuiteDataStoreInitRequest.Builder> internal__static_gauge_messages_SuiteDataStoreInitRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_ParameterPosition__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ParameterPosition, global::Gauge.Messages.ParameterPosition.Builder> internal__static_gauge_messages_ParameterPosition__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_RefactorRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.RefactorRequest, global::Gauge.Messages.RefactorRequest.Builder> internal__static_gauge_messages_RefactorRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_RefactorResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.RefactorResponse, global::Gauge.Messages.RefactorResponse.Builder> internal__static_gauge_messages_RefactorResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepNameRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameRequest, global::Gauge.Messages.StepNameRequest.Builder> internal__static_gauge_messages_StepNameRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_StepNameResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameResponse, global::Gauge.Messages.StepNameResponse.Builder> internal__static_gauge_messages_StepNameResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_Message__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Message, global::Gauge.Messages.Message.Builder> internal__static_gauge_messages_Message__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -73,186 +83,231 @@ namespace main {
     
     static Messages() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "Cg5tZXNzYWdlcy5wcm90bxIEbWFpbhoKc3BlYy5wcm90byIUChJLaWxsUHJv" + 
-          "Y2Vzc1JlcXVlc3QiTgoXRXhlY3V0aW9uU3RhdHVzUmVzcG9uc2USMwoPZXhl" + 
-          "Y3V0aW9uUmVzdWx0GAEgAigLMhoubWFpbi5Qcm90b0V4ZWN1dGlvblJlc3Vs" + 
-          "dCJNChhFeGVjdXRpb25TdGFydGluZ1JlcXVlc3QSMQoUY3VycmVudEV4ZWN1" + 
-          "dGlvbkluZm8YASABKAsyEy5tYWluLkV4ZWN1dGlvbkluZm8iUQocU3BlY0V4" + 
-          "ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBIxChRjdXJyZW50RXhlY3V0aW9uSW5m" + 
-          "bxgBIAEoCzITLm1haW4uRXhlY3V0aW9uSW5mbyJPChpTcGVjRXhlY3V0aW9u" + 
-          "RW5kaW5nUmVxdWVzdBIxChRjdXJyZW50RXhlY3V0aW9uSW5mbxgBIAEoCzIT" + 
-          "Lm1haW4uRXhlY3V0aW9uSW5mbyJVCiBTY2VuYXJpb0V4ZWN1dGlvblN0YXJ0" + 
-          "aW5nUmVxdWVzdBIxChRjdXJyZW50RXhlY3V0aW9uSW5mbxgBIAEoCzITLm1h" + 
-          "aW4uRXhlY3V0aW9uSW5mbyJTCh5TY2VuYXJpb0V4ZWN1dGlvbkVuZGluZ1Jl" + 
-          "cXVlc3QSMQoUY3VycmVudEV4ZWN1dGlvbkluZm8YASABKAsyEy5tYWluLkV4" + 
-          "ZWN1dGlvbkluZm8iUQocU3RlcEV4ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBIx" + 
-          "ChRjdXJyZW50RXhlY3V0aW9uSW5mbxgBIAEoCzITLm1haW4uRXhlY3V0aW9u" + 
-          "SW5mbyJPChpTdGVwRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBIxChRjdXJyZW50" + 
-          "RXhlY3V0aW9uSW5mbxgBIAEoCzITLm1haW4uRXhlY3V0aW9uSW5mbyKaAQoN" + 
-          "RXhlY3V0aW9uSW5mbxIjCgtjdXJyZW50U3BlYxgBIAEoCzIOLm1haW4uU3Bl" + 
-          "Y0luZm8SKwoPY3VycmVudFNjZW5hcmlvGAIgASgLMhIubWFpbi5TY2VuYXJp" + 
-          "b0luZm8SIwoLY3VycmVudFN0ZXAYAyABKAsyDi5tYWluLlN0ZXBJbmZvEhIK" + 
-          "CnN0YWNrdHJhY2UYBCABKAkiSgoIU3BlY0luZm8SDAoEbmFtZRgBIAIoCRIQ" + 
-          "CghmaWxlTmFtZRgCIAIoCRIQCghpc0ZhaWxlZBgDIAIoCBIMCgR0YWdzGAQg" + 
-          "AygJIjwKDFNjZW5hcmlvSW5mbxIMCgRuYW1lGAEgAigJEhAKCGlzRmFpbGVk" + 
-          "GAIgAigIEgwKBHRhZ3MYAyADKAkiRAoIU3RlcEluZm8SJgoEc3RlcBgBIAIo" + 
-          "CzIYLm1haW4uRXhlY3V0ZVN0ZXBSZXF1ZXN0EhAKCGlzRmFpbGVkGAIgAigI" + 
-          "IoIBChJFeGVjdXRlU3RlcFJlcXVlc3QSFgoOYWN0dWFsU3RlcFRleHQYASAC" + 
-          "KAkSFgoOcGFyc2VkU3RlcFRleHQYAiACKAkSFwoPc2NlbmFyaW9GYWlsaW5n" + 
-          "GAMgASgIEiMKCnBhcmFtZXRlcnMYBCADKAsyDy5tYWluLlBhcmFtZXRlciJD" + 
-          "ChNTdGVwVmFsaWRhdGVSZXF1ZXN0EhAKCHN0ZXBUZXh0GAEgAigJEhoKEm51" + 
-          "bWJlck9mUGFyYW1ldGVycxgCIAIoBSI9ChRTdGVwVmFsaWRhdGVSZXNwb25z" + 
-          "ZRIPCgdpc1ZhbGlkGAEgAigIEhQKDGVycm9yTWVzc2FnZRgCIAEoCSJLChZF" + 
-          "eGVjdXRpb25FbmRpbmdSZXF1ZXN0EjEKFGN1cnJlbnRFeGVjdXRpb25JbmZv" + 
-          "GAEgASgLMhMubWFpbi5FeGVjdXRpb25JbmZvIkMKFFN1aXRlRXhlY3V0aW9u" + 
-          "UmVzdWx0EisKC3N1aXRlUmVzdWx0GAEgAigLMhYubWFpbi5Qcm90b1N1aXRl" + 
-          "UmVzdWx0IhIKEFN0ZXBOYW1lc1JlcXVlc3QiIgoRU3RlcE5hbWVzUmVzcG9u" + 
-          "c2USDQoFc3RlcHMYASADKAkiHgocU2NlbmFyaW9EYXRhU3RvcmVJbml0UmVx" + 
-          "dWVzdCIaChhTcGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QiGwoZU3VpdGVEYXRh" + 
-          "U3RvcmVJbml0UmVxdWVzdCKEDgoHTWVzc2FnZRIuCgttZXNzYWdlVHlwZRgB" + 
-          "IAIoDjIZLm1haW4uTWVzc2FnZS5NZXNzYWdlVHlwZRIRCgltZXNzYWdlSWQY" + 
-          "AiACKAMSQAoYZXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0GAMgASgLMh4ubWFp" + 
-          "bi5FeGVjdXRpb25TdGFydGluZ1JlcXVlc3QSSAocc3BlY0V4ZWN1dGlvblN0" + 
-          "YXJ0aW5nUmVxdWVzdBgEIAEoCzIiLm1haW4uU3BlY0V4ZWN1dGlvblN0YXJ0" + 
-          "aW5nUmVxdWVzdBJEChpzcGVjRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgFIAEo" + 
-          "CzIgLm1haW4uU3BlY0V4ZWN1dGlvbkVuZGluZ1JlcXVlc3QSUAogc2NlbmFy" + 
-          "aW9FeGVjdXRpb25TdGFydGluZ1JlcXVlc3QYBiABKAsyJi5tYWluLlNjZW5h" + 
-          "cmlvRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0EkwKHnNjZW5hcmlvRXhlY3V0" + 
-          "aW9uRW5kaW5nUmVxdWVzdBgHIAEoCzIkLm1haW4uU2NlbmFyaW9FeGVjdXRp" + 
-          "b25FbmRpbmdSZXF1ZXN0EkgKHHN0ZXBFeGVjdXRpb25TdGFydGluZ1JlcXVl" + 
-          "c3QYCCABKAsyIi5tYWluLlN0ZXBFeGVjdXRpb25TdGFydGluZ1JlcXVlc3QS" + 
-          "RAoac3RlcEV4ZWN1dGlvbkVuZGluZ1JlcXVlc3QYCSABKAsyIC5tYWluLlN0" + 
-          "ZXBFeGVjdXRpb25FbmRpbmdSZXF1ZXN0EjQKEmV4ZWN1dGVTdGVwUmVxdWVz" + 
-          "dBgKIAEoCzIYLm1haW4uRXhlY3V0ZVN0ZXBSZXF1ZXN0EjwKFmV4ZWN1dGlv" + 
-          "bkVuZGluZ1JlcXVlc3QYCyABKAsyHC5tYWluLkV4ZWN1dGlvbkVuZGluZ1Jl" + 
-          "cXVlc3QSNgoTc3RlcFZhbGlkYXRlUmVxdWVzdBgMIAEoCzIZLm1haW4uU3Rl" + 
-          "cFZhbGlkYXRlUmVxdWVzdBI4ChRzdGVwVmFsaWRhdGVSZXNwb25zZRgNIAEo" + 
-          "CzIaLm1haW4uU3RlcFZhbGlkYXRlUmVzcG9uc2USPgoXZXhlY3V0aW9uU3Rh" + 
-          "dHVzUmVzcG9uc2UYDiABKAsyHS5tYWluLkV4ZWN1dGlvblN0YXR1c1Jlc3Bv" + 
-          "bnNlEjAKEHN0ZXBOYW1lc1JlcXVlc3QYDyABKAsyFi5tYWluLlN0ZXBOYW1l" + 
-          "c1JlcXVlc3QSMgoRc3RlcE5hbWVzUmVzcG9uc2UYECABKAsyFy5tYWluLlN0" + 
-          "ZXBOYW1lc1Jlc3BvbnNlEjgKFHN1aXRlRXhlY3V0aW9uUmVzdWx0GBEgASgL" + 
-          "MhoubWFpbi5TdWl0ZUV4ZWN1dGlvblJlc3VsdBI0ChJraWxsUHJvY2Vzc1Jl" + 
-          "cXVlc3QYEiABKAsyGC5tYWluLktpbGxQcm9jZXNzUmVxdWVzdBJIChxzY2Vu" + 
-          "YXJpb0RhdGFTdG9yZUluaXRSZXF1ZXN0GBMgASgLMiIubWFpbi5TY2VuYXJp" + 
-          "b0RhdGFTdG9yZUluaXRSZXF1ZXN0EkAKGHNwZWNEYXRhU3RvcmVJbml0UmVx" + 
-          "dWVzdBgUIAEoCzIeLm1haW4uU3BlY0RhdGFTdG9yZUluaXRSZXF1ZXN0EkIK" + 
-          "GXN1aXRlRGF0YVN0b3JlSW5pdFJlcXVlc3QYFSABKAsyHy5tYWluLlN1aXRl" + 
-          "RGF0YVN0b3JlSW5pdFJlcXVlc3Qi5wMKC01lc3NhZ2VUeXBlEhUKEUV4ZWN1" + 
-          "dGlvblN0YXJ0aW5nEAASGQoVU3BlY0V4ZWN1dGlvblN0YXJ0aW5nEAESFwoT" + 
-          "U3BlY0V4ZWN1dGlvbkVuZGluZxACEh0KGVNjZW5hcmlvRXhlY3V0aW9uU3Rh" + 
-          "cnRpbmcQAxIbChdTY2VuYXJpb0V4ZWN1dGlvbkVuZGluZxAEEhkKFVN0ZXBF" + 
-          "eGVjdXRpb25TdGFydGluZxAFEhcKE1N0ZXBFeGVjdXRpb25FbmRpbmcQBhIP" + 
-          "CgtFeGVjdXRlU3RlcBAHEhMKD0V4ZWN1dGlvbkVuZGluZxAIEhcKE1N0ZXBW" + 
-          "YWxpZGF0ZVJlcXVlc3QQCRIYChRTdGVwVmFsaWRhdGVSZXNwb25zZRAKEhsK" + 
-          "F0V4ZWN1dGlvblN0YXR1c1Jlc3BvbnNlEAsSFAoQU3RlcE5hbWVzUmVxdWVz" + 
-          "dBAMEhUKEVN0ZXBOYW1lc1Jlc3BvbnNlEA0SFgoSS2lsbFByb2Nlc3NSZXF1" + 
-          "ZXN0EA4SGAoUU3VpdGVFeGVjdXRpb25SZXN1bHQQDxIZChVTY2VuYXJpb0Rh" + 
-          "dGFTdG9yZUluaXQQEBIVChFTcGVjRGF0YVN0b3JlSW5pdBAREhYKElN1aXRl" + 
-          "RGF0YVN0b3JlSW5pdBAS");
+          "Cg5tZXNzYWdlcy5wcm90bxIOZ2F1Z2UubWVzc2FnZXMaCnNwZWMucHJvdG8i" + 
+          "FAoSS2lsbFByb2Nlc3NSZXF1ZXN0IlgKF0V4ZWN1dGlvblN0YXR1c1Jlc3Bv" + 
+          "bnNlEj0KD2V4ZWN1dGlvblJlc3VsdBgBIAIoCzIkLmdhdWdlLm1lc3NhZ2Vz" + 
+          "LlByb3RvRXhlY3V0aW9uUmVzdWx0IlcKGEV4ZWN1dGlvblN0YXJ0aW5nUmVx" + 
+          "dWVzdBI7ChRjdXJyZW50RXhlY3V0aW9uSW5mbxgBIAEoCzIdLmdhdWdlLm1l" + 
+          "c3NhZ2VzLkV4ZWN1dGlvbkluZm8iWwocU3BlY0V4ZWN1dGlvblN0YXJ0aW5n" + 
+          "UmVxdWVzdBI7ChRjdXJyZW50RXhlY3V0aW9uSW5mbxgBIAEoCzIdLmdhdWdl" + 
+          "Lm1lc3NhZ2VzLkV4ZWN1dGlvbkluZm8iWQoaU3BlY0V4ZWN1dGlvbkVuZGlu" + 
+          "Z1JlcXVlc3QSOwoUY3VycmVudEV4ZWN1dGlvbkluZm8YASABKAsyHS5nYXVn" + 
+          "ZS5tZXNzYWdlcy5FeGVjdXRpb25JbmZvIl8KIFNjZW5hcmlvRXhlY3V0aW9u" + 
+          "U3RhcnRpbmdSZXF1ZXN0EjsKFGN1cnJlbnRFeGVjdXRpb25JbmZvGAEgASgL" + 
+          "Mh0uZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9uSW5mbyJdCh5TY2VuYXJpb0V4" + 
+          "ZWN1dGlvbkVuZGluZ1JlcXVlc3QSOwoUY3VycmVudEV4ZWN1dGlvbkluZm8Y" + 
+          "ASABKAsyHS5nYXVnZS5tZXNzYWdlcy5FeGVjdXRpb25JbmZvIlsKHFN0ZXBF" + 
+          "eGVjdXRpb25TdGFydGluZ1JlcXVlc3QSOwoUY3VycmVudEV4ZWN1dGlvbklu" + 
+          "Zm8YASABKAsyHS5nYXVnZS5tZXNzYWdlcy5FeGVjdXRpb25JbmZvIlkKGlN0" + 
+          "ZXBFeGVjdXRpb25FbmRpbmdSZXF1ZXN0EjsKFGN1cnJlbnRFeGVjdXRpb25J" + 
+          "bmZvGAEgASgLMh0uZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9uSW5mbyK4AQoN" + 
+          "RXhlY3V0aW9uSW5mbxItCgtjdXJyZW50U3BlYxgBIAEoCzIYLmdhdWdlLm1l" + 
+          "c3NhZ2VzLlNwZWNJbmZvEjUKD2N1cnJlbnRTY2VuYXJpbxgCIAEoCzIcLmdh" + 
+          "dWdlLm1lc3NhZ2VzLlNjZW5hcmlvSW5mbxItCgtjdXJyZW50U3RlcBgDIAEo" + 
+          "CzIYLmdhdWdlLm1lc3NhZ2VzLlN0ZXBJbmZvEhIKCnN0YWNrdHJhY2UYBCAB" + 
+          "KAkiSgoIU3BlY0luZm8SDAoEbmFtZRgBIAIoCRIQCghmaWxlTmFtZRgCIAIo" + 
+          "CRIQCghpc0ZhaWxlZBgDIAIoCBIMCgR0YWdzGAQgAygJIjwKDFNjZW5hcmlv" + 
+          "SW5mbxIMCgRuYW1lGAEgAigJEhAKCGlzRmFpbGVkGAIgAigIEgwKBHRhZ3MY" + 
+          "AyADKAkiTgoIU3RlcEluZm8SMAoEc3RlcBgBIAIoCzIiLmdhdWdlLm1lc3Nh" + 
+          "Z2VzLkV4ZWN1dGVTdGVwUmVxdWVzdBIQCghpc0ZhaWxlZBgCIAIoCCKMAQoS" + 
+          "RXhlY3V0ZVN0ZXBSZXF1ZXN0EhYKDmFjdHVhbFN0ZXBUZXh0GAEgAigJEhYK" + 
+          "DnBhcnNlZFN0ZXBUZXh0GAIgAigJEhcKD3NjZW5hcmlvRmFpbGluZxgDIAEo" + 
+          "CBItCgpwYXJhbWV0ZXJzGAQgAygLMhkuZ2F1Z2UubWVzc2FnZXMuUGFyYW1l" + 
+          "dGVyIkMKE1N0ZXBWYWxpZGF0ZVJlcXVlc3QSEAoIc3RlcFRleHQYASACKAkS" + 
+          "GgoSbnVtYmVyT2ZQYXJhbWV0ZXJzGAIgAigFIj0KFFN0ZXBWYWxpZGF0ZVJl" + 
+          "c3BvbnNlEg8KB2lzVmFsaWQYASACKAgSFAoMZXJyb3JNZXNzYWdlGAIgASgJ" + 
+          "IlUKFkV4ZWN1dGlvbkVuZGluZ1JlcXVlc3QSOwoUY3VycmVudEV4ZWN1dGlv" + 
+          "bkluZm8YASABKAsyHS5nYXVnZS5tZXNzYWdlcy5FeGVjdXRpb25JbmZvIk0K" + 
+          "FFN1aXRlRXhlY3V0aW9uUmVzdWx0EjUKC3N1aXRlUmVzdWx0GAEgAigLMiAu" + 
+          "Z2F1Z2UubWVzc2FnZXMuUHJvdG9TdWl0ZVJlc3VsdCISChBTdGVwTmFtZXNS" + 
+          "ZXF1ZXN0IiIKEVN0ZXBOYW1lc1Jlc3BvbnNlEg0KBXN0ZXBzGAEgAygJIh4K" + 
+          "HFNjZW5hcmlvRGF0YVN0b3JlSW5pdFJlcXVlc3QiGgoYU3BlY0RhdGFTdG9y" + 
+          "ZUluaXRSZXF1ZXN0IhsKGVN1aXRlRGF0YVN0b3JlSW5pdFJlcXVlc3QiPQoR" + 
+          "UGFyYW1ldGVyUG9zaXRpb24SEwoLb2xkUG9zaXRpb24YASACKAUSEwoLbmV3" + 
+          "UG9zaXRpb24YAiACKAUiuAEKD1JlZmFjdG9yUmVxdWVzdBI0CgxvbGRTdGVw" + 
+          "VmFsdWUYASACKAsyHi5nYXVnZS5tZXNzYWdlcy5Qcm90b1N0ZXBWYWx1ZRI0" + 
+          "CgxuZXdTdGVwVmFsdWUYAiACKAsyHi5nYXVnZS5tZXNzYWdlcy5Qcm90b1N0" + 
+          "ZXBWYWx1ZRI5Cg5wYXJhbVBvc2l0aW9ucxgDIAMoCzIhLmdhdWdlLm1lc3Nh" + 
+          "Z2VzLlBhcmFtZXRlclBvc2l0aW9uIkgKEFJlZmFjdG9yUmVzcG9uc2USDwoH" + 
+          "c3VjY2VzcxgBIAIoCBINCgVlcnJvchgCIAEoCRIUCgxmaWxlc0NoYW5nZWQY" + 
+          "AyADKAkiJAoPU3RlcE5hbWVSZXF1ZXN0EhEKCXN0ZXBWYWx1ZRgBIAIoCSJN" + 
+          "ChBTdGVwTmFtZVJlc3BvbnNlEhUKDWlzU3RlcFByZXNlbnQYASACKAgSEAoI" + 
+          "c3RlcE5hbWUYAiADKAkSEAoIaGFzQWxpYXMYAyACKAgijhIKB01lc3NhZ2US" + 
+          "OAoLbWVzc2FnZVR5cGUYASACKA4yIy5nYXVnZS5tZXNzYWdlcy5NZXNzYWdl" + 
+          "Lk1lc3NhZ2VUeXBlEhEKCW1lc3NhZ2VJZBgCIAIoAxJKChhleGVjdXRpb25T" + 
+          "dGFydGluZ1JlcXVlc3QYAyABKAsyKC5nYXVnZS5tZXNzYWdlcy5FeGVjdXRp" + 
+          "b25TdGFydGluZ1JlcXVlc3QSUgocc3BlY0V4ZWN1dGlvblN0YXJ0aW5nUmVx" + 
+          "dWVzdBgEIAEoCzIsLmdhdWdlLm1lc3NhZ2VzLlNwZWNFeGVjdXRpb25TdGFy" + 
+          "dGluZ1JlcXVlc3QSTgoac3BlY0V4ZWN1dGlvbkVuZGluZ1JlcXVlc3QYBSAB" + 
+          "KAsyKi5nYXVnZS5tZXNzYWdlcy5TcGVjRXhlY3V0aW9uRW5kaW5nUmVxdWVz" + 
+          "dBJaCiBzY2VuYXJpb0V4ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBgGIAEoCzIw" + 
+          "LmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhlY3V0aW9uU3RhcnRpbmdSZXF1" + 
+          "ZXN0ElYKHnNjZW5hcmlvRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgHIAEoCzIu" + 
+          "LmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhlY3V0aW9uRW5kaW5nUmVxdWVz" + 
+          "dBJSChxzdGVwRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0GAggASgLMiwuZ2F1" + 
+          "Z2UubWVzc2FnZXMuU3RlcEV4ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBJOChpz" + 
+          "dGVwRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgJIAEoCzIqLmdhdWdlLm1lc3Nh" + 
+          "Z2VzLlN0ZXBFeGVjdXRpb25FbmRpbmdSZXF1ZXN0Ej4KEmV4ZWN1dGVTdGVw" + 
+          "UmVxdWVzdBgKIAEoCzIiLmdhdWdlLm1lc3NhZ2VzLkV4ZWN1dGVTdGVwUmVx" + 
+          "dWVzdBJGChZleGVjdXRpb25FbmRpbmdSZXF1ZXN0GAsgASgLMiYuZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBJAChNzdGVwVmFsaWRh" + 
+          "dGVSZXF1ZXN0GAwgASgLMiMuZ2F1Z2UubWVzc2FnZXMuU3RlcFZhbGlkYXRl" + 
+          "UmVxdWVzdBJCChRzdGVwVmFsaWRhdGVSZXNwb25zZRgNIAEoCzIkLmdhdWdl" + 
+          "Lm1lc3NhZ2VzLlN0ZXBWYWxpZGF0ZVJlc3BvbnNlEkgKF2V4ZWN1dGlvblN0" + 
+          "YXR1c1Jlc3BvbnNlGA4gASgLMicuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9u" + 
+          "U3RhdHVzUmVzcG9uc2USOgoQc3RlcE5hbWVzUmVxdWVzdBgPIAEoCzIgLmdh" + 
+          "dWdlLm1lc3NhZ2VzLlN0ZXBOYW1lc1JlcXVlc3QSPAoRc3RlcE5hbWVzUmVz" + 
+          "cG9uc2UYECABKAsyIS5nYXVnZS5tZXNzYWdlcy5TdGVwTmFtZXNSZXNwb25z" + 
+          "ZRJCChRzdWl0ZUV4ZWN1dGlvblJlc3VsdBgRIAEoCzIkLmdhdWdlLm1lc3Nh" + 
+          "Z2VzLlN1aXRlRXhlY3V0aW9uUmVzdWx0Ej4KEmtpbGxQcm9jZXNzUmVxdWVz" + 
+          "dBgSIAEoCzIiLmdhdWdlLm1lc3NhZ2VzLktpbGxQcm9jZXNzUmVxdWVzdBJS" + 
+          "ChxzY2VuYXJpb0RhdGFTdG9yZUluaXRSZXF1ZXN0GBMgASgLMiwuZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuU2NlbmFyaW9EYXRhU3RvcmVJbml0UmVxdWVzdBJKChhzcGVj" + 
+          "RGF0YVN0b3JlSW5pdFJlcXVlc3QYFCABKAsyKC5nYXVnZS5tZXNzYWdlcy5T" + 
+          "cGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QSTAoZc3VpdGVEYXRhU3RvcmVJbml0" + 
+          "UmVxdWVzdBgVIAEoCzIpLmdhdWdlLm1lc3NhZ2VzLlN1aXRlRGF0YVN0b3Jl" + 
+          "SW5pdFJlcXVlc3QSOAoPc3RlcE5hbWVSZXF1ZXN0GBYgASgLMh8uZ2F1Z2Uu" + 
+          "bWVzc2FnZXMuU3RlcE5hbWVSZXF1ZXN0EjoKEHN0ZXBOYW1lUmVzcG9uc2UY" + 
+          "FyABKAsyIC5nYXVnZS5tZXNzYWdlcy5TdGVwTmFtZVJlc3BvbnNlEjgKD3Jl" + 
+          "ZmFjdG9yUmVxdWVzdBgYIAEoCzIfLmdhdWdlLm1lc3NhZ2VzLlJlZmFjdG9y" + 
+          "UmVxdWVzdBI6ChByZWZhY3RvclJlc3BvbnNlGBkgASgLMiAuZ2F1Z2UubWVz" + 
+          "c2FnZXMuUmVmYWN0b3JSZXNwb25zZSK9BAoLTWVzc2FnZVR5cGUSFQoRRXhl" + 
+          "Y3V0aW9uU3RhcnRpbmcQABIZChVTcGVjRXhlY3V0aW9uU3RhcnRpbmcQARIX" + 
+          "ChNTcGVjRXhlY3V0aW9uRW5kaW5nEAISHQoZU2NlbmFyaW9FeGVjdXRpb25T" + 
+          "dGFydGluZxADEhsKF1NjZW5hcmlvRXhlY3V0aW9uRW5kaW5nEAQSGQoVU3Rl" + 
+          "cEV4ZWN1dGlvblN0YXJ0aW5nEAUSFwoTU3RlcEV4ZWN1dGlvbkVuZGluZxAG" + 
+          "Eg8KC0V4ZWN1dGVTdGVwEAcSEwoPRXhlY3V0aW9uRW5kaW5nEAgSFwoTU3Rl" + 
+          "cFZhbGlkYXRlUmVxdWVzdBAJEhgKFFN0ZXBWYWxpZGF0ZVJlc3BvbnNlEAoS" + 
+          "GwoXRXhlY3V0aW9uU3RhdHVzUmVzcG9uc2UQCxIUChBTdGVwTmFtZXNSZXF1" + 
+          "ZXN0EAwSFQoRU3RlcE5hbWVzUmVzcG9uc2UQDRIWChJLaWxsUHJvY2Vzc1Jl" + 
+          "cXVlc3QQDhIYChRTdWl0ZUV4ZWN1dGlvblJlc3VsdBAPEhkKFVNjZW5hcmlv" + 
+          "RGF0YVN0b3JlSW5pdBAQEhUKEVNwZWNEYXRhU3RvcmVJbml0EBESFgoSU3Vp" + 
+          "dGVEYXRhU3RvcmVJbml0EBISEwoPU3RlcE5hbWVSZXF1ZXN0EBMSFAoQU3Rl" + 
+          "cE5hbWVSZXNwb25zZRAUEhMKD1JlZmFjdG9yUmVxdWVzdBAVEhQKEFJlZmFj" + 
+          "dG9yUmVzcG9uc2UQFg==");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_main_KillProcessRequest__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_main_KillProcessRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.KillProcessRequest, global::main.KillProcessRequest.Builder>(internal__static_main_KillProcessRequest__Descriptor,
+        internal__static_gauge_messages_KillProcessRequest__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_gauge_messages_KillProcessRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.KillProcessRequest, global::Gauge.Messages.KillProcessRequest.Builder>(internal__static_gauge_messages_KillProcessRequest__Descriptor,
                 new string[] { });
-        internal__static_main_ExecutionStatusResponse__Descriptor = Descriptor.MessageTypes[1];
-        internal__static_main_ExecutionStatusResponse__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ExecutionStatusResponse, global::main.ExecutionStatusResponse.Builder>(internal__static_main_ExecutionStatusResponse__Descriptor,
+        internal__static_gauge_messages_ExecutionStatusResponse__Descriptor = Descriptor.MessageTypes[1];
+        internal__static_gauge_messages_ExecutionStatusResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionStatusResponse, global::Gauge.Messages.ExecutionStatusResponse.Builder>(internal__static_gauge_messages_ExecutionStatusResponse__Descriptor,
                 new string[] { "ExecutionResult", });
-        internal__static_main_ExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[2];
-        internal__static_main_ExecutionStartingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ExecutionStartingRequest, global::main.ExecutionStartingRequest.Builder>(internal__static_main_ExecutionStartingRequest__Descriptor,
+        internal__static_gauge_messages_ExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[2];
+        internal__static_gauge_messages_ExecutionStartingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionStartingRequest, global::Gauge.Messages.ExecutionStartingRequest.Builder>(internal__static_gauge_messages_ExecutionStartingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_SpecExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[3];
-        internal__static_main_SpecExecutionStartingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SpecExecutionStartingRequest, global::main.SpecExecutionStartingRequest.Builder>(internal__static_main_SpecExecutionStartingRequest__Descriptor,
+        internal__static_gauge_messages_SpecExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[3];
+        internal__static_gauge_messages_SpecExecutionStartingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecExecutionStartingRequest, global::Gauge.Messages.SpecExecutionStartingRequest.Builder>(internal__static_gauge_messages_SpecExecutionStartingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_SpecExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[4];
-        internal__static_main_SpecExecutionEndingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SpecExecutionEndingRequest, global::main.SpecExecutionEndingRequest.Builder>(internal__static_main_SpecExecutionEndingRequest__Descriptor,
+        internal__static_gauge_messages_SpecExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[4];
+        internal__static_gauge_messages_SpecExecutionEndingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecExecutionEndingRequest, global::Gauge.Messages.SpecExecutionEndingRequest.Builder>(internal__static_gauge_messages_SpecExecutionEndingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_ScenarioExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[5];
-        internal__static_main_ScenarioExecutionStartingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ScenarioExecutionStartingRequest, global::main.ScenarioExecutionStartingRequest.Builder>(internal__static_main_ScenarioExecutionStartingRequest__Descriptor,
+        internal__static_gauge_messages_ScenarioExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[5];
+        internal__static_gauge_messages_ScenarioExecutionStartingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioExecutionStartingRequest, global::Gauge.Messages.ScenarioExecutionStartingRequest.Builder>(internal__static_gauge_messages_ScenarioExecutionStartingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_ScenarioExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[6];
-        internal__static_main_ScenarioExecutionEndingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ScenarioExecutionEndingRequest, global::main.ScenarioExecutionEndingRequest.Builder>(internal__static_main_ScenarioExecutionEndingRequest__Descriptor,
+        internal__static_gauge_messages_ScenarioExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[6];
+        internal__static_gauge_messages_ScenarioExecutionEndingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioExecutionEndingRequest, global::Gauge.Messages.ScenarioExecutionEndingRequest.Builder>(internal__static_gauge_messages_ScenarioExecutionEndingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_StepExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[7];
-        internal__static_main_StepExecutionStartingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepExecutionStartingRequest, global::main.StepExecutionStartingRequest.Builder>(internal__static_main_StepExecutionStartingRequest__Descriptor,
+        internal__static_gauge_messages_StepExecutionStartingRequest__Descriptor = Descriptor.MessageTypes[7];
+        internal__static_gauge_messages_StepExecutionStartingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepExecutionStartingRequest, global::Gauge.Messages.StepExecutionStartingRequest.Builder>(internal__static_gauge_messages_StepExecutionStartingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_StepExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[8];
-        internal__static_main_StepExecutionEndingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepExecutionEndingRequest, global::main.StepExecutionEndingRequest.Builder>(internal__static_main_StepExecutionEndingRequest__Descriptor,
+        internal__static_gauge_messages_StepExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_gauge_messages_StepExecutionEndingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepExecutionEndingRequest, global::Gauge.Messages.StepExecutionEndingRequest.Builder>(internal__static_gauge_messages_StepExecutionEndingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_ExecutionInfo__Descriptor = Descriptor.MessageTypes[9];
-        internal__static_main_ExecutionInfo__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ExecutionInfo, global::main.ExecutionInfo.Builder>(internal__static_main_ExecutionInfo__Descriptor,
+        internal__static_gauge_messages_ExecutionInfo__Descriptor = Descriptor.MessageTypes[9];
+        internal__static_gauge_messages_ExecutionInfo__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionInfo, global::Gauge.Messages.ExecutionInfo.Builder>(internal__static_gauge_messages_ExecutionInfo__Descriptor,
                 new string[] { "CurrentSpec", "CurrentScenario", "CurrentStep", "Stacktrace", });
-        internal__static_main_SpecInfo__Descriptor = Descriptor.MessageTypes[10];
-        internal__static_main_SpecInfo__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SpecInfo, global::main.SpecInfo.Builder>(internal__static_main_SpecInfo__Descriptor,
+        internal__static_gauge_messages_SpecInfo__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_gauge_messages_SpecInfo__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecInfo, global::Gauge.Messages.SpecInfo.Builder>(internal__static_gauge_messages_SpecInfo__Descriptor,
                 new string[] { "Name", "FileName", "IsFailed", "Tags", });
-        internal__static_main_ScenarioInfo__Descriptor = Descriptor.MessageTypes[11];
-        internal__static_main_ScenarioInfo__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ScenarioInfo, global::main.ScenarioInfo.Builder>(internal__static_main_ScenarioInfo__Descriptor,
+        internal__static_gauge_messages_ScenarioInfo__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_gauge_messages_ScenarioInfo__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioInfo, global::Gauge.Messages.ScenarioInfo.Builder>(internal__static_gauge_messages_ScenarioInfo__Descriptor,
                 new string[] { "Name", "IsFailed", "Tags", });
-        internal__static_main_StepInfo__Descriptor = Descriptor.MessageTypes[12];
-        internal__static_main_StepInfo__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepInfo, global::main.StepInfo.Builder>(internal__static_main_StepInfo__Descriptor,
+        internal__static_gauge_messages_StepInfo__Descriptor = Descriptor.MessageTypes[12];
+        internal__static_gauge_messages_StepInfo__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepInfo, global::Gauge.Messages.StepInfo.Builder>(internal__static_gauge_messages_StepInfo__Descriptor,
                 new string[] { "Step", "IsFailed", });
-        internal__static_main_ExecuteStepRequest__Descriptor = Descriptor.MessageTypes[13];
-        internal__static_main_ExecuteStepRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ExecuteStepRequest, global::main.ExecuteStepRequest.Builder>(internal__static_main_ExecuteStepRequest__Descriptor,
+        internal__static_gauge_messages_ExecuteStepRequest__Descriptor = Descriptor.MessageTypes[13];
+        internal__static_gauge_messages_ExecuteStepRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecuteStepRequest, global::Gauge.Messages.ExecuteStepRequest.Builder>(internal__static_gauge_messages_ExecuteStepRequest__Descriptor,
                 new string[] { "ActualStepText", "ParsedStepText", "ScenarioFailing", "Parameters", });
-        internal__static_main_StepValidateRequest__Descriptor = Descriptor.MessageTypes[14];
-        internal__static_main_StepValidateRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepValidateRequest, global::main.StepValidateRequest.Builder>(internal__static_main_StepValidateRequest__Descriptor,
+        internal__static_gauge_messages_StepValidateRequest__Descriptor = Descriptor.MessageTypes[14];
+        internal__static_gauge_messages_StepValidateRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepValidateRequest, global::Gauge.Messages.StepValidateRequest.Builder>(internal__static_gauge_messages_StepValidateRequest__Descriptor,
                 new string[] { "StepText", "NumberOfParameters", });
-        internal__static_main_StepValidateResponse__Descriptor = Descriptor.MessageTypes[15];
-        internal__static_main_StepValidateResponse__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepValidateResponse, global::main.StepValidateResponse.Builder>(internal__static_main_StepValidateResponse__Descriptor,
+        internal__static_gauge_messages_StepValidateResponse__Descriptor = Descriptor.MessageTypes[15];
+        internal__static_gauge_messages_StepValidateResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepValidateResponse, global::Gauge.Messages.StepValidateResponse.Builder>(internal__static_gauge_messages_StepValidateResponse__Descriptor,
                 new string[] { "IsValid", "ErrorMessage", });
-        internal__static_main_ExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[16];
-        internal__static_main_ExecutionEndingRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ExecutionEndingRequest, global::main.ExecutionEndingRequest.Builder>(internal__static_main_ExecutionEndingRequest__Descriptor,
+        internal__static_gauge_messages_ExecutionEndingRequest__Descriptor = Descriptor.MessageTypes[16];
+        internal__static_gauge_messages_ExecutionEndingRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionEndingRequest, global::Gauge.Messages.ExecutionEndingRequest.Builder>(internal__static_gauge_messages_ExecutionEndingRequest__Descriptor,
                 new string[] { "CurrentExecutionInfo", });
-        internal__static_main_SuiteExecutionResult__Descriptor = Descriptor.MessageTypes[17];
-        internal__static_main_SuiteExecutionResult__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SuiteExecutionResult, global::main.SuiteExecutionResult.Builder>(internal__static_main_SuiteExecutionResult__Descriptor,
+        internal__static_gauge_messages_SuiteExecutionResult__Descriptor = Descriptor.MessageTypes[17];
+        internal__static_gauge_messages_SuiteExecutionResult__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SuiteExecutionResult, global::Gauge.Messages.SuiteExecutionResult.Builder>(internal__static_gauge_messages_SuiteExecutionResult__Descriptor,
                 new string[] { "SuiteResult", });
-        internal__static_main_StepNamesRequest__Descriptor = Descriptor.MessageTypes[18];
-        internal__static_main_StepNamesRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepNamesRequest, global::main.StepNamesRequest.Builder>(internal__static_main_StepNamesRequest__Descriptor,
+        internal__static_gauge_messages_StepNamesRequest__Descriptor = Descriptor.MessageTypes[18];
+        internal__static_gauge_messages_StepNamesRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNamesRequest, global::Gauge.Messages.StepNamesRequest.Builder>(internal__static_gauge_messages_StepNamesRequest__Descriptor,
                 new string[] { });
-        internal__static_main_StepNamesResponse__Descriptor = Descriptor.MessageTypes[19];
-        internal__static_main_StepNamesResponse__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.StepNamesResponse, global::main.StepNamesResponse.Builder>(internal__static_main_StepNamesResponse__Descriptor,
+        internal__static_gauge_messages_StepNamesResponse__Descriptor = Descriptor.MessageTypes[19];
+        internal__static_gauge_messages_StepNamesResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNamesResponse, global::Gauge.Messages.StepNamesResponse.Builder>(internal__static_gauge_messages_StepNamesResponse__Descriptor,
                 new string[] { "Steps", });
-        internal__static_main_ScenarioDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[20];
-        internal__static_main_ScenarioDataStoreInitRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.ScenarioDataStoreInitRequest, global::main.ScenarioDataStoreInitRequest.Builder>(internal__static_main_ScenarioDataStoreInitRequest__Descriptor,
+        internal__static_gauge_messages_ScenarioDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[20];
+        internal__static_gauge_messages_ScenarioDataStoreInitRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ScenarioDataStoreInitRequest, global::Gauge.Messages.ScenarioDataStoreInitRequest.Builder>(internal__static_gauge_messages_ScenarioDataStoreInitRequest__Descriptor,
                 new string[] { });
-        internal__static_main_SpecDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[21];
-        internal__static_main_SpecDataStoreInitRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SpecDataStoreInitRequest, global::main.SpecDataStoreInitRequest.Builder>(internal__static_main_SpecDataStoreInitRequest__Descriptor,
+        internal__static_gauge_messages_SpecDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[21];
+        internal__static_gauge_messages_SpecDataStoreInitRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SpecDataStoreInitRequest, global::Gauge.Messages.SpecDataStoreInitRequest.Builder>(internal__static_gauge_messages_SpecDataStoreInitRequest__Descriptor,
                 new string[] { });
-        internal__static_main_SuiteDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[22];
-        internal__static_main_SuiteDataStoreInitRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.SuiteDataStoreInitRequest, global::main.SuiteDataStoreInitRequest.Builder>(internal__static_main_SuiteDataStoreInitRequest__Descriptor,
+        internal__static_gauge_messages_SuiteDataStoreInitRequest__Descriptor = Descriptor.MessageTypes[22];
+        internal__static_gauge_messages_SuiteDataStoreInitRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.SuiteDataStoreInitRequest, global::Gauge.Messages.SuiteDataStoreInitRequest.Builder>(internal__static_gauge_messages_SuiteDataStoreInitRequest__Descriptor,
                 new string[] { });
-        internal__static_main_Message__Descriptor = Descriptor.MessageTypes[23];
-        internal__static_main_Message__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::main.Message, global::main.Message.Builder>(internal__static_main_Message__Descriptor,
-                new string[] { "MessageType", "MessageId", "ExecutionStartingRequest", "SpecExecutionStartingRequest", "SpecExecutionEndingRequest", "ScenarioExecutionStartingRequest", "ScenarioExecutionEndingRequest", "StepExecutionStartingRequest", "StepExecutionEndingRequest", "ExecuteStepRequest", "ExecutionEndingRequest", "StepValidateRequest", "StepValidateResponse", "ExecutionStatusResponse", "StepNamesRequest", "StepNamesResponse", "SuiteExecutionResult", "KillProcessRequest", "ScenarioDataStoreInitRequest", "SpecDataStoreInitRequest", "SuiteDataStoreInitRequest", });
+        internal__static_gauge_messages_ParameterPosition__Descriptor = Descriptor.MessageTypes[23];
+        internal__static_gauge_messages_ParameterPosition__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ParameterPosition, global::Gauge.Messages.ParameterPosition.Builder>(internal__static_gauge_messages_ParameterPosition__Descriptor,
+                new string[] { "OldPosition", "NewPosition", });
+        internal__static_gauge_messages_RefactorRequest__Descriptor = Descriptor.MessageTypes[24];
+        internal__static_gauge_messages_RefactorRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.RefactorRequest, global::Gauge.Messages.RefactorRequest.Builder>(internal__static_gauge_messages_RefactorRequest__Descriptor,
+                new string[] { "OldStepValue", "NewStepValue", "ParamPositions", });
+        internal__static_gauge_messages_RefactorResponse__Descriptor = Descriptor.MessageTypes[25];
+        internal__static_gauge_messages_RefactorResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.RefactorResponse, global::Gauge.Messages.RefactorResponse.Builder>(internal__static_gauge_messages_RefactorResponse__Descriptor,
+                new string[] { "Success", "Error", "FilesChanged", });
+        internal__static_gauge_messages_StepNameRequest__Descriptor = Descriptor.MessageTypes[26];
+        internal__static_gauge_messages_StepNameRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameRequest, global::Gauge.Messages.StepNameRequest.Builder>(internal__static_gauge_messages_StepNameRequest__Descriptor,
+                new string[] { "StepValue", });
+        internal__static_gauge_messages_StepNameResponse__Descriptor = Descriptor.MessageTypes[27];
+        internal__static_gauge_messages_StepNameResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameResponse, global::Gauge.Messages.StepNameResponse.Builder>(internal__static_gauge_messages_StepNameResponse__Descriptor,
+                new string[] { "IsStepPresent", "StepName", "HasAlias", });
+        internal__static_gauge_messages_Message__Descriptor = Descriptor.MessageTypes[28];
+        internal__static_gauge_messages_Message__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Message, global::Gauge.Messages.Message.Builder>(internal__static_gauge_messages_Message__Descriptor,
+                new string[] { "MessageType", "MessageId", "ExecutionStartingRequest", "SpecExecutionStartingRequest", "SpecExecutionEndingRequest", "ScenarioExecutionStartingRequest", "ScenarioExecutionEndingRequest", "StepExecutionStartingRequest", "StepExecutionEndingRequest", "ExecuteStepRequest", "ExecutionEndingRequest", "StepValidateRequest", "StepValidateResponse", "ExecutionStatusResponse", "StepNamesRequest", "StepNamesResponse", "SuiteExecutionResult", "KillProcessRequest", "ScenarioDataStoreInitRequest", "SpecDataStoreInitRequest", "SuiteDataStoreInitRequest", "StepNameRequest", "StepNameResponse", "RefactorRequest", "RefactorResponse", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
           new pbd::FileDescriptor[] {
-          global::main.Spec.Descriptor, 
+          global::Gauge.Messages.Spec.Descriptor, 
           }, assigner);
     }
     #endregion
@@ -278,11 +333,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_KillProcessRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_KillProcessRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<KillProcessRequest, KillProcessRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_KillProcessRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_KillProcessRequest__FieldAccessorTable; }
     }
     
     public override bool IsInitialized {
@@ -401,11 +456,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.KillProcessRequest.Descriptor; }
+        get { return global::Gauge.Messages.KillProcessRequest.Descriptor; }
       }
       
       public override KillProcessRequest DefaultInstanceForType {
-        get { return global::main.KillProcessRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.KillProcessRequest.DefaultInstance; }
       }
       
       public override KillProcessRequest BuildPartial() {
@@ -426,7 +481,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(KillProcessRequest other) {
-        if (other == global::main.KillProcessRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.KillProcessRequest.DefaultInstance) return this;
         PrepareBuilder();
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -482,7 +537,7 @@ namespace main {
       
     }
     static KillProcessRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -505,21 +560,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ExecutionStatusResponse__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionStatusResponse__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ExecutionStatusResponse, ExecutionStatusResponse.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ExecutionStatusResponse__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionStatusResponse__FieldAccessorTable; }
     }
     
     public const int ExecutionResultFieldNumber = 1;
     private bool hasExecutionResult;
-    private global::main.ProtoExecutionResult executionResult_;
+    private global::Gauge.Messages.ProtoExecutionResult executionResult_;
     public bool HasExecutionResult {
       get { return hasExecutionResult; }
     }
-    public global::main.ProtoExecutionResult ExecutionResult {
-      get { return executionResult_ ?? global::main.ProtoExecutionResult.DefaultInstance; }
+    public global::Gauge.Messages.ProtoExecutionResult ExecutionResult {
+      get { return executionResult_ ?? global::Gauge.Messages.ProtoExecutionResult.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -646,11 +701,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ExecutionStatusResponse.Descriptor; }
+        get { return global::Gauge.Messages.ExecutionStatusResponse.Descriptor; }
       }
       
       public override ExecutionStatusResponse DefaultInstanceForType {
-        get { return global::main.ExecutionStatusResponse.DefaultInstance; }
+        get { return global::Gauge.Messages.ExecutionStatusResponse.DefaultInstance; }
       }
       
       public override ExecutionStatusResponse BuildPartial() {
@@ -671,7 +726,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ExecutionStatusResponse other) {
-        if (other == global::main.ExecutionStatusResponse.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ExecutionStatusResponse.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasExecutionResult) {
           MergeExecutionResult(other.ExecutionResult);
@@ -720,7 +775,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoExecutionResult.Builder subBuilder = global::main.ProtoExecutionResult.CreateBuilder();
+              global::Gauge.Messages.ProtoExecutionResult.Builder subBuilder = global::Gauge.Messages.ProtoExecutionResult.CreateBuilder();
               if (result.hasExecutionResult) {
                 subBuilder.MergeFrom(ExecutionResult);
               }
@@ -741,30 +796,30 @@ namespace main {
       public bool HasExecutionResult {
        get { return result.hasExecutionResult; }
       }
-      public global::main.ProtoExecutionResult ExecutionResult {
+      public global::Gauge.Messages.ProtoExecutionResult ExecutionResult {
         get { return result.ExecutionResult; }
         set { SetExecutionResult(value); }
       }
-      public Builder SetExecutionResult(global::main.ProtoExecutionResult value) {
+      public Builder SetExecutionResult(global::Gauge.Messages.ProtoExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecutionResult = true;
         result.executionResult_ = value;
         return this;
       }
-      public Builder SetExecutionResult(global::main.ProtoExecutionResult.Builder builderForValue) {
+      public Builder SetExecutionResult(global::Gauge.Messages.ProtoExecutionResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecutionResult = true;
         result.executionResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecutionResult(global::main.ProtoExecutionResult value) {
+      public Builder MergeExecutionResult(global::Gauge.Messages.ProtoExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecutionResult &&
-            result.executionResult_ != global::main.ProtoExecutionResult.DefaultInstance) {
-            result.executionResult_ = global::main.ProtoExecutionResult.CreateBuilder(result.executionResult_).MergeFrom(value).BuildPartial();
+            result.executionResult_ != global::Gauge.Messages.ProtoExecutionResult.DefaultInstance) {
+            result.executionResult_ = global::Gauge.Messages.ProtoExecutionResult.CreateBuilder(result.executionResult_).MergeFrom(value).BuildPartial();
         } else {
           result.executionResult_ = value;
         }
@@ -779,7 +834,7 @@ namespace main {
       }
     }
     static ExecutionStatusResponse() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -802,21 +857,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ExecutionStartingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionStartingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ExecutionStartingRequest, ExecutionStartingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ExecutionStartingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionStartingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -944,11 +999,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ExecutionStartingRequest.Descriptor; }
+        get { return global::Gauge.Messages.ExecutionStartingRequest.Descriptor; }
       }
       
       public override ExecutionStartingRequest DefaultInstanceForType {
-        get { return global::main.ExecutionStartingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ExecutionStartingRequest.DefaultInstance; }
       }
       
       public override ExecutionStartingRequest BuildPartial() {
@@ -969,7 +1024,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ExecutionStartingRequest other) {
-        if (other == global::main.ExecutionStartingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ExecutionStartingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -1018,7 +1073,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -1039,30 +1094,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -1077,7 +1132,7 @@ namespace main {
       }
     }
     static ExecutionStartingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -1100,21 +1155,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SpecExecutionStartingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecExecutionStartingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SpecExecutionStartingRequest, SpecExecutionStartingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SpecExecutionStartingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecExecutionStartingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -1242,11 +1297,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SpecExecutionStartingRequest.Descriptor; }
+        get { return global::Gauge.Messages.SpecExecutionStartingRequest.Descriptor; }
       }
       
       public override SpecExecutionStartingRequest DefaultInstanceForType {
-        get { return global::main.SpecExecutionStartingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.SpecExecutionStartingRequest.DefaultInstance; }
       }
       
       public override SpecExecutionStartingRequest BuildPartial() {
@@ -1267,7 +1322,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SpecExecutionStartingRequest other) {
-        if (other == global::main.SpecExecutionStartingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SpecExecutionStartingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -1316,7 +1371,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -1337,30 +1392,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -1375,7 +1430,7 @@ namespace main {
       }
     }
     static SpecExecutionStartingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -1398,21 +1453,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SpecExecutionEndingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecExecutionEndingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SpecExecutionEndingRequest, SpecExecutionEndingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SpecExecutionEndingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecExecutionEndingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -1540,11 +1595,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SpecExecutionEndingRequest.Descriptor; }
+        get { return global::Gauge.Messages.SpecExecutionEndingRequest.Descriptor; }
       }
       
       public override SpecExecutionEndingRequest DefaultInstanceForType {
-        get { return global::main.SpecExecutionEndingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.SpecExecutionEndingRequest.DefaultInstance; }
       }
       
       public override SpecExecutionEndingRequest BuildPartial() {
@@ -1565,7 +1620,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SpecExecutionEndingRequest other) {
-        if (other == global::main.SpecExecutionEndingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SpecExecutionEndingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -1614,7 +1669,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -1635,30 +1690,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -1673,7 +1728,7 @@ namespace main {
       }
     }
     static SpecExecutionEndingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -1696,21 +1751,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ScenarioExecutionStartingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioExecutionStartingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ScenarioExecutionStartingRequest, ScenarioExecutionStartingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ScenarioExecutionStartingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioExecutionStartingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -1838,11 +1893,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ScenarioExecutionStartingRequest.Descriptor; }
+        get { return global::Gauge.Messages.ScenarioExecutionStartingRequest.Descriptor; }
       }
       
       public override ScenarioExecutionStartingRequest DefaultInstanceForType {
-        get { return global::main.ScenarioExecutionStartingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ScenarioExecutionStartingRequest.DefaultInstance; }
       }
       
       public override ScenarioExecutionStartingRequest BuildPartial() {
@@ -1863,7 +1918,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ScenarioExecutionStartingRequest other) {
-        if (other == global::main.ScenarioExecutionStartingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ScenarioExecutionStartingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -1912,7 +1967,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -1933,30 +1988,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -1971,7 +2026,7 @@ namespace main {
       }
     }
     static ScenarioExecutionStartingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -1994,21 +2049,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ScenarioExecutionEndingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioExecutionEndingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ScenarioExecutionEndingRequest, ScenarioExecutionEndingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ScenarioExecutionEndingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioExecutionEndingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -2136,11 +2191,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ScenarioExecutionEndingRequest.Descriptor; }
+        get { return global::Gauge.Messages.ScenarioExecutionEndingRequest.Descriptor; }
       }
       
       public override ScenarioExecutionEndingRequest DefaultInstanceForType {
-        get { return global::main.ScenarioExecutionEndingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ScenarioExecutionEndingRequest.DefaultInstance; }
       }
       
       public override ScenarioExecutionEndingRequest BuildPartial() {
@@ -2161,7 +2216,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ScenarioExecutionEndingRequest other) {
-        if (other == global::main.ScenarioExecutionEndingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ScenarioExecutionEndingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -2210,7 +2265,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -2231,30 +2286,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -2269,7 +2324,7 @@ namespace main {
       }
     }
     static ScenarioExecutionEndingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -2292,21 +2347,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepExecutionStartingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepExecutionStartingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepExecutionStartingRequest, StepExecutionStartingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepExecutionStartingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepExecutionStartingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -2434,11 +2489,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepExecutionStartingRequest.Descriptor; }
+        get { return global::Gauge.Messages.StepExecutionStartingRequest.Descriptor; }
       }
       
       public override StepExecutionStartingRequest DefaultInstanceForType {
-        get { return global::main.StepExecutionStartingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.StepExecutionStartingRequest.DefaultInstance; }
       }
       
       public override StepExecutionStartingRequest BuildPartial() {
@@ -2459,7 +2514,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepExecutionStartingRequest other) {
-        if (other == global::main.StepExecutionStartingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepExecutionStartingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -2508,7 +2563,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -2529,30 +2584,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -2567,7 +2622,7 @@ namespace main {
       }
     }
     static StepExecutionStartingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -2590,21 +2645,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepExecutionEndingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepExecutionEndingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepExecutionEndingRequest, StepExecutionEndingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepExecutionEndingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepExecutionEndingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -2732,11 +2787,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepExecutionEndingRequest.Descriptor; }
+        get { return global::Gauge.Messages.StepExecutionEndingRequest.Descriptor; }
       }
       
       public override StepExecutionEndingRequest DefaultInstanceForType {
-        get { return global::main.StepExecutionEndingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.StepExecutionEndingRequest.DefaultInstance; }
       }
       
       public override StepExecutionEndingRequest BuildPartial() {
@@ -2757,7 +2812,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepExecutionEndingRequest other) {
-        if (other == global::main.StepExecutionEndingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepExecutionEndingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -2806,7 +2861,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -2827,30 +2882,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -2865,7 +2920,7 @@ namespace main {
       }
     }
     static StepExecutionEndingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -2888,41 +2943,41 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ExecutionInfo__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionInfo__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ExecutionInfo, ExecutionInfo.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ExecutionInfo__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionInfo__FieldAccessorTable; }
     }
     
     public const int CurrentSpecFieldNumber = 1;
     private bool hasCurrentSpec;
-    private global::main.SpecInfo currentSpec_;
+    private global::Gauge.Messages.SpecInfo currentSpec_;
     public bool HasCurrentSpec {
       get { return hasCurrentSpec; }
     }
-    public global::main.SpecInfo CurrentSpec {
-      get { return currentSpec_ ?? global::main.SpecInfo.DefaultInstance; }
+    public global::Gauge.Messages.SpecInfo CurrentSpec {
+      get { return currentSpec_ ?? global::Gauge.Messages.SpecInfo.DefaultInstance; }
     }
     
     public const int CurrentScenarioFieldNumber = 2;
     private bool hasCurrentScenario;
-    private global::main.ScenarioInfo currentScenario_;
+    private global::Gauge.Messages.ScenarioInfo currentScenario_;
     public bool HasCurrentScenario {
       get { return hasCurrentScenario; }
     }
-    public global::main.ScenarioInfo CurrentScenario {
-      get { return currentScenario_ ?? global::main.ScenarioInfo.DefaultInstance; }
+    public global::Gauge.Messages.ScenarioInfo CurrentScenario {
+      get { return currentScenario_ ?? global::Gauge.Messages.ScenarioInfo.DefaultInstance; }
     }
     
     public const int CurrentStepFieldNumber = 3;
     private bool hasCurrentStep;
-    private global::main.StepInfo currentStep_;
+    private global::Gauge.Messages.StepInfo currentStep_;
     public bool HasCurrentStep {
       get { return hasCurrentStep; }
     }
-    public global::main.StepInfo CurrentStep {
-      get { return currentStep_ ?? global::main.StepInfo.DefaultInstance; }
+    public global::Gauge.Messages.StepInfo CurrentStep {
+      get { return currentStep_ ?? global::Gauge.Messages.StepInfo.DefaultInstance; }
     }
     
     public const int StacktraceFieldNumber = 4;
@@ -3084,11 +3139,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ExecutionInfo.Descriptor; }
+        get { return global::Gauge.Messages.ExecutionInfo.Descriptor; }
       }
       
       public override ExecutionInfo DefaultInstanceForType {
-        get { return global::main.ExecutionInfo.DefaultInstance; }
+        get { return global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
       }
       
       public override ExecutionInfo BuildPartial() {
@@ -3109,7 +3164,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ExecutionInfo other) {
-        if (other == global::main.ExecutionInfo.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ExecutionInfo.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentSpec) {
           MergeCurrentSpec(other.CurrentSpec);
@@ -3167,7 +3222,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.SpecInfo.Builder subBuilder = global::main.SpecInfo.CreateBuilder();
+              global::Gauge.Messages.SpecInfo.Builder subBuilder = global::Gauge.Messages.SpecInfo.CreateBuilder();
               if (result.hasCurrentSpec) {
                 subBuilder.MergeFrom(CurrentSpec);
               }
@@ -3176,7 +3231,7 @@ namespace main {
               break;
             }
             case 18: {
-              global::main.ScenarioInfo.Builder subBuilder = global::main.ScenarioInfo.CreateBuilder();
+              global::Gauge.Messages.ScenarioInfo.Builder subBuilder = global::Gauge.Messages.ScenarioInfo.CreateBuilder();
               if (result.hasCurrentScenario) {
                 subBuilder.MergeFrom(CurrentScenario);
               }
@@ -3185,7 +3240,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.StepInfo.Builder subBuilder = global::main.StepInfo.CreateBuilder();
+              global::Gauge.Messages.StepInfo.Builder subBuilder = global::Gauge.Messages.StepInfo.CreateBuilder();
               if (result.hasCurrentStep) {
                 subBuilder.MergeFrom(CurrentStep);
               }
@@ -3210,30 +3265,30 @@ namespace main {
       public bool HasCurrentSpec {
        get { return result.hasCurrentSpec; }
       }
-      public global::main.SpecInfo CurrentSpec {
+      public global::Gauge.Messages.SpecInfo CurrentSpec {
         get { return result.CurrentSpec; }
         set { SetCurrentSpec(value); }
       }
-      public Builder SetCurrentSpec(global::main.SpecInfo value) {
+      public Builder SetCurrentSpec(global::Gauge.Messages.SpecInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentSpec = true;
         result.currentSpec_ = value;
         return this;
       }
-      public Builder SetCurrentSpec(global::main.SpecInfo.Builder builderForValue) {
+      public Builder SetCurrentSpec(global::Gauge.Messages.SpecInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentSpec = true;
         result.currentSpec_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentSpec(global::main.SpecInfo value) {
+      public Builder MergeCurrentSpec(global::Gauge.Messages.SpecInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentSpec &&
-            result.currentSpec_ != global::main.SpecInfo.DefaultInstance) {
-            result.currentSpec_ = global::main.SpecInfo.CreateBuilder(result.currentSpec_).MergeFrom(value).BuildPartial();
+            result.currentSpec_ != global::Gauge.Messages.SpecInfo.DefaultInstance) {
+            result.currentSpec_ = global::Gauge.Messages.SpecInfo.CreateBuilder(result.currentSpec_).MergeFrom(value).BuildPartial();
         } else {
           result.currentSpec_ = value;
         }
@@ -3250,30 +3305,30 @@ namespace main {
       public bool HasCurrentScenario {
        get { return result.hasCurrentScenario; }
       }
-      public global::main.ScenarioInfo CurrentScenario {
+      public global::Gauge.Messages.ScenarioInfo CurrentScenario {
         get { return result.CurrentScenario; }
         set { SetCurrentScenario(value); }
       }
-      public Builder SetCurrentScenario(global::main.ScenarioInfo value) {
+      public Builder SetCurrentScenario(global::Gauge.Messages.ScenarioInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentScenario = true;
         result.currentScenario_ = value;
         return this;
       }
-      public Builder SetCurrentScenario(global::main.ScenarioInfo.Builder builderForValue) {
+      public Builder SetCurrentScenario(global::Gauge.Messages.ScenarioInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentScenario = true;
         result.currentScenario_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentScenario(global::main.ScenarioInfo value) {
+      public Builder MergeCurrentScenario(global::Gauge.Messages.ScenarioInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentScenario &&
-            result.currentScenario_ != global::main.ScenarioInfo.DefaultInstance) {
-            result.currentScenario_ = global::main.ScenarioInfo.CreateBuilder(result.currentScenario_).MergeFrom(value).BuildPartial();
+            result.currentScenario_ != global::Gauge.Messages.ScenarioInfo.DefaultInstance) {
+            result.currentScenario_ = global::Gauge.Messages.ScenarioInfo.CreateBuilder(result.currentScenario_).MergeFrom(value).BuildPartial();
         } else {
           result.currentScenario_ = value;
         }
@@ -3290,30 +3345,30 @@ namespace main {
       public bool HasCurrentStep {
        get { return result.hasCurrentStep; }
       }
-      public global::main.StepInfo CurrentStep {
+      public global::Gauge.Messages.StepInfo CurrentStep {
         get { return result.CurrentStep; }
         set { SetCurrentStep(value); }
       }
-      public Builder SetCurrentStep(global::main.StepInfo value) {
+      public Builder SetCurrentStep(global::Gauge.Messages.StepInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentStep = true;
         result.currentStep_ = value;
         return this;
       }
-      public Builder SetCurrentStep(global::main.StepInfo.Builder builderForValue) {
+      public Builder SetCurrentStep(global::Gauge.Messages.StepInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentStep = true;
         result.currentStep_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentStep(global::main.StepInfo value) {
+      public Builder MergeCurrentStep(global::Gauge.Messages.StepInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentStep &&
-            result.currentStep_ != global::main.StepInfo.DefaultInstance) {
-            result.currentStep_ = global::main.StepInfo.CreateBuilder(result.currentStep_).MergeFrom(value).BuildPartial();
+            result.currentStep_ != global::Gauge.Messages.StepInfo.DefaultInstance) {
+            result.currentStep_ = global::Gauge.Messages.StepInfo.CreateBuilder(result.currentStep_).MergeFrom(value).BuildPartial();
         } else {
           result.currentStep_ = value;
         }
@@ -3349,7 +3404,7 @@ namespace main {
       }
     }
     static ExecutionInfo() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -3372,11 +3427,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SpecInfo__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecInfo__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SpecInfo, SpecInfo.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SpecInfo__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecInfo__FieldAccessorTable; }
     }
     
     public const int NameFieldNumber = 1;
@@ -3570,11 +3625,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SpecInfo.Descriptor; }
+        get { return global::Gauge.Messages.SpecInfo.Descriptor; }
       }
       
       public override SpecInfo DefaultInstanceForType {
-        get { return global::main.SpecInfo.DefaultInstance; }
+        get { return global::Gauge.Messages.SpecInfo.DefaultInstance; }
       }
       
       public override SpecInfo BuildPartial() {
@@ -3595,7 +3650,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SpecInfo other) {
-        if (other == global::main.SpecInfo.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SpecInfo.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasName) {
           Name = other.Name;
@@ -3773,7 +3828,7 @@ namespace main {
       }
     }
     static SpecInfo() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -3796,11 +3851,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ScenarioInfo__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioInfo__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ScenarioInfo, ScenarioInfo.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ScenarioInfo__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioInfo__FieldAccessorTable; }
     }
     
     public const int NameFieldNumber = 1;
@@ -3977,11 +4032,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ScenarioInfo.Descriptor; }
+        get { return global::Gauge.Messages.ScenarioInfo.Descriptor; }
       }
       
       public override ScenarioInfo DefaultInstanceForType {
-        get { return global::main.ScenarioInfo.DefaultInstance; }
+        get { return global::Gauge.Messages.ScenarioInfo.DefaultInstance; }
       }
       
       public override ScenarioInfo BuildPartial() {
@@ -4002,7 +4057,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ScenarioInfo other) {
-        if (other == global::main.ScenarioInfo.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ScenarioInfo.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasName) {
           Name = other.Name;
@@ -4152,7 +4207,7 @@ namespace main {
       }
     }
     static ScenarioInfo() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -4175,21 +4230,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepInfo__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepInfo__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepInfo, StepInfo.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepInfo__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepInfo__FieldAccessorTable; }
     }
     
     public const int StepFieldNumber = 1;
     private bool hasStep;
-    private global::main.ExecuteStepRequest step_;
+    private global::Gauge.Messages.ExecuteStepRequest step_;
     public bool HasStep {
       get { return hasStep; }
     }
-    public global::main.ExecuteStepRequest Step {
-      get { return step_ ?? global::main.ExecuteStepRequest.DefaultInstance; }
+    public global::Gauge.Messages.ExecuteStepRequest Step {
+      get { return step_ ?? global::Gauge.Messages.ExecuteStepRequest.DefaultInstance; }
     }
     
     public const int IsFailedFieldNumber = 2;
@@ -4333,11 +4388,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepInfo.Descriptor; }
+        get { return global::Gauge.Messages.StepInfo.Descriptor; }
       }
       
       public override StepInfo DefaultInstanceForType {
-        get { return global::main.StepInfo.DefaultInstance; }
+        get { return global::Gauge.Messages.StepInfo.DefaultInstance; }
       }
       
       public override StepInfo BuildPartial() {
@@ -4358,7 +4413,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepInfo other) {
-        if (other == global::main.StepInfo.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepInfo.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasStep) {
           MergeStep(other.Step);
@@ -4410,7 +4465,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecuteStepRequest.Builder subBuilder = global::main.ExecuteStepRequest.CreateBuilder();
+              global::Gauge.Messages.ExecuteStepRequest.Builder subBuilder = global::Gauge.Messages.ExecuteStepRequest.CreateBuilder();
               if (result.hasStep) {
                 subBuilder.MergeFrom(Step);
               }
@@ -4435,30 +4490,30 @@ namespace main {
       public bool HasStep {
        get { return result.hasStep; }
       }
-      public global::main.ExecuteStepRequest Step {
+      public global::Gauge.Messages.ExecuteStepRequest Step {
         get { return result.Step; }
         set { SetStep(value); }
       }
-      public Builder SetStep(global::main.ExecuteStepRequest value) {
+      public Builder SetStep(global::Gauge.Messages.ExecuteStepRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStep = true;
         result.step_ = value;
         return this;
       }
-      public Builder SetStep(global::main.ExecuteStepRequest.Builder builderForValue) {
+      public Builder SetStep(global::Gauge.Messages.ExecuteStepRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStep = true;
         result.step_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStep(global::main.ExecuteStepRequest value) {
+      public Builder MergeStep(global::Gauge.Messages.ExecuteStepRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStep &&
-            result.step_ != global::main.ExecuteStepRequest.DefaultInstance) {
-            result.step_ = global::main.ExecuteStepRequest.CreateBuilder(result.step_).MergeFrom(value).BuildPartial();
+            result.step_ != global::Gauge.Messages.ExecuteStepRequest.DefaultInstance) {
+            result.step_ = global::Gauge.Messages.ExecuteStepRequest.CreateBuilder(result.step_).MergeFrom(value).BuildPartial();
         } else {
           result.step_ = value;
         }
@@ -4493,7 +4548,7 @@ namespace main {
       }
     }
     static StepInfo() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -4516,11 +4571,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ExecuteStepRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecuteStepRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ExecuteStepRequest, ExecuteStepRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ExecuteStepRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecuteStepRequest__FieldAccessorTable; }
     }
     
     public const int ActualStepTextFieldNumber = 1;
@@ -4554,14 +4609,14 @@ namespace main {
     }
     
     public const int ParametersFieldNumber = 4;
-    private pbc::PopsicleList<global::main.Parameter> parameters_ = new pbc::PopsicleList<global::main.Parameter>();
-    public scg::IList<global::main.Parameter> ParametersList {
+    private pbc::PopsicleList<global::Gauge.Messages.Parameter> parameters_ = new pbc::PopsicleList<global::Gauge.Messages.Parameter>();
+    public scg::IList<global::Gauge.Messages.Parameter> ParametersList {
       get { return parameters_; }
     }
     public int ParametersCount {
       get { return parameters_.Count; }
     }
-    public global::main.Parameter GetParameters(int index) {
+    public global::Gauge.Messages.Parameter GetParameters(int index) {
       return parameters_[index];
     }
     
@@ -4569,7 +4624,7 @@ namespace main {
       get {
         if (!hasActualStepText) return false;
         if (!hasParsedStepText) return false;
-        foreach (global::main.Parameter element in ParametersList) {
+        foreach (global::Gauge.Messages.Parameter element in ParametersList) {
           if (!element.IsInitialized) return false;
         }
         return true;
@@ -4610,7 +4665,7 @@ namespace main {
         if (hasScenarioFailing) {
           size += pb::CodedOutputStream.ComputeBoolSize(3, ScenarioFailing);
         }
-        foreach (global::main.Parameter element in ParametersList) {
+        foreach (global::Gauge.Messages.Parameter element in ParametersList) {
           size += pb::CodedOutputStream.ComputeMessageSize(4, element);
         }
         size += UnknownFields.SerializedSize;
@@ -4711,11 +4766,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ExecuteStepRequest.Descriptor; }
+        get { return global::Gauge.Messages.ExecuteStepRequest.Descriptor; }
       }
       
       public override ExecuteStepRequest DefaultInstanceForType {
-        get { return global::main.ExecuteStepRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ExecuteStepRequest.DefaultInstance; }
       }
       
       public override ExecuteStepRequest BuildPartial() {
@@ -4736,7 +4791,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ExecuteStepRequest other) {
-        if (other == global::main.ExecuteStepRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ExecuteStepRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasActualStepText) {
           ActualStepText = other.ActualStepText;
@@ -4806,7 +4861,7 @@ namespace main {
               break;
             }
             case 34: {
-              input.ReadMessageArray(tag, field_name, result.parameters_, global::main.Parameter.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.parameters_, global::Gauge.Messages.Parameter.DefaultInstance, extensionRegistry);
               break;
             }
           }
@@ -4881,40 +4936,40 @@ namespace main {
         return this;
       }
       
-      public pbc::IPopsicleList<global::main.Parameter> ParametersList {
+      public pbc::IPopsicleList<global::Gauge.Messages.Parameter> ParametersList {
         get { return PrepareBuilder().parameters_; }
       }
       public int ParametersCount {
         get { return result.ParametersCount; }
       }
-      public global::main.Parameter GetParameters(int index) {
+      public global::Gauge.Messages.Parameter GetParameters(int index) {
         return result.GetParameters(index);
       }
-      public Builder SetParameters(int index, global::main.Parameter value) {
+      public Builder SetParameters(int index, global::Gauge.Messages.Parameter value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.parameters_[index] = value;
         return this;
       }
-      public Builder SetParameters(int index, global::main.Parameter.Builder builderForValue) {
+      public Builder SetParameters(int index, global::Gauge.Messages.Parameter.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.parameters_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddParameters(global::main.Parameter value) {
+      public Builder AddParameters(global::Gauge.Messages.Parameter value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.parameters_.Add(value);
         return this;
       }
-      public Builder AddParameters(global::main.Parameter.Builder builderForValue) {
+      public Builder AddParameters(global::Gauge.Messages.Parameter.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.parameters_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeParameters(scg::IEnumerable<global::main.Parameter> values) {
+      public Builder AddRangeParameters(scg::IEnumerable<global::Gauge.Messages.Parameter> values) {
         PrepareBuilder();
         result.parameters_.Add(values);
         return this;
@@ -4926,7 +4981,7 @@ namespace main {
       }
     }
     static ExecuteStepRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -4949,11 +5004,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepValidateRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepValidateRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepValidateRequest, StepValidateRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepValidateRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepValidateRequest__FieldAccessorTable; }
     }
     
     public const int StepTextFieldNumber = 1;
@@ -5106,11 +5161,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepValidateRequest.Descriptor; }
+        get { return global::Gauge.Messages.StepValidateRequest.Descriptor; }
       }
       
       public override StepValidateRequest DefaultInstanceForType {
-        get { return global::main.StepValidateRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.StepValidateRequest.DefaultInstance; }
       }
       
       public override StepValidateRequest BuildPartial() {
@@ -5131,7 +5186,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepValidateRequest other) {
-        if (other == global::main.StepValidateRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepValidateRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasStepText) {
           StepText = other.StepText;
@@ -5242,7 +5297,7 @@ namespace main {
       }
     }
     static StepValidateRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -5265,11 +5320,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepValidateResponse__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepValidateResponse__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepValidateResponse, StepValidateResponse.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepValidateResponse__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepValidateResponse__FieldAccessorTable; }
     }
     
     public const int IsValidFieldNumber = 1;
@@ -5421,11 +5476,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepValidateResponse.Descriptor; }
+        get { return global::Gauge.Messages.StepValidateResponse.Descriptor; }
       }
       
       public override StepValidateResponse DefaultInstanceForType {
-        get { return global::main.StepValidateResponse.DefaultInstance; }
+        get { return global::Gauge.Messages.StepValidateResponse.DefaultInstance; }
       }
       
       public override StepValidateResponse BuildPartial() {
@@ -5446,7 +5501,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepValidateResponse other) {
-        if (other == global::main.StepValidateResponse.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepValidateResponse.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasIsValid) {
           IsValid = other.IsValid;
@@ -5557,7 +5612,7 @@ namespace main {
       }
     }
     static StepValidateResponse() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -5580,21 +5635,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ExecutionEndingRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionEndingRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ExecutionEndingRequest, ExecutionEndingRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ExecutionEndingRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ExecutionEndingRequest__FieldAccessorTable; }
     }
     
     public const int CurrentExecutionInfoFieldNumber = 1;
     private bool hasCurrentExecutionInfo;
-    private global::main.ExecutionInfo currentExecutionInfo_;
+    private global::Gauge.Messages.ExecutionInfo currentExecutionInfo_;
     public bool HasCurrentExecutionInfo {
       get { return hasCurrentExecutionInfo; }
     }
-    public global::main.ExecutionInfo CurrentExecutionInfo {
-      get { return currentExecutionInfo_ ?? global::main.ExecutionInfo.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
+      get { return currentExecutionInfo_ ?? global::Gauge.Messages.ExecutionInfo.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -5722,11 +5777,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ExecutionEndingRequest.Descriptor; }
+        get { return global::Gauge.Messages.ExecutionEndingRequest.Descriptor; }
       }
       
       public override ExecutionEndingRequest DefaultInstanceForType {
-        get { return global::main.ExecutionEndingRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ExecutionEndingRequest.DefaultInstance; }
       }
       
       public override ExecutionEndingRequest BuildPartial() {
@@ -5747,7 +5802,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ExecutionEndingRequest other) {
-        if (other == global::main.ExecutionEndingRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ExecutionEndingRequest.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCurrentExecutionInfo) {
           MergeCurrentExecutionInfo(other.CurrentExecutionInfo);
@@ -5796,7 +5851,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ExecutionInfo.Builder subBuilder = global::main.ExecutionInfo.CreateBuilder();
+              global::Gauge.Messages.ExecutionInfo.Builder subBuilder = global::Gauge.Messages.ExecutionInfo.CreateBuilder();
               if (result.hasCurrentExecutionInfo) {
                 subBuilder.MergeFrom(CurrentExecutionInfo);
               }
@@ -5817,30 +5872,30 @@ namespace main {
       public bool HasCurrentExecutionInfo {
        get { return result.hasCurrentExecutionInfo; }
       }
-      public global::main.ExecutionInfo CurrentExecutionInfo {
+      public global::Gauge.Messages.ExecutionInfo CurrentExecutionInfo {
         get { return result.CurrentExecutionInfo; }
         set { SetCurrentExecutionInfo(value); }
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = value;
         return this;
       }
-      public Builder SetCurrentExecutionInfo(global::main.ExecutionInfo.Builder builderForValue) {
+      public Builder SetCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentExecutionInfo = true;
         result.currentExecutionInfo_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentExecutionInfo(global::main.ExecutionInfo value) {
+      public Builder MergeCurrentExecutionInfo(global::Gauge.Messages.ExecutionInfo value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentExecutionInfo &&
-            result.currentExecutionInfo_ != global::main.ExecutionInfo.DefaultInstance) {
-            result.currentExecutionInfo_ = global::main.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
+            result.currentExecutionInfo_ != global::Gauge.Messages.ExecutionInfo.DefaultInstance) {
+            result.currentExecutionInfo_ = global::Gauge.Messages.ExecutionInfo.CreateBuilder(result.currentExecutionInfo_).MergeFrom(value).BuildPartial();
         } else {
           result.currentExecutionInfo_ = value;
         }
@@ -5855,7 +5910,7 @@ namespace main {
       }
     }
     static ExecutionEndingRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -5878,21 +5933,21 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SuiteExecutionResult__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SuiteExecutionResult__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SuiteExecutionResult, SuiteExecutionResult.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SuiteExecutionResult__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SuiteExecutionResult__FieldAccessorTable; }
     }
     
     public const int SuiteResultFieldNumber = 1;
     private bool hasSuiteResult;
-    private global::main.ProtoSuiteResult suiteResult_;
+    private global::Gauge.Messages.ProtoSuiteResult suiteResult_;
     public bool HasSuiteResult {
       get { return hasSuiteResult; }
     }
-    public global::main.ProtoSuiteResult SuiteResult {
-      get { return suiteResult_ ?? global::main.ProtoSuiteResult.DefaultInstance; }
+    public global::Gauge.Messages.ProtoSuiteResult SuiteResult {
+      get { return suiteResult_ ?? global::Gauge.Messages.ProtoSuiteResult.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -6019,11 +6074,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SuiteExecutionResult.Descriptor; }
+        get { return global::Gauge.Messages.SuiteExecutionResult.Descriptor; }
       }
       
       public override SuiteExecutionResult DefaultInstanceForType {
-        get { return global::main.SuiteExecutionResult.DefaultInstance; }
+        get { return global::Gauge.Messages.SuiteExecutionResult.DefaultInstance; }
       }
       
       public override SuiteExecutionResult BuildPartial() {
@@ -6044,7 +6099,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SuiteExecutionResult other) {
-        if (other == global::main.SuiteExecutionResult.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SuiteExecutionResult.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasSuiteResult) {
           MergeSuiteResult(other.SuiteResult);
@@ -6093,7 +6148,7 @@ namespace main {
               break;
             }
             case 10: {
-              global::main.ProtoSuiteResult.Builder subBuilder = global::main.ProtoSuiteResult.CreateBuilder();
+              global::Gauge.Messages.ProtoSuiteResult.Builder subBuilder = global::Gauge.Messages.ProtoSuiteResult.CreateBuilder();
               if (result.hasSuiteResult) {
                 subBuilder.MergeFrom(SuiteResult);
               }
@@ -6114,30 +6169,30 @@ namespace main {
       public bool HasSuiteResult {
        get { return result.hasSuiteResult; }
       }
-      public global::main.ProtoSuiteResult SuiteResult {
+      public global::Gauge.Messages.ProtoSuiteResult SuiteResult {
         get { return result.SuiteResult; }
         set { SetSuiteResult(value); }
       }
-      public Builder SetSuiteResult(global::main.ProtoSuiteResult value) {
+      public Builder SetSuiteResult(global::Gauge.Messages.ProtoSuiteResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSuiteResult = true;
         result.suiteResult_ = value;
         return this;
       }
-      public Builder SetSuiteResult(global::main.ProtoSuiteResult.Builder builderForValue) {
+      public Builder SetSuiteResult(global::Gauge.Messages.ProtoSuiteResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSuiteResult = true;
         result.suiteResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSuiteResult(global::main.ProtoSuiteResult value) {
+      public Builder MergeSuiteResult(global::Gauge.Messages.ProtoSuiteResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSuiteResult &&
-            result.suiteResult_ != global::main.ProtoSuiteResult.DefaultInstance) {
-            result.suiteResult_ = global::main.ProtoSuiteResult.CreateBuilder(result.suiteResult_).MergeFrom(value).BuildPartial();
+            result.suiteResult_ != global::Gauge.Messages.ProtoSuiteResult.DefaultInstance) {
+            result.suiteResult_ = global::Gauge.Messages.ProtoSuiteResult.CreateBuilder(result.suiteResult_).MergeFrom(value).BuildPartial();
         } else {
           result.suiteResult_ = value;
         }
@@ -6152,7 +6207,7 @@ namespace main {
       }
     }
     static SuiteExecutionResult() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -6175,11 +6230,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepNamesRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNamesRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepNamesRequest, StepNamesRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepNamesRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNamesRequest__FieldAccessorTable; }
     }
     
     public override bool IsInitialized {
@@ -6298,11 +6353,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepNamesRequest.Descriptor; }
+        get { return global::Gauge.Messages.StepNamesRequest.Descriptor; }
       }
       
       public override StepNamesRequest DefaultInstanceForType {
-        get { return global::main.StepNamesRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.StepNamesRequest.DefaultInstance; }
       }
       
       public override StepNamesRequest BuildPartial() {
@@ -6323,7 +6378,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepNamesRequest other) {
-        if (other == global::main.StepNamesRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepNamesRequest.DefaultInstance) return this;
         PrepareBuilder();
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -6379,7 +6434,7 @@ namespace main {
       
     }
     static StepNamesRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -6402,11 +6457,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_StepNamesResponse__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNamesResponse__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<StepNamesResponse, StepNamesResponse.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_StepNamesResponse__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNamesResponse__FieldAccessorTable; }
     }
     
     public const int StepsFieldNumber = 1;
@@ -6549,11 +6604,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.StepNamesResponse.Descriptor; }
+        get { return global::Gauge.Messages.StepNamesResponse.Descriptor; }
       }
       
       public override StepNamesResponse DefaultInstanceForType {
-        get { return global::main.StepNamesResponse.DefaultInstance; }
+        get { return global::Gauge.Messages.StepNamesResponse.DefaultInstance; }
       }
       
       public override StepNamesResponse BuildPartial() {
@@ -6574,7 +6629,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(StepNamesResponse other) {
-        if (other == global::main.StepNamesResponse.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.StepNamesResponse.DefaultInstance) return this;
         PrepareBuilder();
         if (other.steps_.Count != 0) {
           result.steps_.Add(other.steps_);
@@ -6669,7 +6724,7 @@ namespace main {
       }
     }
     static StepNamesResponse() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -6692,11 +6747,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_ScenarioDataStoreInitRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioDataStoreInitRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<ScenarioDataStoreInitRequest, ScenarioDataStoreInitRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_ScenarioDataStoreInitRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ScenarioDataStoreInitRequest__FieldAccessorTable; }
     }
     
     public override bool IsInitialized {
@@ -6815,11 +6870,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.ScenarioDataStoreInitRequest.Descriptor; }
+        get { return global::Gauge.Messages.ScenarioDataStoreInitRequest.Descriptor; }
       }
       
       public override ScenarioDataStoreInitRequest DefaultInstanceForType {
-        get { return global::main.ScenarioDataStoreInitRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.ScenarioDataStoreInitRequest.DefaultInstance; }
       }
       
       public override ScenarioDataStoreInitRequest BuildPartial() {
@@ -6840,7 +6895,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(ScenarioDataStoreInitRequest other) {
-        if (other == global::main.ScenarioDataStoreInitRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.ScenarioDataStoreInitRequest.DefaultInstance) return this;
         PrepareBuilder();
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -6896,7 +6951,7 @@ namespace main {
       
     }
     static ScenarioDataStoreInitRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -6919,11 +6974,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SpecDataStoreInitRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecDataStoreInitRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SpecDataStoreInitRequest, SpecDataStoreInitRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SpecDataStoreInitRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SpecDataStoreInitRequest__FieldAccessorTable; }
     }
     
     public override bool IsInitialized {
@@ -7042,11 +7097,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SpecDataStoreInitRequest.Descriptor; }
+        get { return global::Gauge.Messages.SpecDataStoreInitRequest.Descriptor; }
       }
       
       public override SpecDataStoreInitRequest DefaultInstanceForType {
-        get { return global::main.SpecDataStoreInitRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.SpecDataStoreInitRequest.DefaultInstance; }
       }
       
       public override SpecDataStoreInitRequest BuildPartial() {
@@ -7067,7 +7122,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SpecDataStoreInitRequest other) {
-        if (other == global::main.SpecDataStoreInitRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SpecDataStoreInitRequest.DefaultInstance) return this;
         PrepareBuilder();
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -7123,7 +7178,7 @@ namespace main {
       
     }
     static SpecDataStoreInitRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -7146,11 +7201,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_SuiteDataStoreInitRequest__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SuiteDataStoreInitRequest__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<SuiteDataStoreInitRequest, SuiteDataStoreInitRequest.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_SuiteDataStoreInitRequest__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_SuiteDataStoreInitRequest__FieldAccessorTable; }
     }
     
     public override bool IsInitialized {
@@ -7269,11 +7324,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.SuiteDataStoreInitRequest.Descriptor; }
+        get { return global::Gauge.Messages.SuiteDataStoreInitRequest.Descriptor; }
       }
       
       public override SuiteDataStoreInitRequest DefaultInstanceForType {
-        get { return global::main.SuiteDataStoreInitRequest.DefaultInstance; }
+        get { return global::Gauge.Messages.SuiteDataStoreInitRequest.DefaultInstance; }
       }
       
       public override SuiteDataStoreInitRequest BuildPartial() {
@@ -7294,7 +7349,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(SuiteDataStoreInitRequest other) {
-        if (other == global::main.SuiteDataStoreInitRequest.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.SuiteDataStoreInitRequest.DefaultInstance) return this;
         PrepareBuilder();
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -7350,7 +7405,1790 @@ namespace main {
       
     }
     static SuiteDataStoreInitRequest() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class ParameterPosition : pb::GeneratedMessage<ParameterPosition, ParameterPosition.Builder> {
+    private ParameterPosition() { }
+    private static readonly ParameterPosition defaultInstance = new ParameterPosition().MakeReadOnly();
+    private static readonly string[] _parameterPositionFieldNames = new string[] { "newPosition", "oldPosition" };
+    private static readonly uint[] _parameterPositionFieldTags = new uint[] { 16, 8 };
+    public static ParameterPosition DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override ParameterPosition DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override ParameterPosition ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ParameterPosition__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<ParameterPosition, ParameterPosition.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_ParameterPosition__FieldAccessorTable; }
+    }
+    
+    public const int OldPositionFieldNumber = 1;
+    private bool hasOldPosition;
+    private int oldPosition_;
+    public bool HasOldPosition {
+      get { return hasOldPosition; }
+    }
+    public int OldPosition {
+      get { return oldPosition_; }
+    }
+    
+    public const int NewPositionFieldNumber = 2;
+    private bool hasNewPosition;
+    private int newPosition_;
+    public bool HasNewPosition {
+      get { return hasNewPosition; }
+    }
+    public int NewPosition {
+      get { return newPosition_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasOldPosition) return false;
+        if (!hasNewPosition) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _parameterPositionFieldNames;
+      if (hasOldPosition) {
+        output.WriteInt32(1, field_names[1], OldPosition);
+      }
+      if (hasNewPosition) {
+        output.WriteInt32(2, field_names[0], NewPosition);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasOldPosition) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, OldPosition);
+        }
+        if (hasNewPosition) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, NewPosition);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static ParameterPosition ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static ParameterPosition ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static ParameterPosition ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static ParameterPosition ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private ParameterPosition MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(ParameterPosition prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<ParameterPosition, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(ParameterPosition cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private ParameterPosition result;
+      
+      private ParameterPosition PrepareBuilder() {
+        if (resultIsReadOnly) {
+          ParameterPosition original = result;
+          result = new ParameterPosition();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override ParameterPosition MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.ParameterPosition.Descriptor; }
+      }
+      
+      public override ParameterPosition DefaultInstanceForType {
+        get { return global::Gauge.Messages.ParameterPosition.DefaultInstance; }
+      }
+      
+      public override ParameterPosition BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is ParameterPosition) {
+          return MergeFrom((ParameterPosition) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(ParameterPosition other) {
+        if (other == global::Gauge.Messages.ParameterPosition.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOldPosition) {
+          OldPosition = other.OldPosition;
+        }
+        if (other.HasNewPosition) {
+          NewPosition = other.NewPosition;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_parameterPositionFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _parameterPositionFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasOldPosition = input.ReadInt32(ref result.oldPosition_);
+              break;
+            }
+            case 16: {
+              result.hasNewPosition = input.ReadInt32(ref result.newPosition_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOldPosition {
+        get { return result.hasOldPosition; }
+      }
+      public int OldPosition {
+        get { return result.OldPosition; }
+        set { SetOldPosition(value); }
+      }
+      public Builder SetOldPosition(int value) {
+        PrepareBuilder();
+        result.hasOldPosition = true;
+        result.oldPosition_ = value;
+        return this;
+      }
+      public Builder ClearOldPosition() {
+        PrepareBuilder();
+        result.hasOldPosition = false;
+        result.oldPosition_ = 0;
+        return this;
+      }
+      
+      public bool HasNewPosition {
+        get { return result.hasNewPosition; }
+      }
+      public int NewPosition {
+        get { return result.NewPosition; }
+        set { SetNewPosition(value); }
+      }
+      public Builder SetNewPosition(int value) {
+        PrepareBuilder();
+        result.hasNewPosition = true;
+        result.newPosition_ = value;
+        return this;
+      }
+      public Builder ClearNewPosition() {
+        PrepareBuilder();
+        result.hasNewPosition = false;
+        result.newPosition_ = 0;
+        return this;
+      }
+    }
+    static ParameterPosition() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class RefactorRequest : pb::GeneratedMessage<RefactorRequest, RefactorRequest.Builder> {
+    private RefactorRequest() { }
+    private static readonly RefactorRequest defaultInstance = new RefactorRequest().MakeReadOnly();
+    private static readonly string[] _refactorRequestFieldNames = new string[] { "newStepValue", "oldStepValue", "paramPositions" };
+    private static readonly uint[] _refactorRequestFieldTags = new uint[] { 18, 10, 26 };
+    public static RefactorRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override RefactorRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override RefactorRequest ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_RefactorRequest__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<RefactorRequest, RefactorRequest.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_RefactorRequest__FieldAccessorTable; }
+    }
+    
+    public const int OldStepValueFieldNumber = 1;
+    private bool hasOldStepValue;
+    private global::Gauge.Messages.ProtoStepValue oldStepValue_;
+    public bool HasOldStepValue {
+      get { return hasOldStepValue; }
+    }
+    public global::Gauge.Messages.ProtoStepValue OldStepValue {
+      get { return oldStepValue_ ?? global::Gauge.Messages.ProtoStepValue.DefaultInstance; }
+    }
+    
+    public const int NewStepValueFieldNumber = 2;
+    private bool hasNewStepValue;
+    private global::Gauge.Messages.ProtoStepValue newStepValue_;
+    public bool HasNewStepValue {
+      get { return hasNewStepValue; }
+    }
+    public global::Gauge.Messages.ProtoStepValue NewStepValue {
+      get { return newStepValue_ ?? global::Gauge.Messages.ProtoStepValue.DefaultInstance; }
+    }
+    
+    public const int ParamPositionsFieldNumber = 3;
+    private pbc::PopsicleList<global::Gauge.Messages.ParameterPosition> paramPositions_ = new pbc::PopsicleList<global::Gauge.Messages.ParameterPosition>();
+    public scg::IList<global::Gauge.Messages.ParameterPosition> ParamPositionsList {
+      get { return paramPositions_; }
+    }
+    public int ParamPositionsCount {
+      get { return paramPositions_.Count; }
+    }
+    public global::Gauge.Messages.ParameterPosition GetParamPositions(int index) {
+      return paramPositions_[index];
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasOldStepValue) return false;
+        if (!hasNewStepValue) return false;
+        if (!OldStepValue.IsInitialized) return false;
+        if (!NewStepValue.IsInitialized) return false;
+        foreach (global::Gauge.Messages.ParameterPosition element in ParamPositionsList) {
+          if (!element.IsInitialized) return false;
+        }
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _refactorRequestFieldNames;
+      if (hasOldStepValue) {
+        output.WriteMessage(1, field_names[1], OldStepValue);
+      }
+      if (hasNewStepValue) {
+        output.WriteMessage(2, field_names[0], NewStepValue);
+      }
+      if (paramPositions_.Count > 0) {
+        output.WriteMessageArray(3, field_names[2], paramPositions_);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasOldStepValue) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, OldStepValue);
+        }
+        if (hasNewStepValue) {
+          size += pb::CodedOutputStream.ComputeMessageSize(2, NewStepValue);
+        }
+        foreach (global::Gauge.Messages.ParameterPosition element in ParamPositionsList) {
+          size += pb::CodedOutputStream.ComputeMessageSize(3, element);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static RefactorRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static RefactorRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static RefactorRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private RefactorRequest MakeReadOnly() {
+      paramPositions_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(RefactorRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<RefactorRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(RefactorRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private RefactorRequest result;
+      
+      private RefactorRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          RefactorRequest original = result;
+          result = new RefactorRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override RefactorRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.RefactorRequest.Descriptor; }
+      }
+      
+      public override RefactorRequest DefaultInstanceForType {
+        get { return global::Gauge.Messages.RefactorRequest.DefaultInstance; }
+      }
+      
+      public override RefactorRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is RefactorRequest) {
+          return MergeFrom((RefactorRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(RefactorRequest other) {
+        if (other == global::Gauge.Messages.RefactorRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasOldStepValue) {
+          MergeOldStepValue(other.OldStepValue);
+        }
+        if (other.HasNewStepValue) {
+          MergeNewStepValue(other.NewStepValue);
+        }
+        if (other.paramPositions_.Count != 0) {
+          result.paramPositions_.Add(other.paramPositions_);
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_refactorRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _refactorRequestFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              global::Gauge.Messages.ProtoStepValue.Builder subBuilder = global::Gauge.Messages.ProtoStepValue.CreateBuilder();
+              if (result.hasOldStepValue) {
+                subBuilder.MergeFrom(OldStepValue);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              OldStepValue = subBuilder.BuildPartial();
+              break;
+            }
+            case 18: {
+              global::Gauge.Messages.ProtoStepValue.Builder subBuilder = global::Gauge.Messages.ProtoStepValue.CreateBuilder();
+              if (result.hasNewStepValue) {
+                subBuilder.MergeFrom(NewStepValue);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              NewStepValue = subBuilder.BuildPartial();
+              break;
+            }
+            case 26: {
+              input.ReadMessageArray(tag, field_name, result.paramPositions_, global::Gauge.Messages.ParameterPosition.DefaultInstance, extensionRegistry);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasOldStepValue {
+       get { return result.hasOldStepValue; }
+      }
+      public global::Gauge.Messages.ProtoStepValue OldStepValue {
+        get { return result.OldStepValue; }
+        set { SetOldStepValue(value); }
+      }
+      public Builder SetOldStepValue(global::Gauge.Messages.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasOldStepValue = true;
+        result.oldStepValue_ = value;
+        return this;
+      }
+      public Builder SetOldStepValue(global::Gauge.Messages.ProtoStepValue.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasOldStepValue = true;
+        result.oldStepValue_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeOldStepValue(global::Gauge.Messages.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasOldStepValue &&
+            result.oldStepValue_ != global::Gauge.Messages.ProtoStepValue.DefaultInstance) {
+            result.oldStepValue_ = global::Gauge.Messages.ProtoStepValue.CreateBuilder(result.oldStepValue_).MergeFrom(value).BuildPartial();
+        } else {
+          result.oldStepValue_ = value;
+        }
+        result.hasOldStepValue = true;
+        return this;
+      }
+      public Builder ClearOldStepValue() {
+        PrepareBuilder();
+        result.hasOldStepValue = false;
+        result.oldStepValue_ = null;
+        return this;
+      }
+      
+      public bool HasNewStepValue {
+       get { return result.hasNewStepValue; }
+      }
+      public global::Gauge.Messages.ProtoStepValue NewStepValue {
+        get { return result.NewStepValue; }
+        set { SetNewStepValue(value); }
+      }
+      public Builder SetNewStepValue(global::Gauge.Messages.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasNewStepValue = true;
+        result.newStepValue_ = value;
+        return this;
+      }
+      public Builder SetNewStepValue(global::Gauge.Messages.ProtoStepValue.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasNewStepValue = true;
+        result.newStepValue_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeNewStepValue(global::Gauge.Messages.ProtoStepValue value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasNewStepValue &&
+            result.newStepValue_ != global::Gauge.Messages.ProtoStepValue.DefaultInstance) {
+            result.newStepValue_ = global::Gauge.Messages.ProtoStepValue.CreateBuilder(result.newStepValue_).MergeFrom(value).BuildPartial();
+        } else {
+          result.newStepValue_ = value;
+        }
+        result.hasNewStepValue = true;
+        return this;
+      }
+      public Builder ClearNewStepValue() {
+        PrepareBuilder();
+        result.hasNewStepValue = false;
+        result.newStepValue_ = null;
+        return this;
+      }
+      
+      public pbc::IPopsicleList<global::Gauge.Messages.ParameterPosition> ParamPositionsList {
+        get { return PrepareBuilder().paramPositions_; }
+      }
+      public int ParamPositionsCount {
+        get { return result.ParamPositionsCount; }
+      }
+      public global::Gauge.Messages.ParameterPosition GetParamPositions(int index) {
+        return result.GetParamPositions(index);
+      }
+      public Builder SetParamPositions(int index, global::Gauge.Messages.ParameterPosition value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.paramPositions_[index] = value;
+        return this;
+      }
+      public Builder SetParamPositions(int index, global::Gauge.Messages.ParameterPosition.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.paramPositions_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddParamPositions(global::Gauge.Messages.ParameterPosition value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.paramPositions_.Add(value);
+        return this;
+      }
+      public Builder AddParamPositions(global::Gauge.Messages.ParameterPosition.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.paramPositions_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeParamPositions(scg::IEnumerable<global::Gauge.Messages.ParameterPosition> values) {
+        PrepareBuilder();
+        result.paramPositions_.Add(values);
+        return this;
+      }
+      public Builder ClearParamPositions() {
+        PrepareBuilder();
+        result.paramPositions_.Clear();
+        return this;
+      }
+    }
+    static RefactorRequest() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class RefactorResponse : pb::GeneratedMessage<RefactorResponse, RefactorResponse.Builder> {
+    private RefactorResponse() { }
+    private static readonly RefactorResponse defaultInstance = new RefactorResponse().MakeReadOnly();
+    private static readonly string[] _refactorResponseFieldNames = new string[] { "error", "filesChanged", "success" };
+    private static readonly uint[] _refactorResponseFieldTags = new uint[] { 18, 26, 8 };
+    public static RefactorResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override RefactorResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override RefactorResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_RefactorResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<RefactorResponse, RefactorResponse.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_RefactorResponse__FieldAccessorTable; }
+    }
+    
+    public const int SuccessFieldNumber = 1;
+    private bool hasSuccess;
+    private bool success_;
+    public bool HasSuccess {
+      get { return hasSuccess; }
+    }
+    public bool Success {
+      get { return success_; }
+    }
+    
+    public const int ErrorFieldNumber = 2;
+    private bool hasError;
+    private string error_ = "";
+    public bool HasError {
+      get { return hasError; }
+    }
+    public string Error {
+      get { return error_; }
+    }
+    
+    public const int FilesChangedFieldNumber = 3;
+    private pbc::PopsicleList<string> filesChanged_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> FilesChangedList {
+      get { return pbc::Lists.AsReadOnly(filesChanged_); }
+    }
+    public int FilesChangedCount {
+      get { return filesChanged_.Count; }
+    }
+    public string GetFilesChanged(int index) {
+      return filesChanged_[index];
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasSuccess) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _refactorResponseFieldNames;
+      if (hasSuccess) {
+        output.WriteBool(1, field_names[2], Success);
+      }
+      if (hasError) {
+        output.WriteString(2, field_names[0], Error);
+      }
+      if (filesChanged_.Count > 0) {
+        output.WriteStringArray(3, field_names[1], filesChanged_);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasSuccess) {
+          size += pb::CodedOutputStream.ComputeBoolSize(1, Success);
+        }
+        if (hasError) {
+          size += pb::CodedOutputStream.ComputeStringSize(2, Error);
+        }
+        {
+          int dataSize = 0;
+          foreach (string element in FilesChangedList) {
+            dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+          }
+          size += dataSize;
+          size += 1 * filesChanged_.Count;
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static RefactorResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static RefactorResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static RefactorResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static RefactorResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private RefactorResponse MakeReadOnly() {
+      filesChanged_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(RefactorResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<RefactorResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(RefactorResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private RefactorResponse result;
+      
+      private RefactorResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          RefactorResponse original = result;
+          result = new RefactorResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override RefactorResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.RefactorResponse.Descriptor; }
+      }
+      
+      public override RefactorResponse DefaultInstanceForType {
+        get { return global::Gauge.Messages.RefactorResponse.DefaultInstance; }
+      }
+      
+      public override RefactorResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is RefactorResponse) {
+          return MergeFrom((RefactorResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(RefactorResponse other) {
+        if (other == global::Gauge.Messages.RefactorResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasSuccess) {
+          Success = other.Success;
+        }
+        if (other.HasError) {
+          Error = other.Error;
+        }
+        if (other.filesChanged_.Count != 0) {
+          result.filesChanged_.Add(other.filesChanged_);
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_refactorResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _refactorResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasSuccess = input.ReadBool(ref result.success_);
+              break;
+            }
+            case 18: {
+              result.hasError = input.ReadString(ref result.error_);
+              break;
+            }
+            case 26: {
+              input.ReadStringArray(tag, field_name, result.filesChanged_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasSuccess {
+        get { return result.hasSuccess; }
+      }
+      public bool Success {
+        get { return result.Success; }
+        set { SetSuccess(value); }
+      }
+      public Builder SetSuccess(bool value) {
+        PrepareBuilder();
+        result.hasSuccess = true;
+        result.success_ = value;
+        return this;
+      }
+      public Builder ClearSuccess() {
+        PrepareBuilder();
+        result.hasSuccess = false;
+        result.success_ = false;
+        return this;
+      }
+      
+      public bool HasError {
+        get { return result.hasError; }
+      }
+      public string Error {
+        get { return result.Error; }
+        set { SetError(value); }
+      }
+      public Builder SetError(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasError = true;
+        result.error_ = value;
+        return this;
+      }
+      public Builder ClearError() {
+        PrepareBuilder();
+        result.hasError = false;
+        result.error_ = "";
+        return this;
+      }
+      
+      public pbc::IPopsicleList<string> FilesChangedList {
+        get { return PrepareBuilder().filesChanged_; }
+      }
+      public int FilesChangedCount {
+        get { return result.FilesChangedCount; }
+      }
+      public string GetFilesChanged(int index) {
+        return result.GetFilesChanged(index);
+      }
+      public Builder SetFilesChanged(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.filesChanged_[index] = value;
+        return this;
+      }
+      public Builder AddFilesChanged(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.filesChanged_.Add(value);
+        return this;
+      }
+      public Builder AddRangeFilesChanged(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.filesChanged_.Add(values);
+        return this;
+      }
+      public Builder ClearFilesChanged() {
+        PrepareBuilder();
+        result.filesChanged_.Clear();
+        return this;
+      }
+    }
+    static RefactorResponse() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class StepNameRequest : pb::GeneratedMessage<StepNameRequest, StepNameRequest.Builder> {
+    private StepNameRequest() { }
+    private static readonly StepNameRequest defaultInstance = new StepNameRequest().MakeReadOnly();
+    private static readonly string[] _stepNameRequestFieldNames = new string[] { "stepValue" };
+    private static readonly uint[] _stepNameRequestFieldTags = new uint[] { 10 };
+    public static StepNameRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override StepNameRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override StepNameRequest ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNameRequest__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<StepNameRequest, StepNameRequest.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNameRequest__FieldAccessorTable; }
+    }
+    
+    public const int StepValueFieldNumber = 1;
+    private bool hasStepValue;
+    private string stepValue_ = "";
+    public bool HasStepValue {
+      get { return hasStepValue; }
+    }
+    public string StepValue {
+      get { return stepValue_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasStepValue) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _stepNameRequestFieldNames;
+      if (hasStepValue) {
+        output.WriteString(1, field_names[0], StepValue);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasStepValue) {
+          size += pb::CodedOutputStream.ComputeStringSize(1, StepValue);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static StepNameRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static StepNameRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static StepNameRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private StepNameRequest MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(StepNameRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<StepNameRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(StepNameRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private StepNameRequest result;
+      
+      private StepNameRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          StepNameRequest original = result;
+          result = new StepNameRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override StepNameRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.StepNameRequest.Descriptor; }
+      }
+      
+      public override StepNameRequest DefaultInstanceForType {
+        get { return global::Gauge.Messages.StepNameRequest.DefaultInstance; }
+      }
+      
+      public override StepNameRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is StepNameRequest) {
+          return MergeFrom((StepNameRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(StepNameRequest other) {
+        if (other == global::Gauge.Messages.StepNameRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasStepValue) {
+          StepValue = other.StepValue;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_stepNameRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _stepNameRequestFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasStepValue = input.ReadString(ref result.stepValue_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasStepValue {
+        get { return result.hasStepValue; }
+      }
+      public string StepValue {
+        get { return result.StepValue; }
+        set { SetStepValue(value); }
+      }
+      public Builder SetStepValue(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStepValue = true;
+        result.stepValue_ = value;
+        return this;
+      }
+      public Builder ClearStepValue() {
+        PrepareBuilder();
+        result.hasStepValue = false;
+        result.stepValue_ = "";
+        return this;
+      }
+    }
+    static StepNameRequest() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class StepNameResponse : pb::GeneratedMessage<StepNameResponse, StepNameResponse.Builder> {
+    private StepNameResponse() { }
+    private static readonly StepNameResponse defaultInstance = new StepNameResponse().MakeReadOnly();
+    private static readonly string[] _stepNameResponseFieldNames = new string[] { "hasAlias", "isStepPresent", "stepName" };
+    private static readonly uint[] _stepNameResponseFieldTags = new uint[] { 24, 8, 18 };
+    public static StepNameResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override StepNameResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override StepNameResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNameResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<StepNameResponse, StepNameResponse.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_StepNameResponse__FieldAccessorTable; }
+    }
+    
+    public const int IsStepPresentFieldNumber = 1;
+    private bool hasIsStepPresent;
+    private bool isStepPresent_;
+    public bool HasIsStepPresent {
+      get { return hasIsStepPresent; }
+    }
+    public bool IsStepPresent {
+      get { return isStepPresent_; }
+    }
+    
+    public const int StepNameFieldNumber = 2;
+    private pbc::PopsicleList<string> stepName_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> StepNameList {
+      get { return pbc::Lists.AsReadOnly(stepName_); }
+    }
+    public int StepNameCount {
+      get { return stepName_.Count; }
+    }
+    public string GetStepName(int index) {
+      return stepName_[index];
+    }
+    
+    public const int HasAliasFieldNumber = 3;
+    private bool hasHasAlias;
+    private bool hasAlias_;
+    public bool HasHasAlias {
+      get { return hasHasAlias; }
+    }
+    public bool HasAlias {
+      get { return hasAlias_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasIsStepPresent) return false;
+        if (!hasHasAlias) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _stepNameResponseFieldNames;
+      if (hasIsStepPresent) {
+        output.WriteBool(1, field_names[1], IsStepPresent);
+      }
+      if (stepName_.Count > 0) {
+        output.WriteStringArray(2, field_names[2], stepName_);
+      }
+      if (hasHasAlias) {
+        output.WriteBool(3, field_names[0], HasAlias);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasIsStepPresent) {
+          size += pb::CodedOutputStream.ComputeBoolSize(1, IsStepPresent);
+        }
+        {
+          int dataSize = 0;
+          foreach (string element in StepNameList) {
+            dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+          }
+          size += dataSize;
+          size += 1 * stepName_.Count;
+        }
+        if (hasHasAlias) {
+          size += pb::CodedOutputStream.ComputeBoolSize(3, HasAlias);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static StepNameResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static StepNameResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static StepNameResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static StepNameResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private StepNameResponse MakeReadOnly() {
+      stepName_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(StepNameResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<StepNameResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(StepNameResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private StepNameResponse result;
+      
+      private StepNameResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          StepNameResponse original = result;
+          result = new StepNameResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override StepNameResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.StepNameResponse.Descriptor; }
+      }
+      
+      public override StepNameResponse DefaultInstanceForType {
+        get { return global::Gauge.Messages.StepNameResponse.DefaultInstance; }
+      }
+      
+      public override StepNameResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is StepNameResponse) {
+          return MergeFrom((StepNameResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(StepNameResponse other) {
+        if (other == global::Gauge.Messages.StepNameResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasIsStepPresent) {
+          IsStepPresent = other.IsStepPresent;
+        }
+        if (other.stepName_.Count != 0) {
+          result.stepName_.Add(other.stepName_);
+        }
+        if (other.HasHasAlias) {
+          HasAlias = other.HasAlias;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_stepNameResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _stepNameResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasIsStepPresent = input.ReadBool(ref result.isStepPresent_);
+              break;
+            }
+            case 18: {
+              input.ReadStringArray(tag, field_name, result.stepName_);
+              break;
+            }
+            case 24: {
+              result.hasHasAlias = input.ReadBool(ref result.hasAlias_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasIsStepPresent {
+        get { return result.hasIsStepPresent; }
+      }
+      public bool IsStepPresent {
+        get { return result.IsStepPresent; }
+        set { SetIsStepPresent(value); }
+      }
+      public Builder SetIsStepPresent(bool value) {
+        PrepareBuilder();
+        result.hasIsStepPresent = true;
+        result.isStepPresent_ = value;
+        return this;
+      }
+      public Builder ClearIsStepPresent() {
+        PrepareBuilder();
+        result.hasIsStepPresent = false;
+        result.isStepPresent_ = false;
+        return this;
+      }
+      
+      public pbc::IPopsicleList<string> StepNameList {
+        get { return PrepareBuilder().stepName_; }
+      }
+      public int StepNameCount {
+        get { return result.StepNameCount; }
+      }
+      public string GetStepName(int index) {
+        return result.GetStepName(index);
+      }
+      public Builder SetStepName(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.stepName_[index] = value;
+        return this;
+      }
+      public Builder AddStepName(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.stepName_.Add(value);
+        return this;
+      }
+      public Builder AddRangeStepName(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.stepName_.Add(values);
+        return this;
+      }
+      public Builder ClearStepName() {
+        PrepareBuilder();
+        result.stepName_.Clear();
+        return this;
+      }
+      
+      public bool HasHasAlias {
+        get { return result.hasHasAlias; }
+      }
+      public bool HasAlias {
+        get { return result.HasAlias; }
+        set { SetHasAlias(value); }
+      }
+      public Builder SetHasAlias(bool value) {
+        PrepareBuilder();
+        result.hasHasAlias = true;
+        result.hasAlias_ = value;
+        return this;
+      }
+      public Builder ClearHasAlias() {
+        PrepareBuilder();
+        result.hasHasAlias = false;
+        result.hasAlias_ = false;
+        return this;
+      }
+    }
+    static StepNameResponse() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   
@@ -7358,8 +9196,8 @@ namespace main {
   public sealed partial class Message : pb::GeneratedMessage<Message, Message.Builder> {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
-    private static readonly string[] _messageFieldNames = new string[] { "executeStepRequest", "executionEndingRequest", "executionStartingRequest", "executionStatusResponse", "killProcessRequest", "messageId", "messageType", "scenarioDataStoreInitRequest", "scenarioExecutionEndingRequest", "scenarioExecutionStartingRequest", "specDataStoreInitRequest", "specExecutionEndingRequest", "specExecutionStartingRequest", "stepExecutionEndingRequest", "stepExecutionStartingRequest", "stepNamesRequest", "stepNamesResponse", "stepValidateRequest", "stepValidateResponse", "suiteDataStoreInitRequest", "suiteExecutionResult" };
-    private static readonly uint[] _messageFieldTags = new uint[] { 82, 90, 26, 114, 146, 16, 8, 154, 58, 50, 162, 42, 34, 74, 66, 122, 130, 98, 106, 170, 138 };
+    private static readonly string[] _messageFieldNames = new string[] { "executeStepRequest", "executionEndingRequest", "executionStartingRequest", "executionStatusResponse", "killProcessRequest", "messageId", "messageType", "refactorRequest", "refactorResponse", "scenarioDataStoreInitRequest", "scenarioExecutionEndingRequest", "scenarioExecutionStartingRequest", "specDataStoreInitRequest", "specExecutionEndingRequest", "specExecutionStartingRequest", "stepExecutionEndingRequest", "stepExecutionStartingRequest", "stepNameRequest", "stepNameResponse", "stepNamesRequest", "stepNamesResponse", "stepValidateRequest", "stepValidateResponse", "suiteDataStoreInitRequest", "suiteExecutionResult" };
+    private static readonly uint[] _messageFieldTags = new uint[] { 82, 90, 26, 114, 146, 16, 8, 194, 202, 154, 58, 50, 162, 42, 34, 74, 66, 178, 186, 122, 130, 98, 106, 170, 138 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
     }
@@ -7373,11 +9211,11 @@ namespace main {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::main.Messages.internal__static_main_Message__Descriptor; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_Message__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Message, Message.Builder> InternalFieldAccessors {
-      get { return global::main.Messages.internal__static_main_Message__FieldAccessorTable; }
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_Message__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -7403,6 +9241,10 @@ namespace main {
         ScenarioDataStoreInit = 16,
         SpecDataStoreInit = 17,
         SuiteDataStoreInit = 18,
+        StepNameRequest = 19,
+        StepNameResponse = 20,
+        RefactorRequest = 21,
+        RefactorResponse = 22,
       }
       
     }
@@ -7410,11 +9252,11 @@ namespace main {
     
     public const int MessageTypeFieldNumber = 1;
     private bool hasMessageType;
-    private global::main.Message.Types.MessageType messageType_ = global::main.Message.Types.MessageType.ExecutionStarting;
+    private global::Gauge.Messages.Message.Types.MessageType messageType_ = global::Gauge.Messages.Message.Types.MessageType.ExecutionStarting;
     public bool HasMessageType {
       get { return hasMessageType; }
     }
-    public global::main.Message.Types.MessageType MessageType {
+    public global::Gauge.Messages.Message.Types.MessageType MessageType {
       get { return messageType_; }
     }
     
@@ -7430,192 +9272,232 @@ namespace main {
     
     public const int ExecutionStartingRequestFieldNumber = 3;
     private bool hasExecutionStartingRequest;
-    private global::main.ExecutionStartingRequest executionStartingRequest_;
+    private global::Gauge.Messages.ExecutionStartingRequest executionStartingRequest_;
     public bool HasExecutionStartingRequest {
       get { return hasExecutionStartingRequest; }
     }
-    public global::main.ExecutionStartingRequest ExecutionStartingRequest {
-      get { return executionStartingRequest_ ?? global::main.ExecutionStartingRequest.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionStartingRequest ExecutionStartingRequest {
+      get { return executionStartingRequest_ ?? global::Gauge.Messages.ExecutionStartingRequest.DefaultInstance; }
     }
     
     public const int SpecExecutionStartingRequestFieldNumber = 4;
     private bool hasSpecExecutionStartingRequest;
-    private global::main.SpecExecutionStartingRequest specExecutionStartingRequest_;
+    private global::Gauge.Messages.SpecExecutionStartingRequest specExecutionStartingRequest_;
     public bool HasSpecExecutionStartingRequest {
       get { return hasSpecExecutionStartingRequest; }
     }
-    public global::main.SpecExecutionStartingRequest SpecExecutionStartingRequest {
-      get { return specExecutionStartingRequest_ ?? global::main.SpecExecutionStartingRequest.DefaultInstance; }
+    public global::Gauge.Messages.SpecExecutionStartingRequest SpecExecutionStartingRequest {
+      get { return specExecutionStartingRequest_ ?? global::Gauge.Messages.SpecExecutionStartingRequest.DefaultInstance; }
     }
     
     public const int SpecExecutionEndingRequestFieldNumber = 5;
     private bool hasSpecExecutionEndingRequest;
-    private global::main.SpecExecutionEndingRequest specExecutionEndingRequest_;
+    private global::Gauge.Messages.SpecExecutionEndingRequest specExecutionEndingRequest_;
     public bool HasSpecExecutionEndingRequest {
       get { return hasSpecExecutionEndingRequest; }
     }
-    public global::main.SpecExecutionEndingRequest SpecExecutionEndingRequest {
-      get { return specExecutionEndingRequest_ ?? global::main.SpecExecutionEndingRequest.DefaultInstance; }
+    public global::Gauge.Messages.SpecExecutionEndingRequest SpecExecutionEndingRequest {
+      get { return specExecutionEndingRequest_ ?? global::Gauge.Messages.SpecExecutionEndingRequest.DefaultInstance; }
     }
     
     public const int ScenarioExecutionStartingRequestFieldNumber = 6;
     private bool hasScenarioExecutionStartingRequest;
-    private global::main.ScenarioExecutionStartingRequest scenarioExecutionStartingRequest_;
+    private global::Gauge.Messages.ScenarioExecutionStartingRequest scenarioExecutionStartingRequest_;
     public bool HasScenarioExecutionStartingRequest {
       get { return hasScenarioExecutionStartingRequest; }
     }
-    public global::main.ScenarioExecutionStartingRequest ScenarioExecutionStartingRequest {
-      get { return scenarioExecutionStartingRequest_ ?? global::main.ScenarioExecutionStartingRequest.DefaultInstance; }
+    public global::Gauge.Messages.ScenarioExecutionStartingRequest ScenarioExecutionStartingRequest {
+      get { return scenarioExecutionStartingRequest_ ?? global::Gauge.Messages.ScenarioExecutionStartingRequest.DefaultInstance; }
     }
     
     public const int ScenarioExecutionEndingRequestFieldNumber = 7;
     private bool hasScenarioExecutionEndingRequest;
-    private global::main.ScenarioExecutionEndingRequest scenarioExecutionEndingRequest_;
+    private global::Gauge.Messages.ScenarioExecutionEndingRequest scenarioExecutionEndingRequest_;
     public bool HasScenarioExecutionEndingRequest {
       get { return hasScenarioExecutionEndingRequest; }
     }
-    public global::main.ScenarioExecutionEndingRequest ScenarioExecutionEndingRequest {
-      get { return scenarioExecutionEndingRequest_ ?? global::main.ScenarioExecutionEndingRequest.DefaultInstance; }
+    public global::Gauge.Messages.ScenarioExecutionEndingRequest ScenarioExecutionEndingRequest {
+      get { return scenarioExecutionEndingRequest_ ?? global::Gauge.Messages.ScenarioExecutionEndingRequest.DefaultInstance; }
     }
     
     public const int StepExecutionStartingRequestFieldNumber = 8;
     private bool hasStepExecutionStartingRequest;
-    private global::main.StepExecutionStartingRequest stepExecutionStartingRequest_;
+    private global::Gauge.Messages.StepExecutionStartingRequest stepExecutionStartingRequest_;
     public bool HasStepExecutionStartingRequest {
       get { return hasStepExecutionStartingRequest; }
     }
-    public global::main.StepExecutionStartingRequest StepExecutionStartingRequest {
-      get { return stepExecutionStartingRequest_ ?? global::main.StepExecutionStartingRequest.DefaultInstance; }
+    public global::Gauge.Messages.StepExecutionStartingRequest StepExecutionStartingRequest {
+      get { return stepExecutionStartingRequest_ ?? global::Gauge.Messages.StepExecutionStartingRequest.DefaultInstance; }
     }
     
     public const int StepExecutionEndingRequestFieldNumber = 9;
     private bool hasStepExecutionEndingRequest;
-    private global::main.StepExecutionEndingRequest stepExecutionEndingRequest_;
+    private global::Gauge.Messages.StepExecutionEndingRequest stepExecutionEndingRequest_;
     public bool HasStepExecutionEndingRequest {
       get { return hasStepExecutionEndingRequest; }
     }
-    public global::main.StepExecutionEndingRequest StepExecutionEndingRequest {
-      get { return stepExecutionEndingRequest_ ?? global::main.StepExecutionEndingRequest.DefaultInstance; }
+    public global::Gauge.Messages.StepExecutionEndingRequest StepExecutionEndingRequest {
+      get { return stepExecutionEndingRequest_ ?? global::Gauge.Messages.StepExecutionEndingRequest.DefaultInstance; }
     }
     
     public const int ExecuteStepRequestFieldNumber = 10;
     private bool hasExecuteStepRequest;
-    private global::main.ExecuteStepRequest executeStepRequest_;
+    private global::Gauge.Messages.ExecuteStepRequest executeStepRequest_;
     public bool HasExecuteStepRequest {
       get { return hasExecuteStepRequest; }
     }
-    public global::main.ExecuteStepRequest ExecuteStepRequest {
-      get { return executeStepRequest_ ?? global::main.ExecuteStepRequest.DefaultInstance; }
+    public global::Gauge.Messages.ExecuteStepRequest ExecuteStepRequest {
+      get { return executeStepRequest_ ?? global::Gauge.Messages.ExecuteStepRequest.DefaultInstance; }
     }
     
     public const int ExecutionEndingRequestFieldNumber = 11;
     private bool hasExecutionEndingRequest;
-    private global::main.ExecutionEndingRequest executionEndingRequest_;
+    private global::Gauge.Messages.ExecutionEndingRequest executionEndingRequest_;
     public bool HasExecutionEndingRequest {
       get { return hasExecutionEndingRequest; }
     }
-    public global::main.ExecutionEndingRequest ExecutionEndingRequest {
-      get { return executionEndingRequest_ ?? global::main.ExecutionEndingRequest.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionEndingRequest ExecutionEndingRequest {
+      get { return executionEndingRequest_ ?? global::Gauge.Messages.ExecutionEndingRequest.DefaultInstance; }
     }
     
     public const int StepValidateRequestFieldNumber = 12;
     private bool hasStepValidateRequest;
-    private global::main.StepValidateRequest stepValidateRequest_;
+    private global::Gauge.Messages.StepValidateRequest stepValidateRequest_;
     public bool HasStepValidateRequest {
       get { return hasStepValidateRequest; }
     }
-    public global::main.StepValidateRequest StepValidateRequest {
-      get { return stepValidateRequest_ ?? global::main.StepValidateRequest.DefaultInstance; }
+    public global::Gauge.Messages.StepValidateRequest StepValidateRequest {
+      get { return stepValidateRequest_ ?? global::Gauge.Messages.StepValidateRequest.DefaultInstance; }
     }
     
     public const int StepValidateResponseFieldNumber = 13;
     private bool hasStepValidateResponse;
-    private global::main.StepValidateResponse stepValidateResponse_;
+    private global::Gauge.Messages.StepValidateResponse stepValidateResponse_;
     public bool HasStepValidateResponse {
       get { return hasStepValidateResponse; }
     }
-    public global::main.StepValidateResponse StepValidateResponse {
-      get { return stepValidateResponse_ ?? global::main.StepValidateResponse.DefaultInstance; }
+    public global::Gauge.Messages.StepValidateResponse StepValidateResponse {
+      get { return stepValidateResponse_ ?? global::Gauge.Messages.StepValidateResponse.DefaultInstance; }
     }
     
     public const int ExecutionStatusResponseFieldNumber = 14;
     private bool hasExecutionStatusResponse;
-    private global::main.ExecutionStatusResponse executionStatusResponse_;
+    private global::Gauge.Messages.ExecutionStatusResponse executionStatusResponse_;
     public bool HasExecutionStatusResponse {
       get { return hasExecutionStatusResponse; }
     }
-    public global::main.ExecutionStatusResponse ExecutionStatusResponse {
-      get { return executionStatusResponse_ ?? global::main.ExecutionStatusResponse.DefaultInstance; }
+    public global::Gauge.Messages.ExecutionStatusResponse ExecutionStatusResponse {
+      get { return executionStatusResponse_ ?? global::Gauge.Messages.ExecutionStatusResponse.DefaultInstance; }
     }
     
     public const int StepNamesRequestFieldNumber = 15;
     private bool hasStepNamesRequest;
-    private global::main.StepNamesRequest stepNamesRequest_;
+    private global::Gauge.Messages.StepNamesRequest stepNamesRequest_;
     public bool HasStepNamesRequest {
       get { return hasStepNamesRequest; }
     }
-    public global::main.StepNamesRequest StepNamesRequest {
-      get { return stepNamesRequest_ ?? global::main.StepNamesRequest.DefaultInstance; }
+    public global::Gauge.Messages.StepNamesRequest StepNamesRequest {
+      get { return stepNamesRequest_ ?? global::Gauge.Messages.StepNamesRequest.DefaultInstance; }
     }
     
     public const int StepNamesResponseFieldNumber = 16;
     private bool hasStepNamesResponse;
-    private global::main.StepNamesResponse stepNamesResponse_;
+    private global::Gauge.Messages.StepNamesResponse stepNamesResponse_;
     public bool HasStepNamesResponse {
       get { return hasStepNamesResponse; }
     }
-    public global::main.StepNamesResponse StepNamesResponse {
-      get { return stepNamesResponse_ ?? global::main.StepNamesResponse.DefaultInstance; }
+    public global::Gauge.Messages.StepNamesResponse StepNamesResponse {
+      get { return stepNamesResponse_ ?? global::Gauge.Messages.StepNamesResponse.DefaultInstance; }
     }
     
     public const int SuiteExecutionResultFieldNumber = 17;
     private bool hasSuiteExecutionResult;
-    private global::main.SuiteExecutionResult suiteExecutionResult_;
+    private global::Gauge.Messages.SuiteExecutionResult suiteExecutionResult_;
     public bool HasSuiteExecutionResult {
       get { return hasSuiteExecutionResult; }
     }
-    public global::main.SuiteExecutionResult SuiteExecutionResult {
-      get { return suiteExecutionResult_ ?? global::main.SuiteExecutionResult.DefaultInstance; }
+    public global::Gauge.Messages.SuiteExecutionResult SuiteExecutionResult {
+      get { return suiteExecutionResult_ ?? global::Gauge.Messages.SuiteExecutionResult.DefaultInstance; }
     }
     
     public const int KillProcessRequestFieldNumber = 18;
     private bool hasKillProcessRequest;
-    private global::main.KillProcessRequest killProcessRequest_;
+    private global::Gauge.Messages.KillProcessRequest killProcessRequest_;
     public bool HasKillProcessRequest {
       get { return hasKillProcessRequest; }
     }
-    public global::main.KillProcessRequest KillProcessRequest {
-      get { return killProcessRequest_ ?? global::main.KillProcessRequest.DefaultInstance; }
+    public global::Gauge.Messages.KillProcessRequest KillProcessRequest {
+      get { return killProcessRequest_ ?? global::Gauge.Messages.KillProcessRequest.DefaultInstance; }
     }
     
     public const int ScenarioDataStoreInitRequestFieldNumber = 19;
     private bool hasScenarioDataStoreInitRequest;
-    private global::main.ScenarioDataStoreInitRequest scenarioDataStoreInitRequest_;
+    private global::Gauge.Messages.ScenarioDataStoreInitRequest scenarioDataStoreInitRequest_;
     public bool HasScenarioDataStoreInitRequest {
       get { return hasScenarioDataStoreInitRequest; }
     }
-    public global::main.ScenarioDataStoreInitRequest ScenarioDataStoreInitRequest {
-      get { return scenarioDataStoreInitRequest_ ?? global::main.ScenarioDataStoreInitRequest.DefaultInstance; }
+    public global::Gauge.Messages.ScenarioDataStoreInitRequest ScenarioDataStoreInitRequest {
+      get { return scenarioDataStoreInitRequest_ ?? global::Gauge.Messages.ScenarioDataStoreInitRequest.DefaultInstance; }
     }
     
     public const int SpecDataStoreInitRequestFieldNumber = 20;
     private bool hasSpecDataStoreInitRequest;
-    private global::main.SpecDataStoreInitRequest specDataStoreInitRequest_;
+    private global::Gauge.Messages.SpecDataStoreInitRequest specDataStoreInitRequest_;
     public bool HasSpecDataStoreInitRequest {
       get { return hasSpecDataStoreInitRequest; }
     }
-    public global::main.SpecDataStoreInitRequest SpecDataStoreInitRequest {
-      get { return specDataStoreInitRequest_ ?? global::main.SpecDataStoreInitRequest.DefaultInstance; }
+    public global::Gauge.Messages.SpecDataStoreInitRequest SpecDataStoreInitRequest {
+      get { return specDataStoreInitRequest_ ?? global::Gauge.Messages.SpecDataStoreInitRequest.DefaultInstance; }
     }
     
     public const int SuiteDataStoreInitRequestFieldNumber = 21;
     private bool hasSuiteDataStoreInitRequest;
-    private global::main.SuiteDataStoreInitRequest suiteDataStoreInitRequest_;
+    private global::Gauge.Messages.SuiteDataStoreInitRequest suiteDataStoreInitRequest_;
     public bool HasSuiteDataStoreInitRequest {
       get { return hasSuiteDataStoreInitRequest; }
     }
-    public global::main.SuiteDataStoreInitRequest SuiteDataStoreInitRequest {
-      get { return suiteDataStoreInitRequest_ ?? global::main.SuiteDataStoreInitRequest.DefaultInstance; }
+    public global::Gauge.Messages.SuiteDataStoreInitRequest SuiteDataStoreInitRequest {
+      get { return suiteDataStoreInitRequest_ ?? global::Gauge.Messages.SuiteDataStoreInitRequest.DefaultInstance; }
+    }
+    
+    public const int StepNameRequestFieldNumber = 22;
+    private bool hasStepNameRequest;
+    private global::Gauge.Messages.StepNameRequest stepNameRequest_;
+    public bool HasStepNameRequest {
+      get { return hasStepNameRequest; }
+    }
+    public global::Gauge.Messages.StepNameRequest StepNameRequest {
+      get { return stepNameRequest_ ?? global::Gauge.Messages.StepNameRequest.DefaultInstance; }
+    }
+    
+    public const int StepNameResponseFieldNumber = 23;
+    private bool hasStepNameResponse;
+    private global::Gauge.Messages.StepNameResponse stepNameResponse_;
+    public bool HasStepNameResponse {
+      get { return hasStepNameResponse; }
+    }
+    public global::Gauge.Messages.StepNameResponse StepNameResponse {
+      get { return stepNameResponse_ ?? global::Gauge.Messages.StepNameResponse.DefaultInstance; }
+    }
+    
+    public const int RefactorRequestFieldNumber = 24;
+    private bool hasRefactorRequest;
+    private global::Gauge.Messages.RefactorRequest refactorRequest_;
+    public bool HasRefactorRequest {
+      get { return hasRefactorRequest; }
+    }
+    public global::Gauge.Messages.RefactorRequest RefactorRequest {
+      get { return refactorRequest_ ?? global::Gauge.Messages.RefactorRequest.DefaultInstance; }
+    }
+    
+    public const int RefactorResponseFieldNumber = 25;
+    private bool hasRefactorResponse;
+    private global::Gauge.Messages.RefactorResponse refactorResponse_;
+    public bool HasRefactorResponse {
+      get { return hasRefactorResponse; }
+    }
+    public global::Gauge.Messages.RefactorResponse RefactorResponse {
+      get { return refactorResponse_ ?? global::Gauge.Messages.RefactorResponse.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -7661,6 +9543,18 @@ namespace main {
         if (HasSuiteExecutionResult) {
           if (!SuiteExecutionResult.IsInitialized) return false;
         }
+        if (HasStepNameRequest) {
+          if (!StepNameRequest.IsInitialized) return false;
+        }
+        if (HasStepNameResponse) {
+          if (!StepNameResponse.IsInitialized) return false;
+        }
+        if (HasRefactorRequest) {
+          if (!RefactorRequest.IsInitialized) return false;
+        }
+        if (HasRefactorResponse) {
+          if (!RefactorResponse.IsInitialized) return false;
+        }
         return true;
       }
     }
@@ -7678,22 +9572,22 @@ namespace main {
         output.WriteMessage(3, field_names[2], ExecutionStartingRequest);
       }
       if (hasSpecExecutionStartingRequest) {
-        output.WriteMessage(4, field_names[12], SpecExecutionStartingRequest);
+        output.WriteMessage(4, field_names[14], SpecExecutionStartingRequest);
       }
       if (hasSpecExecutionEndingRequest) {
-        output.WriteMessage(5, field_names[11], SpecExecutionEndingRequest);
+        output.WriteMessage(5, field_names[13], SpecExecutionEndingRequest);
       }
       if (hasScenarioExecutionStartingRequest) {
-        output.WriteMessage(6, field_names[9], ScenarioExecutionStartingRequest);
+        output.WriteMessage(6, field_names[11], ScenarioExecutionStartingRequest);
       }
       if (hasScenarioExecutionEndingRequest) {
-        output.WriteMessage(7, field_names[8], ScenarioExecutionEndingRequest);
+        output.WriteMessage(7, field_names[10], ScenarioExecutionEndingRequest);
       }
       if (hasStepExecutionStartingRequest) {
-        output.WriteMessage(8, field_names[14], StepExecutionStartingRequest);
+        output.WriteMessage(8, field_names[16], StepExecutionStartingRequest);
       }
       if (hasStepExecutionEndingRequest) {
-        output.WriteMessage(9, field_names[13], StepExecutionEndingRequest);
+        output.WriteMessage(9, field_names[15], StepExecutionEndingRequest);
       }
       if (hasExecuteStepRequest) {
         output.WriteMessage(10, field_names[0], ExecuteStepRequest);
@@ -7702,34 +9596,46 @@ namespace main {
         output.WriteMessage(11, field_names[1], ExecutionEndingRequest);
       }
       if (hasStepValidateRequest) {
-        output.WriteMessage(12, field_names[17], StepValidateRequest);
+        output.WriteMessage(12, field_names[21], StepValidateRequest);
       }
       if (hasStepValidateResponse) {
-        output.WriteMessage(13, field_names[18], StepValidateResponse);
+        output.WriteMessage(13, field_names[22], StepValidateResponse);
       }
       if (hasExecutionStatusResponse) {
         output.WriteMessage(14, field_names[3], ExecutionStatusResponse);
       }
       if (hasStepNamesRequest) {
-        output.WriteMessage(15, field_names[15], StepNamesRequest);
+        output.WriteMessage(15, field_names[19], StepNamesRequest);
       }
       if (hasStepNamesResponse) {
-        output.WriteMessage(16, field_names[16], StepNamesResponse);
+        output.WriteMessage(16, field_names[20], StepNamesResponse);
       }
       if (hasSuiteExecutionResult) {
-        output.WriteMessage(17, field_names[20], SuiteExecutionResult);
+        output.WriteMessage(17, field_names[24], SuiteExecutionResult);
       }
       if (hasKillProcessRequest) {
         output.WriteMessage(18, field_names[4], KillProcessRequest);
       }
       if (hasScenarioDataStoreInitRequest) {
-        output.WriteMessage(19, field_names[7], ScenarioDataStoreInitRequest);
+        output.WriteMessage(19, field_names[9], ScenarioDataStoreInitRequest);
       }
       if (hasSpecDataStoreInitRequest) {
-        output.WriteMessage(20, field_names[10], SpecDataStoreInitRequest);
+        output.WriteMessage(20, field_names[12], SpecDataStoreInitRequest);
       }
       if (hasSuiteDataStoreInitRequest) {
-        output.WriteMessage(21, field_names[19], SuiteDataStoreInitRequest);
+        output.WriteMessage(21, field_names[23], SuiteDataStoreInitRequest);
+      }
+      if (hasStepNameRequest) {
+        output.WriteMessage(22, field_names[17], StepNameRequest);
+      }
+      if (hasStepNameResponse) {
+        output.WriteMessage(23, field_names[18], StepNameResponse);
+      }
+      if (hasRefactorRequest) {
+        output.WriteMessage(24, field_names[7], RefactorRequest);
+      }
+      if (hasRefactorResponse) {
+        output.WriteMessage(25, field_names[8], RefactorResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -7803,6 +9709,18 @@ namespace main {
         }
         if (hasSuiteDataStoreInitRequest) {
           size += pb::CodedOutputStream.ComputeMessageSize(21, SuiteDataStoreInitRequest);
+        }
+        if (hasStepNameRequest) {
+          size += pb::CodedOutputStream.ComputeMessageSize(22, StepNameRequest);
+        }
+        if (hasStepNameResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(23, StepNameResponse);
+        }
+        if (hasRefactorRequest) {
+          size += pb::CodedOutputStream.ComputeMessageSize(24, RefactorRequest);
+        }
+        if (hasRefactorResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(25, RefactorResponse);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -7901,11 +9819,11 @@ namespace main {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::main.Message.Descriptor; }
+        get { return global::Gauge.Messages.Message.Descriptor; }
       }
       
       public override Message DefaultInstanceForType {
-        get { return global::main.Message.DefaultInstance; }
+        get { return global::Gauge.Messages.Message.DefaultInstance; }
       }
       
       public override Message BuildPartial() {
@@ -7926,7 +9844,7 @@ namespace main {
       }
       
       public override Builder MergeFrom(Message other) {
-        if (other == global::main.Message.DefaultInstance) return this;
+        if (other == global::Gauge.Messages.Message.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasMessageType) {
           MessageType = other.MessageType;
@@ -7991,6 +9909,18 @@ namespace main {
         if (other.HasSuiteDataStoreInitRequest) {
           MergeSuiteDataStoreInitRequest(other.SuiteDataStoreInitRequest);
         }
+        if (other.HasStepNameRequest) {
+          MergeStepNameRequest(other.StepNameRequest);
+        }
+        if (other.HasStepNameResponse) {
+          MergeStepNameResponse(other.StepNameResponse);
+        }
+        if (other.HasRefactorRequest) {
+          MergeRefactorRequest(other.RefactorRequest);
+        }
+        if (other.HasRefactorResponse) {
+          MergeRefactorResponse(other.RefactorResponse);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -8051,7 +9981,7 @@ namespace main {
               break;
             }
             case 26: {
-              global::main.ExecutionStartingRequest.Builder subBuilder = global::main.ExecutionStartingRequest.CreateBuilder();
+              global::Gauge.Messages.ExecutionStartingRequest.Builder subBuilder = global::Gauge.Messages.ExecutionStartingRequest.CreateBuilder();
               if (result.hasExecutionStartingRequest) {
                 subBuilder.MergeFrom(ExecutionStartingRequest);
               }
@@ -8060,7 +9990,7 @@ namespace main {
               break;
             }
             case 34: {
-              global::main.SpecExecutionStartingRequest.Builder subBuilder = global::main.SpecExecutionStartingRequest.CreateBuilder();
+              global::Gauge.Messages.SpecExecutionStartingRequest.Builder subBuilder = global::Gauge.Messages.SpecExecutionStartingRequest.CreateBuilder();
               if (result.hasSpecExecutionStartingRequest) {
                 subBuilder.MergeFrom(SpecExecutionStartingRequest);
               }
@@ -8069,7 +9999,7 @@ namespace main {
               break;
             }
             case 42: {
-              global::main.SpecExecutionEndingRequest.Builder subBuilder = global::main.SpecExecutionEndingRequest.CreateBuilder();
+              global::Gauge.Messages.SpecExecutionEndingRequest.Builder subBuilder = global::Gauge.Messages.SpecExecutionEndingRequest.CreateBuilder();
               if (result.hasSpecExecutionEndingRequest) {
                 subBuilder.MergeFrom(SpecExecutionEndingRequest);
               }
@@ -8078,7 +10008,7 @@ namespace main {
               break;
             }
             case 50: {
-              global::main.ScenarioExecutionStartingRequest.Builder subBuilder = global::main.ScenarioExecutionStartingRequest.CreateBuilder();
+              global::Gauge.Messages.ScenarioExecutionStartingRequest.Builder subBuilder = global::Gauge.Messages.ScenarioExecutionStartingRequest.CreateBuilder();
               if (result.hasScenarioExecutionStartingRequest) {
                 subBuilder.MergeFrom(ScenarioExecutionStartingRequest);
               }
@@ -8087,7 +10017,7 @@ namespace main {
               break;
             }
             case 58: {
-              global::main.ScenarioExecutionEndingRequest.Builder subBuilder = global::main.ScenarioExecutionEndingRequest.CreateBuilder();
+              global::Gauge.Messages.ScenarioExecutionEndingRequest.Builder subBuilder = global::Gauge.Messages.ScenarioExecutionEndingRequest.CreateBuilder();
               if (result.hasScenarioExecutionEndingRequest) {
                 subBuilder.MergeFrom(ScenarioExecutionEndingRequest);
               }
@@ -8096,7 +10026,7 @@ namespace main {
               break;
             }
             case 66: {
-              global::main.StepExecutionStartingRequest.Builder subBuilder = global::main.StepExecutionStartingRequest.CreateBuilder();
+              global::Gauge.Messages.StepExecutionStartingRequest.Builder subBuilder = global::Gauge.Messages.StepExecutionStartingRequest.CreateBuilder();
               if (result.hasStepExecutionStartingRequest) {
                 subBuilder.MergeFrom(StepExecutionStartingRequest);
               }
@@ -8105,7 +10035,7 @@ namespace main {
               break;
             }
             case 74: {
-              global::main.StepExecutionEndingRequest.Builder subBuilder = global::main.StepExecutionEndingRequest.CreateBuilder();
+              global::Gauge.Messages.StepExecutionEndingRequest.Builder subBuilder = global::Gauge.Messages.StepExecutionEndingRequest.CreateBuilder();
               if (result.hasStepExecutionEndingRequest) {
                 subBuilder.MergeFrom(StepExecutionEndingRequest);
               }
@@ -8114,7 +10044,7 @@ namespace main {
               break;
             }
             case 82: {
-              global::main.ExecuteStepRequest.Builder subBuilder = global::main.ExecuteStepRequest.CreateBuilder();
+              global::Gauge.Messages.ExecuteStepRequest.Builder subBuilder = global::Gauge.Messages.ExecuteStepRequest.CreateBuilder();
               if (result.hasExecuteStepRequest) {
                 subBuilder.MergeFrom(ExecuteStepRequest);
               }
@@ -8123,7 +10053,7 @@ namespace main {
               break;
             }
             case 90: {
-              global::main.ExecutionEndingRequest.Builder subBuilder = global::main.ExecutionEndingRequest.CreateBuilder();
+              global::Gauge.Messages.ExecutionEndingRequest.Builder subBuilder = global::Gauge.Messages.ExecutionEndingRequest.CreateBuilder();
               if (result.hasExecutionEndingRequest) {
                 subBuilder.MergeFrom(ExecutionEndingRequest);
               }
@@ -8132,7 +10062,7 @@ namespace main {
               break;
             }
             case 98: {
-              global::main.StepValidateRequest.Builder subBuilder = global::main.StepValidateRequest.CreateBuilder();
+              global::Gauge.Messages.StepValidateRequest.Builder subBuilder = global::Gauge.Messages.StepValidateRequest.CreateBuilder();
               if (result.hasStepValidateRequest) {
                 subBuilder.MergeFrom(StepValidateRequest);
               }
@@ -8141,7 +10071,7 @@ namespace main {
               break;
             }
             case 106: {
-              global::main.StepValidateResponse.Builder subBuilder = global::main.StepValidateResponse.CreateBuilder();
+              global::Gauge.Messages.StepValidateResponse.Builder subBuilder = global::Gauge.Messages.StepValidateResponse.CreateBuilder();
               if (result.hasStepValidateResponse) {
                 subBuilder.MergeFrom(StepValidateResponse);
               }
@@ -8150,7 +10080,7 @@ namespace main {
               break;
             }
             case 114: {
-              global::main.ExecutionStatusResponse.Builder subBuilder = global::main.ExecutionStatusResponse.CreateBuilder();
+              global::Gauge.Messages.ExecutionStatusResponse.Builder subBuilder = global::Gauge.Messages.ExecutionStatusResponse.CreateBuilder();
               if (result.hasExecutionStatusResponse) {
                 subBuilder.MergeFrom(ExecutionStatusResponse);
               }
@@ -8159,7 +10089,7 @@ namespace main {
               break;
             }
             case 122: {
-              global::main.StepNamesRequest.Builder subBuilder = global::main.StepNamesRequest.CreateBuilder();
+              global::Gauge.Messages.StepNamesRequest.Builder subBuilder = global::Gauge.Messages.StepNamesRequest.CreateBuilder();
               if (result.hasStepNamesRequest) {
                 subBuilder.MergeFrom(StepNamesRequest);
               }
@@ -8168,7 +10098,7 @@ namespace main {
               break;
             }
             case 130: {
-              global::main.StepNamesResponse.Builder subBuilder = global::main.StepNamesResponse.CreateBuilder();
+              global::Gauge.Messages.StepNamesResponse.Builder subBuilder = global::Gauge.Messages.StepNamesResponse.CreateBuilder();
               if (result.hasStepNamesResponse) {
                 subBuilder.MergeFrom(StepNamesResponse);
               }
@@ -8177,7 +10107,7 @@ namespace main {
               break;
             }
             case 138: {
-              global::main.SuiteExecutionResult.Builder subBuilder = global::main.SuiteExecutionResult.CreateBuilder();
+              global::Gauge.Messages.SuiteExecutionResult.Builder subBuilder = global::Gauge.Messages.SuiteExecutionResult.CreateBuilder();
               if (result.hasSuiteExecutionResult) {
                 subBuilder.MergeFrom(SuiteExecutionResult);
               }
@@ -8186,7 +10116,7 @@ namespace main {
               break;
             }
             case 146: {
-              global::main.KillProcessRequest.Builder subBuilder = global::main.KillProcessRequest.CreateBuilder();
+              global::Gauge.Messages.KillProcessRequest.Builder subBuilder = global::Gauge.Messages.KillProcessRequest.CreateBuilder();
               if (result.hasKillProcessRequest) {
                 subBuilder.MergeFrom(KillProcessRequest);
               }
@@ -8195,7 +10125,7 @@ namespace main {
               break;
             }
             case 154: {
-              global::main.ScenarioDataStoreInitRequest.Builder subBuilder = global::main.ScenarioDataStoreInitRequest.CreateBuilder();
+              global::Gauge.Messages.ScenarioDataStoreInitRequest.Builder subBuilder = global::Gauge.Messages.ScenarioDataStoreInitRequest.CreateBuilder();
               if (result.hasScenarioDataStoreInitRequest) {
                 subBuilder.MergeFrom(ScenarioDataStoreInitRequest);
               }
@@ -8204,7 +10134,7 @@ namespace main {
               break;
             }
             case 162: {
-              global::main.SpecDataStoreInitRequest.Builder subBuilder = global::main.SpecDataStoreInitRequest.CreateBuilder();
+              global::Gauge.Messages.SpecDataStoreInitRequest.Builder subBuilder = global::Gauge.Messages.SpecDataStoreInitRequest.CreateBuilder();
               if (result.hasSpecDataStoreInitRequest) {
                 subBuilder.MergeFrom(SpecDataStoreInitRequest);
               }
@@ -8213,12 +10143,48 @@ namespace main {
               break;
             }
             case 170: {
-              global::main.SuiteDataStoreInitRequest.Builder subBuilder = global::main.SuiteDataStoreInitRequest.CreateBuilder();
+              global::Gauge.Messages.SuiteDataStoreInitRequest.Builder subBuilder = global::Gauge.Messages.SuiteDataStoreInitRequest.CreateBuilder();
               if (result.hasSuiteDataStoreInitRequest) {
                 subBuilder.MergeFrom(SuiteDataStoreInitRequest);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               SuiteDataStoreInitRequest = subBuilder.BuildPartial();
+              break;
+            }
+            case 178: {
+              global::Gauge.Messages.StepNameRequest.Builder subBuilder = global::Gauge.Messages.StepNameRequest.CreateBuilder();
+              if (result.hasStepNameRequest) {
+                subBuilder.MergeFrom(StepNameRequest);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              StepNameRequest = subBuilder.BuildPartial();
+              break;
+            }
+            case 186: {
+              global::Gauge.Messages.StepNameResponse.Builder subBuilder = global::Gauge.Messages.StepNameResponse.CreateBuilder();
+              if (result.hasStepNameResponse) {
+                subBuilder.MergeFrom(StepNameResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              StepNameResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 194: {
+              global::Gauge.Messages.RefactorRequest.Builder subBuilder = global::Gauge.Messages.RefactorRequest.CreateBuilder();
+              if (result.hasRefactorRequest) {
+                subBuilder.MergeFrom(RefactorRequest);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              RefactorRequest = subBuilder.BuildPartial();
+              break;
+            }
+            case 202: {
+              global::Gauge.Messages.RefactorResponse.Builder subBuilder = global::Gauge.Messages.RefactorResponse.CreateBuilder();
+              if (result.hasRefactorResponse) {
+                subBuilder.MergeFrom(RefactorResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              RefactorResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -8234,11 +10200,11 @@ namespace main {
       public bool HasMessageType {
        get { return result.hasMessageType; }
       }
-      public global::main.Message.Types.MessageType MessageType {
+      public global::Gauge.Messages.Message.Types.MessageType MessageType {
         get { return result.MessageType; }
         set { SetMessageType(value); }
       }
-      public Builder SetMessageType(global::main.Message.Types.MessageType value) {
+      public Builder SetMessageType(global::Gauge.Messages.Message.Types.MessageType value) {
         PrepareBuilder();
         result.hasMessageType = true;
         result.messageType_ = value;
@@ -8247,7 +10213,7 @@ namespace main {
       public Builder ClearMessageType() {
         PrepareBuilder();
         result.hasMessageType = false;
-        result.messageType_ = global::main.Message.Types.MessageType.ExecutionStarting;
+        result.messageType_ = global::Gauge.Messages.Message.Types.MessageType.ExecutionStarting;
         return this;
       }
       
@@ -8274,30 +10240,30 @@ namespace main {
       public bool HasExecutionStartingRequest {
        get { return result.hasExecutionStartingRequest; }
       }
-      public global::main.ExecutionStartingRequest ExecutionStartingRequest {
+      public global::Gauge.Messages.ExecutionStartingRequest ExecutionStartingRequest {
         get { return result.ExecutionStartingRequest; }
         set { SetExecutionStartingRequest(value); }
       }
-      public Builder SetExecutionStartingRequest(global::main.ExecutionStartingRequest value) {
+      public Builder SetExecutionStartingRequest(global::Gauge.Messages.ExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecutionStartingRequest = true;
         result.executionStartingRequest_ = value;
         return this;
       }
-      public Builder SetExecutionStartingRequest(global::main.ExecutionStartingRequest.Builder builderForValue) {
+      public Builder SetExecutionStartingRequest(global::Gauge.Messages.ExecutionStartingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecutionStartingRequest = true;
         result.executionStartingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecutionStartingRequest(global::main.ExecutionStartingRequest value) {
+      public Builder MergeExecutionStartingRequest(global::Gauge.Messages.ExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecutionStartingRequest &&
-            result.executionStartingRequest_ != global::main.ExecutionStartingRequest.DefaultInstance) {
-            result.executionStartingRequest_ = global::main.ExecutionStartingRequest.CreateBuilder(result.executionStartingRequest_).MergeFrom(value).BuildPartial();
+            result.executionStartingRequest_ != global::Gauge.Messages.ExecutionStartingRequest.DefaultInstance) {
+            result.executionStartingRequest_ = global::Gauge.Messages.ExecutionStartingRequest.CreateBuilder(result.executionStartingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.executionStartingRequest_ = value;
         }
@@ -8314,30 +10280,30 @@ namespace main {
       public bool HasSpecExecutionStartingRequest {
        get { return result.hasSpecExecutionStartingRequest; }
       }
-      public global::main.SpecExecutionStartingRequest SpecExecutionStartingRequest {
+      public global::Gauge.Messages.SpecExecutionStartingRequest SpecExecutionStartingRequest {
         get { return result.SpecExecutionStartingRequest; }
         set { SetSpecExecutionStartingRequest(value); }
       }
-      public Builder SetSpecExecutionStartingRequest(global::main.SpecExecutionStartingRequest value) {
+      public Builder SetSpecExecutionStartingRequest(global::Gauge.Messages.SpecExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSpecExecutionStartingRequest = true;
         result.specExecutionStartingRequest_ = value;
         return this;
       }
-      public Builder SetSpecExecutionStartingRequest(global::main.SpecExecutionStartingRequest.Builder builderForValue) {
+      public Builder SetSpecExecutionStartingRequest(global::Gauge.Messages.SpecExecutionStartingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSpecExecutionStartingRequest = true;
         result.specExecutionStartingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSpecExecutionStartingRequest(global::main.SpecExecutionStartingRequest value) {
+      public Builder MergeSpecExecutionStartingRequest(global::Gauge.Messages.SpecExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSpecExecutionStartingRequest &&
-            result.specExecutionStartingRequest_ != global::main.SpecExecutionStartingRequest.DefaultInstance) {
-            result.specExecutionStartingRequest_ = global::main.SpecExecutionStartingRequest.CreateBuilder(result.specExecutionStartingRequest_).MergeFrom(value).BuildPartial();
+            result.specExecutionStartingRequest_ != global::Gauge.Messages.SpecExecutionStartingRequest.DefaultInstance) {
+            result.specExecutionStartingRequest_ = global::Gauge.Messages.SpecExecutionStartingRequest.CreateBuilder(result.specExecutionStartingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.specExecutionStartingRequest_ = value;
         }
@@ -8354,30 +10320,30 @@ namespace main {
       public bool HasSpecExecutionEndingRequest {
        get { return result.hasSpecExecutionEndingRequest; }
       }
-      public global::main.SpecExecutionEndingRequest SpecExecutionEndingRequest {
+      public global::Gauge.Messages.SpecExecutionEndingRequest SpecExecutionEndingRequest {
         get { return result.SpecExecutionEndingRequest; }
         set { SetSpecExecutionEndingRequest(value); }
       }
-      public Builder SetSpecExecutionEndingRequest(global::main.SpecExecutionEndingRequest value) {
+      public Builder SetSpecExecutionEndingRequest(global::Gauge.Messages.SpecExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSpecExecutionEndingRequest = true;
         result.specExecutionEndingRequest_ = value;
         return this;
       }
-      public Builder SetSpecExecutionEndingRequest(global::main.SpecExecutionEndingRequest.Builder builderForValue) {
+      public Builder SetSpecExecutionEndingRequest(global::Gauge.Messages.SpecExecutionEndingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSpecExecutionEndingRequest = true;
         result.specExecutionEndingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSpecExecutionEndingRequest(global::main.SpecExecutionEndingRequest value) {
+      public Builder MergeSpecExecutionEndingRequest(global::Gauge.Messages.SpecExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSpecExecutionEndingRequest &&
-            result.specExecutionEndingRequest_ != global::main.SpecExecutionEndingRequest.DefaultInstance) {
-            result.specExecutionEndingRequest_ = global::main.SpecExecutionEndingRequest.CreateBuilder(result.specExecutionEndingRequest_).MergeFrom(value).BuildPartial();
+            result.specExecutionEndingRequest_ != global::Gauge.Messages.SpecExecutionEndingRequest.DefaultInstance) {
+            result.specExecutionEndingRequest_ = global::Gauge.Messages.SpecExecutionEndingRequest.CreateBuilder(result.specExecutionEndingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.specExecutionEndingRequest_ = value;
         }
@@ -8394,30 +10360,30 @@ namespace main {
       public bool HasScenarioExecutionStartingRequest {
        get { return result.hasScenarioExecutionStartingRequest; }
       }
-      public global::main.ScenarioExecutionStartingRequest ScenarioExecutionStartingRequest {
+      public global::Gauge.Messages.ScenarioExecutionStartingRequest ScenarioExecutionStartingRequest {
         get { return result.ScenarioExecutionStartingRequest; }
         set { SetScenarioExecutionStartingRequest(value); }
       }
-      public Builder SetScenarioExecutionStartingRequest(global::main.ScenarioExecutionStartingRequest value) {
+      public Builder SetScenarioExecutionStartingRequest(global::Gauge.Messages.ScenarioExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasScenarioExecutionStartingRequest = true;
         result.scenarioExecutionStartingRequest_ = value;
         return this;
       }
-      public Builder SetScenarioExecutionStartingRequest(global::main.ScenarioExecutionStartingRequest.Builder builderForValue) {
+      public Builder SetScenarioExecutionStartingRequest(global::Gauge.Messages.ScenarioExecutionStartingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasScenarioExecutionStartingRequest = true;
         result.scenarioExecutionStartingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeScenarioExecutionStartingRequest(global::main.ScenarioExecutionStartingRequest value) {
+      public Builder MergeScenarioExecutionStartingRequest(global::Gauge.Messages.ScenarioExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasScenarioExecutionStartingRequest &&
-            result.scenarioExecutionStartingRequest_ != global::main.ScenarioExecutionStartingRequest.DefaultInstance) {
-            result.scenarioExecutionStartingRequest_ = global::main.ScenarioExecutionStartingRequest.CreateBuilder(result.scenarioExecutionStartingRequest_).MergeFrom(value).BuildPartial();
+            result.scenarioExecutionStartingRequest_ != global::Gauge.Messages.ScenarioExecutionStartingRequest.DefaultInstance) {
+            result.scenarioExecutionStartingRequest_ = global::Gauge.Messages.ScenarioExecutionStartingRequest.CreateBuilder(result.scenarioExecutionStartingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.scenarioExecutionStartingRequest_ = value;
         }
@@ -8434,30 +10400,30 @@ namespace main {
       public bool HasScenarioExecutionEndingRequest {
        get { return result.hasScenarioExecutionEndingRequest; }
       }
-      public global::main.ScenarioExecutionEndingRequest ScenarioExecutionEndingRequest {
+      public global::Gauge.Messages.ScenarioExecutionEndingRequest ScenarioExecutionEndingRequest {
         get { return result.ScenarioExecutionEndingRequest; }
         set { SetScenarioExecutionEndingRequest(value); }
       }
-      public Builder SetScenarioExecutionEndingRequest(global::main.ScenarioExecutionEndingRequest value) {
+      public Builder SetScenarioExecutionEndingRequest(global::Gauge.Messages.ScenarioExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasScenarioExecutionEndingRequest = true;
         result.scenarioExecutionEndingRequest_ = value;
         return this;
       }
-      public Builder SetScenarioExecutionEndingRequest(global::main.ScenarioExecutionEndingRequest.Builder builderForValue) {
+      public Builder SetScenarioExecutionEndingRequest(global::Gauge.Messages.ScenarioExecutionEndingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasScenarioExecutionEndingRequest = true;
         result.scenarioExecutionEndingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeScenarioExecutionEndingRequest(global::main.ScenarioExecutionEndingRequest value) {
+      public Builder MergeScenarioExecutionEndingRequest(global::Gauge.Messages.ScenarioExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasScenarioExecutionEndingRequest &&
-            result.scenarioExecutionEndingRequest_ != global::main.ScenarioExecutionEndingRequest.DefaultInstance) {
-            result.scenarioExecutionEndingRequest_ = global::main.ScenarioExecutionEndingRequest.CreateBuilder(result.scenarioExecutionEndingRequest_).MergeFrom(value).BuildPartial();
+            result.scenarioExecutionEndingRequest_ != global::Gauge.Messages.ScenarioExecutionEndingRequest.DefaultInstance) {
+            result.scenarioExecutionEndingRequest_ = global::Gauge.Messages.ScenarioExecutionEndingRequest.CreateBuilder(result.scenarioExecutionEndingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.scenarioExecutionEndingRequest_ = value;
         }
@@ -8474,30 +10440,30 @@ namespace main {
       public bool HasStepExecutionStartingRequest {
        get { return result.hasStepExecutionStartingRequest; }
       }
-      public global::main.StepExecutionStartingRequest StepExecutionStartingRequest {
+      public global::Gauge.Messages.StepExecutionStartingRequest StepExecutionStartingRequest {
         get { return result.StepExecutionStartingRequest; }
         set { SetStepExecutionStartingRequest(value); }
       }
-      public Builder SetStepExecutionStartingRequest(global::main.StepExecutionStartingRequest value) {
+      public Builder SetStepExecutionStartingRequest(global::Gauge.Messages.StepExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepExecutionStartingRequest = true;
         result.stepExecutionStartingRequest_ = value;
         return this;
       }
-      public Builder SetStepExecutionStartingRequest(global::main.StepExecutionStartingRequest.Builder builderForValue) {
+      public Builder SetStepExecutionStartingRequest(global::Gauge.Messages.StepExecutionStartingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepExecutionStartingRequest = true;
         result.stepExecutionStartingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepExecutionStartingRequest(global::main.StepExecutionStartingRequest value) {
+      public Builder MergeStepExecutionStartingRequest(global::Gauge.Messages.StepExecutionStartingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepExecutionStartingRequest &&
-            result.stepExecutionStartingRequest_ != global::main.StepExecutionStartingRequest.DefaultInstance) {
-            result.stepExecutionStartingRequest_ = global::main.StepExecutionStartingRequest.CreateBuilder(result.stepExecutionStartingRequest_).MergeFrom(value).BuildPartial();
+            result.stepExecutionStartingRequest_ != global::Gauge.Messages.StepExecutionStartingRequest.DefaultInstance) {
+            result.stepExecutionStartingRequest_ = global::Gauge.Messages.StepExecutionStartingRequest.CreateBuilder(result.stepExecutionStartingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.stepExecutionStartingRequest_ = value;
         }
@@ -8514,30 +10480,30 @@ namespace main {
       public bool HasStepExecutionEndingRequest {
        get { return result.hasStepExecutionEndingRequest; }
       }
-      public global::main.StepExecutionEndingRequest StepExecutionEndingRequest {
+      public global::Gauge.Messages.StepExecutionEndingRequest StepExecutionEndingRequest {
         get { return result.StepExecutionEndingRequest; }
         set { SetStepExecutionEndingRequest(value); }
       }
-      public Builder SetStepExecutionEndingRequest(global::main.StepExecutionEndingRequest value) {
+      public Builder SetStepExecutionEndingRequest(global::Gauge.Messages.StepExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepExecutionEndingRequest = true;
         result.stepExecutionEndingRequest_ = value;
         return this;
       }
-      public Builder SetStepExecutionEndingRequest(global::main.StepExecutionEndingRequest.Builder builderForValue) {
+      public Builder SetStepExecutionEndingRequest(global::Gauge.Messages.StepExecutionEndingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepExecutionEndingRequest = true;
         result.stepExecutionEndingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepExecutionEndingRequest(global::main.StepExecutionEndingRequest value) {
+      public Builder MergeStepExecutionEndingRequest(global::Gauge.Messages.StepExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepExecutionEndingRequest &&
-            result.stepExecutionEndingRequest_ != global::main.StepExecutionEndingRequest.DefaultInstance) {
-            result.stepExecutionEndingRequest_ = global::main.StepExecutionEndingRequest.CreateBuilder(result.stepExecutionEndingRequest_).MergeFrom(value).BuildPartial();
+            result.stepExecutionEndingRequest_ != global::Gauge.Messages.StepExecutionEndingRequest.DefaultInstance) {
+            result.stepExecutionEndingRequest_ = global::Gauge.Messages.StepExecutionEndingRequest.CreateBuilder(result.stepExecutionEndingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.stepExecutionEndingRequest_ = value;
         }
@@ -8554,30 +10520,30 @@ namespace main {
       public bool HasExecuteStepRequest {
        get { return result.hasExecuteStepRequest; }
       }
-      public global::main.ExecuteStepRequest ExecuteStepRequest {
+      public global::Gauge.Messages.ExecuteStepRequest ExecuteStepRequest {
         get { return result.ExecuteStepRequest; }
         set { SetExecuteStepRequest(value); }
       }
-      public Builder SetExecuteStepRequest(global::main.ExecuteStepRequest value) {
+      public Builder SetExecuteStepRequest(global::Gauge.Messages.ExecuteStepRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecuteStepRequest = true;
         result.executeStepRequest_ = value;
         return this;
       }
-      public Builder SetExecuteStepRequest(global::main.ExecuteStepRequest.Builder builderForValue) {
+      public Builder SetExecuteStepRequest(global::Gauge.Messages.ExecuteStepRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecuteStepRequest = true;
         result.executeStepRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecuteStepRequest(global::main.ExecuteStepRequest value) {
+      public Builder MergeExecuteStepRequest(global::Gauge.Messages.ExecuteStepRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecuteStepRequest &&
-            result.executeStepRequest_ != global::main.ExecuteStepRequest.DefaultInstance) {
-            result.executeStepRequest_ = global::main.ExecuteStepRequest.CreateBuilder(result.executeStepRequest_).MergeFrom(value).BuildPartial();
+            result.executeStepRequest_ != global::Gauge.Messages.ExecuteStepRequest.DefaultInstance) {
+            result.executeStepRequest_ = global::Gauge.Messages.ExecuteStepRequest.CreateBuilder(result.executeStepRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.executeStepRequest_ = value;
         }
@@ -8594,30 +10560,30 @@ namespace main {
       public bool HasExecutionEndingRequest {
        get { return result.hasExecutionEndingRequest; }
       }
-      public global::main.ExecutionEndingRequest ExecutionEndingRequest {
+      public global::Gauge.Messages.ExecutionEndingRequest ExecutionEndingRequest {
         get { return result.ExecutionEndingRequest; }
         set { SetExecutionEndingRequest(value); }
       }
-      public Builder SetExecutionEndingRequest(global::main.ExecutionEndingRequest value) {
+      public Builder SetExecutionEndingRequest(global::Gauge.Messages.ExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecutionEndingRequest = true;
         result.executionEndingRequest_ = value;
         return this;
       }
-      public Builder SetExecutionEndingRequest(global::main.ExecutionEndingRequest.Builder builderForValue) {
+      public Builder SetExecutionEndingRequest(global::Gauge.Messages.ExecutionEndingRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecutionEndingRequest = true;
         result.executionEndingRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecutionEndingRequest(global::main.ExecutionEndingRequest value) {
+      public Builder MergeExecutionEndingRequest(global::Gauge.Messages.ExecutionEndingRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecutionEndingRequest &&
-            result.executionEndingRequest_ != global::main.ExecutionEndingRequest.DefaultInstance) {
-            result.executionEndingRequest_ = global::main.ExecutionEndingRequest.CreateBuilder(result.executionEndingRequest_).MergeFrom(value).BuildPartial();
+            result.executionEndingRequest_ != global::Gauge.Messages.ExecutionEndingRequest.DefaultInstance) {
+            result.executionEndingRequest_ = global::Gauge.Messages.ExecutionEndingRequest.CreateBuilder(result.executionEndingRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.executionEndingRequest_ = value;
         }
@@ -8634,30 +10600,30 @@ namespace main {
       public bool HasStepValidateRequest {
        get { return result.hasStepValidateRequest; }
       }
-      public global::main.StepValidateRequest StepValidateRequest {
+      public global::Gauge.Messages.StepValidateRequest StepValidateRequest {
         get { return result.StepValidateRequest; }
         set { SetStepValidateRequest(value); }
       }
-      public Builder SetStepValidateRequest(global::main.StepValidateRequest value) {
+      public Builder SetStepValidateRequest(global::Gauge.Messages.StepValidateRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepValidateRequest = true;
         result.stepValidateRequest_ = value;
         return this;
       }
-      public Builder SetStepValidateRequest(global::main.StepValidateRequest.Builder builderForValue) {
+      public Builder SetStepValidateRequest(global::Gauge.Messages.StepValidateRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepValidateRequest = true;
         result.stepValidateRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepValidateRequest(global::main.StepValidateRequest value) {
+      public Builder MergeStepValidateRequest(global::Gauge.Messages.StepValidateRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepValidateRequest &&
-            result.stepValidateRequest_ != global::main.StepValidateRequest.DefaultInstance) {
-            result.stepValidateRequest_ = global::main.StepValidateRequest.CreateBuilder(result.stepValidateRequest_).MergeFrom(value).BuildPartial();
+            result.stepValidateRequest_ != global::Gauge.Messages.StepValidateRequest.DefaultInstance) {
+            result.stepValidateRequest_ = global::Gauge.Messages.StepValidateRequest.CreateBuilder(result.stepValidateRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.stepValidateRequest_ = value;
         }
@@ -8674,30 +10640,30 @@ namespace main {
       public bool HasStepValidateResponse {
        get { return result.hasStepValidateResponse; }
       }
-      public global::main.StepValidateResponse StepValidateResponse {
+      public global::Gauge.Messages.StepValidateResponse StepValidateResponse {
         get { return result.StepValidateResponse; }
         set { SetStepValidateResponse(value); }
       }
-      public Builder SetStepValidateResponse(global::main.StepValidateResponse value) {
+      public Builder SetStepValidateResponse(global::Gauge.Messages.StepValidateResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepValidateResponse = true;
         result.stepValidateResponse_ = value;
         return this;
       }
-      public Builder SetStepValidateResponse(global::main.StepValidateResponse.Builder builderForValue) {
+      public Builder SetStepValidateResponse(global::Gauge.Messages.StepValidateResponse.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepValidateResponse = true;
         result.stepValidateResponse_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepValidateResponse(global::main.StepValidateResponse value) {
+      public Builder MergeStepValidateResponse(global::Gauge.Messages.StepValidateResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepValidateResponse &&
-            result.stepValidateResponse_ != global::main.StepValidateResponse.DefaultInstance) {
-            result.stepValidateResponse_ = global::main.StepValidateResponse.CreateBuilder(result.stepValidateResponse_).MergeFrom(value).BuildPartial();
+            result.stepValidateResponse_ != global::Gauge.Messages.StepValidateResponse.DefaultInstance) {
+            result.stepValidateResponse_ = global::Gauge.Messages.StepValidateResponse.CreateBuilder(result.stepValidateResponse_).MergeFrom(value).BuildPartial();
         } else {
           result.stepValidateResponse_ = value;
         }
@@ -8714,30 +10680,30 @@ namespace main {
       public bool HasExecutionStatusResponse {
        get { return result.hasExecutionStatusResponse; }
       }
-      public global::main.ExecutionStatusResponse ExecutionStatusResponse {
+      public global::Gauge.Messages.ExecutionStatusResponse ExecutionStatusResponse {
         get { return result.ExecutionStatusResponse; }
         set { SetExecutionStatusResponse(value); }
       }
-      public Builder SetExecutionStatusResponse(global::main.ExecutionStatusResponse value) {
+      public Builder SetExecutionStatusResponse(global::Gauge.Messages.ExecutionStatusResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExecutionStatusResponse = true;
         result.executionStatusResponse_ = value;
         return this;
       }
-      public Builder SetExecutionStatusResponse(global::main.ExecutionStatusResponse.Builder builderForValue) {
+      public Builder SetExecutionStatusResponse(global::Gauge.Messages.ExecutionStatusResponse.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExecutionStatusResponse = true;
         result.executionStatusResponse_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExecutionStatusResponse(global::main.ExecutionStatusResponse value) {
+      public Builder MergeExecutionStatusResponse(global::Gauge.Messages.ExecutionStatusResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExecutionStatusResponse &&
-            result.executionStatusResponse_ != global::main.ExecutionStatusResponse.DefaultInstance) {
-            result.executionStatusResponse_ = global::main.ExecutionStatusResponse.CreateBuilder(result.executionStatusResponse_).MergeFrom(value).BuildPartial();
+            result.executionStatusResponse_ != global::Gauge.Messages.ExecutionStatusResponse.DefaultInstance) {
+            result.executionStatusResponse_ = global::Gauge.Messages.ExecutionStatusResponse.CreateBuilder(result.executionStatusResponse_).MergeFrom(value).BuildPartial();
         } else {
           result.executionStatusResponse_ = value;
         }
@@ -8754,30 +10720,30 @@ namespace main {
       public bool HasStepNamesRequest {
        get { return result.hasStepNamesRequest; }
       }
-      public global::main.StepNamesRequest StepNamesRequest {
+      public global::Gauge.Messages.StepNamesRequest StepNamesRequest {
         get { return result.StepNamesRequest; }
         set { SetStepNamesRequest(value); }
       }
-      public Builder SetStepNamesRequest(global::main.StepNamesRequest value) {
+      public Builder SetStepNamesRequest(global::Gauge.Messages.StepNamesRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepNamesRequest = true;
         result.stepNamesRequest_ = value;
         return this;
       }
-      public Builder SetStepNamesRequest(global::main.StepNamesRequest.Builder builderForValue) {
+      public Builder SetStepNamesRequest(global::Gauge.Messages.StepNamesRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepNamesRequest = true;
         result.stepNamesRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepNamesRequest(global::main.StepNamesRequest value) {
+      public Builder MergeStepNamesRequest(global::Gauge.Messages.StepNamesRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepNamesRequest &&
-            result.stepNamesRequest_ != global::main.StepNamesRequest.DefaultInstance) {
-            result.stepNamesRequest_ = global::main.StepNamesRequest.CreateBuilder(result.stepNamesRequest_).MergeFrom(value).BuildPartial();
+            result.stepNamesRequest_ != global::Gauge.Messages.StepNamesRequest.DefaultInstance) {
+            result.stepNamesRequest_ = global::Gauge.Messages.StepNamesRequest.CreateBuilder(result.stepNamesRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.stepNamesRequest_ = value;
         }
@@ -8794,30 +10760,30 @@ namespace main {
       public bool HasStepNamesResponse {
        get { return result.hasStepNamesResponse; }
       }
-      public global::main.StepNamesResponse StepNamesResponse {
+      public global::Gauge.Messages.StepNamesResponse StepNamesResponse {
         get { return result.StepNamesResponse; }
         set { SetStepNamesResponse(value); }
       }
-      public Builder SetStepNamesResponse(global::main.StepNamesResponse value) {
+      public Builder SetStepNamesResponse(global::Gauge.Messages.StepNamesResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasStepNamesResponse = true;
         result.stepNamesResponse_ = value;
         return this;
       }
-      public Builder SetStepNamesResponse(global::main.StepNamesResponse.Builder builderForValue) {
+      public Builder SetStepNamesResponse(global::Gauge.Messages.StepNamesResponse.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasStepNamesResponse = true;
         result.stepNamesResponse_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeStepNamesResponse(global::main.StepNamesResponse value) {
+      public Builder MergeStepNamesResponse(global::Gauge.Messages.StepNamesResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasStepNamesResponse &&
-            result.stepNamesResponse_ != global::main.StepNamesResponse.DefaultInstance) {
-            result.stepNamesResponse_ = global::main.StepNamesResponse.CreateBuilder(result.stepNamesResponse_).MergeFrom(value).BuildPartial();
+            result.stepNamesResponse_ != global::Gauge.Messages.StepNamesResponse.DefaultInstance) {
+            result.stepNamesResponse_ = global::Gauge.Messages.StepNamesResponse.CreateBuilder(result.stepNamesResponse_).MergeFrom(value).BuildPartial();
         } else {
           result.stepNamesResponse_ = value;
         }
@@ -8834,30 +10800,30 @@ namespace main {
       public bool HasSuiteExecutionResult {
        get { return result.hasSuiteExecutionResult; }
       }
-      public global::main.SuiteExecutionResult SuiteExecutionResult {
+      public global::Gauge.Messages.SuiteExecutionResult SuiteExecutionResult {
         get { return result.SuiteExecutionResult; }
         set { SetSuiteExecutionResult(value); }
       }
-      public Builder SetSuiteExecutionResult(global::main.SuiteExecutionResult value) {
+      public Builder SetSuiteExecutionResult(global::Gauge.Messages.SuiteExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSuiteExecutionResult = true;
         result.suiteExecutionResult_ = value;
         return this;
       }
-      public Builder SetSuiteExecutionResult(global::main.SuiteExecutionResult.Builder builderForValue) {
+      public Builder SetSuiteExecutionResult(global::Gauge.Messages.SuiteExecutionResult.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSuiteExecutionResult = true;
         result.suiteExecutionResult_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSuiteExecutionResult(global::main.SuiteExecutionResult value) {
+      public Builder MergeSuiteExecutionResult(global::Gauge.Messages.SuiteExecutionResult value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSuiteExecutionResult &&
-            result.suiteExecutionResult_ != global::main.SuiteExecutionResult.DefaultInstance) {
-            result.suiteExecutionResult_ = global::main.SuiteExecutionResult.CreateBuilder(result.suiteExecutionResult_).MergeFrom(value).BuildPartial();
+            result.suiteExecutionResult_ != global::Gauge.Messages.SuiteExecutionResult.DefaultInstance) {
+            result.suiteExecutionResult_ = global::Gauge.Messages.SuiteExecutionResult.CreateBuilder(result.suiteExecutionResult_).MergeFrom(value).BuildPartial();
         } else {
           result.suiteExecutionResult_ = value;
         }
@@ -8874,30 +10840,30 @@ namespace main {
       public bool HasKillProcessRequest {
        get { return result.hasKillProcessRequest; }
       }
-      public global::main.KillProcessRequest KillProcessRequest {
+      public global::Gauge.Messages.KillProcessRequest KillProcessRequest {
         get { return result.KillProcessRequest; }
         set { SetKillProcessRequest(value); }
       }
-      public Builder SetKillProcessRequest(global::main.KillProcessRequest value) {
+      public Builder SetKillProcessRequest(global::Gauge.Messages.KillProcessRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasKillProcessRequest = true;
         result.killProcessRequest_ = value;
         return this;
       }
-      public Builder SetKillProcessRequest(global::main.KillProcessRequest.Builder builderForValue) {
+      public Builder SetKillProcessRequest(global::Gauge.Messages.KillProcessRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasKillProcessRequest = true;
         result.killProcessRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeKillProcessRequest(global::main.KillProcessRequest value) {
+      public Builder MergeKillProcessRequest(global::Gauge.Messages.KillProcessRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasKillProcessRequest &&
-            result.killProcessRequest_ != global::main.KillProcessRequest.DefaultInstance) {
-            result.killProcessRequest_ = global::main.KillProcessRequest.CreateBuilder(result.killProcessRequest_).MergeFrom(value).BuildPartial();
+            result.killProcessRequest_ != global::Gauge.Messages.KillProcessRequest.DefaultInstance) {
+            result.killProcessRequest_ = global::Gauge.Messages.KillProcessRequest.CreateBuilder(result.killProcessRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.killProcessRequest_ = value;
         }
@@ -8914,30 +10880,30 @@ namespace main {
       public bool HasScenarioDataStoreInitRequest {
        get { return result.hasScenarioDataStoreInitRequest; }
       }
-      public global::main.ScenarioDataStoreInitRequest ScenarioDataStoreInitRequest {
+      public global::Gauge.Messages.ScenarioDataStoreInitRequest ScenarioDataStoreInitRequest {
         get { return result.ScenarioDataStoreInitRequest; }
         set { SetScenarioDataStoreInitRequest(value); }
       }
-      public Builder SetScenarioDataStoreInitRequest(global::main.ScenarioDataStoreInitRequest value) {
+      public Builder SetScenarioDataStoreInitRequest(global::Gauge.Messages.ScenarioDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasScenarioDataStoreInitRequest = true;
         result.scenarioDataStoreInitRequest_ = value;
         return this;
       }
-      public Builder SetScenarioDataStoreInitRequest(global::main.ScenarioDataStoreInitRequest.Builder builderForValue) {
+      public Builder SetScenarioDataStoreInitRequest(global::Gauge.Messages.ScenarioDataStoreInitRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasScenarioDataStoreInitRequest = true;
         result.scenarioDataStoreInitRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeScenarioDataStoreInitRequest(global::main.ScenarioDataStoreInitRequest value) {
+      public Builder MergeScenarioDataStoreInitRequest(global::Gauge.Messages.ScenarioDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasScenarioDataStoreInitRequest &&
-            result.scenarioDataStoreInitRequest_ != global::main.ScenarioDataStoreInitRequest.DefaultInstance) {
-            result.scenarioDataStoreInitRequest_ = global::main.ScenarioDataStoreInitRequest.CreateBuilder(result.scenarioDataStoreInitRequest_).MergeFrom(value).BuildPartial();
+            result.scenarioDataStoreInitRequest_ != global::Gauge.Messages.ScenarioDataStoreInitRequest.DefaultInstance) {
+            result.scenarioDataStoreInitRequest_ = global::Gauge.Messages.ScenarioDataStoreInitRequest.CreateBuilder(result.scenarioDataStoreInitRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.scenarioDataStoreInitRequest_ = value;
         }
@@ -8954,30 +10920,30 @@ namespace main {
       public bool HasSpecDataStoreInitRequest {
        get { return result.hasSpecDataStoreInitRequest; }
       }
-      public global::main.SpecDataStoreInitRequest SpecDataStoreInitRequest {
+      public global::Gauge.Messages.SpecDataStoreInitRequest SpecDataStoreInitRequest {
         get { return result.SpecDataStoreInitRequest; }
         set { SetSpecDataStoreInitRequest(value); }
       }
-      public Builder SetSpecDataStoreInitRequest(global::main.SpecDataStoreInitRequest value) {
+      public Builder SetSpecDataStoreInitRequest(global::Gauge.Messages.SpecDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSpecDataStoreInitRequest = true;
         result.specDataStoreInitRequest_ = value;
         return this;
       }
-      public Builder SetSpecDataStoreInitRequest(global::main.SpecDataStoreInitRequest.Builder builderForValue) {
+      public Builder SetSpecDataStoreInitRequest(global::Gauge.Messages.SpecDataStoreInitRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSpecDataStoreInitRequest = true;
         result.specDataStoreInitRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSpecDataStoreInitRequest(global::main.SpecDataStoreInitRequest value) {
+      public Builder MergeSpecDataStoreInitRequest(global::Gauge.Messages.SpecDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSpecDataStoreInitRequest &&
-            result.specDataStoreInitRequest_ != global::main.SpecDataStoreInitRequest.DefaultInstance) {
-            result.specDataStoreInitRequest_ = global::main.SpecDataStoreInitRequest.CreateBuilder(result.specDataStoreInitRequest_).MergeFrom(value).BuildPartial();
+            result.specDataStoreInitRequest_ != global::Gauge.Messages.SpecDataStoreInitRequest.DefaultInstance) {
+            result.specDataStoreInitRequest_ = global::Gauge.Messages.SpecDataStoreInitRequest.CreateBuilder(result.specDataStoreInitRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.specDataStoreInitRequest_ = value;
         }
@@ -8994,30 +10960,30 @@ namespace main {
       public bool HasSuiteDataStoreInitRequest {
        get { return result.hasSuiteDataStoreInitRequest; }
       }
-      public global::main.SuiteDataStoreInitRequest SuiteDataStoreInitRequest {
+      public global::Gauge.Messages.SuiteDataStoreInitRequest SuiteDataStoreInitRequest {
         get { return result.SuiteDataStoreInitRequest; }
         set { SetSuiteDataStoreInitRequest(value); }
       }
-      public Builder SetSuiteDataStoreInitRequest(global::main.SuiteDataStoreInitRequest value) {
+      public Builder SetSuiteDataStoreInitRequest(global::Gauge.Messages.SuiteDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasSuiteDataStoreInitRequest = true;
         result.suiteDataStoreInitRequest_ = value;
         return this;
       }
-      public Builder SetSuiteDataStoreInitRequest(global::main.SuiteDataStoreInitRequest.Builder builderForValue) {
+      public Builder SetSuiteDataStoreInitRequest(global::Gauge.Messages.SuiteDataStoreInitRequest.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasSuiteDataStoreInitRequest = true;
         result.suiteDataStoreInitRequest_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeSuiteDataStoreInitRequest(global::main.SuiteDataStoreInitRequest value) {
+      public Builder MergeSuiteDataStoreInitRequest(global::Gauge.Messages.SuiteDataStoreInitRequest value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasSuiteDataStoreInitRequest &&
-            result.suiteDataStoreInitRequest_ != global::main.SuiteDataStoreInitRequest.DefaultInstance) {
-            result.suiteDataStoreInitRequest_ = global::main.SuiteDataStoreInitRequest.CreateBuilder(result.suiteDataStoreInitRequest_).MergeFrom(value).BuildPartial();
+            result.suiteDataStoreInitRequest_ != global::Gauge.Messages.SuiteDataStoreInitRequest.DefaultInstance) {
+            result.suiteDataStoreInitRequest_ = global::Gauge.Messages.SuiteDataStoreInitRequest.CreateBuilder(result.suiteDataStoreInitRequest_).MergeFrom(value).BuildPartial();
         } else {
           result.suiteDataStoreInitRequest_ = value;
         }
@@ -9030,9 +10996,169 @@ namespace main {
         result.suiteDataStoreInitRequest_ = null;
         return this;
       }
+      
+      public bool HasStepNameRequest {
+       get { return result.hasStepNameRequest; }
+      }
+      public global::Gauge.Messages.StepNameRequest StepNameRequest {
+        get { return result.StepNameRequest; }
+        set { SetStepNameRequest(value); }
+      }
+      public Builder SetStepNameRequest(global::Gauge.Messages.StepNameRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStepNameRequest = true;
+        result.stepNameRequest_ = value;
+        return this;
+      }
+      public Builder SetStepNameRequest(global::Gauge.Messages.StepNameRequest.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasStepNameRequest = true;
+        result.stepNameRequest_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeStepNameRequest(global::Gauge.Messages.StepNameRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasStepNameRequest &&
+            result.stepNameRequest_ != global::Gauge.Messages.StepNameRequest.DefaultInstance) {
+            result.stepNameRequest_ = global::Gauge.Messages.StepNameRequest.CreateBuilder(result.stepNameRequest_).MergeFrom(value).BuildPartial();
+        } else {
+          result.stepNameRequest_ = value;
+        }
+        result.hasStepNameRequest = true;
+        return this;
+      }
+      public Builder ClearStepNameRequest() {
+        PrepareBuilder();
+        result.hasStepNameRequest = false;
+        result.stepNameRequest_ = null;
+        return this;
+      }
+      
+      public bool HasStepNameResponse {
+       get { return result.hasStepNameResponse; }
+      }
+      public global::Gauge.Messages.StepNameResponse StepNameResponse {
+        get { return result.StepNameResponse; }
+        set { SetStepNameResponse(value); }
+      }
+      public Builder SetStepNameResponse(global::Gauge.Messages.StepNameResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasStepNameResponse = true;
+        result.stepNameResponse_ = value;
+        return this;
+      }
+      public Builder SetStepNameResponse(global::Gauge.Messages.StepNameResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasStepNameResponse = true;
+        result.stepNameResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeStepNameResponse(global::Gauge.Messages.StepNameResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasStepNameResponse &&
+            result.stepNameResponse_ != global::Gauge.Messages.StepNameResponse.DefaultInstance) {
+            result.stepNameResponse_ = global::Gauge.Messages.StepNameResponse.CreateBuilder(result.stepNameResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.stepNameResponse_ = value;
+        }
+        result.hasStepNameResponse = true;
+        return this;
+      }
+      public Builder ClearStepNameResponse() {
+        PrepareBuilder();
+        result.hasStepNameResponse = false;
+        result.stepNameResponse_ = null;
+        return this;
+      }
+      
+      public bool HasRefactorRequest {
+       get { return result.hasRefactorRequest; }
+      }
+      public global::Gauge.Messages.RefactorRequest RefactorRequest {
+        get { return result.RefactorRequest; }
+        set { SetRefactorRequest(value); }
+      }
+      public Builder SetRefactorRequest(global::Gauge.Messages.RefactorRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasRefactorRequest = true;
+        result.refactorRequest_ = value;
+        return this;
+      }
+      public Builder SetRefactorRequest(global::Gauge.Messages.RefactorRequest.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasRefactorRequest = true;
+        result.refactorRequest_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeRefactorRequest(global::Gauge.Messages.RefactorRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasRefactorRequest &&
+            result.refactorRequest_ != global::Gauge.Messages.RefactorRequest.DefaultInstance) {
+            result.refactorRequest_ = global::Gauge.Messages.RefactorRequest.CreateBuilder(result.refactorRequest_).MergeFrom(value).BuildPartial();
+        } else {
+          result.refactorRequest_ = value;
+        }
+        result.hasRefactorRequest = true;
+        return this;
+      }
+      public Builder ClearRefactorRequest() {
+        PrepareBuilder();
+        result.hasRefactorRequest = false;
+        result.refactorRequest_ = null;
+        return this;
+      }
+      
+      public bool HasRefactorResponse {
+       get { return result.hasRefactorResponse; }
+      }
+      public global::Gauge.Messages.RefactorResponse RefactorResponse {
+        get { return result.RefactorResponse; }
+        set { SetRefactorResponse(value); }
+      }
+      public Builder SetRefactorResponse(global::Gauge.Messages.RefactorResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasRefactorResponse = true;
+        result.refactorResponse_ = value;
+        return this;
+      }
+      public Builder SetRefactorResponse(global::Gauge.Messages.RefactorResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasRefactorResponse = true;
+        result.refactorResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeRefactorResponse(global::Gauge.Messages.RefactorResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasRefactorResponse &&
+            result.refactorResponse_ != global::Gauge.Messages.RefactorResponse.DefaultInstance) {
+            result.refactorResponse_ = global::Gauge.Messages.RefactorResponse.CreateBuilder(result.refactorResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.refactorResponse_ = value;
+        }
+        result.hasRefactorResponse = true;
+        return this;
+      }
+      public Builder ClearRefactorResponse() {
+        PrepareBuilder();
+        result.hasRefactorResponse = false;
+        result.refactorResponse_ = null;
+        return this;
+      }
     }
     static Message() {
-      object.ReferenceEquals(global::main.Messages.Descriptor, null);
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
     }
   }
   

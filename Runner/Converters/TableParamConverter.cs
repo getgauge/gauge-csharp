@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib;
-using main;
+using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Converters
 {

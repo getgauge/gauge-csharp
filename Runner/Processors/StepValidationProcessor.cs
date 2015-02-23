@@ -1,4 +1,5 @@
-using main;
+using System;
+using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
