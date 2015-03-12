@@ -3,8 +3,8 @@
   "version" : "0.0.6",
   "description": "C# support for gauge",
   "run": {
-  "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
-  "linux": ["echo", "Coming Soon!"],
+    "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
+    "linux": ["echo", "Coming Soon!"],
     "darwin": ["echo", "Coming Soon!"]
   },
   "init": {
