@@ -4,7 +4,7 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>Gauge CSharp Lib</title>
-    <authors>ThoughtWorks Studios</authors>
+    <authors>ThoughtWorks Inc</authors>
     <owners>steam</owners>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.txt</licenseUrl>
     <projectUrl>http://getgauge.io</projectUrl>
@@ -13,9 +13,6 @@
     <releaseNotes>Initial version of Gauge CSharp</releaseNotes>
     <tags>Gauge CSharp</tags>
     <summary>CSharp bindings for Gauge. Write CSharp step implementation for Gauge specs.</summary>
-    <dependencies>
-      <dependency id="Google.ProtocolBuffers" version="2.4.1.521"/>
-    </dependencies>
   </metadata>
   <files>
     <file src="Install.ps1" target="tools" />    

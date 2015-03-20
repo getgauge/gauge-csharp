@@ -52,15 +52,17 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.1.0.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.1.1.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
-    <Reference Include="Google.ProtocolBuffers">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.521\lib\net40\Google.ProtocolBuffers.dll</HintPath>
+    <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.dll</HintPath>
     </Reference>
-    <Reference Include="Google.ProtocolBuffers.Serialization">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.521\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
+    <Reference Include="Google.ProtocolBuffers.Serialization, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
@@ -122,6 +124,7 @@
     <Compile Include="Processors\StepExecutionStartingProcessor.cs" />
     <Compile Include="SetupPhaseExecutor.cs" />
     <Compile Include="StartPhaseExecutor.cs" />
+    <Compile Include="StepImplementation.cs" />
     <Compile Include="StepRegistry.cs" />
     <Compile Include="Processors\StepValidationProcessor.cs" />
     <Compile Include="Converters\StringParamConverter.cs" />
@@ -131,12 +134,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="csharp.json" />
+    <None Include="env\default\default.properties" />
+    <None Include="manifest.json" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CHANGES.txt" />
-    <Content Include="licenses\license.txt" />
-    <Content Include="licenses\protoc-license.txt" />
+    <None Include="specs\hello_world.spec" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
