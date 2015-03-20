@@ -72,6 +72,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassInstanceManager.cs" />
+    <Compile Include="Communication\AbstractGaugeConnection.cs" />
+    <Compile Include="Communication\Api.cs" />
+    <Compile Include="Communication\GaugeApiConnection.cs" />
+    <Compile Include="Communication\GaugeConnection.cs" />
+    <Compile Include="Communication\ITcpClientWrapper.cs" />
+    <Compile Include="Communication\Messages.cs" />
+    <Compile Include="Communication\Spec.cs" />
+    <Compile Include="Communication\TcpClientWrapper.cs" />
+    <Compile Include="Communication\Utils.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="DataStore.cs" />
     <Compile Include="DataStoreFactory.cs" />

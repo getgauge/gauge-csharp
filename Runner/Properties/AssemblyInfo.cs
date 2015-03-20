@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Gauge.CSharp.Runner")]
 [assembly: AssemblyDescription("C# spec for Gauge. http://getgauge.io")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thoughtworks Studios")]
+[assembly: AssemblyCompany("Thoughtworks Inc")]
 [assembly: AssemblyProduct("Gauge.CSharp.Runner")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.0.6")]
-[assembly: AssemblyFileVersion("0.0.6")]
+[assembly: AssemblyVersion("0.1.0")]
+[assembly: AssemblyFileVersion("0.1.0")]
