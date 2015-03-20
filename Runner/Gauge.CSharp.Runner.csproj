@@ -52,6 +52,10 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gauge.CSharp.Lib, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.1.0.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Google.ProtocolBuffers">
       <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.521\lib\net40\Google.ProtocolBuffers.dll</HintPath>
     </Reference>
@@ -128,12 +132,6 @@
     <None Include="App.config" />
     <None Include="csharp.json" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lib\Gauge.CSharp.Lib.csproj">
-      <Project>{98c96ca5-84ee-4e47-b0c1-7ff7591ee12a}</Project>
-      <Name>Gauge.CSharp.Lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CHANGES.txt" />
