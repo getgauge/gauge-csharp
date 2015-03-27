@@ -4,9 +4,10 @@ if ($artifactPath -ne '') {
     $artifactPath=resolve-path $artifactPath
 }
 else {
-    $artifactPath=$pwd
+    $artifactPath=join-path $pwd, "artifacts"
 }
-$pluginFile = gci artifacts\gauge-csharp*.zip | select -f 1
+
+$pluginFile = gci $artifactPath\gauge-csharp*.zip | select -f 1
 
 $pluginVersion=$pluginFile.Name | Select-String '(gauge-csharp-)(.*).zip' | %{$_.Matches[0].Groups[2].Value}
 
@@ -31,6 +32,10 @@ Try
 Catch
 {
     Write-host "Failed to install $($pluginVersion), Rolling back"
+    Write-host $_.Exception.Message
     Remove-Item -recurse $destinationPath -Force
-    Rename-Item $tempFolderPath $pluginVersion -Force
+    if(Test-Path $tempFolderPath)
+    {
+        Rename-Item $tempFolderPath $pluginVersion -Force
+    }
 }
