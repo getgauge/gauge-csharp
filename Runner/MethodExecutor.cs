@@ -14,15 +14,25 @@ namespace Gauge.CSharp.Runner
 {
     public class MethodExecutor : IMethodExecutor
     {
+        private readonly ISandbox _sandbox;
+
+        public MethodExecutor(ISandbox sandbox)
+        {
+            _sandbox = sandbox;
+        }
+
+        public MethodExecutor() : this(Sandbox.Instance)
+        {
+        }
+
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {
             var stopwatch = Stopwatch.StartNew();
             try
             {
-                var instance = ClassInstanceManager.Get(method.DeclaringType);
                 try
                 {
-                    method.Invoke(instance, args);
+                    _sandbox.ExecuteMethod(method, args);
                 }
                 catch (TargetInvocationException e)
                 {
