@@ -100,6 +100,7 @@
     <Compile Include="IPhaseExecutor.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="PhaseExecutorFactory.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Processors\SpecExecutionStartingProcessor.cs" />
     <Compile Include="Processors\StepExecutionEndingProcessor.cs" />
     <Compile Include="Processors\StepExecutionStartingProcessor.cs" />
+    <Compile Include="Sandbox.cs" />
     <Compile Include="SetupPhaseExecutor.cs" />
     <Compile Include="StartPhaseExecutor.cs" />
     <Compile Include="StepRegistry.cs" />
