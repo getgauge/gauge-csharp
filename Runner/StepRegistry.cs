@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace Gauge.CSharp.Runner
 {
+    [Serializable]
     public class StepRegistry : IStepRegistry
     {
         private readonly Dictionary<string, MethodInfo> _scannedSteps;
