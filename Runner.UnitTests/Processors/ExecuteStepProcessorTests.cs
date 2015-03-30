@@ -27,8 +27,9 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(false);
+            var mockSandBox = new Mock<ISandbox>();
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
 
             Assert.True(response.ExecutionStatusResponse.ExecutionResult.Failed);
             Assert.AreEqual(response.ExecutionStatusResponse.ExecutionResult.ErrorMessage,
@@ -50,9 +51,12 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(GetType().GetMethod("Foo"));
+            var fooMethodInfo = GetType().GetMethod("Foo");
+            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
+            var mockSandBox = new Mock<ISandbox>();
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(fooMethodInfo));
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
             
             Assert.True(response.ExecutionStatusResponse.ExecutionResult.Failed);
             Assert.AreEqual(response.ExecutionStatusResponse.ExecutionResult.ErrorMessage,
@@ -80,9 +84,12 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(GetType().GetMethod("Foo"));
+            var fooMethodInfo = GetType().GetMethod("Foo");
+            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
+            var mockSandBox = new Mock<ISandbox>();
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(fooMethodInfo));
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
 
             Assert.False(response.ExecutionStatusResponse.ExecutionResult.Failed);
         }

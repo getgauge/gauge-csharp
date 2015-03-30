@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using Gauge.CSharp.Lib;
+using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
 {

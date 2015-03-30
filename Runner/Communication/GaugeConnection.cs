@@ -1,4 +1,4 @@
-namespace Gauge.CSharp.Lib
+namespace Gauge.CSharp.Runner.Communication
 {
     public class GaugeConnection : AbstractGaugeConnection
     {

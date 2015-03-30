@@ -18,7 +18,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockHookRegistry = new Mock<IHookRegistry>();
             mockMethodScanner.Setup(x => x.GetHookRegistry()).Returns(mockHookRegistry.Object);
             mockMethodScanner.Setup(x => x.GetStepRegistry()).Returns(mockStepRegistry.Object);
-            _messageProcessorFactory = new MessageProcessorFactory(mockMethodScanner.Object);
+            var mockSandBox = new Mock<ISandbox>();
+            _messageProcessorFactory = new MessageProcessorFactory(mockMethodScanner.Object, mockSandBox.Object);
         }
 
         [Test]

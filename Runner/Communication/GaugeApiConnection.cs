@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Gauge.CSharp.Lib;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 
-namespace Gauge.CSharp.Lib
+namespace Gauge.CSharp.Runner.Communication
 {
     public class GaugeApiConnection : AbstractGaugeConnection
     {

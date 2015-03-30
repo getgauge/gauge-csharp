@@ -91,6 +91,7 @@
     <Compile Include="DataStore.cs" />
     <Compile Include="DataStoreFactory.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
+    <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -21,6 +21,11 @@ namespace Gauge.CSharp.Runner.Processors
             InitializeConverter();
         }
 
+        public ExecuteStepProcessor(IStepRegistry stepRegistry, ISandbox sandbox)
+            : this(stepRegistry, new MethodExecutor(sandbox))
+        {
+        }
+
         public ExecuteStepProcessor(IStepRegistry stepRegistry) : this(stepRegistry, new MethodExecutor())
         {
         }

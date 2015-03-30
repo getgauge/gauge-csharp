@@ -7,17 +7,21 @@ namespace Gauge.CSharp.Runner.Processors
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
         private readonly IMethodExecutor _methodExecutor;
+        private readonly ISandbox _sandbox;
         protected IHookRegistry Hooks { get; private set; }
 
-        protected HookExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        protected HookExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
         {
             _methodExecutor = methodExecutor;
+            _sandbox = sandbox;
             Hooks = hookRegistry;
         }
 
-        protected HookExecutionProcessor(IHookRegistry hookRegistry) : this(hookRegistry, new MethodExecutor())
-        {    
+        protected HookExecutionProcessor(IHookRegistry hookRegistry, ISandbox sandbox)
+            : this(hookRegistry, new MethodExecutor(), sandbox)
+        {
         }
+
 
         protected abstract IEnumerable<MethodInfo> GetHooks();
 

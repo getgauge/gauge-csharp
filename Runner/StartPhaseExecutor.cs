@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Gauge.CSharp.Lib;
+using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Runner.Exceptions;
 using Gauge.Messages;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
@@ -16,7 +17,7 @@ namespace Gauge.CSharp.Runner
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
         private static StartPhaseExecutor _instance;
-
+        private static bool _shouldBuildProject = true;
         public static StartPhaseExecutor GetDefaultInstance()
         {
             return _instance ?? (_instance = new StartPhaseExecutor());
@@ -24,12 +25,24 @@ namespace Gauge.CSharp.Runner
 
         private StartPhaseExecutor()
         {
-            BuildTargetGaugeProject();
             _messageProcessorFactory = new MessageProcessorFactory();
         }
 
         public void Execute()
         {
+            if (_shouldBuildProject)
+            {
+                try
+                {
+                    BuildTargetGaugeProject();
+                    _shouldBuildProject = false;
+                }
+                catch (NotAValidGaugeProjectException)
+                {
+                    Console.Out.WriteLine("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
+                    Environment.Exit(1);
+                }
+            }
             using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
             {
                 while (gaugeConnection.Connected)
@@ -55,8 +68,7 @@ namespace Gauge.CSharp.Runner
 
             if (!solutionFileList.Any())
             {
-                Console.Out.WriteLine("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
-                Environment.Exit(0);
+                throw new NotAValidGaugeProjectException();
             }
             var solutionFullPath = solutionFileList.First();
             Directory.CreateDirectory(Utils.GaugeBinDir);

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
@@ -22,7 +23,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar"));
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
             

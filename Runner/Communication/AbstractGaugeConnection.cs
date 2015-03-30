@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Google.ProtocolBuffers;
 
-namespace Gauge.CSharp.Lib
+namespace Gauge.CSharp.Runner.Communication
 {
     public abstract class AbstractGaugeConnection : IDisposable
     {

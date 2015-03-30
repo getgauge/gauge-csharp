@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
-using System.Security.Policy;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
 {

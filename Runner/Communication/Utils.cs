@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Gauge.CSharp.Lib
+namespace Gauge.CSharp.Runner.Communication
 {
     public class Utils
     {

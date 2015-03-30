@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Gauge.CSharp.Lib;
+using Gauge.CSharp.Runner.Communication;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 
@@ -7,18 +7,21 @@ namespace Gauge.CSharp.Runner
 {
     public class MessageProcessorFactory
     {
+        private readonly ISandbox _sandbox;
         private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
         public MessageProcessorFactory()
         {
+            _sandbox = new Sandbox();
             using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
                 InitializeProcessors(new MethodScanner(apiConnection));
             }
         }
 
-        public MessageProcessorFactory(IMethodScanner stepScanner)
+        public MessageProcessorFactory(IMethodScanner stepScanner, ISandbox sandbox)
         {
+            _sandbox = sandbox;
             InitializeProcessors(stepScanner);
         }
 
@@ -28,21 +31,21 @@ namespace Gauge.CSharp.Runner
         }
 
 
-        private static Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry,
+        private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry,
             IHookRegistry hookRegistry)
         {
-            var methodExecutor = new MethodExecutor();
+            var methodExecutor = new MethodExecutor(_sandbox);
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
-                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(hookRegistry)},
-                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(hookRegistry)},
-                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(hookRegistry)},
-                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(hookRegistry)},
-                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(hookRegistry)},
-                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry)},
-                {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry)},
+                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry, methodExecutor, _sandbox)},
+                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry, methodExecutor, _sandbox)},
+                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry, _sandbox)},
+                {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, _sandbox)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
                 {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry)},
                 {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)},

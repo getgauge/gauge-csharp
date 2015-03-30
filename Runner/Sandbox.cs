@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
 {
@@ -21,9 +21,9 @@ namespace Gauge.CSharp.Runner
         private static IEnumerable<Assembly> _scannedAssemblies;
         private static Assembly _targetLibAssembly;
 
-        private static Sandbox Create()
+        private static Sandbox Create(AppDomainSetup setup=null)
         {
-            var sandboxAppDomainSetup = new AppDomainSetup {ApplicationBase = Utils.GaugeBinDir};
+            var sandboxAppDomainSetup = setup ?? new AppDomainSetup {ApplicationBase = Utils.GaugeBinDir};
 
             var permSet = new PermissionSet(PermissionState.None);
             permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
