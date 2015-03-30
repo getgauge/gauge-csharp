@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.True(executionResult.ExecutionTime > 0);
         }
 
-        [Test]
+        [Test, Ignore("Screenshots are not available in CI - to use Gauge_screenshot instead")]
         public void ShouldTakeScreenShotOnFailedExecution()
         {
             var mockSandBox = new Mock<ISandbox>();

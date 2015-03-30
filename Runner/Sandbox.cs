@@ -25,11 +25,10 @@ namespace Gauge.CSharp.Runner
         {
             var sandboxAppDomainSetup = setup ?? new AppDomainSetup {ApplicationBase = Utils.GaugeBinDir};
 
-            var permSet = new PermissionSet(PermissionState.None);
-            permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+            var permSet = new PermissionSet(PermissionState.Unrestricted);
 
             var newDomain = AppDomain.CreateDomain("Sandbox", null, sandboxAppDomainSetup, permSet);
-
+            
             var handle = Activator.CreateInstanceFrom(
                 newDomain, typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                 typeof(Sandbox).FullName

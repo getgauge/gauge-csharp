@@ -81,10 +81,8 @@ namespace Gauge.CSharp.Runner
                     return takeScreenshot;
                 }
             }
-            catch(Exception e)
+            catch
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
                 return ByteString.Empty;
             }
         }
