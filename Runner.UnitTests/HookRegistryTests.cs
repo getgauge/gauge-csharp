@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using Gauge.CSharp.Lib.Attribute;
+using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {

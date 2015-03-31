@@ -25,11 +25,6 @@ namespace Gauge.CSharp.Runner
 
         private StartPhaseExecutor()
         {
-            _messageProcessorFactory = new MessageProcessorFactory();
-        }
-
-        public void Execute()
-        {
             if (_shouldBuildProject)
             {
                 try
@@ -43,6 +38,11 @@ namespace Gauge.CSharp.Runner
                     Environment.Exit(1);
                 }
             }
+            _messageProcessorFactory = new MessageProcessorFactory();
+        }
+
+        public void Execute()
+        {
             using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
             {
                 while (gaugeConnection.Connected)

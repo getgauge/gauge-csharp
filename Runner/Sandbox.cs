@@ -10,16 +10,25 @@ using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
 {
+    [Serializable]
     public class Sandbox : MarshalByRefObject, ISandbox
     {
         private static Sandbox _instance;
+        private List<Assembly> ScannedAssemblies { get; set; }
+        private static Assembly TargetLibAssembly { get; set; }
+
+        private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+
         public static Sandbox Instance
         {
             get { return _instance ?? (_instance=Create()); }
         }
 
-        private static IEnumerable<Assembly> _scannedAssemblies;
-        private static Assembly _targetLibAssembly;
+        public void ExecuteMethod(MethodInfo method, params object[] args)
+        {
+            var instance = ClassInstanceManager.Get(method.DeclaringType);
+            method.Invoke(instance, args);
+        }
 
         private static Sandbox Create(AppDomainSetup setup=null)
         {
@@ -27,15 +36,13 @@ namespace Gauge.CSharp.Runner
 
             var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-            var newDomain = AppDomain.CreateDomain("Sandbox", null, sandboxAppDomainSetup, permSet);
-            
-            var handle = Activator.CreateInstanceFrom(
-                newDomain, typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
-                typeof(Sandbox).FullName
-                );
-            var sandbox = (Sandbox)handle.Unwrap();
-            _scannedAssemblies = GetAllAssemblyFiles();
-            _targetLibAssembly = _scannedAssemblies.First(assembly => assembly.GetName().Name=="Gauge.CSharp.Lib");
+            var sandboxDomain = AppDomain.CreateDomain("Sandbox", null, sandboxAppDomainSetup, permSet);
+            AppDomain.CurrentDomain.AssemblyResolve+=CurrentDomain_AssemblyResolve;
+
+            var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
+                typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
+                typeof (Sandbox).FullName);
+            sandbox.LoadAssemblyFiles();
             return sandbox;
         }
 
@@ -53,30 +60,40 @@ namespace Gauge.CSharp.Runner
             return hookRegistry;
         }
 
-        internal IEnumerable<MethodInfo> GetStepMethods()
+        internal List<MethodInfo> GetStepMethods()
         {
-            return GetAllMethodsForSpecAssemblies(typeof(Step).ToString());
-        }
-        private static IEnumerable<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
-        {
-            var targetType = _targetLibAssembly.GetType(type);
-            return _scannedAssemblies.SelectMany(assembly => GetMethodsFromAssembly(targetType, assembly));
+            return GetAllMethodsForSpecAssemblies(typeof(Step).FullName);
         }
 
-        private static IEnumerable<MethodInfo> GetMethodsFromAssembly(Type type, Assembly assembly)
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            var isGaugeAssembly = assembly.GetReferencedAssemblies().Select(name => name.Name).Contains("Gauge.CSharp.Lib");
-            return isGaugeAssembly ? assembly.GetTypes().SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any())) : Enumerable.Empty<MethodInfo>();
-        }
-        private static IEnumerable<Assembly> GetAllAssemblyFiles()
-        {
-            return Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly).Select(Assembly.LoadFrom);
+            var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
+            var fileName = Path.Combine(Utils.GaugeBinDir, shortAssemblyName + ".dll");
+            if (File.Exists(fileName))
+            {
+                return Assembly.LoadFrom(fileName);
+            }
+            return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
         }
 
-        public void ExecuteMethod(MethodInfo method, params object[] args)
+        private static List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
         {
-            var instance = ClassInstanceManager.Get(method.DeclaringType);
-            method.Invoke(instance, args);
+            var targetType = TargetLibAssembly.GetType(type);
+            return Instance.ScannedAssemblies.SelectMany(assembly => GetMethodsFromAssembly(targetType, assembly)).ToList();
+        }
+
+        private static List<MethodInfo> GetMethodsFromAssembly(Type type, Assembly assembly)
+        {
+            var isGaugeAssembly = assembly.GetReferencedAssemblies().Select(name => name.Name).Contains(GaugeLibAssembleName);
+            return isGaugeAssembly ? assembly.GetTypes().SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any())).ToList() : new List<MethodInfo>();
+        }
+        private void LoadAssemblyFiles()
+        {
+            ScannedAssemblies=Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly)
+                .Select(Assembly.LoadFrom)
+                .ToList();
+            Console.WriteLine("Loaded {0} assemblies", ScannedAssemblies.Count());
+            TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
         }
     }
 }
