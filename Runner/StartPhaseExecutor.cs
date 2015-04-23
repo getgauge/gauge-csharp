@@ -35,6 +35,7 @@ namespace Gauge.CSharp.Runner
 
         private static StartPhaseExecutor _instance;
         private static bool _shouldBuildProject = true;
+
         public static StartPhaseExecutor GetDefaultInstance()
         {
             return _instance ?? (_instance = new StartPhaseExecutor());
@@ -60,24 +61,31 @@ namespace Gauge.CSharp.Runner
 
         public void Execute()
         {
-            using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
+            try
             {
-                while (gaugeConnection.Connected)
+                using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
                 {
-                    var messageBytes = gaugeConnection.ReadBytes();
-                    var message = Message.ParseFrom(messageBytes.ToArray());
-                    
-                    var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
-                    var response = processor.Process(message);
-                    gaugeConnection.WriteMessage(response);
-                    if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
+                    while (gaugeConnection.Connected)
                     {
-                        return;
+                        var messageBytes = gaugeConnection.ReadBytes();
+                        var message = Message.ParseFrom(messageBytes.ToArray());
+
+                        var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
+                        var response = processor.Process(message);
+                        gaugeConnection.WriteMessage(response);
+                        if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
+                        {
+                            return;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[WARN] Exception thrown: {0}", ex);
+            }
         }
-        
+
         private static void BuildTargetGaugeProject()
         {
             var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
