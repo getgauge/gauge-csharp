@@ -8,3 +8,5 @@ packages
 *.nupkg
 *.csproj.user
 artifacts/
+Gauge.CSharp.Sln.ide
+Gauge.CSharp.Lib.Sln.ide

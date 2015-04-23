@@ -1,10 +1,10 @@
 # C# support for Gauge
 
-This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html). 
+This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html).
 
 You can download Gauge [here](http://getgauge.io)
 
-This repository hosts two projects, `Lib` and `Runner`. 
+This repository hosts two projects, `Lib` and `Runner`.
 
 ## Gauge Lib
 `Lib` is a dll that brings in Gauge's data types to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
@@ -17,7 +17,7 @@ Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/ma
 Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/master/Runner).
 
 ## Gauge-Proto
-This is a submodule of the repository `https://github.com/getgauge/gauge-proto`. This repository holds the `.proto` files that act as contracts between Gauge and the plugins. This submodule needs to be fetched to generate the protobuf classes. 
+This is a submodule of the repository `https://github.com/getgauge/gauge-proto`. This repository holds the `.proto` files that act as contracts between Gauge and the plugins. This submodule needs to be fetched to generate the protobuf classes.
 
 ## Developer notes
 
