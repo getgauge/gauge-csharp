@@ -24,6 +24,7 @@ namespace Gauge.CSharp.Runner
 {
     public class MessageProcessorFactory
     {
+        private readonly IMethodScanner _stepScanner;
         private readonly ISandbox _sandbox;
         private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
@@ -32,12 +33,14 @@ namespace Gauge.CSharp.Runner
             _sandbox = new Sandbox();
             using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
-                InitializeProcessors(new MethodScanner(apiConnection));
+                _stepScanner = new MethodScanner(apiConnection);
+                InitializeProcessors(_stepScanner);
             }
         }
 
         public MessageProcessorFactory(IMethodScanner stepScanner, ISandbox sandbox)
         {
+            _stepScanner = stepScanner;
             _sandbox = sandbox;
             InitializeProcessors(stepScanner);
         }
@@ -64,7 +67,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry, _sandbox)},
                 {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, _sandbox)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
-                {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(stepRegistry)},
+                {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(_stepScanner)},
                 {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)},
                 {Message.Types.MessageType.ScenarioDataStoreInit, new DataStoreInitProcessor()},
                 {Message.Types.MessageType.SpecDataStoreInit, new DataStoreInitProcessor()},

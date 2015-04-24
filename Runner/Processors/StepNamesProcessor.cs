@@ -22,16 +22,16 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class StepNamesProcessor : IMessageProcessor
     {
-        private readonly IStepRegistry _stepRegistry;
+        private readonly IMethodScanner _methodScanner;
 
-        public StepNamesProcessor(IStepRegistry stepRegistry)
+        public StepNamesProcessor(IMethodScanner methodScanner)
         {
-            _stepRegistry = stepRegistry;
+            _methodScanner = methodScanner;
         }
 
         public Message Process(Message request)
         {
-            var allSteps = _stepRegistry.AllSteps();
+            var allSteps = _methodScanner.GetStepTexts();
             return GetStepNamesResponseMessage(allSteps, request);
         }
 

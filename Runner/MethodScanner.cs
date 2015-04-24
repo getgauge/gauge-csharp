@@ -16,7 +16,9 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Communication;
 
@@ -37,17 +39,27 @@ namespace Gauge.CSharp.Runner
             return new StepRegistry(GetStepMethods());
         }
 
+        public IEnumerable<string> GetStepTexts()
+        {
+            return _sandbox.GetStepMethods().SelectMany(stepMethod => stepMethod.GetCustomAttribute<Step>().Names);
+        } 
+
         private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
         {
             var stepMethods = _sandbox.GetStepMethods();
             foreach (var stepMethod in stepMethods)
             {
-                var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names, false);
+                var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names, hasTableParameter(stepMethod));
                 foreach (var stepValue in stepValues)
                 {
                     yield return new KeyValuePair<string, MethodInfo>(stepValue, stepMethod);
                 }
             }
+        }
+
+        private bool hasTableParameter(MethodInfo method)
+        {
+            return method.GetParameters().Any(parameterInfo => parameterInfo.ParameterType.FullName == typeof (Table).FullName);
         }
 
         public IHookRegistry GetHookRegistry()
