@@ -1,6 +1,6 @@
 {
   "id" : "csharp",
-  "version" : "0.0.6",
+  "version" : "0.2.1",
   "description": "C# support for gauge",
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
@@ -13,7 +13,7 @@
     "darwin": ["echo", "Coming Soon!"]
   },
   "gaugeVersionSupport": {
-      "minimum": "0.0.5",
+      "minimum": "0.1.0",
       "maximum": ""
   }
 }
