@@ -109,7 +109,6 @@ namespace Gauge.CSharp.Runner
             ScannedAssemblies=Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly)
                 .Select(Assembly.LoadFrom)
                 .ToList();
-            Console.WriteLine("Loaded {0} assemblies", ScannedAssemblies.Count());
             TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
         }
     }
