@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Communication;
 
@@ -29,6 +29,7 @@ namespace Gauge.CSharp.Runner
         private readonly GaugeApiConnection _apiConnection;
 
         private readonly Sandbox _sandbox = Sandbox.Instance;
+
         public MethodScanner(GaugeApiConnection apiConnection)
         {
             _apiConnection = apiConnection;
@@ -42,30 +43,35 @@ namespace Gauge.CSharp.Runner
         public IEnumerable<string> GetStepTexts()
         {
             return _sandbox.GetStepMethods().SelectMany(stepMethod => stepMethod.GetCustomAttribute<Step>().Names);
-        } 
+        }
 
         private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
         {
-            var stepMethods = _sandbox.GetStepMethods();
-            foreach (var stepMethod in stepMethods)
+            var retVal = new List<KeyValuePair<string, MethodInfo>>();
+            try
             {
-                var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names, hasTableParameter(stepMethod));
-                foreach (var stepValue in stepValues)
+                var stepMethods = _sandbox.GetStepMethods();
+                foreach (var stepMethod in stepMethods)
                 {
-                    yield return new KeyValuePair<string, MethodInfo>(stepValue, stepMethod);
+                    // HasTable is set to false here, table parameter is interpreted using the Step text.
+                    var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names,
+                        false);
+
+                    retVal.AddRange(
+                        stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
                 }
             }
-        }
-
-        private bool hasTableParameter(MethodInfo method)
-        {
-            return method.GetParameters().Any(parameterInfo => parameterInfo.ParameterType.FullName == typeof (Table).FullName);
+            catch (Exception ex)
+            {
+                Console.WriteLine("[WARN] Steps Fetch failed, Failed to connect to Gauge API");
+                Console.WriteLine(ex.Message);
+            }
+            return retVal;
         }
 
         public IHookRegistry GetHookRegistry()
         {
             return _sandbox.GetHookRegistry();
         }
-
     }
 }
