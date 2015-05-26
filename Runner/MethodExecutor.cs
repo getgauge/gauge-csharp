@@ -42,6 +42,7 @@ namespace Gauge.CSharp.Runner
         {
         }
 
+        [DebuggerHidden]
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -104,6 +105,7 @@ namespace Gauge.CSharp.Runner
             }
         }
 
+        [DebuggerHidden]
         public ProtoExecutionResult ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo)
         {
             var stopwatch = Stopwatch.StartNew();
@@ -121,6 +123,7 @@ namespace Gauge.CSharp.Runner
                 .Build();
         }
 
+        [DebuggerHidden]
         private ProtoExecutionResult ExecuteHook(MethodInfo method, object[] objects)
         {
             return HasArguments(method, objects) ? Execute(method, objects) : Execute(method);

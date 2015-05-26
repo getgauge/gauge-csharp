@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -41,6 +42,8 @@ namespace Gauge.CSharp.Runner
             get { return _instance ?? (_instance=Create()); }
         }
 
+        [DebuggerStepperBoundary]
+        [DebuggerHidden]
         public void ExecuteMethod(MethodInfo method, params object[] args)
         {
             var instance = ClassInstanceManager.Get(method.DeclaringType);
@@ -107,7 +110,7 @@ namespace Gauge.CSharp.Runner
         private void LoadAssemblyFiles()
         {
             ScannedAssemblies=Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly)
-                .Select(Assembly.LoadFrom)
+                .Select(Assembly.LoadFile)
                 .ToList();
             TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
         }

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Gauge.CSharp.Runner.Communication;
@@ -59,6 +60,7 @@ namespace Gauge.CSharp.Runner
             _messageProcessorFactory = new MessageProcessorFactory();
         }
 
+        [DebuggerHidden]
         public void Execute()
         {
             try

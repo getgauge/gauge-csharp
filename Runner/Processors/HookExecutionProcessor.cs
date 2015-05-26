@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Gauge.Messages;
 
@@ -42,6 +43,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected abstract IEnumerable<MethodInfo> GetHooks();
 
+        [DebuggerHidden]
         public Message Process(Message request)
         {
             var currentExecutionInfo = GetExecutionInfo(request);

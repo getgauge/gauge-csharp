@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
@@ -46,6 +47,8 @@ namespace Gauge.CSharp.Runner.Processors
         public ExecuteStepProcessor(IStepRegistry stepRegistry) : this(stepRegistry, new MethodExecutor())
         {
         }
+
+        [DebuggerHidden]
         public Message Process(Message request)
         {
             var executeStepRequest = request.ExecuteStepRequest;
@@ -98,6 +101,7 @@ namespace Gauge.CSharp.Runner.Processors
             return WrapInMessage(builder.Build(), request);
         }
 
+        [DebuggerHidden]
         private ProtoExecutionResult ExecuteMethod(MethodInfo method, object[] args)
         {
             return _methodExecutor.Execute(method, args);
