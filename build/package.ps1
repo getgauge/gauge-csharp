@@ -15,18 +15,37 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+# Clean the artifacts directory
+
 Remove-Item "$($pwd)\artifacts" -recurse
 
+# Build everything
+
 & "$(Split-Path $MyInvocation.MyCommand.Path)\build.ps1"
+
+# First package the Lib, output is Gauge.CSharp.Lib nupkg, upload it to nuget.org.
+$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
+$nugetDir = "$($pwd)\artifacts"
+
+New-Item -Itemtype directory $nugetDir -Force
+
+$nugetInstallScript= {param($outputPath, $nugetDir)
+    $nuget = "$($pwd)\.nuget\NuGet.exe"
+    $env:OutDir=$outputPath # required for nuget to pick up the file from this location
+    &$nuget pack Lib\Gauge.CSharp.Lib.csproj /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
+}
+
+Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $outputPath, $nugetDir
+
+# Now, package the runner
 
 $outputDir= "$($pwd)\artifacts\gauge-csharp"
 
 $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $skelDir="$($outputDir)\skel"
-$nugetDir = "$($pwd)\artifacts\gauge-csharp-nuget"
 $skelPropertiesDir = "$($skelDir)\Properties"
 
-@($skelDir, $skelPropertiesDir, $nugetDir) | %{ New-Item -Itemtype directory $_ -Force}
+@($skelDir, $skelPropertiesDir) | %{ New-Item -Itemtype directory $_ -Force}
 
 Write-host "Copying Skeleton files for Gauge CSharp project"
 
@@ -42,14 +61,6 @@ Copy-Item "$($pwd)\.nuget\NuGet.exe" -Destination $outputPath -Force
 Copy-Item "$($pwd)\.nuget" -Destination $skelDir -recurse
 
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force
-
-$nugetInstallScript= {param($outputPath, $nugetDir)
-    $nuget = "$($pwd)\.nuget\NuGet.exe"
-    $env:OutDir=$outputPath # required for nuget to pick up the file from this location
-    &$nuget pack Lib\Gauge.CSharp.Lib.csproj /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
-}
-
-Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $outputPath, $nugetDir
 
 Import-Module Pscx
 

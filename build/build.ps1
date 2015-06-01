@@ -16,9 +16,18 @@
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 param([string]$buildWithTest='')
-$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
+
+# Build the package CSharp-lib
+$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-lib\")
 New-Item -Itemtype directory $outputPath -Force
 $msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
+$sln = "Gauge.CSharp.Lib.sln"
+
+&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
+
+# Build the runner
+$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
+New-Item -Itemtype directory $outputPath -Force
 $sln = "Gauge.CSharp.NoTests.sln"
 if ($buildWithTest -eq 'true') {
     $sln="Gauge.CSharp.sln"
