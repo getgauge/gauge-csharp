@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.1.1.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.2.0.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,8 +65,6 @@
     <Compile Include="ClassInstanceManagerTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="Converter\TableParamConverterTests.cs" />
-    <Compile Include="DataStoreFactoryTests.cs" />
-    <Compile Include="DataStoreTests.cs" />
     <Compile Include="HookRegistryTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />

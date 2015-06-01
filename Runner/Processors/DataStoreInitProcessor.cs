@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Diagnostics;
+using Gauge.CSharp.Lib;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -25,10 +27,25 @@ namespace Gauge.CSharp.Runner.Processors
         [DebuggerHidden]
         public Message Process(Message request)
         {
-            DataStoreFactory.GetDataStoreFor(request.MessageType).Initialize();
+            DataStoreFactory.GetDataStoreFor(GetDataStoreType(request.MessageType)).Initialize();
             
             //send back a default response?
             return new DefaultProcessor().Process(request);
+        }
+
+        private static DataStoreType GetDataStoreType(Message.Types.MessageType messageType)
+        {
+            switch (messageType)
+            {
+                case Message.Types.MessageType.ScenarioDataStoreInit:
+                    return DataStoreType.Scenario;
+                case Message.Types.MessageType.SpecDataStoreInit:
+                    return DataStoreType.Specification;
+                case Message.Types.MessageType.SuiteDataStoreInit:
+                    return DataStoreType.Suite;
+                default:
+                    throw new Exception("Invalid datastore init request");
+            }
         }
     }
 }
