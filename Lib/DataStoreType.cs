@@ -20,7 +20,7 @@ namespace Gauge.CSharp.Lib
     public enum DataStoreType
     {
         Suite,
-        Specification,
+        Spec,
         Scenario
     }
 }

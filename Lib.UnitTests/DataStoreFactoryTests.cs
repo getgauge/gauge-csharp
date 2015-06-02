@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Lib.UnitTests
         [Test]
         public void ShouldGetDataStoreForSpec()
         {
-            var dataStore = DataStoreFactory.GetDataStoreFor(DataStoreType.Specification);
+            var dataStore = DataStoreFactory.GetDataStoreFor(DataStoreType.Spec);
 
             Assert.NotNull(dataStore);
             Assert.IsInstanceOf<DataStore>(dataStore);

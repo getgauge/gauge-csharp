@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Lib
         private static readonly Dictionary<DataStoreType, DataStore> DataStores = new Dictionary<DataStoreType, DataStore>
         {
             {DataStoreType.Suite, new DataStore()},
-            {DataStoreType.Specification, new DataStore()},
+            {DataStoreType.Spec, new DataStore()},
             {DataStoreType.Scenario, new DataStore()}
         };
 
