@@ -33,7 +33,7 @@ namespace Gauge.CSharp.Runner.Processors
             return new DefaultProcessor().Process(request);
         }
 
-        private static DataStoreType GetDataStoreType(Message.Types.MessageType messageType)
+        public static DataStoreType GetDataStoreType(Message.Types.MessageType messageType)
         {
             switch (messageType)
             {
