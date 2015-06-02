@@ -31,7 +31,7 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
-        protected override IEnumerable<MethodInfo> GetHooks()
+        protected override HashSet<HookMethod> GetHooks()
         {
             return Hooks.BeforeSpecHooks;
         }

@@ -16,29 +16,40 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
-using Gauge.Messages;
 
-namespace Gauge.CSharp.Runner.Processors
+namespace Gauge.CSharp.Lib.Attribute
 {
-    public class ScenarioExecutionStartingProcessor : HookExecutionProcessor
+    public class FilteredHookAttribute : System.Attribute
     {
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
-        {
-        }
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, ISandbox sandbox)
-            : base(hookRegistry, new MethodExecutor(sandbox))
+        private readonly IEnumerable<string> _filterTags;
+        private readonly TagAggregation _tagAggregation;
+
+        public FilteredHookAttribute()
         {
         }
 
-        protected override HashSet<HookMethod> GetHooks()
+        public FilteredHookAttribute(string filterTag)
         {
-            return Hooks.BeforeScenarioHooks;
+            _filterTags = new[] {filterTag};
         }
 
-        protected override ExecutionInfo GetExecutionInfo(Message request)
+        public FilteredHookAttribute(IEnumerable<string> filterTags, TagAggregation tagAggregation = TagAggregation.And)
         {
-            return request.ScenarioExecutionStartingRequest.CurrentExecutionInfo;
+            _filterTags = filterTags;
+            _tagAggregation = tagAggregation;
+        }
+
+        public TagAggregation TagAggregation
+        {
+            get { return _tagAggregation; }
+        }
+
+        public IEnumerable<string> FilterTags
+        {
+            get
+            {
+                return _filterTags;
+            }
         }
     }
 }

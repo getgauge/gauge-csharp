@@ -42,8 +42,10 @@
     <Compile Include="Attribute\AfterSuite.cs" />
     <Compile Include="Attribute\BeforeScenario.cs" />
     <Compile Include="Attribute\BeforeStep.cs" />
+    <Compile Include="Attribute\FilteredHookAttribute.cs" />
     <Compile Include="Attribute\BeforeSpec.cs" />
     <Compile Include="Attribute\BeforeSuite.cs" />
+    <Compile Include="Attribute\TagAggregation.cs" />
     <Compile Include="DataStore.cs" />
     <Compile Include="DataStoreFactory.cs" />
     <Compile Include="DataStoreType.cs" />

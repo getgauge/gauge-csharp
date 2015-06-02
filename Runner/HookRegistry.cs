@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -25,19 +26,19 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class HookRegistry : IHookRegistry
     {
-        private readonly IDictionary<Type, HashSet<MethodInfo>> _hooks = new Dictionary<Type, HashSet<MethodInfo>>()
+        private readonly IDictionary<Type, HashSet<HookMethod>> _hooks = new Dictionary<Type, HashSet<HookMethod>>()
         {
-            {typeof (BeforeSuite), new HashSet<MethodInfo>()},
-            {typeof (AfterSuite), new HashSet<MethodInfo>()},
-            {typeof (BeforeSpec), new HashSet<MethodInfo>()},
-            {typeof (AfterSpec), new HashSet<MethodInfo>()},
-            {typeof (BeforeScenario), new HashSet<MethodInfo>()},
-            {typeof (AfterScenario), new HashSet<MethodInfo>()},
-            {typeof (BeforeStep), new HashSet<MethodInfo>()},
-            {typeof (AfterStep), new HashSet<MethodInfo>()},
+            {typeof (BeforeSuite), new HashSet<HookMethod>()},
+            {typeof (AfterSuite), new HashSet<HookMethod>()},
+            {typeof (BeforeSpec), new HashSet<HookMethod>()},
+            {typeof (AfterSpec), new HashSet<HookMethod>()},
+            {typeof (BeforeScenario), new HashSet<HookMethod>()},
+            {typeof (AfterScenario), new HashSet<HookMethod>()},
+            {typeof (BeforeStep), new HashSet<HookMethod>()},
+            {typeof (AfterStep), new HashSet<HookMethod>()},
         };
 
-        public HashSet<MethodInfo> BeforeSuiteHooks
+        public HashSet<HookMethod> BeforeSuiteHooks
         {
             get { return GetHookOfType(typeof (BeforeSuite)); }
         }
@@ -47,7 +48,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (BeforeSuite), beforeSuiteHook);
         }
 
-        public HashSet<MethodInfo> AfterSuiteHooks
+        public HashSet<HookMethod> AfterSuiteHooks
         {
             get { return GetHookOfType(typeof (AfterSuite)); }
         }
@@ -57,7 +58,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (AfterSuite), afterSuiteHook);
         }
 
-        public HashSet<MethodInfo> BeforeSpecHooks
+        public HashSet<HookMethod> BeforeSpecHooks
         {
             get { return GetHookOfType(typeof (BeforeSpec)); }
         }
@@ -67,7 +68,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (BeforeSpec), beforeSpecHook);
         }
 
-        public HashSet<MethodInfo> AfterSpecHooks
+        public HashSet<HookMethod> AfterSpecHooks
         {
             get { return GetHookOfType(typeof (AfterSpec)); }
         }
@@ -77,7 +78,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (AfterSpec), afterSpecHook);
         }
 
-        public HashSet<MethodInfo> BeforeScenarioHooks
+        public HashSet<HookMethod> BeforeScenarioHooks
         {
             get { return GetHookOfType(typeof (BeforeScenario)); }
         }
@@ -87,7 +88,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (BeforeScenario), beforeScenarioHook);
         }
 
-        public HashSet<MethodInfo> AfterScenarioHooks
+        public HashSet<HookMethod> AfterScenarioHooks
         {
             get { return GetHookOfType(typeof (AfterScenario)); }
         }
@@ -97,7 +98,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (AfterScenario), afterScenarioHook);
         }
 
-        public HashSet<MethodInfo> BeforeStepHooks
+        public HashSet<HookMethod> BeforeStepHooks
         {
             get { return GetHookOfType(typeof (BeforeStep)); }
         }
@@ -107,7 +108,7 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (BeforeStep), beforeStepHook);
         }
 
-        public HashSet<MethodInfo> AfterStepHooks
+        public HashSet<HookMethod> AfterStepHooks
         {
             get { return GetHookOfType(typeof (AfterStep)); }
         }
@@ -117,13 +118,37 @@ namespace Gauge.CSharp.Runner
             AddHookOfType(typeof (AfterStep), afterStepHook);
         }
 
-        private void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hook)
+        private void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hooks)
         {
-            _hooks[hookType].UnionWith(hook);
+            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info)));
         }
-        private HashSet<MethodInfo> GetHookOfType(Type type)
+
+        private HashSet<HookMethod> GetHookOfType(Type type)
         {
-            return new HashSet<MethodInfo>(_hooks[type]);
+            return _hooks[type];
+        }
+    }
+
+    public class HookMethod
+    {
+        private readonly MethodInfo _methodInfo;
+
+        public readonly TagAggregation TagAggregation = TagAggregation.And;
+
+        public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
+
+        public HookMethod(MethodInfo methodInfo)
+        {
+            _methodInfo = methodInfo;
+            var filteredHookAttribute = _methodInfo.GetCustomAttribute<FilteredHookAttribute>();
+            if (filteredHookAttribute == null) return;
+            FilterTags = filteredHookAttribute.FilterTags;
+            TagAggregation = filteredHookAttribute.TagAggregation;
+        }
+
+        public MethodInfo Method
+        {
+            get { return _methodInfo; }
         }
     }
 }

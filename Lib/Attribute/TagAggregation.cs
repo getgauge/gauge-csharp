@@ -1,4 +1,4 @@
-﻿// Copyright 2015 ThoughtWorks, Inc.
+// Copyright 2015 ThoughtWorks, Inc.
 
 // This file is part of Gauge-CSharp.
 
@@ -15,12 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
 namespace Gauge.CSharp.Lib.Attribute
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class AfterSpec : FilteredHookAttribute
+    public enum TagAggregation
     {
+        And,
+        Or
     }
 }

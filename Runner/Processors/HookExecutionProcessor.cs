@@ -17,7 +17,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Lib.Attribute;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -39,14 +41,37 @@ namespace Gauge.CSharp.Runner.Processors
         }
 
 
-        protected abstract IEnumerable<MethodInfo> GetHooks();
+        protected abstract HashSet<HookMethod> GetHooks();
 
         [DebuggerHidden]
         public Message Process(Message request)
         {
             var currentExecutionInfo = GetExecutionInfo(request);
+            var applicableTags = currentExecutionInfo.CurrentScenario.TagsList.Union(currentExecutionInfo.CurrentSpec.TagsList).ToList();
             var hooks = GetHooks();
-            var protoExecutionResult = _methodExecutor.ExecuteHooks(hooks, currentExecutionInfo);
+            List<MethodInfo> applicableHooks;
+            if (applicableTags.Any())
+            {
+                applicableHooks = new List<MethodInfo>();
+                foreach (var hookMethod in hooks)
+                {
+                    if (hookMethod.TagAggregation==TagAggregation.Or)
+                    {
+                        if (hookMethod.FilterTags.Intersect(applicableTags).Any())
+                        {
+                            applicableHooks.Add(hookMethod.Method);
+                        }
+                    }
+                    else
+                    {
+                        if (hookMethod.FilterTags.Intersect(applicableTags).Count().Equals(applicableTags.Count))
+                        {
+                            applicableHooks.Add(hookMethod.Method);
+                        }
+                    }
+                }                                 
+            }
+            var protoExecutionResult = _methodExecutor.ExecuteHooks(applicableHooks, currentExecutionInfo);
             return WrapInMessage(protoExecutionResult, request);
         }
 
