@@ -23,12 +23,12 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class StepExecutionStartingProcessor : HookExecutionProcessor
     {
-        public StepExecutionStartingProcessor(IHookRegistry hookRegistry) : base(hookRegistry, new Sandbox())
+        public StepExecutionStartingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
         {
         }
 
         public StepExecutionStartingProcessor(IHookRegistry hookRegistry, ISandbox sandbox)
-            : base(hookRegistry, new MethodExecutor(sandbox), sandbox)
+            : base(hookRegistry, new MethodExecutor(sandbox))
         {
         }
 
