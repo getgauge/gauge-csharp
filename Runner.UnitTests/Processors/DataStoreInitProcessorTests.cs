@@ -19,7 +19,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void ShouldGetSpecDataStoreType()
         {
             var dataStoreType = DataStoreInitProcessor.GetDataStoreType(Message.Types.MessageType.SpecDataStoreInit);
-            Assert.AreEqual(DataStoreType.Specification, dataStoreType);
+            Assert.AreEqual(DataStoreType.Spec, dataStoreType);
         }
 
         [Test]

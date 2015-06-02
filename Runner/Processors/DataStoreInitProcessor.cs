@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner.Processors
                 case Message.Types.MessageType.ScenarioDataStoreInit:
                     return DataStoreType.Scenario;
                 case Message.Types.MessageType.SpecDataStoreInit:
-                    return DataStoreType.Specification;
+                    return DataStoreType.Spec;
                 case Message.Types.MessageType.SuiteDataStoreInit:
                     return DataStoreType.Suite;
                 default:
