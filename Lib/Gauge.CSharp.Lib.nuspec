@@ -8,7 +8,7 @@
     <owners>steam</owners>
     <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.txt</licenseUrl>
     <projectUrl>http://getgauge.io</projectUrl>
-    <iconUrl>https://github.com/getgauge/gauge-csharp/logo-32x32.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/getgauge/gauge-csharp/master/logo-64x64.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial version of Gauge CSharp</releaseNotes>
