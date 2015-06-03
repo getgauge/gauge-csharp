@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
@@ -22,7 +23,7 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class HookRegistryTests
     {
-        public void DummmyHook(){}
+        public void DummyHook(){}
 
         [Test]
         public void ShouldAddAndGetBeforeScenarioHook()
@@ -30,7 +31,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeScenarioHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeScenarioHooks.Contains(methodInfo));
+
+            Assert.True(hookRegistry.BeforeScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -39,7 +41,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterScenarioHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterScenarioHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.AfterScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -48,7 +50,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSpecHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeSpecHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.BeforeSpecHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -57,7 +59,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSpecHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterSpecHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.AfterSpecHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -66,7 +68,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeStepHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeStepHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.BeforeStepHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -75,7 +77,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterStepHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterStepHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.AfterStepHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -84,7 +86,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSuiteHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeSuiteHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.BeforeSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
         }
 
         [Test]
@@ -93,7 +95,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSuiteHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterSuiteHooks.Contains(methodInfo));
+            Assert.True(hookRegistry.AfterSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
         }
     }
 }

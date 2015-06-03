@@ -46,33 +46,29 @@ namespace Gauge.CSharp.Runner.Processors
         [DebuggerHidden]
         public Message Process(Message request)
         {
-            var currentExecutionInfo = GetExecutionInfo(request);
-            var applicableTags = currentExecutionInfo.CurrentScenario.TagsList.Union(currentExecutionInfo.CurrentSpec.TagsList).ToList();
-            var hooks = GetHooks();
-            List<MethodInfo> applicableHooks;
-            if (applicableTags.Any())
-            {
-                applicableHooks = new List<MethodInfo>();
-                foreach (var hookMethod in hooks)
-                {
-                    if (hookMethod.TagAggregation==TagAggregation.Or)
-                    {
-                        if (hookMethod.FilterTags.Intersect(applicableTags).Any())
-                        {
-                            applicableHooks.Add(hookMethod.Method);
-                        }
-                    }
-                    else
-                    {
-                        if (hookMethod.FilterTags.Intersect(applicableTags).Count().Equals(applicableTags.Count))
-                        {
-                            applicableHooks.Add(hookMethod.Method);
-                        }
-                    }
-                }                                 
-            }
-            var protoExecutionResult = _methodExecutor.ExecuteHooks(applicableHooks, currentExecutionInfo);
+            var applicableTags = GetApplicableTags(request);
+            var applicableHooks = GetApplicableHooks(applicableTags, GetHooks());
+            var protoExecutionResult = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
             return WrapInMessage(protoExecutionResult, request);
+        }
+
+        private List<string> GetApplicableTags(Message request)
+        {
+            return GetExecutionInfo(request).CurrentScenario.TagsList.Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
+        }
+
+        public static IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
+        {
+            return applicableTags.Any() ? GetFilteredHooks(applicableTags, hooks) : hooks.Select(method => method.Method);
+        }
+
+        public static IEnumerable<MethodInfo> GetFilteredHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        {
+            var tagsList = applicableTags.ToList();
+            return from hookMethod in hooks
+                where hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
+                      hookMethod.TagAggregation == TagAggregation.And && !hookMethod.FilterTags.Except(tagsList).Any() && !tagsList.Except(hookMethod.FilterTags).Any()
+                select hookMethod.Method;
         }
 
         protected abstract ExecutionInfo GetExecutionInfo(Message request);

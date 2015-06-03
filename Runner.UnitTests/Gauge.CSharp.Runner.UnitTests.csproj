@@ -73,6 +73,7 @@
     <Compile Include="Processors\ExecuteStepProcessorTests.cs" />
     <Compile Include="Processors\ExecutionStartingProcessorTests.cs" />
     <Compile Include="Processors\ExecutionEndingProcessorTests.cs" />
+    <Compile Include="Processors\HookExecutionProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepRegistryTests.cs" />
   </ItemGroup>

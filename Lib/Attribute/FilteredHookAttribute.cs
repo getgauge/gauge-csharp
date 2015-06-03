@@ -19,29 +19,21 @@ using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib.Attribute
 {
-    public class FilteredHookAttribute : System.Attribute
+    public abstract class FilteredHookAttribute : System.Attribute
     {
         private readonly IEnumerable<string> _filterTags;
-        private readonly TagAggregation _tagAggregation;
 
-        public FilteredHookAttribute()
+        protected FilteredHookAttribute()
         {
         }
 
-        public FilteredHookAttribute(string filterTag)
+        protected FilteredHookAttribute(string filterTag) : this(new []{filterTag})
         {
-            _filterTags = new[] {filterTag};
         }
-
-        public FilteredHookAttribute(IEnumerable<string> filterTags, TagAggregation tagAggregation = TagAggregation.And)
+        
+        protected FilteredHookAttribute(params string[] filterTags)
         {
             _filterTags = filterTags;
-            _tagAggregation = tagAggregation;
-        }
-
-        public TagAggregation TagAggregation
-        {
-            get { return _tagAggregation; }
         }
 
         public IEnumerable<string> FilterTags

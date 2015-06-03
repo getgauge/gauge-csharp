@@ -16,7 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using Moq;
@@ -40,7 +40,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void Setup()
         {
             var mockHookRegistry = new Mock<IHookRegistry>();
-            var hooks = new HashSet<MethodInfo> {GetType().GetMethod("Foo")};
+            var hooks = new HashSet<HookMethod> {new HookMethod(GetType().GetMethod("Foo"))};
+            var hooksToExecute = hooks.Select(method => method.Method);
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
             var executionEndingRequest = ExecutionEndingRequest.DefaultInstance;
             _request = Message.CreateBuilder()
@@ -51,7 +52,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
             _protoExecutionResult = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false).Build();
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks(hooks, executionEndingRequest.CurrentExecutionInfo))
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks(hooksToExecute, executionEndingRequest.CurrentExecutionInfo))
                 .Returns(_protoExecutionResult);
             _executionStartingProcessor = new ExecutionStartingProcessor(mockHookRegistry.Object, _mockMethodExecutor.Object);
         }

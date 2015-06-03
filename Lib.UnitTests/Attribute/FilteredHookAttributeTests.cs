@@ -7,10 +7,25 @@ namespace Gauge.CSharp.Lib.UnitTests.Attribute
     [TestFixture]
     public class FilteredHookAttributeTests
     {
+        public class TestHookAttribute : FilteredHookAttribute
+        {
+            public TestHookAttribute()
+            {
+            }
+
+            public TestHookAttribute(string filterTag) : base(filterTag)
+            {
+            }
+
+            public TestHookAttribute(params string[] filterTags) : base(filterTags)
+            {
+            }
+        }
+
         [Test]
         public void ShouldCreateAttributeWithNoParameters()
         {
-            var filteredHookAttribute = new FilteredHookAttribute();
+            var filteredHookAttribute = new TestHookAttribute();
             Assert.IsNotNull(filteredHookAttribute);
         }
 
@@ -18,7 +33,7 @@ namespace Gauge.CSharp.Lib.UnitTests.Attribute
         public void ShouldCreateAttributeWithOneTag()
         {
             var filterTag = "foo";
-            var filteredHookAttribute = new FilteredHookAttribute(filterTag);
+            var filteredHookAttribute = new TestHookAttribute(filterTag);
             Assert.IsTrue(filteredHookAttribute.FilterTags.Contains(filterTag));
         }
 
@@ -26,28 +41,12 @@ namespace Gauge.CSharp.Lib.UnitTests.Attribute
         public void ShouldCreateAttributeWithMultipleTags()
         {
             var filterTags = new[] {"foo", "bar"};
-            var filteredHookAttribute = new FilteredHookAttribute(filterTags);
+            var filteredHookAttribute = new TestHookAttribute(filterTags);
 
             foreach (var filterTag in filterTags)
             {
                 Assert.IsTrue(filteredHookAttribute.FilterTags.Contains(filterTag));
             }
-        }
-
-        [Test]
-        public void MultipleTagsAttributeShouldHaveDefaultAggregation()
-        {
-            var filterTags = new[] {"foo", "bar"};
-            var filteredHookAttribute = new FilteredHookAttribute(filterTags);
-            Assert.AreEqual(TagAggregation.And, filteredHookAttribute.TagAggregation);
-        }
-
-        [Test]
-        public void MultipleTagsAttributeShouldTakeAggregation()
-        {
-            var filterTags = new[] {"foo", "bar"};
-            var filteredHookAttribute = new FilteredHookAttribute(filterTags, TagAggregation.Or);
-            Assert.AreEqual(TagAggregation.Or, filteredHookAttribute.TagAggregation);
         }
     }
 }

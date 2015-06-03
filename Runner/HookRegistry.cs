@@ -143,7 +143,8 @@ namespace Gauge.CSharp.Runner
             var filteredHookAttribute = _methodInfo.GetCustomAttribute<FilteredHookAttribute>();
             if (filteredHookAttribute == null) return;
             FilterTags = filteredHookAttribute.FilterTags;
-            TagAggregation = filteredHookAttribute.TagAggregation;
+            var tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute<TagAggregationBehaviourAttribute>();
+            TagAggregation = tagAggregationBehaviourAttribute == null ? TagAggregation.And : tagAggregationBehaviourAttribute.TagAggregation;
         }
 
         public MethodInfo Method

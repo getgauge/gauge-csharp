@@ -46,6 +46,7 @@
     <Compile Include="Attribute\BeforeSpec.cs" />
     <Compile Include="Attribute\BeforeSuite.cs" />
     <Compile Include="Attribute\TagAggregation.cs" />
+    <Compile Include="Attribute\TagAggregationBehaviourAttribute.cs" />
     <Compile Include="DataStore.cs" />
     <Compile Include="DataStoreFactory.cs" />
     <Compile Include="DataStoreType.cs" />
