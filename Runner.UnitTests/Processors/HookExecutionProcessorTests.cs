@@ -25,6 +25,12 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
         }
 
+        [BeforeSpec]
+        public void blah()
+        {
+        }
+
+
         /*
          * Tags     | Methods
          * foo      | foo, baz
@@ -38,7 +44,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [SetUp]
         public void Setup()
         {
-            _hookMethods = new List<HookMethod> { new HookMethod(GetType().GetMethod("foo")), new HookMethod(GetType().GetMethod("bar")), new HookMethod(GetType().GetMethod("baz")) };
+            _hookMethods = new List<HookMethod>
+            {
+                new HookMethod(GetType().GetMethod("foo")),
+                new HookMethod(GetType().GetMethod("bar")),
+                new HookMethod(GetType().GetMethod("baz")),
+                new HookMethod(GetType().GetMethod("blah"))
+            };
         }
         [Test]
         public void ShouldFetchAllHooksWhenNoTagsSpecified()
@@ -46,7 +58,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string>(), _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count());
+            Assert.AreEqual(1, applicableHooks.Count());
         }
 
         [Test]
@@ -55,7 +67,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count());
             Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
@@ -66,7 +78,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(0, applicableHooks.Count());
+            Assert.AreEqual(1, applicableHooks.Count());
         }
 
         [Test]
@@ -75,7 +87,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(1, applicableHooks.Count());
+            Assert.AreEqual(2, applicableHooks.Count());
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
 
@@ -85,7 +97,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count());
             Assert.That(applicableHooks.Any(info => info.Name=="bar"), Is.True);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
@@ -96,16 +108,17 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(1, applicableHooks.Count());
+            Assert.AreEqual(2, applicableHooks.Count());
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
         [Test]
-        public void ShouldNotFetchAnyHooksWhenTagsAreASuperSet()
+        public void ShouldNotFetchAnyFilteredHooksWhenTagsAreASuperSet()
         {
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"bar",  "blah"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(0, applicableHooks.Count());
+            // The blah hook is still called before step.
+            Assert.AreEqual(1, applicableHooks.Count());
         }
     }
 }
