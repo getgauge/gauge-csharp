@@ -128,28 +128,4 @@ namespace Gauge.CSharp.Runner
             return _hooks[type];
         }
     }
-
-    public class HookMethod
-    {
-        private readonly MethodInfo _methodInfo;
-
-        public readonly TagAggregation TagAggregation = TagAggregation.And;
-
-        public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
-
-        public HookMethod(MethodInfo methodInfo)
-        {
-            _methodInfo = methodInfo;
-            var filteredHookAttribute = _methodInfo.GetCustomAttribute<FilteredHookAttribute>();
-            if (filteredHookAttribute == null) return;
-            FilterTags = filteredHookAttribute.FilterTags;
-            var tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute<TagAggregationBehaviourAttribute>();
-            TagAggregation = tagAggregationBehaviourAttribute == null ? TagAggregation.And : tagAggregationBehaviourAttribute.TagAggregation;
-        }
-
-        public MethodInfo Method
-        {
-            get { return _methodInfo; }
-        }
-    }
 }

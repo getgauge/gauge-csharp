@@ -59,15 +59,20 @@ namespace Gauge.CSharp.Runner.Processors
 
         public static IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
-            return applicableTags.Any() ? GetFilteredHooks(applicableTags, hooks) : hooks.Select(method => method.Method);
+            var hookMethods = hooks as IList<HookMethod> ?? hooks.ToList();
+            var alwaysExecuteHooks = hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any() ).Select(method => method.Method);
+            return applicableTags.Any() ? alwaysExecuteHooks.Union(GetFilteredHooks(applicableTags, hookMethods)) : alwaysExecuteHooks;
         }
 
         public static IEnumerable<MethodInfo> GetFilteredHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             var tagsList = applicableTags.ToList();
-            return from hookMethod in hooks
-                where hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
-                      hookMethod.TagAggregation == TagAggregation.And && !hookMethod.FilterTags.Except(tagsList).Any() && !tagsList.Except(hookMethod.FilterTags).Any()
+            return from hookMethod in hooks.ToList()
+                where hookMethod.FilterTags != null
+                where
+                    hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
+                    hookMethod.TagAggregation == TagAggregation.And && !hookMethod.FilterTags.Except(tagsList).Any() &&
+                    !tagsList.Except(hookMethod.FilterTags).Any()
                 select hookMethod.Method;
         }
 

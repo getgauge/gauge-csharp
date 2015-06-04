@@ -114,7 +114,11 @@ namespace Gauge.CSharp.Runner
                 var executionResult = ExecuteHook(method, new object[] {executionInfo});
                 if (executionResult.Failed)
                 {
-                    return ProtoExecutionResult.CreateBuilder(executionResult).SetExecutionTime(stopwatch.ElapsedMilliseconds).Build();
+                    return ProtoExecutionResult.CreateBuilder(executionResult)
+                            .SetFailed(true)
+                            .SetStackTrace(executionResult.StackTrace)
+                            .SetExecutionTime(stopwatch.ElapsedMilliseconds)
+                            .Build();
                 }
             }
             return ProtoExecutionResult.CreateBuilder()
