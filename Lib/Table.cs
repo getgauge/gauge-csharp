@@ -15,33 +15,51 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib
 {
+    /// <summary>
+    /// Holds a matrix of data, that is equivalent to Markdown representation of a table, or tablular data defined in a csv file.
+    /// </summary>
     public class Table
     {
-        private readonly List<String> _headers;
-        private readonly List<List<String>> _rows;
+        private readonly List<string> _headers;
+        private readonly List<List<string>> _rows;
 
-        public Table(List<String> headers)
+        /// <summary>
+        /// Creates a new Table type
+        /// </summary>
+        /// <param name="headers">A List of string representing the headers, in order.</param>
+        public Table(List<string> headers)
         {
             _headers = headers;
-            _rows = new List<List<String>>();
+            _rows = new List<List<string>>();
         }
 
-        public void AddRow(List<String> row)
+        /// <summary>
+        /// Add a row of data to the table.
+        /// </summary>
+        /// <param name="row">List of string representing the tuple of a table.</param>
+        public void AddRow(List<string> row)
         {
             _rows.Add(row);
         }
 
-        public List<String> GetColumnNames()
+        /// <summary>
+        /// Fetch all column headers of a table.
+        /// </summary>
+        /// <returns>List of string representing the column headers of table.</returns>
+        public List<string> GetColumnNames()
         {
             return _headers;
         }
 
-        public List<List<String>> GetRows()
+        /// <summary>
+        /// Fetch all the rows of a table, in order.
+        /// </summary>
+        /// <returns>List of string representing the tuples of a table.</returns>
+        public List<List<string>> GetRows()
         {
             return _rows;
         }

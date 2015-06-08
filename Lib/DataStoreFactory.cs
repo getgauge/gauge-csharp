@@ -15,22 +15,55 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib
 {
+    /// <summary>
+    ///     Holds various DataStores, that have lifetime defined as per their scope.
+    ///     Ex: ScenarioDataStore has its scope defined to a particular scenario.
+    /// </summary>
     public static class DataStoreFactory
     {
-        private static readonly Dictionary<DataStoreType, DataStore> DataStores = new Dictionary<DataStoreType, DataStore>
+        private static readonly Dictionary<DataStoreType, DataStore> DataStores = new Dictionary
+            <DataStoreType, DataStore>
         {
             {DataStoreType.Suite, new DataStore()},
             {DataStoreType.Spec, new DataStore()},
             {DataStoreType.Scenario, new DataStore()}
         };
 
+        [Obsolete(
+            "Use one of DataStoreFactory.SuiteDataStore, DataStoreFactory.SpecDataStore, DataStoreFactory.ScenarioDataStore instead."
+            )]
         public static DataStore GetDataStoreFor(DataStoreType dataStoreType)
         {
             return DataStores[dataStoreType];
+        }
+
+        /// <summary>
+        ///     Access the Suite level DataStore.
+        /// </summary>
+        public static DataStore SuiteDataStore
+        {
+            get { return DataStores[DataStoreType.Suite]; }
+        }
+
+        /// <summary>
+        ///     Access the Specification level DataStore.
+        /// </summary>
+        public static DataStore SpecDataStore
+        {
+            get { return DataStores[DataStoreType.Spec]; }
+        }
+
+        /// <summary>
+        ///     Access the Scenario level DataStore.
+        /// </summary>
+        public static DataStore ScenarioDataStore
+        {
+            get { return DataStores[DataStoreType.Scenario]; }
         }
     }
 }

@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Lib.UnitTests
@@ -22,6 +23,11 @@ namespace Gauge.CSharp.Lib.UnitTests
     [TestFixture]
     public class DataStoreTests
     {
+        public class Fruit
+        {
+            public string Name { get; set; }
+        }
+
         private DataStore _dataStore;
         [SetUp]
         public void Setup()
@@ -71,6 +77,49 @@ namespace Gauge.CSharp.Lib.UnitTests
             _dataStore.Clear();
 
             Assert.AreEqual(_dataStore.Count, 0);
+        }
+
+        [Test]
+        public void ShouldGetStrongTypedValue()
+        {
+            _dataStore.Add("banana", new Fruit { Name = "Banana" });
+            var fruit = _dataStore.Get<Fruit>("banana");
+
+            Assert.IsInstanceOf<Fruit>(fruit);
+            Assert.AreEqual("Banana", fruit.Name);
+        }
+
+        [Test]
+        public void ShouldGetNullWhenKeyDoesNotExist()
+        {
+            _dataStore.Add("fruit", "banana");
+            var fruit = _dataStore.Get("banana");
+
+            Assert.IsNull(fruit);
+        }
+
+        [Test]
+        public void ShouldRaiseInvalidCastExceptionWhenAskingForInvalidCast()
+        {
+            _dataStore.Add("banana", new Fruit { Name = "Banana" });
+
+            Assert.Throws<InvalidCastException>(() => { _dataStore.Get<String>("banana"); });
+        }
+
+        [Test]
+        public void ShouldReturnNullWhenAskingForInvalidKeyWithStrongType()
+        {
+            _dataStore.Add("banana", new Fruit { Name = "Banana" });
+
+            var fruit = _dataStore.Get<Fruit>("random");
+
+            Assert.IsNull(fruit);
+        }
+        
+        [Test]
+        public void ShouldThrowArgumentNullExceptionWhenKeyIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => { _dataStore.Get(null); });
         }
     }
 }
