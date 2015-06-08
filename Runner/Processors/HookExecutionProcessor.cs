@@ -71,8 +71,7 @@ namespace Gauge.CSharp.Runner.Processors
                 where hookMethod.FilterTags != null
                 where
                     hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
-                    hookMethod.TagAggregation == TagAggregation.And && !hookMethod.FilterTags.Except(tagsList).Any() &&
-                    !tagsList.Except(hookMethod.FilterTags).Any()
+                    hookMethod.TagAggregation == TagAggregation.And && hookMethod.FilterTags.All(tagsList.Contains)
                 select hookMethod.Method;
         }
 

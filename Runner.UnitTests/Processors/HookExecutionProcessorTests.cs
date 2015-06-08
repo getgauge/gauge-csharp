@@ -9,29 +9,30 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class HookExecutionProcessorTests
     {
-        [BeforeSpec("foo")]
+        [BeforeScenario("foo")]
         public void foo()
         {
         }
 
-        [BeforeSpec("bar", "baz")]
+        [BeforeScenario("bar", "baz")]
         public void bar()
         {
         }
 
-        [BeforeSpec("foo", "baz")]
+        [BeforeScenario("foo", "baz")]
         [TagAggregationBehaviour(TagAggregation.Or)]
         public void baz()
         {
         }
 
-        [BeforeSpec]
+        [BeforeScenario]
         public void blah()
         {
         }
 
 
         /*
+         * untagged hooks are executed for all.
          * Tags     | Methods
          * foo      | foo, baz
          * bar      | NONE
@@ -108,9 +109,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count());
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
+            Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
         }
+
         [Test]
         public void ShouldNotFetchAnyFilteredHooksWhenTagsAreASuperSet()
         {
