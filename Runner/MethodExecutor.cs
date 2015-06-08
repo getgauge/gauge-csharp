@@ -82,10 +82,14 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        private static ByteString TakeScreenshot()
+        private ByteString TakeScreenshot()
         {
             try
             {
+                byte[] screenShotBytes;
+                if (_sandbox.TryScreenCapture(out screenShotBytes))
+                    return ByteString.CopyFrom(screenShotBytes);
+
                 var bounds = Screen.GetBounds(Point.Empty);
                 using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
                 {

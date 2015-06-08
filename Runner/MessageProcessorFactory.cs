@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner
 
         public MessageProcessorFactory()
         {
-            _sandbox = new Sandbox();
+            _sandbox = Sandbox.Instance;
             using (var apiConnection = new GaugeApiConnection(new TcpClientWrapper(Utils.GaugeApiPort)))
             {
                 _stepScanner = new MethodScanner(apiConnection);

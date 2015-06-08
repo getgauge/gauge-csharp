@@ -23,6 +23,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Communication;
 
@@ -33,13 +34,19 @@ namespace Gauge.CSharp.Runner
     {
         private static Sandbox _instance;
         private List<Assembly> ScannedAssemblies { get; set; }
-        private static Assembly TargetLibAssembly { get; set; }
+        private Assembly TargetLibAssembly { get; set; }
 
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+        private Type ScreenGrabberType { get; set; }
 
         public static Sandbox Instance
         {
             get { return _instance ?? (_instance=Create()); }
+        }
+
+        [Obsolete("Sandbox is supposed to be a singleton class. Use Sandbox.Instance instead", true)]
+        public Sandbox()
+        {
         }
 
         [DebuggerStepperBoundary]
@@ -96,10 +103,26 @@ namespace Gauge.CSharp.Runner
             return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
         }
 
-        private static List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
+        private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
         {
             var targetType = TargetLibAssembly.GetType(type);
             return Instance.ScannedAssemblies.SelectMany(assembly => GetMethodsFromAssembly(targetType, assembly)).ToList();
+        }
+
+        public bool TryScreenCapture(out byte[] screenShotBytes)
+        {
+            if (ScreenGrabberType != null)
+            {
+                var screenCaptureMethod = ScreenGrabberType.GetMethod("TakeScreenShot");
+                var instance = Activator.CreateInstance(ScreenGrabberType);
+                if (instance != null)
+                {
+                    screenShotBytes = screenCaptureMethod.Invoke(instance, null) as byte[];
+                    return true;
+                }
+            }
+            screenShotBytes = null;
+            return false;
         }
 
         private static List<MethodInfo> GetMethodsFromAssembly(Type type, Assembly assembly)
@@ -107,12 +130,17 @@ namespace Gauge.CSharp.Runner
             var isGaugeAssembly = assembly.GetReferencedAssemblies().Select(name => name.Name).Contains(GaugeLibAssembleName);
             return isGaugeAssembly ? assembly.GetTypes().SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any())).ToList() : new List<MethodInfo>();
         }
+
         private void LoadAssemblyFiles()
         {
             ScannedAssemblies=Directory.EnumerateFiles(Utils.GaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly)
                 .Select(Assembly.LoadFile)
                 .ToList();
             TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
+            
+            ScreenGrabberType = ScannedAssemblies
+                                    .SelectMany(assembly => assembly.GetTypes())
+                                    .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
         }
     }
 }

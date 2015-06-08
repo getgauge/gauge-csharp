@@ -62,6 +62,23 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.True(executionResult.HasScreenShot);
             Assert.True(executionResult.ScreenShot.Length > 0);
         }
+        
+        [Test]
+        public void ShouldTakeScreenShotUsingCustomScreenShotMethod()
+        {
+            var mockSandBox = new Mock<ISandbox>();
+            var method = new Mock<MethodInfo>();
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
+            byte[] bytes = {0x20, 0x20};
+            mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
+
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
+            
+            mockSandBox.VerifyAll();
+            Assert.True(executionResult.Failed);
+            Assert.True(executionResult.HasScreenShot);
+            Assert.AreEqual(2, executionResult.ScreenShot.Length);
+        }
 
         [Test]
         public void ShouldNotTakeScreenShotWhenDisabled()

@@ -1,4 +1,4 @@
-// Copyright 2015 ThoughtWorks, Inc.
+﻿// Copyright 2015 ThoughtWorks, Inc.
 
 // This file is part of Gauge-CSharp.
 
@@ -15,13 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Reflection;
-
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Lib
 {
-    public interface ISandbox
+    public interface IScreenGrabber
     {
-        void ExecuteMethod(MethodInfo method, params object[] args);
-        bool TryScreenCapture(out byte[] screenShotBytes);
+        byte[] TakeScreenShot();
     }
 }
