@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib
@@ -22,6 +23,7 @@ namespace Gauge.CSharp.Lib
     /// <summary>
     /// Holds a matrix of data, that is equivalent to Markdown representation of a table, or tablular data defined in a csv file.
     /// </summary>
+    [Serializable]
     public class Table
     {
         private readonly List<string> _headers;
