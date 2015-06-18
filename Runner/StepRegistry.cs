@@ -25,11 +25,21 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class StepRegistry : IStepRegistry
     {
-        private readonly Dictionary<string, MethodInfo> _scannedSteps;
+        private readonly Dictionary<string, MethodInfo> _scannedSteps = new Dictionary<string, MethodInfo>();
 
         public StepRegistry(IEnumerable<KeyValuePair<string, MethodInfo>> scannedSteps)
         {
-            _scannedSteps = scannedSteps.ToDictionary(pair => pair.Key, pair => pair.Value);
+            foreach (var stepMap in scannedSteps)
+            {
+                if (_scannedSteps.ContainsKey(stepMap.Key))
+                {
+                    _scannedSteps[stepMap.Key] = stepMap.Value;
+                }
+                else
+                {
+                    _scannedSteps.Add(stepMap.Key, stepMap.Value);
+                }
+            }
         }
 
         public bool ContainsStep(string parsedStepText)
