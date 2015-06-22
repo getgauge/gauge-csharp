@@ -38,10 +38,6 @@ namespace Gauge.CSharp.Runner
             _sandbox = sandbox;
         }
 
-        public MethodExecutor() : this(Sandbox.Instance)
-        {
-        }
-
         [DebuggerHidden]
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {

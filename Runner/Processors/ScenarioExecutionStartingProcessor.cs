@@ -23,11 +23,8 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ScenarioExecutionStartingProcessor : HookExecutionProcessor
     {
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
-        {
-        }
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, ISandbox sandbox)
-            : base(hookRegistry, new MethodExecutor(sandbox))
+        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+            : base(hookRegistry, methodExecutor)
         {
         }
 

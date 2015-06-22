@@ -57,7 +57,8 @@ namespace Gauge.CSharp.Runner
                     Environment.Exit(1);
                 }
             }
-            _messageProcessorFactory = new MessageProcessorFactory();
+            var sandbox = SandboxFactory.Create();
+            _messageProcessorFactory = new MessageProcessorFactory(sandbox);
         }
 
         [DebuggerHidden]

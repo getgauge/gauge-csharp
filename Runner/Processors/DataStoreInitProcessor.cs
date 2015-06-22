@@ -15,37 +15,50 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Diagnostics;
-using Gauge.CSharp.Lib;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class DataStoreInitProcessor : IMessageProcessor
     {
+        private readonly ISandbox _sandbox;
+
+        public DataStoreInitProcessor(ISandbox sandbox)
+        {
+            _sandbox = sandbox;
+        }
+
         [DebuggerHidden]
         public Message Process(Message request)
         {
-            DataStoreFactory.GetDataStoreFor(GetDataStoreType(request.MessageType)).Initialize();
-            
-            //send back a default response?
+//            GetDataStoreFor(request.MessageType).Initialize();
+            _sandbox.InitializeDataStore(DataStoreType);
             return new DefaultProcessor().Process(request);
         }
 
-        public static DataStoreType GetDataStoreType(Message.Types.MessageType messageType)
+        protected string DataStoreType; 
+    }
+
+    class SuiteDataStoreInitProcessor : DataStoreInitProcessor
+    {
+        public SuiteDataStoreInitProcessor(ISandbox sandbox) : base(sandbox)
         {
-            switch (messageType)
-            {
-                case Message.Types.MessageType.ScenarioDataStoreInit:
-                    return DataStoreType.Scenario;
-                case Message.Types.MessageType.SpecDataStoreInit:
-                    return DataStoreType.Spec;
-                case Message.Types.MessageType.SuiteDataStoreInit:
-                    return DataStoreType.Suite;
-                default:
-                    throw new Exception("Invalid datastore init request");
-            }
+            DataStoreType = "Suite";
+        }
+    }
+    class SpecDataStoreInitProcessor : DataStoreInitProcessor
+    {
+        public SpecDataStoreInitProcessor(ISandbox sandbox) : base(sandbox)
+        {
+            DataStoreType = "Spec";
+        }
+    }
+    class ScenarioDataStoreInitProcessor : DataStoreInitProcessor
+    {
+        public ScenarioDataStoreInitProcessor(ISandbox sandbox) : base(sandbox)
+        {
+            DataStoreType = "Scenario";
         }
     }
 }

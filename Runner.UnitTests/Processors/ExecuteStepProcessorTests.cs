@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using Moq;
@@ -44,9 +45,9 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(false);
-            var mockSandBox = new Mock<ISandbox>();
+            var mockMethodExecutor = new Mock<IMethodExecutor>();
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
 
             Assert.True(response.ExecutionStatusResponse.ExecutionResult.Failed);
             Assert.AreEqual(response.ExecutionStatusResponse.ExecutionResult.ErrorMessage,
@@ -70,10 +71,9 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
             var fooMethodInfo = GetType().GetMethod("Foo");
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
-            var mockSandBox = new Mock<ISandbox>();
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(fooMethodInfo));
+            var mockMethodExecutor = new Mock<IMethodExecutor>();
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
             
             Assert.True(response.ExecutionStatusResponse.ExecutionResult.Failed);
             Assert.AreEqual(response.ExecutionStatusResponse.ExecutionResult.ErrorMessage,
@@ -103,10 +103,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
             var fooMethodInfo = GetType().GetMethod("Foo");
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
-            var mockSandBox = new Mock<ISandbox>();
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(fooMethodInfo));
+            var mockMethodExecutor = new Mock<IMethodExecutor>();
+            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<Object[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
 
-            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockSandBox.Object).Process(request);
+            var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
 
             Assert.False(response.ExecutionStatusResponse.ExecutionResult.Failed);
         }

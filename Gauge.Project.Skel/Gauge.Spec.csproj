@@ -31,9 +31,9 @@
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.4.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Gauge.CSharp.Lib.0.4.2.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>packages\Gauge.CSharp.Lib.0.4.3.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
 		<Reference Include="System.Core"/>

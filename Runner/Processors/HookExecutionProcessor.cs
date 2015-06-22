@@ -35,12 +35,6 @@ namespace Gauge.CSharp.Runner.Processors
             Hooks = hookRegistry;
         }
 
-        protected HookExecutionProcessor(IHookRegistry hookRegistry)
-            : this(hookRegistry, new MethodExecutor())
-        {
-        }
-
-
         protected abstract HashSet<HookMethod> GetHooks();
 
         [DebuggerHidden]

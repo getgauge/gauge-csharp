@@ -15,14 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
 namespace Gauge.CSharp.Lib
 {
-    [Obsolete("Use one of DataStoreFactory.SuiteDataStore, DataStoreFactory.SpecDataStore, DataStoreFactory.ScenarioDataStore instead.")]
     public enum DataStoreType
     {
-        Suite,
+        Suite = 0,
         Spec,
         Scenario
     }

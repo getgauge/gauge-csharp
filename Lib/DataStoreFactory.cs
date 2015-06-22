@@ -24,19 +24,16 @@ namespace Gauge.CSharp.Lib
     ///     Holds various DataStores, that have lifetime defined as per their scope.
     ///     Ex: ScenarioDataStore has its scope defined to a particular scenario.
     /// </summary>
-    public static class DataStoreFactory
+    public class DataStoreFactory
     {
-        private static readonly Dictionary<DataStoreType, DataStore> DataStores = new Dictionary
-            <DataStoreType, DataStore>
+        private static readonly Dictionary<DataStoreType , DataStore> DataStores = new Dictionary<DataStoreType, DataStore>
         {
             {DataStoreType.Suite, new DataStore()},
             {DataStoreType.Spec, new DataStore()},
             {DataStoreType.Scenario, new DataStore()}
         };
 
-        [Obsolete(
-            "Use one of DataStoreFactory.SuiteDataStore, DataStoreFactory.SpecDataStore, DataStoreFactory.ScenarioDataStore instead."
-            )]
+        [Obsolete("Use one of DataStoreFactory.SuiteDataStore, DataStoreFactory.SpecDataStore, DataStoreFactory.ScenarioDataStore instead.")]
         public static DataStore GetDataStoreFor(DataStoreType dataStoreType)
         {
             return DataStores[dataStoreType];
@@ -64,6 +61,39 @@ namespace Gauge.CSharp.Lib
         public static DataStore ScenarioDataStore
         {
             get { return DataStores[DataStoreType.Scenario]; }
+        }
+
+        /// <summary>
+        ///     <remarks>
+        ///         FOR GAUGE INTERNAL USE ONLY.
+        ///     </remarks>
+        ///     Initializes the Suite level DataStore.
+        /// </summary>
+        public static void InitializeSuiteDataStore()
+        {
+            SuiteDataStore.Initialize();
+        }
+
+        /// <summary>
+        ///     <remarks>
+        ///         FOR GAUGE INTERNAL USE ONLY.
+        ///     </remarks>
+        ///     Initializes the Spec level DataStore.
+        /// </summary>
+        public static void InitializeSpecDataStore()
+        {
+            SpecDataStore.Initialize();
+        }
+
+        /// <summary>
+        ///     <remarks>
+        ///         FOR GAUGE INTERNAL USE ONLY.
+        ///     </remarks>
+        ///     Initializes the Scenario level DataStore.
+        /// </summary>
+        public static void InitializeScenarioDataStore()
+        {
+            ScenarioDataStore.Initialize();
         }
     }
 }

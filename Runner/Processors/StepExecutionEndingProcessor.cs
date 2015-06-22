@@ -16,18 +16,14 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class StepExecutionEndingProcessor : HookExecutionProcessor
     {
-        public StepExecutionEndingProcessor(IHookRegistry hookRegistry) : base(hookRegistry)
-        {
-        }
-        public StepExecutionEndingProcessor(IHookRegistry hookRegistry, ISandbox sandbox)
-            : base(hookRegistry, new MethodExecutor(sandbox))
+        public StepExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+            : base(hookRegistry, methodExecutor)
         {
         }
 

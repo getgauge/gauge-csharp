@@ -52,9 +52,9 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.4.1.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.4.2.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,6 +124,7 @@
     <Compile Include="Processors\StepExecutionEndingProcessor.cs" />
     <Compile Include="Processors\StepExecutionStartingProcessor.cs" />
     <Compile Include="Sandbox.cs" />
+    <Compile Include="SandboxFactory.cs" />
     <Compile Include="SetupPhaseExecutor.cs" />
     <Compile Include="StartPhaseExecutor.cs" />
     <Compile Include="StepRegistry.cs" />

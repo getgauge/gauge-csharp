@@ -15,23 +15,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Gauge.CSharp.Lib
 {
     /// <summary>
     ///     A key-value store that holds any object data.
     /// </summary>
+    [Serializable]
     public class DataStore
     {
-        private Dictionary<object, object> _dictionary;
+        public DataStore()
+        {
+            Console.WriteLine("New Datastore");
+        }
+        private Dictionary<object, object> Dictionary { get; set; }
 
         /// <summary>
         ///     Initializes a datastore, with a new dictionary.
         /// </summary>
         public void Initialize()
         {
-            _dictionary = new Dictionary<object, object>();
+            Dictionary = new Dictionary<object, object>();
         }
 
         /// <summary>
@@ -42,7 +49,7 @@ namespace Gauge.CSharp.Lib
         public object Get(string key)
         {
             object outVal;
-            var valueExists = _dictionary.TryGetValue(key, out outVal);
+            var valueExists = Dictionary.TryGetValue(key, out outVal);
             return valueExists ? outVal : null;
         }
 
@@ -64,7 +71,7 @@ namespace Gauge.CSharp.Lib
         /// <param name="value">Value to store</param>
         public void Add(string key, object value)
         {
-            _dictionary[key] = value;
+            Dictionary[key] = value;
         }
 
         /// <summary>
@@ -72,7 +79,7 @@ namespace Gauge.CSharp.Lib
         /// </summary>
         public void Clear()
         {
-            _dictionary.Clear();
+            Dictionary.Clear();
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace Gauge.CSharp.Lib
         /// </summary>
         public int Count
         {
-            get { return _dictionary.Count; }
+            get { return Dictionary.Count; }
         }
     }
 }

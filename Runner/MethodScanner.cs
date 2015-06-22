@@ -28,11 +28,12 @@ namespace Gauge.CSharp.Runner
     {
         private readonly GaugeApiConnection _apiConnection;
 
-        private readonly Sandbox _sandbox = Sandbox.Instance;
+        private readonly ISandbox _sandbox;
 
-        public MethodScanner(GaugeApiConnection apiConnection)
+        public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
             _apiConnection = apiConnection;
+            _sandbox = sandbox;
         }
 
         public IStepRegistry GetStepRegistry()

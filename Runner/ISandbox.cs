@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Gauge.CSharp.Runner
@@ -23,5 +24,8 @@ namespace Gauge.CSharp.Runner
     {
         void ExecuteMethod(MethodInfo method, params object[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
+        HookRegistry GetHookRegistry();
+        List<MethodInfo> GetStepMethods();
+        void InitializeDataStore(string dataStoreType);
     }
 }
