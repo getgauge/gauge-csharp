@@ -140,7 +140,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecDataStoreInit);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(SpecDataStoreInitProcessor));
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SuiteDataStoreInit);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(SuiteDataStoreInitProcessor));
         }
 
         [Test]
@@ -156,7 +156,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioDataStoreInit);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(DataStoreInitProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioDataStoreInitProcessor));
         }
     }
 }
