@@ -1,0 +1,6 @@
+{
+  "Language": "csharp",
+  "Plugins": [
+    "html-report"
+  ]
+}

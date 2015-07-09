@@ -31,7 +31,7 @@ namespace Gauge.CSharp.Runner
     public class Sandbox : MarshalByRefObject, ISandbox
     {
         private List<Assembly> ScannedAssemblies { get; set; }
-        private Assembly TargetLibAssembly { get; set; }
+        public Assembly TargetLibAssembly { get; set; }
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
         private Type ScreenGrabberType { get; set; }
 
