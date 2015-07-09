@@ -15,7 +15,4 @@
     <tags>Gauge CSharp</tags>
     <summary>CSharp bindings for Gauge. Write CSharp step implementation for Gauge specs.</summary>
   </metadata>
-  <files>
-    <file src="Install.ps1" target="tools" />    
-  </files>
 </package>
