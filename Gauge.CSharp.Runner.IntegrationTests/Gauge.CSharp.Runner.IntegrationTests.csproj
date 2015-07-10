@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.4.4.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.4.4.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.4.3.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
