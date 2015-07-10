@@ -28,5 +28,7 @@ namespace Gauge.CSharp.Runner
         List<MethodInfo> GetStepMethods();
         void InitializeDataStore(string dataStoreType);
         IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
+        List<string> GetAllStepTexts();
+        Assembly TargetLibAssembly { get; set; }
     }
 }

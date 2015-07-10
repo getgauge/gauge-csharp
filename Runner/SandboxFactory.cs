@@ -26,7 +26,7 @@ namespace Gauge.CSharp.Runner
 {
     public class SandboxFactory
     {
-        public static Sandbox Create(AppDomainSetup setup = null)
+        public static ISandbox Create(AppDomainSetup setup = null)
         {
             var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GaugeBinDir };
 

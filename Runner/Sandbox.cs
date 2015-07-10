@@ -67,6 +67,11 @@ namespace Gauge.CSharp.Runner
             return GetAllMethodsForSpecAssemblies(typeof(Step).FullName);
         }
 
+        public List<string> GetAllStepTexts()
+        {
+            return GetAllMethodsForSpecAssemblies(typeof(Step).FullName).SelectMany(GetStepTexts).ToList();
+        }
+
         public void InitializeDataStore(string dataStoreType)
         {
             var remoteDataStoreType = TargetLibAssembly.GetType(typeof(DataStoreFactory).ToString());

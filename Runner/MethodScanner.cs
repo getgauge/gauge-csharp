@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
@@ -45,7 +44,7 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetStepTexts()
         {
-            return _stepRegistry.AllSteps();
+            return _sandbox.GetAllStepTexts();
         }
 
         private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
