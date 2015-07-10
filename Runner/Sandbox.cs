@@ -48,7 +48,7 @@ namespace Gauge.CSharp.Runner
             method.Invoke(instance, args);
         }
 
-        public HookRegistry GetHookRegistry()
+        public IHookRegistry GetHookRegistry()
         {
             var hookRegistry = new HookRegistry();
             hookRegistry.AddBeforeSuiteHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeSuite).ToString()));
@@ -73,6 +73,13 @@ namespace Gauge.CSharp.Runner
             var dataStoreGetter = remoteDataStoreType.GetMethod(string.Format("Initialize{0}DataStore", dataStoreType));
             if (dataStoreGetter != null)
                 dataStoreGetter.Invoke(null, null);
+        }
+
+        public IEnumerable<string> GetStepTexts(MethodInfo stepMethod)
+        {
+            var targetStepType = TargetLibAssembly.GetType(typeof(Step).ToString());
+            dynamic step = stepMethod.GetCustomAttribute(targetStepType);
+            return step.Names;
         }
 
         public bool TryScreenCapture(out byte[] screenShotBytes)

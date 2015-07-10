@@ -24,8 +24,9 @@ namespace Gauge.CSharp.Runner
     {
         void ExecuteMethod(MethodInfo method, params object[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
-        HookRegistry GetHookRegistry();
+        IHookRegistry GetHookRegistry();
         List<MethodInfo> GetStepMethods();
         void InitializeDataStore(string dataStoreType);
+        IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
     }
 }

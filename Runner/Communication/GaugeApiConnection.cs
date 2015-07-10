@@ -28,7 +28,7 @@ namespace Gauge.CSharp.Runner.Communication
         {
         }
 
-        public IEnumerable<string> GetStepValue(IEnumerable<string> stepTexts, bool hasInlineTable)
+        public IEnumerable<string> GetStepValues(IEnumerable<string> stepTexts, bool hasInlineTable)
         {
             foreach (var stepText in stepTexts)
             {

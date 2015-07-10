@@ -29,7 +29,7 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly IStepRegistry _stepRegistry;
         private readonly IMethodExecutor _methodExecutor;
-        private Dictionary<Type, IParamConverter> _paramConverters;
+        private Dictionary<string, IParamConverter> _paramConverters;
 
 
         public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor)
@@ -61,9 +61,9 @@ namespace Gauge.CSharp.Runner.Processors
             for (var i = 0; i < parameters.Length; i++)
             {
                 var paramType = parameters[i].ParameterType;
-                if (_paramConverters.ContainsKey(paramType))
+                if (_paramConverters.ContainsKey(paramType.ToString()))
                 {
-                    args[i] = _paramConverters[paramType].Convert(stepParameter[i]);
+                    args[i] = _paramConverters[paramType.ToString()].Convert(stepParameter[i]);
                 }
                 else
                 {
@@ -76,10 +76,10 @@ namespace Gauge.CSharp.Runner.Processors
 
         private void InitializeConverter()
         {
-            _paramConverters = new Dictionary<Type, IParamConverter>
+            _paramConverters = new Dictionary<string, IParamConverter>
             {
-                {typeof (string), new StringParamConverter()},
-                {typeof (Table), new TableParamConverter()}
+                {typeof (string).ToString(), new StringParamConverter()},
+                {typeof (Table).ToString(), new TableParamConverter()}
             };
         }
 

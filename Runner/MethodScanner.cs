@@ -29,6 +29,7 @@ namespace Gauge.CSharp.Runner
         private readonly GaugeApiConnection _apiConnection;
 
         private readonly ISandbox _sandbox;
+        private IStepRegistry _stepRegistry;
 
         public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
@@ -38,12 +39,13 @@ namespace Gauge.CSharp.Runner
 
         public IStepRegistry GetStepRegistry()
         {
-            return new StepRegistry(GetStepMethods());
+            _stepRegistry = new StepRegistry(GetStepMethods());
+            return _stepRegistry;
         }
 
         public IEnumerable<string> GetStepTexts()
         {
-            return _sandbox.GetStepMethods().SelectMany(stepMethod => stepMethod.GetCustomAttribute<Step>().Names);
+            return _stepRegistry.AllSteps();
         }
 
         private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
@@ -55,11 +57,9 @@ namespace Gauge.CSharp.Runner
                 foreach (var stepMethod in stepMethods)
                 {
                     // HasTable is set to false here, table parameter is interpreted using the Step text.
-                    var stepValues = _apiConnection.GetStepValue(stepMethod.GetCustomAttribute<Step>().Names,
-                        false);
+                    var stepValues = _apiConnection.GetStepValues(_sandbox.GetStepTexts(stepMethod), false);
 
-                    retVal.AddRange(
-                        stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
+                    retVal.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
                 }
             }
             catch (Exception ex)
