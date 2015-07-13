@@ -51,6 +51,102 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             }.ForEach(s => Assert.Contains(s, stepTexts));
         }
 
+        [TestCase]
+        public void ShouldGetBeforeSuiteHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.BeforeSuiteHooks.Count);
+
+            var hookMethod = hookRegistry.BeforeSuiteHooks.First();
+            Assert.AreEqual("BeforeSuite", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetAfterSuiteHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.AfterSuiteHooks.Count);
+
+            var hookMethod = hookRegistry.AfterSuiteHooks.First();
+            Assert.AreEqual("AfterSuite", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetBeforeScenarioHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.BeforeScenarioHooks.Count);
+
+            var hookMethod = hookRegistry.BeforeScenarioHooks.First();
+            Assert.AreEqual("BeforeScenario", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetAfterScenarioHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.AfterScenarioHooks.Count);
+
+            var hookMethod = hookRegistry.AfterScenarioHooks.First();
+            Assert.AreEqual("AfterScenario", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetBeforeSpecHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.BeforeSpecHooks.Count);
+
+            var hookMethod = hookRegistry.BeforeSpecHooks.First();
+            Assert.AreEqual("BeforeSpec", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetAfterSpecHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.AfterSpecHooks.Count);
+
+            var hookMethod = hookRegistry.AfterSpecHooks.First();
+            Assert.AreEqual("AfterSpec", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetBeforeStepHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.BeforeStepHooks.Count);
+
+            var hookMethod = hookRegistry.BeforeStepHooks.First();
+            Assert.AreEqual("BeforeStep", hookMethod.Method.Name);
+        }
+
+        [TestCase]
+        public void ShouldGetAfterStepHooks()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var hookRegistry = sandbox.GetHookRegistry();
+
+            Assert.AreEqual(1, hookRegistry.AfterStepHooks.Count);
+
+            var hookMethod = hookRegistry.AfterStepHooks.First();
+            Assert.AreEqual("AfterStep", hookMethod.Method.Name);
+        }
+
         [TearDown]
         public void TearDown()
         {
