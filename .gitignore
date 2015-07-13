@@ -8,8 +8,7 @@ packages
 *.nupkg
 *.csproj.user
 artifacts/
-Gauge.CSharp.Sln.ide
-Gauge.CSharp.Lib.Sln.ide
+*.Sln.ide
 IntegrationTestSample/gauge-bin
 IntegrationTestSample/logs
 IntegrationTestSample/reports

@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTestSample", "IntegrationTestSample\IntegrationTestSample.csproj", "{81502D2C-472B-4D4C-BFA9-EA206CD16B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner.IntegrationTests", "Gauge.CSharp.Runner.IntegrationTests\Gauge.CSharp.Runner.IntegrationTests.csproj", "{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner.IntegrationTests", "Runner.IntegrationTests\Gauge.CSharp.Runner.IntegrationTests.csproj", "{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

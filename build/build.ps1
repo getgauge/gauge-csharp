@@ -25,6 +25,19 @@ $sln = "Gauge.CSharp.Lib.sln"
 
 &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
 
+if($LastExitCode -ne 0)
+{
+    throw "Build failed $($sln)"
+}
+
+$sln = "IntegrationTestSample.sln"
+&$msbuild "IntegrationTestSample\$($sln)" /t:rebuild /m /nologo /p:configuration=release
+
+if($LastExitCode -ne 0)
+{
+    throw "Build failed: $($sln)"
+}
+
 # Build the runner
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
 New-Item -Itemtype directory $outputPath -Force
@@ -34,3 +47,8 @@ if ($buildWithTest -eq 'true') {
 }
 
 &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
+
+if($LastExitCode -ne 0)
+{
+    throw "Build failed $($sln)"
+}
