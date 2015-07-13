@@ -79,6 +79,12 @@ namespace Gauge.Messages {
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.step, global::Gauge.Messages.step.Builder> internal__static_gauge_messages_step__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_gauge_messages_ExtractConceptResponse__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExtractConceptResponse, global::Gauge.Messages.ExtractConceptResponse.Builder> internal__static_gauge_messages_ExtractConceptResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_FormatSpecsRequest__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.FormatSpecsRequest, global::Gauge.Messages.FormatSpecsRequest.Builder> internal__static_gauge_messages_FormatSpecsRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_FormatSpecsResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.FormatSpecsResponse, global::Gauge.Messages.FormatSpecsResponse.Builder> internal__static_gauge_messages_FormatSpecsResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_UnsupportedApiMessageResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.UnsupportedApiMessageResponse, global::Gauge.Messages.UnsupportedApiMessageResponse.Builder> internal__static_gauge_messages_UnsupportedApiMessageResponse__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_gauge_messages_APIMessage__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.APIMessage, global::Gauge.Messages.APIMessage.Builder> internal__static_gauge_messages_APIMessage__FieldAccessorTable;
     #endregion
@@ -123,51 +129,60 @@ namespace Gauge.Messages {
             "ZU5vGAIgAigFEhEKCWVuZExpbmVObxgDIAIoBSI7CgRzdGVwEgwKBG5hbWUY", 
             "ASACKAkSDQoFdGFibGUYAiABKAkSFgoOcGFyYW1UYWJsZU5hbWUYAyABKAki", 
             "UAoWRXh0cmFjdENvbmNlcHRSZXNwb25zZRIRCglpc1N1Y2Nlc3MYASACKAgS", 
-            "DQoFZXJyb3IYAiABKAkSFAoMZmlsZXNDaGFuZ2VkGAMgAygJIpsPCgpBUElN", 
-            "ZXNzYWdlEj4KC21lc3NhZ2VUeXBlGAEgAigOMikuZ2F1Z2UubWVzc2FnZXMu", 
-            "QVBJTWVzc2FnZS5BUElNZXNzYWdlVHlwZRIRCgltZXNzYWdlSWQYAiACKAMS", 
-            "QQoScHJvamVjdFJvb3RSZXF1ZXN0GAMgASgLMiUuZ2F1Z2UubWVzc2FnZXMu", 
-            "R2V0UHJvamVjdFJvb3RSZXF1ZXN0EkMKE3Byb2plY3RSb290UmVzcG9uc2UY", 
-            "BCABKAsyJi5nYXVnZS5tZXNzYWdlcy5HZXRQcm9qZWN0Um9vdFJlc3BvbnNl", 
-            "EksKF2luc3RhbGxhdGlvblJvb3RSZXF1ZXN0GAUgASgLMiouZ2F1Z2UubWVz", 
-            "c2FnZXMuR2V0SW5zdGFsbGF0aW9uUm9vdFJlcXVlc3QSTQoYaW5zdGFsbGF0", 
-            "aW9uUm9vdFJlc3BvbnNlGAYgASgLMisuZ2F1Z2UubWVzc2FnZXMuR2V0SW5z", 
-            "dGFsbGF0aW9uUm9vdFJlc3BvbnNlEjsKD2FsbFN0ZXBzUmVxdWVzdBgHIAEo", 
-            "CzIiLmdhdWdlLm1lc3NhZ2VzLkdldEFsbFN0ZXBzUmVxdWVzdBI9ChBhbGxT", 
-            "dGVwc1Jlc3BvbnNlGAggASgLMiMuZ2F1Z2UubWVzc2FnZXMuR2V0QWxsU3Rl", 
-            "cHNSZXNwb25zZRI7Cg9hbGxTcGVjc1JlcXVlc3QYCSABKAsyIi5nYXVnZS5t", 
-            "ZXNzYWdlcy5HZXRBbGxTcGVjc1JlcXVlc3QSPQoQYWxsU3BlY3NSZXNwb25z", 
-            "ZRgKIAEoCzIjLmdhdWdlLm1lc3NhZ2VzLkdldEFsbFNwZWNzUmVzcG9uc2US", 
-            "PQoQc3RlcFZhbHVlUmVxdWVzdBgLIAEoCzIjLmdhdWdlLm1lc3NhZ2VzLkdl", 
-            "dFN0ZXBWYWx1ZVJlcXVlc3QSPwoRc3RlcFZhbHVlUmVzcG9uc2UYDCABKAsy", 
-            "JC5nYXVnZS5tZXNzYWdlcy5HZXRTdGVwVmFsdWVSZXNwb25zZRJHCg5saWJQ", 
-            "YXRoUmVxdWVzdBgNIAEoCzIvLmdhdWdlLm1lc3NhZ2VzLkdldExhbmd1YWdl", 
-            "UGx1Z2luTGliUGF0aFJlcXVlc3QSSQoPbGliUGF0aFJlc3BvbnNlGA4gASgL", 
-            "MjAuZ2F1Z2UubWVzc2FnZXMuR2V0TGFuZ3VhZ2VQbHVnaW5MaWJQYXRoUmVz", 
-            "cG9uc2USLAoFZXJyb3IYDyABKAsyHS5nYXVnZS5tZXNzYWdlcy5FcnJvclJl", 
-            "c3BvbnNlEkEKEmFsbENvbmNlcHRzUmVxdWVzdBgQIAEoCzIlLmdhdWdlLm1l", 
-            "c3NhZ2VzLkdldEFsbENvbmNlcHRzUmVxdWVzdBJDChNhbGxDb25jZXB0c1Jl", 
-            "c3BvbnNlGBEgASgLMiYuZ2F1Z2UubWVzc2FnZXMuR2V0QWxsQ29uY2VwdHNS", 
-            "ZXNwb25zZRJMChlwZXJmb3JtUmVmYWN0b3JpbmdSZXF1ZXN0GBIgASgLMiku", 
-            "Z2F1Z2UubWVzc2FnZXMuUGVyZm9ybVJlZmFjdG9yaW5nUmVxdWVzdBJOChpw", 
-            "ZXJmb3JtUmVmYWN0b3JpbmdSZXNwb25zZRgTIAEoCzIqLmdhdWdlLm1lc3Nh", 
-            "Z2VzLlBlcmZvcm1SZWZhY3RvcmluZ1Jlc3BvbnNlEkQKFWV4dHJhY3RDb25j", 
-            "ZXB0UmVxdWVzdBgUIAEoCzIlLmdhdWdlLm1lc3NhZ2VzLkV4dHJhY3RDb25j", 
-            "ZXB0UmVxdWVzdBJGChZleHRyYWN0Q29uY2VwdFJlc3BvbnNlGBUgASgLMiYu", 
-            "Z2F1Z2UubWVzc2FnZXMuRXh0cmFjdENvbmNlcHRSZXNwb25zZSKnBAoOQVBJ", 
-            "TWVzc2FnZVR5cGUSGQoVR2V0UHJvamVjdFJvb3RSZXF1ZXN0EAESGgoWR2V0", 
-            "UHJvamVjdFJvb3RSZXNwb25zZRACEh4KGkdldEluc3RhbGxhdGlvblJvb3RS", 
-            "ZXF1ZXN0EAMSHwobR2V0SW5zdGFsbGF0aW9uUm9vdFJlc3BvbnNlEAQSFgoS", 
-            "R2V0QWxsU3RlcHNSZXF1ZXN0EAUSFgoSR2V0QWxsU3RlcFJlc3BvbnNlEAYS", 
-            "FgoSR2V0QWxsU3BlY3NSZXF1ZXN0EAcSFwoTR2V0QWxsU3BlY3NSZXNwb25z", 
-            "ZRAIEhcKE0dldFN0ZXBWYWx1ZVJlcXVlc3QQCRIYChRHZXRTdGVwVmFsdWVS", 
-            "ZXNwb25zZRAKEiMKH0dldExhbmd1YWdlUGx1Z2luTGliUGF0aFJlcXVlc3QQ", 
-            "CxIkCiBHZXRMYW5ndWFnZVBsdWdpbkxpYlBhdGhSZXNwb25zZRAMEhEKDUVy", 
-            "cm9yUmVzcG9uc2UQDRIZChVHZXRBbGxDb25jZXB0c1JlcXVlc3QQDhIaChZH", 
-            "ZXRBbGxDb25jZXB0c1Jlc3BvbnNlEA8SHQoZUGVyZm9ybVJlZmFjdG9yaW5n", 
-            "UmVxdWVzdBAQEh4KGlBlcmZvcm1SZWZhY3RvcmluZ1Jlc3BvbnNlEBESGQoV", 
-            "RXh0cmFjdENvbmNlcHRSZXF1ZXN0EBISGgoWRXh0cmFjdENvbmNlcHRSZXNw", 
-          "b25zZRAT"));
+            "DQoFZXJyb3IYAiABKAkSFAoMZmlsZXNDaGFuZ2VkGAMgAygJIiMKEkZvcm1h", 
+            "dFNwZWNzUmVxdWVzdBINCgVzcGVjcxgBIAMoCSI3ChNGb3JtYXRTcGVjc1Jl", 
+            "c3BvbnNlEg4KBmVycm9ycxgBIAMoCRIQCgh3YXJuaW5ncxgCIAMoCSIfCh1V", 
+            "bnN1cHBvcnRlZEFwaU1lc3NhZ2VSZXNwb25zZSLHEQoKQVBJTWVzc2FnZRI+", 
+            "CgttZXNzYWdlVHlwZRgBIAIoDjIpLmdhdWdlLm1lc3NhZ2VzLkFQSU1lc3Nh", 
+            "Z2UuQVBJTWVzc2FnZVR5cGUSEQoJbWVzc2FnZUlkGAIgAigDEkEKEnByb2pl", 
+            "Y3RSb290UmVxdWVzdBgDIAEoCzIlLmdhdWdlLm1lc3NhZ2VzLkdldFByb2pl", 
+            "Y3RSb290UmVxdWVzdBJDChNwcm9qZWN0Um9vdFJlc3BvbnNlGAQgASgLMiYu", 
+            "Z2F1Z2UubWVzc2FnZXMuR2V0UHJvamVjdFJvb3RSZXNwb25zZRJLChdpbnN0", 
+            "YWxsYXRpb25Sb290UmVxdWVzdBgFIAEoCzIqLmdhdWdlLm1lc3NhZ2VzLkdl", 
+            "dEluc3RhbGxhdGlvblJvb3RSZXF1ZXN0Ek0KGGluc3RhbGxhdGlvblJvb3RS", 
+            "ZXNwb25zZRgGIAEoCzIrLmdhdWdlLm1lc3NhZ2VzLkdldEluc3RhbGxhdGlv", 
+            "blJvb3RSZXNwb25zZRI7Cg9hbGxTdGVwc1JlcXVlc3QYByABKAsyIi5nYXVn", 
+            "ZS5tZXNzYWdlcy5HZXRBbGxTdGVwc1JlcXVlc3QSPQoQYWxsU3RlcHNSZXNw", 
+            "b25zZRgIIAEoCzIjLmdhdWdlLm1lc3NhZ2VzLkdldEFsbFN0ZXBzUmVzcG9u", 
+            "c2USOwoPYWxsU3BlY3NSZXF1ZXN0GAkgASgLMiIuZ2F1Z2UubWVzc2FnZXMu", 
+            "R2V0QWxsU3BlY3NSZXF1ZXN0Ej0KEGFsbFNwZWNzUmVzcG9uc2UYCiABKAsy", 
+            "Iy5nYXVnZS5tZXNzYWdlcy5HZXRBbGxTcGVjc1Jlc3BvbnNlEj0KEHN0ZXBW", 
+            "YWx1ZVJlcXVlc3QYCyABKAsyIy5nYXVnZS5tZXNzYWdlcy5HZXRTdGVwVmFs", 
+            "dWVSZXF1ZXN0Ej8KEXN0ZXBWYWx1ZVJlc3BvbnNlGAwgASgLMiQuZ2F1Z2Uu", 
+            "bWVzc2FnZXMuR2V0U3RlcFZhbHVlUmVzcG9uc2USRwoObGliUGF0aFJlcXVl", 
+            "c3QYDSABKAsyLy5nYXVnZS5tZXNzYWdlcy5HZXRMYW5ndWFnZVBsdWdpbkxp", 
+            "YlBhdGhSZXF1ZXN0EkkKD2xpYlBhdGhSZXNwb25zZRgOIAEoCzIwLmdhdWdl", 
+            "Lm1lc3NhZ2VzLkdldExhbmd1YWdlUGx1Z2luTGliUGF0aFJlc3BvbnNlEiwK", 
+            "BWVycm9yGA8gASgLMh0uZ2F1Z2UubWVzc2FnZXMuRXJyb3JSZXNwb25zZRJB", 
+            "ChJhbGxDb25jZXB0c1JlcXVlc3QYECABKAsyJS5nYXVnZS5tZXNzYWdlcy5H", 
+            "ZXRBbGxDb25jZXB0c1JlcXVlc3QSQwoTYWxsQ29uY2VwdHNSZXNwb25zZRgR", 
+            "IAEoCzImLmdhdWdlLm1lc3NhZ2VzLkdldEFsbENvbmNlcHRzUmVzcG9uc2US", 
+            "TAoZcGVyZm9ybVJlZmFjdG9yaW5nUmVxdWVzdBgSIAEoCzIpLmdhdWdlLm1l", 
+            "c3NhZ2VzLlBlcmZvcm1SZWZhY3RvcmluZ1JlcXVlc3QSTgoacGVyZm9ybVJl", 
+            "ZmFjdG9yaW5nUmVzcG9uc2UYEyABKAsyKi5nYXVnZS5tZXNzYWdlcy5QZXJm", 
+            "b3JtUmVmYWN0b3JpbmdSZXNwb25zZRJEChVleHRyYWN0Q29uY2VwdFJlcXVl", 
+            "c3QYFCABKAsyJS5nYXVnZS5tZXNzYWdlcy5FeHRyYWN0Q29uY2VwdFJlcXVl", 
+            "c3QSRgoWZXh0cmFjdENvbmNlcHRSZXNwb25zZRgVIAEoCzImLmdhdWdlLm1l", 
+            "c3NhZ2VzLkV4dHJhY3RDb25jZXB0UmVzcG9uc2USPgoSZm9ybWF0U3BlY3NS", 
+            "ZXF1ZXN0GBYgASgLMiIuZ2F1Z2UubWVzc2FnZXMuRm9ybWF0U3BlY3NSZXF1", 
+            "ZXN0EkAKE2Zvcm1hdFNwZWNzUmVzcG9uc2UYFyABKAsyIy5nYXVnZS5tZXNz", 
+            "YWdlcy5Gb3JtYXRTcGVjc1Jlc3BvbnNlElQKHXVuc3VwcG9ydGVkQXBpTWVz", 
+            "c2FnZVJlc3BvbnNlGBggASgLMi0uZ2F1Z2UubWVzc2FnZXMuVW5zdXBwb3J0", 
+            "ZWRBcGlNZXNzYWdlUmVzcG9uc2Ui+wQKDkFQSU1lc3NhZ2VUeXBlEhkKFUdl", 
+            "dFByb2plY3RSb290UmVxdWVzdBABEhoKFkdldFByb2plY3RSb290UmVzcG9u", 
+            "c2UQAhIeChpHZXRJbnN0YWxsYXRpb25Sb290UmVxdWVzdBADEh8KG0dldElu", 
+            "c3RhbGxhdGlvblJvb3RSZXNwb25zZRAEEhYKEkdldEFsbFN0ZXBzUmVxdWVz", 
+            "dBAFEhYKEkdldEFsbFN0ZXBSZXNwb25zZRAGEhYKEkdldEFsbFNwZWNzUmVx", 
+            "dWVzdBAHEhcKE0dldEFsbFNwZWNzUmVzcG9uc2UQCBIXChNHZXRTdGVwVmFs", 
+            "dWVSZXF1ZXN0EAkSGAoUR2V0U3RlcFZhbHVlUmVzcG9uc2UQChIjCh9HZXRM", 
+            "YW5ndWFnZVBsdWdpbkxpYlBhdGhSZXF1ZXN0EAsSJAogR2V0TGFuZ3VhZ2VQ", 
+            "bHVnaW5MaWJQYXRoUmVzcG9uc2UQDBIRCg1FcnJvclJlc3BvbnNlEA0SGQoV", 
+            "R2V0QWxsQ29uY2VwdHNSZXF1ZXN0EA4SGgoWR2V0QWxsQ29uY2VwdHNSZXNw", 
+            "b25zZRAPEh0KGVBlcmZvcm1SZWZhY3RvcmluZ1JlcXVlc3QQEBIeChpQZXJm", 
+            "b3JtUmVmYWN0b3JpbmdSZXNwb25zZRAREhkKFUV4dHJhY3RDb25jZXB0UmVx", 
+            "dWVzdBASEhoKFkV4dHJhY3RDb25jZXB0UmVzcG9uc2UQExIWChJGb3JtYXRT", 
+            "cGVjc1JlcXVlc3QQFBIXChNGb3JtYXRTcGVjc1Jlc3BvbnNlEBUSIQodVW5z", 
+          "dXBwb3J0ZWRBcGlNZXNzYWdlUmVzcG9uc2UQFg=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_GetProjectRootRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -262,10 +277,22 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ExtractConceptResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExtractConceptResponse, global::Gauge.Messages.ExtractConceptResponse.Builder>(internal__static_gauge_messages_ExtractConceptResponse__Descriptor,
                 new string[] { "IsSuccess", "Error", "FilesChanged", });
-        internal__static_gauge_messages_APIMessage__Descriptor = Descriptor.MessageTypes[23];
+        internal__static_gauge_messages_FormatSpecsRequest__Descriptor = Descriptor.MessageTypes[23];
+        internal__static_gauge_messages_FormatSpecsRequest__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.FormatSpecsRequest, global::Gauge.Messages.FormatSpecsRequest.Builder>(internal__static_gauge_messages_FormatSpecsRequest__Descriptor,
+                new string[] { "Specs", });
+        internal__static_gauge_messages_FormatSpecsResponse__Descriptor = Descriptor.MessageTypes[24];
+        internal__static_gauge_messages_FormatSpecsResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.FormatSpecsResponse, global::Gauge.Messages.FormatSpecsResponse.Builder>(internal__static_gauge_messages_FormatSpecsResponse__Descriptor,
+                new string[] { "Errors", "Warnings", });
+        internal__static_gauge_messages_UnsupportedApiMessageResponse__Descriptor = Descriptor.MessageTypes[25];
+        internal__static_gauge_messages_UnsupportedApiMessageResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.UnsupportedApiMessageResponse, global::Gauge.Messages.UnsupportedApiMessageResponse.Builder>(internal__static_gauge_messages_UnsupportedApiMessageResponse__Descriptor,
+                new string[] { });
+        internal__static_gauge_messages_APIMessage__Descriptor = Descriptor.MessageTypes[26];
         internal__static_gauge_messages_APIMessage__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.APIMessage, global::Gauge.Messages.APIMessage.Builder>(internal__static_gauge_messages_APIMessage__Descriptor,
-                new string[] { "MessageType", "MessageId", "ProjectRootRequest", "ProjectRootResponse", "InstallationRootRequest", "InstallationRootResponse", "AllStepsRequest", "AllStepsResponse", "AllSpecsRequest", "AllSpecsResponse", "StepValueRequest", "StepValueResponse", "LibPathRequest", "LibPathResponse", "Error", "AllConceptsRequest", "AllConceptsResponse", "PerformRefactoringRequest", "PerformRefactoringResponse", "ExtractConceptRequest", "ExtractConceptResponse", });
+                new string[] { "MessageType", "MessageId", "ProjectRootRequest", "ProjectRootResponse", "InstallationRootRequest", "InstallationRootResponse", "AllStepsRequest", "AllStepsResponse", "AllSpecsRequest", "AllSpecsResponse", "StepValueRequest", "StepValueResponse", "LibPathRequest", "LibPathResponse", "Error", "AllConceptsRequest", "AllConceptsResponse", "PerformRefactoringRequest", "PerformRefactoringResponse", "ExtractConceptRequest", "ExtractConceptResponse", "FormatSpecsRequest", "FormatSpecsResponse", "UnsupportedApiMessageResponse", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -7400,11 +7427,896 @@ namespace Gauge.Messages {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class FormatSpecsRequest : pb::GeneratedMessage<FormatSpecsRequest, FormatSpecsRequest.Builder> {
+    private FormatSpecsRequest() { }
+    private static readonly FormatSpecsRequest defaultInstance = new FormatSpecsRequest().MakeReadOnly();
+    private static readonly string[] _formatSpecsRequestFieldNames = new string[] { "specs" };
+    private static readonly uint[] _formatSpecsRequestFieldTags = new uint[] { 10 };
+    public static FormatSpecsRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override FormatSpecsRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override FormatSpecsRequest ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_FormatSpecsRequest__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<FormatSpecsRequest, FormatSpecsRequest.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_FormatSpecsRequest__FieldAccessorTable; }
+    }
+    
+    public const int SpecsFieldNumber = 1;
+    private pbc::PopsicleList<string> specs_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> SpecsList {
+      get { return pbc::Lists.AsReadOnly(specs_); }
+    }
+    public int SpecsCount {
+      get { return specs_.Count; }
+    }
+    public string GetSpecs(int index) {
+      return specs_[index];
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _formatSpecsRequestFieldNames;
+      if (specs_.Count > 0) {
+        output.WriteStringArray(1, field_names[0], specs_);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      {
+        int dataSize = 0;
+        foreach (string element in SpecsList) {
+          dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * specs_.Count;
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static FormatSpecsRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static FormatSpecsRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private FormatSpecsRequest MakeReadOnly() {
+      specs_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(FormatSpecsRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<FormatSpecsRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(FormatSpecsRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private FormatSpecsRequest result;
+      
+      private FormatSpecsRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          FormatSpecsRequest original = result;
+          result = new FormatSpecsRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override FormatSpecsRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.FormatSpecsRequest.Descriptor; }
+      }
+      
+      public override FormatSpecsRequest DefaultInstanceForType {
+        get { return global::Gauge.Messages.FormatSpecsRequest.DefaultInstance; }
+      }
+      
+      public override FormatSpecsRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is FormatSpecsRequest) {
+          return MergeFrom((FormatSpecsRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(FormatSpecsRequest other) {
+        if (other == global::Gauge.Messages.FormatSpecsRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.specs_.Count != 0) {
+          result.specs_.Add(other.specs_);
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_formatSpecsRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _formatSpecsRequestFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              input.ReadStringArray(tag, field_name, result.specs_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public pbc::IPopsicleList<string> SpecsList {
+        get { return PrepareBuilder().specs_; }
+      }
+      public int SpecsCount {
+        get { return result.SpecsCount; }
+      }
+      public string GetSpecs(int index) {
+        return result.GetSpecs(index);
+      }
+      public Builder SetSpecs(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.specs_[index] = value;
+        return this;
+      }
+      public Builder AddSpecs(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.specs_.Add(value);
+        return this;
+      }
+      public Builder AddRangeSpecs(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.specs_.Add(values);
+        return this;
+      }
+      public Builder ClearSpecs() {
+        PrepareBuilder();
+        result.specs_.Clear();
+        return this;
+      }
+    }
+    static FormatSpecsRequest() {
+      object.ReferenceEquals(global::Gauge.Messages.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class FormatSpecsResponse : pb::GeneratedMessage<FormatSpecsResponse, FormatSpecsResponse.Builder> {
+    private FormatSpecsResponse() { }
+    private static readonly FormatSpecsResponse defaultInstance = new FormatSpecsResponse().MakeReadOnly();
+    private static readonly string[] _formatSpecsResponseFieldNames = new string[] { "errors", "warnings" };
+    private static readonly uint[] _formatSpecsResponseFieldTags = new uint[] { 10, 18 };
+    public static FormatSpecsResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override FormatSpecsResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override FormatSpecsResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_FormatSpecsResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<FormatSpecsResponse, FormatSpecsResponse.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_FormatSpecsResponse__FieldAccessorTable; }
+    }
+    
+    public const int ErrorsFieldNumber = 1;
+    private pbc::PopsicleList<string> errors_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> ErrorsList {
+      get { return pbc::Lists.AsReadOnly(errors_); }
+    }
+    public int ErrorsCount {
+      get { return errors_.Count; }
+    }
+    public string GetErrors(int index) {
+      return errors_[index];
+    }
+    
+    public const int WarningsFieldNumber = 2;
+    private pbc::PopsicleList<string> warnings_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> WarningsList {
+      get { return pbc::Lists.AsReadOnly(warnings_); }
+    }
+    public int WarningsCount {
+      get { return warnings_.Count; }
+    }
+    public string GetWarnings(int index) {
+      return warnings_[index];
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _formatSpecsResponseFieldNames;
+      if (errors_.Count > 0) {
+        output.WriteStringArray(1, field_names[0], errors_);
+      }
+      if (warnings_.Count > 0) {
+        output.WriteStringArray(2, field_names[1], warnings_);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      {
+        int dataSize = 0;
+        foreach (string element in ErrorsList) {
+          dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * errors_.Count;
+      }
+      {
+        int dataSize = 0;
+        foreach (string element in WarningsList) {
+          dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * warnings_.Count;
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static FormatSpecsResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static FormatSpecsResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private FormatSpecsResponse MakeReadOnly() {
+      errors_.MakeReadOnly();
+      warnings_.MakeReadOnly();
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(FormatSpecsResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<FormatSpecsResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(FormatSpecsResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private FormatSpecsResponse result;
+      
+      private FormatSpecsResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          FormatSpecsResponse original = result;
+          result = new FormatSpecsResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override FormatSpecsResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.FormatSpecsResponse.Descriptor; }
+      }
+      
+      public override FormatSpecsResponse DefaultInstanceForType {
+        get { return global::Gauge.Messages.FormatSpecsResponse.DefaultInstance; }
+      }
+      
+      public override FormatSpecsResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is FormatSpecsResponse) {
+          return MergeFrom((FormatSpecsResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(FormatSpecsResponse other) {
+        if (other == global::Gauge.Messages.FormatSpecsResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.errors_.Count != 0) {
+          result.errors_.Add(other.errors_);
+        }
+        if (other.warnings_.Count != 0) {
+          result.warnings_.Add(other.warnings_);
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_formatSpecsResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _formatSpecsResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              input.ReadStringArray(tag, field_name, result.errors_);
+              break;
+            }
+            case 18: {
+              input.ReadStringArray(tag, field_name, result.warnings_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public pbc::IPopsicleList<string> ErrorsList {
+        get { return PrepareBuilder().errors_; }
+      }
+      public int ErrorsCount {
+        get { return result.ErrorsCount; }
+      }
+      public string GetErrors(int index) {
+        return result.GetErrors(index);
+      }
+      public Builder SetErrors(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.errors_[index] = value;
+        return this;
+      }
+      public Builder AddErrors(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.errors_.Add(value);
+        return this;
+      }
+      public Builder AddRangeErrors(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.errors_.Add(values);
+        return this;
+      }
+      public Builder ClearErrors() {
+        PrepareBuilder();
+        result.errors_.Clear();
+        return this;
+      }
+      
+      public pbc::IPopsicleList<string> WarningsList {
+        get { return PrepareBuilder().warnings_; }
+      }
+      public int WarningsCount {
+        get { return result.WarningsCount; }
+      }
+      public string GetWarnings(int index) {
+        return result.GetWarnings(index);
+      }
+      public Builder SetWarnings(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.warnings_[index] = value;
+        return this;
+      }
+      public Builder AddWarnings(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.warnings_.Add(value);
+        return this;
+      }
+      public Builder AddRangeWarnings(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.warnings_.Add(values);
+        return this;
+      }
+      public Builder ClearWarnings() {
+        PrepareBuilder();
+        result.warnings_.Clear();
+        return this;
+      }
+    }
+    static FormatSpecsResponse() {
+      object.ReferenceEquals(global::Gauge.Messages.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class UnsupportedApiMessageResponse : pb::GeneratedMessage<UnsupportedApiMessageResponse, UnsupportedApiMessageResponse.Builder> {
+    private UnsupportedApiMessageResponse() { }
+    private static readonly UnsupportedApiMessageResponse defaultInstance = new UnsupportedApiMessageResponse().MakeReadOnly();
+    private static readonly string[] _unsupportedApiMessageResponseFieldNames = new string[] {  };
+    private static readonly uint[] _unsupportedApiMessageResponseFieldTags = new uint[] {  };
+    public static UnsupportedApiMessageResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override UnsupportedApiMessageResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override UnsupportedApiMessageResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_UnsupportedApiMessageResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<UnsupportedApiMessageResponse, UnsupportedApiMessageResponse.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Api.internal__static_gauge_messages_UnsupportedApiMessageResponse__FieldAccessorTable; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _unsupportedApiMessageResponseFieldNames;
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static UnsupportedApiMessageResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private UnsupportedApiMessageResponse MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(UnsupportedApiMessageResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<UnsupportedApiMessageResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(UnsupportedApiMessageResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private UnsupportedApiMessageResponse result;
+      
+      private UnsupportedApiMessageResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          UnsupportedApiMessageResponse original = result;
+          result = new UnsupportedApiMessageResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override UnsupportedApiMessageResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.UnsupportedApiMessageResponse.Descriptor; }
+      }
+      
+      public override UnsupportedApiMessageResponse DefaultInstanceForType {
+        get { return global::Gauge.Messages.UnsupportedApiMessageResponse.DefaultInstance; }
+      }
+      
+      public override UnsupportedApiMessageResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is UnsupportedApiMessageResponse) {
+          return MergeFrom((UnsupportedApiMessageResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(UnsupportedApiMessageResponse other) {
+        if (other == global::Gauge.Messages.UnsupportedApiMessageResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_unsupportedApiMessageResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _unsupportedApiMessageResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+    }
+    static UnsupportedApiMessageResponse() {
+      object.ReferenceEquals(global::Gauge.Messages.Api.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class APIMessage : pb::GeneratedMessage<APIMessage, APIMessage.Builder> {
     private APIMessage() { }
     private static readonly APIMessage defaultInstance = new APIMessage().MakeReadOnly();
-    private static readonly string[] _aPIMessageFieldNames = new string[] { "allConceptsRequest", "allConceptsResponse", "allSpecsRequest", "allSpecsResponse", "allStepsRequest", "allStepsResponse", "error", "extractConceptRequest", "extractConceptResponse", "installationRootRequest", "installationRootResponse", "libPathRequest", "libPathResponse", "messageId", "messageType", "performRefactoringRequest", "performRefactoringResponse", "projectRootRequest", "projectRootResponse", "stepValueRequest", "stepValueResponse" };
-    private static readonly uint[] _aPIMessageFieldTags = new uint[] { 130, 138, 74, 82, 58, 66, 122, 162, 170, 42, 50, 106, 114, 16, 8, 146, 154, 26, 34, 90, 98 };
+    private static readonly string[] _aPIMessageFieldNames = new string[] { "allConceptsRequest", "allConceptsResponse", "allSpecsRequest", "allSpecsResponse", "allStepsRequest", "allStepsResponse", "error", "extractConceptRequest", "extractConceptResponse", "formatSpecsRequest", "formatSpecsResponse", "installationRootRequest", "installationRootResponse", "libPathRequest", "libPathResponse", "messageId", "messageType", "performRefactoringRequest", "performRefactoringResponse", "projectRootRequest", "projectRootResponse", "stepValueRequest", "stepValueResponse", "unsupportedApiMessageResponse" };
+    private static readonly uint[] _aPIMessageFieldTags = new uint[] { 130, 138, 74, 82, 58, 66, 122, 162, 170, 178, 186, 42, 50, 106, 114, 16, 8, 146, 154, 26, 34, 90, 98, 194 };
     public static APIMessage DefaultInstance {
       get { return defaultInstance; }
     }
@@ -7448,6 +8360,9 @@ namespace Gauge.Messages {
         PerformRefactoringResponse = 17,
         ExtractConceptRequest = 18,
         ExtractConceptResponse = 19,
+        FormatSpecsRequest = 20,
+        FormatSpecsResponse = 21,
+        UnsupportedApiMessageResponse = 22,
       }
       
     }
@@ -7663,6 +8578,36 @@ namespace Gauge.Messages {
       get { return extractConceptResponse_ ?? global::Gauge.Messages.ExtractConceptResponse.DefaultInstance; }
     }
     
+    public const int FormatSpecsRequestFieldNumber = 22;
+    private bool hasFormatSpecsRequest;
+    private global::Gauge.Messages.FormatSpecsRequest formatSpecsRequest_;
+    public bool HasFormatSpecsRequest {
+      get { return hasFormatSpecsRequest; }
+    }
+    public global::Gauge.Messages.FormatSpecsRequest FormatSpecsRequest {
+      get { return formatSpecsRequest_ ?? global::Gauge.Messages.FormatSpecsRequest.DefaultInstance; }
+    }
+    
+    public const int FormatSpecsResponseFieldNumber = 23;
+    private bool hasFormatSpecsResponse;
+    private global::Gauge.Messages.FormatSpecsResponse formatSpecsResponse_;
+    public bool HasFormatSpecsResponse {
+      get { return hasFormatSpecsResponse; }
+    }
+    public global::Gauge.Messages.FormatSpecsResponse FormatSpecsResponse {
+      get { return formatSpecsResponse_ ?? global::Gauge.Messages.FormatSpecsResponse.DefaultInstance; }
+    }
+    
+    public const int UnsupportedApiMessageResponseFieldNumber = 24;
+    private bool hasUnsupportedApiMessageResponse;
+    private global::Gauge.Messages.UnsupportedApiMessageResponse unsupportedApiMessageResponse_;
+    public bool HasUnsupportedApiMessageResponse {
+      get { return hasUnsupportedApiMessageResponse; }
+    }
+    public global::Gauge.Messages.UnsupportedApiMessageResponse UnsupportedApiMessageResponse {
+      get { return unsupportedApiMessageResponse_ ?? global::Gauge.Messages.UnsupportedApiMessageResponse.DefaultInstance; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasMessageType) return false;
@@ -7717,22 +8662,22 @@ namespace Gauge.Messages {
       CalcSerializedSize();
       string[] field_names = _aPIMessageFieldNames;
       if (hasMessageType) {
-        output.WriteEnum(1, field_names[14], (int) MessageType, MessageType);
+        output.WriteEnum(1, field_names[16], (int) MessageType, MessageType);
       }
       if (hasMessageId) {
-        output.WriteInt64(2, field_names[13], MessageId);
+        output.WriteInt64(2, field_names[15], MessageId);
       }
       if (hasProjectRootRequest) {
-        output.WriteMessage(3, field_names[17], ProjectRootRequest);
+        output.WriteMessage(3, field_names[19], ProjectRootRequest);
       }
       if (hasProjectRootResponse) {
-        output.WriteMessage(4, field_names[18], ProjectRootResponse);
+        output.WriteMessage(4, field_names[20], ProjectRootResponse);
       }
       if (hasInstallationRootRequest) {
-        output.WriteMessage(5, field_names[9], InstallationRootRequest);
+        output.WriteMessage(5, field_names[11], InstallationRootRequest);
       }
       if (hasInstallationRootResponse) {
-        output.WriteMessage(6, field_names[10], InstallationRootResponse);
+        output.WriteMessage(6, field_names[12], InstallationRootResponse);
       }
       if (hasAllStepsRequest) {
         output.WriteMessage(7, field_names[4], AllStepsRequest);
@@ -7747,16 +8692,16 @@ namespace Gauge.Messages {
         output.WriteMessage(10, field_names[3], AllSpecsResponse);
       }
       if (hasStepValueRequest) {
-        output.WriteMessage(11, field_names[19], StepValueRequest);
+        output.WriteMessage(11, field_names[21], StepValueRequest);
       }
       if (hasStepValueResponse) {
-        output.WriteMessage(12, field_names[20], StepValueResponse);
+        output.WriteMessage(12, field_names[22], StepValueResponse);
       }
       if (hasLibPathRequest) {
-        output.WriteMessage(13, field_names[11], LibPathRequest);
+        output.WriteMessage(13, field_names[13], LibPathRequest);
       }
       if (hasLibPathResponse) {
-        output.WriteMessage(14, field_names[12], LibPathResponse);
+        output.WriteMessage(14, field_names[14], LibPathResponse);
       }
       if (hasError) {
         output.WriteMessage(15, field_names[6], Error);
@@ -7768,16 +8713,25 @@ namespace Gauge.Messages {
         output.WriteMessage(17, field_names[1], AllConceptsResponse);
       }
       if (hasPerformRefactoringRequest) {
-        output.WriteMessage(18, field_names[15], PerformRefactoringRequest);
+        output.WriteMessage(18, field_names[17], PerformRefactoringRequest);
       }
       if (hasPerformRefactoringResponse) {
-        output.WriteMessage(19, field_names[16], PerformRefactoringResponse);
+        output.WriteMessage(19, field_names[18], PerformRefactoringResponse);
       }
       if (hasExtractConceptRequest) {
         output.WriteMessage(20, field_names[7], ExtractConceptRequest);
       }
       if (hasExtractConceptResponse) {
         output.WriteMessage(21, field_names[8], ExtractConceptResponse);
+      }
+      if (hasFormatSpecsRequest) {
+        output.WriteMessage(22, field_names[9], FormatSpecsRequest);
+      }
+      if (hasFormatSpecsResponse) {
+        output.WriteMessage(23, field_names[10], FormatSpecsResponse);
+      }
+      if (hasUnsupportedApiMessageResponse) {
+        output.WriteMessage(24, field_names[23], UnsupportedApiMessageResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -7858,6 +8812,15 @@ namespace Gauge.Messages {
       }
       if (hasExtractConceptResponse) {
         size += pb::CodedOutputStream.ComputeMessageSize(21, ExtractConceptResponse);
+      }
+      if (hasFormatSpecsRequest) {
+        size += pb::CodedOutputStream.ComputeMessageSize(22, FormatSpecsRequest);
+      }
+      if (hasFormatSpecsResponse) {
+        size += pb::CodedOutputStream.ComputeMessageSize(23, FormatSpecsResponse);
+      }
+      if (hasUnsupportedApiMessageResponse) {
+        size += pb::CodedOutputStream.ComputeMessageSize(24, UnsupportedApiMessageResponse);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -8043,6 +9006,15 @@ namespace Gauge.Messages {
         }
         if (other.HasExtractConceptResponse) {
           MergeExtractConceptResponse(other.ExtractConceptResponse);
+        }
+        if (other.HasFormatSpecsRequest) {
+          MergeFormatSpecsRequest(other.FormatSpecsRequest);
+        }
+        if (other.HasFormatSpecsResponse) {
+          MergeFormatSpecsResponse(other.FormatSpecsResponse);
+        }
+        if (other.HasUnsupportedApiMessageResponse) {
+          MergeUnsupportedApiMessageResponse(other.UnsupportedApiMessageResponse);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -8272,6 +9244,33 @@ namespace Gauge.Messages {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               ExtractConceptResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 178: {
+              global::Gauge.Messages.FormatSpecsRequest.Builder subBuilder = global::Gauge.Messages.FormatSpecsRequest.CreateBuilder();
+              if (result.hasFormatSpecsRequest) {
+                subBuilder.MergeFrom(FormatSpecsRequest);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              FormatSpecsRequest = subBuilder.BuildPartial();
+              break;
+            }
+            case 186: {
+              global::Gauge.Messages.FormatSpecsResponse.Builder subBuilder = global::Gauge.Messages.FormatSpecsResponse.CreateBuilder();
+              if (result.hasFormatSpecsResponse) {
+                subBuilder.MergeFrom(FormatSpecsResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              FormatSpecsResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 194: {
+              global::Gauge.Messages.UnsupportedApiMessageResponse.Builder subBuilder = global::Gauge.Messages.UnsupportedApiMessageResponse.CreateBuilder();
+              if (result.hasUnsupportedApiMessageResponse) {
+                subBuilder.MergeFrom(UnsupportedApiMessageResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              UnsupportedApiMessageResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -9081,6 +10080,126 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasExtractConceptResponse = false;
         result.extractConceptResponse_ = null;
+        return this;
+      }
+      
+      public bool HasFormatSpecsRequest {
+       get { return result.hasFormatSpecsRequest; }
+      }
+      public global::Gauge.Messages.FormatSpecsRequest FormatSpecsRequest {
+        get { return result.FormatSpecsRequest; }
+        set { SetFormatSpecsRequest(value); }
+      }
+      public Builder SetFormatSpecsRequest(global::Gauge.Messages.FormatSpecsRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasFormatSpecsRequest = true;
+        result.formatSpecsRequest_ = value;
+        return this;
+      }
+      public Builder SetFormatSpecsRequest(global::Gauge.Messages.FormatSpecsRequest.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasFormatSpecsRequest = true;
+        result.formatSpecsRequest_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeFormatSpecsRequest(global::Gauge.Messages.FormatSpecsRequest value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasFormatSpecsRequest &&
+            result.formatSpecsRequest_ != global::Gauge.Messages.FormatSpecsRequest.DefaultInstance) {
+            result.formatSpecsRequest_ = global::Gauge.Messages.FormatSpecsRequest.CreateBuilder(result.formatSpecsRequest_).MergeFrom(value).BuildPartial();
+        } else {
+          result.formatSpecsRequest_ = value;
+        }
+        result.hasFormatSpecsRequest = true;
+        return this;
+      }
+      public Builder ClearFormatSpecsRequest() {
+        PrepareBuilder();
+        result.hasFormatSpecsRequest = false;
+        result.formatSpecsRequest_ = null;
+        return this;
+      }
+      
+      public bool HasFormatSpecsResponse {
+       get { return result.hasFormatSpecsResponse; }
+      }
+      public global::Gauge.Messages.FormatSpecsResponse FormatSpecsResponse {
+        get { return result.FormatSpecsResponse; }
+        set { SetFormatSpecsResponse(value); }
+      }
+      public Builder SetFormatSpecsResponse(global::Gauge.Messages.FormatSpecsResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasFormatSpecsResponse = true;
+        result.formatSpecsResponse_ = value;
+        return this;
+      }
+      public Builder SetFormatSpecsResponse(global::Gauge.Messages.FormatSpecsResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasFormatSpecsResponse = true;
+        result.formatSpecsResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeFormatSpecsResponse(global::Gauge.Messages.FormatSpecsResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasFormatSpecsResponse &&
+            result.formatSpecsResponse_ != global::Gauge.Messages.FormatSpecsResponse.DefaultInstance) {
+            result.formatSpecsResponse_ = global::Gauge.Messages.FormatSpecsResponse.CreateBuilder(result.formatSpecsResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.formatSpecsResponse_ = value;
+        }
+        result.hasFormatSpecsResponse = true;
+        return this;
+      }
+      public Builder ClearFormatSpecsResponse() {
+        PrepareBuilder();
+        result.hasFormatSpecsResponse = false;
+        result.formatSpecsResponse_ = null;
+        return this;
+      }
+      
+      public bool HasUnsupportedApiMessageResponse {
+       get { return result.hasUnsupportedApiMessageResponse; }
+      }
+      public global::Gauge.Messages.UnsupportedApiMessageResponse UnsupportedApiMessageResponse {
+        get { return result.UnsupportedApiMessageResponse; }
+        set { SetUnsupportedApiMessageResponse(value); }
+      }
+      public Builder SetUnsupportedApiMessageResponse(global::Gauge.Messages.UnsupportedApiMessageResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUnsupportedApiMessageResponse = true;
+        result.unsupportedApiMessageResponse_ = value;
+        return this;
+      }
+      public Builder SetUnsupportedApiMessageResponse(global::Gauge.Messages.UnsupportedApiMessageResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasUnsupportedApiMessageResponse = true;
+        result.unsupportedApiMessageResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeUnsupportedApiMessageResponse(global::Gauge.Messages.UnsupportedApiMessageResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasUnsupportedApiMessageResponse &&
+            result.unsupportedApiMessageResponse_ != global::Gauge.Messages.UnsupportedApiMessageResponse.DefaultInstance) {
+            result.unsupportedApiMessageResponse_ = global::Gauge.Messages.UnsupportedApiMessageResponse.CreateBuilder(result.unsupportedApiMessageResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.unsupportedApiMessageResponse_ = value;
+        }
+        result.hasUnsupportedApiMessageResponse = true;
+        return this;
+      }
+      public Builder ClearUnsupportedApiMessageResponse() {
+        PrepareBuilder();
+        result.hasUnsupportedApiMessageResponse = false;
+        result.unsupportedApiMessageResponse_ = null;
         return this;
       }
     }

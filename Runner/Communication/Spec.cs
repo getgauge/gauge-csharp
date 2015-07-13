@@ -131,24 +131,26 @@ namespace Gauge.Messages {
             "bWVzc2FnZXMuUHJvdG9FeGVjdXRpb25SZXN1bHQSOAoOcHJlSG9va0ZhaWx1", 
             "cmUYAiABKAsyIC5nYXVnZS5tZXNzYWdlcy5Qcm90b0hvb2tGYWlsdXJlEjkK", 
             "D3Bvc3RIb29rRmFpbHVyZRgDIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlByb3Rv", 
-            "SG9va0ZhaWx1cmUilQEKFFByb3RvRXhlY3V0aW9uUmVzdWx0Eg4KBmZhaWxl", 
+            "SG9va0ZhaWx1cmUipgEKFFByb3RvRXhlY3V0aW9uUmVzdWx0Eg4KBmZhaWxl", 
             "ZBgBIAIoCBIYChByZWNvdmVyYWJsZUVycm9yGAIgASgIEhQKDGVycm9yTWVz", 
             "c2FnZRgDIAEoCRISCgpzdGFja1RyYWNlGAQgASgJEhIKCnNjcmVlblNob3QY", 
-            "BSABKAwSFQoNZXhlY3V0aW9uVGltZRgGIAIoAyJQChBQcm90b0hvb2tGYWls", 
-            "dXJlEhIKCnN0YWNrVHJhY2UYASACKAkSFAoMZXJyb3JNZXNzYWdlGAIgAigJ", 
-            "EhIKCnNjcmVlblNob3QYAyABKAwikwIKEFByb3RvU3VpdGVSZXN1bHQSNAoL", 
-            "c3BlY1Jlc3VsdHMYASADKAsyHy5nYXVnZS5tZXNzYWdlcy5Qcm90b1NwZWNS", 
-            "ZXN1bHQSOAoOcHJlSG9va0ZhaWx1cmUYAiABKAsyIC5nYXVnZS5tZXNzYWdl", 
-            "cy5Qcm90b0hvb2tGYWlsdXJlEjkKD3Bvc3RIb29rRmFpbHVyZRgDIAEoCzIg", 
-            "LmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUSDgoGZmFpbGVkGAQg", 
-            "AigIEhgKEHNwZWNzRmFpbGVkQ291bnQYBSACKAUSFQoNZXhlY3V0aW9uVGlt", 
-            "ZRgGIAEoAxITCgtzdWNjZXNzUmF0ZRgHIAIoAiK3AQoPUHJvdG9TcGVjUmVz", 
-            "dWx0EiwKCXByb3RvU3BlYxgBIAIoCzIZLmdhdWdlLm1lc3NhZ2VzLlByb3Rv", 
-            "U3BlYxIVCg1zY2VuYXJpb0NvdW50GAIgAigFEhsKE3NjZW5hcmlvRmFpbGVk", 
-            "Q291bnQYAyACKAUSDgoGZmFpbGVkGAQgAigIEhsKE2ZhaWxlZERhdGFUYWJs", 
-            "ZVJvd3MYBSADKAUSFQoNZXhlY3V0aW9uVGltZRgGIAEoAyJXCg5Qcm90b1N0", 
-            "ZXBWYWx1ZRIRCglzdGVwVmFsdWUYASACKAkSHgoWcGFyYW1ldGVyaXplZFN0", 
-          "ZXBWYWx1ZRgCIAIoCRISCgpwYXJhbWV0ZXJzGAMgAygJ"));
+            "BSABKAwSFQoNZXhlY3V0aW9uVGltZRgGIAIoAxIPCgdtZXNzYWdlGAcgAygJ", 
+            "IlAKEFByb3RvSG9va0ZhaWx1cmUSEgoKc3RhY2tUcmFjZRgBIAIoCRIUCgxl", 
+            "cnJvck1lc3NhZ2UYAiACKAkSEgoKc2NyZWVuU2hvdBgDIAEoDCLeAgoQUHJv", 
+            "dG9TdWl0ZVJlc3VsdBI0CgtzcGVjUmVzdWx0cxgBIAMoCzIfLmdhdWdlLm1l", 
+            "c3NhZ2VzLlByb3RvU3BlY1Jlc3VsdBI4Cg5wcmVIb29rRmFpbHVyZRgCIAEo", 
+            "CzIgLmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUSOQoPcG9zdEhv", 
+            "b2tGYWlsdXJlGAMgASgLMiAuZ2F1Z2UubWVzc2FnZXMuUHJvdG9Ib29rRmFp", 
+            "bHVyZRIOCgZmYWlsZWQYBCACKAgSGAoQc3BlY3NGYWlsZWRDb3VudBgFIAIo", 
+            "BRIVCg1leGVjdXRpb25UaW1lGAYgASgDEhMKC3N1Y2Nlc3NSYXRlGAcgAigC", 
+            "EhMKC2Vudmlyb25tZW50GAggASgJEgwKBHRhZ3MYCSABKAkSEwoLcHJvamVj", 
+            "dE5hbWUYCiACKAkSEQoJdGltZXN0YW1wGAsgAigJIrcBCg9Qcm90b1NwZWNS", 
+            "ZXN1bHQSLAoJcHJvdG9TcGVjGAEgAigLMhkuZ2F1Z2UubWVzc2FnZXMuUHJv", 
+            "dG9TcGVjEhUKDXNjZW5hcmlvQ291bnQYAiACKAUSGwoTc2NlbmFyaW9GYWls", 
+            "ZWRDb3VudBgDIAIoBRIOCgZmYWlsZWQYBCACKAgSGwoTZmFpbGVkRGF0YVRh", 
+            "YmxlUm93cxgFIAMoBRIVCg1leGVjdXRpb25UaW1lGAYgASgDIlcKDlByb3Rv", 
+            "U3RlcFZhbHVlEhEKCXN0ZXBWYWx1ZRgBIAIoCRIeChZwYXJhbWV0ZXJpemVk", 
+          "U3RlcFZhbHVlGAIgAigJEhIKCnBhcmFtZXRlcnMYAyADKAk="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_ProtoSpec__Descriptor = Descriptor.MessageTypes[0];
@@ -206,7 +208,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ProtoExecutionResult__Descriptor = Descriptor.MessageTypes[13];
         internal__static_gauge_messages_ProtoExecutionResult__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoExecutionResult, global::Gauge.Messages.ProtoExecutionResult.Builder>(internal__static_gauge_messages_ProtoExecutionResult__Descriptor,
-                new string[] { "Failed", "RecoverableError", "ErrorMessage", "StackTrace", "ScreenShot", "ExecutionTime", });
+                new string[] { "Failed", "RecoverableError", "ErrorMessage", "StackTrace", "ScreenShot", "ExecutionTime", "Message", });
         internal__static_gauge_messages_ProtoHookFailure__Descriptor = Descriptor.MessageTypes[14];
         internal__static_gauge_messages_ProtoHookFailure__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoHookFailure, global::Gauge.Messages.ProtoHookFailure.Builder>(internal__static_gauge_messages_ProtoHookFailure__Descriptor,
@@ -214,7 +216,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ProtoSuiteResult__Descriptor = Descriptor.MessageTypes[15];
         internal__static_gauge_messages_ProtoSuiteResult__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSuiteResult, global::Gauge.Messages.ProtoSuiteResult.Builder>(internal__static_gauge_messages_ProtoSuiteResult__Descriptor,
-                new string[] { "SpecResults", "PreHookFailure", "PostHookFailure", "Failed", "SpecsFailedCount", "ExecutionTime", "SuccessRate", });
+                new string[] { "SpecResults", "PreHookFailure", "PostHookFailure", "Failed", "SpecsFailedCount", "ExecutionTime", "SuccessRate", "Environment", "Tags", "ProjectName", "Timestamp", });
         internal__static_gauge_messages_ProtoSpecResult__Descriptor = Descriptor.MessageTypes[16];
         internal__static_gauge_messages_ProtoSpecResult__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpecResult, global::Gauge.Messages.ProtoSpecResult.Builder>(internal__static_gauge_messages_ProtoSpecResult__Descriptor,
@@ -6156,8 +6158,8 @@ namespace Gauge.Messages {
   public sealed partial class ProtoExecutionResult : pb::GeneratedMessage<ProtoExecutionResult, ProtoExecutionResult.Builder> {
     private ProtoExecutionResult() { }
     private static readonly ProtoExecutionResult defaultInstance = new ProtoExecutionResult().MakeReadOnly();
-    private static readonly string[] _protoExecutionResultFieldNames = new string[] { "errorMessage", "executionTime", "failed", "recoverableError", "screenShot", "stackTrace" };
-    private static readonly uint[] _protoExecutionResultFieldTags = new uint[] { 26, 48, 8, 16, 42, 34 };
+    private static readonly string[] _protoExecutionResultFieldNames = new string[] { "errorMessage", "executionTime", "failed", "message", "recoverableError", "screenShot", "stackTrace" };
+    private static readonly uint[] _protoExecutionResultFieldTags = new uint[] { 26, 48, 8, 58, 16, 42, 34 };
     public static ProtoExecutionResult DefaultInstance {
       get { return defaultInstance; }
     }
@@ -6238,6 +6240,18 @@ namespace Gauge.Messages {
       get { return executionTime_; }
     }
     
+    public const int MessageFieldNumber = 7;
+    private pbc::PopsicleList<string> message_ = new pbc::PopsicleList<string>();
+    public scg::IList<string> MessageList {
+      get { return pbc::Lists.AsReadOnly(message_); }
+    }
+    public int MessageCount {
+      get { return message_.Count; }
+    }
+    public string GetMessage(int index) {
+      return message_[index];
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasFailed) return false;
@@ -6253,19 +6267,22 @@ namespace Gauge.Messages {
         output.WriteBool(1, field_names[2], Failed);
       }
       if (hasRecoverableError) {
-        output.WriteBool(2, field_names[3], RecoverableError);
+        output.WriteBool(2, field_names[4], RecoverableError);
       }
       if (hasErrorMessage) {
         output.WriteString(3, field_names[0], ErrorMessage);
       }
       if (hasStackTrace) {
-        output.WriteString(4, field_names[5], StackTrace);
+        output.WriteString(4, field_names[6], StackTrace);
       }
       if (hasScreenShot) {
-        output.WriteBytes(5, field_names[4], ScreenShot);
+        output.WriteBytes(5, field_names[5], ScreenShot);
       }
       if (hasExecutionTime) {
         output.WriteInt64(6, field_names[1], ExecutionTime);
+      }
+      if (message_.Count > 0) {
+        output.WriteStringArray(7, field_names[3], message_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -6302,6 +6319,14 @@ namespace Gauge.Messages {
       if (hasExecutionTime) {
         size += pb::CodedOutputStream.ComputeInt64Size(6, ExecutionTime);
       }
+      {
+        int dataSize = 0;
+        foreach (string element in MessageList) {
+          dataSize += pb::CodedOutputStream.ComputeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * message_.Count;
+      }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
       return size;
@@ -6337,6 +6362,7 @@ namespace Gauge.Messages {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private ProtoExecutionResult MakeReadOnly() {
+      message_.MakeReadOnly();
       return this;
     }
     
@@ -6442,6 +6468,9 @@ namespace Gauge.Messages {
         if (other.HasExecutionTime) {
           ExecutionTime = other.ExecutionTime;
         }
+        if (other.message_.Count != 0) {
+          result.message_.Add(other.message_);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -6507,6 +6536,10 @@ namespace Gauge.Messages {
             }
             case 48: {
               result.hasExecutionTime = input.ReadInt64(ref result.executionTime_);
+              break;
+            }
+            case 58: {
+              input.ReadStringArray(tag, field_name, result.message_);
               break;
             }
           }
@@ -6639,6 +6672,38 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasExecutionTime = false;
         result.executionTime_ = 0L;
+        return this;
+      }
+      
+      public pbc::IPopsicleList<string> MessageList {
+        get { return PrepareBuilder().message_; }
+      }
+      public int MessageCount {
+        get { return result.MessageCount; }
+      }
+      public string GetMessage(int index) {
+        return result.GetMessage(index);
+      }
+      public Builder SetMessage(int index, string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.message_[index] = value;
+        return this;
+      }
+      public Builder AddMessage(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.message_.Add(value);
+        return this;
+      }
+      public Builder AddRangeMessage(scg::IEnumerable<string> values) {
+        PrepareBuilder();
+        result.message_.Add(values);
+        return this;
+      }
+      public Builder ClearMessage() {
+        PrepareBuilder();
+        result.message_.Clear();
         return this;
       }
     }
@@ -7017,8 +7082,8 @@ namespace Gauge.Messages {
   public sealed partial class ProtoSuiteResult : pb::GeneratedMessage<ProtoSuiteResult, ProtoSuiteResult.Builder> {
     private ProtoSuiteResult() { }
     private static readonly ProtoSuiteResult defaultInstance = new ProtoSuiteResult().MakeReadOnly();
-    private static readonly string[] _protoSuiteResultFieldNames = new string[] { "executionTime", "failed", "postHookFailure", "preHookFailure", "specResults", "specsFailedCount", "successRate" };
-    private static readonly uint[] _protoSuiteResultFieldTags = new uint[] { 48, 32, 26, 18, 10, 40, 61 };
+    private static readonly string[] _protoSuiteResultFieldNames = new string[] { "environment", "executionTime", "failed", "postHookFailure", "preHookFailure", "projectName", "specResults", "specsFailedCount", "successRate", "tags", "timestamp" };
+    private static readonly uint[] _protoSuiteResultFieldTags = new uint[] { 66, 48, 32, 26, 18, 82, 10, 40, 61, 74, 90 };
     public static ProtoSuiteResult DefaultInstance {
       get { return defaultInstance; }
     }
@@ -7111,11 +7176,53 @@ namespace Gauge.Messages {
       get { return successRate_; }
     }
     
+    public const int EnvironmentFieldNumber = 8;
+    private bool hasEnvironment;
+    private string environment_ = "";
+    public bool HasEnvironment {
+      get { return hasEnvironment; }
+    }
+    public string Environment {
+      get { return environment_; }
+    }
+    
+    public const int TagsFieldNumber = 9;
+    private bool hasTags;
+    private string tags_ = "";
+    public bool HasTags {
+      get { return hasTags; }
+    }
+    public string Tags {
+      get { return tags_; }
+    }
+    
+    public const int ProjectNameFieldNumber = 10;
+    private bool hasProjectName;
+    private string projectName_ = "";
+    public bool HasProjectName {
+      get { return hasProjectName; }
+    }
+    public string ProjectName {
+      get { return projectName_; }
+    }
+    
+    public const int TimestampFieldNumber = 11;
+    private bool hasTimestamp;
+    private string timestamp_ = "";
+    public bool HasTimestamp {
+      get { return hasTimestamp; }
+    }
+    public string Timestamp {
+      get { return timestamp_; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasFailed) return false;
         if (!hasSpecsFailedCount) return false;
         if (!hasSuccessRate) return false;
+        if (!hasProjectName) return false;
+        if (!hasTimestamp) return false;
         foreach (global::Gauge.Messages.ProtoSpecResult element in SpecResultsList) {
           if (!element.IsInitialized) return false;
         }
@@ -7133,25 +7240,37 @@ namespace Gauge.Messages {
       CalcSerializedSize();
       string[] field_names = _protoSuiteResultFieldNames;
       if (specResults_.Count > 0) {
-        output.WriteMessageArray(1, field_names[4], specResults_);
+        output.WriteMessageArray(1, field_names[6], specResults_);
       }
       if (hasPreHookFailure) {
-        output.WriteMessage(2, field_names[3], PreHookFailure);
+        output.WriteMessage(2, field_names[4], PreHookFailure);
       }
       if (hasPostHookFailure) {
-        output.WriteMessage(3, field_names[2], PostHookFailure);
+        output.WriteMessage(3, field_names[3], PostHookFailure);
       }
       if (hasFailed) {
-        output.WriteBool(4, field_names[1], Failed);
+        output.WriteBool(4, field_names[2], Failed);
       }
       if (hasSpecsFailedCount) {
-        output.WriteInt32(5, field_names[5], SpecsFailedCount);
+        output.WriteInt32(5, field_names[7], SpecsFailedCount);
       }
       if (hasExecutionTime) {
-        output.WriteInt64(6, field_names[0], ExecutionTime);
+        output.WriteInt64(6, field_names[1], ExecutionTime);
       }
       if (hasSuccessRate) {
-        output.WriteFloat(7, field_names[6], SuccessRate);
+        output.WriteFloat(7, field_names[8], SuccessRate);
+      }
+      if (hasEnvironment) {
+        output.WriteString(8, field_names[0], Environment);
+      }
+      if (hasTags) {
+        output.WriteString(9, field_names[9], Tags);
+      }
+      if (hasProjectName) {
+        output.WriteString(10, field_names[5], ProjectName);
+      }
+      if (hasTimestamp) {
+        output.WriteString(11, field_names[10], Timestamp);
       }
       UnknownFields.WriteTo(output);
     }
@@ -7190,6 +7309,18 @@ namespace Gauge.Messages {
       }
       if (hasSuccessRate) {
         size += pb::CodedOutputStream.ComputeFloatSize(7, SuccessRate);
+      }
+      if (hasEnvironment) {
+        size += pb::CodedOutputStream.ComputeStringSize(8, Environment);
+      }
+      if (hasTags) {
+        size += pb::CodedOutputStream.ComputeStringSize(9, Tags);
+      }
+      if (hasProjectName) {
+        size += pb::CodedOutputStream.ComputeStringSize(10, ProjectName);
+      }
+      if (hasTimestamp) {
+        size += pb::CodedOutputStream.ComputeStringSize(11, Timestamp);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -7335,6 +7466,18 @@ namespace Gauge.Messages {
         if (other.HasSuccessRate) {
           SuccessRate = other.SuccessRate;
         }
+        if (other.HasEnvironment) {
+          Environment = other.Environment;
+        }
+        if (other.HasTags) {
+          Tags = other.Tags;
+        }
+        if (other.HasProjectName) {
+          ProjectName = other.ProjectName;
+        }
+        if (other.HasTimestamp) {
+          Timestamp = other.Timestamp;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -7414,6 +7557,22 @@ namespace Gauge.Messages {
             }
             case 61: {
               result.hasSuccessRate = input.ReadFloat(ref result.successRate_);
+              break;
+            }
+            case 66: {
+              result.hasEnvironment = input.ReadString(ref result.environment_);
+              break;
+            }
+            case 74: {
+              result.hasTags = input.ReadString(ref result.tags_);
+              break;
+            }
+            case 82: {
+              result.hasProjectName = input.ReadString(ref result.projectName_);
+              break;
+            }
+            case 90: {
+              result.hasTimestamp = input.ReadString(ref result.timestamp_);
               break;
             }
           }
@@ -7627,6 +7786,90 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasSuccessRate = false;
         result.successRate_ = 0F;
+        return this;
+      }
+      
+      public bool HasEnvironment {
+        get { return result.hasEnvironment; }
+      }
+      public string Environment {
+        get { return result.Environment; }
+        set { SetEnvironment(value); }
+      }
+      public Builder SetEnvironment(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasEnvironment = true;
+        result.environment_ = value;
+        return this;
+      }
+      public Builder ClearEnvironment() {
+        PrepareBuilder();
+        result.hasEnvironment = false;
+        result.environment_ = "";
+        return this;
+      }
+      
+      public bool HasTags {
+        get { return result.hasTags; }
+      }
+      public string Tags {
+        get { return result.Tags; }
+        set { SetTags(value); }
+      }
+      public Builder SetTags(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasTags = true;
+        result.tags_ = value;
+        return this;
+      }
+      public Builder ClearTags() {
+        PrepareBuilder();
+        result.hasTags = false;
+        result.tags_ = "";
+        return this;
+      }
+      
+      public bool HasProjectName {
+        get { return result.hasProjectName; }
+      }
+      public string ProjectName {
+        get { return result.ProjectName; }
+        set { SetProjectName(value); }
+      }
+      public Builder SetProjectName(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasProjectName = true;
+        result.projectName_ = value;
+        return this;
+      }
+      public Builder ClearProjectName() {
+        PrepareBuilder();
+        result.hasProjectName = false;
+        result.projectName_ = "";
+        return this;
+      }
+      
+      public bool HasTimestamp {
+        get { return result.hasTimestamp; }
+      }
+      public string Timestamp {
+        get { return result.Timestamp; }
+        set { SetTimestamp(value); }
+      }
+      public Builder SetTimestamp(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasTimestamp = true;
+        result.timestamp_ = value;
+        return this;
+      }
+      public Builder ClearTimestamp() {
+        PrepareBuilder();
+        result.hasTimestamp = false;
+        result.timestamp_ = "";
         return this;
       }
     }
