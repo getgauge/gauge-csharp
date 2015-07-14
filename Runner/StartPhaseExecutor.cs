@@ -44,6 +44,11 @@ namespace Gauge.CSharp.Runner
 
         private StartPhaseExecutor()
         {
+            var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
+            if (!string.IsNullOrEmpty(customBuildPath))
+            {
+                _shouldBuildProject = false;    
+            }
             if (_shouldBuildProject)
             {
                 try
@@ -99,14 +104,14 @@ namespace Gauge.CSharp.Runner
                 throw new NotAValidGaugeProjectException();
             }
             var solutionFullPath = solutionFileList.First();
-            Directory.CreateDirectory(Utils.GaugeBinDir);
+            Directory.CreateDirectory(Utils.GetGaugeBinDir());
             Console.WriteLine("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string>
             {
                 {"Configuration", "Release"},
                 {"Platform", "Any CPU"},
-                {"OutputPath", Utils.GaugeBinDir}
+                {"OutputPath", Utils.GetGaugeBinDir()}
             };
 
             var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);

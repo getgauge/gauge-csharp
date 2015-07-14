@@ -28,7 +28,7 @@ namespace Gauge.CSharp.Runner
     {
         public static ISandbox Create(AppDomainSetup setup = null)
         {
-            var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GaugeBinDir };
+            var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
 
             var permSet = new PermissionSet(PermissionState.Unrestricted);
 
@@ -38,6 +38,7 @@ namespace Gauge.CSharp.Runner
             var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
                 typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                 typeof(Sandbox).FullName);
+            
             sandbox.LoadAssemblyFiles();
             return sandbox;
         }
@@ -45,7 +46,7 @@ namespace Gauge.CSharp.Runner
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
-            var fileName = Path.Combine(Utils.GaugeBinDir, shortAssemblyName + ".dll");
+            var fileName = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
             if (File.Exists(fileName))
             {
                 return Assembly.LoadFrom(fileName);

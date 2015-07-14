@@ -16,7 +16,9 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Gauge.CSharp.Runner.Communication
 {
@@ -25,6 +27,8 @@ namespace Gauge.CSharp.Runner.Communication
         private const string GaugePortEnv = "GAUGE_INTERNAL_PORT";
         private const string GaugeApiPortEnv = "GAUGE_API_PORT";
         private const string GaugeProjectRootEnv = "GAUGE_PROJECT_ROOT";
+        private const string GaugeCustomBuildPath = "gauge_custom_build_path";
+            
 
         public static int GaugePort {
             get { return Convert.ToInt32(ReadEnvValue(GaugePortEnv)); }
@@ -39,11 +43,6 @@ namespace Gauge.CSharp.Runner.Communication
             get { return Convert.ToInt32(ReadEnvValue(GaugeApiPortEnv)); }
         }
 
-        public static string GaugeBinDir
-        {
-            get { return Path.Combine(GaugeProjectRoot, "gauge-bin"); }
-        }
-
         private static string ReadEnvValue(string env)
         {
             var envValue = Environment.GetEnvironmentVariable(env);
@@ -52,6 +51,30 @@ namespace Gauge.CSharp.Runner.Communication
                 throw new Exception(env + " is not set");
             }
             return envValue;
+        }
+
+        public static string GetGaugeBinDir()
+        {
+            var customBuildPath = Environment.GetEnvironmentVariable(GaugeCustomBuildPath);
+            if (string.IsNullOrEmpty(customBuildPath))
+            {
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+            }
+            customBuildPath = Regex.Escape(customBuildPath);
+            try
+            {
+                return IsAbsoluteUrl(customBuildPath) ? customBuildPath : Path.Combine(GaugeProjectRoot, customBuildPath);
+            }
+            catch (Exception e)
+            {
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+            }
+        }
+
+        public static bool IsAbsoluteUrl(string url)
+        {
+            Uri result;
+            return Uri.TryCreate(url, UriKind.Absolute, out result);
         }
     }
 }
