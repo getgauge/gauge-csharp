@@ -89,6 +89,8 @@ namespace Gauge.Messages {
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameRequest, global::Gauge.Messages.StepNameRequest.Builder> internal__static_gauge_messages_StepNameRequest__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_gauge_messages_StepNameResponse__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameResponse, global::Gauge.Messages.StepNameResponse.Builder> internal__static_gauge_messages_StepNameResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_gauge_messages_UnsupportedMessageResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.UnsupportedMessageResponse, global::Gauge.Messages.UnsupportedMessageResponse.Builder> internal__static_gauge_messages_UnsupportedMessageResponse__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_gauge_messages_Message__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Message, global::Gauge.Messages.Message.Builder> internal__static_gauge_messages_Message__FieldAccessorTable;
     #endregion
@@ -150,59 +152,62 @@ namespace Gauge.Messages {
             "c3VjY2VzcxgBIAIoCBINCgVlcnJvchgCIAEoCRIUCgxmaWxlc0NoYW5nZWQY", 
             "AyADKAkiJAoPU3RlcE5hbWVSZXF1ZXN0EhEKCXN0ZXBWYWx1ZRgBIAIoCSJN", 
             "ChBTdGVwTmFtZVJlc3BvbnNlEhUKDWlzU3RlcFByZXNlbnQYASACKAgSEAoI", 
-            "c3RlcE5hbWUYAiADKAkSEAoIaGFzQWxpYXMYAyACKAgijhIKB01lc3NhZ2US", 
-            "OAoLbWVzc2FnZVR5cGUYASACKA4yIy5nYXVnZS5tZXNzYWdlcy5NZXNzYWdl", 
-            "Lk1lc3NhZ2VUeXBlEhEKCW1lc3NhZ2VJZBgCIAIoAxJKChhleGVjdXRpb25T", 
-            "dGFydGluZ1JlcXVlc3QYAyABKAsyKC5nYXVnZS5tZXNzYWdlcy5FeGVjdXRp", 
-            "b25TdGFydGluZ1JlcXVlc3QSUgocc3BlY0V4ZWN1dGlvblN0YXJ0aW5nUmVx", 
-            "dWVzdBgEIAEoCzIsLmdhdWdlLm1lc3NhZ2VzLlNwZWNFeGVjdXRpb25TdGFy", 
-            "dGluZ1JlcXVlc3QSTgoac3BlY0V4ZWN1dGlvbkVuZGluZ1JlcXVlc3QYBSAB", 
-            "KAsyKi5nYXVnZS5tZXNzYWdlcy5TcGVjRXhlY3V0aW9uRW5kaW5nUmVxdWVz", 
-            "dBJaCiBzY2VuYXJpb0V4ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBgGIAEoCzIw", 
-            "LmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhlY3V0aW9uU3RhcnRpbmdSZXF1", 
-            "ZXN0ElYKHnNjZW5hcmlvRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgHIAEoCzIu", 
-            "LmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhlY3V0aW9uRW5kaW5nUmVxdWVz", 
-            "dBJSChxzdGVwRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0GAggASgLMiwuZ2F1", 
-            "Z2UubWVzc2FnZXMuU3RlcEV4ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBJOChpz", 
-            "dGVwRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgJIAEoCzIqLmdhdWdlLm1lc3Nh", 
-            "Z2VzLlN0ZXBFeGVjdXRpb25FbmRpbmdSZXF1ZXN0Ej4KEmV4ZWN1dGVTdGVw", 
-            "UmVxdWVzdBgKIAEoCzIiLmdhdWdlLm1lc3NhZ2VzLkV4ZWN1dGVTdGVwUmVx", 
-            "dWVzdBJGChZleGVjdXRpb25FbmRpbmdSZXF1ZXN0GAsgASgLMiYuZ2F1Z2Uu", 
-            "bWVzc2FnZXMuRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBJAChNzdGVwVmFsaWRh", 
-            "dGVSZXF1ZXN0GAwgASgLMiMuZ2F1Z2UubWVzc2FnZXMuU3RlcFZhbGlkYXRl", 
-            "UmVxdWVzdBJCChRzdGVwVmFsaWRhdGVSZXNwb25zZRgNIAEoCzIkLmdhdWdl", 
-            "Lm1lc3NhZ2VzLlN0ZXBWYWxpZGF0ZVJlc3BvbnNlEkgKF2V4ZWN1dGlvblN0", 
-            "YXR1c1Jlc3BvbnNlGA4gASgLMicuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9u", 
-            "U3RhdHVzUmVzcG9uc2USOgoQc3RlcE5hbWVzUmVxdWVzdBgPIAEoCzIgLmdh", 
-            "dWdlLm1lc3NhZ2VzLlN0ZXBOYW1lc1JlcXVlc3QSPAoRc3RlcE5hbWVzUmVz", 
-            "cG9uc2UYECABKAsyIS5nYXVnZS5tZXNzYWdlcy5TdGVwTmFtZXNSZXNwb25z", 
-            "ZRJCChRzdWl0ZUV4ZWN1dGlvblJlc3VsdBgRIAEoCzIkLmdhdWdlLm1lc3Nh", 
-            "Z2VzLlN1aXRlRXhlY3V0aW9uUmVzdWx0Ej4KEmtpbGxQcm9jZXNzUmVxdWVz", 
-            "dBgSIAEoCzIiLmdhdWdlLm1lc3NhZ2VzLktpbGxQcm9jZXNzUmVxdWVzdBJS", 
-            "ChxzY2VuYXJpb0RhdGFTdG9yZUluaXRSZXF1ZXN0GBMgASgLMiwuZ2F1Z2Uu", 
-            "bWVzc2FnZXMuU2NlbmFyaW9EYXRhU3RvcmVJbml0UmVxdWVzdBJKChhzcGVj", 
-            "RGF0YVN0b3JlSW5pdFJlcXVlc3QYFCABKAsyKC5nYXVnZS5tZXNzYWdlcy5T", 
-            "cGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QSTAoZc3VpdGVEYXRhU3RvcmVJbml0", 
-            "UmVxdWVzdBgVIAEoCzIpLmdhdWdlLm1lc3NhZ2VzLlN1aXRlRGF0YVN0b3Jl", 
-            "SW5pdFJlcXVlc3QSOAoPc3RlcE5hbWVSZXF1ZXN0GBYgASgLMh8uZ2F1Z2Uu", 
-            "bWVzc2FnZXMuU3RlcE5hbWVSZXF1ZXN0EjoKEHN0ZXBOYW1lUmVzcG9uc2UY", 
-            "FyABKAsyIC5nYXVnZS5tZXNzYWdlcy5TdGVwTmFtZVJlc3BvbnNlEjgKD3Jl", 
-            "ZmFjdG9yUmVxdWVzdBgYIAEoCzIfLmdhdWdlLm1lc3NhZ2VzLlJlZmFjdG9y", 
-            "UmVxdWVzdBI6ChByZWZhY3RvclJlc3BvbnNlGBkgASgLMiAuZ2F1Z2UubWVz", 
-            "c2FnZXMuUmVmYWN0b3JSZXNwb25zZSK9BAoLTWVzc2FnZVR5cGUSFQoRRXhl", 
-            "Y3V0aW9uU3RhcnRpbmcQABIZChVTcGVjRXhlY3V0aW9uU3RhcnRpbmcQARIX", 
-            "ChNTcGVjRXhlY3V0aW9uRW5kaW5nEAISHQoZU2NlbmFyaW9FeGVjdXRpb25T", 
-            "dGFydGluZxADEhsKF1NjZW5hcmlvRXhlY3V0aW9uRW5kaW5nEAQSGQoVU3Rl", 
-            "cEV4ZWN1dGlvblN0YXJ0aW5nEAUSFwoTU3RlcEV4ZWN1dGlvbkVuZGluZxAG", 
-            "Eg8KC0V4ZWN1dGVTdGVwEAcSEwoPRXhlY3V0aW9uRW5kaW5nEAgSFwoTU3Rl", 
-            "cFZhbGlkYXRlUmVxdWVzdBAJEhgKFFN0ZXBWYWxpZGF0ZVJlc3BvbnNlEAoS", 
-            "GwoXRXhlY3V0aW9uU3RhdHVzUmVzcG9uc2UQCxIUChBTdGVwTmFtZXNSZXF1", 
-            "ZXN0EAwSFQoRU3RlcE5hbWVzUmVzcG9uc2UQDRIWChJLaWxsUHJvY2Vzc1Jl", 
-            "cXVlc3QQDhIYChRTdWl0ZUV4ZWN1dGlvblJlc3VsdBAPEhkKFVNjZW5hcmlv", 
-            "RGF0YVN0b3JlSW5pdBAQEhUKEVNwZWNEYXRhU3RvcmVJbml0EBESFgoSU3Vp", 
-            "dGVEYXRhU3RvcmVJbml0EBISEwoPU3RlcE5hbWVSZXF1ZXN0EBMSFAoQU3Rl", 
-            "cE5hbWVSZXNwb25zZRAUEhMKD1JlZmFjdG9yUmVxdWVzdBAVEhQKEFJlZmFj", 
-          "dG9yUmVzcG9uc2UQFg=="));
+            "c3RlcE5hbWUYAiADKAkSEAoIaGFzQWxpYXMYAyACKAgiLQoaVW5zdXBwb3J0", 
+            "ZWRNZXNzYWdlUmVzcG9uc2USDwoHbWVzc2FnZRgBIAEoCSL+EgoHTWVzc2Fn", 
+            "ZRI4CgttZXNzYWdlVHlwZRgBIAIoDjIjLmdhdWdlLm1lc3NhZ2VzLk1lc3Nh", 
+            "Z2UuTWVzc2FnZVR5cGUSEQoJbWVzc2FnZUlkGAIgAigDEkoKGGV4ZWN1dGlv", 
+            "blN0YXJ0aW5nUmVxdWVzdBgDIAEoCzIoLmdhdWdlLm1lc3NhZ2VzLkV4ZWN1", 
+            "dGlvblN0YXJ0aW5nUmVxdWVzdBJSChxzcGVjRXhlY3V0aW9uU3RhcnRpbmdS", 
+            "ZXF1ZXN0GAQgASgLMiwuZ2F1Z2UubWVzc2FnZXMuU3BlY0V4ZWN1dGlvblN0", 
+            "YXJ0aW5nUmVxdWVzdBJOChpzcGVjRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgF", 
+            "IAEoCzIqLmdhdWdlLm1lc3NhZ2VzLlNwZWNFeGVjdXRpb25FbmRpbmdSZXF1", 
+            "ZXN0EloKIHNjZW5hcmlvRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0GAYgASgL", 
+            "MjAuZ2F1Z2UubWVzc2FnZXMuU2NlbmFyaW9FeGVjdXRpb25TdGFydGluZ1Jl", 
+            "cXVlc3QSVgoec2NlbmFyaW9FeGVjdXRpb25FbmRpbmdSZXF1ZXN0GAcgASgL", 
+            "Mi4uZ2F1Z2UubWVzc2FnZXMuU2NlbmFyaW9FeGVjdXRpb25FbmRpbmdSZXF1", 
+            "ZXN0ElIKHHN0ZXBFeGVjdXRpb25TdGFydGluZ1JlcXVlc3QYCCABKAsyLC5n", 
+            "YXVnZS5tZXNzYWdlcy5TdGVwRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0Ek4K", 
+            "GnN0ZXBFeGVjdXRpb25FbmRpbmdSZXF1ZXN0GAkgASgLMiouZ2F1Z2UubWVz", 
+            "c2FnZXMuU3RlcEV4ZWN1dGlvbkVuZGluZ1JlcXVlc3QSPgoSZXhlY3V0ZVN0", 
+            "ZXBSZXF1ZXN0GAogASgLMiIuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0ZVN0ZXBS", 
+            "ZXF1ZXN0EkYKFmV4ZWN1dGlvbkVuZGluZ1JlcXVlc3QYCyABKAsyJi5nYXVn", 
+            "ZS5tZXNzYWdlcy5FeGVjdXRpb25FbmRpbmdSZXF1ZXN0EkAKE3N0ZXBWYWxp", 
+            "ZGF0ZVJlcXVlc3QYDCABKAsyIy5nYXVnZS5tZXNzYWdlcy5TdGVwVmFsaWRh", 
+            "dGVSZXF1ZXN0EkIKFHN0ZXBWYWxpZGF0ZVJlc3BvbnNlGA0gASgLMiQuZ2F1", 
+            "Z2UubWVzc2FnZXMuU3RlcFZhbGlkYXRlUmVzcG9uc2USSAoXZXhlY3V0aW9u", 
+            "U3RhdHVzUmVzcG9uc2UYDiABKAsyJy5nYXVnZS5tZXNzYWdlcy5FeGVjdXRp", 
+            "b25TdGF0dXNSZXNwb25zZRI6ChBzdGVwTmFtZXNSZXF1ZXN0GA8gASgLMiAu", 
+            "Z2F1Z2UubWVzc2FnZXMuU3RlcE5hbWVzUmVxdWVzdBI8ChFzdGVwTmFtZXNS", 
+            "ZXNwb25zZRgQIAEoCzIhLmdhdWdlLm1lc3NhZ2VzLlN0ZXBOYW1lc1Jlc3Bv", 
+            "bnNlEkIKFHN1aXRlRXhlY3V0aW9uUmVzdWx0GBEgASgLMiQuZ2F1Z2UubWVz", 
+            "c2FnZXMuU3VpdGVFeGVjdXRpb25SZXN1bHQSPgoSa2lsbFByb2Nlc3NSZXF1", 
+            "ZXN0GBIgASgLMiIuZ2F1Z2UubWVzc2FnZXMuS2lsbFByb2Nlc3NSZXF1ZXN0", 
+            "ElIKHHNjZW5hcmlvRGF0YVN0b3JlSW5pdFJlcXVlc3QYEyABKAsyLC5nYXVn", 
+            "ZS5tZXNzYWdlcy5TY2VuYXJpb0RhdGFTdG9yZUluaXRSZXF1ZXN0EkoKGHNw", 
+            "ZWNEYXRhU3RvcmVJbml0UmVxdWVzdBgUIAEoCzIoLmdhdWdlLm1lc3NhZ2Vz", 
+            "LlNwZWNEYXRhU3RvcmVJbml0UmVxdWVzdBJMChlzdWl0ZURhdGFTdG9yZUlu", 
+            "aXRSZXF1ZXN0GBUgASgLMikuZ2F1Z2UubWVzc2FnZXMuU3VpdGVEYXRhU3Rv", 
+            "cmVJbml0UmVxdWVzdBI4Cg9zdGVwTmFtZVJlcXVlc3QYFiABKAsyHy5nYXVn", 
+            "ZS5tZXNzYWdlcy5TdGVwTmFtZVJlcXVlc3QSOgoQc3RlcE5hbWVSZXNwb25z", 
+            "ZRgXIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlN0ZXBOYW1lUmVzcG9uc2USOAoP", 
+            "cmVmYWN0b3JSZXF1ZXN0GBggASgLMh8uZ2F1Z2UubWVzc2FnZXMuUmVmYWN0", 
+            "b3JSZXF1ZXN0EjoKEHJlZmFjdG9yUmVzcG9uc2UYGSABKAsyIC5nYXVnZS5t", 
+            "ZXNzYWdlcy5SZWZhY3RvclJlc3BvbnNlEk4KGnVuc3VwcG9ydGVkTWVzc2Fn", 
+            "ZVJlc3BvbnNlGBogASgLMiouZ2F1Z2UubWVzc2FnZXMuVW5zdXBwb3J0ZWRN", 
+            "ZXNzYWdlUmVzcG9uc2Ui3QQKC01lc3NhZ2VUeXBlEhUKEUV4ZWN1dGlvblN0", 
+            "YXJ0aW5nEAASGQoVU3BlY0V4ZWN1dGlvblN0YXJ0aW5nEAESFwoTU3BlY0V4", 
+            "ZWN1dGlvbkVuZGluZxACEh0KGVNjZW5hcmlvRXhlY3V0aW9uU3RhcnRpbmcQ", 
+            "AxIbChdTY2VuYXJpb0V4ZWN1dGlvbkVuZGluZxAEEhkKFVN0ZXBFeGVjdXRp", 
+            "b25TdGFydGluZxAFEhcKE1N0ZXBFeGVjdXRpb25FbmRpbmcQBhIPCgtFeGVj", 
+            "dXRlU3RlcBAHEhMKD0V4ZWN1dGlvbkVuZGluZxAIEhcKE1N0ZXBWYWxpZGF0", 
+            "ZVJlcXVlc3QQCRIYChRTdGVwVmFsaWRhdGVSZXNwb25zZRAKEhsKF0V4ZWN1", 
+            "dGlvblN0YXR1c1Jlc3BvbnNlEAsSFAoQU3RlcE5hbWVzUmVxdWVzdBAMEhUK", 
+            "EVN0ZXBOYW1lc1Jlc3BvbnNlEA0SFgoSS2lsbFByb2Nlc3NSZXF1ZXN0EA4S", 
+            "GAoUU3VpdGVFeGVjdXRpb25SZXN1bHQQDxIZChVTY2VuYXJpb0RhdGFTdG9y", 
+            "ZUluaXQQEBIVChFTcGVjRGF0YVN0b3JlSW5pdBAREhYKElN1aXRlRGF0YVN0", 
+            "b3JlSW5pdBASEhMKD1N0ZXBOYW1lUmVxdWVzdBATEhQKEFN0ZXBOYW1lUmVz", 
+            "cG9uc2UQFBITCg9SZWZhY3RvclJlcXVlc3QQFRIUChBSZWZhY3RvclJlc3Bv", 
+          "bnNlEBYSHgoaVW5zdXBwb3J0ZWRNZXNzYWdlUmVzcG9uc2UQFw=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_KillProcessRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -317,10 +322,14 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_StepNameResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.StepNameResponse, global::Gauge.Messages.StepNameResponse.Builder>(internal__static_gauge_messages_StepNameResponse__Descriptor,
                 new string[] { "IsStepPresent", "StepName", "HasAlias", });
-        internal__static_gauge_messages_Message__Descriptor = Descriptor.MessageTypes[28];
+        internal__static_gauge_messages_UnsupportedMessageResponse__Descriptor = Descriptor.MessageTypes[28];
+        internal__static_gauge_messages_UnsupportedMessageResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.UnsupportedMessageResponse, global::Gauge.Messages.UnsupportedMessageResponse.Builder>(internal__static_gauge_messages_UnsupportedMessageResponse__Descriptor,
+                new string[] { "Message", });
+        internal__static_gauge_messages_Message__Descriptor = Descriptor.MessageTypes[29];
         internal__static_gauge_messages_Message__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Message, global::Gauge.Messages.Message.Builder>(internal__static_gauge_messages_Message__Descriptor,
-                new string[] { "MessageType", "MessageId", "ExecutionStartingRequest", "SpecExecutionStartingRequest", "SpecExecutionEndingRequest", "ScenarioExecutionStartingRequest", "ScenarioExecutionEndingRequest", "StepExecutionStartingRequest", "StepExecutionEndingRequest", "ExecuteStepRequest", "ExecutionEndingRequest", "StepValidateRequest", "StepValidateResponse", "ExecutionStatusResponse", "StepNamesRequest", "StepNamesResponse", "SuiteExecutionResult", "KillProcessRequest", "ScenarioDataStoreInitRequest", "SpecDataStoreInitRequest", "SuiteDataStoreInitRequest", "StepNameRequest", "StepNameResponse", "RefactorRequest", "RefactorResponse", });
+                new string[] { "MessageType", "MessageId", "ExecutionStartingRequest", "SpecExecutionStartingRequest", "SpecExecutionEndingRequest", "ScenarioExecutionStartingRequest", "ScenarioExecutionEndingRequest", "StepExecutionStartingRequest", "StepExecutionEndingRequest", "ExecuteStepRequest", "ExecutionEndingRequest", "StepValidateRequest", "StepValidateResponse", "ExecutionStatusResponse", "StepNamesRequest", "StepNamesResponse", "SuiteExecutionResult", "KillProcessRequest", "ScenarioDataStoreInitRequest", "SpecDataStoreInitRequest", "SuiteDataStoreInitRequest", "StepNameRequest", "StepNameResponse", "RefactorRequest", "RefactorResponse", "UnsupportedMessageResponse", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -9351,11 +9360,287 @@ namespace Gauge.Messages {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class UnsupportedMessageResponse : pb::GeneratedMessage<UnsupportedMessageResponse, UnsupportedMessageResponse.Builder> {
+    private UnsupportedMessageResponse() { }
+    private static readonly UnsupportedMessageResponse defaultInstance = new UnsupportedMessageResponse().MakeReadOnly();
+    private static readonly string[] _unsupportedMessageResponseFieldNames = new string[] { "message" };
+    private static readonly uint[] _unsupportedMessageResponseFieldTags = new uint[] { 10 };
+    public static UnsupportedMessageResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override UnsupportedMessageResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override UnsupportedMessageResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_UnsupportedMessageResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<UnsupportedMessageResponse, UnsupportedMessageResponse.Builder> InternalFieldAccessors {
+      get { return global::Gauge.Messages.Messages.internal__static_gauge_messages_UnsupportedMessageResponse__FieldAccessorTable; }
+    }
+    
+    public const int MessageFieldNumber = 1;
+    private bool hasMessage;
+    private string message_ = "";
+    public bool HasMessage {
+      get { return hasMessage; }
+    }
+    public string Message {
+      get { return message_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _unsupportedMessageResponseFieldNames;
+      if (hasMessage) {
+        output.WriteString(1, field_names[0], Message);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasMessage) {
+        size += pb::CodedOutputStream.ComputeStringSize(1, Message);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static UnsupportedMessageResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static UnsupportedMessageResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private UnsupportedMessageResponse MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(UnsupportedMessageResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<UnsupportedMessageResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(UnsupportedMessageResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private UnsupportedMessageResponse result;
+      
+      private UnsupportedMessageResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          UnsupportedMessageResponse original = result;
+          result = new UnsupportedMessageResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override UnsupportedMessageResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Gauge.Messages.UnsupportedMessageResponse.Descriptor; }
+      }
+      
+      public override UnsupportedMessageResponse DefaultInstanceForType {
+        get { return global::Gauge.Messages.UnsupportedMessageResponse.DefaultInstance; }
+      }
+      
+      public override UnsupportedMessageResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is UnsupportedMessageResponse) {
+          return MergeFrom((UnsupportedMessageResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(UnsupportedMessageResponse other) {
+        if (other == global::Gauge.Messages.UnsupportedMessageResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasMessage) {
+          Message = other.Message;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_unsupportedMessageResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _unsupportedMessageResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasMessage = input.ReadString(ref result.message_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasMessage {
+        get { return result.hasMessage; }
+      }
+      public string Message {
+        get { return result.Message; }
+        set { SetMessage(value); }
+      }
+      public Builder SetMessage(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasMessage = true;
+        result.message_ = value;
+        return this;
+      }
+      public Builder ClearMessage() {
+        PrepareBuilder();
+        result.hasMessage = false;
+        result.message_ = "";
+        return this;
+      }
+    }
+    static UnsupportedMessageResponse() {
+      object.ReferenceEquals(global::Gauge.Messages.Messages.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class Message : pb::GeneratedMessage<Message, Message.Builder> {
     private Message() { }
     private static readonly Message defaultInstance = new Message().MakeReadOnly();
-    private static readonly string[] _messageFieldNames = new string[] { "executeStepRequest", "executionEndingRequest", "executionStartingRequest", "executionStatusResponse", "killProcessRequest", "messageId", "messageType", "refactorRequest", "refactorResponse", "scenarioDataStoreInitRequest", "scenarioExecutionEndingRequest", "scenarioExecutionStartingRequest", "specDataStoreInitRequest", "specExecutionEndingRequest", "specExecutionStartingRequest", "stepExecutionEndingRequest", "stepExecutionStartingRequest", "stepNameRequest", "stepNameResponse", "stepNamesRequest", "stepNamesResponse", "stepValidateRequest", "stepValidateResponse", "suiteDataStoreInitRequest", "suiteExecutionResult" };
-    private static readonly uint[] _messageFieldTags = new uint[] { 82, 90, 26, 114, 146, 16, 8, 194, 202, 154, 58, 50, 162, 42, 34, 74, 66, 178, 186, 122, 130, 98, 106, 170, 138 };
+    private static readonly string[] _messageFieldNames = new string[] { "executeStepRequest", "executionEndingRequest", "executionStartingRequest", "executionStatusResponse", "killProcessRequest", "messageId", "messageType", "refactorRequest", "refactorResponse", "scenarioDataStoreInitRequest", "scenarioExecutionEndingRequest", "scenarioExecutionStartingRequest", "specDataStoreInitRequest", "specExecutionEndingRequest", "specExecutionStartingRequest", "stepExecutionEndingRequest", "stepExecutionStartingRequest", "stepNameRequest", "stepNameResponse", "stepNamesRequest", "stepNamesResponse", "stepValidateRequest", "stepValidateResponse", "suiteDataStoreInitRequest", "suiteExecutionResult", "unsupportedMessageResponse" };
+    private static readonly uint[] _messageFieldTags = new uint[] { 82, 90, 26, 114, 146, 16, 8, 194, 202, 154, 58, 50, 162, 42, 34, 74, 66, 178, 186, 122, 130, 98, 106, 170, 138, 210 };
     public static Message DefaultInstance {
       get { return defaultInstance; }
     }
@@ -9403,6 +9688,7 @@ namespace Gauge.Messages {
         StepNameResponse = 20,
         RefactorRequest = 21,
         RefactorResponse = 22,
+        UnsupportedMessageResponse = 23,
       }
       
     }
@@ -9658,6 +9944,16 @@ namespace Gauge.Messages {
       get { return refactorResponse_ ?? global::Gauge.Messages.RefactorResponse.DefaultInstance; }
     }
     
+    public const int UnsupportedMessageResponseFieldNumber = 26;
+    private bool hasUnsupportedMessageResponse;
+    private global::Gauge.Messages.UnsupportedMessageResponse unsupportedMessageResponse_;
+    public bool HasUnsupportedMessageResponse {
+      get { return hasUnsupportedMessageResponse; }
+    }
+    public global::Gauge.Messages.UnsupportedMessageResponse UnsupportedMessageResponse {
+      get { return unsupportedMessageResponse_ ?? global::Gauge.Messages.UnsupportedMessageResponse.DefaultInstance; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasMessageType) return false;
@@ -9795,6 +10091,9 @@ namespace Gauge.Messages {
       if (hasRefactorResponse) {
         output.WriteMessage(25, field_names[8], RefactorResponse);
       }
+      if (hasUnsupportedMessageResponse) {
+        output.WriteMessage(26, field_names[25], UnsupportedMessageResponse);
+      }
       UnknownFields.WriteTo(output);
     }
     
@@ -9886,6 +10185,9 @@ namespace Gauge.Messages {
       }
       if (hasRefactorResponse) {
         size += pb::CodedOutputStream.ComputeMessageSize(25, RefactorResponse);
+      }
+      if (hasUnsupportedMessageResponse) {
+        size += pb::CodedOutputStream.ComputeMessageSize(26, UnsupportedMessageResponse);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -10083,6 +10385,9 @@ namespace Gauge.Messages {
         }
         if (other.HasRefactorResponse) {
           MergeRefactorResponse(other.RefactorResponse);
+        }
+        if (other.HasUnsupportedMessageResponse) {
+          MergeUnsupportedMessageResponse(other.UnsupportedMessageResponse);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -10348,6 +10653,15 @@ namespace Gauge.Messages {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               RefactorResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 210: {
+              global::Gauge.Messages.UnsupportedMessageResponse.Builder subBuilder = global::Gauge.Messages.UnsupportedMessageResponse.CreateBuilder();
+              if (result.hasUnsupportedMessageResponse) {
+                subBuilder.MergeFrom(UnsupportedMessageResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              UnsupportedMessageResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -11317,6 +11631,46 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasRefactorResponse = false;
         result.refactorResponse_ = null;
+        return this;
+      }
+      
+      public bool HasUnsupportedMessageResponse {
+       get { return result.hasUnsupportedMessageResponse; }
+      }
+      public global::Gauge.Messages.UnsupportedMessageResponse UnsupportedMessageResponse {
+        get { return result.UnsupportedMessageResponse; }
+        set { SetUnsupportedMessageResponse(value); }
+      }
+      public Builder SetUnsupportedMessageResponse(global::Gauge.Messages.UnsupportedMessageResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUnsupportedMessageResponse = true;
+        result.unsupportedMessageResponse_ = value;
+        return this;
+      }
+      public Builder SetUnsupportedMessageResponse(global::Gauge.Messages.UnsupportedMessageResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasUnsupportedMessageResponse = true;
+        result.unsupportedMessageResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeUnsupportedMessageResponse(global::Gauge.Messages.UnsupportedMessageResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasUnsupportedMessageResponse &&
+            result.unsupportedMessageResponse_ != global::Gauge.Messages.UnsupportedMessageResponse.DefaultInstance) {
+            result.unsupportedMessageResponse_ = global::Gauge.Messages.UnsupportedMessageResponse.CreateBuilder(result.unsupportedMessageResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.unsupportedMessageResponse_ = value;
+        }
+        result.hasUnsupportedMessageResponse = true;
+        return this;
+      }
+      public Builder ClearUnsupportedMessageResponse() {
+        PrepareBuilder();
+        result.hasUnsupportedMessageResponse = false;
+        result.unsupportedMessageResponse_ = null;
         return this;
       }
     }
