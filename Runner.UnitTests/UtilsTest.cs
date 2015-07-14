@@ -14,10 +14,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", @"C:\Blah");
 
             var imaginaryPath = string.Format("foo{0}bar", Path.DirectorySeparatorChar);
-            Console.WriteLine(imaginaryPath);
             Environment.SetEnvironmentVariable("gauge_custom_build_path", imaginaryPath);
             var gaugeBinDir = Utils.GetGaugeBinDir();
-
             Assert.AreEqual(@"C:\Blah\foo\bar", gaugeBinDir);
         }
     }
