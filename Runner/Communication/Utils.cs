@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -60,7 +59,6 @@ namespace Gauge.CSharp.Runner.Communication
             {
                 return Path.Combine(GaugeProjectRoot, "gauge-bin");
             }
-            customBuildPath = Regex.Escape(customBuildPath);
             try
             {
                 return IsAbsoluteUrl(customBuildPath) ? customBuildPath : Path.Combine(GaugeProjectRoot, customBuildPath);
