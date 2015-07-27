@@ -34,5 +34,10 @@ namespace Gauge.CSharp.Runner
             ClassInstanceMap.Add(declaringType, instance);
             return instance;
         }
+
+        public static void ClearCache()
+        {
+            ClassInstanceMap.Clear();
+        }
     }
 }

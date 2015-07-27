@@ -31,6 +31,10 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.BeforeSuiteHooks;
         }
 
+        protected override void ClearAllObjectCache()
+        {
+        }
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ExecutionStartingRequest.CurrentExecutionInfo;

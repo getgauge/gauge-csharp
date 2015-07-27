@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -31,6 +30,11 @@ namespace Gauge.CSharp.Runner.Processors
         protected override HashSet<HookMethod> GetHooks()
         {
             return Hooks.AfterSpecHooks;
+        }
+
+        protected override void ClearAllObjectCache()
+        {
+            ClearObjectCache.ClearCache(ClearObjectCache.SpecLevel);
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

@@ -32,6 +32,11 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterScenarioHooks;
         }
 
+        protected override void ClearAllObjectCache()
+        {
+            ClearObjectCache.ClearCache(ClearObjectCache.ScenarioLevel);
+        }
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ScenarioExecutionEndingRequest.CurrentExecutionInfo;

@@ -31,6 +31,11 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterSuiteHooks;
         }
 
+        protected override void ClearAllObjectCache()
+        {
+            ClearObjectCache.ClearCache(ClearObjectCache.SuiteLevel);    
+        }
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ExecutionEndingRequest.CurrentExecutionInfo;
