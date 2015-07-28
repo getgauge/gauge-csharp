@@ -32,9 +32,9 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterScenarioHooks;
         }
 
-        protected override void ClearAllObjectCache()
+        protected override bool ShouldClearAllObjectCache()
         {
-            ClearObjectCache.ClearCache(ClearObjectCache.ScenarioLevel);
+            return ClearObjectCache.ShouldClearObjectCache(ClearObjectCache.ScenarioLevel);
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

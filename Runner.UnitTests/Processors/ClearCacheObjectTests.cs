@@ -1,6 +1,4 @@
-﻿using System;
-using Gauge.CSharp.Runner.Processors;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {

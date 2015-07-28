@@ -9,12 +9,10 @@ namespace Gauge.CSharp.Runner.Processors
         public static string ScenarioLevel = "scenario";
         public static string ClearStateFlag = "gauge_clear_state_level";
 
-
-        public static void ClearCache(string currentLevel)
+        public static bool ShouldClearObjectCache(string currentLevel)
         {
             var flag = Environment.GetEnvironmentVariable(ClearStateFlag);
-            if (!string.IsNullOrEmpty(flag) && flag.Trim().Equals(currentLevel))
-                ClassInstanceManager.ClearCache();
+            return !string.IsNullOrEmpty(flag) && flag.Trim().Equals(currentLevel);
         }
     }
 }

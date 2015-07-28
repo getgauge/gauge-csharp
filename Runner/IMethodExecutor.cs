@@ -25,5 +25,6 @@ namespace Gauge.CSharp.Runner
     {
         ProtoExecutionResult Execute(MethodInfo method, params object[] args);
         ProtoExecutionResult ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo);
+        void ClearCache();
     }
 }

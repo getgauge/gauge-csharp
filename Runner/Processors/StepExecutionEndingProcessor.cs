@@ -32,8 +32,9 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterStepHooks;
         }
 
-        protected override void ClearAllObjectCache()
+        protected override bool ShouldClearAllObjectCache()
         {
+            return false;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

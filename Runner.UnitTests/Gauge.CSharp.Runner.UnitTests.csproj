@@ -69,7 +69,6 @@
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />
     <Compile Include="PhaseExecutorFactoryTests.cs" />
-    <Compile Include="Processors\ClearCacheObjectTests.cs" />
     <Compile Include="Processors\DefaultProcessorTests.cs" />
     <Compile Include="Processors\ExecuteStepProcessorTests.cs" />
     <Compile Include="Processors\ExecutionStartingProcessorTests.cs" />

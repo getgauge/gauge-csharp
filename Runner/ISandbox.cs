@@ -30,5 +30,6 @@ namespace Gauge.CSharp.Runner
         IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
         List<string> GetAllStepTexts();
         Assembly TargetLibAssembly { get; set; }
+        void ClearObjectCache();
     }
 }

@@ -32,6 +32,8 @@ namespace Gauge.CSharp.Runner
     {
         private List<Assembly> ScannedAssemblies { get; set; }
         public Assembly TargetLibAssembly { get; set; }
+        
+
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
         private Type ScreenGrabberType { get; set; }
 
@@ -101,6 +103,11 @@ namespace Gauge.CSharp.Runner
             }
             screenShotBytes = null;
             return false;
+        }
+
+        public void ClearObjectCache()
+        {
+            ClassInstanceManager.ClearCache();
         }
 
         private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
