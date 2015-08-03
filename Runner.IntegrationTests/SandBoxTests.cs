@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(3, stepMethods.Count);
+            Assert.AreEqual(6, stepMethods.Count);
         }
 
         [TestCase]
@@ -47,7 +47,10 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             {
                 "Say <what> to <who>",
                 "A context step which gets executed before every scenario",
-                "Step that takes a table <table>"
+                "Step that takes a table <table>",
+                "Refactoring Say <what> to <who>",
+                "Refactoring A context step which gets executed before every scenario",
+                "Refactoring Step that takes a table <table>"
             }.ForEach(s => Assert.Contains(s, stepTexts));
         }
 

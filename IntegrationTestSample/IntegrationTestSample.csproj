@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutionHooks.cs" />
+    <Compile Include="RefactoringSample.cs" />
     <Compile Include="StepImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

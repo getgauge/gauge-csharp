@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Communication;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
@@ -73,6 +72,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ScenarioDataStoreInit, new ScenarioDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SpecDataStoreInit, new SpecDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SuiteDataStoreInit, new SuiteDataStoreInitProcessor(_sandbox)},
+                {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry)},
             };
             return messageHandlers;
         }
@@ -82,6 +82,31 @@ namespace Gauge.CSharp.Runner
             var stepRegistry = stepScanner.GetStepRegistry();
             var hookRegistry = stepScanner.GetHookRegistry();
             _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
+        }
+    }
+
+    internal class RefactorProcessor : IMessageProcessor
+    {
+        private readonly IStepRegistry _stepRegistry;
+
+        public RefactorProcessor(IStepRegistry stepRegistry)
+        {
+            _stepRegistry = stepRegistry;
+        }
+
+        public Message Process(Message request)
+        {
+            var oldStepValue = request.RefactorRequest.OldStepValue.ParameterizedStepValue;
+            var newStep = request.RefactorRequest.NewStepValue;
+
+            var newStepValue = newStep.ParameterizedStepValue;
+            var parameterPositions = request.RefactorRequest.ParamPositionsList;
+
+            var methodInfo = _stepRegistry.MethodFor(oldStepValue);
+
+            RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
+
+            throw new System.NotImplementedException();
         }
     }
 }
