@@ -13,6 +13,12 @@ namespace IntegrationTestSample
             Console.WriteLine("This is a sample context");
         }
 
+        [Step("Refactoring this is a test step")]
+        public void RefactoringSampleTest()
+        {
+            Console.WriteLine("This is a sample context");
+        }
+
         [Step("Refactoring Say <what> to <who>")]
         public void RefactoringSaySomething(string what, string who)
         {

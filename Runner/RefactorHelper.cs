@@ -56,12 +56,33 @@ namespace Gauge.CSharp.Runner
                 foreach (var methodDeclarationSyntax in stepMethods)
                 {
                     var updatedAttribute = ReplaceAttribute(methodDeclarationSyntax, newStepValue);
-                    var declarationSyntax = methodDeclarationSyntax.WithAttributeLists(updatedAttribute);
+                    var updatedParameters = ReplaceParameters(methodDeclarationSyntax, parameterPositions, parameters);
+                    var declarationSyntax = methodDeclarationSyntax
+                                                .WithAttributeLists(updatedAttribute)
+                                                .WithParameterList(updatedParameters);
                     var replaceNode = root.ReplaceNode(methodDeclarationSyntax, declarationSyntax);
 
                     File.WriteAllText(f, replaceNode.ToFullString());
                 }
             });
+        }
+
+        private static ParameterListSyntax ReplaceParameters(MethodDeclarationSyntax methodDeclarationSyntax, IList<ParameterPosition> parameterPositions, IList<string> parameters)
+        {
+            var parameterListSyntax = methodDeclarationSyntax.ParameterList;
+            var foo = new SeparatedSyntaxList<ParameterSyntax>();
+            foo = parameterPositions.OrderBy(position => position.NewPosition)
+                .Aggregate(foo, (current, parameterPosition) =>
+                        current.Add(parameterPosition.OldPosition == -1
+                            ? CreateParameter(parameters[parameterPosition.NewPosition])
+                            : parameterListSyntax.Parameters[parameterPosition.OldPosition]));
+            return parameterListSyntax.WithParameters(foo);
+        }
+
+        private static ParameterSyntax CreateParameter(string text)
+        {
+            // Could not get SyntaxFactory.Parameter to work properly, so ended up parsing code as string
+            return SyntaxFactory.ParseParameterList(string.Format("string {0}", text)).Parameters[0];
         }
 
         private static SyntaxList<AttributeListSyntax> ReplaceAttribute(MethodDeclarationSyntax methodDeclarationSyntax, string newStepText)
