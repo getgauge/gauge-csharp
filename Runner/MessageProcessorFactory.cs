@@ -84,29 +84,4 @@ namespace Gauge.CSharp.Runner
             _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
         }
     }
-
-    internal class RefactorProcessor : IMessageProcessor
-    {
-        private readonly IStepRegistry _stepRegistry;
-
-        public RefactorProcessor(IStepRegistry stepRegistry)
-        {
-            _stepRegistry = stepRegistry;
-        }
-
-        public Message Process(Message request)
-        {
-            var oldStepValue = request.RefactorRequest.OldStepValue.ParameterizedStepValue;
-            var newStep = request.RefactorRequest.NewStepValue;
-
-            var newStepValue = newStep.ParameterizedStepValue;
-            var parameterPositions = request.RefactorRequest.ParamPositionsList;
-
-            var methodInfo = _stepRegistry.MethodFor(oldStepValue);
-
-            RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
-
-            throw new System.NotImplementedException();
-        }
-    }
 }

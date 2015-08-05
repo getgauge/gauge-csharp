@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Runner.Exceptions;
+using Gauge.CSharp.Runner.Extensions;
 using Gauge.Messages;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -21,7 +23,7 @@ namespace Gauge.CSharp.Runner
 
             if (projectFile == null)
             {
-                return;
+                throw new NotAValidGaugeProjectException();
             }
             
             var document = XDocument.Load(projectFile);
@@ -113,20 +115,6 @@ namespace Gauge.CSharp.Runner
         public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             return base.VisitMethodDeclaration(node);
-        }
-    }
-
-    public static class AttributeExtensions
-    {
-        public static AttributeListSyntax WithStepAttribute(this SyntaxList<AttributeListSyntax> list)
-        {
-            return list.First( syntax => syntax.Attributes.GetStepAttribute()!=null);
-        }
-
-        public static AttributeSyntax GetStepAttribute(this SeparatedSyntaxList<AttributeSyntax> list)
-        {
-            return list.FirstOrDefault(argumentSyntax => 
-                string.CompareOrdinal(argumentSyntax.ToFullString(), typeof(Step).ToString()) > 0);
         }
     }
 }

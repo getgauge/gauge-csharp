@@ -133,6 +133,7 @@
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
@@ -158,6 +159,7 @@
     <Compile Include="Processors\KillProcessProcessor.cs" />
     <Compile Include="MethodExecutor.cs" />
     <Compile Include="Processors\ExecutionProcessor.cs" />
+    <Compile Include="Processors\RefactorProcessor.cs" />
     <Compile Include="Processors\ScenarioDataStoreInitProcessor.cs" />
     <Compile Include="Processors\SpecDataStoreInitProcessor.cs" />
     <Compile Include="Processors\SuiteDataStoreInitProcessor.cs" />
