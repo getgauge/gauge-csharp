@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(6, stepMethods.Count);
+            Assert.AreEqual(7, stepMethods.Count);
         }
 
         [TestCase]
