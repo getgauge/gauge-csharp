@@ -63,7 +63,7 @@ namespace Gauge.CSharp.Runner.Communication
             {
                 return IsAbsoluteUrl(customBuildPath) ? customBuildPath : Path.Combine(GaugeProjectRoot, customBuildPath);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Path.Combine(GaugeProjectRoot, "gauge-bin");
             }

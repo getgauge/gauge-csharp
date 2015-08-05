@@ -80,7 +80,7 @@ namespace Gauge.CSharp.Runner
 
         public void ClearCache()
         {
-            _sandbox.ClearCache();
+            _sandbox.ClearObjectCache();
         }
 
         private ByteString TakeScreenshot()
