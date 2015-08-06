@@ -18,7 +18,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _testProjectPath);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldLoadTargetLibAssemblyInSandbox()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -28,7 +28,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual(FileVersionInfo.GetVersionInfo(sandbox.TargetLibAssembly.Location).ProductVersion, "0.0.0");
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAllStepMethods()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual(7, stepMethods.Count);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAllStepTexts()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -54,7 +54,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             }.ForEach(s => Assert.Contains(s, stepTexts));
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetBeforeSuiteHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -66,7 +66,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("BeforeSuite", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAfterSuiteHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -78,7 +78,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("AfterSuite", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetBeforeScenarioHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -90,7 +90,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("BeforeScenario", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAfterScenarioHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -102,7 +102,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("AfterScenario", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetBeforeSpecHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -114,7 +114,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("BeforeSpec", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAfterSpecHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -126,7 +126,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("AfterSpec", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetBeforeStepHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
@@ -138,7 +138,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.AreEqual("BeforeStep", hookMethod.Method.Name);
         }
 
-        [TestCase]
+        [Test]
         public void ShouldGetAfterStepHooks()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
