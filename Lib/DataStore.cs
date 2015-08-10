@@ -27,6 +27,11 @@ namespace Gauge.CSharp.Lib
     [Serializable]
     public class DataStore
     {
+        public DataStore()
+        {
+            Initialize();
+        }
+
         private Dictionary<object, object> Dictionary { get; set; }
 
         /// <summary>

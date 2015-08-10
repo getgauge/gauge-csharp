@@ -48,5 +48,13 @@ namespace Gauge.CSharp.Lib.UnitTests
             Assert.NotNull(dataStore);
             Assert.IsInstanceOf<DataStore>(dataStore);
         }
+
+        [Test]
+        public void ShouldBeAbleToStoreValuesToDatastoreWithoutInitializing()
+        {
+            var dataStore = DataStoreFactory.ScenarioDataStore;
+            dataStore.Add("myKey", "myValue");
+            Assert.AreEqual(dataStore.Get("myKey"), "myValue");
+        }
     }
 }
