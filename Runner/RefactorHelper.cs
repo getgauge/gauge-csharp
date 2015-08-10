@@ -47,7 +47,9 @@ namespace Gauge.CSharp.Runner
 
                 var stepMethods = from node in root.DescendantNodes().OfType<MethodDeclarationSyntax>()
                     let attributeSyntaxes = node.AttributeLists.SelectMany(syntax => syntax.Attributes)
+                    let classDef = node.Parent as ClassDeclarationSyntax
                     where string.CompareOrdinal(node.Identifier.ValueText, method.Name) == 0
+                        && string.CompareOrdinal(classDef.Identifier.ValueText, method.DeclaringType.Name) == 0
                        && attributeSyntaxes.Any(syntax => string.CompareOrdinal(syntax.ToFullString(), typeof(Step).ToString()) > 0)
                           select node;
 
