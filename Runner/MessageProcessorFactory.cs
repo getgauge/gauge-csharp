@@ -72,6 +72,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ScenarioDataStoreInit, new ScenarioDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SpecDataStoreInit, new SpecDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SuiteDataStoreInit, new SuiteDataStoreInitProcessor(_sandbox)},
+                {Message.Types.MessageType.StepNameRequest, new StepNameProcessor(stepRegistry) },
                 {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry)},
             };
             return messageHandlers;
@@ -82,6 +83,21 @@ namespace Gauge.CSharp.Runner
             var stepRegistry = stepScanner.GetStepRegistry();
             var hookRegistry = stepScanner.GetHookRegistry();
             _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
+        }
+    }
+
+    internal class StepNameProcessor : IMessageProcessor
+    {
+        private readonly IStepRegistry _stepRegistry;
+
+        public StepNameProcessor(IStepRegistry stepRegistry)
+        {
+            _stepRegistry = stepRegistry;
+        }
+
+        public Message Process(Message request)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

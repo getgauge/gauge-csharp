@@ -28,7 +28,6 @@ namespace Gauge.CSharp.Runner
         private readonly GaugeApiConnection _apiConnection;
 
         private readonly ISandbox _sandbox;
-        private IStepRegistry _stepRegistry;
 
         public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
@@ -38,27 +37,24 @@ namespace Gauge.CSharp.Runner
 
         public IStepRegistry GetStepRegistry()
         {
-            _stepRegistry = new StepRegistry(GetStepMethods());
-            return _stepRegistry;
-        }
-
-        public IEnumerable<string> GetStepTexts()
-        {
-            return _sandbox.GetAllStepTexts();
-        }
-
-        private IEnumerable<KeyValuePair<string, MethodInfo>> GetStepMethods()
-        {
             var retVal = new List<KeyValuePair<string, MethodInfo>>();
+            var aliases = new Dictionary<string, bool>();
             try
             {
                 var stepMethods = _sandbox.GetStepMethods();
                 foreach (var stepMethod in stepMethods)
                 {
                     // HasTable is set to false here, table parameter is interpreted using the Step text.
-                    var stepValues = _apiConnection.GetStepValues(_sandbox.GetStepTexts(stepMethod), false);
+                    var stepValues = _apiConnection.GetStepValues(_sandbox.GetStepTexts(stepMethod), false).ToList();
 
                     retVal.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
+
+                    if (stepValues.Count <= 1) continue;
+
+                    foreach (var stepValue in stepValues)
+                    {
+                        aliases.Add(stepValue, true);
+                    }
                 }
             }
             catch (Exception ex)
@@ -66,7 +62,12 @@ namespace Gauge.CSharp.Runner
                 Console.WriteLine("[WARN] Steps Fetch failed, Failed to connect to Gauge API");
                 Console.WriteLine(ex.Message);
             }
-            return retVal;
+            return new StepRegistry(retVal, aliases);
+        }
+
+        public IEnumerable<string> GetStepTexts()
+        {
+            return _sandbox.GetAllStepTexts();
         }
 
         public IHookRegistry GetHookRegistry()
