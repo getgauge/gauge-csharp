@@ -51,7 +51,8 @@ namespace Gauge.CSharp.Runner
 
                     for (var i = 0; i < stepTexts.Count(); i++)
                     {
-                        stepTextMap.Add(stepValues[i], stepTexts[i]);
+                        if(!stepTextMap.ContainsKey(stepValues[i]))
+                            stepTextMap.Add(stepValues[i], stepTexts[i]);
                     }
 
                     stepImplementations.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
@@ -60,7 +61,8 @@ namespace Gauge.CSharp.Runner
 
                     foreach (var stepValue in stepValues)
                     {
-                        aliases.Add(stepValue, true);
+                        if(!aliases.ContainsKey(stepValue))
+                            aliases.Add(stepValue, true);
                     }
                 }
             }
