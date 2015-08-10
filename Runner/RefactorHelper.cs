@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,7 +18,7 @@ namespace Gauge.CSharp.Runner
 {
     public class RefactorHelper
     {
-        public static void Refactor(MethodInfo method, IList<ParameterPosition> parameterPositions, IList<string> parameters, string newStepValue)
+        public static IEnumerable<string> Refactor(MethodInfo method, IList<ParameterPosition> parameterPositions, IList<string> parameters, string newStepValue)
         {
             var projectFile = Directory.EnumerateFiles(Utils.GaugeProjectRoot, "*.csproj", SearchOption.AllDirectories).FirstOrDefault();
 
@@ -36,6 +37,8 @@ namespace Gauge.CSharp.Runner
                 .Elements(ns + "Compile")
                 .Where(r => r.Attribute("Include") != null)
                 .Select(r => Path.GetFullPath(Path.Combine(Utils.GaugeProjectRoot, r.Attribute("Include").Value)));
+
+            var filesChanged = new ConcurrentBag<string>();
 
             Parallel.ForEach(classFiles, (f, state) =>
             {
@@ -65,8 +68,10 @@ namespace Gauge.CSharp.Runner
                     var replaceNode = root.ReplaceNode(methodDeclarationSyntax, declarationSyntax);
 
                     File.WriteAllText(f, replaceNode.ToFullString());
+                    filesChanged.Add(f);
                 }
             });
+            return filesChanged;
         }
 
         private static ParameterListSyntax ReplaceParameters(MethodDeclarationSyntax methodDeclarationSyntax, IList<ParameterPosition> parameterPositions, IList<string> parameters)

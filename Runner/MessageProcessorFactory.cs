@@ -72,6 +72,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ScenarioDataStoreInit, new ScenarioDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SpecDataStoreInit, new SpecDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SuiteDataStoreInit, new SuiteDataStoreInitProcessor(_sandbox)},
+                {Message.Types.MessageType.StepNameRequest, new StepNameProcessor(stepRegistry) },
                 {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry)},
             };
             return messageHandlers;
