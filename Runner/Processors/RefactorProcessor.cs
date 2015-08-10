@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         public Message Process(Message request)
         {
-            var oldStepValue = request.RefactorRequest.OldStepValue.ParameterizedStepValue;
+            var oldStepValue = request.RefactorRequest.OldStepValue.StepValue;
             var newStep = request.RefactorRequest.NewStepValue;
 
             var newStepValue = newStep.ParameterizedStepValue;
@@ -43,8 +43,8 @@ namespace Gauge.CSharp.Runner.Processors
             var refactorResponseBuilder = RefactorResponse.CreateBuilder();
             try
             {
-                RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
-                refactorResponseBuilder.SetSuccess(true);
+                var filesChanged = RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
+                refactorResponseBuilder.SetSuccess(true).AddFilesChanged(filesChanged.First());
             }
             catch (AggregateException ex)
             {

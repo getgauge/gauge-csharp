@@ -132,6 +132,7 @@
     <Compile Include="Processors\RefactorProcessor.cs" />
     <Compile Include="Processors\ScenarioDataStoreInitProcessor.cs" />
     <Compile Include="Processors\SpecDataStoreInitProcessor.cs" />
+    <Compile Include="Processors\StepNameProcessor.cs" />
     <Compile Include="Processors\SuiteDataStoreInitProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

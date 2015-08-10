@@ -85,19 +85,4 @@ namespace Gauge.CSharp.Runner
             _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
         }
     }
-
-    internal class StepNameProcessor : IMessageProcessor
-    {
-        private readonly IStepRegistry _stepRegistry;
-
-        public StepNameProcessor(IStepRegistry stepRegistry)
-        {
-            _stepRegistry = stepRegistry;
-        }
-
-        public Message Process(Message request)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
 }

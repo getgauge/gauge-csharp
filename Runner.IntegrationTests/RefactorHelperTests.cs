@@ -34,6 +34,19 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             AssertStepAttributeWithTextExists(methodInfo.Name, "foo");
         }
 
+        [Test]
+        public void ShouldRefactorAndReturnFilesChanged()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var methodInfo = sandbox.GetStepMethods().First(info => info.Name== "RefactoringContext");
+            var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
+
+            var filesChanged = RefactorHelper.Refactor(methodInfo, new List<ParameterPosition>(), new List<string>(), "foo").ToList();
+
+            Assert.AreEqual(1, filesChanged.Count());
+            Assert.AreEqual(expectedPath, filesChanged.First());
+        }
+
 
         [Test]
         public void ShouldReorderParameters()

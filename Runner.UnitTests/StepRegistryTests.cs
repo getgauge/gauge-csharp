@@ -36,7 +36,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
-            var stepRegistry = new StepRegistry(methods, null);
+            var stepRegistry = new StepRegistry(methods, null, null);
             var allSteps = stepRegistry.AllSteps();
 
             Assert.AreEqual(allSteps.Count(), 2);
@@ -52,7 +52,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
-            var stepRegistry = new StepRegistry(methods, null);
+            var stepRegistry = new StepRegistry(methods, null, null);
             var method = stepRegistry.MethodFor("Foo");
 
             Assert.AreEqual(method.Name, "Foo");
@@ -66,7 +66,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
-            var stepRegistry = new StepRegistry(methods, null);
+            var stepRegistry = new StepRegistry(methods, null, null);
 
             Assert.True(stepRegistry.ContainsStep("Foo"));
             Assert.True(stepRegistry.ContainsStep("Bar"));
@@ -81,7 +81,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("FooAlias", GetType().GetMethod("Foo")),
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
-            var stepRegistry = new StepRegistry(methods, new Dictionary<string, bool> { { "Foo", true}, {"FooAlias", true} });
+            var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool> { { "Foo", true}, {"FooAlias", true} });
 
             Assert.True(stepRegistry.HasAlias("Foo"));
             Assert.True(stepRegistry.HasAlias("FooAlias"));
@@ -95,10 +95,40 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
-            var stepRegistry = new StepRegistry(methods, new Dictionary<string, bool> ());
+            var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool> ());
 
             Assert.False(stepRegistry.HasAlias("Foo"));
             Assert.False(stepRegistry.HasAlias("Bar"));
+        }
+
+        [Test]
+        public void ShouldGetStepTextFromParameterizedStepText()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
+                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+            };
+            var stepTextMap = new Dictionary<string, string> { {"foo_parameterized", "Foo"} };
+
+            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
+
+            Assert.AreEqual(stepRegistry.GetStepText("foo_parameterized"), "Foo");
+        }
+
+        [Test]
+        public void ShouldGetEmptyStepTextForInvalidParameterizedStepText()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
+                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+            };
+            var stepTextMap = new Dictionary<string, string> { {"foo_parameterized", "Foo"} };
+
+            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
+
+            Assert.AreEqual(stepRegistry.GetStepText("random"), string.Empty);
         }
     }
 }

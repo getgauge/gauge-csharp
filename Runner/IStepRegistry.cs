@@ -26,5 +26,6 @@ namespace Gauge.CSharp.Runner
         MethodInfo MethodFor(string parsedStepText);
         IEnumerable<string> AllSteps();
         bool HasAlias(string stepText);
+        string GetStepText(string parameterizedStepText);
     }
 }
