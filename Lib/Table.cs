@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gauge.CSharp.Lib
 {
@@ -64,6 +65,17 @@ namespace Gauge.CSharp.Lib
         public List<List<string>> GetRows()
         {
             return _rows;
+        }
+
+        /// <summary>
+        /// Fetches all the column values defined under the given column name
+        /// </summary>
+        /// <param name="columnName">Name of the Column to fetch</param>
+        /// <returns>IEnumerable of string containing the given column's values</returns>
+        public IEnumerable<string> GetColumnValues(string columnName)
+        {
+            var columnIndex = _headers.IndexOf(columnName);
+            return columnIndex >= 0 ?_rows.Select(list => list[columnIndex]) : Enumerable.Empty<string>();
         }
     }
 }
