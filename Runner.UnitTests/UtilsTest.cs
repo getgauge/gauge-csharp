@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Core;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests

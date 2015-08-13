@@ -20,7 +20,7 @@ using System.Linq;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 
-namespace Gauge.CSharp.Runner.Communication
+namespace Gauge.CSharp.Core
 {
     public class GaugeApiConnection : AbstractGaugeConnection
     {

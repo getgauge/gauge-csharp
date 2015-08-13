@@ -52,6 +52,10 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gauge.CSharp.Core, Version=0.0.2.0, Culture=neutral, PublicKeyToken=4d2d442b45695923, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Gauge.CSharp.Core.0.0.2.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Gauge.CSharp.Lib, Version=0.4.4.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Gauge.CSharp.Lib.0.4.4.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
@@ -91,15 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassInstanceManager.cs" />
-    <Compile Include="Communication\AbstractGaugeConnection.cs" />
-    <Compile Include="Communication\Api.cs" />
-    <Compile Include="Communication\GaugeApiConnection.cs" />
-    <Compile Include="Communication\GaugeConnection.cs" />
-    <Compile Include="Communication\ITcpClientWrapper.cs" />
-    <Compile Include="Communication\Messages.cs" />
-    <Compile Include="Communication\Spec.cs" />
-    <Compile Include="Communication\TcpClientWrapper.cs" />
-    <Compile Include="Communication\Utils.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
@@ -157,7 +152,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="csharp.json" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -176,7 +173,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

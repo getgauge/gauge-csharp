@@ -23,22 +23,23 @@ Remove-Item "$($pwd)\artifacts" -recurse
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\build.ps1"
 
-# First package the Lib, output is Gauge.CSharp.Lib nupkg, upload it to nuget.org.
-$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
-$nugetDir = "$($pwd)\artifacts"
-
-New-Item -Itemtype directory $nugetDir -Force
-
-$nugetInstallScript= {param($outputPath, $nugetDir)
+$nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
     $nuget = "$($pwd)\.nuget\NuGet.exe"
     $env:OutDir=$outputPath # required for nuget to pick up the file from this location
-    &$nuget pack Lib\Gauge.CSharp.Lib.csproj /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
+    &$nuget pack "$($projectPath)" /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
 }
 
-Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $outputPath, $nugetDir
+
+# First package the Lib and Core, output is Gauge.CSharp.Lib.nupkg and Gauge.CSharp.Core.nupkg
+$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
+$nugetDir = "$($pwd)\artifacts"
+$libProjectPath = "Lib\Gauge.CSharp.Lib.csproj"
+$coreProjectPath = "Core\Gauge.CSharp.Core.csproj"
+New-Item -Itemtype directory $nugetDir -Force
+
+@("Core", "Lib") | %{Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $outputPath, $nugetDir, "$($_)\Gauge.CSharp.$($_).csproj"}
 
 # Now, package the runner
-
 $outputDir= "$($pwd)\artifacts\gauge-csharp"
 
 $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
@@ -66,9 +67,8 @@ Import-Module Pscx
 
 # zip!
 $zipScript= {
-    set-location $outputDir
     $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
-    gci -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
+    gci $outputDir -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
 }
 
 Invoke-Command -ScriptBlock $zipScript

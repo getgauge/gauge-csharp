@@ -17,9 +17,8 @@
 
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
-namespace Gauge.CSharp.Runner.Communication
+namespace Gauge.CSharp.Core
 {
     public class Utils
     {

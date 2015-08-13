@@ -21,9 +21,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
-using Gauge.CSharp.Runner.Communication;
 
 namespace Gauge.CSharp.Runner
 {

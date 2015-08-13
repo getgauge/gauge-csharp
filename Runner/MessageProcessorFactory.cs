@@ -16,7 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 

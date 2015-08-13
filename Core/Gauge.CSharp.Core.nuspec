@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Gauge CSharp Core</title>
+    <authors>ThoughtWorks Inc</authors>
+    <owners>steam</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl-3.0.txt</licenseUrl>
+    <projectUrl>http://getgauge.io</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/getgauge/gauge-csharp/master/logo-64x64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>[INTERNAL GAUGE USE ONLY] Gauge CSharp Core</releaseNotes>
+    <summary>[INTERNAL GAUGE USE ONLY] Library to be used to communicate with Gauge Core.</summary>
+    <copyright>Copyright ThoughtWorks Inc.© 2015</copyright>
+    <dependencies>
+      <dependency id="Gauge.CSharp.Lib" version="[0.4.4.0,)"/>
+      <dependency id="Google.ProtocolBuffers" version="[2.4.1.555,)"/>
+    </dependencies>
+  </metadata>
+</package>

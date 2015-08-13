@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Gauge.CSharp.Runner.Communication
+namespace Gauge.CSharp.Core
 {
     public class GaugeConnection : AbstractGaugeConnection
     {

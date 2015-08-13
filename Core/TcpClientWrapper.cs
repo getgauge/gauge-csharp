@@ -20,7 +20,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Gauge.CSharp.Runner.Communication
+namespace Gauge.CSharp.Core
 {
     public class TcpClientWrapper : ITcpClientWrapper
     {

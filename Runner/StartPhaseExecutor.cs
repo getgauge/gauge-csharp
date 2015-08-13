@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
 using Gauge.Messages;
 using Microsoft.Build.Evaluation;

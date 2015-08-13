@@ -17,7 +17,7 @@
 
 using System.IO;
 
-namespace Gauge.CSharp.Runner.Communication
+namespace Gauge.CSharp.Core
 {
     public interface ITcpClientWrapper
     {

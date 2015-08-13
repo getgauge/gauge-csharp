@@ -35,7 +35,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>gauge.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>gauge_lib.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,7 +65,7 @@
     <None Include="Gauge.CSharp.Lib.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="gauge.snk" />
+    <None Include="gauge_lib.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

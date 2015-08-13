@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Runner.Communication;
+using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner
 {
