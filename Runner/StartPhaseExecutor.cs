@@ -35,7 +35,6 @@ namespace Gauge.CSharp.Runner
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
         private static StartPhaseExecutor _instance;
-        private static bool _shouldBuildProject = true;
 
         public static StartPhaseExecutor GetDefaultInstance()
         {
@@ -45,16 +44,11 @@ namespace Gauge.CSharp.Runner
         private StartPhaseExecutor()
         {
             var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
-            if (!string.IsNullOrEmpty(customBuildPath))
-            {
-                _shouldBuildProject = false;    
-            }
-            if (_shouldBuildProject)
+            if (string.IsNullOrEmpty(customBuildPath))
             {
                 try
                 {
                     BuildTargetGaugeProject();
-                    _shouldBuildProject = false;
                 }
                 catch (NotAValidGaugeProjectException)
                 {
@@ -121,11 +115,6 @@ namespace Gauge.CSharp.Runner
 
             var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
 
-            if (buildResult.OverallResult == BuildResultCode.Success)
-            {
-                Console.Out.WriteLine(buildResult.OverallResult);
-                return;
-            }
             if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
             {
                 Console.WriteLine();
@@ -133,7 +122,8 @@ namespace Gauge.CSharp.Runner
                 Console.WriteLine("Please choose a project name that complies with C# Project naming conventions.");
                 Console.WriteLine();
             }
-            Environment.Exit(1);
+
+            Console.Out.WriteLine(buildResult.OverallResult);
         }
     }
 }
