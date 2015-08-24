@@ -34,8 +34,11 @@ if($LastExitCode -ne 0)
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
 New-Item -Itemtype directory $outputPath -Force
 $sln = "Gauge.CSharp.NoTests.sln"
-if ($buildWithTest -eq 'true') {
+if ($buildWithTest) {
     $sln="Gauge.CSharp.sln"
+    $sampleProj = resolve-path "IntegrationTestSample\IntegrationTestSample.sln"
+    $sampleProjOutputPath = [IO.Path]::Combine($pwd,"IntegrationTestSample\gauge-bin")
+    &$msbuild $sampleProj /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($sampleProjOutputPath)"
 }
 
 &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
