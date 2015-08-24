@@ -29,6 +29,7 @@ namespace Gauge.CSharp.Lib
     {
         private readonly List<string> _headers;
         private readonly List<List<string>> _rows;
+        private readonly List<TableRow> _tableRows; 
 
         /// <summary>
         /// Creates a new Table type
@@ -38,6 +39,7 @@ namespace Gauge.CSharp.Lib
         {
             _headers = headers;
             _rows = new List<List<string>>();
+            _tableRows = new List<TableRow>();
         }
 
         /// <summary>
@@ -47,6 +49,12 @@ namespace Gauge.CSharp.Lib
         public void AddRow(List<string> row)
         {
             _rows.Add(row);
+            var tableRow = new TableRow();
+            foreach (var columnValue in _headers)
+            {
+                tableRow.AddCell(columnValue, row[_headers.IndexOf(columnValue)]);
+            }
+            _tableRows.Add(tableRow);
         }
 
         /// <summary>
@@ -62,9 +70,19 @@ namespace Gauge.CSharp.Lib
         /// Fetch all the rows of a table, in order.
         /// </summary>
         /// <returns>List of string representing the tuples of a table.</returns>
+        [Obsolete("Method GetRows is deprecated, please use GetTableRows instead.")]
         public List<List<string>> GetRows()
         {
             return _rows;
+        }
+
+        /// <summary>
+        /// Fetch all the rows of a table represented as TableRow. 
+        /// </summary>
+        /// <returns>List of TableRow representing the tuples of a table.</returns>
+        public List<TableRow> GetTableRows()
+        {
+            return _tableRows;
         }
 
         /// <summary>
