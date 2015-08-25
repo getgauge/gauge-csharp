@@ -21,7 +21,7 @@ if ($artifactPath -ne '') {
     $artifactPath=resolve-path $artifactPath
 }
 else {
-    $artifactPath=join-path $pwd, "artifacts"
+    $artifactPath= [IO.Path]::Combine($pwd,"artifacts")
 }
 
 $pluginFile = gci $artifactPath\gauge-csharp*.zip | select -f 1
