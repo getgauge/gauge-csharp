@@ -17,7 +17,7 @@
 
 # Clean the artifacts directory
 
-Remove-Item "$($pwd)\artifacts" -recurse
+Remove-Item "$($pwd)\artifacts*" -recurse -force
 
 # Build everything
 
@@ -29,15 +29,18 @@ $nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
     &$nuget pack "$($projectPath)" /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
 }
 
-
-# First package the Lib and Core, output is Gauge.CSharp.Lib.nupkg and Gauge.CSharp.Core.nupkg
-$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
 $nugetDir = "$($pwd)\artifacts"
-$libProjectPath = "Lib\Gauge.CSharp.Lib.csproj"
-$coreProjectPath = "Core\Gauge.CSharp.Core.csproj"
 New-Item -Itemtype directory $nugetDir -Force
 
-@("Core", "Lib") | %{Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $outputPath, $nugetDir, "$($_)\Gauge.CSharp.$($_).csproj"}
+# Package the Lib, output is Gauge.CSharp.Lib.nupkg
+$buildOutputPath= "$($pwd)\artifacts\gauge-csharp-lib"
+$libProjectPath = "Lib\Gauge.CSharp.Lib.csproj"
+Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $buildOutputPath, $nugetDir, $libProjectPath
+
+# Package Core, output is Gauge.CSharp.Core.nupkg
+$buildOutputPath= "$($pwd)\artifacts\gauge-csharp-core"
+$coreProjectPath = "Core\Gauge.CSharp.Core.csproj"
+Invoke-Command -ScriptBlock $nugetInstallScript -ArgumentList $buildOutputPath, $nugetDir, $coreProjectPath
 
 # Now, package the runner
 $outputDir= "$($pwd)\artifacts\gauge-csharp"

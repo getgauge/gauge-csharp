@@ -30,6 +30,21 @@ if($LastExitCode -ne 0)
     throw "Build failed $($sln)"
 }
 
+# Build the package CSharp-Core
+$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-core\")
+New-Item -Itemtype directory $outputPath -Force
+$msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
+$sln = "Gauge.CSharp.Core.sln"
+
+&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
+
+if($LastExitCode -ne 0)
+{
+    throw "Build failed $($sln)"
+}
+
+
+
 # Build the runner
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
 New-Item -Itemtype directory $outputPath -Force

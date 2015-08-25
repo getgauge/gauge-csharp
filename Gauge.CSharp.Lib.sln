@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Lib", "Lib\Gau
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Lib.UnitTests", "Lib.UnitTests\Gauge.CSharp.Lib.UnitTests.csproj", "{12F93FF5-ECB3-4ED0-929C-DD842B6EEC98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Core", "Core\Gauge.CSharp.Core.csproj", "{1163BDE3-0424-4B35-AB5C-FE3A9391C74E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{12F93FF5-ECB3-4ED0-929C-DD842B6EEC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12F93FF5-ECB3-4ED0-929C-DD842B6EEC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12F93FF5-ECB3-4ED0-929C-DD842B6EEC98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1163BDE3-0424-4B35-AB5C-FE3A9391C74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1163BDE3-0424-4B35-AB5C-FE3A9391C74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1163BDE3-0424-4B35-AB5C-FE3A9391C74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1163BDE3-0424-4B35-AB5C-FE3A9391C74E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
