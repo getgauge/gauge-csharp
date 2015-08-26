@@ -42,9 +42,13 @@ namespace Gauge.CSharp.Runner
             FilterTags = filteredHookAttribute.FilterTags;
             var targetTagBehaviourType = GetTargetType(typeof(TagAggregationBehaviourAttribute), sandbox);
             dynamic tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute(targetTagBehaviourType);
-            TagAggregation setTagAggregation;
-            var parseResult = Enum.TryParse((string) tagAggregationBehaviourAttribute.TagAggregation.ToString(), true, out setTagAggregation);
-            TagAggregation = parseResult ? setTagAggregation : TagAggregation.And;
+
+            var setTagAggregation = TagAggregation.And;
+            if (!ReferenceEquals(tagAggregationBehaviourAttribute, null))
+            {
+                Enum.TryParse((string)tagAggregationBehaviourAttribute.TagAggregation.ToString(), true, out setTagAggregation);
+            }
+            TagAggregation = setTagAggregation;
         }
 
         private static Type GetTargetType(Type type, ISandbox sandbox)
