@@ -16,6 +16,8 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
+using Gauge.CSharp.Lib.Attribute;
+using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
@@ -25,10 +27,19 @@ namespace Gauge.CSharp.Runner.UnitTests
     {
         public void DummyHook(){}
 
+        public ISandbox SandBox;
+
+        [SetUp]
+        public void Setup()
+        {
+            var mockSandbox = new Mock<ISandbox>();
+            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof(Step).Assembly);
+            SandBox = mockSandbox.Object;
+        }
         [Test]
         public void ShouldAddAndGetBeforeScenarioHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeScenarioHooks(new [] {methodInfo});
 
@@ -38,7 +49,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterScenarioHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterScenarioHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -47,7 +58,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeSpecHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSpecHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeSpecHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -56,7 +67,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterSpecHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSpecHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterSpecHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -65,7 +76,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeStepHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeStepHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeStepHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -74,7 +85,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterStepHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterStepHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterStepHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -83,7 +94,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeSuiteHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSuiteHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -92,7 +103,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterSuiteHook()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(SandBox);
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSuiteHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterSuiteHooks.Any(method => method.Method.Equals(methodInfo)));

@@ -26,6 +26,8 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class HookRegistry : IHookRegistry
     {
+        private readonly ISandbox _sandbox;
+
         private readonly IDictionary<Type, HashSet<HookMethod>> _hooks = new Dictionary<Type, HashSet<HookMethod>>()
         {
             {typeof (BeforeSuite), new HashSet<HookMethod>()},
@@ -37,6 +39,11 @@ namespace Gauge.CSharp.Runner
             {typeof (BeforeStep), new HashSet<HookMethod>()},
             {typeof (AfterStep), new HashSet<HookMethod>()},
         };
+
+        public HookRegistry(ISandbox sandbox)
+        {
+            _sandbox = sandbox;
+        }
 
         public HashSet<HookMethod> BeforeSuiteHooks
         {
@@ -120,7 +127,7 @@ namespace Gauge.CSharp.Runner
 
         private void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hooks)
         {
-            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info)));
+            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info, _sandbox)));
         }
 
         private HashSet<HookMethod> GetHookOfType(Type type)

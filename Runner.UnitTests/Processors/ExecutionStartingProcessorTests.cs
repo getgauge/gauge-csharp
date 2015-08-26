@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using Moq;
@@ -40,7 +41,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void Setup()
         {
             var mockHookRegistry = new Mock<IHookRegistry>();
-            var hooks = new HashSet<HookMethod> {new HookMethod(GetType().GetMethod("Foo"))};
+            var mockSandbox = new Mock<ISandbox>();
+            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof(Step).Assembly);
+
+            var hooks = new HashSet<HookMethod> {new HookMethod(GetType().GetMethod("Foo"), mockSandbox.Object)};
             var hooksToExecute = hooks.Select(method => method.Method);
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
             var executionEndingRequest = ExecutionEndingRequest.DefaultInstance;

@@ -52,7 +52,7 @@ namespace Gauge.CSharp.Runner
 
         public IHookRegistry GetHookRegistry()
         {
-            var hookRegistry = new HookRegistry();
+            var hookRegistry = new HookRegistry(this);
             hookRegistry.AddBeforeSuiteHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeSuite).ToString()));
             hookRegistry.AddAfterSuiteHooks(GetAllMethodsForSpecAssemblies(typeof(AfterSuite).ToString()));
             hookRegistry.AddBeforeSpecHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeSpec).ToString()));

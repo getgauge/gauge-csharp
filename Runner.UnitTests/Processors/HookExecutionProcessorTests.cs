@@ -2,6 +2,7 @@
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
+using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
@@ -45,12 +46,15 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [SetUp]
         public void Setup()
         {
+            var mockSandbox = new Mock<ISandbox>();
+            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof(Step).Assembly);
+
             _hookMethods = new List<HookMethod>
             {
-                new HookMethod(GetType().GetMethod("foo")),
-                new HookMethod(GetType().GetMethod("bar")),
-                new HookMethod(GetType().GetMethod("baz")),
-                new HookMethod(GetType().GetMethod("blah"))
+                new HookMethod(GetType().GetMethod("foo"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("bar"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("baz"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("blah"), mockSandbox.Object)
             };
         }
         [Test]
