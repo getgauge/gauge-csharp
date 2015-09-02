@@ -56,10 +56,13 @@ namespace Gauge.CSharp.Runner
                     ExceptionDispatchInfo.Capture(e.InnerException).Throw();
                 }
                 
-                return ProtoExecutionResult.CreateBuilder()
-                    .SetFailed(false)
-                    .SetExecutionTime(stopwatch.ElapsedMilliseconds)
-                    .Build();
+                var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false)
+                                .SetExecutionTime(stopwatch.ElapsedMilliseconds);
+                foreach (var message in _sandbox.GetAllPendingMessages())
+                {
+                    builder.AddMessage(message);   
+                }
+                return builder.Build();
             }
             catch (Exception e)
             {
@@ -74,6 +77,10 @@ namespace Gauge.CSharp.Runner
                 builder.SetStackTrace(e.StackTrace);
                 builder.SetRecoverableError(false);
                 builder.SetExecutionTime(elapsedMilliseconds);
+                foreach (var message in _sandbox.GetAllPendingMessages())
+                {
+                    builder.AddMessage(message);
+                }
                 return builder.Build();
             }
         }

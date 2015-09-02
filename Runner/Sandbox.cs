@@ -110,6 +110,11 @@ namespace Gauge.CSharp.Runner
             ClassInstanceManager.ClearCache();
         }
 
+        public List<string> GetAllPendingMessages()
+        {
+            return MessageCollector.GetAllPendingMessages();
+        }
+
         private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
         {
             var targetType = TargetLibAssembly.GetType(type);
