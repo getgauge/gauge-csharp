@@ -112,7 +112,8 @@ namespace Gauge.CSharp.Runner
 
         public List<string> GetAllPendingMessages()
         {
-            return MessageCollector.GetAllPendingMessages();
+//            return MessageCollector.GetAllPendingMessages();
+              return new List<string>();  
         }
 
         private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
