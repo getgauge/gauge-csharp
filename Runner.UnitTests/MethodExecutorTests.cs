@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -40,6 +41,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
+            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
             
@@ -69,6 +71,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
+            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
+
             byte[] bytes = {0x20, 0x20};
             mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
 
@@ -86,6 +90,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
+            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
+
             var screenshotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
             Environment.SetEnvironmentVariable("screenshot_enabled", "false");
             
@@ -102,6 +108,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object));
+            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var executionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks(new[] { method.Object },
                 ExecutionInfo.CreateBuilder().Build());

@@ -42,6 +42,7 @@ namespace Gauge.CSharp.Runner
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {
             var stopwatch = Stopwatch.StartNew();
+            var pendingMessages = new List<string>();
             try
             {
                 try
@@ -55,10 +56,14 @@ namespace Gauge.CSharp.Runner
                     // and is fixable from the Step Implemented
                     ExceptionDispatchInfo.Capture(e.InnerException).Throw();
                 }
+                finally
+                {
+                    pendingMessages = _sandbox.GetAllPendingMessages();
+                }
                 
                 var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false)
                                 .SetExecutionTime(stopwatch.ElapsedMilliseconds);
-                foreach (var message in _sandbox.GetAllPendingMessages())
+                foreach (var message in pendingMessages)
                 {
                     builder.AddMessage(message);   
                 }
@@ -77,7 +82,7 @@ namespace Gauge.CSharp.Runner
                 builder.SetStackTrace(e.StackTrace);
                 builder.SetRecoverableError(false);
                 builder.SetExecutionTime(elapsedMilliseconds);
-                foreach (var message in _sandbox.GetAllPendingMessages())
+                foreach (var message in pendingMessages)
                 {
                     builder.AddMessage(message);
                 }
