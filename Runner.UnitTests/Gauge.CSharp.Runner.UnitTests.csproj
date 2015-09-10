@@ -36,9 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Gauge.CSharp.Core.0.0.2.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Gauge.CSharp.Lib">
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.5.1.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Gauge.CSharp.Lib, Version=0.5.2.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.5.2.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

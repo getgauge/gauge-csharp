@@ -31,9 +31,9 @@
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<ItemGroup>
-    <Reference Include="Gauge.CSharp.Lib, Version=0.5.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Gauge.CSharp.Lib, Version=$nugetLibNormalizedVersion$, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Gauge.CSharp.Lib.0.5.0.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>packages\Gauge.CSharp.Lib.$nugetLibVersion$\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
 		<Reference Include="System.Core"/>
@@ -50,7 +50,6 @@
 	<ItemGroup>
 		<None Include="env\default\default.properties" />
 		<None Include="manifest.json" />
-		<None Include="packages.config" />
 		<None Include="specs\hello_world.spec" />
 	</ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

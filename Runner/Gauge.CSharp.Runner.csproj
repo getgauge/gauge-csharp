@@ -56,9 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Gauge.CSharp.Core.0.0.2.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Gauge.CSharp.Lib">
-      <HintPath>..\packages\Gauge.CSharp.Lib.0.5.1.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Gauge.CSharp.Lib, Version=0.5.2.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Gauge.CSharp.Lib.0.5.2.0\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
     <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,6 +75,12 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp">
       <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.0.0\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\packages\NuGet.Core.2.8.6\lib\net40-Client\NuGet.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

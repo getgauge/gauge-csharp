@@ -59,11 +59,6 @@ Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.csproj" -Destination $skelDir -
 Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force
-Copy-Item "$($pwd)\.nuget\NuGet.exe" -Destination $outputPath -Force
-
-# Copy the .nuget folder - this is required since the solution is configured to restore packages.
-Copy-Item "$($pwd)\.nuget" -Destination $skelDir -recurse
-
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force
 
 Import-Module Pscx

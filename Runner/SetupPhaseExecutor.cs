@@ -17,10 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using Gauge.CSharp.Core;
+using NuGet;
 
 namespace Gauge.CSharp.Runner
 {
@@ -28,6 +28,8 @@ namespace Gauge.CSharp.Runner
     {
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
+        const string packageID = "Gauge.CSharp.Lib";
+        private static SemanticVersion _maxLibVersion = GetMaxNugetVersion();
         public void Execute()
         {
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
@@ -35,8 +37,7 @@ namespace Gauge.CSharp.Runner
             new List<string>
             {
                 Path.Combine("Properties", "AssemblyInfo.cs"),
-                "StepImplementation.cs",
-                "packages.config"
+                "StepImplementation.cs"
             }.ForEach(CopyFile); 
             
             CopyFile("Gauge.Spec.csproj", string.Format("{0}.csproj", ProjectName));
@@ -73,11 +74,17 @@ namespace Gauge.CSharp.Runner
             }
             else
             {
+                var version = _maxLibVersion.ToString();
+                var normalizedVersion = _maxLibVersion.ToNormalizedString();
+
                 File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
                 var fileContent = File.ReadAllText(destFileNameFull)
                     .Replace(@"$safeprojectname$", ProjectName)
                     .Replace("$guid1$", Guid.NewGuid().ToString())
-                    .Replace("$guid2$", Guid.NewGuid().ToString());
+                    .Replace("$guid2$", Guid.NewGuid().ToString())
+                    .Replace("$nugetLibVersion$", version)
+                    .Replace("$nugetLibNormalizedVersion$", normalizedVersion);
+
                 File.WriteAllText(destFileNameFull, fileContent);
                 Console.Out.WriteLine(" create  {0}", destFileName);
             }
@@ -85,31 +92,18 @@ namespace Gauge.CSharp.Runner
 
         private static void InstallDependencies()
         {
-            var nugetExePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nuget.exe");
+            Console.Out.WriteLine(" Installing Nuget Package : {0}, version: {1}", packageID, _maxLibVersion);
+            var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
+            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            var packageManager = new PackageManager(repo, packagePath);
+            packageManager.InstallPackage(packageID, _maxLibVersion);
+            Console.Out.WriteLine(" Done Installing Nuget Package!");
+        }
 
-            var nugetProcess = new Process
-            {
-                StartInfo =
-                {
-                    WorkingDirectory = Utils.GaugeProjectRoot,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    FileName = nugetExePath,
-                    RedirectStandardError = true,
-                    Arguments = string.Format(@"install {0} -o packages", "packages.config")
-                }
-            };
-            nugetProcess.OutputDataReceived += (sender, args) => Console.Out.WriteLine(args.Data);
-            nugetProcess.ErrorDataReceived += (sender, args) =>
-            {
-                if (string.IsNullOrEmpty(args.Data)) return;
-                Console.Out.WriteLine(" {0}", args.Data);
-                Environment.Exit(1);
-            };
-            nugetProcess.Start();
-            nugetProcess.BeginOutputReadLine();
-            nugetProcess.BeginErrorReadLine();
-            nugetProcess.WaitForExit();
+        private static SemanticVersion GetMaxNugetVersion()
+        {
+            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            return repo.FindPackagesById(packageID).Max(p => p.Version);
         }
     }
 }

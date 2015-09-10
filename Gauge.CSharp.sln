@@ -19,7 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge
 		Gauge.Project.Skel\AssemblyInfo.cs = Gauge.Project.Skel\AssemblyInfo.cs
 		Gauge.Project.Skel\Gauge.Spec.csproj = Gauge.Project.Skel\Gauge.Spec.csproj
 		Gauge.Project.Skel\Gauge.Spec.sln = Gauge.Project.Skel\Gauge.Spec.sln
-		Gauge.Project.Skel\packages.config = Gauge.Project.Skel\packages.config
 		Gauge.Project.Skel\StepImplementation.cs = Gauge.Project.Skel\StepImplementation.cs
 	EndProjectSection
 EndProject
