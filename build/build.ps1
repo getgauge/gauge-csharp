@@ -17,48 +17,39 @@
 
 param([string]$buildWithTest='')
 
+
+function RestoreNugetAndBuild
+{
+  param($sln, $outputDir)
+  New-Item -Itemtype directory $outputPath -Force
+  $msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
+  Write-Host "Restoring Nuget for $($sln)"
+  $nuget = "$($pwd)\build\NuGet.exe"
+  &$nuget restore $sln
+  &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputDir)"
+  if($LastExitCode -ne 0)
+  {
+      throw "Build failed $($sln)"
+  }
+}
+
 # Build the package CSharp-lib
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-lib\")
-New-Item -Itemtype directory $outputPath -Force
-$msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
 $sln = "Gauge.CSharp.Lib.sln"
-
-&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
-
-if($LastExitCode -ne 0)
-{
-    throw "Build failed $($sln)"
-}
+RestoreNugetAndBuild $sln $outputPath
 
 # Build the package CSharp-Core
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-core\")
-New-Item -Itemtype directory $outputPath -Force
-$msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
 $sln = "Gauge.CSharp.Core.sln"
-
-&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
-
-if($LastExitCode -ne 0)
-{
-    throw "Build failed $($sln)"
-}
-
-
+RestoreNugetAndBuild $sln $outputPath
 
 # Build the runner
 $outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
-New-Item -Itemtype directory $outputPath -Force
 $sln = "Gauge.CSharp.NoTests.sln"
 if ($buildWithTest) {
     $sln="Gauge.CSharp.sln"
     $sampleProj = resolve-path "IntegrationTestSample\IntegrationTestSample.sln"
     $sampleProjOutputPath = [IO.Path]::Combine($pwd,"IntegrationTestSample\gauge-bin")
-    &$msbuild $sampleProj /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($sampleProjOutputPath)"
+    RestoreNugetAndBuild $sampleProj $sampleProjOutputPath
 }
-
-&$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputPath)"
-
-if($LastExitCode -ne 0)
-{
-    throw "Build failed $($sln)"
-}
+RestoreNugetAndBuild $sln $outputPath
