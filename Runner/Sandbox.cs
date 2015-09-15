@@ -32,9 +32,9 @@ namespace Gauge.CSharp.Runner
     {
         private List<Assembly> ScannedAssemblies { get; set; }
         public Assembly TargetLibAssembly { get; set; }
-        
 
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+
         private Type ScreenGrabberType { get; set; }
 
         [Obsolete("Sandbox is supposed to be a singleton class. Use Sandbox.Instance instead", true)]
@@ -146,7 +146,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (ReflectionTypeLoadException ex)
             {
-                Console.WriteLine("[Error] Unable to load one or more assemblies.");
+                Console.WriteLine("[ERROR] Unable to load one or more assemblies.");
                 foreach (var loaderException in ex.LoaderExceptions)
                 {
                     Console.WriteLine(" [ERROR] {0}",loaderException);
