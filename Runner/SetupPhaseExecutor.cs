@@ -37,7 +37,8 @@ namespace Gauge.CSharp.Runner
             new List<string>
             {
                 Path.Combine("Properties", "AssemblyInfo.cs"),
-                "StepImplementation.cs"
+                "StepImplementation.cs",
+                "packages.config"
             }.ForEach(CopyFile); 
             
             CopyFile("Gauge.Spec.csproj", string.Format("{0}.csproj", ProjectName));
@@ -94,16 +95,22 @@ namespace Gauge.CSharp.Runner
         {
             Console.Out.WriteLine(" Installing Nuget Package : {0}, version: {1}", packageID, _maxLibVersion);
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
-            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            var repo = CreatePackageRepository();
             var packageManager = new PackageManager(repo, packagePath);
             packageManager.InstallPackage(packageID, _maxLibVersion);
             Console.Out.WriteLine(" Done Installing Nuget Package!");
         }
 
+        private static IPackageRepository CreatePackageRepository()
+        {
+            return PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+        }
+
         private static SemanticVersion GetMaxNugetVersion()
         {
-            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            return repo.FindPackagesById(packageID).Max(p => p.Version);
+            return CreatePackageRepository()
+                .FindPackagesById(packageID)
+                .Max(p => p.Version);
         }
     }
 }
