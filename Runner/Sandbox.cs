@@ -133,14 +133,26 @@ namespace Gauge.CSharp.Runner
 
         internal void LoadAssemblyFiles()
         {
-            ScannedAssemblies=Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
-                .Select(Assembly.LoadFrom)
-                .ToList();
-            TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
-            
-            ScreenGrabberType = ScannedAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
+            try
+            {
+                ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
+                    .Select(Assembly.LoadFrom)
+                    .ToList();
+                TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
+
+                ScreenGrabberType = ScannedAssemblies
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                Console.WriteLine("[Error] Unable to load one or more assemblies.");
+                foreach (var loaderException in ex.LoaderExceptions)
+                {
+                    Console.WriteLine(" [ERROR] {0}",loaderException);
+                }
+                throw;
+            }
         }
     }
 }
