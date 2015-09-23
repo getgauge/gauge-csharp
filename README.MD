@@ -4,10 +4,17 @@ This project adds C# support for [Gauge](https://github.com/getgauge/gauge) test
 
 You can download Gauge [here](http://getgauge.io)
 
-This repository hosts two projects, `Lib` and `Runner`.
+This repository hosts three projects, `Core`, `Lib` and `Runner`.
+
+## Gauge Core
+
+### *Internal Gauge Use Only*
+`Core` is a dll that brings in Gauge's API and connection to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Core/), and is not listed in the search results. This package is used by `Lib` and `Runner` only.
+
+Read more about `Core` [here](https://github.com/getgauge/gauge-csharp/tree/master/Core).
 
 ## Gauge Lib
-`Lib` is a dll that brings in Gauge's data types to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
+`Lib` is a dll that brings in Gauge's data types to C#. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
 
 Read more about `Lib` [here](https://github.com/getgauge/gauge-csharp/tree/master/Lib).
 
@@ -50,9 +57,12 @@ You will need Gauge and Gauge-csharp plugin installed before installing `Lib`.
 All artifacts are genereated in `.\artifacts` folder.
 
 The plugin is zipped to `.\artifacts\gauge-csharp-<version>.zip`
-The Nuget package is put at `.\artigacts\gauge-csharp-nuget\`
+The Lib Nuget package is put at `.\artigacts\Gauge.CSharp.Lib.<version>.nupkg`
+The Core Nuget package is put at `.\artigacts\Gauge.CSharp.Core.<version>.nupkg`
 
 ### Install the plugin
+
+To install a local version of the plugin:
 
     run.bat install
 
