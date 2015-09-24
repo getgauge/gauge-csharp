@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-param([string]$artifactPath='')
+param([string]$artifactPath='',[string]$force="false")
 
 if ($artifactPath -ne '') {
     $artifactPath=resolve-path $artifactPath
@@ -27,7 +27,7 @@ else {
 $pluginFile = gci $artifactPath\gauge-csharp*.zip | select -f 1
 
 $gauge="gauge.exe"
-if($force)
+if($force -eq 'true')
 {
     &$gauge --uninstall csharp
 }
