@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Gauge.CSharp.Core;
+using NLog;
 using NuGet;
 
 namespace Gauge.CSharp.Runner
@@ -29,7 +30,9 @@ namespace Gauge.CSharp.Runner
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
         const string packageID = "Gauge.CSharp.Lib";
-        private static SemanticVersion _maxLibVersion = GetMaxNugetVersion();
+        private static readonly SemanticVersion MaxLibVersion = GetMaxNugetVersion();
+        private static readonly Logger Logger = LogManager.GetLogger("install");
+
         public void Execute()
         {
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
@@ -50,11 +53,11 @@ namespace Gauge.CSharp.Runner
         {
             if (Directory.Exists(directory))
             {
-                Console.Out.WriteLine(" skip  {0}", ProjectName);
+                Logger.Info("skip  {0}", ProjectName);
             }
             else
             {
-                Console.Out.WriteLine(" create  {0}", ProjectName);
+                Logger.Info("create  {0}", ProjectName);
                 Directory.CreateDirectory(directory);
             }
         }
@@ -71,12 +74,12 @@ namespace Gauge.CSharp.Runner
             var destFileNameFull = Path.Combine(string.IsNullOrEmpty(rootDir) ? ProjectRootDir : rootDir, destFileName);
             if (File.Exists(destFileNameFull))
             {
-                Console.Out.WriteLine(" skip  {0}", destFileName);
+                Logger.Info("skip  {0}", destFileName);
             }
             else
             {
-                var version = _maxLibVersion.ToString();
-                var normalizedVersion = _maxLibVersion.ToNormalizedString();
+                var version = MaxLibVersion.ToString();
+                var normalizedVersion = MaxLibVersion.ToNormalizedString();
 
                 File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
                 var fileContent = File.ReadAllText(destFileNameFull)
@@ -87,18 +90,18 @@ namespace Gauge.CSharp.Runner
                     .Replace("$nugetLibNormalizedVersion$", normalizedVersion);
 
                 File.WriteAllText(destFileNameFull, fileContent);
-                Console.Out.WriteLine(" create  {0}", destFileName);
+                Logger.Info("create  {0}", destFileName);
             }
         }
 
         private static void InstallDependencies()
         {
-            Console.Out.WriteLine(" Installing Nuget Package : {0}, version: {1}", packageID, _maxLibVersion);
+            Logger.Info("Installing Nuget Package : {0}, version: {1}", packageID, MaxLibVersion);
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
             var repo = CreatePackageRepository();
             var packageManager = new PackageManager(repo, packagePath);
-            packageManager.InstallPackage(packageID, _maxLibVersion);
-            Console.Out.WriteLine(" Done Installing Nuget Package!");
+            packageManager.InstallPackage(packageID, MaxLibVersion);
+            Logger.Info("Done Installing Nuget Package!");
         }
 
         private static IPackageRepository CreatePackageRepository()

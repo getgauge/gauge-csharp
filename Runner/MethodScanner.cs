@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Core;
+using NLog;
 
 namespace Gauge.CSharp.Runner
 {
@@ -28,6 +29,8 @@ namespace Gauge.CSharp.Runner
         private readonly GaugeApiConnection _apiConnection;
 
         private readonly ISandbox _sandbox;
+
+        private static readonly Logger logger = LogManager.GetLogger("MethodScanner");
 
         public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
@@ -68,8 +71,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                Console.WriteLine("[WARN] Steps Fetch failed, Failed to connect to Gauge API");
-                Console.WriteLine(ex.Message);
+                logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
         }

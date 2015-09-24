@@ -27,6 +27,8 @@ using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
+using NLog;
+using ILogger = Microsoft.Build.Framework.ILogger;
 
 namespace Gauge.CSharp.Runner
 {
@@ -35,6 +37,7 @@ namespace Gauge.CSharp.Runner
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
         private static StartPhaseExecutor _instance;
+        private static readonly Logger logger = LogManager.GetLogger("Build");
 
         public static StartPhaseExecutor GetDefaultInstance()
         {
@@ -52,7 +55,7 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (NotAValidGaugeProjectException)
                 {
-                    Console.Out.WriteLine("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
+                    logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
                     Environment.Exit(1);
                 }
             }
@@ -84,7 +87,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                Console.WriteLine("[WARN] Exception thrown: {0}", ex);
+                logger.Warn(ex);
             }
         }
 
@@ -99,7 +102,7 @@ namespace Gauge.CSharp.Runner
             }
             var solutionFullPath = solutionFileList.First();
             Directory.CreateDirectory(Utils.GetGaugeBinDir());
-            Console.WriteLine("Building Project: {0}", solutionFullPath);
+            logger.Info("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string>
             {
@@ -117,13 +120,11 @@ namespace Gauge.CSharp.Runner
 
             if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
             {
-                Console.WriteLine();
-                Console.WriteLine("You have chosen an invalid folder name to initialize a Gauge project.");
-                Console.WriteLine("Please choose a project name that complies with C# Project naming conventions.");
-                Console.WriteLine();
+                logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
+                logger.Error("Please choose a project name that complies with C# Project naming conventions.");
             }
 
-            Console.Out.WriteLine(buildResult.OverallResult);
+            logger.Info(buildResult.OverallResult);
         }
     }
 }

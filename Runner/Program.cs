@@ -27,6 +27,7 @@ namespace Gauge.CSharp.Runner
         [DebuggerHidden]
         private static void Main(string[] args)
         {
+            LogConfiguration.Initialize();
             if (args.Length == 0)
             {
                 Console.WriteLine("usage: {0} --<start|init>", AppDomain.CurrentDomain.FriendlyName);
