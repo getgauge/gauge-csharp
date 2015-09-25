@@ -23,7 +23,7 @@ namespace $safeprojectname$
         public void ReadTable(Table table)
         {
             table.GetColumnNames().ForEach(Console.Write);
-            var rows = table.GetRows();
+            var rows = table.GetTableRows();
             // typeof(rows) = List<List<string>> i.e a 2-dimensional representation of a table.
             rows.ForEach(list => Console.WriteLine(list.Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
         }
