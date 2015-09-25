@@ -26,12 +26,14 @@ using System.Runtime.ExceptionServices;
 using System.Windows.Forms;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
+using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class MethodExecutor : IMethodExecutor
     {
         private readonly ISandbox _sandbox;
+        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         public MethodExecutor(ISandbox sandbox)
         {
@@ -41,6 +43,7 @@ namespace Gauge.CSharp.Runner
         [DebuggerHidden]
         public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
         {
+            Logger.Debug("Execution method: {0}.{1}", method.DeclaringType.FullName, method.Name);
             var stopwatch = Stopwatch.StartNew();
             var pendingMessages = new List<string>();
             try
@@ -71,6 +74,8 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception e)
             {
+                Logger.Error(e, "Error executing {0}.{1}", method.DeclaringType.FullName, method.Name);
+
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
                 var isScreenShotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
@@ -129,14 +134,17 @@ namespace Gauge.CSharp.Runner
             foreach (var method in methods)
             {
                 var executionResult = ExecuteHook(method, new object[] {executionInfo});
-                if (executionResult.Failed)
-                {
-                    return ProtoExecutionResult.CreateBuilder(executionResult)
-                            .SetFailed(true)
-                            .SetStackTrace(executionResult.StackTrace)
-                            .SetExecutionTime(stopwatch.ElapsedMilliseconds)
-                            .Build();
-                }
+                if (!executionResult.Failed) continue;
+
+                Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
+                return ProtoExecutionResult.CreateBuilder(executionResult)
+                    .SetFailed(true)
+                    .SetRecoverableError(false)
+                    .SetErrorMessage(executionResult.ErrorMessage)
+                    .SetScreenShot(executionResult.ScreenShot)
+                    .SetStackTrace(executionResult.StackTrace)
+                    .SetExecutionTime(stopwatch.ElapsedMilliseconds)
+                    .Build();
             }
             return ProtoExecutionResult.CreateBuilder()
                 .SetFailed(false)
