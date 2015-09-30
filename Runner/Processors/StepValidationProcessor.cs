@@ -33,14 +33,15 @@ namespace Gauge.CSharp.Runner.Processors
             var stepToValidate = request.StepValidateRequest.StepText;
             var isValid = _stepMethodTable.ContainsStep(stepToValidate);
             var errorMessage = isValid ? string.Empty : string.Format("No implementation found for : {0}. Full Step Text :", stepToValidate);
-            return GetStepValidateResponseMessage(isValid, request, errorMessage);
+            return GetStepValidateResponseMessage(isValid, request, StepValidateResponse.Types.ErrorType.STEP_IMPLEMENTATION_NOT_FOUND,  errorMessage);
         }
 
-        private static Message GetStepValidateResponseMessage(bool isValid, Message request, string errorMessage)
+        private static Message GetStepValidateResponseMessage(bool isValid, Message request, StepValidateResponse.Types.ErrorType errorType, string errorMessage)
         {
             var stepValidateResponse = StepValidateResponse.CreateBuilder()
                                                     .SetErrorMessage(errorMessage)
                                                     .SetIsValid(isValid)
+                                                    .SetErrorType(errorType)
                                                     .Build();
             return Message.CreateBuilder()
                     .SetMessageId(request.MessageId)
