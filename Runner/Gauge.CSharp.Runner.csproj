@@ -51,9 +51,8 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gauge.CSharp.Core, Version=0.0.2.0, Culture=neutral, PublicKeyToken=4d2d442b45695923, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gauge.CSharp.Core.0.0.2.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
+    <Reference Include="Gauge.CSharp.Core, Version=0.0.3.0, Culture=neutral, PublicKeyToken=4d2d442b45695923, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gauge.CSharp.Core.0.0.3.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="Gauge.CSharp.Lib, Version=0.5.2.0, Culture=neutral, PublicKeyToken=3f92af01a0ea350e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
