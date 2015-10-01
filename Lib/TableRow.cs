@@ -21,6 +21,9 @@ using System.Linq;
 
 namespace Gauge.CSharp.Lib
 {
+    /// <summary>
+    /// Holds data of a row in Table. 
+    /// </summary>
     [Serializable]
     public class TableRow
     {
@@ -34,6 +37,11 @@ namespace Gauge.CSharp.Lib
         public string GetCell(string columnName)
         {
             return _cells.ContainsKey(columnName) ? _cells[columnName] : "";
+        }
+
+        public int Size()
+        {
+            return _cells.Count;
         }
 
         public override string ToString()

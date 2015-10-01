@@ -46,8 +46,13 @@ namespace Gauge.CSharp.Lib
         /// Add a row of data to the table.
         /// </summary>
         /// <param name="row">List of string representing the tuple of a table.</param>
+        /// <exception cref="RowSizeMismatchException">Throws RowSizeMismatchException if column size doesn't match row size.</exception>
         public void AddRow(List<string> row)
         {
+            if (row.Count != _headers.Count)
+            {
+                throw new RowSizeMismatchException(string.Format("Row size mismatch. Expected row size: {0}, Obtained row size: {1}", _headers.Count, row.Count));
+            }
             _rows.Add(row);
             var tableRow = new TableRow();
             foreach (var columnValue in _headers)

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -23,9 +22,11 @@ namespace IntegrationTestSample
         public void ReadTable(Table table)
         {
             table.GetColumnNames().ForEach(Console.Write);
-            var rows = table.GetRows();
-            // typeof(rows) = List<List<string>> i.e a 2-dimensional representation of a table.
-            rows.ForEach(list => Console.WriteLine(list.Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
+            var rows = table.GetTableRows();
+            foreach (var row in rows)
+            {
+                Console.WriteLine("{0}|{1}", row.GetCell("Product"), row.GetCell("Description"));
+            }
         }
 	}
 }

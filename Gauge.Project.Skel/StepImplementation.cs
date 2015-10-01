@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -24,7 +23,10 @@ namespace $safeprojectname$
         {
             table.GetColumnNames().ForEach(Console.Write);
             var rows = table.GetTableRows();
-            rows.ForEach(list => Console.WriteLine(list.Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
+            foreach (var row in rows)
+            {
+                Console.WriteLine("{0}|{1}", row.GetCell("Product"), row.GetCell("Description"));
+            }
         }
 	}
 }
