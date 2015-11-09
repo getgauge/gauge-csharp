@@ -40,6 +40,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
+            method.Setup(info => info.DeclaringType).Returns(GetType());
+            method.Setup(info => info.Name).Returns("ShouldExecuteMethod");
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
@@ -55,6 +57,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
+            method.Setup(info => info.DeclaringType).Returns(GetType());
+            method.Setup(info => info.Name).Returns("ShouldTakeScreenShotOnFailedExecution");
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
@@ -70,6 +74,9 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
+            method.Setup(info => info.DeclaringType).Returns(GetType());
+            method.Setup(info => info.Name).Returns("ShouldTakeScreenShotUsingCustomScreenShotMethod");
+
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
@@ -89,6 +96,9 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
+            method.Setup(info => info.DeclaringType).Returns(GetType());
+            method.Setup(info => info.Name).Returns("ShouldNotTakeScreenShotWhenDisabled");
+
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
@@ -107,6 +117,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var method = new Mock<MethodInfo>();
+            method.Setup(info => info.DeclaringType).Returns(GetType());
+            method.Setup(info => info.Name).Returns("ShouldExecuteHooks");
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object));
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 

@@ -112,9 +112,11 @@ namespace Gauge.CSharp.Runner
             ClassInstanceManager.ClearCache();
         }
 
-        public List<string> GetAllPendingMessages()
+        public IEnumerable<string> GetAllPendingMessages()
         {
-            return MessageCollector.GetAllPendingMessages();
+            var targetMessageCollectorType = TargetLibAssembly.GetType(typeof(MessageCollector).ToString());
+            var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages", BindingFlags.Static | BindingFlags.Public);
+            return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
 
         private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)

@@ -45,7 +45,7 @@ namespace Gauge.CSharp.Runner
         {
             Logger.Debug("Execution method: {0}.{1}", method.DeclaringType.FullName, method.Name);
             var stopwatch = Stopwatch.StartNew();
-            var pendingMessages = new List<string>();
+            IEnumerable<string> pendingMessages = new List<string>();
             try
             {
                 try

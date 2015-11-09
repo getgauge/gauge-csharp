@@ -31,6 +31,6 @@ namespace Gauge.CSharp.Runner
         List<string> GetAllStepTexts();
         Assembly TargetLibAssembly { get; set; }
         void ClearObjectCache();
-        List<string> GetAllPendingMessages();
+        IEnumerable<string> GetAllPendingMessages();
     }
 }
