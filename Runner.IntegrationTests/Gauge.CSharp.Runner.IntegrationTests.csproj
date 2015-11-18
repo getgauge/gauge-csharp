@@ -74,6 +74,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Text.Encoding" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RefactorHelperTests.cs" />
