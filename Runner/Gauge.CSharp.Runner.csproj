@@ -160,7 +160,6 @@
     <Compile Include="MethodScanner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="csharp.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
