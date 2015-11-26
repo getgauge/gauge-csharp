@@ -101,6 +101,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Threading.Tasks, Version=4.0.0.0" />
+    <Reference Include="System.Text.Encoding, Version=4.0.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassInstanceManager.cs" />
