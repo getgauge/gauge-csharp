@@ -27,7 +27,7 @@ namespace Gauge.CSharp.Runner.Strategy
         {
             var hookMethods = hooks as IList<HookMethod> ?? hooks.ToList();
             return applicableTags.Any()
-                ? GetFilteredHooks(applicableTags, hookMethods).Concat(GetUntaggedHooks(hookMethods))
+                ? GetTaggedHooks(applicableTags, hookMethods).Concat(GetUntaggedHooks(hookMethods))
                 : GetUntaggedHooks(hookMethods);
         }
     }

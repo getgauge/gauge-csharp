@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.Strategy
 {
     public class HooksStrategy
     {
-        public IEnumerable<MethodInfo> GetFilteredHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public IEnumerable<MethodInfo> GetTaggedHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             var tagsList = applicableTags.ToList();
             return from hookMethod in hooks.ToList()

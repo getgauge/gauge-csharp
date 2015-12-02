@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Strategy;
 using Moq;
@@ -31,7 +32,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
         }
 
-
         /*
          * untagged hooks are executed for all.
          * Tags     | Methods
@@ -41,13 +41,14 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
          * bar, baz | bar, baz
          * foo, baz | baz
          */
+
         private List<HookMethod> _hookMethods;
 
         [SetUp]
         public void Setup()
         {
             var mockSandbox = new Mock<ISandbox>();
-            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof(Step).Assembly);
+            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof (Step).Assembly);
 
             _hookMethods = new List<HookMethod>
             {
@@ -57,6 +58,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 new HookMethod(GetType().GetMethod("blah"), mockSandbox.Object)
             };
         }
+
         [Test]
         public void ShouldFetchAllHooksWhenNoTagsSpecified()
         {
@@ -69,63 +71,70 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTags()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count);
-            Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
-            Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
+            Assert.AreEqual(2, applicableHooks.Count);
+            AssertHooksExists(applicableHooks, "baz", "foo");
         }
 
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"bar"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"bar"}, _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(1, applicableHooks.Count);
+            Assert.IsEmpty(applicableHooks);
         }
 
         [Test]
         public void ShouldFetchAnyHooksWithSpecifiedTagsWhenDoingOr()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"baz"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count);
-            Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
+            Assert.AreEqual(1, applicableHooks.Count);
+            AssertHooksExists(applicableHooks, "baz");
         }
 
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
+            var applicableHooks =
+                new HooksStrategy().GetTaggedHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count);
-            Assert.That(applicableHooks.Any(info => info.Name=="bar"), Is.True);
-            Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
+            Assert.AreEqual(2, applicableHooks.Count);
+            AssertHooksExists(applicableHooks, "baz", "bar");
         }
 
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingOr()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
+            var applicableHooks =
+                new HooksStrategy().GetTaggedHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count);
-            Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
-            Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
+            Assert.AreEqual(2, applicableHooks.Count);
+            AssertHooksExists(applicableHooks, "baz", "foo");
         }
 
         [Test]
-        public void ShouldNotFetchAnyFilteredHooksWhenTagsAreASuperSet()
+        public void ShouldNotFetchAnyTaggedHooksWhenTagsAreASuperSet()
         {
-            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"bar",  "blah"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"bar", "blah"}, _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
-            // The blah hook is still called before step.
-            Assert.AreEqual(1, applicableHooks.Count);
+            Assert.IsEmpty(applicableHooks);
+        }
+
+        private static void AssertHooksExists(IEnumerable<MethodInfo> hooks, params string[] methodNames)
+        {
+            var hookMethodNames = hooks.Select(info => info.Name).ToArray();
+            foreach (var methodName in methodNames)
+            {
+                Assert.Contains(methodName, hookMethodNames);
+            }
         }
     }
 }
