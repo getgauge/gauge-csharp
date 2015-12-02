@@ -15,31 +15,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using Gauge.Messages;
+using Gauge.CSharp.Runner.Strategy;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class SpecExecutionEndingProcessor : TaggedHooksFirstExecutionProcessor
+    public abstract class UntaggedHooksFirstExecutionProcessor : HookExecutionProcessor
     {
-        public SpecExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        protected UntaggedHooksFirstExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
             : base(hookRegistry, methodExecutor)
         {
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.AfterSpecHooks;
-        }
-
-        protected override bool ShouldClearAllObjectCache()
-        {
-            return ClearObjectCache.ShouldClearObjectCache(ClearObjectCache.SpecLevel);
-        }
-
-        protected override ExecutionInfo GetExecutionInfo(Message request)
-        {
-            return request.SpecExecutionEndingRequest.CurrentExecutionInfo;
+            Strategy = new UntaggedHooksFirstStrategy();
         }
     }
 }

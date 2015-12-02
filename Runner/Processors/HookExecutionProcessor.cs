@@ -18,8 +18,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -28,11 +27,13 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly IMethodExecutor _methodExecutor;
         protected IHookRegistry Hooks { get; private set; }
+        protected HooksStrategy Strategy { get; set; }
 
         protected HookExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
         {
             _methodExecutor = methodExecutor;
             Hooks = hookRegistry;
+            Strategy = new HooksStrategy();
         }
 
         protected abstract HashSet<HookMethod> GetHooks();
@@ -41,7 +42,7 @@ namespace Gauge.CSharp.Runner.Processors
         public Message Process(Message request)
         {
             var applicableTags = GetApplicableTags(request);
-            var applicableHooks = GetApplicableHooks(applicableTags, GetHooks());
+            var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
             var protoExecutionResult = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
             if(ShouldClearAllObjectCache())
                 _methodExecutor.ClearCache();
@@ -53,24 +54,6 @@ namespace Gauge.CSharp.Runner.Processors
         private List<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentScenario.TagsList.Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
-        }
-
-        public static IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
-        {
-            var hookMethods = hooks as IList<HookMethod> ?? hooks.ToList();
-            var alwaysExecuteHooks = hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any() ).Select(method => method.Method);
-            return applicableTags.Any() ? alwaysExecuteHooks.Union(GetFilteredHooks(applicableTags, hookMethods)) : alwaysExecuteHooks;
-        }
-
-        public static IEnumerable<MethodInfo> GetFilteredHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
-        {
-            var tagsList = applicableTags.ToList();
-            return from hookMethod in hooks.ToList()
-                where hookMethod.FilterTags != null
-                where
-                    hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
-                    hookMethod.TagAggregation == TagAggregation.And && hookMethod.FilterTags.All(tagsList.Contains)
-                select hookMethod.Method;
         }
 
         protected abstract ExecutionInfo GetExecutionInfo(Message request);

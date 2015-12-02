@@ -20,7 +20,7 @@ using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class SpecExecutionStartingProcessor : HookExecutionProcessor
+    public class SpecExecutionStartingProcessor : UntaggedHooksFirstExecutionProcessor
     {
         public SpecExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
             : base(hookRegistry, methodExecutor)

@@ -20,7 +20,7 @@ using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class ScenarioExecutionEndingProcessor : HookExecutionProcessor
+    public class ScenarioExecutionEndingProcessor : TaggedHooksFirstExecutionProcessor
     {
         public ScenarioExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
             : base(hookRegistry, methodExecutor)

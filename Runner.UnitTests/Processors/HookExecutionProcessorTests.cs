@@ -2,6 +2,7 @@
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.CSharp.Runner.Strategy;
 using Moq;
 using NUnit.Framework;
 
@@ -60,7 +61,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAllHooksWhenNoTagsSpecified()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string>(), _hookMethods);
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string>(), _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(1, applicableHooks.Count());
@@ -69,7 +70,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTags()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(3, applicableHooks.Count());
@@ -80,7 +81,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"bar"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(1, applicableHooks.Count());
@@ -89,7 +90,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAnyHooksWithSpecifiedTagsWhenDoingOr()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count());
@@ -99,7 +100,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(3, applicableHooks.Count());
@@ -110,7 +111,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingOr()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(3, applicableHooks.Count());
@@ -121,7 +122,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldNotFetchAnyFilteredHooksWhenTagsAreASuperSet()
         {
-            var applicableHooks = HookExecutionProcessor.GetApplicableHooks(new List<string> {"bar",  "blah"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"bar",  "blah"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             // The blah hook is still called before step.
