@@ -21,9 +21,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Windows.Forms;
+using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 using NLog;
@@ -50,7 +52,7 @@ namespace Gauge.CSharp.Runner
             {
                 try
                 {
-                    _sandbox.ExecuteMethod(method, args);
+                    _sandbox.ExecuteMethod(method, StringParamConverter.TryConvertParams(method, args));
                 }
                 catch (TargetInvocationException e)
                 {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
-using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Moq;
 using NUnit.Framework;
@@ -73,7 +72,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count);
             Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
@@ -84,7 +83,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(1, applicableHooks.Count());
+            Assert.AreEqual(1, applicableHooks.Count);
         }
 
         [Test]
@@ -93,7 +92,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count());
+            Assert.AreEqual(2, applicableHooks.Count);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
 
@@ -103,7 +102,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count);
             Assert.That(applicableHooks.Any(info => info.Name=="bar"), Is.True);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
         }
@@ -114,7 +113,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var applicableHooks = new HooksStrategy().GetApplicableHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(3, applicableHooks.Count());
+            Assert.AreEqual(3, applicableHooks.Count);
             Assert.That(applicableHooks.Any(info => info.Name=="baz"), Is.True);
             Assert.That(applicableHooks.Any(info => info.Name=="foo"), Is.True);
         }
@@ -126,7 +125,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             // The blah hook is still called before step.
-            Assert.AreEqual(1, applicableHooks.Count());
+            Assert.AreEqual(1, applicableHooks.Count);
         }
     }
 }

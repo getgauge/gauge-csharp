@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
+using System.Reflection;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Converters
@@ -25,5 +27,21 @@ namespace Gauge.CSharp.Runner.Converters
         {
             return parameter.Value;
         }
+
+        public static object[] TryConvertParams(MethodInfo method, object[] parameters)
+        {
+            return method.GetParameters().Select((t, i) =>
+            {
+                try
+                {
+                    return System.Convert.ChangeType(parameters[i], t.ParameterType);
+                }
+                catch
+                {
+                    return parameters[i];
+                }
+            }).ToArray();
+        }
+
     }
 }
