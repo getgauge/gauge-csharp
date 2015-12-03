@@ -1,4 +1,4 @@
-// Copyright 2015 ThoughtWorks, Inc.
+﻿// Copyright 2015 ThoughtWorks, Inc.
 
 // This file is part of Gauge-CSharp.
 
@@ -15,20 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using Gauge.CSharp.Runner.Processors;
+using NUnit.Framework;
 
-namespace Gauge.CSharp.Runner.Strategy
+namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
-    public class UntaggedHooksFirstStrategy : HooksStrategy
+    class StepExecutionEndingProcessorTests
     {
-        public override IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
+        [Test]
+        public void ShouldExtendFromHooksExecutionProcessor()
         {
-            var hookMethods = hooks as IList<HookMethod> ?? hooks.ToList();
-            return applicableTags.Any()
-                ? GetUntaggedHooks(hookMethods).Concat(GetTaggedHooks(applicableTags, hookMethods))
-                : GetUntaggedHooks(hookMethods);
+            AssertEx.InheritsFrom<HookExecutionProcessor, StepExecutionEndingProcessor>();
+            AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, StepExecutionEndingProcessor>();
+            AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, StepExecutionEndingProcessor>();
         }
     }
 }

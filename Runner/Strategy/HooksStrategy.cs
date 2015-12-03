@@ -32,12 +32,15 @@ namespace Gauge.CSharp.Runner.Strategy
                 where
                     hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
                     hookMethod.TagAggregation == TagAggregation.And && hookMethod.FilterTags.All(tagsList.Contains)
+                orderby hookMethod.Method.Name
                 select hookMethod.Method;
         }
 
         protected IEnumerable<MethodInfo> GetUntaggedHooks(IEnumerable<HookMethod> hookMethods)
         {
-            return hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any() ).Select(method => method.Method);
+            return hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any())
+                    .Select(method => method.Method)
+                    .OrderBy(info => info.Name);
         }
 
 

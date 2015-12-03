@@ -1,8 +1,25 @@
-﻿using System.Collections.Generic;
+﻿// Copyright 2015 ThoughtWorks, Inc.
+
+// This file is part of Gauge-CSharp.
+
+// Gauge-CSharp is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// Gauge-CSharp is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
+
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Strategy;
+using Gauge.CSharp.Runner.UnitTests.Processors.Stubs;
 using Moq;
 using NUnit.Framework;
 
@@ -75,7 +92,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertHooksExists(applicableHooks, "baz", "foo");
+            AssertEx.ContainsMethods(applicableHooks, "baz", "foo");
         }
 
         [Test]
@@ -94,7 +111,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(1, applicableHooks.Count);
-            AssertHooksExists(applicableHooks, "baz");
+            AssertEx.ContainsMethods(applicableHooks, "baz");
         }
 
         [Test]
@@ -105,7 +122,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertHooksExists(applicableHooks, "baz", "bar");
+            AssertEx.ContainsMethods(applicableHooks, "baz", "bar");
         }
 
         [Test]
@@ -116,7 +133,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertHooksExists(applicableHooks, "baz", "foo");
+            AssertEx.ContainsMethods(applicableHooks, "baz", "foo");
         }
 
         [Test]
@@ -128,13 +145,28 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             Assert.IsEmpty(applicableHooks);
         }
 
-        private static void AssertHooksExists(IEnumerable<MethodInfo> hooks, params string[] methodNames)
+        [Test]
+        public void ShouldUseDefaultHooksStrategy()
         {
-            var hookMethodNames = hooks.Select(info => info.Name).ToArray();
-            foreach (var methodName in methodNames)
-            {
-                Assert.Contains(methodName, hookMethodNames);
-            }
+            var hooksStrategy = new TestHooksExecutionProcessor(null, null).GetHooksStrategy();
+
+            Assert.IsInstanceOf<HooksStrategy>(hooksStrategy);
+        }
+
+        [Test]
+        public void ShouldUseUntaggedHooksFirstStrategy()
+        {
+            var hooksStrategy = new TestUntaggedHooksFirstExecutionProcessor(null, null).GetHooksStrategy();
+
+            Assert.IsInstanceOf<UntaggedHooksFirstStrategy>(hooksStrategy);
+        }
+
+        [Test]
+        public void ShouldUseTaggedHooksFirstStrategy()
+        {
+            var hooksStrategy = new TestTaggedHooksFirstExecutionProcessor(null, null).GetHooksStrategy();
+
+            Assert.IsInstanceOf<TaggedHooksFirstStrategy>(hooksStrategy);
         }
     }
 }

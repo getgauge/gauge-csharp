@@ -25,7 +25,7 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
     [TestFixture]
-    public class UntaggedHooksFirstStrategyTests
+    public class TaggedHooksFirstStrategyTests
     {
         [AfterScenario("foo")]
         public void foo()
@@ -82,30 +82,31 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldFetchTaggedHooksAfterUntaggedHooks()
+        public void ShouldFetchUntaggedHooksAfterTaggedHooks()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
 
-            AssertEx.ContainsMethods(new[] { applicableHooks[0], applicableHooks[1] }, "blah", "zed");
+            AssertEx.ContainsMethods(new[] { applicableHooks[3], applicableHooks[2] }, "blah", "zed");
         }
+
 
         [Test]
         public void ShouldFetchTaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "foo" }, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[0].Name, Is.EqualTo("blah"));
-            Assert.That(applicableHooks[1].Name, Is.EqualTo("zed"));
+            Assert.That(applicableHooks[2].Name, Is.EqualTo("blah"));
+            Assert.That(applicableHooks[3].Name, Is.EqualTo("zed"));
         }
 
 
         [Test]
         public void ShouldFetchUntaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "foo" }, _hookMethods).ToList();
+            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "foo" }, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[2].Name, Is.EqualTo("baz"));
-            Assert.That(applicableHooks[3].Name, Is.EqualTo("foo"));
+            Assert.That(applicableHooks[0].Name, Is.EqualTo("baz"));
+            Assert.That(applicableHooks[1].Name, Is.EqualTo("foo"));
         }
     }
 }

@@ -67,5 +67,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             _mockMethodExecutor.VerifyAll();
         }
+
+        [Test]
+        public void ShouldExtendFromHooksExecutionProcessor()
+        {
+            AssertEx.InheritsFrom<HookExecutionProcessor, ExecutionStartingProcessor>();
+            AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, ExecutionStartingProcessor>();
+            AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, ExecutionStartingProcessor>();
+        }
     }
 }

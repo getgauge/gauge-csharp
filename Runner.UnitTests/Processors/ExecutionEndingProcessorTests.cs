@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
@@ -76,6 +75,14 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             Assert.AreEqual(message.MessageId, _request.MessageId);
             Assert.AreEqual(message.MessageType, Message.Types.MessageType.ExecutionStatusResponse);
             Assert.AreSame(message.ExecutionStatusResponse.ExecutionResult, _protoExecutionResult);
+        }
+
+        [Test]
+        public void ShouldExtendFromHooksExecutionProcessor()
+        {
+            AssertEx.InheritsFrom<HookExecutionProcessor, ExecutionEndingProcessor>();
+            AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, ExecutionEndingProcessor>();
+            AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, ExecutionEndingProcessor>();
         }
     }
 }
