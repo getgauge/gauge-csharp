@@ -42,6 +42,7 @@ namespace Gauge.CSharp.Runner
         [Obsolete("Sandbox is supposed to be a singleton class. Use Sandbox.Instance instead", true)]
         public Sandbox()
         {
+            LogConfiguration.Initialize();
         }
 
         [DebuggerStepperBoundary]
