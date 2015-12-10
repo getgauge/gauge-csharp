@@ -28,7 +28,7 @@ namespace Gauge.CSharp.Lib
             Messages.Add(message);
         }
 
-        public static void WriteMessage(string message, params string[] args)
+        public static void WriteMessage(string message, params object[] args)
         {
             Messages.Add(string.Format(message, args));
         }
