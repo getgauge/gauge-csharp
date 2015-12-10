@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
             
             Assert.NotNull(actual);
             Assert.That(actual.GetColumnNames(), Contains.Item("header"));
-            Assert.That(actual.GetRows().First(), Contains.Item("foo"));
+            Assert.That(actual.GetTableRows().First().GetCell("header"), Is.EqualTo("foo"));
         }
     }
 }
