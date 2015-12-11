@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Gauge.CSharp.Core;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -17,7 +19,7 @@ namespace Gauge.CSharp.Runner
             config.AddTarget("file", fileTarget);
 
             consoleTarget.Layout = @"${logger} ${message}";
-            fileTarget.FileName = "${basedir}/log/gauge.log";
+            fileTarget.FileName = Path.Combine(Utils.GaugeProjectRoot, "logs","gauge.log");
             fileTarget.Layout = "${message}";
 
             var logLevel = Environment.GetEnvironmentVariable("GAUGE_LOG_LEVEL");

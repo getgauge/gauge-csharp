@@ -114,6 +114,7 @@
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="GaugeBuildManager.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
