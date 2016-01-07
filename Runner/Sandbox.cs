@@ -140,23 +140,14 @@ namespace Gauge.CSharp.Runner
         {
             try
             {
-                var gaugeBinDir = Utils.GetGaugeBinDir();
-                ScannedAssemblies = Directory.EnumerateFiles(gaugeBinDir, "*.dll", SearchOption.TopDirectoryOnly)
+                ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
                     .Select(s =>
                         {
                             logger.Debug("Loading assembly from : {0}", s);
                             return Assembly.LoadFrom(s);
                         })
                     .ToList();
-                try
-                {
-                    TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
-                }
-                catch
-                {
-                    logger.Debug("No Gauge Assembly found at {0}", gaugeBinDir);
-                    throw;
-                }
+                TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
                 logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
 
                 ScreenGrabberType = ScannedAssemblies
