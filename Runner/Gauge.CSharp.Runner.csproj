@@ -113,6 +113,7 @@
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
+    <Compile Include="ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">

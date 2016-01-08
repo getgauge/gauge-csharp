@@ -190,13 +190,4 @@ namespace Gauge.CSharp.Runner
             }
         }
     }
-
-    public class ExecutionResult : MarshalByRefObject
-    {
-        public bool Success { get; set; }
-
-        public string ExceptionMessage { get; set; }
-        public string Source { get; set; }
-        public string StackTrace { get; set; }
-    }
 }
