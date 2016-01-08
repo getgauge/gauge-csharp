@@ -1,6 +1,6 @@
 {
   "id" : "csharp",
-  "version" : "0.7.0",
+  "version" : "0.7.1",
   "description": "C# support for gauge",
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
