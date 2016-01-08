@@ -1,5 +1,7 @@
 # C# support for Gauge
 
+ [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
+
 This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html).
 
 You can download Gauge [here](http://getgauge.io)
