@@ -45,7 +45,9 @@ namespace Gauge.CSharp.Runner.UnitTests
             var parameterInfo = new Mock<ParameterInfo>();
             parameterInfo.Setup(info => info.ParameterType).Returns(typeof(string));
             method.Setup(info => info.GetParameters()).Returns(() => new[] { parameterInfo.Object });
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar"))
+                .Returns(() => new ExecutionResult {Success = true})
+                .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
@@ -83,7 +85,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             parameterInfo.Setup(info => info.ParameterType).Returns(typeof(string));
             method.Setup(info => info.GetParameters()).Returns(() => new[] { parameterInfo.Object });
 
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
+            var result = new ExecutionResult {Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace"};
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             byte[] bytes = {0x20, 0x20};
@@ -108,7 +111,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             parameterInfo.Setup(info => info.ParameterType).Returns(typeof (string));
             method.Setup(info => info.GetParameters()).Returns(() => new[] {parameterInfo.Object});
 
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
+            var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var screenshotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
@@ -128,7 +132,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var method = new Mock<MethodInfo>();
             method.Setup(info => info.DeclaringType).Returns(GetType());
             method.Setup(info => info.Name).Returns("ShouldExecuteHooks");
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object));
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object)).Returns(new ExecutionResult {Success = true});
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var executionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks(new[] { method.Object },
