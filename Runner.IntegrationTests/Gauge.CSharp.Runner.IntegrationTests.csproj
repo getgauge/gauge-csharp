@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Runner.IntegrationTests.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntegrationTestSample\IntegrationTestSample.csproj">

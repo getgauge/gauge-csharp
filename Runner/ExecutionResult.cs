@@ -1,4 +1,4 @@
-﻿// Copyright 2015 ThoughtWorks, Inc.
+// Copyright 2015 ThoughtWorks, Inc.
 //
 // This file is part of Gauge-CSharp.
 //
@@ -17,19 +17,16 @@
 
 using System;
 
-namespace Gauge.CSharp.Runner.Processors
+namespace Gauge.CSharp.Runner
 {
-    public class ClearObjectCache
+    public class ExecutionResult : MarshalByRefObject
     {
-        public static string SuiteLevel = "suite";
-        public static string SpecLevel = "spec";
-        public static string ScenarioLevel = "scenario";
-        public static string ClearStateFlag = "gauge_clear_state_level";
+        public bool Success { get; set; }
 
-        public static bool ShouldClearObjectCache(string currentLevel)
-        {
-            var flag = Environment.GetEnvironmentVariable(ClearStateFlag);
-            return !string.IsNullOrEmpty(flag) && flag.Trim().Equals(currentLevel);
-        }
+        public string ExceptionMessage { get; set; }
+
+        public string Source { get; set; }
+
+        public string StackTrace { get; set; }
     }
 }

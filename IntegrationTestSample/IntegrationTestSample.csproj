@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="env\default\default.properties" />
+    <None Include="IntegrationTestSample.licenseheader" />
     <None Include="manifest.json" />
     <None Include="specs\hello_world.spec" />
   </ItemGroup>
