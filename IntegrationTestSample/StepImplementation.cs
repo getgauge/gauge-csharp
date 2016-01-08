@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Runtime.Serialization;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -19,7 +20,19 @@ namespace IntegrationTestSample
             Console.WriteLine("{0}, {1}!", what, who);
         }
 
-        [Step("Step that takes a table <table>")]
+	    [Step("I throw an unserializable exception")]
+	    public void ThrowUnserializableException()
+	    {
+	        throw new CustomException("I am a custom exception");
+	    }
+
+	    [Step("I throw a serializable exception")]
+	    public void ThrowSerializableException()
+	    {
+	        throw new CustomSerializableException("I am a custom serializable exception");
+	    }
+
+	    [Step("Step that takes a table <table>")]
         public void ReadTable(Table table)
         {
             var columnNames = table.GetColumnNames();
@@ -29,5 +42,25 @@ namespace IntegrationTestSample
                 row => Console.WriteLine(columnNames.Select(row.GetCell)
                         .Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
         }
-	}
+
+        [Serializable]
+        public class CustomSerializableException : Exception
+        {
+            public CustomSerializableException(string s) : base(s)
+            {
+            }
+
+            public CustomSerializableException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+
+        public class CustomException : Exception
+        {
+            public CustomException(string message) : base(message)
+            {
+            }
+        }
+    }
 }

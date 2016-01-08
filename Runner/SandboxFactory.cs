@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner
 
             var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-            var sandboxDomain = AppDomain.CreateDomain("Sandbox", null, sandboxAppDomainSetup, permSet);
+            var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(

@@ -22,7 +22,7 @@ namespace Gauge.CSharp.Runner
 {
     public interface ISandbox
     {
-        void ExecuteMethod(MethodInfo method, params object[] args);
+        ExecutionResult ExecuteMethod(MethodInfo method, params object[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
         IHookRegistry GetHookRegistry();
         List<MethodInfo> GetStepMethods();

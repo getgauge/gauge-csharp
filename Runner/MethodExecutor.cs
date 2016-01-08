@@ -22,7 +22,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
-using System.Runtime.ExceptionServices;
 using System.Windows.Forms;
 using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
@@ -46,54 +45,33 @@ namespace Gauge.CSharp.Runner
         {
             Logger.Debug("Execution method: {0}.{1}", method.DeclaringType.FullName, method.Name);
             var stopwatch = Stopwatch.StartNew();
-            IEnumerable<string> pendingMessages = new List<string>();
-            try
-            {
-                try
-                {
-                    _sandbox.ExecuteMethod(method, StringParamConverter.TryConvertParams(method, args));
-                }
-                catch (TargetInvocationException e)
-                {
-                    // Throw inner exception, which is the exception that matters to the user
-                    // This is the exception that is thrown by the user's code
-                    // and is fixable from the Step Implemented
-                    ExceptionDispatchInfo.Capture(e.InnerException).Throw();
-                }
-                finally
-                {
-                    pendingMessages = _sandbox.GetAllPendingMessages();
-                }
+            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
+            var executionResult = _sandbox.ExecuteMethod(method, StringParamConverter.TryConvertParams(method, args));
+            var pendingMessages = _sandbox.GetAllPendingMessages();
+
                 
-                var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false)
-                                .SetExecutionTime(stopwatch.ElapsedMilliseconds);
-                foreach (var message in pendingMessages)
-                {
-                    builder.AddMessage(message);   
-                }
-                return builder.Build();
-            }
-            catch (Exception e)
+            builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+            if (!executionResult.Success)
             {
-                Logger.Error(e, "Error executing {0}.{1}", method.DeclaringType.FullName, method.Name);
+                Logger.Error("Error executing {0}.{1}", method.DeclaringType.FullName, method.Name);
 
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-                var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true);
+                builder.SetFailed(true);
                 var isScreenShotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
                     builder.SetScreenShot(TakeScreenshot());
                 }
-                builder.SetErrorMessage(e.Message);
-                builder.SetStackTrace(e.StackTrace);
+                builder.SetErrorMessage(executionResult.ExceptionMessage);
+                builder.SetStackTrace(executionResult.StackTrace);
                 builder.SetRecoverableError(false);
                 builder.SetExecutionTime(elapsedMilliseconds);
-                foreach (var message in pendingMessages)
-                {
-                    builder.AddMessage(message);
-                }
-                return builder.Build();
             }
+            foreach (var message in pendingMessages)
+            {
+                builder.AddMessage(message);
+            }
+            return builder.Build();
         }
 
         public void ClearCache()

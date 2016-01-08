@@ -16,11 +16,14 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
+using System.Runtime.Serialization;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
@@ -47,10 +50,23 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public void ExecuteMethod(MethodInfo method, params object[] args)
+        public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
         {
+            var executionResult = new ExecutionResult {Success = true};
             var instance = ClassInstanceManager.Get(method.DeclaringType);
-            method.Invoke(instance, args);
+            try
+            {
+                method.Invoke(instance, args);
+            }
+            catch (TargetInvocationException ex)
+            {
+                var innerException = ex.InnerException;
+                executionResult.ExceptionMessage = innerException.Message;
+                executionResult.StackTrace = innerException.StackTrace;
+                executionResult.Source= innerException.Source;
+                executionResult.Success = false;
+            }
+            return executionResult;
         }
 
         public IHookRegistry GetHookRegistry()
@@ -173,5 +189,14 @@ namespace Gauge.CSharp.Runner
                 throw;
             }
         }
+    }
+
+    public class ExecutionResult : MarshalByRefObject
+    {
+        public bool Success { get; set; }
+
+        public string ExceptionMessage { get; set; }
+        public string Source { get; set; }
+        public string StackTrace { get; set; }
     }
 }

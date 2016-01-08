@@ -4,13 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
     [TestFixture]
     public class SandBoxTests
     {
-        readonly string _testProjectPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\IntegrationTestSample");
+        private readonly string _testProjectPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\IntegrationTestSample");
 
         [SetUp]
         public void Setup()
@@ -34,7 +35,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(7, stepMethods.Count);
+            Assert.AreEqual(9, stepMethods.Count);
         }
 
         [Test]
@@ -148,6 +149,46 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             var hookMethod = hookRegistry.AfterStepHooks.First();
             Assert.AreEqual("AfterStep", hookMethod.Method.Name);
+        }
+
+        [Test]
+        public void ShouldExecuteMethodAndReturnResult()
+        {
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var stepMethods = sandbox.GetStepMethods();
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "Context") == 0);
+
+            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            Assert.True(executionResult.Success);
+        }
+
+        [Test]
+        public void SuccessIsFalseOnUnserializableExceptionThrown()
+        {
+            const string expectedMessage = "I am a custom exception";
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var stepMethods = sandbox.GetStepMethods();
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ThrowUnserializableException") ==0);
+
+            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            Assert.False(executionResult.Success);
+            Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
+            Assert.True(executionResult.StackTrace.Contains("IntegrationTestSample.StepImplementation.ThrowUnserializableException()"));
+        }
+
+        [Test]
+        public void SuccessIsFalseOnSerializableExceptionThrown()
+        {
+            const string expectedMessage = "I am a custom serializable exception";
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var stepMethods = sandbox.GetStepMethods();
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ThrowSerializableException") ==0);
+
+            var executionResult = sandbox.ExecuteMethod(methodInfo);
+
+            Assert.False(executionResult.Success);
+            Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
+            Assert.True(executionResult.StackTrace.Contains("IntegrationTestSample.StepImplementation.ThrowSerializableException()"));
         }
 
         [TearDown]
