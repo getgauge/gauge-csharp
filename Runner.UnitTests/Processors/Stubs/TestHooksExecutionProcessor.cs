@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
 {
     public class TestHooksExecutionProcessor : HookExecutionProcessor
     {
-        public TestHooksExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor) : base(hookRegistry, methodExecutor)
+        public TestHooksExecutionProcessor() : base(null, null)
         {
         }
 
@@ -47,5 +47,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
         {
             return Strategy;
         }
+
+        public new bool ShouldReadMessages()
+        {
+            return base.ShouldReadMessages();
+        }
+
     }
 }

@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
             return Strategy;
         }
 
-        public TestTaggedHooksFirstExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor) : base(hookRegistry, methodExecutor)
+        public TestTaggedHooksFirstExecutionProcessor() : base(null, null)
         {
         }
 

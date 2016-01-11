@@ -18,8 +18,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.UnitTests.Processors.Stubs;
+using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
 
@@ -148,7 +150,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldUseDefaultHooksStrategy()
         {
-            var hooksStrategy = new TestHooksExecutionProcessor(null, null).GetHooksStrategy();
+            var hooksStrategy = new TestHooksExecutionProcessor().GetHooksStrategy();
 
             Assert.IsInstanceOf<HooksStrategy>(hooksStrategy);
         }
@@ -156,7 +158,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldUseUntaggedHooksFirstStrategy()
         {
-            var hooksStrategy = new TestUntaggedHooksFirstExecutionProcessor(null, null).GetHooksStrategy();
+            var hooksStrategy = new TestUntaggedHooksFirstExecutionProcessor().GetHooksStrategy();
 
             Assert.IsInstanceOf<UntaggedHooksFirstStrategy>(hooksStrategy);
         }
@@ -164,9 +166,15 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldUseTaggedHooksFirstStrategy()
         {
-            var hooksStrategy = new TestTaggedHooksFirstExecutionProcessor(null, null).GetHooksStrategy();
+            var hooksStrategy = new TestTaggedHooksFirstExecutionProcessor().GetHooksStrategy();
 
             Assert.IsInstanceOf<TaggedHooksFirstStrategy>(hooksStrategy);
+        }
+
+        [Test]
+        public void ShouldSetReadMessageToFalseByDefault()
+        {
+            Assert.False(new TestHooksExecutionProcessor().ShouldReadMessages());
         }
     }
 }

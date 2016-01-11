@@ -37,6 +37,11 @@ namespace Gauge.CSharp.Runner.Processors
             return false;
         }
 
+        protected override bool ShouldReadMessages()
+        {
+            return true;
+        }
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.StepExecutionEndingRequest.CurrentExecutionInfo;

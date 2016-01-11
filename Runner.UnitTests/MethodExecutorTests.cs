@@ -48,7 +48,6 @@ namespace Gauge.CSharp.Runner.UnitTests
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar"))
                 .Returns(() => new ExecutionResult {Success = true})
                 .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
-            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
             
@@ -87,7 +86,6 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             var result = new ExecutionResult {Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace"};
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
-            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             byte[] bytes = {0x20, 0x20};
             mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
@@ -113,7 +111,6 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
-            mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
             var screenshotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
             Environment.SetEnvironmentVariable("screenshot_enabled", "false");

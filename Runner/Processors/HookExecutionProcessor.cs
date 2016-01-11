@@ -43,13 +43,26 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var applicableTags = GetApplicableTags(request);
             var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
-            var protoExecutionResult = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
-            if(ShouldClearAllObjectCache())
+            var protoExecutionResultBuilder = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
+
+            if (ShouldClearAllObjectCache())
                 _methodExecutor.ClearCache();
-            return WrapInMessage(protoExecutionResult, request);
+
+            if (ShouldReadMessages())
+            {
+                var allPendingMessages = _methodExecutor.GetAllPendingMessages();
+                protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
+            }
+
+            return WrapInMessage(protoExecutionResultBuilder.Build(), request);
         }
 
         protected abstract bool ShouldClearAllObjectCache();
+
+        protected virtual bool ShouldReadMessages()
+        {
+            return false;
+        }
 
         private List<string> GetApplicableTags(Message request)
         {

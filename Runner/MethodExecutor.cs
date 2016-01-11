@@ -47,8 +47,6 @@ namespace Gauge.CSharp.Runner
             var stopwatch = Stopwatch.StartNew();
             var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
             var executionResult = _sandbox.ExecuteMethod(method, StringParamConverter.TryConvertParams(method, args));
-            var pendingMessages = _sandbox.GetAllPendingMessages();
-
                 
             builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
             if (!executionResult.Success)
@@ -67,16 +65,17 @@ namespace Gauge.CSharp.Runner
                 builder.SetRecoverableError(false);
                 builder.SetExecutionTime(elapsedMilliseconds);
             }
-            foreach (var message in pendingMessages)
-            {
-                builder.AddMessage(message);
-            }
             return builder.Build();
         }
 
         public void ClearCache()
         {
             _sandbox.ClearObjectCache();
+        }
+
+        public IEnumerable<string> GetAllPendingMessages()
+        {
+            return _sandbox.GetAllPendingMessages();
         }
 
         private ByteString TakeScreenshot()
@@ -107,7 +106,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo)
+        public ProtoExecutionResult.Builder ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo)
         {
             var stopwatch = Stopwatch.StartNew();
             foreach (var method in methods)
@@ -122,13 +121,11 @@ namespace Gauge.CSharp.Runner
                     .SetErrorMessage(executionResult.ErrorMessage)
                     .SetScreenShot(executionResult.ScreenShot)
                     .SetStackTrace(executionResult.StackTrace)
-                    .SetExecutionTime(stopwatch.ElapsedMilliseconds)
-                    .Build();
+                    .SetExecutionTime(stopwatch.ElapsedMilliseconds);
             }
             return ProtoExecutionResult.CreateBuilder()
                 .SetFailed(false)
-                .SetExecutionTime(stopwatch.ElapsedMilliseconds)
-                .Build();
+                .SetExecutionTime(stopwatch.ElapsedMilliseconds);
         }
 
         [DebuggerHidden]

@@ -26,12 +26,12 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
     [TestFixture]
-    public class ExecutionEStartingProcessorTests
+    public class ExecutionStartingProcessorTests
     {
         private ExecutionStartingProcessor _executionStartingProcessor;
         private Message _request;
         private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult _protoExecutionResult;
+        private ProtoExecutionResult.Builder _protoExecutionResultBuilder;
 
         public void Foo()
         {
@@ -55,16 +55,15 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                             .Build();
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false).Build();
+            _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
             _mockMethodExecutor.Setup(x => x.ExecuteHooks(hooksToExecute, executionEndingRequest.CurrentExecutionInfo))
-                .Returns(_protoExecutionResult);
+                .Returns(_protoExecutionResultBuilder);
             _executionStartingProcessor = new ExecutionStartingProcessor(mockHookRegistry.Object, _mockMethodExecutor.Object);
         }
         [Test]
         public void ShouldProcessHooks()
         {
-            var message = _executionStartingProcessor.Process(_request);
-
+            _executionStartingProcessor.Process(_request);
             _mockMethodExecutor.VerifyAll();
         }
 

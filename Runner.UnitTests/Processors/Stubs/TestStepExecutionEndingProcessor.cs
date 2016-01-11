@@ -15,17 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Reflection;
-using Gauge.Messages;
+using Gauge.CSharp.Runner.Processors;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
 {
-    public interface IMethodExecutor
+    public class TestStepExecutionEndingProcessor : StepExecutionEndingProcessor
     {
-        ProtoExecutionResult Execute(MethodInfo method, params object[] args);
-        ProtoExecutionResult.Builder ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo);
-        void ClearCache();
-        IEnumerable<string> GetAllPendingMessages();
+        public TestStepExecutionEndingProcessor() : base(null, null)
+        {
+        }
+
+        public new bool ShouldReadMessages()
+        {
+            return base.ShouldReadMessages();
+        }
     }
 }
