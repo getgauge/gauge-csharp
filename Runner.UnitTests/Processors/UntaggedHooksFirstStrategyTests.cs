@@ -27,40 +27,40 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class UntaggedHooksFirstStrategyTests
     {
-        [AfterScenario("foo")]
-        public void foo()
+        [AfterScenario("Foo")]
+        public void Foo()
         {
         }
 
-        [AfterScenario("bar", "baz")]
-        public void bar()
+        [AfterScenario("Bar", "Baz")]
+        public void Bar()
         {
         }
 
-        [AfterScenario("foo", "baz")]
+        [AfterScenario("Foo", "Baz")]
         [TagAggregationBehaviour(TagAggregation.Or)]
-        public void baz()
+        public void Baz()
         {
         }
 
         [AfterScenario]
-        public void blah()
+        public void Blah()
         {
         }
 
         [AfterScenario]
-        public void zed()
+        public void Zed()
         {
         }
 
         /*
          * untagged hooks are executed for all.
          * Tags     | Methods
-         * foo      | foo, baz
-         * bar      | NONE
-         * baz      | baz
-         * bar, baz | bar, baz
-         * foo, baz | baz
+         * Foo      | Foo, Baz
+         * Bar      | NONE
+         * Baz      | Baz
+         * Bar, Baz | Bar, Baz
+         * Foo, Baz | Baz
          * After hooks should execute tagged hooks prior to untagged
          */
         private HashSet<HookMethod> _hookMethods;
@@ -73,39 +73,39 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             _hookMethods = new HashSet<HookMethod>
             {
-                new HookMethod(GetType().GetMethod("foo"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("bar"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("zed"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("blah"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("baz"), mockSandbox.Object)
+                new HookMethod(GetType().GetMethod("Foo"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Bar"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Zed"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Blah"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Baz"), mockSandbox.Object)
             };
         }
 
         [Test]
         public void ShouldFetchTaggedHooksAfterUntaggedHooks()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
-            AssertEx.ContainsMethods(new[] { applicableHooks[0], applicableHooks[1] }, "blah", "zed");
+            AssertEx.ContainsMethods(new[] { applicableHooks[0], applicableHooks[1] }, "Blah", "Zed");
         }
 
         [Test]
         public void ShouldFetchTaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[0].Name, Is.EqualTo("blah"));
-            Assert.That(applicableHooks[1].Name, Is.EqualTo("zed"));
+            Assert.That(applicableHooks[0].Name, Is.EqualTo("Blah"));
+            Assert.That(applicableHooks[1].Name, Is.EqualTo("Zed"));
         }
 
 
         [Test]
         public void ShouldFetchUntaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "foo" }, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[2].Name, Is.EqualTo("baz"));
-            Assert.That(applicableHooks[3].Name, Is.EqualTo("foo"));
+            Assert.That(applicableHooks[2].Name, Is.EqualTo("Baz"));
+            Assert.That(applicableHooks[3].Name, Is.EqualTo("Foo"));
         }
     }
 }

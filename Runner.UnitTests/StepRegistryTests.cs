@@ -37,9 +37,9 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
             };
             var stepRegistry = new StepRegistry(methods, null, null);
-            var allSteps = stepRegistry.AllSteps();
+            var allSteps = stepRegistry.AllSteps().ToList();
 
-            Assert.AreEqual(allSteps.Count(), 2);
+            Assert.AreEqual(allSteps.Count, 2);
             Assert.True(allSteps.Contains("Foo"));
             Assert.True(allSteps.Contains("Bar"));
         }

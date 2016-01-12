@@ -18,10 +18,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
-using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.UnitTests.Processors.Stubs;
-using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
 
@@ -30,35 +28,35 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class HookExecutionProcessorTests
     {
-        [BeforeScenario("foo")]
-        public void foo()
+        [BeforeScenario("Foo")]
+        public void Foo()
         {
         }
 
-        [BeforeScenario("bar", "baz")]
-        public void bar()
+        [BeforeScenario("Bar", "Baz")]
+        public void Bar()
         {
         }
 
-        [BeforeScenario("foo", "baz")]
+        [BeforeScenario("Foo", "Baz")]
         [TagAggregationBehaviour(TagAggregation.Or)]
-        public void baz()
+        public void Baz()
         {
         }
 
         [BeforeScenario]
-        public void blah()
+        public void Blah()
         {
         }
 
         /*
          * untagged hooks are executed for all.
          * Tags     | Methods
-         * foo      | foo, baz
-         * bar      | NONE
-         * baz      | baz
-         * bar, baz | bar, baz
-         * foo, baz | baz
+         * Foo      | Foo, Baz
+         * Bar      | NONE
+         * Baz      | Baz
+         * Bar, Baz | Bar, Baz
+         * Foo, Baz | Baz
          */
 
         private List<HookMethod> _hookMethods;
@@ -71,10 +69,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             _hookMethods = new List<HookMethod>
             {
-                new HookMethod(GetType().GetMethod("foo"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("bar"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("baz"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("blah"), mockSandbox.Object)
+                new HookMethod(GetType().GetMethod("Foo"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Bar"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Baz"), mockSandbox.Object),
+                new HookMethod(GetType().GetMethod("Blah"), mockSandbox.Object)
             };
         }
 
@@ -90,17 +88,17 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTags()
         {
-            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"foo"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "baz", "foo");
+            AssertEx.ContainsMethods(applicableHooks, "Baz", "Foo");
         }
 
         [Test]
         public void ShouldFetchAllHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"bar"}, _hookMethods);
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Bar"}, _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
             Assert.IsEmpty(applicableHooks);
@@ -109,39 +107,39 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchAnyHooksWithSpecifiedTagsWhenDoingOr()
         {
-            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"baz"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Baz"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(1, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "baz");
+            AssertEx.ContainsMethods(applicableHooks, "Baz");
         }
 
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
         {
             var applicableHooks =
-                new HooksStrategy().GetTaggedHooks(new List<string> {"baz", "bar"}, _hookMethods).ToList();
+                new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "baz", "bar");
+            AssertEx.ContainsMethods(applicableHooks, "Baz", "Bar");
         }
 
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingOr()
         {
             var applicableHooks =
-                new HooksStrategy().GetTaggedHooks(new List<string> {"baz", "foo"}, _hookMethods).ToList();
+                new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Foo"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "baz", "foo");
+            AssertEx.ContainsMethods(applicableHooks, "Baz", "Foo");
         }
 
         [Test]
         public void ShouldNotFetchAnyTaggedHooksWhenTagsAreASuperSet()
         {
-            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"bar", "blah"}, _hookMethods);
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Bar", "Blah"}, _hookMethods);
 
             Assert.IsNotNull(applicableHooks);
             Assert.IsEmpty(applicableHooks);

@@ -60,7 +60,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             var filesChanged = RefactorHelper.Refactor(methodInfo, new List<ParameterPosition>(), new List<string>(), "foo").ToList();
 
-            Assert.AreEqual(1, filesChanged.Count());
+            Assert.AreEqual(1, filesChanged.Count);
             Assert.AreEqual(expectedPath, filesChanged.First());
         }
 

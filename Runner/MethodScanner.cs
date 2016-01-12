@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner
 
         private readonly ISandbox _sandbox;
 
-        private static readonly Logger logger = LogManager.GetLogger("MethodScanner");
+        private static readonly Logger Logger = LogManager.GetLogger("MethodScanner");
 
         public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
@@ -52,7 +52,7 @@ namespace Gauge.CSharp.Runner
                     var stepTexts = _sandbox.GetStepTexts(stepMethod).ToList();
                     var stepValues = _apiConnection.GetStepValues(stepTexts, false).ToList();
 
-                    for (var i = 0; i < stepTexts.Count(); i++)
+                    for (var i = 0; i < stepTexts.Count; i++)
                     {
                         if(!stepTextMap.ContainsKey(stepValues[i]))
                             stepTextMap.Add(stepValues[i], stepTexts[i]);
@@ -71,7 +71,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
+                Logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
         }

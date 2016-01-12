@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
         public void ShouldConvertToTableFromParameter()
         {
             var headers = new ProtoTableRow.Builder().AddRangeCells(new[] {"header"}).Build();
-            var cells = new ProtoTableRow.Builder().AddRangeCells(new[] {"foo"}).Build();
+            var cells = new ProtoTableRow.Builder().AddRangeCells(new[] {"Foo"}).Build();
             var table = new ProtoTable.Builder().SetHeaders(headers).AddRangeRows(new[] {cells});
             var parameter = new Parameter.Builder()
                 .SetParameterType(Parameter.Types.ParameterType.Table)
@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
             
             Assert.NotNull(actual);
             Assert.That(actual.GetColumnNames(), Contains.Item("header"));
-            Assert.That(actual.GetTableRows().First().GetCell("header"), Is.EqualTo("foo"));
+            Assert.That(actual.GetTableRows().First().GetCell("header"), Is.EqualTo("Foo"));
         }
     }
 }

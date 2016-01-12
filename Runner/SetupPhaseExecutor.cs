@@ -29,7 +29,7 @@ namespace Gauge.CSharp.Runner
     {
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
-        const string packageID = "Gauge.CSharp.Lib";
+        private const string PackageId = "Gauge.CSharp.Lib";
         private static SemanticVersion _maxLibVersion;
         private static readonly Logger Logger = LogManager.GetLogger("install");
 
@@ -101,11 +101,11 @@ namespace Gauge.CSharp.Runner
 
         private static void InstallDependencies()
         {
-            Logger.Info("Installing Nuget Package : {0}, version: {1}", packageID, _maxLibVersion);
+            Logger.Info("Installing Nuget Package : {0}, version: {1}", PackageId, _maxLibVersion);
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
             var repo = CreatePackageRepository();
             var packageManager = new PackageManager(repo, packagePath);
-            packageManager.InstallPackage(packageID, _maxLibVersion);
+            packageManager.InstallPackage(PackageId, _maxLibVersion);
             Logger.Info("Done Installing Nuget Package!");
         }
 
@@ -117,7 +117,7 @@ namespace Gauge.CSharp.Runner
         private static SemanticVersion GetMaxNugetVersion()
         {
             return CreatePackageRepository()
-                .FindPackagesById(packageID)
+                .FindPackagesById(PackageId)
                 .Max(p => p.Version);
         }
     }

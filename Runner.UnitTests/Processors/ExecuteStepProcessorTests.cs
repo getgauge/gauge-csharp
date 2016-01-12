@@ -33,7 +33,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldReportMissingStep()
         {
-            const string parsedStepText = "foo";
+            const string parsedStepText = "Foo";
             var request = Message.CreateBuilder()
                 .SetMessageType(Message.Types.MessageType.ExecuteStep)
                 .SetExecuteStepRequest(
@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldReportArgumentMismatch()
         {
-            const string parsedStepText = "foo";
+            const string parsedStepText = "Foo";
             var request = Message.CreateBuilder()
                 .SetMessageType(Message.Types.MessageType.ExecuteStep)
                 .SetExecuteStepRequest(
@@ -77,13 +77,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             
             Assert.True(response.ExecutionStatusResponse.ExecutionResult.Failed);
             Assert.AreEqual(response.ExecutionStatusResponse.ExecutionResult.ErrorMessage,
-                "Argument length mismatch for foo. Actual Count: 0, Expected Count: 1");
+                "Argument length mismatch for Foo. Actual Count: 0, Expected Count: 1");
         }
 
         [Test]
         public void ShouldProcessExecuteStepRequest()
         {
-            const string parsedStepText = "foo";
+            const string parsedStepText = "Foo";
             var request = Message.CreateBuilder()
                 .SetMessageType(Message.Types.MessageType.ExecuteStep)
                 .SetExecuteStepRequest(
@@ -93,8 +93,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                         .AddParameters(
                             Parameter.CreateBuilder()
                                 .SetParameterType(Parameter.Types.ParameterType.Static)
-                                .SetName("foo")
-                                .SetValue("bar")
+                                .SetName("Foo")
+                                .SetValue("Bar")
                                 .Build())
                         .Build())
                 .SetMessageId(20)

@@ -133,12 +133,4 @@ namespace Gauge.CSharp.Runner
             return methodDeclarationSyntax.AttributeLists.Remove(attributeListSyntax).Add(newAttributeListSyntax);
         }
     }
-
-    public class StepAttributeWalker : CSharpSyntaxRewriter
-    {
-        public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
-        {
-            return base.VisitMethodDeclaration(node);
-        }
-    }
 }

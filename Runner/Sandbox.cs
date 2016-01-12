@@ -35,7 +35,7 @@ namespace Gauge.CSharp.Runner
         public Assembly TargetLibAssembly { get; set; }
 
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
-        private static readonly Logger logger = LogManager.GetLogger("Sandbox");
+        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         private Type ScreenGrabberType { get; set; }
 
@@ -156,32 +156,32 @@ namespace Gauge.CSharp.Runner
                 ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
                     .Select(s =>
                         {
-                            logger.Debug("Loading assembly from : {0}", s);
+                            Logger.Debug("Loading assembly from : {0}", s);
                             return Assembly.LoadFrom(s);
                         })
                     .ToList();
                 TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
-                logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
+                Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
 
                 ScreenGrabberType = ScannedAssemblies
                     .SelectMany(assembly => assembly.GetTypes())
                     .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
                 if (ScreenGrabberType!=null)
                 {
-                    logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
+                    Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
                 }
                 else
                 {
-                    logger.Debug("No implementation of IScreenGrabber found.");
+                    Logger.Debug("No implementation of IScreenGrabber found.");
                 }
 
             }
             catch (ReflectionTypeLoadException ex)
             {
-                logger.Fatal(ex, "Unable to load one or more assemblies.");
+                Logger.Fatal(ex, "Unable to load one or more assemblies.");
                 foreach (var loaderException in ex.LoaderExceptions)
                 {
-                    logger.Error(loaderException);
+                    Logger.Error(loaderException);
                 }
                 throw;
             }

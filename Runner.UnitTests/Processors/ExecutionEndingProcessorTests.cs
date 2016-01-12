@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         private Message _request;
         private Mock<IMethodExecutor> _mockMethodExecutor;
         private ProtoExecutionResult.Builder _protoExecutionResultBuilder;
-        private readonly IEnumerable<string> _pendingMessages = new List<string> {"foo" , "bar"};
+        private readonly IEnumerable<string> _pendingMessages = new List<string> {"Foo" , "Bar"};
 
         public void Foo()
         {

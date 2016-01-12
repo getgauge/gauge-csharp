@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
         private static StartPhaseExecutor _instance;
-        private static readonly Logger logger = LogManager.GetLogger("Build");
+        private static readonly Logger Logger = LogManager.GetLogger("Build");
 
         public static StartPhaseExecutor GetDefaultInstance()
         {
@@ -55,7 +55,7 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (NotAValidGaugeProjectException)
                 {
-                    logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
+                    Logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
                     Environment.Exit(1);
                 }
             }
@@ -87,7 +87,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                logger.Warn(ex);
+                Logger.Warn(ex);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Gauge.CSharp.Runner
             }
             var solutionFullPath = solutionFileList.First();
             Directory.CreateDirectory(Utils.GetGaugeBinDir());
-            logger.Info("Building Project: {0}", solutionFullPath);
+            Logger.Info("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string>
             {
@@ -120,11 +120,11 @@ namespace Gauge.CSharp.Runner
 
             if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
             {
-                logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
-                logger.Error("Please choose a project name that complies with C# Project naming conventions.");
+                Logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
+                Logger.Error("Please choose a project name that complies with C# Project naming conventions.");
             }
 
-            logger.Info(buildResult.OverallResult);
+            Logger.Info(buildResult.OverallResult);
         }
     }
 }
