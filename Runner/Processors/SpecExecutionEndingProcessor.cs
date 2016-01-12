@@ -32,9 +32,9 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterSpecHooks;
         }
 
-        protected override bool ShouldClearAllObjectCache()
+        protected override string CacheClearLevel
         {
-            return ClearObjectCache.ShouldClearObjectCache(ClearObjectCache.SpecLevel);
+            get { return SpecLevel; }
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

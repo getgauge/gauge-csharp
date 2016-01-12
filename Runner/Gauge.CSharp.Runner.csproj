@@ -130,7 +130,6 @@
     <Compile Include="LogConfiguration.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="PhaseExecutorFactory.cs" />
-    <Compile Include="Processors\ClearObjectCache.cs" />
     <Compile Include="Processors\DataStoreInitProcessor.cs" />
     <Compile Include="Processors\DefaultProcessor.cs" />
     <Compile Include="Processors\ExecuteStepProcessor.cs" />

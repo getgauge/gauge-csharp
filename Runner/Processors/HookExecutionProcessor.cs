@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,45 +26,56 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
-        protected readonly IMethodExecutor _methodExecutor;
+        private const string ClearStateFlag = "gauge_clear_state_level";
+        protected readonly IMethodExecutor MethodExecutor;
+        protected const string SuiteLevel = "suite";
+        protected const string SpecLevel = "spec";
+        protected const string ScenarioLevel = "scenario";
+
         protected IHookRegistry Hooks { get; private set; }
         protected HooksStrategy Strategy { get; set; }
 
         protected HookExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
         {
-            _methodExecutor = methodExecutor;
+            MethodExecutor = methodExecutor;
             Hooks = hookRegistry;
             Strategy = new HooksStrategy();
         }
 
         protected abstract HashSet<HookMethod> GetHooks();
 
-        [DebuggerHidden]
-        public virtual Message Process(Message request)
-        {
-            var protoExecutionResultBuilder = ExecuteHooks(request);
-
-            if (ShouldClearAllObjectCache())
-                _methodExecutor.ClearCache();
-
-            return WrapInMessage(protoExecutionResultBuilder.Build(), request);
-        }
+        protected abstract ExecutionInfo GetExecutionInfo(Message request);
 
         protected virtual ProtoExecutionResult.Builder ExecuteHooks(Message request)
         {
             var applicableTags = GetApplicableTags(request);
             var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
-            var protoExecutionResultBuilder = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
-            return protoExecutionResultBuilder;
+            return MethodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
         }
 
-        protected abstract bool ShouldClearAllObjectCache();
+        protected virtual string CacheClearLevel
+        {
+            get { return null; }
+        }
+
+        [DebuggerHidden]
+        public Message Process(Message request)
+        {
+            var protoExecutionResultBuilder = ExecuteHooks(request);
+            ClearCacheForConfiguredLevel();
+            return WrapInMessage(protoExecutionResultBuilder.Build(), request);
+        }
+
+        private void ClearCacheForConfiguredLevel()
+        {
+            var flag = Environment.GetEnvironmentVariable(ClearStateFlag);
+            if (!string.IsNullOrEmpty(flag) && flag.Trim().Equals(CacheClearLevel))
+                MethodExecutor.ClearCache();
+        }
 
         private List<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentScenario.TagsList.Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
         }
-
-        protected abstract ExecutionInfo GetExecutionInfo(Message request);
     }
 }

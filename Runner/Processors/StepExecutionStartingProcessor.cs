@@ -32,11 +32,6 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.BeforeStepHooks;
         }
 
-        protected override bool ShouldClearAllObjectCache()
-        {
-            return false;
-        }
-
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.StepExecutionStartingRequest.CurrentExecutionInfo;

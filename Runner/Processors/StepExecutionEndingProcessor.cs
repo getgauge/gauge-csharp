@@ -32,15 +32,10 @@ namespace Gauge.CSharp.Runner.Processors
             return Hooks.AfterStepHooks;
         }
 
-        protected override bool ShouldClearAllObjectCache()
-        {
-            return false;
-        }
-
         protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
         {
             var protoExecutionResultBuilder = base.ExecuteHooks(request);
-            var allPendingMessages = _methodExecutor.GetAllPendingMessages();
+            var allPendingMessages = MethodExecutor.GetAllPendingMessages();
             protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
             return protoExecutionResultBuilder;
         }
