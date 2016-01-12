@@ -39,11 +39,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
             throw new System.NotImplementedException();
         }
 
-        protected override bool ShouldClearAllObjectCache()
-        {
-            throw new System.NotImplementedException();
-        }
-
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             throw new System.NotImplementedException();

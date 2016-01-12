@@ -36,5 +36,12 @@ namespace Gauge.CSharp.Runner.Processors
         {
             return request.StepExecutionStartingRequest.CurrentExecutionInfo;
         }
+
+        protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
+        {
+            // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
+            MethodExecutor.GetAllPendingMessages();
+            return base.ExecuteHooks(request);
+        }
     }
 }

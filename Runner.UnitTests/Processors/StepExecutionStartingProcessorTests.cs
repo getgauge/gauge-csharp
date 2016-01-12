@@ -15,7 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.Messages;
+using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
@@ -28,6 +34,29 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             AssertEx.InheritsFrom<HookExecutionProcessor, StepExecutionStartingProcessor>();
             AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, StepExecutionStartingProcessor>();
             AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, StepExecutionStartingProcessor>();
+        }
+
+        [Test]
+        public void ShouldClearExistingGaugeMessages()
+        {
+            var methodExecutor = new Mock<IMethodExecutor>();
+
+            var request = Message.CreateBuilder()
+                .SetMessageId(20)
+                .SetMessageType(Message.Types.MessageType.StepExecutionStarting)
+                .SetStepExecutionStartingRequest(StepExecutionStartingRequest.DefaultInstance)
+                .Build();
+
+            var protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
+            methodExecutor.Setup( executor => executor.ExecuteHooks(It.IsAny<IEnumerable<MethodInfo>>(),
+                        It.IsAny<ExecutionInfo>()))
+                          .Returns(protoExecutionResultBuilder);
+            var hookRegistry = new Mock<IHookRegistry>();
+            hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<HookMethod>());
+
+            new StepExecutionStartingProcessor(hookRegistry.Object, methodExecutor.Object).Process(request);
+
+            methodExecutor.Verify(executor => executor.GetAllPendingMessages(), Times.Once);
         }
     }
 }
