@@ -74,12 +74,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ReaddAllMessagesFlagIsEnabled()
-        {
-            Assert.True(new TestStepExecutionEndingProcessor().ShouldReadMessages());
-        }
-
-        [Test]
         public void ShouldReadPendingMessages()
         {
             var response = _stepExecutionEndingProcessor.Process(_request);

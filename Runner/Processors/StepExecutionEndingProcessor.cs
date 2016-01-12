@@ -37,9 +37,12 @@ namespace Gauge.CSharp.Runner.Processors
             return false;
         }
 
-        protected override bool ShouldReadMessages()
+        protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
         {
-            return true;
+            var protoExecutionResultBuilder = base.ExecuteHooks(request);
+            var allPendingMessages = _methodExecutor.GetAllPendingMessages();
+            protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
+            return protoExecutionResultBuilder;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

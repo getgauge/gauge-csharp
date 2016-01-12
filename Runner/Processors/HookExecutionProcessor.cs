@@ -25,7 +25,7 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
-        private readonly IMethodExecutor _methodExecutor;
+        protected readonly IMethodExecutor _methodExecutor;
         protected IHookRegistry Hooks { get; private set; }
         protected HooksStrategy Strategy { get; set; }
 
@@ -39,30 +39,25 @@ namespace Gauge.CSharp.Runner.Processors
         protected abstract HashSet<HookMethod> GetHooks();
 
         [DebuggerHidden]
-        public Message Process(Message request)
+        public virtual Message Process(Message request)
         {
-            var applicableTags = GetApplicableTags(request);
-            var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
-            var protoExecutionResultBuilder = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
+            var protoExecutionResultBuilder = ExecuteHooks(request);
 
             if (ShouldClearAllObjectCache())
                 _methodExecutor.ClearCache();
 
-            if (ShouldReadMessages())
-            {
-                var allPendingMessages = _methodExecutor.GetAllPendingMessages();
-                protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
-            }
-
             return WrapInMessage(protoExecutionResultBuilder.Build(), request);
         }
 
-        protected abstract bool ShouldClearAllObjectCache();
-
-        protected virtual bool ShouldReadMessages()
+        protected virtual ProtoExecutionResult.Builder ExecuteHooks(Message request)
         {
-            return false;
+            var applicableTags = GetApplicableTags(request);
+            var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
+            var protoExecutionResultBuilder = _methodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
+            return protoExecutionResultBuilder;
         }
+
+        protected abstract bool ShouldClearAllObjectCache();
 
         private List<string> GetApplicableTags(Message request)
         {

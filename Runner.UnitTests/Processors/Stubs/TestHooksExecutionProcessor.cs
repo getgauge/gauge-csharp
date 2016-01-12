@@ -47,11 +47,5 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
         {
             return Strategy;
         }
-
-        public new bool ShouldReadMessages()
-        {
-            return base.ShouldReadMessages();
-        }
-
     }
 }

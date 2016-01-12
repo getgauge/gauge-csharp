@@ -84,7 +84,6 @@
     <Compile Include="Processors\StepExecutionEndingProcessorTests.cs" />
     <Compile Include="Processors\ScenarioExecutionStartingProcessorTests.cs" />
     <Compile Include="Processors\StepExecutionStartingProcessorTests.cs" />
-    <Compile Include="Processors\Stubs\TestStepExecutionEndingProcessor.cs" />
     <Compile Include="Processors\Stubs\TestTaggedHooksFirstExecutionProcessor.cs" />
     <Compile Include="Processors\Stubs\TestUntaggedHooksFirstExecutionProcessor.cs" />
     <Compile Include="Processors\TaggedHooksFirstStrategyTests.cs" />

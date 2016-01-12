@@ -170,11 +170,5 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsInstanceOf<TaggedHooksFirstStrategy>(hooksStrategy);
         }
-
-        [Test]
-        public void ShouldSetReadMessageToFalseByDefault()
-        {
-            Assert.False(new TestHooksExecutionProcessor().ShouldReadMessages());
-        }
     }
 }
