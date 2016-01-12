@@ -27,13 +27,25 @@ namespace Gauge.CSharp.Runner
 {
     public class SetupPhaseExecutor : IPhaseExecutor
     {
+        private readonly IPackageRepositoryFactory _packageRepositoryFactory;
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
-        private const string PackageId = "Gauge.CSharp.Lib";
+        public const string PackageId = "Gauge.CSharp.Lib";
+        public const string NugetEndpoint = "https://packages.nuget.org/api/v2";
         private static SemanticVersion _maxLibVersion;
         private static readonly Logger Logger = LogManager.GetLogger("install");
 
-        public static SemanticVersion MaxLibVersion
+        public SetupPhaseExecutor() : this(PackageRepositoryFactory.Default)
+        {
+            
+        }
+
+        public SetupPhaseExecutor(IPackageRepositoryFactory packageRepositoryFactory)
+        {
+            _packageRepositoryFactory = packageRepositoryFactory;
+        }
+
+        public SemanticVersion MaxLibVersion
         {
             get { return _maxLibVersion = _maxLibVersion ?? GetMaxNugetVersion(); }
         }
@@ -67,12 +79,12 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        private static void CopyFile(string filePath)
+        private void CopyFile(string filePath)
         {
             CopyFile(filePath, string.Empty);
         }
 
-        private static void CopyFile(string filePath, string destPath, string rootDir = null)
+        private void CopyFile(string filePath, string destPath, string rootDir = null)
         {
             var skeletonPath = Path.GetFullPath("skel");
             var destFileName = string.IsNullOrEmpty(destPath) ? filePath : destPath;
@@ -83,8 +95,8 @@ namespace Gauge.CSharp.Runner
             }
             else
             {
-                var version = _maxLibVersion.ToString();
-                var normalizedVersion = _maxLibVersion.ToNormalizedString();
+                var version = MaxLibVersion.ToString();
+                var normalizedVersion = MaxLibVersion.ToNormalizedString();
 
                 File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
                 var fileContent = File.ReadAllText(destFileNameFull)
@@ -99,22 +111,22 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        private static void InstallDependencies()
+        private void InstallDependencies()
         {
-            Logger.Info("Installing Nuget Package : {0}, version: {1}", PackageId, _maxLibVersion);
+            Logger.Info("Installing Nuget Package : {0}, version: {1}", PackageId, MaxLibVersion);
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
             var repo = CreatePackageRepository();
             var packageManager = new PackageManager(repo, packagePath);
-            packageManager.InstallPackage(PackageId, _maxLibVersion);
+            packageManager.InstallPackage(PackageId, MaxLibVersion);
             Logger.Info("Done Installing Nuget Package!");
         }
 
-        private static IPackageRepository CreatePackageRepository()
+        private IPackageRepository CreatePackageRepository()
         {
-            return PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            return _packageRepositoryFactory.CreateRepository(NugetEndpoint);
         }
 
-        private static SemanticVersion GetMaxNugetVersion()
+        private SemanticVersion GetMaxNugetVersion()
         {
             return CreatePackageRepository()
                 .FindPackagesById(PackageId)
