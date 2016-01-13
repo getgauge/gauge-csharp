@@ -31,9 +31,14 @@ namespace Gauge.CSharp.Runner
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
         public const string PackageId = "Gauge.CSharp.Lib";
-        public const string NugetEndpoint = "https://packages.nuget.org/api/v2";
+
+        public static readonly string NugetEndpoint = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_ENDPOINT"))
+            ? @"https://packages.nuget.org/api/v2"
+            : Environment.GetEnvironmentVariable("NUGET_ENDPOINT");
+
         private static SemanticVersion _maxLibVersion;
-        private static readonly Logger Logger = LogManager.GetLogger("install");
+        private static readonly Logger Logger = LogManager.GetLogger(string.Empty);
+        private IPackageRepository _packageRepository;
 
         public SetupPhaseExecutor() : this(PackageRepositoryFactory.Default)
         {
@@ -113,22 +118,33 @@ namespace Gauge.CSharp.Runner
 
         private void InstallDependencies()
         {
-            Logger.Info("Installing Nuget Package : {0}, version: {1}", PackageId, MaxLibVersion);
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
-            var repo = CreatePackageRepository();
-            var packageManager = new PackageManager(repo, packagePath);
-            packageManager.InstallPackage(PackageId, MaxLibVersion);
+            var packageConfigPath = Path.Combine(Utils.GaugeProjectRoot, "packages.config");
+            var referenceFile = new PackageReferenceFile(packageConfigPath);
+            var packageReferences = referenceFile.GetPackageReferences(true);
+            var packageManager = new PackageManager(PackageRepository, packagePath);
+
+            foreach (var packageReference in packageReferences)
+            {
+                Logger.Info("Installing Nuget Package : {0}, version: {1}", packageReference.Id, packageReference.Version);
+                var package = PackageRepository.FindPackage(packageReference.Id, packageReference.Version);
+                packageManager.InstallPackage(package, false, false);
+            }
+
             Logger.Info("Done Installing Nuget Package!");
         }
 
-        private IPackageRepository CreatePackageRepository()
+        private IPackageRepository PackageRepository
         {
-            return _packageRepositoryFactory.CreateRepository(NugetEndpoint);
+            get
+            {
+                return _packageRepository = _packageRepository ?? _packageRepositoryFactory.CreateRepository(NugetEndpoint);
+            }
         }
 
         private SemanticVersion GetMaxNugetVersion()
         {
-            return CreatePackageRepository()
+            return PackageRepository
                 .FindPackagesById(PackageId)
                 .Max(p => p.Version);
         }
