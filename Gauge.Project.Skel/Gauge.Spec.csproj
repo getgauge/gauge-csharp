@@ -32,10 +32,10 @@
 	</PropertyGroup>
 	<ItemGroup>
     <Reference Include="FluentAssertions">
-      <HintPath>packages\FluentAssertions.4.2.0\lib\net45\FluentAssertions.dll</HintPath>
+      <HintPath>packages\FluentAssertions.3.5.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions.Core">
-      <HintPath>packages\FluentAssertions.4.2.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <HintPath>packages\FluentAssertions.3.5.0\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
     <Reference Include="Gauge.CSharp.Lib, Version=$nugetLibNormalizedVersion$, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
