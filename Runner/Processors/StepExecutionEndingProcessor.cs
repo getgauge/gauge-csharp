@@ -16,11 +16,12 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class StepExecutionEndingProcessor : HookExecutionProcessor
+    public class StepExecutionEndingProcessor : TaggedHooksFirstExecutionProcessor
     {
         public StepExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
             : base(hookRegistry, methodExecutor)
@@ -43,6 +44,12 @@ namespace Gauge.CSharp.Runner.Processors
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.StepExecutionEndingRequest.CurrentExecutionInfo;
+        }
+
+        protected override IEnumerable<string> GetApplicableTags(Message request)
+        {
+            return GetExecutionInfo(request).CurrentScenario.TagsList
+                .Union(GetExecutionInfo(request).CurrentSpec.TagsList);
         }
     }
 }

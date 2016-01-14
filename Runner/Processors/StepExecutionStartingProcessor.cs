@@ -16,11 +16,12 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
-    public class StepExecutionStartingProcessor : HookExecutionProcessor
+    public class StepExecutionStartingProcessor : UntaggedHooksFirstExecutionProcessor
     {
         public StepExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
             : base(hookRegistry, methodExecutor)
@@ -42,6 +43,12 @@ namespace Gauge.CSharp.Runner.Processors
             // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
             MethodExecutor.GetAllPendingMessages();
             return base.ExecuteHooks(request);
+        }
+
+        protected override IEnumerable<string> GetApplicableTags(Message request)
+        {
+            return GetExecutionInfo(request).CurrentScenario.TagsList
+                .Union(GetExecutionInfo(request).CurrentSpec.TagsList);
         }
     }
 }

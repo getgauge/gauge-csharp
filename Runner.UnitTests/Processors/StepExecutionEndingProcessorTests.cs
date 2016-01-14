@@ -67,9 +67,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldExtendFromHooksExecutionProcessor()
         {
-            AssertEx.InheritsFrom<HookExecutionProcessor, StepExecutionEndingProcessor>();
-            AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, StepExecutionEndingProcessor>();
-            AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, StepExecutionEndingProcessor>();
+            AssertEx.InheritsFrom<TaggedHooksFirstExecutionProcessor, StepExecutionEndingProcessor>();
         }
 
         [Test]
@@ -87,14 +85,14 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldGetEmptyTagListByDefault()
+        public void ShouldGetTagListFromScenarioAndSpec()
         {
             var specInfo = SpecInfo.CreateBuilder()
-                            .AddTags("foo")
-                            .SetName("")
-                            .SetFileName("")
-                            .SetIsFailed(false)
-                            .Build();
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
             var scenarioInfo = ScenarioInfo.CreateBuilder()
                 .AddTags("bar")
                 .SetName("")
@@ -104,16 +102,51 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .SetCurrentScenario(scenarioInfo)
                 .SetCurrentSpec(specInfo)
                 .Build();
-            var currentExecutionInfo = ScenarioExecutionStartingRequest.CreateBuilder()
+            var currentExecutionInfo = StepExecutionEndingRequest.CreateBuilder()
                 .SetCurrentExecutionInfo(currentScenario)
                 .Build();
             var message = Message.CreateBuilder()
-                .SetScenarioExecutionStartingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.ScenarioExecutionStarting)
+                .SetStepExecutionEndingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.StepExecutionEnding)
                 .SetMessageId(0)
                 .Build();
-            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionEndingProcessor>("GetApplicableTags", message);
-            Assert.IsEmpty(tags);
+            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+            Assert.IsNotEmpty(tags);
+            Assert.AreEqual(2, tags.Count);
+            Assert.Contains("foo", tags);
+            Assert.Contains("bar", tags);
+        }
+
+        [Test]
+        public void ShouldGetTagListFromScenarioAndSpecAndIgnoreDuplicates()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
+            var scenarioInfo = ScenarioInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetIsFailed(false)
+                .Build();
+            var currentScenario = ExecutionInfo.CreateBuilder()
+                .SetCurrentScenario(scenarioInfo)
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = StepExecutionEndingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(currentScenario)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetStepExecutionEndingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.StepExecutionEnding)
+                .SetMessageId(0)
+                .Build();
+            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+            Assert.IsNotEmpty(tags);
+            Assert.AreEqual(1, tags.Count);
+            Assert.Contains("foo", tags);
         }
     }
 }
