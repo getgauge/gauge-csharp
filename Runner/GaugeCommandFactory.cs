@@ -17,16 +17,16 @@
 
 namespace Gauge.CSharp.Runner
 {
-    public class PhaseExecutorFactory
+    public class GaugeCommandFactory
     {
-        public static IPhaseExecutor GetExecutor(string phase)
+        public static IGaugeCommand GetExecutor(string phase)
         {
             switch (phase)
             {
                 case "--init":
-                    return new SetupPhaseExecutor();
+                    return new SetupCommand();
                 default:
-                    return StartPhaseExecutor.GetDefaultInstance();
+                    return StartCommand.GetDefaultInstance();
             }
         }
     }

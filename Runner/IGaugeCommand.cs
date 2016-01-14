@@ -17,7 +17,7 @@
 
 namespace Gauge.CSharp.Runner
 {
-    public interface IPhaseExecutor
+    public interface IGaugeCommand
     {
         void Execute();
     }

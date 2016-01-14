@@ -25,7 +25,7 @@ using NuGet;
 
 namespace Gauge.CSharp.Runner
 {
-    public class SetupPhaseExecutor : IPhaseExecutor
+    public class SetupCommand : IGaugeCommand
     {
         private readonly IPackageRepositoryFactory _packageRepositoryFactory;
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
@@ -40,12 +40,12 @@ namespace Gauge.CSharp.Runner
         private static readonly Logger Logger = LogManager.GetLogger(string.Empty);
         private IPackageRepository _packageRepository;
 
-        public SetupPhaseExecutor() : this(PackageRepositoryFactory.Default)
+        public SetupCommand() : this(PackageRepositoryFactory.Default)
         {
             
         }
 
-        public SetupPhaseExecutor(IPackageRepositoryFactory packageRepositoryFactory)
+        public SetupCommand(IPackageRepositoryFactory packageRepositoryFactory)
         {
             _packageRepositoryFactory = packageRepositoryFactory;
         }

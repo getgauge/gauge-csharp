@@ -32,19 +32,19 @@ using ILogger = Microsoft.Build.Framework.ILogger;
 
 namespace Gauge.CSharp.Runner
 {
-    public class StartPhaseExecutor : IPhaseExecutor
+    public class StartCommand : IGaugeCommand
     {
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
-        private static StartPhaseExecutor _instance;
+        private static StartCommand _instance;
         private static readonly Logger Logger = LogManager.GetLogger("Build");
 
-        public static StartPhaseExecutor GetDefaultInstance()
+        public static StartCommand GetDefaultInstance()
         {
-            return _instance ?? (_instance = new StartPhaseExecutor());
+            return _instance ?? (_instance = new StartCommand());
         }
 
-        private StartPhaseExecutor()
+        private StartCommand()
         {
             var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
             if (string.IsNullOrEmpty(customBuildPath))

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.UnitTests
 {
     [TestFixture]
-    internal class SetupPhaseExecutorTests
+    internal class SetupCommandTests
     {
         private const string Version = "0.5.2";
         private Mock<IPackageRepositoryFactory> _packageRepositoryFactory;
@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var list = new List<IPackage> {package.Object};
             package.Setup(p => p.Version).Returns(new SemanticVersion(Version));
             packageRepository.Setup(repository => repository.GetPackages()).Returns(list.AsQueryable());
-            _packageRepositoryFactory.Setup(factory => factory.CreateRepository(SetupPhaseExecutor.NugetEndpoint))
+            _packageRepositoryFactory.Setup(factory => factory.CreateRepository(SetupCommand.NugetEndpoint))
                 .Returns(packageRepository.Object);
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
 
@@ -33,13 +33,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldFetchMaxLibVersionOnlyOnce()
         {
-            var setupPhaseExecutor = new SetupPhaseExecutor(_packageRepositoryFactory.Object);
-            var maxLibVersion = setupPhaseExecutor.MaxLibVersion;
+            var setupCommand = new SetupCommand(_packageRepositoryFactory.Object);
+            var maxLibVersion = setupCommand.MaxLibVersion;
 
-            maxLibVersion = setupPhaseExecutor.MaxLibVersion; // call again, just for fun!
+            maxLibVersion = setupCommand.MaxLibVersion; // call again, just for fun!
 
             Assert.AreEqual(Version, maxLibVersion.ToString());
-            _packageRepositoryFactory.Verify(factory => factory.CreateRepository(SetupPhaseExecutor.NugetEndpoint), Times.Once);
+            _packageRepositoryFactory.Verify(factory => factory.CreateRepository(SetupCommand.NugetEndpoint), Times.Once);
         }
     }
 }

@@ -48,8 +48,8 @@ namespace Gauge.CSharp.Runner
                 }
             }
             var phase = args[0];
-            var phaseExecutor = PhaseExecutorFactory.GetExecutor(phase);
-            phaseExecutor.Execute();
+            var command = GaugeCommandFactory.GetExecutor(phase);
+            command.Execute();
         }
     }
 }

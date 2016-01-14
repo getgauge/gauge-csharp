@@ -22,7 +22,7 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.UnitTests
 {
     [TestFixture]
-    public class PhaseExecutorFactoryTests
+    public class GaugeCommandFactoryTests
     {
         [SetUp]
         public void Setup()
@@ -32,15 +32,15 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetSetupPhaseExecutorForInit()
         {
-            var phaseExecutor = PhaseExecutorFactory.GetExecutor("--init");
-            Assert.AreEqual(phaseExecutor.GetType(), typeof(SetupPhaseExecutor));
+            var command = GaugeCommandFactory.GetExecutor("--init");
+            Assert.AreEqual(command.GetType(), typeof(SetupCommand));
         }
 
         [Test, Ignore("Need to figure out a way to mock project creation")]
         public void ShouldGetStartPhaseExecutorByDefault()
         {
-            var phaseExecutor = PhaseExecutorFactory.GetExecutor(default(string));
-            Assert.AreEqual(phaseExecutor.GetType(), typeof(StartPhaseExecutor));
+            var command = GaugeCommandFactory.GetExecutor(default(string));
+            Assert.AreEqual(command.GetType(), typeof(StartCommand));
         }
     }
 }

@@ -81,7 +81,7 @@
     <Compile Include="HookRegistryTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />
-    <Compile Include="PhaseExecutorFactoryTests.cs" />
+    <Compile Include="GaugeCommandFactoryTests.cs" />
     <Compile Include="AssertEx.cs" />
     <Compile Include="Processors\DefaultProcessorTests.cs" />
     <Compile Include="Processors\ExecuteStepProcessorTests.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Processors\UntaggedHooksFirstStrategyTests.cs" />
     <Compile Include="Processors\HookExecutionProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetupPhaseExecutorTests.cs" />
+    <Compile Include="SetupCommandTests.cs" />
     <Compile Include="StepRegistryTests.cs" />
     <Compile Include="UtilsTest.cs" />
   </ItemGroup>
