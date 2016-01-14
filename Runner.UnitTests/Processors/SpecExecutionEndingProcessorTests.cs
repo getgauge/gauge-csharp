@@ -15,17 +15,47 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.Messages;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
-    class SpecExecutionEndingProcessorTests
+    internal class SpecExecutionEndingProcessorTests
     {
         [Test]
         public void ShouldExtendFromTaggedHooksFirstExecutionProcessor()
         {
             AssertEx.InheritsFrom<TaggedHooksFirstExecutionProcessor, SpecExecutionEndingProcessor>();
+        }
+
+        [Test]
+        public void ShouldGetTagListFromExecutionInfo()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
+            var executionInfo = ExecutionInfo.CreateBuilder()
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = SpecExecutionEndingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(executionInfo)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetSpecExecutionEndingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.SpecExecutionEnding)
+                .SetMessageId(0)
+                .Build();
+
+            var tags = AssertEx.ExecuteProtectedMethod<SpecExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+
+            Assert.IsNotEmpty(tags);
+            Assert.AreEqual(1, tags.Count);
+            Assert.Contains("foo", tags);
         }
     }
 }

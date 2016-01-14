@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -35,6 +36,11 @@ namespace Gauge.CSharp.Runner.Processors
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.SpecExecutionStartingRequest.CurrentExecutionInfo;
+        }
+
+        protected override IEnumerable<string> GetApplicableTags(Message request)
+        {
+            return GetExecutionInfo(request).CurrentSpec.TagsList;
         }
     }
 }

@@ -73,9 +73,9 @@ namespace Gauge.CSharp.Runner.Processors
                 MethodExecutor.ClearCache();
         }
 
-        private List<string> GetApplicableTags(Message request)
+        protected virtual IEnumerable<string> GetApplicableTags(Message request)
         {
-            return GetExecutionInfo(request).CurrentScenario.TagsList.Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
+            return Enumerable.Empty<string>();
         }
     }
 }

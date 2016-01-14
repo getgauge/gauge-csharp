@@ -23,11 +23,12 @@ namespace Gauge.CSharp.Runner.Strategy
 {
     public class UntaggedHooksFirstStrategy : HooksStrategy
     {
-        public override IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public override IEnumerable<MethodInfo> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             var hookMethods = hooks as IList<HookMethod> ?? hooks.ToList();
-            return applicableTags.Any()
-                ? GetUntaggedHooks(hookMethods).Concat(GetTaggedHooks(applicableTags, hookMethods))
+            var tags = applicableTags as IList<string> ?? applicableTags.ToList();
+            return tags.Any()
+                ? GetUntaggedHooks(hookMethods).Concat(GetTaggedHooks(tags, hookMethods))
                 : GetUntaggedHooks(hookMethods);
         }
     }

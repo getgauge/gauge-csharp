@@ -24,7 +24,7 @@ using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
-    class StepExecutionStartingProcessorTests
+    internal class StepExecutionStartingProcessorTests
     {
         [Test]
         public void ShouldExtendFromHooksExecutionProcessor()
@@ -55,6 +55,36 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             new StepExecutionStartingProcessor(hookRegistry.Object, methodExecutor.Object).Process(request);
 
             methodExecutor.Verify(executor => executor.GetAllPendingMessages(), Times.Once);
+        }
+
+        [Test]
+        public void ShouldGetEmptyTagListByDefault()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                            .AddTags("foo")
+                            .SetName("")
+                            .SetFileName("")
+                            .SetIsFailed(false)
+                            .Build();
+            var scenarioInfo = ScenarioInfo.CreateBuilder()
+                .AddTags("bar")
+                .SetName("")
+                .SetIsFailed(false)
+                .Build();
+            var currentScenario = ExecutionInfo.CreateBuilder()
+                .SetCurrentScenario(scenarioInfo)
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = ScenarioExecutionStartingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(currentScenario)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetScenarioExecutionStartingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.ScenarioExecutionStarting)
+                .SetMessageId(0)
+                .Build();
+            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionStartingProcessor>("GetApplicableTags", message);
+            Assert.IsEmpty(tags);
         }
     }
 }

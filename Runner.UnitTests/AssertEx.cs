@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
@@ -44,6 +45,15 @@ namespace Gauge.CSharp.Runner.UnitTests
             {
                 Assert.Contains(methodName, existingMethodNames);
             }
+        }
+
+        public static IEnumerable<string> ExecuteProtectedMethod<T>(string methodName, params object[] methodParams)
+        {
+            var uninitializedObject = FormatterServices.GetUninitializedObject(typeof(T));
+            var tags = (IEnumerable<string>) uninitializedObject.GetType()
+                .GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic)
+                .Invoke(uninitializedObject, methodParams);
+            return tags;
         }
     }
 }

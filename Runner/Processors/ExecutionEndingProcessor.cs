@@ -36,6 +36,11 @@ namespace Gauge.CSharp.Runner.Processors
             get { return SuiteLevel; }
         }
 
+        protected override IEnumerable<string> GetApplicableTags(Message request)
+        {
+            return GetExecutionInfo(request).CurrentSpec.TagsList;
+        }
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ExecutionEndingRequest.CurrentExecutionInfo;

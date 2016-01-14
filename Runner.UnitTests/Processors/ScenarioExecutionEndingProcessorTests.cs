@@ -15,17 +15,88 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.Messages;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
 {
-    class ScenarioExecutionEndingProcessorTests
+    internal class ScenarioExecutionEndingProcessorTests
     {
         [Test]
         public void ShouldExtendFromTaggedHooksFirstExecutionProcessor()
         {
             AssertEx.InheritsFrom<TaggedHooksFirstExecutionProcessor, ScenarioExecutionEndingProcessor>();
+        }
+
+        [Test]
+        public void ShouldGetTagListFromSpecAndScenario()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
+            var scenarioInfo = ScenarioInfo.CreateBuilder()
+                .AddTags("bar")
+                .SetName("")
+                .SetIsFailed(false)
+                .Build();
+            var currentScenario = ExecutionInfo.CreateBuilder()
+                .SetCurrentScenario(scenarioInfo)
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = ScenarioExecutionEndingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(currentScenario)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetScenarioExecutionEndingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.ScenarioExecutionEnding)
+                .SetMessageId(0)
+                .Build();
+
+            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+
+            Assert.IsNotEmpty(tags);
+            Assert.AreEqual(2, tags.Count);
+            Assert.Contains("foo", tags);
+            Assert.Contains("bar", tags);
+        }
+
+        [Test]
+        public void ShouldNotGetDuplicateTags()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
+            var scenarioInfo = ScenarioInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetIsFailed(false)
+                .Build();
+            var currentScenario = ExecutionInfo.CreateBuilder()
+                .SetCurrentScenario(scenarioInfo)
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = ScenarioExecutionEndingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(currentScenario)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetScenarioExecutionEndingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.ScenarioExecutionEnding)
+                .SetMessageId(0)
+                .Build();
+
+            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+
+            Assert.IsNotEmpty(tags);
+            Assert.AreEqual(1, tags.Count);
+            Assert.Contains("foo", tags);
         }
     }
 }

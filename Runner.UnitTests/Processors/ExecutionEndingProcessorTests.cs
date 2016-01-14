@@ -88,5 +88,35 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             AssertEx.DoesNotInheritsFrom<TaggedHooksFirstExecutionProcessor, ExecutionEndingProcessor>();
             AssertEx.DoesNotInheritsFrom<UntaggedHooksFirstExecutionProcessor, ExecutionEndingProcessor>();
         }
+
+        [Test]
+        public void ShouldGetEmptyTagListByDefault()
+        {
+            var specInfo = SpecInfo.CreateBuilder()
+                .AddTags("foo")
+                .SetName("")
+                .SetFileName("")
+                .SetIsFailed(false)
+                .Build();
+            var scenarioInfo = ScenarioInfo.CreateBuilder()
+                .AddTags("bar")
+                .SetName("")
+                .SetIsFailed(false)
+                .Build();
+            var currentScenario = ExecutionInfo.CreateBuilder()
+                .SetCurrentScenario(scenarioInfo)
+                .SetCurrentSpec(specInfo)
+                .Build();
+            var currentExecutionInfo = ScenarioExecutionStartingRequest.CreateBuilder()
+                .SetCurrentExecutionInfo(currentScenario)
+                .Build();
+            var message = Message.CreateBuilder()
+                .SetScenarioExecutionStartingRequest(currentExecutionInfo)
+                .SetMessageType(Message.Types.MessageType.ScenarioExecutionStarting)
+                .SetMessageId(0)
+                .Build();
+            var tags = AssertEx.ExecuteProtectedMethod<ExecutionEndingProcessor>("GetApplicableTags", message);
+            Assert.IsEmpty(tags);
+        }
     }
 }

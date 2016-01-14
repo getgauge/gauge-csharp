@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -27,14 +28,21 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
+        protected override string CacheClearLevel
+        {
+            get { return ScenarioLevel; }
+        }
+
         protected override HashSet<HookMethod> GetHooks()
         {
             return Hooks.AfterScenarioHooks;
         }
 
-        protected override string CacheClearLevel
+        protected override IEnumerable<string> GetApplicableTags(Message request)
         {
-            get { return ScenarioLevel; }
+            return GetExecutionInfo(request)
+                    .CurrentScenario.TagsList.Union(GetExecutionInfo(request).CurrentSpec.TagsList)
+                    .ToList();
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

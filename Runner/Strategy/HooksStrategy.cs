@@ -43,8 +43,7 @@ namespace Gauge.CSharp.Runner.Strategy
                     .OrderBy(info => info.Name);
         }
 
-
-        public virtual IEnumerable<MethodInfo> GetApplicableHooks(List<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public virtual IEnumerable<MethodInfo> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             return GetUntaggedHooks(hooks);
         }
