@@ -2,6 +2,11 @@
   "id" : "csharp",
   "version" : "0.7.1",
   "description": "C# support for gauge",
+  "install": {
+    "windows": [],
+    "linux": [],
+    "darwin": []
+  },
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
     "linux": ["echo", "Coming Soon!"],
