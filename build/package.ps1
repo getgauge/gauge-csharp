@@ -15,10 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-# Get first argument which indicates nightly build
-param([string]$nightly='')
-
 # Clean the artifacts directory
+
 Remove-Item "$($pwd)\artifacts*" -recurse -force
 
 # Build everything
@@ -70,9 +68,6 @@ $zipScript= {
     $curr=$pwd
     set-location $outputDir
     $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
-    if ($nightly -eq "--nightly") {
-      $version="$version.nightly-$(Get-Date -format yyyy-MM-dd)"
-    }
     gci -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
     set-location $curr
 }
