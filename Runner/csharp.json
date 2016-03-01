@@ -1,6 +1,6 @@
 {
   "id" : "csharp",
-  "version" : "0.7.1",
+  "version" : "0.7.2",
   "description": "C# support for gauge",
   "install": {
     "windows": [],
