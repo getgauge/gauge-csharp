@@ -157,7 +157,7 @@ namespace Gauge.CSharp.Runner
                     .Select(s =>
                         {
                             Logger.Debug("Loading assembly from : {0}", s);
-                            return Assembly.LoadFrom(s);
+                            return Assembly.Load(AssemblyName.GetAssemblyName(s));
                         })
                     .ToList();
                 TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);

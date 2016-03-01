@@ -49,7 +49,7 @@ namespace Gauge.CSharp.Runner
             var fileName = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
             if (File.Exists(fileName))
             {
-                return Assembly.LoadFrom(fileName);
+                return Assembly.Load(AssemblyName.GetAssemblyName(fileName));
             }
             return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
         }
