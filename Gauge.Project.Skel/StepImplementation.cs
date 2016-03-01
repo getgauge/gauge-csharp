@@ -5,7 +5,7 @@ using FluentAssertions;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
-namespace test
+namespace $safeprojectname$
 {
     public class StepImplementation
     {
@@ -42,7 +42,7 @@ namespace test
             }
         }
 
-        private int CountVowels(String word)
+        private int CountVowels(string word)
         {
             return word.Count(c => _vowels.Contains(c));
         }
