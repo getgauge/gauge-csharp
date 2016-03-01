@@ -2,7 +2,7 @@
 IF "%1"=="" goto NO_ARG
 
 :exec
-powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Command "& '.\build\%1.ps1' '%2'"
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Command "& '.\build\%1.ps1' %2"
 if %errorlevel% neq 0 exit /b %errorlevel%
 goto :eof
 
