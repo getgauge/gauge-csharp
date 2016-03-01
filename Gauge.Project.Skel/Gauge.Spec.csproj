@@ -56,7 +56,7 @@
 	<ItemGroup>
 		<None Include="env\default\default.properties" />
 		<None Include="manifest.json" />
-		<None Include="specs\hello_world.spec" />
+		<None Include="specs\example.spec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
