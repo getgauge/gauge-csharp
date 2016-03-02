@@ -153,28 +153,10 @@ namespace Gauge.CSharp.Runner
         {
             try
             {
-                ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
-                    .Select(s =>
-                        {
-                            Logger.Debug("Loading assembly from : {0}", s);
-                            return Assembly.Load(AssemblyName.GetAssemblyName(s));
-                        })
-                    .ToList();
-                TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
-                Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
-
-                ScreenGrabberType = ScannedAssemblies
-                    .SelectMany(assembly => assembly.GetTypes())
-                    .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
-                if (ScreenGrabberType!=null)
-                {
-                    Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
-                }
-                else
-                {
-                    Logger.Debug("No implementation of IScreenGrabber found.");
-                }
-
+                EnumerateAndLoadAssemblies();
+                LocateTargetLibAssembly();
+                SetAppConfigIfExists();
+                ScanCustomScreenGrabber();
             }
             catch (ReflectionTypeLoadException ex)
             {
@@ -184,6 +166,51 @@ namespace Gauge.CSharp.Runner
                     Logger.Error(loaderException);
                 }
                 throw;
+            }
+        }
+
+        private void SetAppConfigIfExists()
+        {
+            Func<Assembly, bool> targetAssemblyPreficate = a => a.GetReferencedAssemblies().Any(n => string.CompareOrdinal(n.Name, GaugeLibAssembleName) == 0);
+            var targetAssembly = ScannedAssemblies.FirstOrDefault(targetAssemblyPreficate);
+            if (targetAssembly == null) return;
+
+            var configFile = string.Format("{0}.config", targetAssembly.Location);
+            if (File.Exists(configFile))
+            {
+                AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
+            }
+        }
+
+        private void EnumerateAndLoadAssemblies()
+        {
+            ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
+                .Select(s =>
+                {
+                    Logger.Debug("Loading assembly from : {0}", s);
+                    return Assembly.Load(AssemblyName.GetAssemblyName(s));
+                })
+                .ToList();
+        }
+
+        private void LocateTargetLibAssembly()
+        {
+            TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
+            Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
+        }
+
+        private void ScanCustomScreenGrabber()
+        {
+            ScreenGrabberType = ScannedAssemblies
+                .SelectMany(assembly => assembly.GetTypes())
+                .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof (IScreenGrabber).FullName));
+            if (ScreenGrabberType != null)
+            {
+                Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
+            }
+            else
+            {
+                Logger.Debug("No implementation of IScreenGrabber found.");
             }
         }
     }
