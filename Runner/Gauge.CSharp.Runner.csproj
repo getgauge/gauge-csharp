@@ -109,6 +109,7 @@
     <Reference Include="System.Text.Encoding, Version=4.0.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyScanner.cs" />
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
