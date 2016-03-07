@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner
             AttributeToMethodInfo[typeof(Step)] = new List<MethodInfo>();
         }
 
-        public void Scan(string path)
+        public void TryAdd(string path)
         {
             Logger.Debug("Loading assembly from : {0}", path);
             Assembly assembly;

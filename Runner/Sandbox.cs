@@ -168,7 +168,7 @@ namespace Gauge.CSharp.Runner
         private void EnumerateAndLoadAssemblies()
         {
             foreach (var path in Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly))
-                AssemblyScanner.Scan(path);
+                AssemblyScanner.TryAdd(path);
         }
 
         private void LocateTargetLibAssembly()
