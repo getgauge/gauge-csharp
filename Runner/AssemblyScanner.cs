@@ -68,7 +68,7 @@ namespace Gauge.CSharp.Runner
             {
                 var fullyLoadedType = fullyLoadedAssembly.GetType(type.FullName);
                 if (fullyLoadedType == null)
-                    Logger.Warn("Cannot not scan type '{0}'", type.FullName);                    
+                    Logger.Warn("Cannot scan type '{0}'", type.FullName);                    
                 else
                     yield return fullyLoadedType;
             }
