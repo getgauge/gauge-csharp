@@ -49,11 +49,11 @@ namespace Gauge.CSharp.Runner
                 .Select(name => name.Name)
                 .Contains(typeof(Step).Assembly.GetName().Name);
 
-            var loadableTypes = isReferencingGaugeLib ? GetLoadableTypes(assembly) : new List<Type>();
+            var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[]{});
 
             // Load assembly so that code can be executed
             var fullyLoadedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(path));
-            var types = GetFullyLoadedTypes(loadableTypes, fullyLoadedAssembly);
+            var types = GetFullyLoadedTypes(loadableTypes, fullyLoadedAssembly).ToList();
 
             if (isReferencingGaugeLib)
                 AssembliesReferencingGaugeLib.Add(fullyLoadedAssembly);
@@ -65,7 +65,13 @@ namespace Gauge.CSharp.Runner
         private IEnumerable<Type> GetFullyLoadedTypes(IEnumerable<Type> loadableTypes, Assembly fullyLoadedAssembly)
         {
             foreach (var type in loadableTypes)
-                yield return fullyLoadedAssembly.GetType(type.FullName);
+            {
+                var fullyLoadedType = fullyLoadedAssembly.GetType(type.FullName);
+                if (fullyLoadedType == null)
+                    Logger.Warn("Cannot not scan type '{0}'", type.FullName);                    
+                else
+                    yield return fullyLoadedType;
+            }
         }
 
         private void ScanForMethodAttributes(IEnumerable<Type> types)
