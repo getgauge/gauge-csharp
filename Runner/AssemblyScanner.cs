@@ -10,7 +10,7 @@ namespace Gauge.CSharp.Runner
 {
     public class AssemblyScanner
     {
-        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
+        private static readonly Logger Logger = LogManager.GetLogger("AssemblyScanner");
 
         public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
         public List<Type> ScreengrabberTypes = new List<Type>();
