@@ -189,5 +189,10 @@ namespace Gauge.CSharp.Runner
                 Logger.Debug("No implementation of IScreenGrabber found.");
             }
         }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
     }
 }
