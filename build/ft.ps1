@@ -24,7 +24,7 @@ choco install gauge
 $gauge=$env:ProgramFiles + "\gauge\bin\gauge.exe"
 &$gauge --install xml-report
 
-"$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true
+& "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true
  
 git clone --depth=1 https://github.com/getgauge/gauge-tests
 cd gauge-tests
