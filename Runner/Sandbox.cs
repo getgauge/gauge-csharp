@@ -173,7 +173,11 @@ namespace Gauge.CSharp.Runner
 
         private void LocateTargetLibAssembly()
         {
-            TargetLibAssembly = typeof(Step).Assembly;
+            var targetLibAssemblyName = AssemblyScanner.AssembliesReferencingGaugeLib
+                .Select(a => a.GetReferencedAssemblies().Single(ra => ra.Name == GaugeLibAssembleName))
+                .Distinct()
+                .Single();
+            TargetLibAssembly = Assembly.Load(targetLibAssemblyName);
             Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
         }
 
