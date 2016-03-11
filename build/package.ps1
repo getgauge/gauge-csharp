@@ -19,9 +19,9 @@
 
 Remove-Item "$($pwd)\artifacts*" -recurse -force
 
-# Build everything
+# Build And Test everything
 
-& "$(Split-Path $MyInvocation.MyCommand.Path)\build.ps1"
+& "$(Split-Path $MyInvocation.MyCommand.Path)\test.ps1"
 
 $nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
     $nuget = "$($pwd)\build\NuGet.exe"
@@ -73,3 +73,9 @@ $zipScript= {
 }
 
 Invoke-Command -ScriptBlock $zipScript
+
+# Hack to break on exit code. Powershell does not seem to propogate the exit code from test failures.
+if($LastExitCode -ne 0)
+{
+    throw "Test execution failed."
+}
