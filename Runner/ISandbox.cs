@@ -29,7 +29,7 @@ namespace Gauge.CSharp.Runner
         void InitializeDataStore(string dataStoreType);
         IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
         List<string> GetAllStepTexts();
-        Assembly TargetLibAssembly { get; set; }
+        Assembly TargetLibAssembly { get; }
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
     }

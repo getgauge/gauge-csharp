@@ -3,36 +3,47 @@ using Gauge.CSharp.Lib.Attribute;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner
 {
     public class AssemblyScanner
     {
+        private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+
         private static readonly Logger Logger = LogManager.GetLogger("AssemblyScanner");
-        private Dictionary<Type, List<MethodInfo>> AttributeToMethodInfo;
+        private readonly Dictionary<Type, List<MethodInfo>> _attributeToMethodInfo;
 
         public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
         public List<Type> ScreengrabberTypes = new List<Type>();
+        private Assembly _targetLibAssembly;
 
         public AssemblyScanner()
         {
-            AttributeToMethodInfo = new Dictionary<Type, List<MethodInfo>>();
-            AttributeToMethodInfo[typeof(BeforeSuite)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(AfterSuite)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(BeforeSpec)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(AfterSpec)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(BeforeScenario)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(AfterScenario)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(BeforeStep)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(AfterStep)] = new List<MethodInfo>();
-            AttributeToMethodInfo[typeof(Step)] = new List<MethodInfo>();
+            LoadTargetLibAssembly();
+            _attributeToMethodInfo = new Dictionary<Type, List<MethodInfo>>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeSuite>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<AfterSuite>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeSpec>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<AfterSpec>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeScenario>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<AfterScenario>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeStep>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<AfterStep>()] = new List<MethodInfo>();
+            _attributeToMethodInfo[GetTypeFromTargetLib<Step>()] = new List<MethodInfo>();
         }
 
-        public List<MethodInfo> GetHookMethods(Type type)
+        public List<MethodInfo> GetMethods<T>() where T : Attribute
         {
-            return AttributeToMethodInfo[type];
+            return _attributeToMethodInfo[GetTypeFromTargetLib<T>()];
+        }
+
+        public Assembly GetTargetLibAssembly()
+        {
+            return _targetLibAssembly;
         }
 
         public void TryAdd(string path)
@@ -57,7 +68,7 @@ namespace Gauge.CSharp.Runner
             var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[]{});
 
             // Load assembly so that code can be executed
-            var fullyLoadedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(path));
+            var fullyLoadedAssembly = Assembly.LoadFrom(path);
             var types = GetFullyLoadedTypes(loadableTypes, fullyLoadedAssembly).ToList();
 
             if (isReferencingGaugeLib)
@@ -65,6 +76,11 @@ namespace Gauge.CSharp.Runner
 
             ScanForScreengrabber(types);
             ScanForMethodAttributes(types);
+        }
+
+        private Type GetTypeFromTargetLib<T>() where T : Attribute
+        {
+            return _targetLibAssembly.GetType(typeof(T).FullName);
         }
 
         private IEnumerable<Type> GetFullyLoadedTypes(IEnumerable<Type> loadableTypes, Assembly fullyLoadedAssembly)
@@ -81,11 +97,11 @@ namespace Gauge.CSharp.Runner
 
         private void ScanForMethodAttributes(IEnumerable<Type> types)
         {
-            foreach (var type in AttributeToMethodInfo.Keys)
+            foreach (var type in _attributeToMethodInfo.Keys)
             {
                 var methodInfos = types
                     .SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any()));
-                AttributeToMethodInfo[type].AddRange(methodInfos);
+                _attributeToMethodInfo[type].AddRange(methodInfos);
             }
         }
 
@@ -107,6 +123,13 @@ namespace Gauge.CSharp.Runner
                 Logger.Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
                 return e.Types.Where(type => type != null);
             }
+        }
+
+        private void LoadTargetLibAssembly()
+        {
+            var targetLibLocation = Path.GetFullPath(Path.Combine(Utils.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
+            _targetLibAssembly = Assembly.LoadFrom(targetLibLocation);
+            Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
     }
 }
