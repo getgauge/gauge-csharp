@@ -11,10 +11,10 @@ namespace Gauge.CSharp.Runner
     public class AssemblyScanner
     {
         private static readonly Logger Logger = LogManager.GetLogger("AssemblyScanner");
+        private Dictionary<Type, List<MethodInfo>> AttributeToMethodInfo;
 
         public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
         public List<Type> ScreengrabberTypes = new List<Type>();
-        public Dictionary<Type, List<MethodInfo>> AttributeToMethodInfo;
 
         public AssemblyScanner()
         {
@@ -28,6 +28,11 @@ namespace Gauge.CSharp.Runner
             AttributeToMethodInfo[typeof(BeforeStep)] = new List<MethodInfo>();
             AttributeToMethodInfo[typeof(AfterStep)] = new List<MethodInfo>();
             AttributeToMethodInfo[typeof(Step)] = new List<MethodInfo>();
+        }
+
+        public List<MethodInfo> GetHookMethods(Type type)
+        {
+            return AttributeToMethodInfo[type];
         }
 
         public void TryAdd(string path)

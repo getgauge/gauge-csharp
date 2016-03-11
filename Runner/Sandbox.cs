@@ -69,20 +69,20 @@ namespace Gauge.CSharp.Runner
         public IHookRegistry GetHookRegistry()
         {
             var hookRegistry = new HookRegistry(this);
-            hookRegistry.AddBeforeSuiteHooks(AssemblyScanner.AttributeToMethodInfo[typeof(BeforeSuite)]);
-            hookRegistry.AddAfterSuiteHooks(AssemblyScanner.AttributeToMethodInfo[typeof(AfterSuite)]);
-            hookRegistry.AddBeforeSpecHooks(AssemblyScanner.AttributeToMethodInfo[typeof(BeforeSpec)]);
-            hookRegistry.AddAfterSpecHooks(AssemblyScanner.AttributeToMethodInfo[typeof(AfterSpec)]);
-            hookRegistry.AddBeforeScenarioHooks(AssemblyScanner.AttributeToMethodInfo[typeof(BeforeScenario)]);
-            hookRegistry.AddAfterScenarioHooks(AssemblyScanner.AttributeToMethodInfo[typeof(AfterScenario)]);
-            hookRegistry.AddBeforeStepHooks(AssemblyScanner.AttributeToMethodInfo[typeof(BeforeStep)]);
-            hookRegistry.AddAfterStepHooks(AssemblyScanner.AttributeToMethodInfo[typeof(AfterStep)]);
+            hookRegistry.AddBeforeSuiteHooks(AssemblyScanner.GetHookMethods(typeof(BeforeSuite)));
+            hookRegistry.AddAfterSuiteHooks(AssemblyScanner.GetHookMethods(typeof(AfterSuite)));
+            hookRegistry.AddBeforeSpecHooks(AssemblyScanner.GetHookMethods(typeof(BeforeSpec)));
+            hookRegistry.AddAfterSpecHooks(AssemblyScanner.GetHookMethods(typeof(AfterSpec)));
+            hookRegistry.AddBeforeScenarioHooks(AssemblyScanner.GetHookMethods(typeof(BeforeScenario)));
+            hookRegistry.AddAfterScenarioHooks(AssemblyScanner.GetHookMethods(typeof(AfterScenario)));
+            hookRegistry.AddBeforeStepHooks(AssemblyScanner.GetHookMethods(typeof(BeforeStep)));
+            hookRegistry.AddAfterStepHooks(AssemblyScanner.GetHookMethods(typeof(AfterStep)));
             return hookRegistry;
         }
 
         public List<MethodInfo> GetStepMethods()
         {
-            return AssemblyScanner.AttributeToMethodInfo[typeof(Step)];
+            return AssemblyScanner.GetHookMethods(typeof(Step));
         }
 
         public List<string> GetAllStepTexts()
