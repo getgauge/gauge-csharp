@@ -188,7 +188,7 @@ namespace Gauge.CSharp.Runner
                 .Select(s =>
                 {
                     Logger.Debug("Loading assembly from : {0}", s);
-                    return Assembly.Load(AssemblyName.GetAssemblyName(s));
+                    return Assembly.LoadFrom(s);
                 })
                 .ToList();
         }
