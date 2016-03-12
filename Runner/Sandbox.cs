@@ -195,7 +195,7 @@ namespace Gauge.CSharp.Runner
 
         private void LocateTargetLibAssembly()
         {
-            TargetLibAssembly = ScannedAssemblies.First(assembly => assembly.GetName().Name == GaugeLibAssembleName);
+            TargetLibAssembly = ScannedAssemblies.First(assembly => string.CompareOrdinal(assembly.GetName().Name, GaugeLibAssembleName) == 0);
             Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
         }
 
