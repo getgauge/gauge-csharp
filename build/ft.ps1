@@ -19,12 +19,12 @@
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
 
-choco install gauge
+go get github.com/getgauge/gauge
 
-$gauge=$env:ProgramFiles + "\gauge\bin\gauge.exe"
+$gauge=$env:GOPATH + "\bin\gauge.exe"
 &$gauge --install xml-report
 
-& "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true
+& "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
  
 git clone --depth=1 https://github.com/getgauge/gauge-tests
 cd gauge-tests

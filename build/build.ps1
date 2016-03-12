@@ -17,16 +17,21 @@
 
 param([string]$buildWithTest='')
 
-
 function RestoreNugetAndBuild
 {
   param($sln, $outputDir)
+  $verbosity = "minimal"
+  if($env:MSBUILD_VERBOSITY)
+  {
+    $verbosity = $env:MSBUILD_VERBOSITY
+  }
+
   New-Item -Itemtype directory $outputPath -Force
   $msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
   Write-Host "Restoring Nuget for $($sln)"
   $nuget = "$($pwd)\build\NuGet.exe"
   &$nuget restore $sln
-  &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputDir)"
+  &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputDir)" /v:"$($verbosity)"
   if($LastExitCode -ne 0)
   {
       throw "Build failed $($sln)"
