@@ -19,9 +19,12 @@
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
 
+$gopath = "$($pwd)\GoWorkspace"
+mkdir -p $gopath
+$env:GOPATH = $gopath
 go get github.com/getgauge/gauge
 
-$gauge=$env:GOPATH + "\bin\gauge.exe"
+$gauge="$($gopath)\bin\gauge.exe"
 &$gauge --install xml-report
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge

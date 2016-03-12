@@ -61,15 +61,13 @@ Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Fo
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force
 
-Import-Module Pscx
-
 # zip!
 $zipScript= {
-    $curr=$pwd
-    set-location $outputDir
     $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
-    gci -recurse | Write-Zip -OutputPath "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
-    set-location $curr
+    Add-Type -Assembly "System.IO.Compression.FileSystem" ;
+    $archivePath = "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
+    [System.IO.Compression.ZipFile]::CreateFromDirectory($outputDir, $archivePath)
+    Write-Host "Created " $archivePath
 }
 
 Invoke-Command -ScriptBlock $zipScript
