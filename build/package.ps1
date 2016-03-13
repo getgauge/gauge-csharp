@@ -62,15 +62,11 @@ Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -For
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force | Out-Null
 
 # zip!
-$zipScript= {
-    $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
-    Add-Type -Assembly "System.IO.Compression.FileSystem" ;
-    $archivePath = "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
-    [System.IO.Compression.ZipFile]::CreateFromDirectory($outputDir, $archivePath)
-    Write-Host "Created " $archivePath
-}
-
-Invoke-Command -ScriptBlock $zipScript
+$version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
+Add-Type -Assembly "System.IO.Compression.FileSystem" ;
+$archivePath = "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
+[System.IO.Compression.ZipFile]::CreateFromDirectory($outputDir, $archivePath)
+Write-Host "Created " $archivePath
 
 # Hack to break on exit code. Powershell does not seem to propogate the exit code from test failures.
 if($LastExitCode -ne 0)
