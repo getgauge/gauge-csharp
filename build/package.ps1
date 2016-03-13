@@ -17,7 +17,7 @@
 
 # Clean the artifacts directory
 
-Remove-Item "$($pwd)\artifacts*" -recurse -force
+Remove-Item "$($pwd)\artifacts*" -recurse -force | Out-Null
 
 # Build And Test everything
 
@@ -26,11 +26,11 @@ Remove-Item "$($pwd)\artifacts*" -recurse -force
 $nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
     $nuget = "$($pwd)\build\NuGet.exe"
     $env:OutDir=$outputPath # required for nuget to pick up the file from this location
-    &$nuget pack "$($projectPath)" /p Configuration=release -OutputDirectory "$($nugetDir)" -Verbosity detailed -ExcludeEmptyDirectories
+    &$nuget pack "$($projectPath)" /p Configuration=release -OutputDirectory "$($nugetDir)" -ExcludeEmptyDirectories
 }
 
 $nugetDir = "$($pwd)\artifacts"
-New-Item -Itemtype directory $nugetDir -Force
+New-Item -Itemtype directory $nugetDir -Force | Out-Null
 
 # Package the Lib, output is Gauge.CSharp.Lib.nupkg
 $buildOutputPath= "$($pwd)\artifacts\gauge-csharp-lib"
@@ -49,17 +49,17 @@ $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $skelDir="$($outputDir)\skel"
 $skelPropertiesDir = "$($skelDir)\Properties"
 
-@($skelDir, $skelPropertiesDir) | %{ New-Item -Itemtype directory $_ -Force}
+@($skelDir, $skelPropertiesDir) | %{ New-Item -Itemtype directory $_ -Force | Out-Null}
 
 Write-host "Copying Skeleton files for Gauge CSharp project"
 
 # Copy the skeleton files
-Copy-Item "$($pwd)\Gauge.Project.Skel\AssemblyInfo.cs" -Destination $skelPropertiesDir -Force
-Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.csproj" -Destination $skelDir -Force
-Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelDir -Force
-Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force
-Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force
-Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force
+Copy-Item "$($pwd)\Gauge.Project.Skel\AssemblyInfo.cs" -Destination $skelPropertiesDir -Force | Out-Null
+Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.csproj" -Destination $skelDir -Force | Out-Null
+Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelDir -Force | Out-Null
+Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force | Out-Null
+Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force | Out-Null
+Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force | Out-Null
 
 # zip!
 $zipScript= {
