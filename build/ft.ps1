@@ -33,5 +33,9 @@ if(Test-Path .\gauge-tests)
 git clone --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests | out-null
 
 cd .\gauge-tests
-&$gauge --env=ci-csharp -p specs
+if ($env:GAUGE_PARALLEL -ne "false") {
+    &$gauge --env=ci-csharp specs
+}else {
+    &$gauge --env=ci-csharp -p specs
+}
 cd ..
