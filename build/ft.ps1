@@ -29,7 +29,7 @@ if(Test-Path .\gauge-tests)
 {
     Remove-Item -force -recurse .\gauge-tests | Out-Null
 }
-git clone --quite --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests
+git clone --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests | out-null
 
 cd .\gauge-tests
 &$gauge --env=ci-csharp -p specs
