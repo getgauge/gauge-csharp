@@ -31,10 +31,10 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class Sandbox : MarshalByRefObject, ISandbox
     {
-        private List<Assembly> ScannedAssemblies { get; set; }
-        public Assembly TargetLibAssembly { get; set; }
+        private readonly AssemblyScanner _assemblyScanner = new AssemblyScanner();
 
-        private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+        public Assembly TargetLibAssembly { get; private set; }
+
         private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         private Type ScreenGrabberType { get; set; }
@@ -42,6 +42,7 @@ namespace Gauge.CSharp.Runner
         [Obsolete("Sandbox is supposed to be a singleton class. Use Sandbox.Instance instead", true)]
         public Sandbox()
         {
+            TargetLibAssembly = _assemblyScanner.GetTargetLibAssembly();
             LogConfiguration.Initialize();
         }
 
@@ -69,25 +70,25 @@ namespace Gauge.CSharp.Runner
         public IHookRegistry GetHookRegistry()
         {
             var hookRegistry = new HookRegistry(this);
-            hookRegistry.AddBeforeSuiteHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeSuite).ToString()));
-            hookRegistry.AddAfterSuiteHooks(GetAllMethodsForSpecAssemblies(typeof(AfterSuite).ToString()));
-            hookRegistry.AddBeforeSpecHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeSpec).ToString()));
-            hookRegistry.AddAfterSpecHooks(GetAllMethodsForSpecAssemblies(typeof(AfterSpec).ToString()));
-            hookRegistry.AddBeforeScenarioHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeScenario).ToString()));
-            hookRegistry.AddAfterScenarioHooks(GetAllMethodsForSpecAssemblies(typeof(AfterScenario).ToString()));
-            hookRegistry.AddBeforeStepHooks(GetAllMethodsForSpecAssemblies(typeof(BeforeStep).ToString()));
-            hookRegistry.AddAfterStepHooks(GetAllMethodsForSpecAssemblies(typeof(AfterStep).ToString()));
+            hookRegistry.AddBeforeSuiteHooks(_assemblyScanner.GetMethods<BeforeSuite>());
+            hookRegistry.AddAfterSuiteHooks(_assemblyScanner.GetMethods<AfterSuite>());
+            hookRegistry.AddBeforeSpecHooks(_assemblyScanner.GetMethods<BeforeSpec>());
+            hookRegistry.AddAfterSpecHooks(_assemblyScanner.GetMethods<AfterSpec>());
+            hookRegistry.AddBeforeScenarioHooks(_assemblyScanner.GetMethods<BeforeScenario>());
+            hookRegistry.AddAfterScenarioHooks(_assemblyScanner.GetMethods<AfterScenario>());
+            hookRegistry.AddBeforeStepHooks(_assemblyScanner.GetMethods<BeforeStep>());
+            hookRegistry.AddAfterStepHooks(_assemblyScanner.GetMethods<AfterStep>());
             return hookRegistry;
         }
 
         public List<MethodInfo> GetStepMethods()
         {
-            return GetAllMethodsForSpecAssemblies(typeof(Step).FullName);
+            return _assemblyScanner.GetMethods<Step>();
         }
 
         public List<string> GetAllStepTexts()
         {
-            return GetAllMethodsForSpecAssemblies(typeof(Step).FullName).SelectMany(GetStepTexts).ToList();
+            return GetStepMethods().SelectMany(GetStepTexts).ToList();
         }
 
         public void InitializeDataStore(string dataStoreType)
@@ -133,28 +134,11 @@ namespace Gauge.CSharp.Runner
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
 
-        private List<MethodInfo> GetAllMethodsForSpecAssemblies(string type)
-        {
-            var targetType = TargetLibAssembly.GetType(type);
-            return ScannedAssemblies.SelectMany(assembly => GetMethodsFromAssembly(targetType, assembly)).ToList();
-        }
-
-        private static List<MethodInfo> GetMethodsFromAssembly(Type type, Assembly assembly)
-        {
-            var isGaugeAssembly = assembly.GetReferencedAssemblies().Select(name => name.Name).Contains(GaugeLibAssembleName);
-            return isGaugeAssembly
-                ? assembly.GetTypes()
-                    .SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any()))
-                    .ToList()
-                : new List<MethodInfo>();
-        }
-
         internal void LoadAssemblyFiles()
         {
             try
             {
                 EnumerateAndLoadAssemblies();
-                LocateTargetLibAssembly();
                 SetAppConfigIfExists();
                 ScanCustomScreenGrabber();
             }
@@ -170,9 +154,8 @@ namespace Gauge.CSharp.Runner
         }
 
         private void SetAppConfigIfExists()
-        {
-            Func<Assembly, bool> targetAssemblyPreficate = a => a.GetReferencedAssemblies().Any(n => string.CompareOrdinal(n.Name, GaugeLibAssembleName) == 0);
-            var targetAssembly = ScannedAssemblies.FirstOrDefault(targetAssemblyPreficate);
+        {            
+            var targetAssembly = _assemblyScanner.AssembliesReferencingGaugeLib.FirstOrDefault();
             if (targetAssembly == null) return;
 
             var configFile = string.Format("{0}.config", targetAssembly.Location);
@@ -184,26 +167,13 @@ namespace Gauge.CSharp.Runner
 
         private void EnumerateAndLoadAssemblies()
         {
-            ScannedAssemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
-                .Select(s =>
-                {
-                    Logger.Debug("Loading assembly from : {0}", s);
-                    return Assembly.LoadFrom(s);
-                })
-                .ToList();
-        }
-
-        private void LocateTargetLibAssembly()
-        {
-            TargetLibAssembly = ScannedAssemblies.First(assembly => string.CompareOrdinal(assembly.GetName().Name, GaugeLibAssembleName) == 0);
-            Logger.Debug("Target Lib loaded : {0}, from {1}", TargetLibAssembly.FullName, TargetLibAssembly.Location);
+            foreach (var path in Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly))
+                _assemblyScanner.TryAdd(path);
         }
 
         private void ScanCustomScreenGrabber()
         {
-            ScreenGrabberType = ScannedAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
-                .FirstOrDefault(type => type.GetInterfaces().Any(t => t.FullName == typeof (IScreenGrabber).FullName));
+            ScreenGrabberType = _assemblyScanner.ScreengrabberTypes.FirstOrDefault();
             if (ScreenGrabberType != null)
             {
                 Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
@@ -212,6 +182,11 @@ namespace Gauge.CSharp.Runner
             {
                 Logger.Debug("No implementation of IScreenGrabber found.");
             }
+        }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
     }
 }
