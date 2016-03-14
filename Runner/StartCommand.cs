@@ -59,8 +59,17 @@ namespace Gauge.CSharp.Runner
                     Environment.Exit(1);
                 }
             }
-            var sandbox = SandboxFactory.Create();
-            _messageProcessorFactory = new MessageProcessorFactory(sandbox);
+            Logger.Info("Creating a Sandbox in: {0}", Utils.GetGaugeBinDir());
+            try
+            {
+                var sandbox = SandboxFactory.Create();
+                _messageProcessorFactory = new MessageProcessorFactory(sandbox);
+            }
+            catch (Exception e)
+            {
+                Logger.Fatal(e, "Unable to create sandbox in {0}", Utils.GetGaugeBinDir());
+                Environment.Exit(1);
+            }
         }
 
         [DebuggerHidden]
@@ -101,7 +110,15 @@ namespace Gauge.CSharp.Runner
                 throw new NotAValidGaugeProjectException();
             }
             var solutionFullPath = solutionFileList.First();
-            Directory.CreateDirectory(Utils.GetGaugeBinDir());
+            try
+            {
+                Directory.CreateDirectory(Utils.GetGaugeBinDir());
+            }
+            catch (IOException ex)
+            {
+                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", Utils.GetGaugeBinDir());
+                Environment.Exit(1);
+            }
             Logger.Info("Building Project: {0}", solutionFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string>
