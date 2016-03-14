@@ -16,35 +16,19 @@
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 # Build, Test & Package everything
-# & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
+& "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
 
-$gopath = $env:GOPATH
-$gaugeRoot = "$($pwd)\GaugeRoot"
-$currPath = $pwd
-
-if (-Not (Test-Path $gopath)) {
-    New-Item -Itemtype directory $gopath -Force | Out-Null
-}
-New-Item -Itemtype directory $gaugeRoot -Force | Out-Null
-
-go get -d -u github.com/getgauge/gauge
-go get github.com/tools/godep
-
-cd $gopath\src\github.com\getgauge\gauge
-Invoke-Expression "$($gopath)\bin\godep.exe restore"
-go run .\build\make.go
-Invoke-Expression "go run .\build\make.go --install --prefix=$($gaugeRoot)"
-cd $currPath
-
-$gauge="$($gaugeRoot)\bin\gauge.exe"
+$gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 &$gauge --install xml-report
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
-Remove-Item -force -recurse .\gauge-tests | Out-Null
-git clone --depth=1 https://github.com/getgauge/gauge-tests
-cd gauge-tests
+if(Test-Path .\gauge-tests)
+{
+    Remove-Item -force -recurse .\gauge-tests | Out-Null
+}
+git clone --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests
 
+cd .\gauge-tests
 &$gauge --env=ci-csharp -p specs
-
 cd ..

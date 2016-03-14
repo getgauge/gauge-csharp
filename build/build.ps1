@@ -26,9 +26,8 @@ function RestoreNugetAndBuild
     $verbosity = $env:MSBUILD_VERBOSITY
   }
 
-  New-Item -Itemtype directory $outputPath -Force
+  New-Item -Itemtype directory $outputPath -Force | Out-Null
   $msbuild="$($env:systemroot)\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
-  Write-Host "Restoring Nuget for $($sln)"
   $nuget = "$($pwd)\build\NuGet.exe"
   &$nuget restore $sln
   &$msbuild $sln /t:rebuild /m /nologo /p:configuration=release /p:OutDir="$($outputDir)" /v:"$($verbosity)"
