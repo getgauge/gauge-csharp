@@ -18,6 +18,7 @@
 # Build, Test & Package everything
 & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
 
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 &$gauge --install xml-report
 &$gauge --install html-report
