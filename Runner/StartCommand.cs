@@ -67,7 +67,8 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception e)
             {
-                Logger.Fatal(e, "Unable to create sandbox in {0}", Utils.GetGaugeBinDir());
+                Logger.Info("Unable to create sandbox in {0}", Utils.GetGaugeBinDir());
+                Logger.Fatal(e.ToString);
                 Environment.Exit(1);
             }
         }
