@@ -20,6 +20,8 @@
 
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 &$gauge --install xml-report
+&$gauge --install html-report
+&$gauge --install java
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
@@ -27,7 +29,7 @@ if(Test-Path .\gauge-tests)
 {
     Remove-Item -force -recurse .\gauge-tests | Out-Null
 }
-git clone --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests
+git clone --quite --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests
 
 cd .\gauge-tests
 &$gauge --env=ci-csharp -p specs
