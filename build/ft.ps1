@@ -15,7 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-# $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($env:APPVEYOR -eq "true") {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+}
+
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 &$gauge --install xml-report
 &$gauge --install html-report
