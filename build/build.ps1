@@ -38,22 +38,22 @@ function RestoreNugetAndBuild
 }
 
 # Build the package CSharp-lib
-$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-lib\")
+$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
 $sln = "Gauge.CSharp.Lib.sln"
 RestoreNugetAndBuild $sln $outputPath
 
 # Build the package CSharp-Core
-$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp-core\")
+$outputPath= "$($pwd)\artifacts\gauge-csharp-core"
 $sln = "Gauge.CSharp.Core.sln"
 RestoreNugetAndBuild $sln $outputPath
 
 # Build the runner
-$outputPath= [IO.Path]::Combine($pwd,"artifacts\gauge-csharp\bin\")
+$outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $sln = "Gauge.CSharp.NoTests.sln"
 if ($buildWithTest) {
     $sln="Gauge.CSharp.sln"
     $sampleProj = resolve-path "IntegrationTestSample\IntegrationTestSample.sln"
-    $sampleProjOutputPath = [IO.Path]::Combine($pwd,"IntegrationTestSample\gauge-bin")
+    $sampleProjOutputPath = "$($pwd)\IntegrationTestSample\gauge-bin"
     RestoreNugetAndBuild $sampleProj $sampleProjOutputPath
 }
 RestoreNugetAndBuild $sln $outputPath
