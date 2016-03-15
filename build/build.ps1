@@ -57,3 +57,7 @@ if ($buildWithTest) {
     RestoreNugetAndBuild $sampleProj $sampleProjOutputPath
 }
 RestoreNugetAndBuild $sln $outputPath
+
+# MSBuild uses this environment variable. If Gauge Build is run, this is set to the last build's output path
+# Reset this, to prevent undesired sideeffects in subsequent stages
+$env:OutDir=""

@@ -15,34 +15,29 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-# Build, Test & Package everything
-# & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
-
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+# $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
-# &$gauge --install xml-report
+&$gauge --install xml-report
 &$gauge --install html-report
-# &$gauge --install java
+&$gauge --install java
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
-# if(Test-Path .\gauge-tests)
-# {
-#     Remove-Item -force -recurse .\gauge-tests | Out-Null
-# }
-# git clone --depth=1 https://github.com/getgauge/gauge-tests | out-null
+if(Test-Path .\gauge-tests)
+{
+    Remove-Item -force -recurse .\gauge-tests | Out-Null
+}
 
-# cd .\gauge-tests
-# if ($env:GAUGE_PARALLEL -eq "false") {
-#     &$gauge --env=ci-csharp specs
-# }else {
-#     &$gauge --env=ci-csharp -p specs
-# }
-# cd ..
+if ($env:GAUGE_TEST_BRANCH -ne "") {
+    $branch="--branch=$($env:GAUGE_TEST_BRANCH)"
+}
 
-New-Item -ItemType Directory "c:\projects\gaugesample" -Force
-cd c:\projects\gaugesample
-&$gauge --init csharp
-&$gauge specs
+git clone $branch --depth=1 https://github.com/getgauge/gauge-tests | out-null
 
-ls gauge-bin
+cd .\gauge-tests
+if ($env:GAUGE_PARALLEL -eq "false") {
+    &$gauge --env=ci-csharp specs
+}else {
+    &$gauge --env=ci-csharp -p specs
+}
+cd ..
