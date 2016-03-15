@@ -16,7 +16,7 @@
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 # Build, Test & Package everything
-& "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
+# & "$(Split-Path $MyInvocation.MyCommand.Path)\package.ps1"
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
@@ -40,8 +40,8 @@ $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 # }
 # cd ..
 
-New-Item -ItemType Directory "gaugesample" -Force
-cd gaugesample
+New-Item -ItemType Directory "c:\projects\gaugesample" -Force
+cd c:\projects\gaugesample
 &$gauge --init csharp
 &$gauge specs
 
