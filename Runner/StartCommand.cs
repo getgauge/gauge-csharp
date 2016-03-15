@@ -103,7 +103,7 @@ namespace Gauge.CSharp.Runner
 
         private static void BuildTargetGaugeProject()
         {
-            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
+            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Normal);
             var solutionFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.sln");
 
             if (!solutionFileList.Any())
