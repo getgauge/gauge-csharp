@@ -20,9 +20,9 @@
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
-&$gauge --install xml-report
+# &$gauge --install xml-report
 &$gauge --install html-report
-&$gauge --install java
+# &$gauge --install java
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
@@ -30,12 +30,19 @@ if(Test-Path .\gauge-tests)
 {
     Remove-Item -force -recurse .\gauge-tests | Out-Null
 }
-git clone --branch=0.3.2 --depth=1 https://github.com/getgauge/gauge-tests | out-null
+# git clone --depth=1 https://github.com/getgauge/gauge-tests | out-null
 
-cd .\gauge-tests
-if ($env:GAUGE_PARALLEL -eq "false") {
-    &$gauge --env=ci-csharp specs
-}else {
-    &$gauge --env=ci-csharp -p specs
-}
-cd ..
+# cd .\gauge-tests
+# if ($env:GAUGE_PARALLEL -eq "false") {
+#     &$gauge --env=ci-csharp specs
+# }else {
+#     &$gauge --env=ci-csharp -p specs
+# }
+# cd ..
+
+New-Item -ItemType Directory "gauge-tests" -Force
+cd gauge-tests
+&$gauge --init csharp
+&$gauge specs
+
+ls gauge-bin
