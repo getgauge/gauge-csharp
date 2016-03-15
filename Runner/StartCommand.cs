@@ -111,13 +111,15 @@ namespace Gauge.CSharp.Runner
                 throw new NotAValidGaugeProjectException();
             }
             var solutionFullPath = solutionFileList.First();
+            var gaugeBinDir = Utils.GetGaugeBinDir();
             try
             {
-                Directory.CreateDirectory(Utils.GetGaugeBinDir());
+                Logger.Debug("Create Gauge Bin Directory: {0}", gaugeBinDir);
+                Directory.CreateDirectory(gaugeBinDir);
             }
             catch (IOException ex)
             {
-                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", Utils.GetGaugeBinDir());
+                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", gaugeBinDir);
                 Environment.Exit(1);
             }
             Logger.Info("Building Project: {0}", solutionFullPath);
@@ -126,7 +128,7 @@ namespace Gauge.CSharp.Runner
             {
                 {"Configuration", "Release"},
                 {"Platform", "Any CPU"},
-                {"OutputPath", Utils.GetGaugeBinDir()}
+                {"OutputPath", gaugeBinDir}
             };
 
             var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
