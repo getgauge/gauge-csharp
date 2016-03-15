@@ -26,10 +26,10 @@ $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
-if(Test-Path .\gauge-tests)
-{
-    Remove-Item -force -recurse .\gauge-tests | Out-Null
-}
+# if(Test-Path .\gauge-tests)
+# {
+#     Remove-Item -force -recurse .\gauge-tests | Out-Null
+# }
 # git clone --depth=1 https://github.com/getgauge/gauge-tests | out-null
 
 # cd .\gauge-tests
@@ -40,8 +40,8 @@ if(Test-Path .\gauge-tests)
 # }
 # cd ..
 
-New-Item -ItemType Directory "gauge-tests" -Force
-cd gauge-tests
+New-Item -ItemType Directory "gaugesample" -Force
+cd gaugesample
 &$gauge --init csharp
 &$gauge specs
 
