@@ -26,16 +26,20 @@ $gauge="$($env:ProgramFiles)\gauge\bin\gauge.exe"
 
 & "$(Split-Path $MyInvocation.MyCommand.Path)\install.ps1" -force $true -gauge $gauge
 
+if ($env:OutDir) {
+    remove-item Env:\OutDir
+}
+
 if(Test-Path .\gauge-tests)
 {
     Remove-Item -force -recurse .\gauge-tests | Out-Null
 }
 
-if ($env:GAUGE_TEST_BRANCH -ne "") {
+if ($env:GAUGE_TEST_BRANCH) {
     $branch="--branch=$($env:GAUGE_TEST_BRANCH)"
 }
 
-git clone $branch --depth=1 https://github.com/getgauge/gauge-tests | out-null
+git clone $branch --depth=1 https://github.com/getgauge/gauge-tests
 
 cd .\gauge-tests
 if ($env:GAUGE_PARALLEL -eq "false") {
