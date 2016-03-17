@@ -15,15 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
 namespace Gauge.CSharp.Runner
 {
-    public interface IAssemblyScanner
+    public interface IFileWrapper
     {
-        Assembly GetTargetLibAssembly();
-        List<MethodInfo> GetMethods(Type annotationType);
+        bool Exists(string path);
     }
 }

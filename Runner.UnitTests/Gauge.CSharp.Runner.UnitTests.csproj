@@ -75,6 +75,7 @@
     <Reference Include="System.Runtime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyScannerTests.cs" />
     <Compile Include="ClassInstanceManagerTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="Converter\TableParamConverterTests.cs" />

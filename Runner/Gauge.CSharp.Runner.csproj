@@ -110,17 +110,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanner.cs" />
+    <Compile Include="AssemblyWrapper.cs" />
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="FileWrapper.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IAssemblyScanner.cs" />
+    <Compile Include="IAssemblyWrapper.cs" />
+    <Compile Include="IFileWrapper.cs" />
     <Compile Include="IHookRegistry.cs" />
     <Compile Include="IMethodExecutor.cs" />
     <Compile Include="IMethodScanner.cs" />

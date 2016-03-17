@@ -36,9 +36,13 @@ namespace Gauge.CSharp.Runner
         public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
         public List<Type> ScreengrabberTypes = new List<Type>();
         private Assembly _targetLibAssembly;
+        private readonly IAssemblyWrapper _assemblyWrapper;
+        private readonly IFileWrapper _fileWrapper;
 
-        public AssemblyScanner(IEnumerable<string> assemblyLocations)
+        public AssemblyScanner(IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper, IEnumerable<string> assemblyLocations)
         {
+            _assemblyWrapper = assemblyWrapper;
+            _fileWrapper = fileWrapper;
             LoadTargetLibAssembly();
             foreach (var location in assemblyLocations)
             {
@@ -46,14 +50,19 @@ namespace Gauge.CSharp.Runner
             }
         }
 
+        public AssemblyScanner(IEnumerable<string> assemblyLocations)
+            : this(new AssemblyWrapper(), new FileWrapper(), assemblyLocations)
+        {
+        }
+
         public Assembly GetTargetLibAssembly()
         {
             return _targetLibAssembly;
         }
 
-        public List<MethodInfo> GetMethods(Type type)
+        public List<MethodInfo> GetMethods(Type annotationType)
         {
-            var typeFromTargetLib = GetTypeFromTargetLib(type);
+            var typeFromTargetLib = GetTypeFromTargetLib(annotationType);
             Func<MethodInfo, bool> methodFilter = info => info.GetCustomAttributes(typeFromTargetLib).Any();
             Func<Type, IEnumerable<MethodInfo>> methodSelector = t => t.GetMethods().Where(methodFilter);
             return AssembliesReferencingGaugeLib.SelectMany(assembly => assembly.GetTypes().SelectMany(methodSelector)).ToList();
@@ -66,7 +75,7 @@ namespace Gauge.CSharp.Runner
             try
             {
                 // Load assembly for reflection only to avoid exceptions when referenced assemblyLocations cannot be found
-                assembly = Assembly.ReflectionOnlyLoadFrom(path);
+                assembly = _assemblyWrapper.ReflectionOnlyLoadFrom(path);
             }
             catch
             {
@@ -81,7 +90,7 @@ namespace Gauge.CSharp.Runner
             var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[]{});
 
             // Load assembly so that code can be executed
-            var fullyLoadedAssembly = Assembly.LoadFrom(path);
+            var fullyLoadedAssembly = _assemblyWrapper.LoadFrom(path);
             var types = GetFullyLoadedTypes(loadableTypes, fullyLoadedAssembly).ToList();
 
             if (isReferencingGaugeLib)
@@ -96,7 +105,7 @@ namespace Gauge.CSharp.Runner
             {
                 var fullyLoadedType = fullyLoadedAssembly.GetType(type.FullName);
                 if (fullyLoadedType == null)
-                    Logger.Warn("Cannot scan type '{0}'", type.FullName);                    
+                    Logger.Warn("Cannot scan type '{0}'", type.FullName);
                 else
                     yield return fullyLoadedType;
             }
@@ -124,13 +133,13 @@ namespace Gauge.CSharp.Runner
         private void LoadTargetLibAssembly()
         {
             var targetLibLocation = Path.GetFullPath(Path.Combine(Utils.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
-            if (string.IsNullOrEmpty(targetLibLocation))
+            if (!_fileWrapper.Exists(targetLibLocation))
             {
                 var message = string.Format("Unable to locate Gauge Lib at: {0}", targetLibLocation);
                 Logger.Error(message);
                 throw new FileNotFoundException(message);
             }
-            _targetLibAssembly = Assembly.LoadFrom(targetLibLocation);
+            _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
             Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
 
