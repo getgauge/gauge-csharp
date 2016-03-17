@@ -25,7 +25,7 @@ namespace Gauge.CSharp.Lib.UnitTests
         [Test]
         public void ShouldGetDataStoreForSuite()
         {
-            var dataStore = DataStoreFactory.GetDataStoreFor(DataStoreType.Suite);
+            var dataStore = DataStoreFactory.SuiteDataStore;
 
             Assert.NotNull(dataStore);
             Assert.IsInstanceOf<DataStore>(dataStore);
@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Lib.UnitTests
         [Test]
         public void ShouldGetDataStoreForSpec()
         {
-            var dataStore = DataStoreFactory.GetDataStoreFor(DataStoreType.Spec);
+            var dataStore = DataStoreFactory.SpecDataStore;
 
             Assert.NotNull(dataStore);
             Assert.IsInstanceOf<DataStore>(dataStore);
@@ -43,7 +43,7 @@ namespace Gauge.CSharp.Lib.UnitTests
         [Test]
         public void ShouldGetDataStoreForScenario()
         {
-            var dataStore = DataStoreFactory.GetDataStoreFor(DataStoreType.Scenario);
+            var dataStore = DataStoreFactory.ScenarioDataStore;
 
             Assert.NotNull(dataStore);
             Assert.IsInstanceOf<DataStore>(dataStore);
