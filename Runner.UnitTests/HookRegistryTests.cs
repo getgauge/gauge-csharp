@@ -15,7 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 using Moq;
 using NUnit.Framework;
@@ -25,88 +28,107 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class HookRegistryTests
     {
-        public void DummyHook(){}
+        public void BeforeSuiteHook() {}
+        public void AfterSuiteHook() {}
+        public void BeforeSpecHook() {}
+        public void AfterSpecHook() {}
+        public void BeforeScenarioHook() {}
+        public void AfterScenarioHook() {}
+        public void BeforeStepHook() {}
+        public void AfterStepHook() {}
 
         public ISandbox SandBox;
+        private HookRegistry _hookRegistry;
+        private Mock<IAssemblyScanner> _mockAssemblyScanner;
 
         [SetUp]
         public void Setup()
         {
-            var mockSandbox = new Mock<ISandbox>();
-            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof(Step).Assembly);
-            SandBox = mockSandbox.Object;
-        }
-        [Test]
-        public void ShouldAddAndGetBeforeScenarioHook()
-        {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddBeforeScenarioHooks(new [] {methodInfo});
-
-            Assert.True(hookRegistry.BeforeScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
-        }
-
-        [Test]
-        public void ShouldAddAndGetAfterScenarioHook()
-        {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddAfterScenarioHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
+            _mockAssemblyScanner = new Mock<IAssemblyScanner>();
+            _mockAssemblyScanner.Setup(scanner => scanner.GetTargetLibAssembly()).Returns(typeof (Step).Assembly);
+            var types = new[]
+            {
+                typeof (BeforeScenario), typeof (AfterScenario), typeof (BeforeSpec), typeof (AfterSpec),
+                typeof (BeforeStep), typeof (AfterStep), typeof (BeforeSuite), typeof (AfterSuite)
+            };
+            foreach (var type in types)
+            {
+                var methodInfos = new List<MethodInfo> { GetType().GetMethod(string.Format("{0}Hook", type.Name)) };
+                _mockAssemblyScanner.Setup(scanner => scanner.GetMethods(type)).Returns(methodInfos);
+            }
+            _hookRegistry = new HookRegistry(_mockAssemblyScanner.Object);
         }
 
         [Test]
-        public void ShouldAddAndGetBeforeSpecHook()
+        public void ShouldGetBeforeScenarioHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddBeforeSpecHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeSpecHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeScenarioHook") };
+            var hooks = _hookRegistry.BeforeScenarioHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
 
         [Test]
-        public void ShouldAddAndGetAfterSpecHook()
+        public void ShoulddGetAfterScenarioHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddAfterSpecHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterSpecHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterScenarioHook") };
+            var hooks = _hookRegistry.AfterScenarioHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
 
         [Test]
-        public void ShouldAddAndGetBeforeStepHook()
+        public void ShouldGetBeforeSpecHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddBeforeStepHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeStepHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeSpecHook") };
+            var hooks = _hookRegistry.BeforeSpecHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
 
         [Test]
-        public void ShouldAddAndGetAfterStepHook()
+        public void ShouldGetAfterSpecHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddAfterStepHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterStepHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterSpecHook") };
+            var hooks = _hookRegistry.AfterSpecHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
 
         [Test]
-        public void ShouldAddAndGetBeforeSuiteHook()
+        public void ShouldGetBeforeStepHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddBeforeSuiteHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.BeforeSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeStepHook") };
+            var hooks = _hookRegistry.BeforeStepHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
 
         [Test]
-        public void ShouldAddAndGetAfterSuiteHook()
+        public void ShouldGetAfterStepHook()
         {
-            var hookRegistry = new HookRegistry();
-            var methodInfo = GetType().GetMethod("DummyHook");
-            hookRegistry.AddAfterSuiteHooks(new [] {methodInfo});
-            Assert.True(hookRegistry.AfterSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterStepHook") };
+            var hooks = _hookRegistry.AfterStepHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
+        }
+
+        [Test]
+        public void ShouldGetBeforeSuiteHook()
+        {
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeSuiteHook") };
+            var hooks = _hookRegistry.BeforeSuiteHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
+        }
+
+        [Test]
+        public void ShouldGetAfterSuiteHook()
+        {
+            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterSuiteHook") };
+            var hooks = _hookRegistry.AfterSuiteHooks.Select(mi => mi.Method);
+
+            Assert.AreEqual(expectedMethods, hooks);
         }
     }
 }

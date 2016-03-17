@@ -68,16 +68,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [SetUp]
         public void Setup()
         {
-            var mockSandbox = new Mock<ISandbox>();
-            mockSandbox.Setup(sandbox => sandbox.TargetLibAssembly).Returns(typeof (Step).Assembly);
-
             _hookMethods = new HashSet<HookMethod>
             {
-                new HookMethod(GetType().GetMethod("Foo"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("Bar"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("Zed"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("Blah"), mockSandbox.Object),
-                new HookMethod(GetType().GetMethod("Baz"), mockSandbox.Object)
+                new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod(GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod(GetType().GetMethod("Zed"), typeof(Step).Assembly),
+                new HookMethod(GetType().GetMethod("Blah"), typeof(Step).Assembly),
+                new HookMethod(GetType().GetMethod("Baz"), typeof(Step).Assembly)
             };
         }
 

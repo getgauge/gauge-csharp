@@ -27,7 +27,7 @@ using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner
 {
-    public class AssemblyScanner
+    public class AssemblyScanner : IAssemblyScanner
     {
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
 
