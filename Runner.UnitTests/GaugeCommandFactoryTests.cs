@@ -36,7 +36,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.AreEqual(command.GetType(), typeof(SetupCommand));
         }
 
-        [Test, Ignore("Need to figure out a way to mock project creation")]
+        [Test]
         public void ShouldGetStartPhaseExecutorByDefault()
         {
             var command = GaugeCommandFactory.GetExecutor(default(string));

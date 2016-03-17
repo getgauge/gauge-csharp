@@ -34,17 +34,40 @@ namespace Gauge.CSharp.Runner
 {
     public class StartCommand : IGaugeCommand
     {
-        private readonly MessageProcessorFactory _messageProcessorFactory;
+        private MessageProcessorFactory _messageProcessorFactory;
 
-        private static StartCommand _instance;
         private static readonly Logger Logger = LogManager.GetLogger("Build");
 
-        public static StartCommand GetDefaultInstance()
+        [DebuggerHidden]
+        public void Execute()
         {
-            return _instance ?? (_instance = new StartCommand());
+            Initialize();
+            try
+            {
+                using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
+                {
+                    while (gaugeConnection.Connected)
+                    {
+                        var messageBytes = gaugeConnection.ReadBytes();
+                        var message = Message.ParseFrom(messageBytes.ToArray());
+
+                        var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
+                        var response = processor.Process(message);
+                        gaugeConnection.WriteMessage(response);
+                        if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn(ex);
+            }
         }
 
-        private StartCommand()
+        private void Initialize()
         {
             var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
             if (string.IsNullOrEmpty(customBuildPath))
@@ -70,34 +93,6 @@ namespace Gauge.CSharp.Runner
                 Logger.Info("Unable to create sandbox in {0}", Utils.GetGaugeBinDir());
                 Logger.Fatal(e.ToString);
                 Environment.Exit(1);
-            }
-        }
-
-        [DebuggerHidden]
-        public void Execute()
-        {
-            try
-            {
-                using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
-                {
-                    while (gaugeConnection.Connected)
-                    {
-                        var messageBytes = gaugeConnection.ReadBytes();
-                        var message = Message.ParseFrom(messageBytes.ToArray());
-
-                        var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
-                        var response = processor.Process(message);
-                        gaugeConnection.WriteMessage(response);
-                        if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
-                        {
-                            return;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Warn(ex);
             }
         }
 

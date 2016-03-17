@@ -26,7 +26,7 @@ namespace Gauge.CSharp.Runner
                 case "--init":
                     return new SetupCommand();
                 default:
-                    return StartCommand.GetDefaultInstance();
+                    return new StartCommand();
             }
         }
     }
