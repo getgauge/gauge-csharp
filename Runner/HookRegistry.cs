@@ -26,9 +26,9 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class HookRegistry : IHookRegistry
     {
-        private readonly ISandbox _sandbox;
+        private readonly Assembly _targetLibAssembly;
 
-        private readonly IDictionary<Type, HashSet<HookMethod>> _hooks = new Dictionary<Type, HashSet<HookMethod>>()
+        private readonly IDictionary<Type, HashSet<HookMethod>> _hooks = new Dictionary<Type, HashSet<HookMethod>>
         {
             {typeof (BeforeSuite), new HashSet<HookMethod>()},
             {typeof (AfterSuite), new HashSet<HookMethod>()},
@@ -40,99 +40,58 @@ namespace Gauge.CSharp.Runner
             {typeof (AfterStep), new HashSet<HookMethod>()},
         };
 
-        public HookRegistry(ISandbox sandbox)
+        public HookRegistry(AssemblyScanner assemblyScanner)
         {
-            _sandbox = sandbox;
+            _targetLibAssembly = assemblyScanner.GetTargetLibAssembly();
+            foreach (var type in _hooks.Keys)
+            {
+                AddHookOfType(type, assemblyScanner.GetMethods(type));
+            }
         }
 
         public HashSet<HookMethod> BeforeSuiteHooks
         {
-            get { return GetHookOfType(typeof (BeforeSuite)); }
+            get { return _hooks[typeof (BeforeSuite)]; }
         }
  
-        public void AddBeforeSuiteHooks(IEnumerable<MethodInfo> beforeSuiteHook)
-        {
-            AddHookOfType(typeof (BeforeSuite), beforeSuiteHook);
-        }
-
         public HashSet<HookMethod> AfterSuiteHooks
         {
-            get { return GetHookOfType(typeof (AfterSuite)); }
-        }
-
-        public void AddAfterSuiteHooks(IEnumerable<MethodInfo> afterSuiteHook)
-        {
-            AddHookOfType(typeof (AfterSuite), afterSuiteHook);
+            get { return _hooks[typeof (AfterSuite)]; }
         }
 
         public HashSet<HookMethod> BeforeSpecHooks
         {
-            get { return GetHookOfType(typeof (BeforeSpec)); }
-        }
-
-        public void AddBeforeSpecHooks(IEnumerable<MethodInfo> beforeSpecHook)
-        {
-            AddHookOfType(typeof (BeforeSpec), beforeSpecHook);
+            get { return _hooks[typeof (BeforeSpec)]; }
         }
 
         public HashSet<HookMethod> AfterSpecHooks
         {
-            get { return GetHookOfType(typeof (AfterSpec)); }
-        }
-
-        public void AddAfterSpecHooks(IEnumerable<MethodInfo> afterSpecHook)
-        {
-            AddHookOfType(typeof (AfterSpec), afterSpecHook);
+            get { return _hooks[typeof (AfterSpec)]; }
         }
 
         public HashSet<HookMethod> BeforeScenarioHooks
         {
-            get { return GetHookOfType(typeof (BeforeScenario)); }
-        }
-
-        public void AddBeforeScenarioHooks(IEnumerable<MethodInfo> beforeScenarioHook)
-        {
-            AddHookOfType(typeof (BeforeScenario), beforeScenarioHook);
+            get { return _hooks[typeof (BeforeScenario)]; }
         }
 
         public HashSet<HookMethod> AfterScenarioHooks
         {
-            get { return GetHookOfType(typeof (AfterScenario)); }
-        }
-
-        public void AddAfterScenarioHooks(IEnumerable<MethodInfo> afterScenarioHook)
-        {
-            AddHookOfType(typeof (AfterScenario), afterScenarioHook);
+            get { return _hooks[typeof (AfterScenario)]; }
         }
 
         public HashSet<HookMethod> BeforeStepHooks
         {
-            get { return GetHookOfType(typeof (BeforeStep)); }
-        }
-
-        public void AddBeforeStepHooks(IEnumerable<MethodInfo> beforeStepHook)
-        {
-            AddHookOfType(typeof (BeforeStep), beforeStepHook);
+            get { return _hooks[typeof (BeforeStep)]; }
         }
 
         public HashSet<HookMethod> AfterStepHooks
         {
-            get { return GetHookOfType(typeof (AfterStep)); }
-        }
-
-        public void AddAfterStepHooks(IEnumerable<MethodInfo> afterStepHook)
-        {
-            AddHookOfType(typeof (AfterStep), afterStepHook);
+            get { return _hooks[typeof (AfterStep)]; }
         }
 
         private void AddHookOfType(Type hookType, IEnumerable<MethodInfo> hooks)
         {
-            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info, _sandbox)));
-        }
-
-        private HashSet<HookMethod> GetHookOfType(Type type)
-        {
-            return _hooks[type];
+            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info, _targetLibAssembly)));
         }
     }
 }

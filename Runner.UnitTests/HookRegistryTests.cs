@@ -39,7 +39,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeScenarioHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeScenarioHooks(new [] {methodInfo});
 
@@ -49,7 +49,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterScenarioHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterScenarioHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterScenarioHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -58,7 +58,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeSpecHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSpecHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeSpecHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -67,7 +67,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterSpecHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSpecHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterSpecHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -76,7 +76,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeStepHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeStepHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeStepHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -85,7 +85,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterStepHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterStepHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterStepHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -94,7 +94,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetBeforeSuiteHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddBeforeSuiteHooks(new [] {methodInfo});
             Assert.True(hookRegistry.BeforeSuiteHooks.Any(method => method.Method.Equals(methodInfo)));
@@ -103,7 +103,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldAddAndGetAfterSuiteHook()
         {
-            var hookRegistry = new HookRegistry(SandBox);
+            var hookRegistry = new HookRegistry();
             var methodInfo = GetType().GetMethod("DummyHook");
             hookRegistry.AddAfterSuiteHooks(new [] {methodInfo});
             Assert.True(hookRegistry.AfterSuiteHooks.Any(method => method.Method.Equals(methodInfo)));

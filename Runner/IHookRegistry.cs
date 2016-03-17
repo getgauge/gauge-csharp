@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Gauge.CSharp.Runner
 {
@@ -30,13 +29,5 @@ namespace Gauge.CSharp.Runner
         HashSet<HookMethod> AfterScenarioHooks { get; }
         HashSet<HookMethod> BeforeStepHooks { get; }
         HashSet<HookMethod> AfterStepHooks { get; }
-        void AddBeforeSuiteHooks(IEnumerable<MethodInfo> beforeSuiteHook);
-        void AddAfterSuiteHooks(IEnumerable<MethodInfo> afterSuiteHook);
-        void AddBeforeSpecHooks(IEnumerable<MethodInfo> beforeSpecHook);
-        void AddAfterSpecHooks(IEnumerable<MethodInfo> afterSpecHook);
-        void AddBeforeScenarioHooks(IEnumerable<MethodInfo> beforeScenarioHook);
-        void AddAfterScenarioHooks(IEnumerable<MethodInfo> afterScenarioHook);
-        void AddBeforeStepHooks(IEnumerable<MethodInfo> beforeStepHook);
-        void AddAfterStepHooks(IEnumerable<MethodInfo> afterStepHook);
     }
 }

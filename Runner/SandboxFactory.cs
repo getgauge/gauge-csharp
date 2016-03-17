@@ -39,7 +39,6 @@ namespace Gauge.CSharp.Runner
                 typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                 typeof(Sandbox).FullName);
             
-            sandbox.LoadAssemblyFiles();
             return sandbox;
         }
 

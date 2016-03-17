@@ -32,15 +32,15 @@ namespace Gauge.CSharp.Runner
 
         public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
 
-        public HookMethod(MethodInfo methodInfo, ISandbox sandbox)
+        public HookMethod(MethodInfo methodInfo, Assembly targetLibAssembly)
         {
-            var targetHookType = GetTargetType(typeof(FilteredHookAttribute), sandbox);
+            var targetHookType = targetLibAssembly.GetType(typeof(FilteredHookAttribute).FullName);
             _methodInfo = methodInfo;
             dynamic filteredHookAttribute = _methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
 
             FilterTags = filteredHookAttribute.FilterTags;
-            var targetTagBehaviourType = GetTargetType(typeof(TagAggregationBehaviourAttribute), sandbox);
+            var targetTagBehaviourType = targetLibAssembly.GetType(typeof(TagAggregationBehaviourAttribute).FullName);
             dynamic tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute(targetTagBehaviourType);
 
             var setTagAggregation = TagAggregation.And;
@@ -49,13 +49,6 @@ namespace Gauge.CSharp.Runner
                 Enum.TryParse((string)tagAggregationBehaviourAttribute.TagAggregation.ToString(), true, out setTagAggregation);
             }
             TagAggregation = setTagAggregation;
-        }
-
-        private static Type GetTargetType(Type type, ISandbox sandbox)
-        {
-            var targetLibAssembly = sandbox.TargetLibAssembly;
-            var targetHookType = targetLibAssembly.GetType(type.FullName);
-            return targetHookType;
         }
 
         public MethodInfo Method

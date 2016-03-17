@@ -1,4 +1,21 @@
-﻿using Gauge.CSharp.Lib;
+﻿// Copyright 2015 ThoughtWorks, Inc.
+//
+// This file is part of Gauge-CSharp.
+//
+// Gauge-CSharp is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Gauge-CSharp is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
+
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using NLog;
 using System;
@@ -15,30 +32,18 @@ namespace Gauge.CSharp.Runner
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
 
         private static readonly Logger Logger = LogManager.GetLogger("AssemblyScanner");
-        private readonly Dictionary<Type, List<MethodInfo>> _attributeToMethodInfo;
 
         public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
         public List<Type> ScreengrabberTypes = new List<Type>();
         private Assembly _targetLibAssembly;
 
-        public AssemblyScanner()
+        public AssemblyScanner(IEnumerable<string> assemblyLocations)
         {
             LoadTargetLibAssembly();
-            _attributeToMethodInfo = new Dictionary<Type, List<MethodInfo>>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeSuite>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<AfterSuite>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeSpec>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<AfterSpec>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeScenario>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<AfterScenario>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<BeforeStep>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<AfterStep>()] = new List<MethodInfo>();
-            _attributeToMethodInfo[GetTypeFromTargetLib<Step>()] = new List<MethodInfo>();
-        }
-
-        public List<MethodInfo> GetMethods<T>() where T : Attribute
-        {
-            return _attributeToMethodInfo[GetTypeFromTargetLib<T>()];
+            foreach (var location in assemblyLocations)
+            {
+                ScanAndLoad(location);
+            }
         }
 
         public Assembly GetTargetLibAssembly()
@@ -46,13 +51,21 @@ namespace Gauge.CSharp.Runner
             return _targetLibAssembly;
         }
 
-        public void TryAdd(string path)
+        public List<MethodInfo> GetMethods(Type type)
+        {
+            var typeFromTargetLib = GetTypeFromTargetLib(type);
+            Func<MethodInfo, bool> methodFilter = info => info.GetCustomAttributes(typeFromTargetLib).Any();
+            Func<Type, IEnumerable<MethodInfo>> methodSelector = t => t.GetMethods().Where(methodFilter);
+            return AssembliesReferencingGaugeLib.SelectMany(assembly => assembly.GetTypes().SelectMany(methodSelector)).ToList();
+        }
+
+        private void ScanAndLoad(string path)
         {
             Logger.Debug("Loading assembly from : {0}", path);
             Assembly assembly;
             try
             {
-                // Load assembly for reflection only to avoid exceptions when referenced assemblies cannot be found
+                // Load assembly for reflection only to avoid exceptions when referenced assemblyLocations cannot be found
                 assembly = Assembly.ReflectionOnlyLoadFrom(path);
             }
             catch
@@ -75,12 +88,6 @@ namespace Gauge.CSharp.Runner
                 AssembliesReferencingGaugeLib.Add(fullyLoadedAssembly);
 
             ScanForScreengrabber(types);
-            ScanForMethodAttributes(types);
-        }
-
-        private Type GetTypeFromTargetLib<T>() where T : Attribute
-        {
-            return _targetLibAssembly.GetType(typeof(T).FullName);
         }
 
         private IEnumerable<Type> GetFullyLoadedTypes(IEnumerable<Type> loadableTypes, Assembly fullyLoadedAssembly)
@@ -95,20 +102,9 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        private void ScanForMethodAttributes(IEnumerable<Type> types)
-        {
-            foreach (var type in _attributeToMethodInfo.Keys)
-            {
-                var methodInfos = types
-                    .SelectMany(t => t.GetMethods().Where(info => info.GetCustomAttributes(type).Any()));
-                _attributeToMethodInfo[type].AddRange(methodInfos);
-            }
-        }
-
         private void ScanForScreengrabber(IEnumerable<Type> types)
         {
-            var implementingTypes =
-                types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
+            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
             ScreengrabberTypes.AddRange(implementingTypes);
         }
 
@@ -128,8 +124,19 @@ namespace Gauge.CSharp.Runner
         private void LoadTargetLibAssembly()
         {
             var targetLibLocation = Path.GetFullPath(Path.Combine(Utils.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
+            if (string.IsNullOrEmpty(targetLibLocation))
+            {
+                var message = string.Format("Unable to locate Gauge Lib at: {0}", targetLibLocation);
+                Logger.Error(message);
+                throw new FileNotFoundException(message);
+            }
             _targetLibAssembly = Assembly.LoadFrom(targetLibLocation);
             Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
+        }
+
+        private Type GetTypeFromTargetLib(Type type)
+        {
+            return _targetLibAssembly.GetType(type.FullName);
         }
     }
 }
