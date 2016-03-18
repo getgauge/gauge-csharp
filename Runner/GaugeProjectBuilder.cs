@@ -33,7 +33,7 @@ namespace Gauge.CSharp.Runner
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public void BuildTargetGaugeProject()
+        public bool BuildTargetGaugeProject()
         {
             var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
             var solutionFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.sln");
@@ -77,6 +77,7 @@ namespace Gauge.CSharp.Runner
             }
 
             Logger.Info(buildResult.OverallResult);
+            return buildResult.OverallResult == BuildResultCode.Success;
         }
     }
 }

@@ -19,6 +19,6 @@ namespace Gauge.CSharp.Runner
 {
     public interface IGaugeProjectBuilder
     {
-        void BuildTargetGaugeProject();
+        bool BuildTargetGaugeProject();
     }
 }

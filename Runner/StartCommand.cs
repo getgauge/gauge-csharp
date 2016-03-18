@@ -58,7 +58,7 @@ namespace Gauge.CSharp.Runner
 
             try
             {
-                _projectBuilder.Invoke().BuildTargetGaugeProject();
+                return _projectBuilder.Invoke().BuildTargetGaugeProject();
             }
             catch (NotAValidGaugeProjectException)
             {
@@ -69,7 +69,6 @@ namespace Gauge.CSharp.Runner
             {
                 return false;
             }
-            return true;
         }
     }
 }
