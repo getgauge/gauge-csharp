@@ -21,25 +21,38 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Gauge.CSharp.Core;
+using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class SandboxFactory
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static ISandbox Create(AppDomainSetup setup = null)
         {
             var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
+            Logger.Info("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
+            try
+            {
 
-            var permSet = new PermissionSet(PermissionState.Unrestricted);
+                var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-            var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+                var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
+                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
-            var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
-                typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
-                typeof(Sandbox).FullName);
-            
-            return sandbox;
+                var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
+                    typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
+                    typeof(Sandbox).FullName);
+
+                return sandbox;
+            }
+            catch (Exception e)
+            {
+                Logger.Info("Unable to create Sandbox in {0}", sandboxAppDomainSetup.ApplicationBase);
+                Logger.Fatal(e.ToString);
+                throw;
+            }
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

@@ -16,130 +16,60 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
-using Gauge.Messages;
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Execution;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Logging;
 using NLog;
-using ILogger = Microsoft.Build.Framework.ILogger;
 
 namespace Gauge.CSharp.Runner
 {
     public class StartCommand : IGaugeCommand
     {
-        private MessageProcessorFactory _messageProcessorFactory;
+        private readonly Func<IGaugeListener> _gaugeListener;
+        private readonly Func<IGaugeProjectBuilder> _projectBuilder;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private static readonly Logger Logger = LogManager.GetLogger("Build");
+        public StartCommand() : this(() => new GaugeListener(), () => new GaugeProjectBuilder())
+        {
+        }
+
+        public StartCommand(Func<IGaugeListener> gaugeListener, Func<IGaugeProjectBuilder> projectBuilder)
+        {
+            _gaugeListener = gaugeListener;
+            _projectBuilder = projectBuilder;
+        }
 
         [DebuggerHidden]
         public void Execute()
         {
-            Initialize();
-            try
+            if (!TryBuild())
             {
-                using (var gaugeConnection = new GaugeConnection(new TcpClientWrapper(Utils.GaugePort)))
-                {
-                    while (gaugeConnection.Connected)
-                    {
-                        var messageBytes = gaugeConnection.ReadBytes();
-                        var message = Message.ParseFrom(messageBytes.ToArray());
-
-                        var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
-                        var response = processor.Process(message);
-                        gaugeConnection.WriteMessage(response);
-                        if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
-                        {
-                            return;
-                        }
-                    }
-                }
+                return;
             }
-            catch (Exception ex)
-            {
-                Logger.Warn(ex);
-            }
+            _gaugeListener.Invoke().PollForMessages();
         }
 
-        private void Initialize()
+        private bool TryBuild()
         {
             var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
-            if (string.IsNullOrEmpty(customBuildPath))
-            {
-                try
-                {
-                    BuildTargetGaugeProject();
-                }
-                catch (NotAValidGaugeProjectException)
-                {
-                    Logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
-                    Environment.Exit(1);
-                }
-            }
-            Logger.Info("Creating a Sandbox in: {0}", Utils.GetGaugeBinDir());
+            if (!string.IsNullOrEmpty(customBuildPath))
+                return true;
+
             try
             {
-                var sandbox = SandboxFactory.Create();
-                _messageProcessorFactory = new MessageProcessorFactory(sandbox);
+                _projectBuilder.Invoke().BuildTargetGaugeProject();
             }
-            catch (Exception e)
+            catch (NotAValidGaugeProjectException)
             {
-                Logger.Info("Unable to create sandbox in {0}", Utils.GetGaugeBinDir());
-                Logger.Fatal(e.ToString);
-                Environment.Exit(1);
+                Logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
+                return false;
             }
-        }
-
-        private static void BuildTargetGaugeProject()
-        {
-            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
-            var solutionFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.sln");
-
-            if (!solutionFileList.Any())
+            catch (IOException)
             {
-                throw new NotAValidGaugeProjectException();
+                return false;
             }
-            var solutionFullPath = solutionFileList.First();
-            var gaugeBinDir = Utils.GetGaugeBinDir();
-            try
-            {
-                Logger.Debug("Create Gauge Bin Directory: {0}", gaugeBinDir);
-                Directory.CreateDirectory(gaugeBinDir);
-            }
-            catch (IOException ex)
-            {
-                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", gaugeBinDir);
-                Environment.Exit(1);
-            }
-            Logger.Info("Building Project: {0}", solutionFullPath);
-            var pc = new ProjectCollection();
-            var globalProperty = new Dictionary<string, string>
-            {
-                {"Configuration", "Release"},
-                {"Platform", "Any CPU"},
-                {"OutputPath", gaugeBinDir}
-            };
-
-            var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
-
-            var errorCodeAggregator = new ErrorCodeAggregator();
-            var buildParameters = new BuildParameters(pc) {Loggers = new ILogger[] {consoleLogger, errorCodeAggregator}};
-
-            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
-
-            if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
-            {
-                Logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
-                Logger.Error("Please choose a project name that complies with C# Project naming conventions.");
-            }
-
-            Logger.Info(buildResult.OverallResult);
+            return true;
         }
     }
 }

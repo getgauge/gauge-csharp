@@ -28,6 +28,10 @@ namespace Gauge.CSharp.Runner
         private readonly ISandbox _sandbox;
         private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
+        public MessageProcessorFactory() : this(SandboxFactory.Create())
+        {
+        }
+
         public MessageProcessorFactory(ISandbox sandbox)
         {
             _sandbox = sandbox;

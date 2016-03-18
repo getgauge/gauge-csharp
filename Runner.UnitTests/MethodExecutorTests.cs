@@ -35,6 +35,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetDirectoryRoot(Assembly.GetExecutingAssembly().Location));
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
+        }
+
         [Test]
         public void ShouldExecuteMethod()
         {

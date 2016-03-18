@@ -118,6 +118,7 @@
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="FileWrapper.cs" />
+    <Compile Include="GaugeProjectBuilder.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
@@ -125,6 +126,8 @@
     <Compile Include="IAssemblyScanner.cs" />
     <Compile Include="IAssemblyWrapper.cs" />
     <Compile Include="IFileWrapper.cs" />
+    <Compile Include="IGaugeListener.cs" />
+    <Compile Include="IGaugeProjectBuilder.cs" />
     <Compile Include="IHookRegistry.cs" />
     <Compile Include="IMethodExecutor.cs" />
     <Compile Include="IMethodScanner.cs" />
@@ -134,6 +137,7 @@
     <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />
+    <Compile Include="GaugeListener.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="GaugeCommandFactory.cs" />
     <Compile Include="Processors\DataStoreInitProcessor.cs" />

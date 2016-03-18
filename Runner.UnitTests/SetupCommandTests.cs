@@ -17,6 +17,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [SetUp]
         public void Setup()
         {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
             _packageRepositoryFactory = new Mock<IPackageRepositoryFactory>();
             var packageRepository = new Mock<IPackageRepository>();
             var package = new Mock<IPackage>();
@@ -26,8 +27,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             packageRepository.Setup(repository => repository.GetPackages()).Returns(list.AsQueryable());
             _packageRepositoryFactory.Setup(factory => factory.CreateRepository(SetupCommand.NugetEndpoint))
                 .Returns(packageRepository.Object);
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
+        }
 
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
         }
 
         [Test]

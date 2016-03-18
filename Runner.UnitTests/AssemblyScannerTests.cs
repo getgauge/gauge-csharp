@@ -59,6 +59,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             _assemblyScanner = new AssemblyScanner(_mockAssemblyWrapper.Object, fileWrapper.Object, new[] { assemblyLocation });
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
+        }
+
         [Test]
         public void ShouldThrowExceptionWhenLibAssemblyNotFound()
         {
