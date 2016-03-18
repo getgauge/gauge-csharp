@@ -113,6 +113,7 @@
     <Compile Include="AssemblyWrapper.cs" />
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
+    <Compile Include="DefaultScreenGrabber.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="ExecutionResult.cs" />

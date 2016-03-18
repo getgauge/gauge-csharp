@@ -102,15 +102,12 @@ namespace Gauge.CSharp.Runner
 
         public bool TryScreenCapture(out byte[] screenShotBytes)
         {
-            if (ScreenGrabberType != null)
+            var screenCaptureMethod = ScreenGrabberType.GetMethod("TakeScreenShot");
+            var instance = Activator.CreateInstance(ScreenGrabberType);
+            if (instance != null)
             {
-                var screenCaptureMethod = ScreenGrabberType.GetMethod("TakeScreenShot");
-                var instance = Activator.CreateInstance(ScreenGrabberType);
-                if (instance != null)
-                {
-                    screenShotBytes = screenCaptureMethod.Invoke(instance, null) as byte[];
-                    return true;
-                }
+                screenShotBytes = screenCaptureMethod.Invoke(instance, null) as byte[];
+                return true;
             }
             screenShotBytes = null;
             return false;
@@ -149,7 +146,8 @@ namespace Gauge.CSharp.Runner
             }
             else
             {
-                Logger.Debug("No implementation of IScreenGrabber found.");
+                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
+                ScreenGrabberType = typeof (DefaultScreenGrabber);
             }
         }
 
