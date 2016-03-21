@@ -15,15 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.IO;
-
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Wrappers
 {
-    internal class FileWrapper : IFileWrapper
+    public interface IFileWrapper
     {
-        public bool Exists(string path)
-        {
-            return File.Exists(path);
-        }
+        bool Exists(string path);
     }
 }

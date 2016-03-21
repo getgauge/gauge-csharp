@@ -21,9 +21,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
 namespace Gauge.CSharp.Runner
@@ -31,7 +31,7 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class Sandbox : MarshalByRefObject, ISandbox
     {
-        private readonly AssemblyScanner _assemblyScanner;
+        private readonly IAssemblyLoader _assemblyLoader;
 
         public Assembly TargetLibAssembly { get; private set; }
 
@@ -39,14 +39,18 @@ namespace Gauge.CSharp.Runner
 
         private Type ScreenGrabberType { get; set; }
 
-        public Sandbox()
+        public Sandbox(IAssemblyLocater locater)
         {
             LogConfiguration.Initialize();
-            var assemblies = Directory.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly);
-            _assemblyScanner = new AssemblyScanner(assemblies);
-            TargetLibAssembly = _assemblyScanner.GetTargetLibAssembly();
+            var assemblies = locater.GetAllAssemblies();
+            _assemblyLoader = new AssemblyLoader(assemblies);
+            TargetLibAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
+        }
+
+        public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
+        {
         }
 
         [DebuggerStepperBoundary]
@@ -72,12 +76,12 @@ namespace Gauge.CSharp.Runner
 
         public IHookRegistry GetHookRegistry()
         {
-            return new HookRegistry(_assemblyScanner);
+            return new HookRegistry(_assemblyLoader);
         }
 
         public List<MethodInfo> GetStepMethods()
         {
-            return _assemblyScanner.GetMethods(typeof(Step));
+            return _assemblyLoader.GetMethods(typeof(Step));
         }
 
         public List<string> GetAllStepTexts()
@@ -127,7 +131,7 @@ namespace Gauge.CSharp.Runner
 
         private void SetAppConfigIfExists()
         {            
-            var targetAssembly = _assemblyScanner.AssembliesReferencingGaugeLib.FirstOrDefault();
+            var targetAssembly = _assemblyLoader.AssembliesReferencingGaugeLib.FirstOrDefault();
             if (targetAssembly == null) return;
 
             var configFile = string.Format("{0}.config", targetAssembly.Location);
@@ -139,7 +143,7 @@ namespace Gauge.CSharp.Runner
 
         private void ScanCustomScreenGrabber()
         {
-            ScreenGrabberType = _assemblyScanner.ScreengrabberTypes.FirstOrDefault();
+            ScreenGrabberType = _assemblyLoader.ScreengrabberTypes.FirstOrDefault();
             if (ScreenGrabberType != null)
             {
                 Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);

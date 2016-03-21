@@ -24,33 +24,36 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Wrappers;
 
 namespace Gauge.CSharp.Runner
 {
-    public class AssemblyScanner : IAssemblyScanner
+    public class AssemblyLoader : IAssemblyLoader
     {
         private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
 
-        private static readonly Logger Logger = LogManager.GetLogger("AssemblyScanner");
+        private static readonly Logger Logger = LogManager.GetLogger("AssemblyLoader");
 
-        public List<Assembly> AssembliesReferencingGaugeLib = new List<Assembly>();
-        public List<Type> ScreengrabberTypes = new List<Type>();
+        public List<Assembly> AssembliesReferencingGaugeLib { get; private set; }
+        public List<Type> ScreengrabberTypes { get; private set; }
         private Assembly _targetLibAssembly;
         private readonly IAssemblyWrapper _assemblyWrapper;
         private readonly IFileWrapper _fileWrapper;
 
-        public AssemblyScanner(IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper, IEnumerable<string> assemblyLocations)
+        public AssemblyLoader(IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper, IEnumerable<string> assemblyLocations)
         {
             _assemblyWrapper = assemblyWrapper;
             _fileWrapper = fileWrapper;
             LoadTargetLibAssembly();
+            AssembliesReferencingGaugeLib= new List<Assembly>();
+            ScreengrabberTypes = new List<Type>();
             foreach (var location in assemblyLocations)
             {
                 ScanAndLoad(location);
             }
         }
 
-        public AssemblyScanner(IEnumerable<string> assemblyLocations)
+        public AssemblyLoader(IEnumerable<string> assemblyLocations)
             : this(new AssemblyWrapper(), new FileWrapper(), assemblyLocations)
         {
         }

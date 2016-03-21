@@ -38,12 +38,12 @@ namespace Gauge.CSharp.Runner.UnitTests
 
         public ISandbox SandBox;
         private HookRegistry _hookRegistry;
-        private Mock<IAssemblyScanner> _mockAssemblyScanner;
+        private Mock<IAssemblyLoader> _mockAssemblyScanner;
 
         [SetUp]
         public void Setup()
         {
-            _mockAssemblyScanner = new Mock<IAssemblyScanner>();
+            _mockAssemblyScanner = new Mock<IAssemblyLoader>();
             _mockAssemblyScanner.Setup(scanner => scanner.GetTargetLibAssembly()).Returns(typeof (Step).Assembly);
             var types = new[]
             {

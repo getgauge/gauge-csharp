@@ -15,10 +15,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Gauge.CSharp.Runner
+using System.Collections.Generic;
+using System.IO;
+
+namespace Gauge.CSharp.Runner.Wrappers
 {
-    public interface IFileWrapper
+    public class DirectoryWrapper : IDirectoryWrapper
     {
-        bool Exists(string path);
+        public IEnumerable<string> EnumerateFiles(string path, string pattern, SearchOption searchOption)
+        {
+            return Directory.EnumerateFiles(path, pattern, searchOption);
+        }
+
+        public bool Exists(string path)
+        {
+            return Directory.Exists(path);
+        }
     }
 }

@@ -75,7 +75,8 @@
     <Reference Include="System.Runtime" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyScannerTests.cs" />
+    <Compile Include="AssemblyLocaterTests.cs" />
+    <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="ClassInstanceManagerTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="Converter\TableParamConverterTests.cs" />
@@ -116,6 +117,9 @@
       <Project>{1027a646-4c10-44b9-939f-639d49d7cbf7}</Project>
       <Name>Gauge.CSharp.Runner</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

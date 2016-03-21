@@ -15,13 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace Gauge.CSharp.Runner
 {
-    public interface IAssemblyWrapper
+    public interface IAssemblyLocater
     {
-        Assembly LoadFrom(string location);
-        Assembly ReflectionOnlyLoadFrom(string path);
+        IEnumerable<string> GetAllAssemblies();
     }
 }

@@ -109,8 +109,8 @@
     <Reference Include="System.Text.Encoding, Version=4.0.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyScanner.cs" />
-    <Compile Include="AssemblyWrapper.cs" />
+    <Compile Include="AssemblyLocater.cs" />
+    <Compile Include="AssemblyLoader.cs" />
     <Compile Include="ClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="DefaultScreenGrabber.cs" />
@@ -118,15 +118,13 @@
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
-    <Compile Include="FileWrapper.cs" />
     <Compile Include="GaugeProjectBuilder.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IAssemblyScanner.cs" />
-    <Compile Include="IAssemblyWrapper.cs" />
-    <Compile Include="IFileWrapper.cs" />
+    <Compile Include="IAssemblyLoader.cs" />
+    <Compile Include="IAssemblyLocater.cs" />
     <Compile Include="IGaugeListener.cs" />
     <Compile Include="IGaugeProjectBuilder.cs" />
     <Compile Include="IHookRegistry.cs" />
@@ -180,6 +178,12 @@
     <Compile Include="Strategy\HooksStrategy.cs" />
     <Compile Include="Strategy\TaggedHooksFirstStrategy.cs" />
     <Compile Include="Strategy\UntaggedHooksFirstStrategy.cs" />
+    <Compile Include="Wrappers\AssemblyWrapper.cs" />
+    <Compile Include="Wrappers\DirectoryWrapper.cs" />
+    <Compile Include="Wrappers\FileWrapper.cs" />
+    <Compile Include="Wrappers\IAssemblyWrapper.cs" />
+    <Compile Include="Wrappers\IDirectoryWrapper.cs" />
+    <Compile Include="Wrappers\IFileWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

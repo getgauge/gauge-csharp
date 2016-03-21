@@ -40,12 +40,12 @@ namespace Gauge.CSharp.Runner
             {typeof (AfterStep), new HashSet<HookMethod>()},
         };
 
-        public HookRegistry(IAssemblyScanner assemblyScanner)
+        public HookRegistry(IAssemblyLoader assemblyLoader)
         {
-            _targetLibAssembly = assemblyScanner.GetTargetLibAssembly();
+            _targetLibAssembly = assemblyLoader.GetTargetLibAssembly();
             foreach (var type in _hooks.Keys)
             {
-                AddHookOfType(type, assemblyScanner.GetMethods(type));
+                AddHookOfType(type, assemblyLoader.GetMethods(type));
             }
         }
 

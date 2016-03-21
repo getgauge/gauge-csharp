@@ -19,22 +19,23 @@ using System;
 using System.IO;
 using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Wrappers;
 using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
     [TestFixture]
-    public class AssemblyScannerTests
+    public class AssemblyLoaderTests
     {
         public class TestAssembly : Assembly { }
 
         [Step("Foo text")]
         public void DummyStepMethod() { }
 
-        private Mock<TestAssembly> mockAssembly;
+        private Mock<TestAssembly> _mockAssembly;
         private MethodInfo _stepMethod;
-        private AssemblyScanner _assemblyScanner;
+        private AssemblyLoader _assemblyLoader;
         private Mock<IAssemblyWrapper> _mockAssemblyWrapper;
 
         [SetUp]
@@ -48,15 +49,15 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockAssemblyWrapper = new Mock<IAssemblyWrapper>();
             var fileWrapper = new Mock<IFileWrapper>();
             _stepMethod = thisType.GetMethod("DummyStepMethod");
-            mockAssembly = new Mock<TestAssembly>();
-            mockAssembly.Setup(assembly => assembly.GetTypes()).Returns(new[] { thisType });
-            mockAssembly.Setup(assembly => assembly.GetType(thisType.FullName)).Returns(thisType);
-            mockAssembly.Setup(assembly => assembly.GetReferencedAssemblies()).Returns(new[] { new AssemblyName("Gauge.CSharp.Lib") });
+            _mockAssembly = new Mock<TestAssembly>();
+            _mockAssembly.Setup(assembly => assembly.GetTypes()).Returns(new[] { thisType });
+            _mockAssembly.Setup(assembly => assembly.GetType(thisType.FullName)).Returns(thisType);
+            _mockAssembly.Setup(assembly => assembly.GetReferencedAssemblies()).Returns(new[] { new AssemblyName("Gauge.CSharp.Lib") });
             fileWrapper.Setup(wrapper => wrapper.Exists(libPath)).Returns(true);
             _mockAssemblyWrapper.Setup(wrapper => wrapper.LoadFrom(libPath)).Returns(typeof(Step).Assembly).Verifiable();
-            _mockAssemblyWrapper.Setup(wrapper => wrapper.ReflectionOnlyLoadFrom(assemblyLocation)).Returns(mockAssembly.Object);
-            _mockAssemblyWrapper.Setup(wrapper => wrapper.LoadFrom(assemblyLocation)).Returns(mockAssembly.Object);
-            _assemblyScanner = new AssemblyScanner(_mockAssemblyWrapper.Object, fileWrapper.Object, new[] { assemblyLocation });
+            _mockAssemblyWrapper.Setup(wrapper => wrapper.ReflectionOnlyLoadFrom(assemblyLocation)).Returns(_mockAssembly.Object);
+            _mockAssemblyWrapper.Setup(wrapper => wrapper.LoadFrom(assemblyLocation)).Returns(_mockAssembly.Object);
+            _assemblyLoader = new AssemblyLoader(_mockAssemblyWrapper.Object, fileWrapper.Object, new[] { assemblyLocation });
         }
 
         [TearDown]
@@ -73,7 +74,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockAssemblyWrapper = new Mock<IAssemblyWrapper>();
             var fileWrapper = new Mock<IFileWrapper>();
 
-            Assert.Throws<FileNotFoundException>(() => new AssemblyScanner(mockAssemblyWrapper.Object, fileWrapper.Object, new[] { tmpLocation }));
+            Assert.Throws<FileNotFoundException>(() => new AssemblyLoader(mockAssemblyWrapper.Object, fileWrapper.Object, new[] { tmpLocation }));
         }
 
         [Test]
@@ -85,13 +86,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetAssemblyReferencingGaugeLib()
         {
-            Assert.Contains(mockAssembly.Object, _assemblyScanner.AssembliesReferencingGaugeLib);
+            Assert.Contains(_mockAssembly.Object, _assemblyLoader.AssembliesReferencingGaugeLib);
         }
 
         [Test]
         public void ShouldGetMethodsForGaugeAttribute()
         {
-            Assert.Contains(_stepMethod, _assemblyScanner.GetMethods(typeof(Step)));
+            Assert.Contains(_stepMethod, _assemblyLoader.GetMethods(typeof(Step)));
         }
     }
 }
