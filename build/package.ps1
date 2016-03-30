@@ -24,7 +24,7 @@ Remove-Item "$($pwd)\artifacts*" -recurse -force | Out-Null
 & "$(Split-Path $MyInvocation.MyCommand.Path)\test.ps1"
 
 $nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
-    $nuget = "$($pwd)\build\NuGet.exe"
+    $nuget = "$($(Split-Path $MyInvocation.MyCommand.Path))\build\NuGet.exe"
     $env:OutDir=$outputPath # required for nuget to pick up the file from this location
     &$nuget pack "$($projectPath)" /p Configuration=release -OutputDirectory "$($nugetDir)" -ExcludeEmptyDirectories
 }
