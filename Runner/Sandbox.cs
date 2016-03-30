@@ -106,13 +106,21 @@ namespace Gauge.CSharp.Runner
 
         public bool TryScreenCapture(out byte[] screenShotBytes)
         {
-            var screenCaptureMethod = ScreenGrabberType.GetMethod("TakeScreenShot");
-            var instance = Activator.CreateInstance(ScreenGrabberType);
-            if (instance != null)
+            try
             {
-                screenShotBytes = screenCaptureMethod.Invoke(instance, null) as byte[];
-                return true;
+                var screenCaptureMethod = ScreenGrabberType.GetMethod("TakeScreenShot");
+                var instance = Activator.CreateInstance(ScreenGrabberType);
+                if (instance != null)
+                {
+                    screenShotBytes = screenCaptureMethod.Invoke(instance, null) as byte[];
+                    return true;
+                }
             }
+            catch
+            {
+                //do nothing, return
+            }
+
             screenShotBytes = null;
             return false;
         }
