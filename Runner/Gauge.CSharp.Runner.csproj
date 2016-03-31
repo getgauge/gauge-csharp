@@ -188,6 +188,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="csharp.json" />
+    <None Include="notice.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

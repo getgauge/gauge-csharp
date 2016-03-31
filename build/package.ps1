@@ -60,6 +60,7 @@ Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelD
 Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force | Out-Null
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force | Out-Null
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force | Out-Null
+Copy-Item "$($pwd)\Runner\notice.md" -Destination $outputDir -Force | Out-Null
 
 # zip!
 $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion

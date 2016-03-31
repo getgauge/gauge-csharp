@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="gauge_core.snk" />
+    <None Include="notice.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
