@@ -15,14 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-# Clean the artifacts directory
-
-Remove-Item "$($pwd)\artifacts*" -recurse -force | Out-Null
-
-# Build And Test everything
-
-& "$(Split-Path $MyInvocation.MyCommand.Path)\test.ps1"
-
 $nugetInstallScript= {param($outputPath, $nugetDir, $projectPath)
     $nuget = "$($pwd)\build\NuGet.exe"
     $env:OutDir=$outputPath # required for nuget to pick up the file from this location
