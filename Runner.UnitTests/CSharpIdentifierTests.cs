@@ -23,18 +23,20 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class CSharpIdentifierTests
     {
-        [TestCase("With Spaces", "WithSpaces")]
-        [TestCase("Special*chars%!", "SpecialChars")]
-        [TestCase("   begins with whitespace", "BeginsWithWhitespace")]
-        [TestCase("ends with whitespace   ", "EndsWithWhitespace")]
-        [TestCase("class", "Class")]
-        [TestCase("int", "Int")]
-        [TestCase("abstract", "Abstract")]
-        [TestCase("foo", "foo")]
+        [TestCase("With Spaces", "WithSpaces", true)]
+        [TestCase("Special*chars%!", "SpecialChars", true)]
+        [TestCase("   begins with whitespace", "BeginsWithWhitespace", true)]
+        [TestCase("ends with whitespace   ", "EndsWithWhitespace", true)]
+        [TestCase("class", "Class", true)]
+        [TestCase("class", "@class", false)]
+        [TestCase("int", "Int", true)]
+        [TestCase("abstract", "Abstract", true)]
+        [TestCase("foo", "foo", true)]
+        [TestCase("foo", "foo", false)]
         [Test]
-        public void GeneratesValidIdentifiers(string input, string expected)
+        public void GeneratesValidIdentifiers(string input, string expected, bool camelCase)
         {
-            Assert.AreEqual(expected, input.ToValidCSharpIdentifier());
+            Assert.AreEqual(expected, input.ToValidCSharpIdentifier(camelCase));
         }
     }
 }

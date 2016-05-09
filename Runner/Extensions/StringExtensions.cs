@@ -24,14 +24,16 @@ namespace Gauge.CSharp.Runner.Extensions
 {
     public static class StringExtensions
     {
-        public static string ToValidCSharpIdentifier(this string str)
+        public static string ToValidCSharpIdentifier(this string str, bool camelCase=true)
         {
+            str = str.Trim();
+
             if (!IsCSharpKeyword(str) && SyntaxFacts.IsValidIdentifier(str))
             {
                 return str;
             }
 
-            str = str.Split(' ').Select(s => s.Capitalize()).Aggregate(string.Concat);
+            str = camelCase ? str.Split(' ').Select(s => s.Capitalize()).Aggregate(string.Concat) : str.Replace(" ", "");
             var result = new StringBuilder();
 
             if (!SyntaxFacts.IsIdentifierStartCharacter(str[0]))

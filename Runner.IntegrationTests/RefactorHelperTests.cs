@@ -116,6 +116,23 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         }
 
         [Test]
+        public void ShouldAddParametersWithReservedKeywordName()
+        {
+            const string newStepValue = "Refactoring this is a test step <class>";
+            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSampleTest");
+            var parameterPositions = new List<ParameterPosition>
+            {
+                ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(-1).Build()
+            };
+
+            RefactorHelper.Refactor(methodInfo, parameterPositions, new List<string> {"class"}, newStepValue);
+
+            AssertStepAttributeWithTextExists(methodInfo.Name, newStepValue);
+            AssertParametersExist(methodInfo.Name, new[] {"@class"});
+        }
+
+        [Test]
         public void ShouldRemoveParameters()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);

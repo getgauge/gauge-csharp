@@ -108,7 +108,7 @@ namespace Gauge.CSharp.Runner
         private static ParameterSyntax CreateParameter(string text)
         {
             // Could not get SyntaxFactory.Parameter to work properly, so ended up parsing code as string
-            return SyntaxFactory.ParseParameterList(string.Format("string {0}", text)).Parameters[0];
+            return SyntaxFactory.ParseParameterList(string.Format("string {0}", text.ToValidCSharpIdentifier(false))).Parameters[0];
         }
 
         private static SyntaxList<AttributeListSyntax> ReplaceAttribute(MethodDeclarationSyntax methodDeclarationSyntax, string newStepText)
