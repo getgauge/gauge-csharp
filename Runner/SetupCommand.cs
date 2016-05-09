@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Extensions;
 using NLog;
 using NuGet;
 
@@ -105,7 +106,7 @@ namespace Gauge.CSharp.Runner
 
                 File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
                 var fileContent = File.ReadAllText(destFileNameFull)
-                    .Replace(@"$safeprojectname$", ProjectName)
+                    .Replace(@"$safeprojectname$", ProjectName.ToValidCSharpIdentifier())
                     .Replace("$guid1$", Guid.NewGuid().ToString())
                     .Replace("$guid2$", Guid.NewGuid().ToString())
                     .Replace("$nugetLibVersion$", version)
