@@ -118,6 +118,7 @@
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
     <Compile Include="ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GaugeProjectBuilder.cs" />
     <Compile Include="HookMethod.cs" />
     <Compile Include="HookRegistry.cs">
