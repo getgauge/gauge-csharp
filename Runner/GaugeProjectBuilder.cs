@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,13 +37,7 @@ namespace Gauge.CSharp.Runner
         public bool BuildTargetGaugeProject()
         {
             var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
-            var solutionFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.sln");
-
-            if (!solutionFileList.Any())
-            {
-                throw new NotAValidGaugeProjectException();
-            }
-            var solutionFullPath = solutionFileList.First();
+            var projectFullPath = GetProjectFullPath();
             var gaugeBinDir = Utils.GetGaugeBinDir();
             try
             {
@@ -54,7 +49,7 @@ namespace Gauge.CSharp.Runner
                 Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", gaugeBinDir);
                 throw;
             }
-            Logger.Info("Building Project: {0}", solutionFullPath);
+            Logger.Info("Building Project: {0}", projectFullPath);
             var pc = new ProjectCollection();
             var globalProperty = new Dictionary<string, string>
             {
@@ -63,7 +58,7 @@ namespace Gauge.CSharp.Runner
                 {"OutputPath", gaugeBinDir}
             };
 
-            var buildRequestData = new BuildRequestData(solutionFullPath, globalProperty, null, new[] {"Build"}, null);
+            var buildRequestData = new BuildRequestData(projectFullPath, globalProperty, null, new[] {"Build"}, null);
 
             var errorCodeAggregator = new ErrorCodeAggregator();
             var buildParameters = new BuildParameters(pc) {Loggers = new ILogger[] {consoleLogger, errorCodeAggregator}};
@@ -78,6 +73,24 @@ namespace Gauge.CSharp.Runner
 
             Logger.Info(buildResult.OverallResult);
             return buildResult.OverallResult == BuildResultCode.Success;
+        }
+
+        private static string GetProjectFullPath()
+        {
+            var csprojEnvVariable = Environment.GetEnvironmentVariable("GAUGE_CSHARP_PROJECT_FILE");
+            if (!string.IsNullOrEmpty(csprojEnvVariable))
+            {
+                return csprojEnvVariable;
+            }
+
+            var projectFileList = Directory.GetFiles(Utils.GaugeProjectRoot, "*.csproj");
+
+            if (!projectFileList.Any())
+            {
+                throw new NotAValidGaugeProjectException();
+            }
+            var projectFullPath = projectFileList.First();
+            return projectFullPath;
         }
     }
 }
