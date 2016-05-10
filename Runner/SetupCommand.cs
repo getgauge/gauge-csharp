@@ -43,13 +43,15 @@ namespace Gauge.CSharp.Runner
 
         public SetupCommand() : this(PackageRepositoryFactory.Default)
         {
-            
         }
 
         public SetupCommand(IPackageRepositoryFactory packageRepositoryFactory)
         {
             _packageRepositoryFactory = packageRepositoryFactory;
+            SafeProjectName = ProjectName.ToValidCSharpIdentifier();
         }
+
+        public string SafeProjectName { get; private set; }
 
         public SemanticVersion MaxLibVersion
         {
@@ -63,12 +65,13 @@ namespace Gauge.CSharp.Runner
             new List<string>
             {
                 Path.Combine("Properties", "AssemblyInfo.cs"),
+                Path.Combine("env", "default", "csharp.properties"),
                 "StepImplementation.cs",
                 "packages.config"
             }.ForEach(CopyFile); 
             
-            CopyFile("Gauge.Spec.csproj", string.Format("{0}.csproj", ProjectName));
-            CopyFile("Gauge.Spec.sln", string.Format("{0}.sln", ProjectName), Utils.GaugeProjectRoot);
+            CopyFile("Gauge.Spec.csproj", string.Format("{0}.csproj", SafeProjectName));
+            CopyFile("Gauge.Spec.sln", string.Format("{0}.sln", SafeProjectName));
             InstallDependencies();
         }
 
@@ -90,11 +93,12 @@ namespace Gauge.CSharp.Runner
             CopyFile(filePath, string.Empty);
         }
 
-        private void CopyFile(string filePath, string destPath, string rootDir = null)
+        private void CopyFile(string filePath, string destPath)
         {
             var skeletonPath = Path.GetFullPath("skel");
             var destFileName = string.IsNullOrEmpty(destPath) ? filePath : destPath;
-            var destFileNameFull = Path.Combine(string.IsNullOrEmpty(rootDir) ? ProjectRootDir : rootDir, destFileName);
+            var destFileNameFull = Path.GetFullPath(Path.Combine(ProjectRootDir, destFileName));
+
             if (File.Exists(destFileNameFull))
             {
                 Logger.Info("skip  {0}", destFileName);
@@ -106,14 +110,24 @@ namespace Gauge.CSharp.Runner
 
                 File.Copy(Path.Combine(skeletonPath, filePath), destFileNameFull);
                 var fileContent = File.ReadAllText(destFileNameFull)
-                    .Replace(@"$safeprojectname$", ProjectName.ToValidCSharpIdentifier())
+                    .Replace("$safeprojectname$", SafeProjectName)
                     .Replace("$guid1$", Guid.NewGuid().ToString())
                     .Replace("$guid2$", Guid.NewGuid().ToString())
                     .Replace("$nugetLibVersion$", version)
+                    .Replace("$gaugeprojectfile$", ProjectFilePath)
                     .Replace("$nugetLibNormalizedVersion$", normalizedVersion);
 
                 File.WriteAllText(destFileNameFull, fileContent);
                 Logger.Info("create  {0}", destFileName);
+            }
+        }
+
+        private string ProjectFilePath
+        {
+            get
+            {
+                return Path.GetFullPath(Path.Combine(ProjectRootDir, string.Concat(SafeProjectName, ".csproj")))
+                        .Replace(@"\", "/");
             }
         }
 

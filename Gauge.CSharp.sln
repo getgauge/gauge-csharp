@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge.Project.Skel", "{42CCF79A-CE5F-4FB8-ABD4-F7E747823504}"
 	ProjectSection(SolutionItems) = preProject
 		Gauge.Project.Skel\AssemblyInfo.cs = Gauge.Project.Skel\AssemblyInfo.cs
+		Gauge.Project.Skel\csharp.properties = Gauge.Project.Skel\csharp.properties
 		Gauge.Project.Skel\Gauge.Spec.csproj = Gauge.Project.Skel\Gauge.Spec.csproj
 		Gauge.Project.Skel\Gauge.Spec.sln = Gauge.Project.Skel\Gauge.Spec.sln
 		Gauge.Project.Skel\packages.config = Gauge.Project.Skel\packages.config
