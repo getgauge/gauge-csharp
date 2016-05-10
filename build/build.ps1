@@ -37,6 +37,10 @@ function RestoreNugetAndBuild
   }
 }
 
+if (Test-Path "$($pwd)\artifacts") {
+    Remove-Item "$($pwd)\artifacts" -Force -Recurse
+}
+
 # Build the package CSharp-lib
 $outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
 $sln = "Gauge.CSharp.Lib.sln"

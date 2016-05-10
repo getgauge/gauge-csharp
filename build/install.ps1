@@ -30,4 +30,6 @@ if($force -eq 'true')
 {
     &$gauge --uninstall csharp
 }
+
+Write-Host "Installing from file: " $pluginFile
 &$gauge --install csharp -f $pluginFile

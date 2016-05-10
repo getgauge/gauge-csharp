@@ -40,8 +40,9 @@ $outputDir= "$($pwd)\artifacts\gauge-csharp"
 $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $skelDir="$($outputDir)\skel"
 $skelPropertiesDir = "$($skelDir)\Properties"
-
-@($skelDir, $skelPropertiesDir) | %{ New-Item -Itemtype directory $_ -Force | Out-Null}
+$skelEnvDir = "$($skelDir)\Env"
+$skelDefaultPropertiesDir = "$($skelEnvDir)\Default"
+@($skelDir, $skelPropertiesDir, $skelEnvDir, $skelDefaultPropertiesDir) | %{ New-Item -Itemtype directory $_ -Force | Out-Null}
 
 Write-host "Copying Skeleton files for Gauge CSharp project"
 
@@ -51,15 +52,22 @@ Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.csproj" -Destination $skelDir -
 Copy-Item "$($pwd)\Gauge.Project.Skel\StepImplementation.cs" -Destination $skelDir -Force | Out-Null
 Copy-Item "$($pwd)\Gauge.Project.Skel\packages.config" -Destination $skelDir -Force | Out-Null
 Copy-Item "$($pwd)\Gauge.Project.Skel\Gauge.Spec.sln" -Destination $skelDir -Force | Out-Null
+Copy-Item "$($pwd)\Gauge.Project.Skel\csharp.properties" -Destination "$($skelDir)\Env\Default" -Force | Out-Null
 Copy-Item "$($pwd)\Runner\csharp.json" -Destination $outputDir -Force | Out-Null
 Copy-Item "$($pwd)\Runner\notice.md" -Destination $outputDir -Force | Out-Null
 
 # zip!
 $version=(Get-Item "$($outputPath)\Gauge.CSharp.Runner.exe").VersionInfo.ProductVersion
-Add-Type -Assembly "System.IO.Compression.FileSystem" ;
-$archivePath = "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
-[System.IO.Compression.ZipFile]::CreateFromDirectory($outputDir, $archivePath)
-Write-Host "Created " $archivePath
+
+if ($version) {
+    Add-Type -Assembly "System.IO.Compression.FileSystem" ;
+    $archivePath = "$(Split-Path $outputDir)\gauge-csharp-$($version).zip"
+    [System.IO.Compression.ZipFile]::CreateFromDirectory($outputDir, $archivePath)
+    Write-Host "Created " $archivePath    
+}
+else {
+    throw "Cannot determine version number from : $($outputPath)\Gauge.CSharp.Runner.exe"
+}
 
 # Hack to break on exit code. Powershell does not seem to propogate the exit code from test failures.
 if($LastExitCode -ne 0)
