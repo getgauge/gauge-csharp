@@ -36,7 +36,8 @@ namespace Gauge.CSharp.Runner
             config.AddTarget("file", fileTarget);
 
             consoleTarget.Layout = @"${logger} ${message}";
-            fileTarget.FileName = Path.Combine(Utils.GaugeProjectRoot, "logs", "gauge.log");
+
+            fileTarget.FileName = GetLogFilePath();
             fileTarget.Layout = "${message}";
 
             var logLevel = Environment.GetEnvironmentVariable("GAUGE_LOG_LEVEL");
@@ -53,6 +54,23 @@ namespace Gauge.CSharp.Runner
             config.LoggingRules.Add(fileRule);
 
             LogManager.Configuration = config;
+        }
+
+        private static string GetLogFilePath()
+        {
+            var logDir = Environment.GetEnvironmentVariable("logs_directory");
+            if (string.IsNullOrEmpty(logDir))
+            {
+                logDir = Path.Combine(Utils.GaugeProjectRoot, "logs");
+            }
+            else
+            {
+                if (!Path.IsPathRooted(logDir))
+                {
+                    logDir = Path.Combine(Utils.GaugeProjectRoot, logDir);
+                }
+            }
+            return Path.GetFullPath(Path.Combine(logDir, "gauge.log"));
         }
     }
 }
