@@ -75,6 +75,12 @@ Update the submodule and run the `gen-proto` command:
     git submodule update
     run.bat gen-proto
 
+## Development Environment Setup
+
+- Use [BoxStarter](http://boxstarter.org/) to setup Windows box. 
+  - Install Windows
+  - Hit http://bit.ly/20pMrXY from Internet Explorer/Edge.
+  - Install Visual Studio separately (You could consider installing from an ISO).
 
 ## License
 
