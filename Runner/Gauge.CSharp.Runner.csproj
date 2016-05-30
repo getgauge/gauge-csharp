@@ -121,7 +121,6 @@
     <Compile Include="Processors\SuiteDataStoreInitProcessor.cs" />
     <Compile Include="Processors\TaggedHooksFirstExecutionProcessor.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Processors\StepNamesProcessor.cs" />
     <Compile Include="Processors\ScenarioExecutionEndingProcessor.cs" />
     <Compile Include="Processors\ScenarioExecutionStartingProcessor.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="Wrappers\IDirectoryWrapper.cs" />
     <Compile Include="Wrappers\IFileWrapper.cs" />
     <Compile Include="Processors\UnTaggedHooksFirstExecutionProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -286,4 +286,7 @@
       </ItemGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 </Project>

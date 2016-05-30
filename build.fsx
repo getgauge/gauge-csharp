@@ -40,8 +40,8 @@ let authors = [ "Update Author in build.fsx" ]
 // Tags for your project (for NuGet package)
 let tags = ""
 
-// File system information
-//let solutionFile  = "gauge-csharp.sln"
+// Read additional information from the release notes document
+let releaseRunner = LoadReleaseNotes "CHANGELOG.md"
 
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
@@ -99,6 +99,54 @@ Target "CopyBinaries" (fun _ ->
 )
 
 // --------------------------------------------------------------------------------------
+// Generate AssemblyInfo.cs
+
+let commonAttributes = [          
+          Attribute.Configuration("")
+          Attribute.Company("ThoughtWorks Inc.")
+          Attribute.Product("Gauge.CSharp.Core")
+          Attribute.Copyright("Copyright ©  2016")
+          Attribute.Trademark("")
+          Attribute.Culture("")
+          Attribute.ComVisible(true) ]
+
+// Generate assembly info files with the right version & up-to-date information
+Target "AssemblyInfo-Core" (fun _ ->
+    let release = LoadReleaseNotes "Core/CHANGELOG.md"
+    let coreAttributes =
+        [ Attribute.Title("Gauge.CSharp.Core")
+          Attribute.Guid("db098a05-ce23-4b6d-a124-4d125bc89f57")
+          Attribute.Description("[INTERNAL GAUGE USE ONLY] Communicate with Gauge Core")
+          Attribute.Version release.AssemblyVersion
+          Attribute.FileVersion release.AssemblyVersion ] @ commonAttributes
+
+    CreateCSharpAssemblyInfo (("Core" </> "Properties") </> "AssemblyInfo.cs") coreAttributes
+)
+
+Target "AssemblyInfo-Lib" (fun _ ->
+    let release = LoadReleaseNotes "Lib/CHANGELOG.md"
+    let libAttributes =
+        [ Attribute.Title("Gauge.CSharp.Lib")
+          Attribute.Guid("21677428-1b2a-4a9b-9865-f72209fb8f1c")
+          Attribute.Description("C# support for Gauge. http://getgauge.io")
+          Attribute.Version release.AssemblyVersion
+          Attribute.FileVersion release.AssemblyVersion ] @ commonAttributes
+
+    CreateCSharpAssemblyInfo (("Lib" </> "Properties") </> "AssemblyInfo.cs") libAttributes
+)
+
+Target "AssemblyInfo-Runner" (fun _ ->
+    let libAttributes =
+        [ Attribute.Title("Gauge.CSharp.Runner")
+          Attribute.Guid("b80cc90b-dd04-445b-825e-51a42f3cadaf")
+          Attribute.Description("C# spec for Gauge. http://getgauge.io")
+          Attribute.Version releaseRunner.AssemblyVersion
+          Attribute.FileVersion releaseRunner.AssemblyVersion ] @ commonAttributes
+
+    CreateCSharpAssemblyInfo (("Runner" </> "Properties") </> "AssemblyInfo.cs") libAttributes
+)
+
+// --------------------------------------------------------------------------------------
 // Clean build results
 
 Target "Clean" (fun _ ->
@@ -137,8 +185,8 @@ Target "Skel" (fun _ ->
     CopyFile "artifacts/gauge-csharp/csharp.json" "Runner/csharp.json"
 )
 
-//TODO version from runner assembly
-let version = "0.8.0" 
+// version from runner's changelog
+let version = releaseRunner.AssemblyVersion
 
 Target "Zip" (fun _ ->
     !! ("artifacts/gauge-csharp/**/*")
@@ -231,6 +279,15 @@ Target "RunTests" DoNothing
 
 Target "All" DoNothing
 
+"AssemblyInfo-Core"
+  ==> "Build-Core"
+
+"AssemblyInfo-Lib"
+  ==> "Build-Lib"
+
+"AssemblyInfo-Runner"
+  ==> "Build-Runner"
+
 "Build-Lib"
   ==> "Build-Core"
   ==> "Build-Runner"
@@ -244,7 +301,6 @@ Target "All" DoNothing
   ==> "RunTests"
 
 "Clean"
-//  ==> "AssemblyInfo"
   ==> "CopyBinaries"
   ==> "RunTests"
   ==> "All"
