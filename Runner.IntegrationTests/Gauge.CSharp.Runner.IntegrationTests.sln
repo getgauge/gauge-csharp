@@ -1,4 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{6E43ABF5-B2EC-4687-86F4-7CB6B0732670}"
+	ProjectSection(SolutionItems) = preProject
+		..\paket.dependencies = ..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("38bb708e-96fb-4586-b931-bb539012e6bf") = "Gauge.CSharp.Runner.IntegrationTests", "Gauge.CSharp.Runner.IntegrationTests.csproj", "3dad65c9-f7a3-4ef8-9368-987705cba808"
 EndProject
 Global

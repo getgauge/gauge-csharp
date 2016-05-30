@@ -3,14 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner", "Runner\Gauge.CSharp.Runner.csproj", "{1027A646-4C10-44B9-939F-639D49D7CBF7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{907810AA-296E-4BA2-A5D2-87B0E17C6779}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{BBDF92D8-AB1F-47FC-88BF-10A8292F3C90}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
+		paket.dependencies = paket.dependencies
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner", "Runner\Gauge.CSharp.Runner.csproj", "{1027A646-4C10-44B9-939F-639D49D7CBF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge.Project.Skel", "{42CCF79A-CE5F-4FB8-ABD4-F7E747823504}"
 	ProjectSection(SolutionItems) = preProject

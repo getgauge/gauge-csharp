@@ -46,13 +46,31 @@ You will need Gauge and Gauge-csharp plugin installed before installing `Lib`.
 
 ### Build
 
-    run.bat build
+On mono:
+```
+./build.sh CopyBinaries
+```
+
+On Windows
+```
+build.cmd CopyBinaries
+```
 
 ### Test
 
-    run.bat test
+On mono:
+```
+./build.sh RunTests
+```
+
+On Windows
+```
+build.cmd RunTests
+```
 
 ### Package
+
+//TODO with paket
 
     run.bat package
 
@@ -77,7 +95,7 @@ Update the submodule and run the `gen-proto` command:
 
 ## Development Environment Setup
 
-- Use [BoxStarter](http://boxstarter.org/) to setup Windows box. 
+- Use [BoxStarter](http://boxstarter.org/) to setup Windows box.
   - Install Windows
   - Hit http://bit.ly/20pMrXY from Internet Explorer/Edge.
   - Install Visual Studio and Resharper separately (You could consider installing from an ISO).
