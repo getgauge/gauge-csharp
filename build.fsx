@@ -42,6 +42,8 @@ let tags = ""
 
 // Read additional information from the release notes document
 let releaseRunner = LoadReleaseNotes "CHANGELOG.md"
+let libRelease = LoadReleaseNotes "Lib/CHANGELOG.md"
+let coreRelease = LoadReleaseNotes "Core/CHANGELOG.md"
 
 // Pattern specifying assemblies to be tested using NUnit
 let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
@@ -112,25 +114,23 @@ let commonAttributes = [
 
 // Generate assembly info files with the right version & up-to-date information
 Target "AssemblyInfo-Core" (fun _ ->
-    let release = LoadReleaseNotes "Core/CHANGELOG.md"
     let coreAttributes =
         [ Attribute.Title("Gauge.CSharp.Core")
           Attribute.Guid("db098a05-ce23-4b6d-a124-4d125bc89f57")
           Attribute.Description("[INTERNAL GAUGE USE ONLY] Communicate with Gauge Core")
-          Attribute.Version release.AssemblyVersion
-          Attribute.FileVersion release.AssemblyVersion ] @ commonAttributes
+          Attribute.Version coreRelease.AssemblyVersion
+          Attribute.FileVersion coreRelease.AssemblyVersion ] @ commonAttributes
 
     CreateCSharpAssemblyInfo (("Core" </> "Properties") </> "AssemblyInfo.cs") coreAttributes
 )
 
 Target "AssemblyInfo-Lib" (fun _ ->
-    let release = LoadReleaseNotes "Lib/CHANGELOG.md"
     let libAttributes =
         [ Attribute.Title("Gauge.CSharp.Lib")
           Attribute.Guid("21677428-1b2a-4a9b-9865-f72209fb8f1c")
           Attribute.Description("C# support for Gauge. http://getgauge.io")
-          Attribute.Version release.AssemblyVersion
-          Attribute.FileVersion release.AssemblyVersion ] @ commonAttributes
+          Attribute.Version libRelease.AssemblyVersion
+          Attribute.FileVersion libRelease.AssemblyVersion ] @ commonAttributes
 
     CreateCSharpAssemblyInfo (("Lib" </> "Properties") </> "AssemblyInfo.cs") libAttributes
 )
@@ -256,21 +256,25 @@ Target "SourceLink" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
-Target "NuGet" (fun _ ->
+Target "NuGet-Core" (fun _ ->
     Paket.Pack(fun p ->
         { p with
-            OutputPath = "bin"
-            Version = "0.0.1"
-            ReleaseNotes = toLines ["notes"]})
+            TemplateFile = "Core/paket.template"
+            OutputPath = "artifacts/gauge-csharp-core"
+            Version = coreRelease.NugetVersion
+            ReleaseNotes = toLines coreRelease.Notes})
 )
 
-Target "PublishNuget" (fun _ ->
-    Paket.Push(fun p ->
+Target "NuGet-Lib" (fun _ ->
+    Paket.Pack(fun p ->
         { p with
-            WorkingDir = "bin" })
+            TemplateFile = "Lib/paket.template"
+            OutputPath = "artifacts/gauge-csharp-lib"
+            Version = libRelease.NugetVersion
+            ReleaseNotes = toLines libRelease.Notes})
 )
 
-Target "BuildPackage" DoNothing
+Target "Package" DoNothing
 Target "Build" DoNothing
 Target "RunTests" DoNothing
 
@@ -310,15 +314,11 @@ Target "All" DoNothing
   ==> "Zip"
 
 
-"All"
-#if MONO
-#else
-  =?> ("SourceLink", Pdbstr.tryFind().IsSome )
-#endif
-  ==> "NuGet"
-  ==> "BuildPackage"
-
-"BuildPackage"
-  ==> "PublishNuget"
+"Zip"
+  ==> "Package"
+"NuGet-Core"
+  ==> "Package"
+"NuGet-Lib"
+  ==> "Package"
 
 RunTargetOrDefault "All"

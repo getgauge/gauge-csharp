@@ -70,19 +70,28 @@ build.cmd RunTests
 
 ### Package
 
-//TODO with paket
+On mono:
+```
+./build.sh Package
+```
 
-    run.bat package
+On Windows
+```
+build.cmd Package
+```
 
 All artifacts are genereated in `.\artifacts` folder.
 
-The plugin is zipped to `.\artifacts\gauge-csharp-<version>.zip`
-The Lib Nuget package is put at `.\artigacts\Gauge.CSharp.Lib.<version>.nupkg`
-The Core Nuget package is put at `.\artigacts\Gauge.CSharp.Core.<version>.nupkg`
+ * The plugin is zipped to `artifacts/gauge-csharp/gauge-csharp-<runner-version>.zip`,
+ where `<runner-version>` is from top of `CHANGELOG.md` file.
+ * The Lib Nuget package is put at `artifacts/gauge-csharp-lib/Gauge.CSharp.Lib.<lib-version>.nupkg`,
+ where `<lib-version>` is from top of `Lib/CHANGELOG.md` file.
+ * The Core Nuget package is put at `artifacts/gauge-csharp-core/Gauge.CSharp.Core.<core-version>.nupkg`,
+ where `<core-version>` is from top of `Core/CHANGELOG.md` file.
 
 #### Zip
 
-Zip distribution in `.\artifacts\gauge-csharp-<version>.zip` can be created with
+Zip distribution in `artifacts/gauge-csharp/gauge-csharp-<runner-version>.zip` can be created with
 On mono:
 ```
 ./build.sh Zip
@@ -108,10 +117,19 @@ Update the submodule and run the `gen-proto` command:
 
 ## Development Environment Setup
 
+### Windows
+
 - Use [BoxStarter](http://boxstarter.org/) to setup Windows box.
   - Install Windows
   - Hit http://bit.ly/20pMrXY from Internet Explorer/Edge.
   - Install Visual Studio and Resharper separately (You could consider installing from an ISO).
+
+### Linux
+
+For building and unit testing you only need mono.
+For running functional tests *TODO what else?*
+ * gauge
+ * java (which one?)
 
 ## License
 
