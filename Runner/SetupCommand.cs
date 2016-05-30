@@ -60,6 +60,8 @@ namespace Gauge.CSharp.Runner
 
         public void Execute()
         {
+            CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "env"));
+            CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "env", "default"));
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
             
             new List<string>
