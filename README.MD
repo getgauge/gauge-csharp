@@ -80,6 +80,19 @@ The plugin is zipped to `.\artifacts\gauge-csharp-<version>.zip`
 The Lib Nuget package is put at `.\artigacts\Gauge.CSharp.Lib.<version>.nupkg`
 The Core Nuget package is put at `.\artigacts\Gauge.CSharp.Core.<version>.nupkg`
 
+#### Zip
+
+Zip distribution in `.\artifacts\gauge-csharp-<version>.zip` can be created with
+On mono:
+```
+./build.sh Zip
+```
+
+On Windows
+```
+build.cmd Zip
+```
+
 ### Install the plugin
 
 To install a local version of the plugin:

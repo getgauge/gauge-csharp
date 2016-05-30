@@ -80,9 +80,11 @@ let artifactsDir f =
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Runner.IntegrationTests") -> "gauge-csharp/itests"
     | _                           -> failwith (sprintf "Unknown project %s. Where should its artifacts be copied to?" f)
 
-// Copies binaries from default VS location to expected bin folder
-// But keeps a subdirectory structure for each project in the
-// src folder to support multiple project outputs
+// Copies binaries from default VS location to artifacts/ folder
+// But keeps a subdirectory structure
+// - gauge-csharp-lib  - Gauge.CSharp.Lib with referenced core
+// - gauge-csharp-core - Gauge.CSharp.Core only
+// - gauge-csharp      - Gauge.CSharp.Runner with referenced core and lib
 Target "CopyBinaries" (fun _ ->
     !! "**/*.??proj"
     -- "**/*.shproj"
@@ -90,15 +92,17 @@ Target "CopyBinaries" (fun _ ->
     -- "**/Gauge.Spec.csproj"
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "artifacts" </> (artifactsDir f)))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
-    // copy only
-    CopyFile "artifacts/gauge-csharp/bin" "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll"
+    // copy the IntegrationTestSample.dll with test suites
+    CopyFile "artifacts/gauge-csharp/itest" "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll"
+    // and copy its old Lib reference
+    CopyFile "artifacts/gauge-csharp/itest" "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll"
 )
 
 // --------------------------------------------------------------------------------------
 // Clean build results
 
 Target "Clean" (fun _ ->
-    CleanDirs ["bin"; "temp"]
+    CleanDirs ["bin"; "artifacts"; "temp"]
 )
 
 // --------------------------------------------------------------------------------------
@@ -123,6 +127,25 @@ Target "Build-Core" (fun _ ->
 
 Target "Build-Runner" (fun _ ->
     buildSln "Gauge.CSharp.sln"
+)
+
+// --------------------------------------------------------------------------------------
+// Zip distribution
+
+Target "Skel" (fun _ ->
+    CopyDir "artifacts/gauge-csharp/skel" "Gauge.Project.Skel/" (fun _ -> true)
+    CopyFile "artifacts/gauge-csharp/csharp.json" "Runner/csharp.json"
+)
+
+//TODO version from runner assembly
+let version = "0.8.0" 
+
+Target "Zip" (fun _ ->
+    !! ("artifacts/gauge-csharp/**/*")
+    -- ("artifacts/gauge-csharp/tests/*")
+    -- ("artifacts/gauge-csharp/itests/*")
+    -- ("**/*.zip")
+        |> Zip "artifacts/gauge-csharp/" (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version)
 )
 
 // --------------------------------------------------------------------------------------
@@ -225,6 +248,10 @@ Target "All" DoNothing
   ==> "CopyBinaries"
   ==> "RunTests"
   ==> "All"
+
+"CopyBinaries"
+  ==> "Skel"
+  ==> "Zip"
 
 
 "All"
