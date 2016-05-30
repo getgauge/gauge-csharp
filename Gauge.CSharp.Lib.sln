@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1BB9D4B-9316-4807-84AD-4F67BB999619}"
 	ProjectSection(SolutionItems) = preProject
 		build.fsx = build.fsx
+		Lib\CHANGELOG.md = Lib\CHANGELOG.md
 	EndProjectSection
 EndProject
 Global
