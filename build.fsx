@@ -99,6 +99,13 @@ Target "CopyBinaries" (fun _ ->
     // CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll"
 )
 
+// In CI agent, with clean workspace, we need to fetch previosuly built assemblies to gauge-bin
+Target "ITest-Setup" (fun _ ->
+    CopyFile "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll" "artifacts/gauge-csharp/itests/IntegrationTestSample.dll" 
+    // And the old Lib
+    CopyFile "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll" "IntegrationTestSample/Lib/Gauge.CSharp.Lib.dll"
+)
+
 // --------------------------------------------------------------------------------------
 // Generate AssemblyInfo.cs
 
@@ -226,13 +233,13 @@ Target "RunITests-Runner" (fun _ ->
 )
 
 Target "RunTests-All" (fun _ ->
-    let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
-    !! testAssemblies
+    !! "artifacts/gauge-csharp/*tests/*Test*.dll"
+    -- "**/*IntegrationTestSample.dll"
     |> NUnit (fun p ->
         { p with
             DisableShadowCopy = true
             TimeOut = TimeSpan.FromMinutes 5.
-            OutputFile = "ITestResults-Runner.xml" })
+            OutputFile = "TestResults.xml" })
 )
 
 #if MONO
