@@ -29,17 +29,22 @@ namespace Gauge.CSharp.Runner
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static ISandbox Create(AppDomainSetup setup = null)
+        public static ISandbox Create(AppDomainSetup setup)
         {
+			if (setup == null)
+				throw new ArgumentNullException ("setup");
+			
             var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
             Logger.Info("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
             try
             {
-
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-                var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
-                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+				string runnersApplicationBase = setup.ApplicationBase;
+				var resolver = new InjectableAssemblyResolver(runnersApplicationBase,Utils.GetGaugeBinDir());
+
+				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
+				sandboxDomain.AssemblyResolve += resolver.HandleAssemblyResolveForSandboxDomain;
 
                 var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
@@ -54,16 +59,42 @@ namespace Gauge.CSharp.Runner
                 throw;
             }
         }
-
-        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
-            var fileName = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
-            if (File.Exists(fileName))
-            {
-                return Assembly.LoadFrom(fileName);
-            }
-            return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
-        }
     }
+
+	[Serializable]
+	public class InjectableAssemblyResolver
+	{
+		string runnersApplicationBase;
+		string gaugeBin;
+
+		public InjectableAssemblyResolver(string runnersApplicationBase,string gaugeBin)
+		{
+			if (gaugeBin == null)
+				throw new ArgumentNullException ("gaugeBin");
+			if (runnersApplicationBase == null)
+				throw new ArgumentNullException ("runnersApplicationBase");
+			this.gaugeBin = gaugeBin;
+			this.runnersApplicationBase = runnersApplicationBase;
+		}
+
+		public Assembly HandleAssemblyResolveForSandboxDomain(object sender, ResolveEventArgs args)
+		{
+			var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
+			var gaugeBinPath = Path.Combine(gaugeBin, shortAssemblyName + ".dll");
+			// first preference is to load assemblies from gauge-bin/ as User has provided
+			if (File.Exists (gaugeBinPath)) {
+				return Assembly.LoadFrom (gaugeBinPath);
+			} else {
+				// but when assembly is missing there, then we should fallback on the runner's libraries
+				string runnersPath = Path.Combine(runnersApplicationBase, shortAssemblyName + ".dll");
+				if(File.Exists(runnersPath))
+					return Assembly.LoadFrom (runnersPath);
+				// this will also take care of loading runner's assembly
+				runnersPath = Path.Combine(runnersApplicationBase, shortAssemblyName + ".exe");
+				if(File.Exists(runnersPath))
+					return Assembly.LoadFrom (runnersPath);
+			}
+			return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
+		}
+	}
 }

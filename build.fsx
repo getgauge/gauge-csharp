@@ -46,7 +46,6 @@ let libRelease = LoadReleaseNotes "Lib/CHANGELOG.md"
 let coreRelease = LoadReleaseNotes "Core/CHANGELOG.md"
 
 // Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
 let testAssembliesLib = "artifacts/gauge-csharp-lib/tests/*Test*.dll"
 let testAssembliesRunner = "artifacts/gauge-csharp/tests/*Test*.dll"
 let itestAssembliesRunner = "artifacts/gauge-csharp/itests/*IntegrationTest*.dll"
@@ -227,6 +226,7 @@ Target "RunITests-Runner" (fun _ ->
 )
 
 Target "RunTests-All" (fun _ ->
+    let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
     !! testAssemblies
     |> NUnit (fun p ->
         { p with
@@ -304,8 +304,9 @@ Target "All" DoNothing
   ==> "RunTests-Runner"
 "CopyBinaries"
   ==> "RunITests-Runner"
-
-"RunTests-All"
+ 
+"CopyBinaries"
+  ==> "RunTests-All"
   ==> "RunTests"
 
 "Clean"
