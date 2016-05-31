@@ -23,6 +23,7 @@ using System.Threading;
 using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
+using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
@@ -118,14 +119,14 @@ namespace Gauge.CSharp.Runner.UnitTests
             var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
 
-            var screenshotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
-            Environment.SetEnvironmentVariable("screenshot_enabled", "false");
+            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
+            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", "false");
             
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
             
             mockSandBox.VerifyAll();
             Assert.False(executionResult.HasScreenShot);
-            Environment.SetEnvironmentVariable("screenshot_enabled", screenshotEnabled);
+            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", screenshotEnabled);
         }
 
         [Test]

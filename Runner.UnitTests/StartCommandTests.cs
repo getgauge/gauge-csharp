@@ -39,13 +39,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         [TearDown]
         public void TearDown()
         {
-            Environment.SetEnvironmentVariable("gauge_custom_build_path", null);
+            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", null);
         }
 
         [Test]
         public void ShouldNotBuildWhenCustomBuildPathIsSet()
         {
-            Environment.SetEnvironmentVariable("gauge_custom_build_path", "gauge_custom_build_path");
+            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", "GAUGE_CUSTOM_BUILD_PATH");
             _startCommand.Execute();
 
             _mockGaugeProjectBuilder.Verify(builder => builder.BuildTargetGaugeProject(), Times.Never);
@@ -82,7 +82,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldPollForMessagesWhenCustomBuildPathIsSet()
         {
-            Environment.SetEnvironmentVariable("gauge_custom_build_path", "gauge_custom_build_path");
+            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", "GAUGE_CUSTOM_BUILD_PATH");
             _startCommand.Execute();
 
             _mockGaugeListener.Verify(listener => listener.PollForMessages(), Times.Once);

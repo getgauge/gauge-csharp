@@ -77,7 +77,7 @@ namespace Gauge.CSharp.Runner
 
         private static string GetProjectFullPath()
         {
-            var csprojEnvVariable = Environment.GetEnvironmentVariable("GAUGE_CSHARP_PROJECT_FILE");
+            var csprojEnvVariable = Utils.TryReadEnvValue("GAUGE_CSHARP_PROJECT_FILE");
             if (!string.IsNullOrEmpty(csprojEnvVariable))
             {
                 return csprojEnvVariable;

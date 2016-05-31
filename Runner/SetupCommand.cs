@@ -33,9 +33,9 @@ namespace Gauge.CSharp.Runner
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
         public const string PackageId = "Gauge.CSharp.Lib";
 
-        public static readonly string NugetEndpoint = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_ENDPOINT"))
+        public static readonly string NugetEndpoint = string.IsNullOrEmpty(Utils.TryReadEnvValue("NUGET_ENDPOINT"))
             ? @"https://packages.nuget.org/api/v2"
-            : Environment.GetEnvironmentVariable("NUGET_ENDPOINT");
+            : Utils.TryReadEnvValue("NUGET_ENDPOINT");
 
         private static SemanticVersion _maxLibVersion;
         private static readonly Logger Logger = LogManager.GetLogger(string.Empty);

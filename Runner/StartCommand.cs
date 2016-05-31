@@ -52,7 +52,7 @@ namespace Gauge.CSharp.Runner
 
         private bool TryBuild()
         {
-            var customBuildPath = Environment.GetEnvironmentVariable("gauge_custom_build_path");
+            var customBuildPath = Utils.TryReadEnvValue("GAUGE_CUSTOM_BUILD_PATH");
             if (!string.IsNullOrEmpty(customBuildPath))
                 return true;
 

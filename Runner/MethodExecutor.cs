@@ -23,6 +23,7 @@ using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 using NLog;
+using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner
 {
@@ -51,7 +52,7 @@ namespace Gauge.CSharp.Runner
 
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 builder.SetFailed(true);
-                var isScreenShotEnabled = Environment.GetEnvironmentVariable("screenshot_enabled");
+                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
                     builder.SetScreenShot(TakeScreenshot());
