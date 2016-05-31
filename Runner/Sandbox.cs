@@ -33,7 +33,7 @@ namespace Gauge.CSharp.Runner
     {
         private readonly IAssemblyLoader _assemblyLoader;
 
-        public Assembly TargetLibAssembly { get; private set; }
+		private Assembly _libAssembly;
 
         private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
@@ -44,7 +44,7 @@ namespace Gauge.CSharp.Runner
             LogConfiguration.Initialize();
             var assemblies = locater.GetAllAssemblies();
             _assemblyLoader = new AssemblyLoader(assemblies);
-            TargetLibAssembly = _assemblyLoader.GetTargetLibAssembly();
+			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
         }
@@ -74,6 +74,13 @@ namespace Gauge.CSharp.Runner
             return executionResult;
         }
 
+		public string TargetLibAssemblyVersion { 
+			get{ return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; } 
+		}
+		private Assembly TargetLibAssembly { 
+			get{ return _libAssembly; } 
+		}
+
         public IHookRegistry GetHookRegistry()
         {
             return new HookRegistry(_assemblyLoader);
@@ -99,8 +106,9 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetStepTexts(MethodInfo stepMethod)
         {
-            var targetStepType = TargetLibAssembly.GetType(typeof(Step).ToString());
-            dynamic step = stepMethod.GetCustomAttribute(targetStepType);
+			var fullStepName = typeof(Step).FullName;
+			dynamic step = stepMethod.GetCustomAttributes ().FirstOrDefault (
+				a => a.GetType ().FullName.Equals (fullStepName));
             return step.Names;
         }
 

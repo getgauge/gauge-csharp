@@ -29,8 +29,12 @@ namespace Gauge.CSharp.Runner
         void InitializeDataStore(string dataStoreType);
         IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
         List<string> GetAllStepTexts();
-        Assembly TargetLibAssembly { get; }
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
+
+		// Used only from tests.
+		// Don't return Assembly here! assembly instance returned on sandbox side 
+		// would be replaced by assembly instance on runner side, thus making any asserts on it useless.
+		string TargetLibAssemblyVersion { get; }
     }
 }

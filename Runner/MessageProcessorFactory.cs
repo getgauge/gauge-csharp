@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
+using System;
 
 namespace Gauge.CSharp.Runner
 {
@@ -28,7 +29,7 @@ namespace Gauge.CSharp.Runner
         private readonly ISandbox _sandbox;
         private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
-        public MessageProcessorFactory() : this(SandboxFactory.Create())
+		public MessageProcessorFactory() : this(SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation))
         {
         }
 
