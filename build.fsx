@@ -49,7 +49,7 @@ let coreRelease = LoadReleaseNotes "Core/CHANGELOG.md"
 let testAssemblies = "artifacts/gauge-csharp/*tests/*Test*.dll"
 let testAssembliesLib = "artifacts/gauge-csharp-lib/tests/*Test*.dll"
 let testAssembliesRunner = "artifacts/gauge-csharp/tests/*Test*.dll"
-let itestAssembliesRunner = "artifacts/gauge-csharp/itests/*Test*.dll"
+let itestAssembliesRunner = "artifacts/gauge-csharp/itests/*IntegrationTest*.dll"
 let testReportOutput = "artifacts/gauge-csharp/bin/gauge.csharp.runner.unittests.xml"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
@@ -95,9 +95,9 @@ Target "CopyBinaries" (fun _ ->
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "artifacts" </> (artifactsDir f)))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
     // copy the IntegrationTestSample.dll with test suites
-    CopyFile "artifacts/gauge-csharp/itest" "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll"
-    // and copy its old Lib reference
-    CopyFile "artifacts/gauge-csharp/itest" "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll"
+    CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll"
+    // and do NOT copy its old Lib reference, it must be loaded by sandbox
+    // CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll"
 )
 
 // --------------------------------------------------------------------------------------
@@ -300,8 +300,12 @@ Target "All" DoNothing
 
 "CopyBinaries"
   ==> "RunTests-Lib"
+"CopyBinaries"
   ==> "RunTests-Runner"
+"CopyBinaries"
   ==> "RunITests-Runner"
+
+"RunTests-All"
   ==> "RunTests"
 
 "Clean"
