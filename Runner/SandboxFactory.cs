@@ -45,6 +45,14 @@ namespace Gauge.CSharp.Runner
 
 				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
 				sandboxDomain.AssemblyResolve += resolver.HandleAssemblyResolveForSandboxDomain;
+				/*HACK - This is evil! Runner doesn't need to load users assemblies.
+				 * But we cannot avoid this on Windows because ISandbox is declaring MethodInfo
+				 * which is passed over .NET remoting, which is forcing users assemblies to be loaded.
+				 * If we don't do this then Gauge.CSharp.Runner.ISandbox.GetHookRegistry() will throw up
+				 * when called from runners domain.
+				 * Mono is less restrictive and ignores that MethodInfo refers/contains foreign assemblies.
+				 */
+				AppDomain.CurrentDomain.AssemblyResolve += HandleAssemblyResolveForCurrentDomain;
 
                 var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
@@ -59,6 +67,16 @@ namespace Gauge.CSharp.Runner
                 throw;
             }
         }
+
+		static Assembly HandleAssemblyResolveForCurrentDomain (object sender, ResolveEventArgs args)
+		{
+			var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
+			var gaugeBinPath = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
+			if (File.Exists (gaugeBinPath)) {
+				return Assembly.LoadFrom (gaugeBinPath);
+			}
+			return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
+		}
     }
 
 	[Serializable]
