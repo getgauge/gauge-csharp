@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
     [TestFixture]
     class RefactorHelperTests
     {
-        readonly string _testProjectPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\IntegrationTestSample");
+		private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
 
         [SetUp]
         public void Setup()

@@ -26,8 +26,8 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 {
     [TestFixture]
     public class SandBoxTests
-    {
-        private readonly string _testProjectPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\IntegrationTestSample");
+    {		
+		private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
 
         [SetUp]
         public void Setup()
@@ -42,7 +42,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             // The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
             // The actual Gauge CSharp runner uses a different version of Lib 
-            Assert.AreEqual(FileVersionInfo.GetVersionInfo(sandbox.TargetLibAssembly.Location).ProductVersion, "0.0.0");
+			Assert.AreEqual("0.0.0",FileVersionInfo.GetVersionInfo(sandbox.TargetLibAssembly.Location).ProductVersion);
         }
 
         [Test]

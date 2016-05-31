@@ -53,16 +53,13 @@
     <Compile Include="RefactorHelperTests.cs" />
     <Compile Include="SandBoxTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
     <None Include="Runner.IntegrationTests.licenseheader" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IntegrationTestSample\IntegrationTestSample.csproj">
-      <Project>{81502D2C-472B-4D4C-BFA9-EA206CD16B23}</Project>
-      <Name>IntegrationTestSample</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Runner\Gauge.CSharp.Runner.csproj">
       <Project>{1027A646-4C10-44B9-939F-639D49D7CBF7}</Project>
       <Name>Gauge.CSharp.Runner</Name>
