@@ -25,7 +25,7 @@ namespace Gauge.CSharp.Core
         private const string GaugePortEnv = "GAUGE_INTERNAL_PORT";
         private const string GaugeApiPortEnv = "GAUGE_API_PORT";
         private const string GaugeProjectRootEnv = "GAUGE_PROJECT_ROOT";
-        private const string GaugeCustomBuildPath = "gauge_custom_build_path";
+        private const string GaugeCustomBuildPath = "GAUGE_CUSTOM_BUILD_PATH";
             
 
         public static int GaugePort {
@@ -41,19 +41,33 @@ namespace Gauge.CSharp.Core
             get { return Convert.ToInt32(ReadEnvValue(GaugeApiPortEnv)); }
         }
 
-        private static string ReadEnvValue(string env)
+        public static string ReadEnvValue(string env)
         {
-            var envValue = Environment.GetEnvironmentVariable(env);
-            if (string.IsNullOrEmpty(envValue))
-            {
-                throw new Exception(env + " is not set");
-            }
-            return envValue;
+			string envValue = TryReadEnvValue(env);
+			if(envValue == null)
+				throw new Exception (env + " is not set");
+			return envValue;
         }
+
+		public static string TryReadEnvValue(string env)
+		{
+			if (env == null)
+				throw new ArgumentNullException ("env");
+			
+			var envValue = Environment.GetEnvironmentVariable(env.ToUpper());
+			if (string.IsNullOrEmpty(envValue))
+			{
+				envValue = Environment.GetEnvironmentVariable(env.ToLower());
+				if (string.IsNullOrEmpty (envValue)) {
+					return null;
+				}
+			}
+			return envValue;
+		}
 
         public static string GetGaugeBinDir()
         {
-            var customBuildPath = Environment.GetEnvironmentVariable(GaugeCustomBuildPath);
+			var customBuildPath = Utils.TryReadEnvValue(GaugeCustomBuildPath);
             if (string.IsNullOrEmpty(customBuildPath))
             {
                 return Path.Combine(GaugeProjectRoot, "gauge-bin");
