@@ -76,7 +76,10 @@
   <ItemGroup>
     <Compile Include="AssemblyLocater.cs" />
     <Compile Include="AssemblyLoader.cs" />
-    <Compile Include="ClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\ClassInstanceManagerFactory.cs" />
+    <Compile Include="InstanceManagement\ContainerBuilder\DiContainerBuilder.cs" />
+    <Compile Include="InstanceManagement\DependencyInjectingInstanceManager.cs" />
+    <Compile Include="InstanceManagement\DefaultClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="DefaultScreenGrabber.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
@@ -99,6 +102,8 @@
     <Compile Include="IGaugeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InstanceManagement\IClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\ContainerBuilder\IDiContainerBuilder.cs" />
     <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />

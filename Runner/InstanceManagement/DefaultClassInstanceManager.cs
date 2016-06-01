@@ -18,13 +18,14 @@
 using System;
 using System.Collections;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.InstanceManagement
 {
-    public static class ClassInstanceManager
+    public class DefaultClassInstanceManager : IClassInstanceManager
     {
         private static readonly Hashtable ClassInstanceMap = new Hashtable();
-        
-        public static object Get(Type declaringType)
+
+
+        public object Get(Type declaringType)
         {
             if (ClassInstanceMap.ContainsKey(declaringType))
             {
@@ -35,7 +36,19 @@ namespace Gauge.CSharp.Runner
             return instance;
         }
 
-        public static void ClearCache()
+
+        public void StartScope(string tag)
+        {
+            //no scope
+        }
+
+
+        public void CloseScope()
+        {
+            //no scope
+        }
+
+        public void ClearCache()
         {
             ClassInstanceMap.Clear();
         }

@@ -15,18 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using Gauge.CSharp.Runner.InstanceManagement;
 using NUnit.Framework;
 
-namespace Gauge.CSharp.Runner.UnitTests
+namespace Gauge.CSharp.Runner.UnitTests.InstanceManagement
 {
     [TestFixture]
-    public class ClassInstanceManagerTests
+    public class DefaultClassInstanceManagerTests
     {
         [Test]
         public void ShouldGetInstanceForType()
         {
             var type = typeof(object);
-            var instance = ClassInstanceManager.Get(type);
+            var instance = new DefaultClassInstanceManager().Get(type);
             
             Assert.NotNull(instance);
             Assert.AreEqual(instance.GetType(), type);
@@ -35,9 +36,10 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetMemoizedInstanceForType()
         {
+            var instanceManager = new DefaultClassInstanceManager();
             var type = typeof(object);
-            var instance = ClassInstanceManager.Get(type);
-            var anotherInstance = ClassInstanceManager.Get(type);
+            var instance = instanceManager.Get(type);
+            var anotherInstance = instanceManager.Get(type);
             
             Assert.AreSame(instance, anotherInstance);
         }

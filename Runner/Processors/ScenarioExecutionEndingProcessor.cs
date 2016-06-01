@@ -23,10 +23,21 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ScenarioExecutionEndingProcessor : TaggedHooksFirstExecutionProcessor
     {
-        public ScenarioExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        private readonly ISandbox _sandbox;
+
+        public ScenarioExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
             : base(hookRegistry, methodExecutor)
         {
+            _sandbox = sandbox;
         }
+
+
+        public override Message Process(Message request)
+        {
+            _sandbox.CloseExectionScope();
+            return base.Process(request);
+        }
+
 
         protected override string CacheClearLevel
         {

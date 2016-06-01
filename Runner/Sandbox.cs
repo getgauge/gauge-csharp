@@ -21,8 +21,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Autofac;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.InstanceManagement;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -39,6 +41,9 @@ namespace Gauge.CSharp.Runner
 
         private Type ScreenGrabberType { get; set; }
 
+        private readonly IClassInstanceManager _classInstanceManager;
+
+
         public Sandbox(IAssemblyLocater locater)
         {
             LogConfiguration.Initialize();
@@ -47,6 +52,7 @@ namespace Gauge.CSharp.Runner
 			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
+            _classInstanceManager = new ClassInstanceManagerFactory().Create(_assemblyLoader);
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -58,7 +64,7 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
         {
             var executionResult = new ExecutionResult {Success = true};
-            var instance = ClassInstanceManager.Get(method.DeclaringType);
+            var instance = method.DeclaringType.Name.Contains("Navigate") ? _classInstanceManager.Get(method.DeclaringType) : new DefaultClassInstanceManager().Get(method.DeclaringType);
             try
             {
                 method.Invoke(instance, args);
@@ -141,7 +147,7 @@ namespace Gauge.CSharp.Runner
 
         public void ClearObjectCache()
         {
-            ClassInstanceManager.ClearCache();
+            _classInstanceManager.ClearCache();
         }
 
         public IEnumerable<string> GetAllPendingMessages()
@@ -150,6 +156,17 @@ namespace Gauge.CSharp.Runner
             var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages", BindingFlags.Static | BindingFlags.Public);
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
+
+        public void StartExecutionScope(string tag)
+        {
+            _classInstanceManager.StartScope(tag);
+        }
+
+        public void CloseExectionScope()
+        {
+            _classInstanceManager.CloseScope();
+        }
+
 
         private void SetAppConfigIfExists()
         {            
