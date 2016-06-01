@@ -51,6 +51,10 @@
     <StartupObject>Gauge.CSharp.Runner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Gauge.CSharp.Core, Version=0.0.3.0, Culture=neutral, PublicKeyToken=4d2d442b45695923, processorArchitecture=MSIL">
       <HintPath>..\packages\Gauge.CSharp.Core.0.0.3.0\lib\net45\Gauge.CSharp.Core.dll</HintPath>
     </Reference>
@@ -111,7 +115,10 @@
   <ItemGroup>
     <Compile Include="AssemblyLocater.cs" />
     <Compile Include="AssemblyLoader.cs" />
-    <Compile Include="ClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\ClassInstanceManagerFactory.cs" />
+    <Compile Include="InstanceManagement\ContainerBuilder\DiContainerBuilder.cs" />
+    <Compile Include="InstanceManagement\DependencyInjectingInstanceManager.cs" />
+    <Compile Include="InstanceManagement\DefaultClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="DefaultScreenGrabber.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
@@ -134,6 +141,8 @@
     <Compile Include="IGaugeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InstanceManagement\IClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\ContainerBuilder\IDiContainerBuilder.cs" />
     <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />

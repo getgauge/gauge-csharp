@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+using Gauge.CSharp.Runner.InstanceManagement;
 
 namespace Gauge.CSharp.Runner
 {
@@ -32,5 +33,7 @@ namespace Gauge.CSharp.Runner
         Assembly TargetLibAssembly { get; }
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
+        void StartExecutionScope(string tag);
+        void CloseExectionScope();
     }
 }
