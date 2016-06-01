@@ -63,6 +63,11 @@ namespace Gauge.CSharp.Runner
             return _targetLibAssembly;
         }
 
+//        public List<Assembly> GetAssemblies()
+//        {
+//            return AssembliesReferencingGaugeLib;
+//        } 
+
         public List<MethodInfo> GetMethods(Type annotationType)
         {
             Func<MethodInfo, bool> methodFilter = info => info.GetCustomAttributes()

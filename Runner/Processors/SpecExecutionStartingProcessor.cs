@@ -22,9 +22,12 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class SpecExecutionStartingProcessor : UntaggedHooksFirstExecutionProcessor
     {
-        public SpecExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        private readonly ISandbox _sandbox;
+
+        public SpecExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
             : base(hookRegistry, methodExecutor)
         {
+            _sandbox = sandbox;
         }
 
         protected override HashSet<HookMethod> GetHooks()
@@ -40,6 +43,12 @@ namespace Gauge.CSharp.Runner.Processors
         protected override IEnumerable<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentSpec.TagsList;
+        }
+
+        public override Message Process(Message request)
+        {
+            _sandbox.StartExecutionScope("spec");
+            return base.Process(request);
         }
     }
 }
