@@ -132,7 +132,7 @@ namespace Gauge.Messages {
             "DQoFZXJyb3IYAiABKAkSFAoMZmlsZXNDaGFuZ2VkGAMgAygJIiMKEkZvcm1h", 
             "dFNwZWNzUmVxdWVzdBINCgVzcGVjcxgBIAMoCSI3ChNGb3JtYXRTcGVjc1Jl", 
             "c3BvbnNlEg4KBmVycm9ycxgBIAMoCRIQCgh3YXJuaW5ncxgCIAMoCSIfCh1V", 
-            "bnN1cHBvcnRlZEFwaU1lc3NhZ2VSZXNwb25zZSLHEQoKQVBJTWVzc2FnZRI+", 
+            "bnN1cHBvcnRlZEFwaU1lc3NhZ2VSZXNwb25zZSL0EQoKQVBJTWVzc2FnZRI+", 
             "CgttZXNzYWdlVHlwZRgBIAIoDjIpLmdhdWdlLm1lc3NhZ2VzLkFQSU1lc3Nh", 
             "Z2UuQVBJTWVzc2FnZVR5cGUSEQoJbWVzc2FnZUlkGAIgAigDEkEKEnByb2pl", 
             "Y3RSb290UmVxdWVzdBgDIAEoCzIlLmdhdWdlLm1lc3NhZ2VzLkdldFByb2pl", 
@@ -168,7 +168,7 @@ namespace Gauge.Messages {
             "ZXN0EkAKE2Zvcm1hdFNwZWNzUmVzcG9uc2UYFyABKAsyIy5nYXVnZS5tZXNz", 
             "YWdlcy5Gb3JtYXRTcGVjc1Jlc3BvbnNlElQKHXVuc3VwcG9ydGVkQXBpTWVz", 
             "c2FnZVJlc3BvbnNlGBggASgLMi0uZ2F1Z2UubWVzc2FnZXMuVW5zdXBwb3J0", 
-            "ZWRBcGlNZXNzYWdlUmVzcG9uc2Ui+wQKDkFQSU1lc3NhZ2VUeXBlEhkKFUdl", 
+            "ZWRBcGlNZXNzYWdlUmVzcG9uc2UiqAUKDkFQSU1lc3NhZ2VUeXBlEhkKFUdl", 
             "dFByb2plY3RSb290UmVxdWVzdBABEhoKFkdldFByb2plY3RSb290UmVzcG9u", 
             "c2UQAhIeChpHZXRJbnN0YWxsYXRpb25Sb290UmVxdWVzdBADEh8KG0dldElu", 
             "c3RhbGxhdGlvblJvb3RSZXNwb25zZRAEEhYKEkdldEFsbFN0ZXBzUmVxdWVz", 
@@ -182,7 +182,8 @@ namespace Gauge.Messages {
             "b3JtUmVmYWN0b3JpbmdSZXNwb25zZRAREhkKFUV4dHJhY3RDb25jZXB0UmVx", 
             "dWVzdBASEhoKFkV4dHJhY3RDb25jZXB0UmVzcG9uc2UQExIWChJGb3JtYXRT", 
             "cGVjc1JlcXVlc3QQFBIXChNGb3JtYXRTcGVjc1Jlc3BvbnNlEBUSIQodVW5z", 
-          "dXBwb3J0ZWRBcGlNZXNzYWdlUmVzcG9uc2UQFg=="));
+            "dXBwb3J0ZWRBcGlNZXNzYWdlUmVzcG9uc2UQFhIUChBFeGVjdXRpb25SZXF1", 
+          "ZXN0EBcSFQoRRXhlY3V0aW9uUmVzcG9uc2UQGA=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_GetProjectRootRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -8363,6 +8364,8 @@ namespace Gauge.Messages {
         FormatSpecsRequest = 20,
         FormatSpecsResponse = 21,
         UnsupportedApiMessageResponse = 22,
+        ExecutionRequest = 23,
+        ExecutionResponse = 24,
       }
       
     }
