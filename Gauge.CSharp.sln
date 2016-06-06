@@ -1,25 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B1635FF6-69D4-4EE5-9829-F8DD4DF74B8A}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner", "Runner\Gauge.CSharp.Runner.csproj", "{1027A646-4C10-44B9-939F-639D49D7CBF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner.UnitTests", "Runner.UnitTests\Gauge.CSharp.Runner.UnitTests.csproj", "{3D7D7E4E-5F2B-44DD-9AB8-B52468ECFC41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gauge.Project.Skel", "Gauge.Project.Skel", "{42CCF79A-CE5F-4FB8-ABD4-F7E747823504}"
 	ProjectSection(SolutionItems) = preProject
-		Gauge.Project.Skel\AssemblyInfo.cs = Gauge.Project.Skel\AssemblyInfo.cs
-		Gauge.Project.Skel\csharp.properties = Gauge.Project.Skel\csharp.properties
 		Gauge.Project.Skel\Gauge.Spec.csproj = Gauge.Project.Skel\Gauge.Spec.csproj
 		Gauge.Project.Skel\Gauge.Spec.sln = Gauge.Project.Skel\Gauge.Spec.sln
 		Gauge.Project.Skel\packages.config = Gauge.Project.Skel\packages.config
 		Gauge.Project.Skel\StepImplementation.cs = Gauge.Project.Skel\StepImplementation.cs
+		Gauge.Project.Skel\env\default\csharp.properties = Gauge.Project.Skel\env\default\csharp.properties
+		Gauge.Project.Skel\Properties\AssemblyInfo.cs = Gauge.Project.Skel\Properties\AssemblyInfo.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTestSample", "IntegrationTestSample\IntegrationTestSample.csproj", "{81502D2C-472B-4D4C-BFA9-EA206CD16B23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gauge.CSharp.Runner.IntegrationTests", "Runner.IntegrationTests\Gauge.CSharp.Runner.IntegrationTests.csproj", "{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D5D45C5-242C-414E-AC0E-4887BC58CB7B}"
+	ProjectSection(SolutionItems) = preProject
+		build.fsx = build.fsx
+		CHANGELOG.md = CHANGELOG.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +64,8 @@ Global
 		{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E495E651-81F3-427C-AE2A-2E8ABD3CA1F0}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

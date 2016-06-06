@@ -53,7 +53,8 @@ namespace Gauge.CSharp.Runner
                 .Elements(ns + "ItemGroup")
                 .Elements(ns + "Compile")
                 .Where(r => r.Attribute("Include") != null)
-                .Select(r => Path.GetFullPath(Path.Combine(Utils.GaugeProjectRoot, r.Attribute("Include").Value)));
+				.Select(r => Path.GetFullPath(Path.Combine(Utils.GaugeProjectRoot, r.Attribute("Include").Value
+					.Replace('\\',Path.DirectorySeparatorChar))));
 
             var filesChanged = new ConcurrentBag<string>();
 

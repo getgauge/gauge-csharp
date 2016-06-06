@@ -1,0 +1,8 @@
+Google.ProtocolBuffers
+Microsoft.Web.Xdt
+NuGet.Core
+
+group Test
+  Moq
+  NUnit
+  NUnit.Runners

@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner
         public IEnumerable<string> GetAllAssemblies()
         {
             var assemblies = _directoryWrapper.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly).ToList();
-            var gaugeAdditionalLibsPath = Environment.GetEnvironmentVariable("gauge_additional_libs");
+            var gaugeAdditionalLibsPath = Utils.TryReadEnvValue("GAUGE_ADDITIONAL_LIBS");
             if (string.IsNullOrEmpty(gaugeAdditionalLibsPath))
                 return assemblies;
 

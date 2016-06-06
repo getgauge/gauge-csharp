@@ -1,4 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{B18284A0-5417-4239-AC8B-3EC59AE26D70}"
+	ProjectSection(SolutionItems) = preProject
+		..\paket.dependencies = ..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("91a15a46-889c-481f-8902-ef5ca22640c3") = "IntegrationTestSample", "IntegrationTestSample.csproj", "6c31d99f-a982-4596-b423-5e945c16662d"
 EndProject
 Global

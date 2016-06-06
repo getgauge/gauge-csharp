@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Linq;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
+using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner.Processors
 {
@@ -68,7 +69,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         private void ClearCacheForConfiguredLevel()
         {
-            var flag = Environment.GetEnvironmentVariable(ClearStateFlag);
+            var flag = Utils.TryReadEnvValue(ClearStateFlag);
             if (!string.IsNullOrEmpty(flag) && flag.Trim().Equals(CacheClearLevel))
                 MethodExecutor.ClearCache();
         }

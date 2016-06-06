@@ -1,3 +1,9 @@
+/Gauge.CSharp.NoTests.userprefs
+/Gauge.CSharp.Lib.userprefs
+/TestResults-Lib.xml
+/Gauge.CSharp.userprefs
+/Gauge.CSharp.Core.userprefs
+/.paket/paket.exe
 bin
 obj
 *.suo
