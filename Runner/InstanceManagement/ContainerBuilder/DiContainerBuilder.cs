@@ -1,8 +1,7 @@
 ﻿using Autofac;
-using Gauge.CSharp.Runner.InstanceManagement.ContainerBuilder;
 using NLog;
 
-namespace Gauge.CSharp.Runner.InstanceManagement
+namespace Gauge.CSharp.Runner.InstanceManagement.ContainerBuilder
 {
     public class DiContainerBuilder : IDiContainerBuilder
     {
