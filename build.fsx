@@ -289,6 +289,17 @@ Target "NuGet-Lib" (fun _ ->
             ReleaseNotes = toLines libRelease.Notes})
 )
 
+Target "Install" (fun _ ->
+    let result = Shell.Exec("gauge.exe", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version)) 
+    if result <> 0 then failwithf "%s exited with error %d" "gauge --install" result
+)
+
+Target "Uninstall" (fun _ ->
+    let result = Shell.Exec("gauge.exe", (sprintf @"--uninstall csharp --plugin-version %s" version)) 
+    if result <> 0 then failwithf "%s exited with error %d" "gauge --uninstall" result
+)
+
+Target "ForceInstall" DoNothing
 Target "Package" DoNothing
 Target "Build" DoNothing
 Target "RunTests" DoNothing
@@ -351,4 +362,10 @@ Target "BuildAndPackage" DoNothing
 "Package"
   ==> "BuildAndPackage"
 
+"Uninstall"
+  ==> "ForceInstall"
+
+"Install"
+  ==> "ForceInstall"
+  
 RunTargetOrDefault "All"
