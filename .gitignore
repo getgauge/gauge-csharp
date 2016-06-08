@@ -3,7 +3,7 @@
 /TestResults-Lib.xml
 /Gauge.CSharp.userprefs
 /Gauge.CSharp.Core.userprefs
-/.paket/paket.exe
+/.paket
 bin
 obj
 *.suo
