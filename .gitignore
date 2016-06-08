@@ -18,3 +18,5 @@ artifacts/
 IntegrationTestSample/gauge-bin
 IntegrationTestSample/logs
 IntegrationTestSample/reports
+.fake
+TestResults.xml
