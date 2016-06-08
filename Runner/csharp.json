@@ -1,6 +1,6 @@
 {
   "id" : "csharp",
-  "version" : "0.7.2",
+  "version" : "0.8.0",
   "description": "C# support for gauge",
   "install": {
     "windows": [],
@@ -9,13 +9,13 @@
   },
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
-    "linux": ["echo", "Coming Soon!"],
-    "darwin": ["echo", "Coming Soon!"]
+    "linux": ["/usr/bin/mono", "bin/Gauge.CSharp.Runner.exe", "--start"],
+    "darwin": ["/usr/local/bin/mono", "bin/Gauge.Csharp.Runner.exe", "--start"]
   },
   "init": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--init"],
-    "linux": ["echo", "Coming Soon!"],
-    "darwin": ["echo", "Coming Soon!"]
+    "linux": ["/usr/bin/mono", "bin/Gauge.CSharp.Runner.exe", "--init"],
+    "darwin": ["/usr/local/bin/mono", "bin/Gauge.Csharp.Runner.exe", "--init"]
   },
   "gaugeVersionSupport": {
       "minimum": "0.2.0",
