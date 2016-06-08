@@ -24,7 +24,7 @@ else {
     $artifactPath= [IO.Path]::Combine($pwd,"artifacts")
 }
 
-$pluginFile = gci $artifactPath\gauge-csharp*.zip | select -f 1
+$pluginFile = gci $artifactPath\gauge-csharp\gauge-csharp*.zip | select -f 1
 
 if($force -eq 'true')
 {

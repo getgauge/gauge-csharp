@@ -297,6 +297,7 @@ Target "RunTests" DoNothing
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
+Target "BuildAndZip" DoNothing
 
 "AssemblyInfo-Core"
   ==> "Build-Core"
@@ -340,5 +341,14 @@ Target "All" DoNothing
   ==> "Package"
 "NuGet-Lib"
   ==> "Package"
+
+"RunTests-Lib"
+  ==> "RunTests-All"
+
+"RunTests-All"
+  ==> "BuildAndZip"
+
+"Package"
+  ==> "BuildAndZip"
 
 RunTargetOrDefault "All"
