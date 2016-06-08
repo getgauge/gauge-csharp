@@ -1,6 +1,7 @@
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
+    FAKE.Lib (4.28)
     Google.ProtocolBuffers (2.4.1.555) - framework: >= net45
     Microsoft.CodeAnalysis.Analyzers (1.1) - framework: >= net45
     Microsoft.CodeAnalysis.Common (1.1) - framework: >= net45
@@ -22,7 +23,7 @@ GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
-    FAKE (4.27)
+    FAKE (4.28)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.3)
       FSharp.Compiler.Service (2.0.0.6)

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gauge.CSharp.Runner</RootNamespace>
     <AssemblyName>Gauge.CSharp.Runner</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <PublishUrl>publish\</PublishUrl>
@@ -71,6 +71,7 @@
     <Reference Include="Gauge.CSharp.Lib">
       <HintPath>..\Lib\bin\Release\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLocater.cs" />
@@ -185,6 +186,20 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
+      <ItemGroup>
+        <Reference Include="FakeLib">
+          <HintPath>..\packages\FAKE.Lib\lib\net451\FakeLib.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
       <ItemGroup>
@@ -287,6 +302,9 @@
     </When>
   </Choose>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\Gauge.FSharpHelper\Gauge.FSharpHelper.fsproj">
+      <Project>{79B72F34-376A-4B21-8892-8C936421F8FA}</Project>
+      <Name>Gauge.FSharpHelper</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

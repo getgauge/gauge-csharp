@@ -27,52 +27,72 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using NLog;
 using ILogger = Microsoft.Build.Framework.ILogger;
+using Microsoft.FSharp.Core;
+using Fake;
+using Microsoft.FSharp.Collections;
 
 namespace Gauge.CSharp.Runner
 {
     public class GaugeProjectBuilder : IGaugeProjectBuilder
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+		public static bool IsRunningOnMono ()
+		{
+			return Type.GetType ("Mono.Runtime") != null;
+		}
 
         public bool BuildTargetGaugeProject()
         {
-            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);
-            var projectFullPath = GetProjectFullPath();
-            var gaugeBinDir = Utils.GetGaugeBinDir();
-            try
-            {
-                Logger.Debug("Create Gauge Bin Directory: {0}", gaugeBinDir);
-                Directory.CreateDirectory(gaugeBinDir);
-            }
-            catch (IOException ex)
-            {
-                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", gaugeBinDir);
-                throw;
-            }
-            Logger.Info("Building Project: {0}", projectFullPath);
-            var pc = new ProjectCollection();
-            var globalProperty = new Dictionary<string, string>
-            {
-                {"Configuration", "Release"},
-                {"Platform", "Any CPU"},
-                {"OutputPath", gaugeBinDir}
-            };
+			var projectFullPath = GetProjectFullPath();
+			var gaugeBinDir = Utils.GetGaugeBinDir();
+			if (IsRunningOnMono () || 
+				!string.IsNullOrEmpty(Utils.TryReadEnvValue("GAUGE_CSHARP_BUILD_FAKE"))) {
+				try {
+					Gauge.FSharpHelper.Builder.buildProject(projectFullPath, gaugeBinDir);
+				} catch (Exception ex) {
+					Logger.Error (ex,"C# Project build failed {0}",ex.Message);
+					return false;
+				}
+				return true;
+			} else {
+	            var consoleLogger = new ConsoleLogger(LoggerVerbosity.Quiet);	            
+	            try
+	            {
+	                Logger.Debug("Create Gauge Bin Directory: {0}", gaugeBinDir);
+	                Directory.CreateDirectory(gaugeBinDir);
+	            }
+	            catch (IOException ex)
+	            {
+	                Logger.Fatal(ex, "Unable to create Gauge Bin Directory in {0}", gaugeBinDir);
+	                throw;
+	            }
 
-            var buildRequestData = new BuildRequestData(projectFullPath, globalProperty, null, new[] {"Build"}, null);
+	            Logger.Info("Building Project: {0}", projectFullPath);
+	            var pc = new ProjectCollection();
+	            var globalProperty = new Dictionary<string, string>
+	            {
+	                {"Configuration", "Release"},
+	                {"Platform", "Any CPU"},
+	                {"OutputPath", gaugeBinDir}
+	            };
 
-            var errorCodeAggregator = new ErrorCodeAggregator();
-            var buildParameters = new BuildParameters(pc) {Loggers = new ILogger[] {consoleLogger, errorCodeAggregator}};
+	            var buildRequestData = new BuildRequestData(projectFullPath, globalProperty, null, new[] {"Build"}, null);
 
-            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
+	            var errorCodeAggregator = new ErrorCodeAggregator();
+	            var buildParameters = new BuildParameters(pc) {Loggers = new ILogger[] {consoleLogger, errorCodeAggregator}};
 
-            if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
-            {
-                Logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
-                Logger.Error("Please choose a project name that complies with C# Project naming conventions.");
-            }
+	            var buildResult = BuildManager.DefaultBuildManager.Build(buildParameters, buildRequestData);
 
-            Logger.Info(buildResult.OverallResult);
-            return buildResult.OverallResult == BuildResultCode.Success;
+	            if (errorCodeAggregator.ErrorCodes.Contains("CS1001"))
+	            {
+	                Logger.Error("You have chosen an invalid folder name to initialize a Gauge project.");
+	                Logger.Error("Please choose a project name that complies with C# Project naming conventions.");
+	            }
+
+	            Logger.Info(buildResult.OverallResult);
+	            return buildResult.OverallResult == BuildResultCode.Success;
+			}
         }
 
         private static string GetProjectFullPath()
