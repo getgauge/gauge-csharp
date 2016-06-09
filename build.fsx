@@ -294,6 +294,12 @@ let Run = fun (command, args, wd) ->
     let result = Shell.Exec(command, args, wd) 
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
+let InvokeMvn = fun (args) ->
+    if#MONO
+    Run("mvn", args, "gauge-tests")
+    #else
+    Run("mvn.cmd", args, "gauge-tests")
+    #endif
 
 Target "Install" (fun _ ->
     Run("gauge", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
@@ -313,11 +319,11 @@ Target "FetchTests" (fun _ ->
 )
 
 Target "FunctionalTests" (fun _ ->
-    Run("mvn", "test-compile gauge:execute -Denv=ci-csharp", "gauge-tests")
+    InvokeMvn "test-compile gauge:execute -Denv=ci-csharp"
 )
 
 Target "FunctionalTestsP" (fun _ ->
-    Run("mvn", "test -Denv=ci-csharp", "gauge-tests")
+    InvokeMvn "test -Denv=ci-csharp"
 )
 
 Target "GaugePluginInstall" (fun _ ->
