@@ -289,26 +289,54 @@ Target "NuGet-Lib" (fun _ ->
             ReleaseNotes = toLines libRelease.Notes})
 )
 
+let Run = fun (command, args, wd) ->
+    trace (sprintf "Running %s %s in WD: %s" command args wd)
+    let result = Shell.Exec(command, args, wd) 
+    if result <> 0 then failwithf "%s %s exited with error %d" command args result
+
+
 Target "Install" (fun _ ->
-    let result = Shell.Exec("gauge.exe", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version)) 
-    if result <> 0 then failwithf "%s exited with error %d" "gauge --install" result
+    Run("gauge", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
 )
 
 Target "Uninstall" (fun _ ->
-    let result = Shell.Exec("gauge.exe", (sprintf @"--uninstall csharp --plugin-version %s" version)) 
-    if result <> 0 then failwithf "%s exited with error %d" "gauge --uninstall" result
+    Run("gauge", (sprintf @"--uninstall csharp --plugin-version %s" version), ".") 
+)
+
+Target "RemoveTests" (fun _ ->
+    CleanDir "gauge-tests"
+)
+
+Target "FetchTests" (fun _ ->
+    let branch = environVarOrDefault "GAUGE_TEST_BRANCH" "master"
+    Run("git", (sprintf "clone --branch=%s --depth=1 https://github.com/getgauge/gauge-tests" branch), ".")
+)
+
+Target "FunctionalTests" (fun _ ->
+    Run("mvn", "test-compile gauge:execute -Denv=ci-csharp", "gauge-tests")
+)
+
+Target "FunctionalTestsP" (fun _ ->
+    Run("mvn", "test -Denv=ci-csharp", "gauge-tests")
+)
+
+Target "GaugePluginInstall" (fun _ ->
+    Run("gauge", "--install-all", "gauge-tests")
 )
 
 Target "ForceInstall" DoNothing
 Target "Package" DoNothing
 Target "Build" DoNothing
 Target "RunTests" DoNothing
+Target "SetupFT" DoNothing
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
 Target "All" DoNothing
 Target "BuildAndPackage" DoNothing
+
+Target "BuildInstallFT" DoNothing
 
 "AssemblyInfo-Core"
   ==> "Build-Core"
@@ -367,5 +395,27 @@ Target "BuildAndPackage" DoNothing
 
 "Install"
   ==> "ForceInstall"
-  
+
+"RemoveTests"
+  ==> "SetupFT"
+
+"FetchTests"
+  ==> "SetupFT"
+
+"GaugePluginInstall"
+  ==> "SetupFT"
+
+"SetupFT"
+  ==> "FunctionalTests"
+  ==> "FunctionalTestsP"
+
+"BuildAndPackage"
+  ==> "BuildInstallFT"
+
+"ForceInstall"
+  ==> "BuildInstallFT"
+
+"FunctionalTestsP"
+  ==> "BuildInstallFT"
+
 RunTargetOrDefault "All"
