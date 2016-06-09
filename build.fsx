@@ -295,11 +295,10 @@ let Run = fun (command, args, wd) ->
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
 let InvokeMvn = fun (args) ->
-    if#MONO
-    Run("mvn", args, "gauge-tests")
-    #else
-    Run("mvn.cmd", args, "gauge-tests")
-    #endif
+    if isMono then
+        Run("mvn", args, "gauge-tests")
+    else
+        Run("mvn.cmd", args, "gauge-tests")
 
 Target "Install" (fun _ ->
     Run("gauge", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
