@@ -19,6 +19,7 @@ using System.Linq;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
+using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Converter
@@ -35,8 +36,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
             var parameter = new Parameter.Builder()
                 .SetParameterType(Parameter.Types.ParameterType.Table)
                 .SetTable(table).Build();
-            
-            var actual = new TableParamConverter().Convert(parameter) as Table;
+            var mockSandbox = new Mock<ISandbox>();
+            mockSandbox.Setup(sandbox => sandbox.GetTargetType(typeof (Table).FullName)).Returns(typeof (Table));
+
+            var actual = new TableParamConverter().Convert(parameter, mockSandbox.Object) as Table;
             
             Assert.NotNull(actual);
             Assert.That(actual.GetColumnNames(), Contains.Item("header"));

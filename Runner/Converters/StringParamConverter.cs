@@ -23,7 +23,7 @@ namespace Gauge.CSharp.Runner.Converters
 {
     public class StringParamConverter : IParamConverter
     {
-        public object Convert(Parameter parameter)
+        public object Convert(Parameter parameter, ISandbox sandbox)
         {
             return parameter.Value;
         }

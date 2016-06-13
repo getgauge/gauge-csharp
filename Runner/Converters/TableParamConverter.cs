@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.Messages;
 
@@ -25,7 +26,7 @@ namespace Gauge.CSharp.Runner.Converters
 {
     public class TableParamConverter : IParamConverter
     {
-        public object Convert(Parameter parameter)
+        public object Convert(Parameter parameter, ISandbox sandbox)
         {
             var protoTable = parameter.Table;
             if (protoTable == null || protoTable.Headers == null)
@@ -34,11 +35,12 @@ namespace Gauge.CSharp.Runner.Converters
             }
             var protoTableRow = protoTable.Headers;
             var header = GetTableRowFor(protoTableRow);
-            var table = new Table(header);
+            var type = sandbox.GetTargetType(typeof(Table).FullName);
+            var table = Activator.CreateInstance(type, header);
             for (var i = 0; i < protoTable.RowsCount; i++)
             {
                 var row = GetTableRowFor(protoTable.GetRows(i));
-                table.AddRow(row);
+                type.InvokeMember("AddRow", BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, null, table, new object[] {row});
             }
             return table;
         }

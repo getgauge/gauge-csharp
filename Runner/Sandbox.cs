@@ -74,10 +74,16 @@ namespace Gauge.CSharp.Runner
             return executionResult;
         }
 
-		public string TargetLibAssemblyVersion { 
+        public Type GetTargetType(string typeFullName)
+        {
+            return _libAssembly.GetType(typeFullName);
+        }
+
+        public string TargetLibAssemblyVersion {
 			get{ return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; } 
 		}
-		private Assembly TargetLibAssembly { 
+
+        private Assembly TargetLibAssembly {
 			get{ return _libAssembly; } 
 		}
 

@@ -15,13 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Converters
 {
     internal interface IParamConverter
     {
-        Object Convert(Parameter parameter);
+        object Convert(Parameter parameter, ISandbox sandbox);
     }
 }

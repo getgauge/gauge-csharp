@@ -70,7 +70,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(hookRegistry, methodExecutor)},
                 {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(hookRegistry, methodExecutor)},
                 {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, methodExecutor)},
+                {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, methodExecutor, _sandbox)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
                 {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(_stepScanner)},
                 {Message.Types.MessageType.StepValidateRequest, new StepValidationProcessor(stepRegistry)},
