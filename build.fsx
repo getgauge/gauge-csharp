@@ -420,8 +420,14 @@ Target "BuildInstallFT" DoNothing
 
 "SetupFT"
   ==> "FunctionalTests"
+
+"SetupFT"
   ==> "FunctionalTestsP"
+
+"SetupFT"
   ==> "FunctionalTestsUnimplemented"
+
+"SetupFT"
   ==> "FunctionalTestsPUnimplemented"
 
 "BuildAndPackage"
