@@ -162,7 +162,8 @@ namespace Gauge.CSharp.Runner
         private SemanticVersion GetMaxNugetVersion()
         {
             return PackageRepository
-                .FindPackagesById(PackageId)
+                .GetPackages()
+                .Where(package => string.CompareOrdinal(package.Id, PackageId)==0)
                 .Max(p => p.Version);
         }
     }
