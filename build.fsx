@@ -318,11 +318,19 @@ Target "FetchTests" (fun _ ->
 )
 
 Target "FunctionalTests" (fun _ ->
-    InvokeMvn "test-compile gauge:execute -Denv=ci-csharp"
+    InvokeMvn "test-compile gauge:execute -Denv=ci-csharp -Dtags=\"!unimplemented\""
 )
 
 Target "FunctionalTestsP" (fun _ ->
-    InvokeMvn "test -Denv=ci-csharp"
+    InvokeMvn "test -Denv=ci-csharp -Dtags=\"!unimplemented\""
+)
+
+Target "FunctionalTestsUnimplemented" (fun _ ->
+    InvokeMvn "test-compile gauge:execute -Denv=ci-csharp -Dtags=\"unimplemented\""
+)
+
+Target "FunctionalTestsPUnimplemented" (fun _ ->
+    InvokeMvn "test -Denv=ci-csharp -Dtags=\"unimplemented\""
 )
 
 Target "GaugePluginInstall" (fun _ ->
@@ -413,6 +421,8 @@ Target "BuildInstallFT" DoNothing
 "SetupFT"
   ==> "FunctionalTests"
   ==> "FunctionalTestsP"
+  ==> "FunctionalTestsUnimplemented"
+  ==> "FunctionalTestsPUnimplemented"
 
 "BuildAndPackage"
   ==> "BuildInstallFT"
