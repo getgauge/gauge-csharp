@@ -4,6 +4,7 @@ install:
   - brew update
   - brew install gauge
   - brew outdated maven || brew upgrade maven
+  - mvn -version
 language: csharp
 jdk:
   - oraclejdk8
