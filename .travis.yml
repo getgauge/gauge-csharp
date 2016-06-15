@@ -1,13 +1,12 @@
 os:
   - osx
-install:
+before_install:
   - brew update
+  - brew install Caskroom/cask/java
+install:
   - brew install gauge
   - brew outdated maven || brew upgrade maven
   - mvn -version
 language: csharp
-jdk:
-  - oraclejdk8
 script:
-  - jdk_switcher use oraclejdk8
   - ./build.sh BuildInstallFT
