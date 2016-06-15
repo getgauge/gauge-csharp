@@ -1,5 +1,8 @@
 os:
   - osx
+install:
+  - brew update
+  - brew install gauge
 language: csharp
 script:
   - ./build.sh BuildInstallFT
