@@ -176,9 +176,9 @@ let buildSln solutionFile =
         { defaults with
             Verbosity = Some Minimal
             Targets = [ "Rebuild" ]
-            Properties = [ "Configuration", "Release"
+            Properties = [ ("Configuration", "Release")
                         #if MONO
-                            "DefineConstants","MONO"
+                            ;("DefineConstants","MONO")
                         #endif
                         ] })
         |> ignore
