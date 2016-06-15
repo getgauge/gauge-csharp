@@ -9,4 +9,5 @@ language: csharp
 jdk:
   - oraclejdk8
 script:
+  - jdk_switcher use oraclejdk8
   - ./build.sh BuildInstallFT
