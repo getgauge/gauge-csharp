@@ -3,6 +3,7 @@ os:
 install:
   - brew update
   - brew install gauge
+  - brew outdated maven || brew upgrade maven
 language: csharp
 script:
   - ./build.sh BuildInstallFT
