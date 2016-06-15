@@ -1,0 +1,5 @@
+os:
+  - osx
+language: csharp
+script:
+  - ./build.sh BuildInstallFT
