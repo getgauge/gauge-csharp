@@ -171,12 +171,16 @@ Target "Clean" (fun _ ->
 // Build library & test project
 
 let buildSln solutionFile =
-    !! solutionFile
-    #if MONO
-        |> MSBuildReleaseExt "" [ ("DefineConstants","MONO") ] "Rebuild"
-    #else
-        |> MSBuildRelease "" "Rebuild"
-    #endif
+    solutionFile
+        |> build (fun defaults ->
+        { defaults with
+            Verbosity = Some Minimal
+            Targets = [ "Rebuild" ]
+            Properties = [ "Configuration", "Release"
+                        #if MONO
+                            "DefineConstants","MONO"
+                        #endif
+                        ] })
         |> ignore
 
 Target "Build-Lib" (fun _ ->
