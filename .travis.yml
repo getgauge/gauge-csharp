@@ -5,5 +5,7 @@ install:
   - brew install gauge
   - brew outdated maven || brew upgrade maven
 language: csharp
+jdk:
+  - oraclejdk8
 script:
   - ./build.sh BuildInstallFT
