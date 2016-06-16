@@ -43,6 +43,7 @@ namespace Gauge.CSharp.Runner
         private dynamic _classInstanceManager;
 
 
+
         public Sandbox(IAssemblyLocater locater)
         {
             LogConfiguration.Initialize();
@@ -52,6 +53,7 @@ namespace Gauge.CSharp.Runner
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
+
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))

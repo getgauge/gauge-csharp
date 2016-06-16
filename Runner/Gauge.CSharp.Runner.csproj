@@ -99,6 +99,8 @@
     <Compile Include="IGaugeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InstanceManagement\IClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\ContainerBuilder\IDiContainerBuilder.cs" />
     <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />

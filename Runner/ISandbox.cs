@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Gauge.CSharp.Runner.InstanceManagement;
 
 namespace Gauge.CSharp.Runner
 {
@@ -32,12 +33,15 @@ namespace Gauge.CSharp.Runner
         List<string> GetAllStepTexts();
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
+<<<<<<< HEAD
         Type GetTargetType(string typeFullName);
 
 		// Used only from tests.
 		// Don't return Assembly here! assembly instance returned on sandbox side 
 		// would be replaced by assembly instance on runner side, thus making any asserts on it useless.
 		string TargetLibAssemblyVersion { get; }
+=======
+>>>>>>> 822539ee30eb79c9ad549749d2fa410ef548535e
         void StartExecutionScope(string tag);
         void CloseExectionScope();
     }
