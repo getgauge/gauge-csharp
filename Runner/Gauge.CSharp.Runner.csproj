@@ -99,8 +99,6 @@
     <Compile Include="IGaugeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InstanceManagement\IClassInstanceManager.cs" />
-    <Compile Include="InstanceManagement\ContainerBuilder\IDiContainerBuilder.cs" />
     <Compile Include="ISandbox.cs" />
     <Compile Include="IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />
@@ -188,9 +186,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
       <ItemGroup>
