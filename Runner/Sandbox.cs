@@ -42,7 +42,7 @@ namespace Gauge.CSharp.Runner
 
         private Type ScreenGrabberType { get; set; }
 
-        private readonly IClassInstanceManager _classInstanceManager;
+        private dynamic _classInstanceManager;
 
 
         public Sandbox(IAssemblyLocater locater)
@@ -53,7 +53,7 @@ namespace Gauge.CSharp.Runner
 			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
-            _classInstanceManager = LoadClassInstanceManager();
+            LoadClassInstanceManager();
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -65,14 +65,21 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
         {
             var executionResult = new ExecutionResult {Success = true};
-            var instance = _classInstanceManager.Get(method.DeclaringType);
             try
             {
                 var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey)o) : o).ToArray();
+                Type typeToLoad = method.DeclaringType;
+                var instance = _classInstanceManager.Get(typeToLoad);
+                if (instance == null)
+                {
+                    string error = "Could not instance type: " + typeToLoad;
+                    Logger.Error(error);
+                    throw new Exception(error);
+                }
                 Logger.Info(instance.GetType().FullName);
                 method.Invoke(instance, parameters);
             }
-            catch (TargetInvocationException ex)
+            catch (Exception ex)
             {
                 var innerException = ex.InnerException;
                 executionResult.ExceptionMessage = innerException.Message;
@@ -80,6 +87,7 @@ namespace Gauge.CSharp.Runner
                 executionResult.Source= innerException.Source;
                 executionResult.Success = false;
             }
+
             return executionResult;
         }
 
@@ -142,18 +150,17 @@ namespace Gauge.CSharp.Runner
         }
 
 
-        public IClassInstanceManager LoadClassInstanceManager()
+        public void LoadClassInstanceManager()
         {
             var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
-            IClassInstanceManager instanceManager = instanceManagerType != null
-                ? (IClassInstanceManager) Activator.CreateInstance(instanceManagerType)
+
+            _classInstanceManager = instanceManagerType != null
+                ? Activator.CreateInstance(instanceManagerType)
                 : new DefaultClassInstanceManager();
 
-            Logger.Info(instanceManager.GetType().FullName);
+            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
 
-            instanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
-
-            return instanceManager;
+            _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
 
 
