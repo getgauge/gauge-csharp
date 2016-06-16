@@ -17,6 +17,9 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using Gauge.CSharp.Lib;
 
 namespace Gauge.CSharp.Runner.InstanceManagement
 {
@@ -24,6 +27,11 @@ namespace Gauge.CSharp.Runner.InstanceManagement
     {
         private static readonly Hashtable ClassInstanceMap = new Hashtable();
 
+
+        public void Initialize(List<Assembly> assemblies)
+        {
+            //nothing to do
+        }
 
         public object Get(Type declaringType)
         {

@@ -36,6 +36,7 @@ namespace Gauge.CSharp.Runner
 
         public List<Assembly> AssembliesReferencingGaugeLib { get; private set; }
         public List<Type> ScreengrabberTypes { get; private set; }
+        public List<Type> ClassInstanceManagerTypes { get; private set; }
         private Assembly _targetLibAssembly;
         private readonly IAssemblyWrapper _assemblyWrapper;
         private readonly IFileWrapper _fileWrapper;
@@ -47,6 +48,7 @@ namespace Gauge.CSharp.Runner
             LoadTargetLibAssembly();
             AssembliesReferencingGaugeLib= new List<Assembly>();
             ScreengrabberTypes = new List<Type>();
+            ClassInstanceManagerTypes = new List<Type>();
             foreach (var location in assemblyLocations)
             {
                 ScanAndLoad(location);
@@ -62,11 +64,6 @@ namespace Gauge.CSharp.Runner
         {
             return _targetLibAssembly;
         }
-
-//        public List<Assembly> GetAssemblies()
-//        {
-//            return AssembliesReferencingGaugeLib;
-//        } 
 
         public List<MethodInfo> GetMethods(Type annotationType)
         {
@@ -105,6 +102,7 @@ namespace Gauge.CSharp.Runner
                 AssembliesReferencingGaugeLib.Add(fullyLoadedAssembly);
 
             ScanForScreengrabber(types);
+            ScanForInstanceManager(types);
         }
 
         private IEnumerable<Type> GetFullyLoadedTypes(IEnumerable<Type> loadableTypes, Assembly fullyLoadedAssembly)
@@ -124,6 +122,14 @@ namespace Gauge.CSharp.Runner
             var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
             ScreengrabberTypes.AddRange(implementingTypes);
         }
+
+
+        private void ScanForInstanceManager(IEnumerable<Type> types)
+        {
+            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IClassInstanceManager).FullName));
+            ClassInstanceManagerTypes.AddRange(implementingTypes);
+        }
+
 
         private IEnumerable<Type> GetLoadableTypes(Assembly assembly)
         {

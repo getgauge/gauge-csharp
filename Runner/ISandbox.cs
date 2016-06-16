@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Gauge.CSharp.Runner.InstanceManagement;
 
 namespace Gauge.CSharp.Runner
 {

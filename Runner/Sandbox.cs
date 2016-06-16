@@ -21,7 +21,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Autofac;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.InstanceManagement;
@@ -52,7 +51,7 @@ namespace Gauge.CSharp.Runner
 			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
-            _classInstanceManager = new ClassInstanceManagerFactory().Create(_assemblyLoader);
+            _classInstanceManager = LoadClassInstanceManager();
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -64,9 +63,10 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
         {
             var executionResult = new ExecutionResult {Success = true};
-            var instance = method.DeclaringType.Name.Contains("Navigate") ? _classInstanceManager.Get(method.DeclaringType) : new DefaultClassInstanceManager().Get(method.DeclaringType);
+            var instance = _classInstanceManager.Get(method.DeclaringType);
             try
             {
+                Logger.Info(instance.GetType().FullName);
                 method.Invoke(instance, args);
             }
             catch (TargetInvocationException ex)
@@ -123,6 +123,22 @@ namespace Gauge.CSharp.Runner
 				a => a.GetType ().FullName.Equals (fullStepName));
             return step.Names;
         }
+
+
+        public IClassInstanceManager LoadClassInstanceManager()
+        {
+            var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
+            IClassInstanceManager instanceManager = instanceManagerType != null
+                ? (IClassInstanceManager) Activator.CreateInstance(instanceManagerType)
+                : new DefaultClassInstanceManager();
+
+            Logger.Info(instanceManager.GetType().FullName);
+
+            instanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
+
+            return instanceManager;
+        }
+
 
         public bool TryScreenCapture(out byte[] screenShotBytes)
         {
