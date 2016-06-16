@@ -28,12 +28,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetCustomBuildPathFromEnv()
         {
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", @"C:\Blah");
+            var driveRoot = Path.GetPathRoot(Directory.GetCurrentDirectory());
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Path.Combine(driveRoot, "Blah"));
 
-            var imaginaryPath = string.Format("Foo{0}Bar", Path.DirectorySeparatorChar);
+            var imaginaryPath = Path.Combine("Foo", "Bar");;
             Environment.SetEnvironmentVariable("gauge_custom_build_path", imaginaryPath);
             var gaugeBinDir = Utils.GetGaugeBinDir();
-            Assert.AreEqual(@"C:\Blah\Foo\Bar", gaugeBinDir);
+            Assert.AreEqual(Path.Combine(driveRoot, "Blah", "Foo", "Bar"), gaugeBinDir);
 
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", string.Empty);
             Environment.SetEnvironmentVariable("gauge_custom_build_path", string.Empty);
