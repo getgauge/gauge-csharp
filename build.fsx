@@ -326,7 +326,7 @@ Target "FunctionalTests" (fun _ ->
 )
 
 Target "FunctionalTestsP" (fun _ ->
-    InvokeMvn "test -Denv=ci-csharp -Dtags=\"!unimplemented\""
+    InvokeMvn "test -Denv=ci-csharp -Dtags=\"!unimplemented\" -Dflags=\"--simple-console\""
 )
 
 Target "FunctionalTestsUnimplemented" (fun _ ->
