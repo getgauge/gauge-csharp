@@ -1,12 +1,18 @@
 os:
   - osx
+  - linux
 before_install:
-  - brew update
-  - brew install Caskroom/cask/java
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; brew update; brew install Caskroom/cask/java; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-keys 023EDB0B; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; echo deb https://dl.bintray.com/gauge/gauge-deb nightly main | sudo tee -a /etc/apt/sources.list; fi
 install:
-  - brew install gauge
-  - brew outdated maven || brew upgrade maven
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; brew install gauge; brew outdated maven || brew upgrade maven; fi
   - mvn -version
+addons:
+  apt:
+    packages:
+      - maven
+      - gauge
 language: csharp
 script:
   - ./build.sh BuildInstallFT
