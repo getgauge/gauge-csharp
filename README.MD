@@ -1,5 +1,10 @@
 # C# support for Gauge
 
+|Windows|Linux (Mono)|OS X|
+|-|-|-|
+|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)
+|[![Build Status](https://snap-ci.com/getgauge/gauge-csharp/branch/master/build_image)](https://snap-ci.com/getgauge/gauge-csharp/branch/master)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
+
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 
 This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html).
@@ -56,7 +61,9 @@ On Windows
 build.cmd CopyBinaries
 ```
 
-### Test
+### Tests
+
+#### Unit/Integration
 
 On mono:
 ```
@@ -68,6 +75,34 @@ On Windows
 build.cmd RunTests
 ```
 
+#### Functional Tests
+
+For running functional tests
+ * gauge
+ * java 1.8
+ * maven
+
+Choose from the below targets (whichever is applicable)
+
+|Target|Purpose|
+|-|-|
+|`FunctionalTests`| Runs all functional tests without `unimplemented` tag|
+|`FunctionalTestsP`| Same as `FunctionalTests` but runs in parallel|
+|`FunctionalTestsUnimplemented`| Runs all functional tests with `unimplemented` tag, ideally these should fail|
+|`FunctionalTestsPUnimplemented`| Same as `FunctionalTestsUnimplemented` but runs in parallel|
+|`BuildInstallFT`| Builds, runs Unit and Integration tests, installs Gauge-CSharp from artifact, and triggers `FunctionalTestsP`|
+
+On mono:
+```
+./build.sh <target>
+```
+
+On Windows:
+```
+build.cmd <target>
+```
+
+
 ### Package
 
 On mono:
@@ -75,7 +110,7 @@ On mono:
 ./build.sh Package
 ```
 
-On Windows
+On Windows:
 ```
 build.cmd Package
 ```
@@ -104,9 +139,23 @@ build.cmd Zip
 
 ### Install the plugin
 
-To install a local version of the plugin:
+To install a local version of the plugin, choose from the below targets (whichever is applicable)
 
-    run.bat install
+|Target|Purpose|
+|-|-|
+|`Install`| Installs Runner from generated Artifact|
+|`ForceInstall`| Same as `Install`, but removes conflicting version if already installed|
+
+
+On mono:
+```
+./build.sh <target>
+```
+
+On Windows:
+```
+build.cmd <target>
+```
 
 ### Regenerate the API messages (protocol buffer api changes)
 
@@ -127,9 +176,6 @@ Update the submodule and run the `gen-proto` command:
 ### Linux
 
 For building and unit testing you only need mono.
-For running functional tests *TODO what else?*
- * gauge
- * java (which one?)
 
 ## License
 
