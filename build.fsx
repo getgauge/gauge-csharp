@@ -295,7 +295,11 @@ Target "NuGet-Lib" (fun _ ->
 
 let Run = fun (command, args, wd) ->
     trace (sprintf "Running %s %s in WD: %s" command args wd)
-    let result = Shell.Exec(command, args, wd) 
+
+    let result = ExecProcess (fun info ->
+        info.FileName <- command
+        info.WorkingDirectory <- wd
+        info.Arguments <- args) (TimeSpan.FromMinutes 30.0)
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
 let InvokeMvn = fun (args) ->
