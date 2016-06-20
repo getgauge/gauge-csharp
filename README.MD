@@ -1,9 +1,8 @@
 # C# support for Gauge
 
-|Windows|Linux (Mono)|OS X|
-|-|-|-|
-|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)
-|[![Build Status](https://snap-ci.com/getgauge/gauge-csharp/branch/master/build_image)](https://snap-ci.com/getgauge/gauge-csharp/branch/master)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
+|Windows|Linux (Mono)|OS X (Mono)|
+|-------|------------|-----------|
+|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)|[![Build Status](https://snap-ci.com/getgauge/gauge-csharp/branch/master/build_image)](https://snap-ci.com/getgauge/gauge-csharp/branch/master)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
 
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 
@@ -85,7 +84,7 @@ For running functional tests
 Choose from the below targets (whichever is applicable)
 
 |Target|Purpose|
-|-|-|
+|------|-------|
 |`FunctionalTests`| Runs all functional tests without `unimplemented` tag|
 |`FunctionalTestsP`| Same as `FunctionalTests` but runs in parallel|
 |`FunctionalTestsUnimplemented`| Runs all functional tests with `unimplemented` tag, ideally these should fail|
@@ -142,7 +141,7 @@ build.cmd Zip
 To install a local version of the plugin, choose from the below targets (whichever is applicable)
 
 |Target|Purpose|
-|-|-|
+|------|-------|
 |`Install`| Installs Runner from generated Artifact|
 |`ForceInstall`| Same as `Install`, but removes conflicting version if already installed|
 
