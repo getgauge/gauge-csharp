@@ -5,10 +5,12 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install Caskroom/cask/java; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-keys 023EDB0B; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo deb https://dl.bintray.com/gauge/gauge-deb nightly main | sudo tee -a /etc/apt/sources.list; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update; sudo apt-get install -y openjdk-8-jdk maven gauge; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update; sudo apt-get install -y maven gauge; fi
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gauge; brew outdated maven || brew upgrade maven; fi
   - mvn -version
 language: csharp
+jdk:
+  - oraclejdk8
 script:
   - ./build.sh BuildInstallFT
