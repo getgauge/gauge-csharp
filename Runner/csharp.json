@@ -2,10 +2,10 @@
   "id" : "csharp",
   "version" : "0.8.0",
   "description": "C# support for gauge",
-  "install": {
+  "PostInstall": {
     "windows": [],
-    "linux": [],
-    "darwin": []
+    "linux": ["chmod","+x", "run.sh"],
+    "darwin": ["chmod","+x", "run.sh"]
   },
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
