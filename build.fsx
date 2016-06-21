@@ -322,7 +322,7 @@ Target "RemoveTests" (fun _ ->
 
 Target "FetchTests" (fun _ ->
     let branch = environVarOrDefault "GAUGE_TEST_BRANCH" "master"
-    Run("git", (sprintf "clone --branch=%s --depth=1 https://github.com/getgauge/gauge-tests" branch), ".")
+    Repository.cloneSingleBranch "" "https://github.com/getgauge/gauge-tests --depth=1" branch "gauge-tests"
 )
 
 Target "FunctionalTests" (fun _ ->
