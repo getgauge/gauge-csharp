@@ -201,6 +201,7 @@ Target "Build-Runner" (fun _ ->
 Target "Skel" (fun _ ->
     CopyDir "artifacts/gauge-csharp/skel" "Gauge.Project.Skel/" (fun _ -> true)
     CopyFile "artifacts/gauge-csharp/csharp.json" "Runner/csharp.json"
+    CopyFile "artifacts/gauge-csharp/run.sh" "Runner/run.sh"
 )
 
 // version from runner's changelog

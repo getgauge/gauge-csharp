@@ -9,13 +9,13 @@
   },
   "run": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
-    "linux": ["mono", "bin/Gauge.CSharp.Runner.exe", "--start"],
-    "darwin": ["mono", "bin/Gauge.Csharp.Runner.exe", "--start"]
+    "linux": ["./run.sh", "--start"],
+    "darwin": ["./run.sh", "--start"]
   },
   "init": {
     "windows": ["bin\\Gauge.Csharp.Runner.exe", "--init"],
-    "linux": ["mono", "bin/Gauge.CSharp.Runner.exe", "--init"],
-    "darwin": ["mono", "bin/Gauge.Csharp.Runner.exe", "--init"]
+    "linux": ["./run.sh", "--init"],
+    "darwin": ["./run.sh", "--init"]
   },
   "gaugeVersionSupport": {
       "minimum": "0.5.0",
