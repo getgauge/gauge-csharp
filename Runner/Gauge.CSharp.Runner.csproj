@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="AssemblyLocater.cs" />
     <Compile Include="AssemblyLoader.cs" />
-    <Compile Include="ClassInstanceManager.cs" />
+    <Compile Include="InstanceManagement\DefaultClassInstanceManager.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="DefaultScreenGrabber.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
@@ -186,9 +186,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
       <ItemGroup>

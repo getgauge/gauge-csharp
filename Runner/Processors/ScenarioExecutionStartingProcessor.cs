@@ -23,9 +23,19 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ScenarioExecutionStartingProcessor : UntaggedHooksFirstExecutionProcessor
     {
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        private readonly ISandbox _sandbox;
+
+
+        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
             : base(hookRegistry, methodExecutor)
         {
+            _sandbox = sandbox;
+        }
+
+        public override Message Process(Message request)
+        {
+            _sandbox.StartExecutionScope("scenario");
+            return base.Process(request);
         }
 
         protected override HashSet<HookMethod> GetHooks()

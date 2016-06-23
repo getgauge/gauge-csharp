@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Gauge.CSharp.Runner.InstanceManagement;
 
 namespace Gauge.CSharp.Runner
 {
@@ -38,5 +39,7 @@ namespace Gauge.CSharp.Runner
 		// Don't return Assembly here! assembly instance returned on sandbox side 
 		// would be replaced by assembly instance on runner side, thus making any asserts on it useless.
 		string TargetLibAssemblyVersion { get; }
+        void StartExecutionScope(string tag);
+        void CloseExectionScope();
     }
 }

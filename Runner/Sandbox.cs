@@ -23,6 +23,7 @@ using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.InstanceManagement;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -39,6 +40,10 @@ namespace Gauge.CSharp.Runner
 
         private Type ScreenGrabberType { get; set; }
 
+        private dynamic _classInstanceManager;
+
+
+
         public Sandbox(IAssemblyLocater locater)
         {
             LogConfiguration.Initialize();
@@ -47,6 +52,8 @@ namespace Gauge.CSharp.Runner
 			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
+            LoadClassInstanceManager();
+
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -58,12 +65,20 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
         {
             var executionResult = new ExecutionResult {Success = true};
-            var instance = ClassInstanceManager.Get(method.DeclaringType);
             try
             {
+                Type typeToLoad = method.DeclaringType;
+                var instance = _classInstanceManager.Get(typeToLoad);
+                if (instance == null)
+                {
+                    string error = "Could not instance type: " + typeToLoad;
+                    Logger.Error(error);
+                    throw new Exception(error);
+                }
+                Logger.Info(instance.GetType().FullName);
                 method.Invoke(instance, args);
             }
-            catch (TargetInvocationException ex)
+            catch (Exception ex)
             {
                 var innerException = ex.InnerException;
                 executionResult.ExceptionMessage = innerException.Message;
@@ -71,6 +86,7 @@ namespace Gauge.CSharp.Runner
                 executionResult.Source= innerException.Source;
                 executionResult.Success = false;
             }
+
             return executionResult;
         }
 
@@ -118,6 +134,21 @@ namespace Gauge.CSharp.Runner
             return step.Names;
         }
 
+
+        public void LoadClassInstanceManager()
+        {
+            var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
+
+            _classInstanceManager = instanceManagerType != null
+                ? Activator.CreateInstance(instanceManagerType)
+                : new DefaultClassInstanceManager();
+
+            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
+
+            _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
+        }
+
+
         public bool TryScreenCapture(out byte[] screenShotBytes)
         {
             try
@@ -141,7 +172,7 @@ namespace Gauge.CSharp.Runner
 
         public void ClearObjectCache()
         {
-            ClassInstanceManager.ClearCache();
+            _classInstanceManager.ClearCache();
         }
 
         public IEnumerable<string> GetAllPendingMessages()
@@ -150,6 +181,17 @@ namespace Gauge.CSharp.Runner
             var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages", BindingFlags.Static | BindingFlags.Public);
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
+
+        public void StartExecutionScope(string tag)
+        {
+            _classInstanceManager.StartScope(tag);
+        }
+
+        public void CloseExectionScope()
+        {
+            _classInstanceManager.CloseScope();
+        }
+
 
         private void SetAppConfigIfExists()
         {            
