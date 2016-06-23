@@ -163,8 +163,8 @@ namespace Gauge.CSharp.Runner
         {
             return PackageRepository
                 .GetPackages()
-                .Where(package => string.CompareOrdinal(package.Id, PackageId)==0)
-                .Max(p => p.Version);
+                .Where(package => package.Id == PackageId)
+                .Max((Func<IPackage, SemanticVersion>)(p => p.Version));
         }
     }
 }
