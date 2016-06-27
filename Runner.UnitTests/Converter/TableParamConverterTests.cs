@@ -39,11 +39,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
             var mockSandbox = new Mock<ISandbox>();
             mockSandbox.Setup(sandbox => sandbox.GetTargetType(typeof (Table).FullName)).Returns(typeof (Table));
 
-            var actual = new TableParamConverter().Convert(parameter, mockSandbox.Object) as Table;
+            var actual = new TableParamConverter().Convert(parameter, mockSandbox.Object) as TableDonkey;
             
             Assert.NotNull(actual);
-            Assert.That(actual.GetColumnNames(), Contains.Item("header"));
-            Assert.That(actual.GetTableRows().First().GetCell("header"), Is.EqualTo("Foo"));
+            Assert.That(actual.Headers, Contains.Item("header"));
+            Assert.That(actual.Rows.First().First(), Is.EqualTo("Foo"));
         }
     }
 }

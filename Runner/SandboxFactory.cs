@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner
             {
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-				string runnersApplicationBase = setup.ApplicationBase;
+				var runnersApplicationBase = setup.ApplicationBase;
 				var resolver = new InjectableAssemblyResolver(runnersApplicationBase,Utils.GetGaugeBinDir());
 
 				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);

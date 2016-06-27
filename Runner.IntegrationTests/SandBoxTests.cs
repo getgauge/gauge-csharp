@@ -18,10 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Converters;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
@@ -244,6 +244,28 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.False(executionResult.Success);
             Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
 			StringAssert.Contains("IntegrationTestSample.StepImplementation.ThrowSerializableException",executionResult.StackTrace);
+        }
+
+        [Test]
+        public void ShouldCreateTableFromTargetType()
+        {
+            var sandbox = SandboxFactory.Create(SetupInformation());
+            var stepMethods = sandbox.GetStepMethods();
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ReadTable") == 0);
+
+            var tableDonkey = new TableDonkey
+            {
+                Headers = new List<string> {"foo", "bar"},
+                Rows =
+                    new List<List<string>>
+                    {
+                        new List<string> {"foorow1", "barrow1"},
+                        new List<string> {"foorow2", "barrow2"}
+                    }
+            };
+            var executionResult = sandbox.ExecuteMethod(methodInfo, tableDonkey);
+
+            Assert.True(executionResult.Success);
         }
 
         [TearDown]

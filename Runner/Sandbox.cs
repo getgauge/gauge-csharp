@@ -18,11 +18,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Converters;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -33,7 +35,7 @@ namespace Gauge.CSharp.Runner
     {
         private readonly IAssemblyLoader _assemblyLoader;
 
-		private Assembly _libAssembly;
+		private readonly Assembly _libAssembly;
 
         private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
@@ -61,7 +63,8 @@ namespace Gauge.CSharp.Runner
             var instance = ClassInstanceManager.Get(method.DeclaringType);
             try
             {
-                method.Invoke(instance, args);
+                var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey)o) : o).ToArray();
+                method.Invoke(instance, parameters);
             }
             catch (TargetInvocationException ex)
             {
@@ -73,6 +76,20 @@ namespace Gauge.CSharp.Runner
             }
             return executionResult;
         }
+
+        private object ToTable(TableDonkey donkey)
+        {
+            var table = _libAssembly.CreateInstance(typeof (Table).FullName, true, BindingFlags.CreateInstance,null,
+                new object[] {donkey.Headers}, CultureInfo.CurrentCulture, null);
+            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
+            foreach (var row in donkey.Rows)
+            {
+                table.GetType().InvokeMember("AddRow", BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
+                        null, table, new object[] {row});
+            }
+            return table;
+        }
+
 
         public Type GetTargetType(string typeFullName)
         {
