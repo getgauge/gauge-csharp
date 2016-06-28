@@ -1,3 +1,5 @@
+env:
+  - GAUGE_TEST_TAGS="!unimplemented | !duplicate_step_impl"
 os:
   - osx
 before_install:

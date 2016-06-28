@@ -331,7 +331,8 @@ Target "FunctionalTests" (fun _ ->
 )
 
 Target "FunctionalTestsP" (fun _ ->
-    InvokeMvn "test -Denv=ci-csharp -Dtags=\"!unimplemented\" -Dflags=\"--simple-console\""
+    let tags = environVarOrDefault "GAUGE_TEST_TAGS" "!unimplemented"
+    InvokeMvn (sprintf "test -Denv=ci-csharp -Dtags=\"%s\" -Dflags=\"--simple-console\"" tags)
 )
 
 Target "FunctionalTestsUnimplemented" (fun _ ->
