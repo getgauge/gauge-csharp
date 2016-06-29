@@ -1,4 +1,1 @@
-### 0.8.0
-
- * Switched build system to paket and FAKE
- * Added mono support
+### 0.8.1
