@@ -1,2 +1,5 @@
 type project
 licenseUrl http://www.gnu.org/licenses/gpl-3.0.txt
+dependencies
+    Gauge.CSharp.Lib >= 0.5.3.0
+    Google.ProtocolBuffers >= 2.4.1.555

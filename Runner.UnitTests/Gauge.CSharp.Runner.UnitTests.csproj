@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime" />
     <Reference Include="Gauge.CSharp.Core">
-      <HintPath>..\Core\bin\Release\Gauge.CSharp.Core.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Core\lib\net45\Gauge.CSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="Gauge.CSharp.Lib">
-      <HintPath>..\Lib\bin\Release\Gauge.CSharp.Lib.dll</HintPath>
+      <HintPath>..\packages\Gauge.CSharp.Lib\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

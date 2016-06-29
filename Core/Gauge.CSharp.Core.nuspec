@@ -15,7 +15,7 @@
     <summary>[INTERNAL GAUGE USE ONLY] Library to be used to communicate with Gauge Core.</summary>
     <copyright>Copyright ThoughtWorks Inc.© 2015</copyright>
     <dependencies>
-      <dependency id="Gauge.CSharp.Lib" version="[0.4.4.0,)"/>
+      <dependency id="Gauge.CSharp.Lib" version="[0.5.3.0,)"/>
       <dependency id="Google.ProtocolBuffers" version="[2.4.1.555,)"/>
     </dependencies>
   </metadata>
