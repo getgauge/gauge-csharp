@@ -56,6 +56,7 @@
     <Compile Include="Converter\TableParamConverterTests.cs" />
     <Compile Include="CSharpIdentifierTests.cs" />
     <Compile Include="HookRegistryTests.cs" />
+    <Compile Include="ValidateProcessorTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />
     <Compile Include="GaugeCommandFactoryTests.cs" />

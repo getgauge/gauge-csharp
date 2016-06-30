@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class StepRegistry : IStepRegistry
     {
-        private readonly Dictionary<string, MethodInfo> _scannedSteps = new Dictionary<string, MethodInfo>();
+        private readonly Dictionary<string, List<MethodInfo>> _scannedSteps = new Dictionary<string, List<MethodInfo>>();
         private readonly Dictionary<string, string> _stepTextMap;
         private readonly Dictionary<string, bool> _aliases;
 
@@ -34,14 +34,11 @@ namespace Gauge.CSharp.Runner
             _aliases = aliases;
             foreach (var stepMap in scannedSteps)
             {
-                if (_scannedSteps.ContainsKey(stepMap.Key))
+                if (!_scannedSteps.ContainsKey(stepMap.Key))
                 {
-                    _scannedSteps[stepMap.Key] = stepMap.Value;
+                    _scannedSteps[stepMap.Key] = new List<MethodInfo>();
                 }
-                else
-                {
-                    _scannedSteps.Add(stepMap.Key, stepMap.Value);
-                }
+                _scannedSteps[stepMap.Key].Add(stepMap.Value);
             }
         }
 
@@ -50,9 +47,14 @@ namespace Gauge.CSharp.Runner
             return _scannedSteps.ContainsKey(parsedStepText);
         }
 
+        public bool HasMultipleImplementations(string parsedStepText)
+        {
+            return _scannedSteps[parsedStepText].Count > 1;
+        }
+
         public MethodInfo MethodFor(string parsedStepText)
         {
-            return _scannedSteps[parsedStepText];
+            return _scannedSteps[parsedStepText][0];
         }
 
         public IEnumerable<string> AllSteps()

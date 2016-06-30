@@ -17,6 +17,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -32,17 +33,15 @@ namespace Gauge.CSharp.Runner.Processors
 
         public Message Process(Message request)
         {
-            var oldStepValue = request.RefactorRequest.OldStepValue.StepValue;
             var newStep = request.RefactorRequest.NewStepValue;
 
             var newStepValue = newStep.ParameterizedStepValue;
             var parameterPositions = request.RefactorRequest.ParamPositionsList;
 
-            var methodInfo = _stepRegistry.MethodFor(oldStepValue);
-
             var refactorResponseBuilder = RefactorResponse.CreateBuilder();
             try
             {
+                var methodInfo = GetMethodInfo(request.RefactorRequest.OldStepValue);
                 var filesChanged = RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
                 refactorResponseBuilder.SetSuccess(true).AddFilesChanged(filesChanged.First());
             }
@@ -64,6 +63,15 @@ namespace Gauge.CSharp.Runner.Processors
                 .SetMessageType(Message.Types.MessageType.RefactorResponse)
                 .SetRefactorResponse(refactorResponse)
                 .Build();
+        }
+
+        private MethodInfo GetMethodInfo(ProtoStepValue stepValue)
+        {
+            if (_stepRegistry.HasMultipleImplementations(stepValue.StepValue))
+            {
+                throw new Exception(string.Format("Multiple step implementations found for : {0}", stepValue.ParameterizedStepValue));
+            }
+            return _stepRegistry.MethodFor(stepValue.StepValue);
         }
     }
 }
