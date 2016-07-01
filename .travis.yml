@@ -1,6 +1,7 @@
 os:
   - osx
 before_install:
+  - mozroots --import --sync
   - brew update; brew install Caskroom/cask/java
 install:
   - brew install gauge; brew outdated maven || brew upgrade maven
