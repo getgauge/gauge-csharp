@@ -13,6 +13,7 @@ obj
 packages
 *.nupkg
 *.csproj.user
+*.userprefs
 artifacts/
 *.Sln.ide
 IntegrationTestSample/gauge-bin
