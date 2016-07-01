@@ -1,0 +1,22 @@
+version: 1.0.{build}
+init:
+- ps: >-
+    choco install gauge
+    choco install maven
+environment:
+  GAUGE_PARALLEL: false
+build_script:
+- ps: >-
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:M2_HOME=(where.exe mvn.cmd | Get-item).Directory.parent.FullName
+    cmd /c build.cmd BuildInstallFT
+test: off
+artifacts:
+- path: .\gauge-tests\reports-csharp\html-report
+  name: html-report
+on_finish:
+- ps: >-
+    # upload results to AppVeyor
+    $wc = New-Object 'System.Net.WebClient'
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path TestResults.xml))
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\gauge-tests\reports-csharp\xml-report\result.xml))
