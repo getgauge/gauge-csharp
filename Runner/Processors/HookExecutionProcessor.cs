@@ -60,7 +60,7 @@ namespace Gauge.CSharp.Runner.Processors
         }
 
         [DebuggerHidden]
-        public Message Process(Message request)
+        public virtual Message Process(Message request)
         {
             var protoExecutionResultBuilder = ExecuteHooks(request);
             ClearCacheForConfiguredLevel();
