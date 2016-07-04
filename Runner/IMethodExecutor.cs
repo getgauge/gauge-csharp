@@ -16,15 +16,15 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner
 {
     public interface IMethodExecutor
     {
-        ProtoExecutionResult Execute(MethodInfo method, params object[] args);
-        ProtoExecutionResult.Builder ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo);
+        ProtoExecutionResult Execute(GaugeMethod method, params KeyValuePair<string, string>[] args);
+        ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo);
         void ClearCache();
         IEnumerable<string> GetAllPendingMessages();
     }

@@ -17,7 +17,6 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -25,10 +24,12 @@ namespace Gauge.CSharp.Runner.Processors
     internal class RefactorProcessor : IMessageProcessor
     {
         private readonly IStepRegistry _stepRegistry;
+        private readonly ISandbox _sandbox;
 
-        public RefactorProcessor(IStepRegistry stepRegistry)
+        public RefactorProcessor(IStepRegistry stepRegistry, ISandbox sandbox)
         {
             _stepRegistry = stepRegistry;
+            _sandbox = sandbox;
         }
 
         public Message Process(Message request)
@@ -42,7 +43,7 @@ namespace Gauge.CSharp.Runner.Processors
             try
             {
                 var methodInfo = GetMethodInfo(request.RefactorRequest.OldStepValue);
-                var filesChanged = RefactorHelper.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
+                var filesChanged = _sandbox.Refactor(methodInfo, parameterPositions, newStep.ParametersList, newStepValue);
                 refactorResponseBuilder.SetSuccess(true).AddFilesChanged(filesChanged.First());
             }
             catch (AggregateException ex)
@@ -65,7 +66,7 @@ namespace Gauge.CSharp.Runner.Processors
                 .Build();
         }
 
-        private MethodInfo GetMethodInfo(ProtoStepValue stepValue)
+        private GaugeMethod GetMethodInfo(ProtoStepValue stepValue)
         {
             if (_stepRegistry.HasMultipleImplementations(stepValue.StepValue))
             {

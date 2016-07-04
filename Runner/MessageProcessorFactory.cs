@@ -62,14 +62,14 @@ namespace Gauge.CSharp.Runner
             var methodExecutor = new MethodExecutor(_sandbox);
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
-                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(hookRegistry, methodExecutor, _sandbox)},
-                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(hookRegistry, methodExecutor, _sandbox)},
-                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(hookRegistry, methodExecutor, _sandbox)},
-                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(hookRegistry, methodExecutor, _sandbox)},
-                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(hookRegistry, methodExecutor)},
-                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(hookRegistry, methodExecutor)},
+                {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(methodExecutor)},
+                {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(methodExecutor)},
+                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(methodExecutor, _sandbox)},
+                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(methodExecutor, _sandbox)},
+                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(methodExecutor, _sandbox)},
+                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(methodExecutor, _sandbox)},
+                {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(methodExecutor)},
+                {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(methodExecutor)},
                 {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, methodExecutor, _sandbox)},
                 {Message.Types.MessageType.KillProcessRequest, new KillProcessProcessor()},
                 {Message.Types.MessageType.StepNamesRequest, new StepNamesProcessor(_stepScanner)},
@@ -78,7 +78,7 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.SpecDataStoreInit, new SpecDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SuiteDataStoreInit, new SuiteDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.StepNameRequest, new StepNameProcessor(stepRegistry) },
-                {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry)},
+                {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry, _sandbox)},
             };
             return messageHandlers;
         }

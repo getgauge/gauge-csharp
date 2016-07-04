@@ -15,15 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
-using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 using NLog;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Strategy;
 
 namespace Gauge.CSharp.Runner
 {
@@ -38,17 +36,17 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult Execute(MethodInfo method, params object[] args)
+        public ProtoExecutionResult Execute(GaugeMethod method, params KeyValuePair<string, string>[] args)
         {
-            Logger.Debug("Execution method: {0}.{1}", method.DeclaringType.FullName, method.Name);
+            Logger.Debug("Execution method: {0}", method.Name);
             var stopwatch = Stopwatch.StartNew();
             var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
-            var executionResult = _sandbox.ExecuteMethod(method, StringParamConverter.TryConvertParams(method, args));
-                
+            var executionResult = _sandbox.ExecuteMethod(method, args);
+
             builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
             if (!executionResult.Success)
             {
-                Logger.Error("Error executing {0}.{1}", method.DeclaringType.FullName, method.Name);
+                Logger.Error("Error executing {0}", method.Name);
 
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 builder.SetFailed(true);
@@ -65,6 +63,13 @@ namespace Gauge.CSharp.Runner
             return builder.Build();
         }
 
+        [DebuggerHidden]
+        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy,
+            IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
+        {
+            return _sandbox.ExecuteHooks(hookType, strategy, applicableTags, executionInfo);
+        }
+
         public void ClearCache()
         {
             _sandbox.ClearObjectCache();
@@ -78,52 +83,9 @@ namespace Gauge.CSharp.Runner
         private ByteString TakeScreenshot()
         {
             byte[] screenShotBytes;
-            return _sandbox.TryScreenCapture(out screenShotBytes) ? ByteString.CopyFrom(screenShotBytes) : ByteString.Empty;
-        }
-
-        [DebuggerHidden]
-        public ProtoExecutionResult.Builder ExecuteHooks(IEnumerable<MethodInfo> methods, ExecutionInfo executionInfo)
-        {
-            var stopwatch = Stopwatch.StartNew();
-            foreach (var method in methods)
-            {
-                var executionResult = ExecuteHook(method, new object[] {executionInfo});
-                if (!executionResult.Failed) continue;
-
-                Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
-                return ProtoExecutionResult.CreateBuilder(executionResult)
-                    .SetFailed(true)
-                    .SetRecoverableError(false)
-                    .SetErrorMessage(executionResult.ErrorMessage)
-                    .SetScreenShot(executionResult.ScreenShot)
-                    .SetStackTrace(executionResult.StackTrace)
-                    .SetExecutionTime(stopwatch.ElapsedMilliseconds);
-            }
-            return ProtoExecutionResult.CreateBuilder()
-                .SetFailed(false)
-                .SetExecutionTime(stopwatch.ElapsedMilliseconds);
-        }
-
-        [DebuggerHidden]
-        private ProtoExecutionResult ExecuteHook(MethodInfo method, object[] objects)
-        {
-            return HasArguments(method, objects) ? Execute(method, objects) : Execute(method);
-        }
-
-        private static bool HasArguments(MethodInfo method, object[] args)
-        {
-            if (method.GetParameters().Length != args.Length)
-            {
-                return false;
-            }
-            for (var i = 0; i < args.Length; i++)
-            {
-                if (args[i].GetType() != method.GetParameters()[i].ParameterType)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return _sandbox.TryScreenCapture(out screenShotBytes)
+                ? ByteString.CopyFrom(screenShotBytes)
+                : ByteString.Empty;
         }
     }
 }

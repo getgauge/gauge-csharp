@@ -27,7 +27,6 @@ namespace Gauge.CSharp.Runner.InstanceManagement
     {
         private static readonly Hashtable ClassInstanceMap = new Hashtable();
 
-
         public void Initialize(List<Assembly> assemblies)
         {
             //nothing to do
@@ -44,12 +43,10 @@ namespace Gauge.CSharp.Runner.InstanceManagement
             return instance;
         }
 
-
         public void StartScope(string tag)
         {
             //no scope
         }
-
 
         public void CloseScope()
         {

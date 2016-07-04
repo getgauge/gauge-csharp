@@ -17,20 +17,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Gauge.CSharp.Runner.Converters;
-using Gauge.CSharp.Runner.InstanceManagement;
+using Gauge.CSharp.Runner.Strategy;
+using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner
 {
     public interface ISandbox
     {
-        ExecutionResult ExecuteMethod(MethodInfo method, params object[] args);
+        ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
         IHookRegistry GetHookRegistry();
-        List<MethodInfo> GetStepMethods();
+        List<GaugeMethod> GetStepMethods();
         void InitializeDataStore(string dataStoreType);
-        IEnumerable<string> GetStepTexts(MethodInfo stepMethod);
+        IEnumerable<string> GetStepTexts(GaugeMethod gaugeMethod);
         List<string> GetAllStepTexts();
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
@@ -42,5 +41,7 @@ namespace Gauge.CSharp.Runner
 		string TargetLibAssemblyVersion { get; }
         void StartExecutionScope(string tag);
         void CloseExectionScope();
+        ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo);
+        IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<ParameterPosition> parameterPositions, IList<string> parametersList, string newStepValue);
     }
 }

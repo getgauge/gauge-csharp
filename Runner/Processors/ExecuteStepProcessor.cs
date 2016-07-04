@@ -16,8 +16,10 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Reflection;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
@@ -50,29 +52,28 @@ namespace Gauge.CSharp.Runner.Processors
 
             var method = _stepRegistry.MethodFor(executeStepRequest.ParsedStepText);
 
-            var parameters = method.GetParameters();
-            var args = new object[parameters.Length];
+            var parameters = method.ParameterCount;
+            var args = new List<KeyValuePair<string, string>>(parameters);
             var stepParameter = executeStepRequest.ParametersList;
-            if (parameters.Length != stepParameter.Count)
+            if (parameters != stepParameter.Count)
             {
-                var argumentMismatchError = String.Format("Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
+                var argumentMismatchError = string.Format("Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
                     executeStepRequest.ActualStepText,
-                    stepParameter.Count, parameters.Length);
+                    stepParameter.Count, parameters);
                 return ExecutionError(argumentMismatchError, request);
             }
-            for (var i = 0; i < parameters.Length; i++)
+            for (var i = 0; i < parameters; i++)
             {
-                var paramType = parameters[i].ParameterType;
-                if (_paramConverters.ContainsKey(paramType.ToString()))
+                if (stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table)
                 {
-                    args[i] = _paramConverters[paramType.ToString()].Convert(stepParameter[i], _sandbox);
+                    args[i] = new KeyValuePair<string, string>(stepParameter[i].Value, "Table");
                 }
                 else
                 {
-                    args[i] = stepParameter[i].Value;
+                    args[i] = new KeyValuePair<string, string>(stepParameter[i].Value, "String");
                 }
             }
-            var protoExecutionResult = ExecuteMethod(method, args);
+            var protoExecutionResult = ExecuteMethod(method, args.ToArray());
             return WrapInMessage(protoExecutionResult, request);
         }
 
@@ -95,7 +96,7 @@ namespace Gauge.CSharp.Runner.Processors
         }
 
         [DebuggerHidden]
-        private ProtoExecutionResult ExecuteMethod(MethodInfo method, object[] args)
+        private ProtoExecutionResult ExecuteMethod(GaugeMethod method, params KeyValuePair<string, string>[] args)
         {
             return _methodExecutor.Execute(method, args);
         }

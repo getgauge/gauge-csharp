@@ -23,14 +23,9 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class StepExecutionStartingProcessor : UntaggedHooksFirstExecutionProcessor
     {
-        public StepExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
-            : base(hookRegistry, methodExecutor)
+        public StepExecutionStartingProcessor(IMethodExecutor methodExecutor)
+            : base(methodExecutor)
         {
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.BeforeStepHooks;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)
@@ -43,6 +38,11 @@ namespace Gauge.CSharp.Runner.Processors
             // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
             MethodExecutor.GetAllPendingMessages();
             return base.ExecuteHooks(request);
+        }
+
+        protected override string HookType
+        {
+            get { return "BeforeStep"; }
         }
 
         protected override IEnumerable<string> GetApplicableTags(Message request)

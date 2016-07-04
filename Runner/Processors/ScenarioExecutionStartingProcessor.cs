@@ -26,8 +26,8 @@ namespace Gauge.CSharp.Runner.Processors
         private readonly ISandbox _sandbox;
 
 
-        public ScenarioExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
-            : base(hookRegistry, methodExecutor)
+        public ScenarioExecutionStartingProcessor(IMethodExecutor methodExecutor, ISandbox sandbox)
+            : base(methodExecutor)
         {
             _sandbox = sandbox;
         }
@@ -38,14 +38,14 @@ namespace Gauge.CSharp.Runner.Processors
             return base.Process(request);
         }
 
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.BeforeScenarioHooks;
-        }
-
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ScenarioExecutionStartingRequest.CurrentExecutionInfo;
+        }
+
+        protected override string HookType
+        {
+            get { return "BeforeScenario"; }
         }
 
         protected override IEnumerable<string> GetApplicableTags(Message request)

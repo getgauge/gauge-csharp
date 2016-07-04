@@ -24,11 +24,11 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class StepRegistry : IStepRegistry
     {
-        private readonly Dictionary<string, List<MethodInfo>> _scannedSteps = new Dictionary<string, List<MethodInfo>>();
+        private readonly Dictionary<string, List<GaugeMethod>> _scannedSteps = new Dictionary<string, List<GaugeMethod>>();
         private readonly Dictionary<string, string> _stepTextMap;
         private readonly Dictionary<string, bool> _aliases;
 
-        public StepRegistry(IEnumerable<KeyValuePair<string, MethodInfo>> scannedSteps, Dictionary<string, string> stepTextMap, Dictionary<string, bool> aliases)
+        public StepRegistry(IEnumerable<KeyValuePair<string, GaugeMethod>> scannedSteps, Dictionary<string, string> stepTextMap, Dictionary<string, bool> aliases)
         {
             _stepTextMap = stepTextMap;
             _aliases = aliases;
@@ -36,7 +36,7 @@ namespace Gauge.CSharp.Runner
             {
                 if (!_scannedSteps.ContainsKey(stepMap.Key))
                 {
-                    _scannedSteps[stepMap.Key] = new List<MethodInfo>();
+                    _scannedSteps[stepMap.Key] = new List<GaugeMethod>();
                 }
                 _scannedSteps[stepMap.Key].Add(stepMap.Value);
             }
@@ -52,7 +52,7 @@ namespace Gauge.CSharp.Runner
             return _scannedSteps[parsedStepText].Count > 1;
         }
 
-        public MethodInfo MethodFor(string parsedStepText)
+        public GaugeMethod MethodFor(string parsedStepText)
         {
             return _scannedSteps[parsedStepText][0];
         }

@@ -16,14 +16,13 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Gauge.CSharp.Runner
 {
     public interface IStepRegistry
     {
         bool ContainsStep(string parsedStepText);
-        MethodInfo MethodFor(string parsedStepText);
+        GaugeMethod MethodFor(string parsedStepText);
         IEnumerable<string> AllSteps();
         bool HasAlias(string stepText);
         string GetStepText(string parameterizedStepText);

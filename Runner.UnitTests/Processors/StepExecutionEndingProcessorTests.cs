@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
@@ -44,7 +45,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var mockSandbox = new Mock<ISandbox>();
             mockSandbox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(_pendingMessages);
             var hooks = new HashSet<HookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
-            var hooksToExecute = hooks.Select(method => method.Method);
             mockHookRegistry.Setup(x => x.AfterStepHooks).Returns(hooks);
             var stepExecutionEndingRequest = StepExecutionEndingRequest.DefaultInstance;
             _request = Message.CreateBuilder()
@@ -58,9 +58,9 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                                         .SetExecutionTime(0)
                                         .SetFailed(false)
                                         .AddRangeMessage(_pendingMessages);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks(hooksToExecute, stepExecutionEndingRequest.CurrentExecutionInfo))
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", new TaggedHooksFirstStrategy(), new List<string>(), stepExecutionEndingRequest.CurrentExecutionInfo))
                 .Returns(_protoExecutionResultBuilder);
-            _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(mockHookRegistry.Object, _mockMethodExecutor.Object);
+            _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(_mockMethodExecutor.Object);
         }
 
         [Test]

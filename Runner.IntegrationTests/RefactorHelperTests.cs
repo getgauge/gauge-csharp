@@ -44,21 +44,21 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldRefactorAttributeText()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name== "RefactoringContext");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
 
-            RefactorHelper.Refactor(methodInfo, new List<ParameterPosition>(), new List<string>(), "foo");
+            sandbox.Refactor(gaugeMethod, new List<ParameterPosition>(), new List<string>(), "foo");
 
-            AssertStepAttributeWithTextExists(methodInfo.Name, "foo");
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, "foo");
         }
 
         [Test]
         public void ShouldRefactorAndReturnFilesChanged()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name== "RefactoringContext");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
             var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
 
-            var filesChanged = RefactorHelper.Refactor(methodInfo, new List<ParameterPosition>(), new List<string>(), "foo").ToList();
+            var filesChanged = sandbox.Refactor(gaugeMethod, new List<ParameterPosition>(), new List<string>(), "foo").ToList();
 
             Assert.AreEqual(1, filesChanged.Count);
             Assert.AreEqual(expectedPath, filesChanged.First());
@@ -70,15 +70,15 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring Say <who> to <what>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPosition = ParameterPosition.CreateBuilder().SetNewPosition(1).SetOldPosition(0).Build();
             var parameterPosition1 = ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(1).Build();
             var parameterPositions = new List<ParameterPosition> {parameterPosition, parameterPosition1 };
-            RefactorHelper.Refactor(methodInfo, parameterPositions, new List<string> {"who", "what"}, newStepValue);
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"who", "what"}, newStepValue);
 
-            AssertStepAttributeWithTextExists(methodInfo.Name, newStepValue);
-            AssertParametersExist(methodInfo.Name, new[] {"who", "what"});
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"who", "what"});
         }
 
         [Test]
@@ -86,13 +86,13 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring Say <what> to <who> in <where>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSaySomething");
+            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPosition = ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(0).Build();
             var parameterPosition1 = ParameterPosition.CreateBuilder().SetNewPosition(1).SetOldPosition(1).Build();
             var parameterPosition2 = ParameterPosition.CreateBuilder().SetNewPosition(2).SetOldPosition(-1).Build();
             var parameterPositions = new List<ParameterPosition> {parameterPosition, parameterPosition1, parameterPosition2 };
-            RefactorHelper.Refactor(methodInfo, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
+            sandbox.Refactor(methodInfo, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
 
             AssertStepAttributeWithTextExists(methodInfo.Name, newStepValue);
             AssertParametersExist(methodInfo.Name, new[] {"what", "who", "where"});
@@ -103,16 +103,16 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring this is a test step <foo>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSampleTest");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new List<ParameterPosition>
             {
                 ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(-1).Build()
             };
 
-            RefactorHelper.Refactor(methodInfo, parameterPositions, new List<string> {"foo"}, newStepValue);
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"foo"}, newStepValue);
 
-            AssertStepAttributeWithTextExists(methodInfo.Name, newStepValue);
-            AssertParametersExist(methodInfo.Name, new[] {"foo"});
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"foo"});
         }
 
         [Test]
@@ -120,40 +120,40 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring this is a test step <class>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSampleTest");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new List<ParameterPosition>
             {
                 ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(-1).Build()
             };
 
-            RefactorHelper.Refactor(methodInfo, parameterPositions, new List<string> {"class"}, newStepValue);
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"class"}, newStepValue);
 
-            AssertStepAttributeWithTextExists(methodInfo.Name, newStepValue);
-            AssertParametersExist(methodInfo.Name, new[] {"@class"});
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"@class"});
         }
 
         [Test]
         public void ShouldRemoveParameters()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPosition = ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(0).Build();
-            RefactorHelper.Refactor(methodInfo, new List<ParameterPosition> { parameterPosition }, new List<string>(), "Refactoring Say <what> to someone");
+            sandbox.Refactor(gaugeMethod, new List<ParameterPosition> { parameterPosition }, new List<string>(), "Refactoring Say <what> to someone");
 
-            AssertParametersExist(methodInfo.Name, new[] { "what" });
+            AssertParametersExist(gaugeMethod.Name, new[] { "what" });
         }
 
         [Test]
         public void ShouldRemoveParametersInAnyOrder()
         {
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
-            var methodInfo = sandbox.GetStepMethods().First(info => info.Name == "RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPosition = ParameterPosition.CreateBuilder().SetNewPosition(0).SetOldPosition(1).Build();
-            RefactorHelper.Refactor(methodInfo, new List<ParameterPosition> { parameterPosition }, new List<string>(), "Refactoring Say something to <who>");
+            sandbox.Refactor(gaugeMethod, new List<ParameterPosition> { parameterPosition }, new List<string>(), "Refactoring Say something to <who>");
 
-            AssertParametersExist(methodInfo.Name, new[] { "who" });
+            AssertParametersExist(gaugeMethod.Name, new[] { "who" });
         }
 
         [TearDown]

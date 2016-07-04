@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -33,26 +32,23 @@ namespace Gauge.CSharp.Runner.Processors
         protected const string SpecLevel = "spec";
         protected const string ScenarioLevel = "scenario";
 
-        protected IHookRegistry Hooks { get; private set; }
         protected HooksStrategy Strategy { get; set; }
 
-        protected HookExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
+        protected HookExecutionProcessor(IMethodExecutor methodExecutor)
         {
             MethodExecutor = methodExecutor;
-            Hooks = hookRegistry;
             Strategy = new HooksStrategy();
         }
-
-        protected abstract HashSet<HookMethod> GetHooks();
 
         protected abstract ExecutionInfo GetExecutionInfo(Message request);
 
         protected virtual ProtoExecutionResult.Builder ExecuteHooks(Message request)
         {
             var applicableTags = GetApplicableTags(request);
-            var applicableHooks = Strategy.GetApplicableHooks(applicableTags, GetHooks());
-            return MethodExecutor.ExecuteHooks(applicableHooks, GetExecutionInfo(request));
+            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, GetExecutionInfo(request));
         }
+
+        protected abstract string HookType { get; }
 
         protected virtual string CacheClearLevel
         {

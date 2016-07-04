@@ -21,8 +21,8 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class TaggedHooksFirstExecutionProcessor : HookExecutionProcessor
     {
-        protected TaggedHooksFirstExecutionProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
-            : base(hookRegistry, methodExecutor)
+        protected TaggedHooksFirstExecutionProcessor(IMethodExecutor methodExecutor)
+            : base(methodExecutor)
         {
             Strategy = new TaggedHooksFirstStrategy();
         }

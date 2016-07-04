@@ -27,6 +27,6 @@ namespace Gauge.CSharp.Runner
         List<Type> ScreengrabberTypes { get; }
         List<Type> ClassInstanceManagerTypes { get; }
         Assembly GetTargetLibAssembly();
-        List<MethodInfo> GetMethods(Type annotationType);
+        List<MethodInfo> GetMethods(string annotation);
     }
 }

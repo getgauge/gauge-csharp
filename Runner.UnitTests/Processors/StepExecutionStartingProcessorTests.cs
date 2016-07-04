@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
@@ -45,13 +46,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
 
             var protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
-            methodExecutor.Setup( executor => executor.ExecuteHooks(It.IsAny<IEnumerable<MethodInfo>>(),
+            methodExecutor.Setup( executor => executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(),It.IsAny<IEnumerable<string>>(),
                         It.IsAny<ExecutionInfo>()))
                           .Returns(protoExecutionResultBuilder);
             var hookRegistry = new Mock<IHookRegistry>();
             hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<HookMethod>());
 
-            new StepExecutionStartingProcessor(hookRegistry.Object, methodExecutor.Object).Process(request);
+            new StepExecutionStartingProcessor(methodExecutor.Object).Process(request);
 
             methodExecutor.Verify(executor => executor.GetAllPendingMessages(), Times.Once);
         }

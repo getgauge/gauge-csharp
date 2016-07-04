@@ -68,7 +68,7 @@ namespace Gauge.CSharp.Runner
             _targetLibAssembly = assemblyLoader.GetTargetLibAssembly();
             foreach (var type in _hooks.Keys)
             {
-                AddHookOfType(type, assemblyLoader.GetMethods(type));
+                AddHookOfType(type, assemblyLoader.GetMethods(type.FullName));
             }
         }
 

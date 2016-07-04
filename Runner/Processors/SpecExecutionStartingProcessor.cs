@@ -24,20 +24,20 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly ISandbox _sandbox;
 
-        public SpecExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
-            : base(hookRegistry, methodExecutor)
+        public SpecExecutionStartingProcessor(IMethodExecutor methodExecutor, ISandbox sandbox)
+            : base(methodExecutor)
         {
             _sandbox = sandbox;
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.BeforeSpecHooks;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.SpecExecutionStartingRequest.CurrentExecutionInfo;
+        }
+
+        protected override string HookType
+        {
+            get { return "BeforeSpec"; }
         }
 
         protected override IEnumerable<string> GetApplicableTags(Message request)

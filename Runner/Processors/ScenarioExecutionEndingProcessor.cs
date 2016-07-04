@@ -25,8 +25,8 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly ISandbox _sandbox;
 
-        public ScenarioExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
-            : base(hookRegistry, methodExecutor)
+        public ScenarioExecutionEndingProcessor(IMethodExecutor methodExecutor, ISandbox sandbox)
+            : base(methodExecutor)
         {
             _sandbox = sandbox;
         }
@@ -38,15 +38,14 @@ namespace Gauge.CSharp.Runner.Processors
             return base.Process(request);
         }
 
+        protected override string HookType
+        {
+            get { return "AfterScenario"; }
+        }
 
         protected override string CacheClearLevel
         {
             get { return ScenarioLevel; }
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.AfterScenarioHooks;
         }
 
         protected override IEnumerable<string> GetApplicableTags(Message request)

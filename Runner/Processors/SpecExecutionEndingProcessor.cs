@@ -24,15 +24,15 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly ISandbox _sandbox;
 
-        public SpecExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
-            : base(hookRegistry, methodExecutor)
+        public SpecExecutionEndingProcessor(IMethodExecutor methodExecutor, ISandbox sandbox)
+            : base(methodExecutor)
         {
             _sandbox = sandbox;
         }
 
-        protected override HashSet<HookMethod> GetHooks()
+        protected override string HookType
         {
-            return Hooks.AfterSpecHooks;
+            get { return "AfterSpec"; }
         }
 
         protected override string CacheClearLevel

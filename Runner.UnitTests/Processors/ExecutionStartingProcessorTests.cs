@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Processors;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
@@ -43,20 +44,19 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var mockHookRegistry = new Mock<IHookRegistry>();
 
             var hooks = new HashSet<HookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
-            var hooksToExecute = hooks.Select(method => method.Method);
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
-            var executionEndingRequest = ExecutionEndingRequest.DefaultInstance;
+            var executionEndingRequest = ExecutionStartingRequest.DefaultInstance;
             _request = Message.CreateBuilder()
                             .SetMessageId(20)
                             .SetMessageType(Message.Types.MessageType.ExecutionEnding)
-                            .SetExecutionEndingRequest(executionEndingRequest)
+                            .SetExecutionStartingRequest(executionEndingRequest)
                             .Build();
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
             _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks(hooksToExecute, executionEndingRequest.CurrentExecutionInfo))
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", new UntaggedHooksFirstStrategy(), new List<string>(), executionEndingRequest.CurrentExecutionInfo))
                 .Returns(_protoExecutionResultBuilder);
-            _executionStartingProcessor = new ExecutionStartingProcessor(mockHookRegistry.Object, _mockMethodExecutor.Object);
+            _executionStartingProcessor = new ExecutionStartingProcessor(_mockMethodExecutor.Object);
         }
         [Test]
         public void ShouldProcessHooks()

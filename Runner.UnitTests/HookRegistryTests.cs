@@ -53,7 +53,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             foreach (var type in types)
             {
                 var methodInfos = new List<MethodInfo> { GetType().GetMethod(string.Format("{0}Hook", type.Name)) };
-                _mockAssemblyScanner.Setup(scanner => scanner.GetMethods(type)).Returns(methodInfos);
+                _mockAssemblyScanner.Setup(scanner => scanner.GetMethods(type.FullName)).Returns(methodInfos);
             }
             _hookRegistry = new HookRegistry(_mockAssemblyScanner.Object);
         }

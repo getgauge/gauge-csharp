@@ -22,13 +22,13 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecutionEndingProcessor : HookExecutionProcessor
     {
-        public ExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor) : base(hookRegistry, methodExecutor)
+        public ExecutionEndingProcessor(IMethodExecutor methodExecutor) : base(methodExecutor)
         {
         }
 
-        protected override HashSet<HookMethod> GetHooks()
+        protected override string HookType
         {
-            return Hooks.AfterSuiteHooks;
+            get { return "AfterSuite"; }
         }
 
         protected override string CacheClearLevel

@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -23,10 +24,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib;
-using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Converters;
-using Gauge.CSharp.Runner.InstanceManagement;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
+using Gauge.Messages;
+using Google.ProtocolBuffers;
 using NLog;
 
 namespace Gauge.CSharp.Runner
@@ -43,6 +45,8 @@ namespace Gauge.CSharp.Runner
         private Type ScreenGrabberType { get; set; }
 
         private dynamic _classInstanceManager;
+        private HookRegistry HookRegistry;
+        private Dictionary<string, IParamConverter> _paramConverters;
 
 
         public Sandbox(IAssemblyLocater locater)
@@ -54,6 +58,8 @@ namespace Gauge.CSharp.Runner
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
+            InitializeConverter();
+            HookRegistry = new HookRegistry(_assemblyLoader);
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -62,22 +68,14 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public ExecutionResult ExecuteMethod(MethodInfo method, params object[] args)
+        public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args)
         {
+            var method = MethodMap[gaugeMethod.Name];
             var executionResult = new ExecutionResult {Success = true};
             try
             {
                 var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey)o) : o).ToArray();
-                Type typeToLoad = method.DeclaringType;
-                var instance = _classInstanceManager.Get(typeToLoad);
-                if (instance == null)
-                {
-                    string error = "Could not instance type: " + typeToLoad;
-                    Logger.Error(error);
-                    throw new Exception(error);
-                }
-                Logger.Info(instance.GetType().FullName);
-                method.Invoke(instance, parameters);
+                Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
             {
@@ -89,6 +87,20 @@ namespace Gauge.CSharp.Runner
             }
 
             return executionResult;
+        }
+
+        private void Execute(MethodBase method, params object[] parameters)
+        {
+            var typeToLoad = method.DeclaringType;
+            var instance = _classInstanceManager.Get(typeToLoad);
+            if (instance == null)
+            {
+                var error = "Could not load instance type: " + typeToLoad;
+                Logger.Error(error);
+                throw new Exception(error);
+            }
+            Logger.Info(instance.GetType().FullName);
+            method.Invoke(instance, parameters);
         }
 
         private object ToTable(TableDonkey donkey)
@@ -120,13 +132,19 @@ namespace Gauge.CSharp.Runner
 
         public IHookRegistry GetHookRegistry()
         {
-            return new HookRegistry(_assemblyLoader);
+            return HookRegistry;
         }
 
-        public List<MethodInfo> GetStepMethods()
+        public List<GaugeMethod> GetStepMethods()
         {
-            return _assemblyLoader.GetMethods(typeof(Step));
+            var infos = _assemblyLoader.GetMethods("Gauge.CSharp.Lib.Attribute.Step");
+            MethodMap = new Dictionary<string, MethodInfo>();
+            foreach (var info in infos)
+                MethodMap.Add(string.Format("{0}.{1}", info.DeclaringType.FullName, info.Name), info);
+            return MethodMap.Keys.Select(s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
         }
+
+        private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
         public List<string> GetAllStepTexts()
         {
@@ -141,10 +159,11 @@ namespace Gauge.CSharp.Runner
                 dataStoreGetter.Invoke(null, null);
         }
 
-        public IEnumerable<string> GetStepTexts(MethodInfo stepMethod)
+        public IEnumerable<string> GetStepTexts(GaugeMethod gaugeMethod)
         {
-			var fullStepName = typeof(Step).FullName;
-			dynamic step = stepMethod.GetCustomAttributes ().FirstOrDefault (
+			const string fullStepName = "Gauge.CSharp.Lib.Attribute.Step";
+            var stepMethod = MethodMap[gaugeMethod.Name];
+            dynamic step = stepMethod.GetCustomAttributes ().FirstOrDefault (
 				a => a.GetType ().FullName.Equals (fullStepName));
             return step.Names;
         }
@@ -154,9 +173,9 @@ namespace Gauge.CSharp.Runner
         {
             var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
 
-            _classInstanceManager = instanceManagerType != null
-                ? Activator.CreateInstance(instanceManagerType)
-                : new DefaultClassInstanceManager();
+            if (instanceManagerType == null) return;
+            
+            _classInstanceManager = Activator.CreateInstance(instanceManagerType);
 
             Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
 
@@ -207,6 +226,96 @@ namespace Gauge.CSharp.Runner
             _classInstanceManager.CloseScope();
         }
 
+        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
+        {
+            var methods = GetHookMethods(hookType, strategy, applicableTags);
+            var stopwatch = Stopwatch.StartNew();
+            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
+
+            foreach (var method in methods)
+            {
+                try
+                {
+                    ExecuteHook(method, new object[] { executionInfo });
+                }
+                catch (Exception ex)
+                {
+                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
+                    byte[] screenshot;
+                    TryScreenCapture(out screenshot);
+                    return builder
+                        .SetFailed(true)
+                        .SetRecoverableError(false)
+                        .SetErrorMessage(ex.Message)
+                        .SetScreenShot(ByteString.CopyFrom(screenshot))
+                        .SetStackTrace(ex.StackTrace)
+                        .SetExecutionTime(stopwatch.ElapsedMilliseconds);
+                }
+            }
+            return builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+        }
+
+        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<ParameterPosition> parameterPositions, IList<string> parametersList, string newStepValue)
+        {
+            return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList, newStepValue);
+        }
+
+        [DebuggerHidden]
+        private void ExecuteHook(MethodInfo method, object[] objects)
+        {
+            if (HasArguments(method, objects)) 
+                Execute(method, objects);
+            else 
+                Execute(method);
+        }
+
+        private static bool HasArguments(MethodInfo method, object[] args)
+        {
+            if (method.GetParameters().Length != args.Length)
+            {
+                return false;
+            }
+            for (var i = 0; i < args.Length; i++)
+            {
+                if (args[i].GetType() != method.GetParameters()[i].ParameterType)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private IEnumerable<MethodInfo> GetHookMethods(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
+        {
+            var hooksFromRegistry = GetHooksFromRegistry(hookType);
+            return strategy.GetApplicableHooks(applicableTags, hooksFromRegistry);
+        }
+
+        private IEnumerable<HookMethod> GetHooksFromRegistry(string hookType)
+        {
+            switch (hookType)
+            {
+                case "BeforeSuite":
+                    return HookRegistry.BeforeSuiteHooks;
+                case "BeforeSpec":
+                    return HookRegistry.BeforeSpecHooks;
+                case "BeforeScenario":
+                    return HookRegistry.BeforeScenarioHooks;
+                case "BeforeStep":
+                    return HookRegistry.BeforeStepHooks;
+                case "AfterStep":
+                    return HookRegistry.AfterStepHooks;
+                case "AfterScenario":
+                    return HookRegistry.AfterScenarioHooks;
+                case "AfterSpec":
+                    return HookRegistry.AfterSpecHooks;
+                case "AfterSuite":
+                    return HookRegistry.AfterSuiteHooks;
+                default:
+                    return null;
+            }
+        }
+
 
         private void SetAppConfigIfExists()
         {            
@@ -230,9 +339,19 @@ namespace Gauge.CSharp.Runner
             else
             {
                 Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
-                ScreenGrabberType = typeof (DefaultScreenGrabber);
+//                ScreenGrabberType = typeof (DefaultScreenGrabber);
             }
         }
+
+        private void InitializeConverter()
+        {
+            _paramConverters = new Dictionary<string, IParamConverter>
+            {
+                {typeof (string).ToString(), new StringParamConverter()},
+                {typeof (Table).ToString(), new TableParamConverter()}
+            };
+        }
+
 
         public override object InitializeLifetimeService()
         {

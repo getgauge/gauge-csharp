@@ -24,6 +24,7 @@ using Gauge.Messages;
 using Moq;
 using NUnit.Framework;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Strategy;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
@@ -46,17 +47,14 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldExecuteMethod()
         {
             var mockSandBox = new Mock<ISandbox>();
-            var method = new Mock<MethodInfo>();
-            method.Setup(info => info.DeclaringType).Returns(GetType());
+            var method = new Mock<GaugeMethod>();
             method.Setup(info => info.Name).Returns("ShouldExecuteMethod");
-            var parameterInfo = new Mock<ParameterInfo>();
-            parameterInfo.Setup(info => info.ParameterType).Returns(typeof(string));
-            method.Setup(info => info.GetParameters()).Returns(() => new[] { parameterInfo.Object });
+            method.Setup(info => info.ParameterCount).Returns(1);
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar"))
                 .Returns(() => new ExecutionResult {Success = true})
                 .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, new KeyValuePair<string, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.False(executionResult.Failed);
@@ -67,12 +65,12 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldTakeScreenShotOnFailedExecution()
         {
             var mockSandBox = new Mock<ISandbox>();
-            var method = new Mock<MethodInfo>();
-            method.Setup(info => info.DeclaringType).Returns(GetType());
+            var method = new Mock<GaugeMethod>();
             method.Setup(info => info.Name).Returns("ShouldTakeScreenShotOnFailedExecution");
+            method.Setup(info => info.ParameterCount).Returns(1);
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Throws<Exception>();
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, new KeyValuePair<string, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
@@ -84,12 +82,9 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldTakeScreenShotUsingCustomScreenShotMethod()
         {
             var mockSandBox = new Mock<ISandbox>();
-            var method = new Mock<MethodInfo>();
-            method.Setup(info => info.DeclaringType).Returns(GetType());
+            var method = new Mock<GaugeMethod>();
             method.Setup(info => info.Name).Returns("ShouldTakeScreenShotUsingCustomScreenShotMethod");
-            var parameterInfo = new Mock<ParameterInfo>();
-            parameterInfo.Setup(info => info.ParameterType).Returns(typeof(string));
-            method.Setup(info => info.GetParameters()).Returns(() => new[] { parameterInfo.Object });
+            method.Setup(info => info.ParameterCount).Returns(1);
 
             var result = new ExecutionResult {Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace"};
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
@@ -97,7 +92,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             byte[] bytes = {0x20, 0x20};
             mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, new KeyValuePair<string, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
@@ -109,12 +104,9 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldNotTakeScreenShotWhenDisabled()
         {
             var mockSandBox = new Mock<ISandbox>();
-            var method = new Mock<MethodInfo>();
-            method.Setup(info => info.DeclaringType).Returns(GetType());
+            var method = new Mock<GaugeMethod>();
             method.Setup(info => info.Name).Returns("ShouldNotTakeScreenShotWhenDisabled");
-            var parameterInfo = new Mock<ParameterInfo>();
-            parameterInfo.Setup(info => info.ParameterType).Returns(typeof (string));
-            method.Setup(info => info.GetParameters()).Returns(() => new[] {parameterInfo.Object});
+            method.Setup(info => info.ParameterCount).Returns(1);
 
             var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object, "Bar")).Returns(result);
@@ -122,7 +114,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
             Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", "false");
             
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, "Bar");
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(method.Object, new KeyValuePair<string, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.False(executionResult.HasScreenShot);
@@ -133,14 +125,18 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldExecuteHooks()
         {
             var mockSandBox = new Mock<ISandbox>();
-            var method = new Mock<MethodInfo>();
-            method.Setup(info => info.DeclaringType).Returns(GetType());
+            var method = new Mock<GaugeMethod>();
             method.Setup(info => info.Name).Returns("ShouldExecuteHooks");
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(method.Object)).Returns(new ExecutionResult {Success = true});
+            method.Setup(info => info.ParameterCount).Returns(1);
+            var hooksStrategy = new HooksStrategy();
+            ExecutionInfo executionInfo = ExecutionInfo.CreateBuilder().Build();
+            var protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder();
+            mockSandBox.Setup(sandbox =>
+                sandbox.ExecuteHooks("hook", hooksStrategy, new List<string>(), executionInfo)
+            ).Returns(protoExecutionResultBuilder);
             mockSandBox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(new List<string>());
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks(new[] { method.Object },
-                ExecutionInfo.CreateBuilder().Build());
+            var executionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(), executionInfo);
             Console.WriteLine(executionResult.ErrorMessage);
             Assert.False(executionResult.Failed);
             Assert.True(executionResult.ExecutionTime > 0);

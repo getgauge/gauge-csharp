@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner
 
         public IStepRegistry GetStepRegistry()
         {
-            var stepImplementations = new List<KeyValuePair<string, MethodInfo>>();
+            var stepImplementations = new List<KeyValuePair<string, GaugeMethod>>();
             var aliases = new Dictionary<string, bool>();
             var stepTextMap = new Dictionary<string, string>();
             try
@@ -58,7 +58,7 @@ namespace Gauge.CSharp.Runner
                             stepTextMap.Add(stepValues[i], stepTexts[i]);
                     }
 
-                    stepImplementations.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, MethodInfo>(stepValue, stepMethod)));
+                    stepImplementations.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, GaugeMethod>(stepValue, stepMethod)));
 
                     if (stepValues.Count <= 1) continue;
 

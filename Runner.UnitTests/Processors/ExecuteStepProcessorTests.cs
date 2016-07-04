@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using Moq;
@@ -70,7 +71,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            var fooMethodInfo = GetType().GetMethod("Foo");
+            var fooMethodInfo = new GaugeMethod {Name = "Foo"};
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
             var mockSandbox = new Mock<ISandbox>();
@@ -103,10 +104,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            var fooMethodInfo = GetType().GetMethod("Foo");
+            var fooMethodInfo = new GaugeMethod {Name = "Foo"};
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
-            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<Object[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
+            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<KeyValuePair<string, string>[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
             var mockSandbox = new Mock<ISandbox>();
 
             var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object, mockSandbox.Object).Process(request);

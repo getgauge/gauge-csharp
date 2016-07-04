@@ -30,7 +30,7 @@ namespace Gauge.CSharp.Runner
 {
     public class AssemblyLoader : IAssemblyLoader
     {
-        private static readonly string GaugeLibAssembleName = typeof(Step).Assembly.GetName().Name;
+        private const string GaugeLibAssembleName = "Gauge.CSharp.Lib";
 
         private static readonly Logger Logger = LogManager.GetLogger("AssemblyLoader");
 
@@ -65,10 +65,10 @@ namespace Gauge.CSharp.Runner
             return _targetLibAssembly;
         }
 
-        public List<MethodInfo> GetMethods(Type annotationType)
+        public List<MethodInfo> GetMethods(string annotation)
         {
             Func<MethodInfo, bool> methodFilter = info => info.GetCustomAttributes()
-				.Any(a => a.GetType().FullName.Equals(annotationType.FullName));
+				.Any(a => a.GetType().FullName.Equals(annotation));
             Func<Type, IEnumerable<MethodInfo>> methodSelector = t => t.GetMethods().Where(methodFilter);
             return AssembliesReferencingGaugeLib.SelectMany(assembly => assembly.GetTypes().SelectMany(methodSelector)).ToList();
         }
@@ -90,7 +90,7 @@ namespace Gauge.CSharp.Runner
 
             var isReferencingGaugeLib = assembly.GetReferencedAssemblies()
                 .Select(name => name.Name)
-                .Contains(typeof(Step).Assembly.GetName().Name);
+                .Contains(GaugeLibAssembleName);
 
             var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[]{});
 
@@ -119,19 +119,19 @@ namespace Gauge.CSharp.Runner
 
         private void ScanForScreengrabber(IEnumerable<Type> types)
         {
-            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IScreenGrabber).FullName));
+            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IScreenGrabber"));
             ScreengrabberTypes.AddRange(implementingTypes);
         }
 
 
         private void ScanForInstanceManager(IEnumerable<Type> types)
         {
-            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == typeof(IClassInstanceManager).FullName));
+            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.InstanceManagement.IClassInstanceManager"));
             ClassInstanceManagerTypes.AddRange(implementingTypes);
         }
 
 
-        private IEnumerable<Type> GetLoadableTypes(Assembly assembly)
+        private static IEnumerable<Type> GetLoadableTypes(Assembly assembly)
         {
             try
             {
@@ -156,10 +156,11 @@ namespace Gauge.CSharp.Runner
             _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
             Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
+    }
 
-        private Type GetTypeFromTargetLib(Type type)
-        {
-            return _targetLibAssembly.GetType(type.FullName);
-        }
+    public class GaugeMethod : MarshalByRefObject
+    {
+        public string Name { get; set; }
+        public int ParameterCount { get; set; }
     }
 }

@@ -23,14 +23,9 @@ namespace Gauge.CSharp.Runner.Processors
 {
     public class StepExecutionEndingProcessor : TaggedHooksFirstExecutionProcessor
     {
-        public StepExecutionEndingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor)
-            : base(hookRegistry, methodExecutor)
+        public StepExecutionEndingProcessor(IMethodExecutor methodExecutor)
+            : base(methodExecutor)
         {
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.AfterStepHooks;
         }
 
         protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
@@ -39,6 +34,11 @@ namespace Gauge.CSharp.Runner.Processors
             var allPendingMessages = MethodExecutor.GetAllPendingMessages();
             protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
             return protoExecutionResultBuilder;
+        }
+
+        protected override string HookType
+        {
+            get { return "AfterStep"; }
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

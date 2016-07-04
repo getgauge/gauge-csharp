@@ -92,7 +92,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetMethodsForGaugeAttribute()
         {
-            Assert.Contains(_stepMethod, _assemblyLoader.GetMethods(typeof(Step)));
+            Assert.Contains(_stepMethod, _assemblyLoader.GetMethods("Gauge.CShsrp.Lib.Attribute.Step"));
         }
     }
 }

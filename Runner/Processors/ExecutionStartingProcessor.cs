@@ -15,25 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecutionStartingProcessor : HookExecutionProcessor
     {
-        public ExecutionStartingProcessor(IHookRegistry hookRegistry, IMethodExecutor methodExecutor) : base(hookRegistry, methodExecutor)
+        public ExecutionStartingProcessor(IMethodExecutor methodExecutor) : base(methodExecutor)
         {
-        }
-
-        protected override HashSet<HookMethod> GetHooks()
-        {
-            return Hooks.BeforeSuiteHooks;
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ExecutionStartingRequest.CurrentExecutionInfo;
+        }
+
+        protected override string HookType
+        {
+            get { return "BeforeSuite"; }
         }
     }
 }

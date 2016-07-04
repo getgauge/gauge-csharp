@@ -33,8 +33,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
             var stepRegistry = new StepRegistry(methods, null, null);
             var allSteps = stepRegistry.AllSteps().ToList();
@@ -49,8 +49,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
             var stepRegistry = new StepRegistry(methods, null, null);
             var method = stepRegistry.MethodFor("Foo");
@@ -63,8 +63,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
             var stepRegistry = new StepRegistry(methods, null, null);
 
@@ -77,9 +77,9 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("FooAlias", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("FooAlias", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
             var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool> { { "Foo", true}, {"FooAlias", true} });
 
@@ -92,10 +92,10 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
-            var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool> ());
+            var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool>());
 
             Assert.False(stepRegistry.HasAlias("Foo"));
             Assert.False(stepRegistry.HasAlias("Bar"));
@@ -106,10 +106,10 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
-            var stepTextMap = new Dictionary<string, string> { {"foo_parameterized", "Foo"} };
+            var stepTextMap = new Dictionary<string, string> { { "foo_parameterized", "Foo" } };
 
             var stepRegistry = new StepRegistry(methods, stepTextMap, null);
 
@@ -121,10 +121,10 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var methods = new[]
             {
-                new KeyValuePair<string, MethodInfo>("Foo", GetType().GetMethod("Foo")),
-                new KeyValuePair<string, MethodInfo>("Bar", GetType().GetMethod("Bar"))
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
-            var stepTextMap = new Dictionary<string, string> { {"foo_parameterized", "Foo"} };
+            var stepTextMap = new Dictionary<string, string> { { "foo_parameterized", "Foo" } };
 
             var stepRegistry = new StepRegistry(methods, stepTextMap, null);
 
