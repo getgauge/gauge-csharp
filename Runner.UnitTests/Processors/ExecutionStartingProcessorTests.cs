@@ -54,7 +54,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
             _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", new UntaggedHooksFirstStrategy(), new List<string>(), executionEndingRequest.CurrentExecutionInfo))
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", It.IsAny<HooksStrategy>(), new List<string>(), executionEndingRequest.CurrentExecutionInfo))
                 .Returns(_protoExecutionResultBuilder);
             _executionStartingProcessor = new ExecutionStartingProcessor(_mockMethodExecutor.Object);
         }

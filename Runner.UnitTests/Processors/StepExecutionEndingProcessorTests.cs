@@ -58,7 +58,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                                         .SetExecutionTime(0)
                                         .SetFailed(false)
                                         .AddRangeMessage(_pendingMessages);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", new TaggedHooksFirstStrategy(), new List<string>(), stepExecutionEndingRequest.CurrentExecutionInfo))
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>(), stepExecutionEndingRequest.CurrentExecutionInfo))
                 .Returns(_protoExecutionResultBuilder);
             _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(_mockMethodExecutor.Object);
         }

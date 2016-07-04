@@ -71,8 +71,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            var fooMethodInfo = new GaugeMethod {Name = "Foo"};
-            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
+            var fooMethod = new GaugeMethod {Name = "Foo", ParameterCount = 1};
+            mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethod);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
             var mockSandbox = new Mock<ISandbox>();
 
@@ -104,7 +104,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Build();
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
-            var fooMethodInfo = new GaugeMethod {Name = "Foo"};
+            var fooMethodInfo = new GaugeMethod {Name = "Foo", ParameterCount = 1};
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
             mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<KeyValuePair<string, string>[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());

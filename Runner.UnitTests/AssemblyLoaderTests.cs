@@ -37,13 +37,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         private MethodInfo _stepMethod;
         private AssemblyLoader _assemblyLoader;
         private Mock<IAssemblyWrapper> _mockAssemblyWrapper;
+        private const string TmpLocation = "/tmp/location";
 
         [SetUp]
         public void Setup()
         {
-            const string tmpLocation = "/tmp/location";
-            var libPath = Path.GetFullPath(Path.Combine(tmpLocation, "gauge-bin", "Gauge.CSharp.Lib.dll"));
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", tmpLocation);
+            var libPath = Path.GetFullPath(Path.Combine(TmpLocation, "gauge-bin", "Gauge.CSharp.Lib.dll"));
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", TmpLocation);
             var thisType = GetType();
             var assemblyLocation = thisType.Assembly.Location;
             _mockAssemblyWrapper = new Mock<IAssemblyWrapper>();
@@ -69,12 +69,11 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldThrowExceptionWhenLibAssemblyNotFound()
         {
-            const string tmpLocation = "/tmp/location";
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", tmpLocation);
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", TmpLocation);
             var mockAssemblyWrapper = new Mock<IAssemblyWrapper>();
             var fileWrapper = new Mock<IFileWrapper>();
 
-            Assert.Throws<FileNotFoundException>(() => new AssemblyLoader(mockAssemblyWrapper.Object, fileWrapper.Object, new[] { tmpLocation }));
+            Assert.Throws<FileNotFoundException>(() => new AssemblyLoader(mockAssemblyWrapper.Object, fileWrapper.Object, new[] { TmpLocation }));
         }
 
         [Test]
@@ -92,7 +91,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetMethodsForGaugeAttribute()
         {
-            Assert.Contains(_stepMethod, _assemblyLoader.GetMethods("Gauge.CShsrp.Lib.Attribute.Step"));
+            Assert.Contains(_stepMethod, _assemblyLoader.GetMethods("Gauge.CSharp.Lib.Attribute.Step"));
         }
     }
 }

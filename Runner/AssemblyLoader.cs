@@ -157,10 +157,4 @@ namespace Gauge.CSharp.Runner
             Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
     }
-
-    public class GaugeMethod : MarshalByRefObject
-    {
-        public string Name { get; set; }
-        public int ParameterCount { get; set; }
-    }
 }

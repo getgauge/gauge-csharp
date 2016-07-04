@@ -64,14 +64,9 @@ namespace Gauge.CSharp.Runner.Processors
             }
             for (var i = 0; i < parameters; i++)
             {
-                if (stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table)
-                {
-                    args[i] = new KeyValuePair<string, string>(stepParameter[i].Value, "Table");
-                }
-                else
-                {
-                    args[i] = new KeyValuePair<string, string>(stepParameter[i].Value, "String");
-                }
+                args.Add(stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
+                    ? new KeyValuePair<string, string>(stepParameter[i].Value, "Table")
+                    : new KeyValuePair<string, string>(stepParameter[i].Value, "String"));
             }
             var protoExecutionResult = ExecuteMethod(method, args.ToArray());
             return WrapInMessage(protoExecutionResult, request);
