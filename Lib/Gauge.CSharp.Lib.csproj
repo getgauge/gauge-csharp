@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute\AfterScenario.cs" />
@@ -55,6 +57,8 @@
     <Compile Include="DataStore.cs" />
     <Compile Include="DataStoreFactory.cs" />
     <Compile Include="DataStoreType.cs" />
+    <Compile Include="DefaultClassInstanceManager.cs" />
+    <Compile Include="DefaultScreenGrabber.cs" />
     <Compile Include="GaugeMessages.cs" />
     <Compile Include="IClassInstanceManager.cs" />
     <Compile Include="IScreenGrabber.cs" />

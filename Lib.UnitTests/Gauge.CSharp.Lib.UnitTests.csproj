@@ -43,6 +43,7 @@
     <Compile Include="Attribute\FilteredHookAttributeTests.cs" />
     <Compile Include="DataStoreFactoryTests.cs" />
     <Compile Include="DataStoreTests.cs" />
+    <Compile Include="DefaultClassInstanceManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableTests.cs" />
   </ItemGroup>
