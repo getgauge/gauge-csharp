@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="AssemblyLocaterTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
-    <Compile Include="InstanceManagement\DefaultClassInstanceManagerTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="Converter\TableParamConverterTests.cs" />
     <Compile Include="CSharpIdentifierTests.cs" />
@@ -159,5 +158,8 @@
       <HintPath>..\packages\test\NUnit\lib\nunit.framework.dll</HintPath>
       <Paket>True</Paket>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InstanceManagement\" />
   </ItemGroup>
 </Project>

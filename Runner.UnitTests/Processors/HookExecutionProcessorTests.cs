@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.UnitTests.Processors.Stubs;
 using Moq;
@@ -89,7 +90,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "Baz", "Foo");
+            Assert.Contains(GetType().GetMethod("Foo").FullyQuallifiedName(), applicableHooks);
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
         }
 
         [Test]
@@ -108,18 +110,18 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(1, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "Baz");
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
         }
 
         [Test]
         public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
         {
-            var applicableHooks =
-                new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Bar"}, _hookMethods).ToList();
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Bar"}, _hookMethods).ToList();
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "Baz", "Bar");
+            Assert.Contains(GetType().GetMethod("Bar").FullyQuallifiedName(), applicableHooks);
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
         }
 
         [Test]
@@ -130,7 +132,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             Assert.IsNotNull(applicableHooks);
             Assert.AreEqual(2, applicableHooks.Count);
-            AssertEx.ContainsMethods(applicableHooks, "Baz", "Foo");
+            Assert.Contains(GetType().GetMethod("Foo").FullyQuallifiedName(), applicableHooks);
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
         }
 
         [Test]

@@ -16,8 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
-using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Gauge.CSharp.Core;
@@ -38,38 +36,7 @@ namespace Gauge.CSharp.Runner
             {
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-//				var runnersApplicationBase = sandboxAppDomainSetup.ApplicationBase;
-//				var resolver = new InjectableAssemblyResolver(runnersApplicationBase,Utils.GetGaugeBinDir());
-
 				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
-//				sandboxDomain.AssemblyResolve += (sender, args) =>
-//				{
-//				    var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
-//				    var gaugeBinPath = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
-//				    // first preference is to load assemblies from gauge-bin/ as User has provided
-//				    if (File.Exists(gaugeBinPath))
-//				    {
-//				        return Assembly.LoadFrom(gaugeBinPath);
-//				    }
-//				    // but when assembly is missing there, then we should fallback on the runner's libraries
-//				    var runnersPath = Path.Combine(sandboxAppDomainSetup.ApplicationBase, shortAssemblyName + ".dll");
-//				    if (File.Exists(runnersPath))
-//				        return Assembly.LoadFrom(runnersPath);
-//				    // this will also take care of loading runner's assembly
-//                    runnersPath = Path.Combine(sandboxAppDomainSetup.ApplicationBase, shortAssemblyName + ".exe");
-//				    if (File.Exists(runnersPath))
-//				        return Assembly.LoadFrom(runnersPath);
-//				    return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
-//				};
-				/*HACK - This is evil! Runner doesn't need to load users assemblies.
-				 * But we cannot avoid this on Windows because ISandbox is declaring MethodInfo
-				 * which is passed over .NET remoting, which is forcing users assemblies to be loaded.
-				 * If we don't do this then Gauge.CSharp.Runner.ISandbox.GetHookRegistry() will throw up
-				 * when called from runners domain.
-				 * Mono is less restrictive and ignores that MethodInfo refers/contains foreign assemblies.
-				 */
-//				AppDomain.CurrentDomain.AssemblyResolve += HandleAssemblyResolveForCurrentDomain;
-
                 var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                     typeof(Sandbox).FullName);
@@ -83,52 +50,5 @@ namespace Gauge.CSharp.Runner
                 throw;
             }
         }
-
-		static Assembly HandleAssemblyResolveForCurrentDomain (object sender, ResolveEventArgs args)
-		{
-			var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
-			var gaugeBinPath = Path.Combine(Utils.GetGaugeBinDir(), shortAssemblyName + ".dll");
-			if (File.Exists (gaugeBinPath)) {
-				return Assembly.LoadFrom (gaugeBinPath);
-			}
-			return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
-		}
     }
-
-	[Serializable]
-	public class InjectableAssemblyResolver
-	{
-		string runnersApplicationBase;
-		string gaugeBin;
-
-		public InjectableAssemblyResolver(string runnersApplicationBase,string gaugeBin)
-		{
-			if (gaugeBin == null)
-				throw new ArgumentNullException ("gaugeBin");
-			if (runnersApplicationBase == null)
-				throw new ArgumentNullException ("runnersApplicationBase");
-			this.gaugeBin = gaugeBin;
-			this.runnersApplicationBase = runnersApplicationBase;
-		}
-
-		public Assembly HandleAssemblyResolveForSandboxDomain(object sender, ResolveEventArgs args)
-		{
-			var shortAssemblyName = args.Name.Substring(0, args.Name.IndexOf(','));
-			var gaugeBinPath = Path.Combine(gaugeBin, shortAssemblyName + ".dll");
-			// first preference is to load assemblies from gauge-bin/ as User has provided
-			if (File.Exists (gaugeBinPath)) {
-				return Assembly.LoadFrom (gaugeBinPath);
-			} else {
-				// but when assembly is missing there, then we should fallback on the runner's libraries
-				string runnersPath = Path.Combine(runnersApplicationBase, shortAssemblyName + ".dll");
-				if(File.Exists(runnersPath))
-					return Assembly.LoadFrom (runnersPath);
-				// this will also take care of loading runner's assembly
-				runnersPath = Path.Combine(runnersApplicationBase, shortAssemblyName + ".exe");
-				if(File.Exists(runnersPath))
-					return Assembly.LoadFrom (runnersPath);
-			}
-			return Assembly.GetExecutingAssembly().FullName == args.Name ? Assembly.GetExecutingAssembly() : null;
-		}
-	}
 }

@@ -1,4 +1,4 @@
-// Copyright 2015 ThoughtWorks, Inc.
+﻿// Copyright 2015 ThoughtWorks, Inc.
 //
 // This file is part of Gauge-CSharp.
 //
@@ -15,21 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using System.Reflection;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Extensions
 {
-    public interface IHookRegistry
+    public static class MethodInfoExtensions
     {
-        HashSet<HookMethod> BeforeSuiteHooks { get; }
-        HashSet<HookMethod> AfterSuiteHooks { get; }
-        HashSet<HookMethod> BeforeSpecHooks { get; }
-        HashSet<HookMethod> AfterSpecHooks { get; }
-        HashSet<HookMethod> BeforeScenarioHooks { get; }
-        HashSet<HookMethod> AfterScenarioHooks { get; }
-        HashSet<HookMethod> BeforeStepHooks { get; }
-        HashSet<HookMethod> AfterStepHooks { get; }
-        MethodInfo MethodFor(string method);
+        public static string FullyQuallifiedName(this MethodInfo info)
+        {
+            return info.DeclaringType == null
+                ? info.Name
+                : string.Format("{0}.{1}", info.DeclaringType.FullName, info.Name);
+        }
     }
 }

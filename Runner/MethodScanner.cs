@@ -80,10 +80,5 @@ namespace Gauge.CSharp.Runner
         {
             return _sandbox.GetAllStepTexts();
         }
-
-        public IHookRegistry GetHookRegistry()
-        {
-            return _sandbox.GetHookRegistry();
-        }
     }
 }

@@ -37,7 +37,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
                 .SetParameterType(Parameter.Types.ParameterType.Table)
                 .SetTable(table).Build();
             var mockSandbox = new Mock<ISandbox>();
-            mockSandbox.Setup(sandbox => sandbox.GetTargetType(typeof (Table).FullName)).Returns(typeof (Table));
 
             var actual = new TableParamConverter().Convert(parameter, mockSandbox.Object) as TableDonkey;
             

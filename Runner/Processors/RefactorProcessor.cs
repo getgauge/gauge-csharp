@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner.Processors
             var newStep = request.RefactorRequest.NewStepValue;
 
             var newStepValue = newStep.ParameterizedStepValue;
-            var parameterPositions = request.RefactorRequest.ParamPositionsList;
+            var parameterPositions = request.RefactorRequest.ParamPositionsList.Select(position => new Tuple<int, int>(position.OldPosition, position.NewPosition));
 
             var refactorResponseBuilder = RefactorResponse.CreateBuilder();
             try

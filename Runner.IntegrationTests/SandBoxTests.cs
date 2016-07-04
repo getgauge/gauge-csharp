@@ -21,7 +21,6 @@ using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Gauge.CSharp.Lib.Attribute;
-using Gauge.CSharp.Runner.Converters;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
@@ -36,12 +35,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _testProjectPath);
         }
 
-		static AppDomainSetup SetupInformation ()
-		{
-			return AppDomain.CurrentDomain.SetupInformation;
-		}
-
-		static void AssertRunnerDomainDidNotLoadUsersAssembly ()
+        private static void AssertRunnerDomainDidNotLoadUsersAssembly ()
 		{
 			Assert.AreNotEqual ("0.0.0", FileVersionInfo.GetVersionInfo (typeof(AfterScenario).Assembly.Location).ProductVersion,
 				"Runner's test domain should not load the Gauge.CSharp.Lib assembly with 0.0.0 version");
@@ -52,7 +46,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldLoadTargetLibAssemblyInSandbox()
         {
-            var sandbox = SandboxFactory.Create (SetupInformation ());
+            var sandbox = SandboxFactory.Create();
 
             // The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
             // The actual Gauge CSharp runner uses a different version of Lib 
@@ -65,7 +59,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 		[Test]
 		public void ShouldNotLoadTargetLibAssemblyInRunnersDomain()
 		{
-			SandboxFactory.Create (SetupInformation ());
+			SandboxFactory.Create();
 
 			// The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
 			// The actual Gauge CSharp runner uses a different version of Lib 
@@ -76,7 +70,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetAllStepMethods()
         {
-            var sandbox = SandboxFactory.Create(SetupInformation());
+            var sandbox = SandboxFactory.Create();
 			AssertRunnerDomainDidNotLoadUsersAssembly ();
             var stepMethods = sandbox.GetStepMethods();
 
@@ -86,7 +80,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetAllStepTexts()
         {
-            var sandbox = SandboxFactory.Create(SetupInformation());
+            var sandbox = SandboxFactory.Create();
             var stepTexts = sandbox.GetAllStepTexts().ToList();
 
             new List<string>
@@ -101,130 +95,25 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         }
 
         [Test]
-        public void ShouldGetBeforeSuiteHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.BeforeSuiteHooks.Count);
-
-            var hookMethod = hookRegistry.BeforeSuiteHooks.First();
-            Assert.AreEqual("BeforeSuite", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetAfterSuiteHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.AfterSuiteHooks.Count);
-
-            var hookMethod = hookRegistry.AfterSuiteHooks.First();
-            Assert.AreEqual("AfterSuite", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetBeforeScenarioHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.BeforeScenarioHooks.Count);
-
-            var hookMethod = hookRegistry.BeforeScenarioHooks.First();
-            Assert.AreEqual("BeforeScenario", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetAfterScenarioHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.AfterScenarioHooks.Count);
-
-            var hookMethod = hookRegistry.AfterScenarioHooks.First();
-            Assert.AreEqual("AfterScenario", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetBeforeSpecHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.BeforeSpecHooks.Count);
-
-            var hookMethod = hookRegistry.BeforeSpecHooks.First();
-            Assert.AreEqual("BeforeSpec", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetAfterSpecHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.AfterSpecHooks.Count);
-
-            var hookMethod = hookRegistry.AfterSpecHooks.First();
-            Assert.AreEqual("AfterSpec", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetBeforeStepHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.BeforeStepHooks.Count);
-
-            var hookMethod = hookRegistry.BeforeStepHooks.First();
-            Assert.AreEqual("BeforeStep", hookMethod.Method.Name);
-        }
-
-        [Test]
-        public void ShouldGetAfterStepHooks()
-        {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            var hookRegistry = sandbox.GetHookRegistry();
-			AssertRunnerDomainDidNotLoadUsersAssembly ();
-
-            Assert.AreEqual(1, hookRegistry.AfterStepHooks.Count);
-
-            var hookMethod = hookRegistry.AfterStepHooks.First();
-            Assert.AreEqual("AfterStep", hookMethod.Method.Name);
-        }
-
-        [Test]
         public void ShouldExecuteMethodAndReturnResult()
         {
-            var sandbox = SandboxFactory.Create(SetupInformation());
-            sandbox.GetStepMethods();
-//            var stepMethods = sandbox.GetStepMethods();
-//			AssertRunnerDomainDidNotLoadUsersAssembly ();
-//            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "Context") == 0);
-//
-//            var executionResult = sandbox.ExecuteMethod(methodInfo);
-//            Assert.True(executionResult.Success);
+            var sandbox = SandboxFactory.Create();
+            var stepMethods = sandbox.GetStepMethods();
+			AssertRunnerDomainDidNotLoadUsersAssembly ();
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.Context") == 0);
+
+            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            Assert.True(executionResult.Success);
         }
 
         [Test]
         public void SuccessIsFalseOnUnserializableExceptionThrown()
         {
             const string expectedMessage = "I am a custom exception";
-            var sandbox = SandboxFactory.Create(SetupInformation());
+            var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
 			AssertRunnerDomainDidNotLoadUsersAssembly ();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ThrowUnserializableException") ==0);
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowUnserializableException") == 0);
 
             var executionResult = sandbox.ExecuteMethod(methodInfo);
             Assert.False(executionResult.Success);
@@ -236,9 +125,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void SuccessIsFalseOnSerializableExceptionThrown()
         {
             const string expectedMessage = "I am a custom serializable exception";
-            var sandbox = SandboxFactory.Create(SetupInformation());
+            var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ThrowSerializableException") ==0);
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowSerializableException") == 0);
 
             var executionResult = sandbox.ExecuteMethod(methodInfo);
 
@@ -250,7 +139,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test, Ignore("Flaky on Mono, passes if this is first test to execute, else fails")]
         public void ShouldCreateTableFromTargetType()
         {
-            var sandbox = SandboxFactory.Create(SetupInformation());
+            var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
             var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ReadTable") == 0);
 

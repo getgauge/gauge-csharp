@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -29,7 +28,7 @@ using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
-using NLog;
+//using NLog;
 
 namespace Gauge.CSharp.Runner
 {
@@ -40,18 +39,18 @@ namespace Gauge.CSharp.Runner
 
 		private readonly Assembly _libAssembly;
 
-        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
+//        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         private Type ScreenGrabberType { get; set; }
 
         private dynamic _classInstanceManager;
-        private HookRegistry HookRegistry;
+        private readonly IHookRegistry _hookRegistry;
         private Dictionary<string, IParamConverter> _paramConverters;
 
 
         public Sandbox(IAssemblyLocater locater)
         {
-            LogConfiguration.Initialize();
+//            LogConfiguration.Initialize();
             var assemblies = locater.GetAllAssemblies();
             _assemblyLoader = new AssemblyLoader(assemblies);
 			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
@@ -59,7 +58,7 @@ namespace Gauge.CSharp.Runner
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
             InitializeConverter();
-            HookRegistry = new HookRegistry(_assemblyLoader);
+            _hookRegistry = new HookRegistry(_assemblyLoader);
         }
 
         public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
@@ -96,10 +95,10 @@ namespace Gauge.CSharp.Runner
             if (instance == null)
             {
                 var error = "Could not load instance type: " + typeToLoad;
-                Logger.Error(error);
+//                Logger.Error(error);
                 throw new Exception(error);
             }
-            Logger.Info(instance.GetType().FullName);
+//            Logger.Info(instance.GetType().FullName);
             method.Invoke(instance, parameters);
         }
 
@@ -107,7 +106,7 @@ namespace Gauge.CSharp.Runner
         {
             var table = _libAssembly.CreateInstance(typeof (Table).FullName, true, BindingFlags.CreateInstance,null,
                 new object[] {donkey.Headers}, CultureInfo.CurrentCulture, null);
-            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
+//            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
             foreach (var row in donkey.Rows)
             {
                 table.GetType().InvokeMember("AddRow", BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
@@ -117,11 +116,6 @@ namespace Gauge.CSharp.Runner
         }
 
 
-        public Type GetTargetType(string typeFullName)
-        {
-            return _libAssembly.GetType(typeFullName);
-        }
-
         public string TargetLibAssemblyVersion {
 			get{ return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; } 
 		}
@@ -129,11 +123,6 @@ namespace Gauge.CSharp.Runner
         private Assembly TargetLibAssembly {
 			get{ return _libAssembly; } 
 		}
-
-        public IHookRegistry GetHookRegistry()
-        {
-            return HookRegistry;
-        }
 
         public List<GaugeMethod> GetStepMethods()
         {
@@ -163,8 +152,8 @@ namespace Gauge.CSharp.Runner
         {
 			const string fullStepName = "Gauge.CSharp.Lib.Attribute.Step";
             var stepMethod = MethodMap[gaugeMethod.Name];
-            dynamic step = stepMethod.GetCustomAttributes ().FirstOrDefault (
-				a => a.GetType ().FullName.Equals (fullStepName));
+            dynamic step = stepMethod.GetCustomAttributes()
+                .FirstOrDefault(a => a.GetType ().FullName.Equals (fullStepName));
             return step.Names;
         }
 
@@ -173,15 +162,13 @@ namespace Gauge.CSharp.Runner
         {
             var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
 
-            if (instanceManagerType == null) return;
-            
-            _classInstanceManager = Activator.CreateInstance(instanceManagerType);
+            _classInstanceManager = instanceManagerType == null
+                ? _libAssembly.CreateInstance("Gauge.CSharp.Lib.DefaultClassInstanceManager")
+                : Activator.CreateInstance(instanceManagerType);
 
-            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
-
+//            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
-
 
         public bool TryScreenCapture(out byte[] screenShotBytes)
         {
@@ -236,11 +223,11 @@ namespace Gauge.CSharp.Runner
             {
                 try
                 {
-                    ExecuteHook(method, new object[] { executionInfo });
+                    ExecuteHook(_hookRegistry.MethodFor(method), new object[] { executionInfo });
                 }
                 catch (Exception ex)
                 {
-                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
+//                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
                     byte[] screenshot;
                     TryScreenCapture(out screenshot);
                     return builder
@@ -255,7 +242,7 @@ namespace Gauge.CSharp.Runner
             return builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
         }
 
-        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<ParameterPosition> parameterPositions, IList<string> parametersList, string newStepValue)
+        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue)
         {
             return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList, newStepValue);
         }
@@ -285,7 +272,7 @@ namespace Gauge.CSharp.Runner
             return true;
         }
 
-        private IEnumerable<MethodInfo> GetHookMethods(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
+        private IEnumerable<string> GetHookMethods(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
         {
             var hooksFromRegistry = GetHooksFromRegistry(hookType);
             return strategy.GetApplicableHooks(applicableTags, hooksFromRegistry);
@@ -296,21 +283,21 @@ namespace Gauge.CSharp.Runner
             switch (hookType)
             {
                 case "BeforeSuite":
-                    return HookRegistry.BeforeSuiteHooks;
+                    return _hookRegistry.BeforeSuiteHooks;
                 case "BeforeSpec":
-                    return HookRegistry.BeforeSpecHooks;
+                    return _hookRegistry.BeforeSpecHooks;
                 case "BeforeScenario":
-                    return HookRegistry.BeforeScenarioHooks;
+                    return _hookRegistry.BeforeScenarioHooks;
                 case "BeforeStep":
-                    return HookRegistry.BeforeStepHooks;
+                    return _hookRegistry.BeforeStepHooks;
                 case "AfterStep":
-                    return HookRegistry.AfterStepHooks;
+                    return _hookRegistry.AfterStepHooks;
                 case "AfterScenario":
-                    return HookRegistry.AfterScenarioHooks;
+                    return _hookRegistry.AfterScenarioHooks;
                 case "AfterSpec":
-                    return HookRegistry.AfterSpecHooks;
+                    return _hookRegistry.AfterSpecHooks;
                 case "AfterSuite":
-                    return HookRegistry.AfterSuiteHooks;
+                    return _hookRegistry.AfterSuiteHooks;
                 default:
                     return null;
             }
@@ -334,12 +321,12 @@ namespace Gauge.CSharp.Runner
             ScreenGrabberType = _assemblyLoader.ScreengrabberTypes.FirstOrDefault();
             if (ScreenGrabberType != null)
             {
-                Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
+//                Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
             }
             else
             {
-                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
-//                ScreenGrabberType = typeof (DefaultScreenGrabber);
+//                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
+                ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
         }
 
@@ -347,8 +334,8 @@ namespace Gauge.CSharp.Runner
         {
             _paramConverters = new Dictionary<string, IParamConverter>
             {
-                {typeof (string).ToString(), new StringParamConverter()},
-                {typeof (Table).ToString(), new TableParamConverter()}
+                {"String", new StringParamConverter()},
+                {"Table", new TableParamConverter()}
             };
         }
 

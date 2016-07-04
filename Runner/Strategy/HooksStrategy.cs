@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.Strategy
 {
     public class HooksStrategy
     {
-        public IEnumerable<MethodInfo> GetTaggedHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public IEnumerable<string> GetTaggedHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             var tagsList = applicableTags.ToList();
             return from hookMethod in hooks.ToList()
@@ -32,18 +32,18 @@ namespace Gauge.CSharp.Runner.Strategy
                 where
                     hookMethod.TagAggregation == TagAggregation.Or && hookMethod.FilterTags.Intersect(tagsList).Any() ||
                     hookMethod.TagAggregation == TagAggregation.And && hookMethod.FilterTags.All(tagsList.Contains)
-                orderby hookMethod.Method.Name
+                orderby hookMethod.Method
                 select hookMethod.Method;
         }
 
-        protected IEnumerable<MethodInfo> GetUntaggedHooks(IEnumerable<HookMethod> hookMethods)
+        protected IOrderedEnumerable<string> GetUntaggedHooks(IEnumerable<HookMethod> hookMethods)
         {
             return hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any())
                     .Select(method => method.Method)
-                    .OrderBy(info => info.Name);
+                    .OrderBy(info => info);
         }
 
-        public virtual IEnumerable<MethodInfo> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public virtual IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
         {
             return GetUntaggedHooks(hooks);
         }

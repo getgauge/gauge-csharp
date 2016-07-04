@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Extensions;
 
 namespace Gauge.CSharp.Runner
 {
@@ -28,32 +28,33 @@ namespace Gauge.CSharp.Runner
     {
         private readonly MethodInfo _methodInfo;
 
-        public readonly TagAggregation TagAggregation = TagAggregation.And;
+        public readonly dynamic TagAggregation;
 
         public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
 
         public HookMethod(MethodInfo methodInfo, Assembly targetLibAssembly)
         {
-            var targetHookType = targetLibAssembly.GetType(typeof(FilteredHookAttribute).FullName);
+            var targetHookType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.FilteredHookAttribute");
             _methodInfo = methodInfo;
             dynamic filteredHookAttribute = _methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
 
             FilterTags = filteredHookAttribute.FilterTags;
-            var targetTagBehaviourType = targetLibAssembly.GetType(typeof(TagAggregationBehaviourAttribute).FullName);
+            var targetTagBehaviourType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregationBehaviourAttribute");
             dynamic tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute(targetTagBehaviourType);
 
-            var setTagAggregation = TagAggregation.And;
+            var aggregationType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregation");
+            var setTagAggregation = Enum.Parse(aggregationType, "And");
             if (!ReferenceEquals(tagAggregationBehaviourAttribute, null))
             {
-                Enum.TryParse((string)tagAggregationBehaviourAttribute.TagAggregation.ToString(), true, out setTagAggregation);
+                setTagAggregation = Enum.Parse(aggregationType, tagAggregationBehaviourAttribute.TagAggregation.ToString());
             }
             TagAggregation = setTagAggregation;
         }
 
-        public MethodInfo Method
+        public string Method
         {
-            get { return _methodInfo; }
+            get { return _methodInfo.FullyQuallifiedName(); }
         }
     }
 }

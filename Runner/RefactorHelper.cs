@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -22,11 +23,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Exceptions;
 using Gauge.CSharp.Runner.Extensions;
-using Gauge.Messages;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -35,9 +34,9 @@ namespace Gauge.CSharp.Runner
 {
     public class RefactorHelper
     {
-        public static IEnumerable<string> Refactor(MethodInfo method, IList<ParameterPosition> parameterPositions, IList<string> parameters, string newStepValue)
+        public static IEnumerable<string> Refactor(MethodInfo method, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parameters, string newStepValue)
         {
-            var projectFile = Directory.EnumerateFiles(Utils.GaugeProjectRoot, "*.csproj", SearchOption.AllDirectories).FirstOrDefault();
+            var projectFile = Directory.EnumerateFiles(Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT"), "*.csproj", SearchOption.AllDirectories).FirstOrDefault();
 
             if (projectFile == null)
             {
@@ -53,7 +52,7 @@ namespace Gauge.CSharp.Runner
                 .Elements(ns + "ItemGroup")
                 .Elements(ns + "Compile")
                 .Where(r => r.Attribute("Include") != null)
-				.Select(r => Path.GetFullPath(Path.Combine(Utils.GaugeProjectRoot, r.Attribute("Include").Value
+                .Select(r => Path.GetFullPath(Path.Combine(Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT"), r.Attribute("Include").Value
 					.Replace('\\',Path.DirectorySeparatorChar))));
 
             var filesChanged = new ConcurrentBag<string>();
@@ -94,16 +93,16 @@ namespace Gauge.CSharp.Runner
             return filesChanged;
         }
 
-        private static ParameterListSyntax ReplaceParameters(MethodDeclarationSyntax methodDeclarationSyntax, IList<ParameterPosition> parameterPositions, IList<string> parameters)
+        private static ParameterListSyntax ReplaceParameters(MethodDeclarationSyntax methodDeclarationSyntax, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parameters)
         {
             var parameterListSyntax = methodDeclarationSyntax.ParameterList;
-            var foo = new SeparatedSyntaxList<ParameterSyntax>();
-            foo = parameterPositions.OrderBy(position => position.NewPosition)
-                .Aggregate(foo, (current, parameterPosition) =>
-                        current.Add(parameterPosition.OldPosition == -1
-                            ? CreateParameter(parameters[parameterPosition.NewPosition])
-                            : parameterListSyntax.Parameters[parameterPosition.OldPosition]));
-            return parameterListSyntax.WithParameters(foo);
+            var newParams = new SeparatedSyntaxList<ParameterSyntax>();
+            newParams = parameterPositions.OrderBy(position => position.Item1)
+                .Aggregate(newParams, (current, parameterPosition) =>
+                        current.Add(parameterPosition.Item2 == -1
+                            ? CreateParameter(parameters[parameterPosition.Item1])
+                            : parameterListSyntax.Parameters[parameterPosition.Item2]));
+            return parameterListSyntax.WithParameters(newParams);
         }
 
         private static ParameterSyntax CreateParameter(string text)

@@ -15,15 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using Gauge.CSharp.Lib;
-using Gauge.CSharp.Lib.Attribute;
-using NLog;
+//using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Wrappers;
 
 namespace Gauge.CSharp.Runner
@@ -32,7 +29,7 @@ namespace Gauge.CSharp.Runner
     {
         private const string GaugeLibAssembleName = "Gauge.CSharp.Lib";
 
-        private static readonly Logger Logger = LogManager.GetLogger("AssemblyLoader");
+//        private static readonly Logger Logger = LogManager.GetLogger("AssemblyLoader");
 
         public List<Assembly> AssembliesReferencingGaugeLib { get; private set; }
         public List<Type> ScreengrabberTypes { get; private set; }
@@ -75,7 +72,7 @@ namespace Gauge.CSharp.Runner
 
         private void ScanAndLoad(string path)
         {
-            Logger.Debug("Loading assembly from : {0}", path);
+//            Logger.Debug("Loading assembly from : {0}", path);
             Assembly assembly;
             try
             {
@@ -84,7 +81,7 @@ namespace Gauge.CSharp.Runner
             }
             catch
             {
-                Logger.Warn("Failed to scan assembly {0}", path);
+//                Logger.Warn("Failed to scan assembly {0}", path);
                 return;
             }
 
@@ -110,9 +107,7 @@ namespace Gauge.CSharp.Runner
             foreach (var type in loadableTypes)
             {
                 var fullyLoadedType = fullyLoadedAssembly.GetType(type.FullName);
-                if (fullyLoadedType == null)
-                    Logger.Warn("Cannot scan type '{0}'", type.FullName);
-                else
+                if (fullyLoadedType != null)
                     yield return fullyLoadedType;
             }
         }
@@ -139,22 +134,22 @@ namespace Gauge.CSharp.Runner
             }
             catch (ReflectionTypeLoadException e)
             {
-                Logger.Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
+//                Logger.Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
                 return e.Types.Where(type => type != null);
             }
         }
 
         private void LoadTargetLibAssembly()
         {
-            var targetLibLocation = Path.GetFullPath(Path.Combine(Utils.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
+            var targetLibLocation = Path.GetFullPath(Path.Combine(AssemblyLocater.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
             if (!_fileWrapper.Exists(targetLibLocation))
             {
                 var message = string.Format("Unable to locate Gauge Lib at: {0}", targetLibLocation);
-                Logger.Error(message);
+//                Logger.Error(message);
                 throw new FileNotFoundException(message);
             }
             _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
-            Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
+//            Logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
     }
 }

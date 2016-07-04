@@ -56,8 +56,7 @@ namespace Gauge.CSharp.Runner
         }
 
 
-        private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry,
-            IHookRegistry hookRegistry)
+        private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry)
         {
             var methodExecutor = new MethodExecutor(_sandbox);
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
@@ -86,8 +85,7 @@ namespace Gauge.CSharp.Runner
         private void InitializeProcessors(IMethodScanner stepScanner)
         {
             var stepRegistry = stepScanner.GetStepRegistry();
-            var hookRegistry = stepScanner.GetHookRegistry();
-            _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry, hookRegistry);
+            _messageProcessorsDictionary = InitializeMessageHandlers(stepRegistry);
         }
     }
 }

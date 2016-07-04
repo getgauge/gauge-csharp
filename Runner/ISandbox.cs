@@ -26,22 +26,20 @@ namespace Gauge.CSharp.Runner
     {
         ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
-        IHookRegistry GetHookRegistry();
         List<GaugeMethod> GetStepMethods();
         void InitializeDataStore(string dataStoreType);
         IEnumerable<string> GetStepTexts(GaugeMethod gaugeMethod);
         List<string> GetAllStepTexts();
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
-        Type GetTargetType(string typeFullName);
 
-		// Used only from tests.
+        // Used only from tests.
 		// Don't return Assembly here! assembly instance returned on sandbox side 
 		// would be replaced by assembly instance on runner side, thus making any asserts on it useless.
 		string TargetLibAssemblyVersion { get; }
         void StartExecutionScope(string tag);
         void CloseExectionScope();
         ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo);
-        IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<ParameterPosition> parameterPositions, IList<string> parametersList, string newStepValue);
+        IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue);
     }
 }

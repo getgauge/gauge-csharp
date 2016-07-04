@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Strategy;
 using Moq;
 using NUnit.Framework;
@@ -83,7 +84,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
-            AssertEx.ContainsMethods(new[] { applicableHooks[3], applicableHooks[2] }, "Blah", "Zed");
+            Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
+            Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
         }
 
 
@@ -92,8 +94,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[2].Name, Is.EqualTo("Blah"));
-            Assert.That(applicableHooks[3].Name, Is.EqualTo("Zed"));
+            Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
+            Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
         }
 
 
@@ -102,8 +104,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[0].Name, Is.EqualTo("Baz"));
-            Assert.That(applicableHooks[1].Name, Is.EqualTo("Foo"));
+            Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Baz").FullyQuallifiedName()));
+            Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Foo").FullyQuallifiedName()));
         }
     }
 }

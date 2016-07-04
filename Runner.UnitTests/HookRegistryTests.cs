@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Extensions;
 using Moq;
 using NUnit.Framework;
 
@@ -61,7 +62,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetBeforeScenarioHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeScenarioHook") };
+            var expectedMethods = new[] { GetType().GetMethod("BeforeScenarioHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.BeforeScenarioHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -70,7 +71,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShoulddGetAfterScenarioHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterScenarioHook") };
+            var expectedMethods = new[] { GetType().GetMethod("AfterScenarioHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.AfterScenarioHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -79,7 +80,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetBeforeSpecHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeSpecHook") };
+            var expectedMethods = new[] { GetType().GetMethod("BeforeSpecHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.BeforeSpecHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -88,7 +89,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetAfterSpecHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterSpecHook") };
+            var expectedMethods = new[] { GetType().GetMethod("AfterSpecHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.AfterSpecHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -97,7 +98,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetBeforeStepHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeStepHook") };
+            var expectedMethods = new[] { GetType().GetMethod("BeforeStepHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.BeforeStepHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -106,7 +107,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetAfterStepHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterStepHook") };
+            var expectedMethods = new[] { GetType().GetMethod("AfterStepHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.AfterStepHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -115,7 +116,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetBeforeSuiteHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("BeforeSuiteHook") };
+            var expectedMethods = new[] { GetType().GetMethod("BeforeSuiteHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.BeforeSuiteHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);
@@ -124,7 +125,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetAfterSuiteHook()
         {
-            var expectedMethods = new List<MethodInfo> { GetType().GetMethod("AfterSuiteHook") };
+            var expectedMethods = new [] { GetType().GetMethod("AfterSuiteHook").FullyQuallifiedName() };
             var hooks = _hookRegistry.AfterSuiteHooks.Select(mi => mi.Method);
 
             Assert.AreEqual(expectedMethods, hooks);

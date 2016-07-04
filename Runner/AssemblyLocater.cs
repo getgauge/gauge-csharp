@@ -19,15 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Wrappers;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class AssemblyLocater : IAssemblyLocater
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+//        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IDirectoryWrapper _directoryWrapper;
         private readonly IFileWrapper _fileWrapper;
 
@@ -39,8 +37,8 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetAllAssemblies()
         {
-            var assemblies = _directoryWrapper.EnumerateFiles(Utils.GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly).ToList();
-            var gaugeAdditionalLibsPath = Utils.TryReadEnvValue("GAUGE_ADDITIONAL_LIBS");
+            var assemblies = _directoryWrapper.EnumerateFiles(GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly).ToList();
+            var gaugeAdditionalLibsPath = Environment.GetEnvironmentVariable("GAUGE_ADDITIONAL_LIBS");
             if (string.IsNullOrEmpty(gaugeAdditionalLibsPath))
                 return assemblies;
 
@@ -57,11 +55,30 @@ namespace Gauge.CSharp.Runner
             return assemblies;
         }
 
+        public static string GetGaugeBinDir()
+        {
+            var customBuildPath = Environment.GetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH");
+            var GaugeProjectRoot = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
+            if (string.IsNullOrEmpty(customBuildPath))
+            {
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+            }
+            try
+            {
+                Uri result;
+                return Uri.TryCreate(customBuildPath, UriKind.Absolute, out result) ? customBuildPath : Path.Combine(GaugeProjectRoot, customBuildPath);
+            }
+            catch (Exception)
+            {
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+            }
+        }
+
         private void AddFilesFromDirectory(string path, List<string> assemblies)
         {
             if (!_directoryWrapper.Exists(path))
             {
-                Logger.Warn("Path does not exist: {0}", path);
+//                Logger.Warn("Path does not exist: {0}", path);
                 return;
             }
             assemblies.AddRange(_directoryWrapper.EnumerateFiles(path, "*.dll", SearchOption.TopDirectoryOnly));
@@ -71,7 +88,7 @@ namespace Gauge.CSharp.Runner
         {
             if (!_fileWrapper.Exists(path))
             {
-                Logger.Warn("Path does not exist: {0}", path);
+//                Logger.Warn("Path does not exist: {0}", path);
                 return;
             }
             assemblies.Add(path);
