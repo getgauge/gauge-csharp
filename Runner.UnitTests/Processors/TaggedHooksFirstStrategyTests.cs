@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
@@ -82,20 +83,25 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchUntaggedHooksAfterTaggedHooks()
         {
+            var taggedHooks = new [] {"Baz", "Foo"} ;
+            var untaggedHooks = new [] {"Blah", "Zed"} ;
+            var expected = taggedHooks.Concat(untaggedHooks).Select(s => GetType().GetMethod(s).FullyQuallifiedName());
+
             var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
-            Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
-            Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
+            Assert.AreEqual(expected, applicableHooks);
         }
 
 
         [Test]
         public void ShouldFetchTaggedHooksInSortedOrder()
         {
-            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
+            var untaggedHooks = new[] { "Blah", "Zed" }.Select(s => GetType().GetMethod(s).FullyQuallifiedName());
 
-            Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
-            Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
+            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToArray();
+            var actual = new ArraySegment<string>(applicableHooks, 2, untaggedHooks.Count());
+
+            Assert.AreEqual(untaggedHooks, actual);
         }
 
 
