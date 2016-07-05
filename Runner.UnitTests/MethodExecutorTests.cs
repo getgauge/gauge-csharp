@@ -48,7 +48,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var gaugeMethod = new GaugeMethod { Name = "ShouldExecuteMethod", ParameterCount = 1};
-            var args = new KeyValuePair<string, string>("Bar", "String");
+            var args = new Tuple<object, string>("Bar", "String");
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<object>()))
                 .Returns(() => new ExecutionResult {Success = true})
                 .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
@@ -67,7 +67,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var gaugeMethod = new GaugeMethod { Name = "ShouldExecuteMethod", ParameterCount = 1 };
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, "Bar")).Throws<Exception>();
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new KeyValuePair<string, string>("Bar", "String"));
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new Tuple<object, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
@@ -87,7 +87,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             byte[] bytes = {0x20, 0x20};
             mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
 
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new KeyValuePair<string, string>("Bar", "String"));
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new Tuple<object, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
@@ -107,7 +107,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
             Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", "false");
             
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new KeyValuePair<string, string>("Bar", "String"));
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, new Tuple<object, string>("Bar", "String"));
             
             mockSandBox.VerifyAll();
             Assert.False(executionResult.HasScreenShot);

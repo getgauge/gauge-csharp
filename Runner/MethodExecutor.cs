@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Gauge.Messages;
@@ -36,7 +37,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult Execute(GaugeMethod method, params KeyValuePair<string, string>[] args)
+        public ProtoExecutionResult Execute(GaugeMethod method, params Tuple<object, string>[] args)
         {
             Logger.Debug("Execution method: {0}", method.Name);
             var stopwatch = Stopwatch.StartNew();

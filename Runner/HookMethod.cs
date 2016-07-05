@@ -26,22 +26,20 @@ namespace Gauge.CSharp.Runner
     [Serializable]
     public class HookMethod
     {
-        private readonly MethodInfo _methodInfo;
-
         public readonly dynamic TagAggregation;
 
         public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
 
         public HookMethod(MethodInfo methodInfo, Assembly targetLibAssembly)
         {
+            Method = methodInfo.FullyQuallifiedName();
             var targetHookType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.FilteredHookAttribute");
-            _methodInfo = methodInfo;
-            dynamic filteredHookAttribute = _methodInfo.GetCustomAttribute(targetHookType);
+            dynamic filteredHookAttribute = methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
 
             FilterTags = filteredHookAttribute.FilterTags;
             var targetTagBehaviourType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregationBehaviourAttribute");
-            dynamic tagAggregationBehaviourAttribute = _methodInfo.GetCustomAttribute(targetTagBehaviourType);
+            dynamic tagAggregationBehaviourAttribute = methodInfo.GetCustomAttribute(targetTagBehaviourType);
 
             var aggregationType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregation");
             var setTagAggregation = Enum.Parse(aggregationType, "And");
@@ -52,9 +50,6 @@ namespace Gauge.CSharp.Runner
             TagAggregation = setTagAggregation;
         }
 
-        public string Method
-        {
-            get { return _methodInfo.FullyQuallifiedName(); }
-        }
+        public string Method { get; private set; }
     }
 }

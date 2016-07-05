@@ -16,13 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
-using System.Reflection;
-using Gauge.CSharp.Lib;
-using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -31,16 +25,11 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly IStepRegistry _stepRegistry;
         private readonly IMethodExecutor _methodExecutor;
-        private readonly ISandbox _sandbox;
-        private Dictionary<string, IParamConverter> _paramConverters;
-
 
         public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
         {
             _stepRegistry = stepRegistry;
             _methodExecutor = methodExecutor;
-            _sandbox = sandbox;
-            InitializeConverter();
         }
 
         [DebuggerHidden]
@@ -53,7 +42,7 @@ namespace Gauge.CSharp.Runner.Processors
             var method = _stepRegistry.MethodFor(executeStepRequest.ParsedStepText);
 
             var parameters = method.ParameterCount;
-            var args = new List<KeyValuePair<string, string>>(parameters);
+            var args = new Tuple<object, string>[parameters];
             var stepParameter = executeStepRequest.ParametersList;
             if (parameters != stepParameter.Count)
             {
@@ -64,21 +53,12 @@ namespace Gauge.CSharp.Runner.Processors
             }
             for (var i = 0; i < parameters; i++)
             {
-                args.Add(stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
-                    ? new KeyValuePair<string, string>(stepParameter[i].Value, "Table")
-                    : new KeyValuePair<string, string>(stepParameter[i].Value, "String"));
+                args[i] = stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
+                    ? new Tuple<object, string>(stepParameter[i].Value, "Table")
+                    : new Tuple<object, string>(stepParameter[i].Value, "String");
             }
-            var protoExecutionResult = ExecuteMethod(method, args.ToArray());
+            var protoExecutionResult = _methodExecutor.Execute(method, args);
             return WrapInMessage(protoExecutionResult, request);
-        }
-
-        private void InitializeConverter()
-        {
-            _paramConverters = new Dictionary<string, IParamConverter>
-            {
-                {typeof (string).ToString(), new StringParamConverter()},
-                {typeof (Table).ToString(), new TableParamConverter()}
-            };
         }
 
         private static Message ExecutionError(string errorMessage, Message request)
@@ -88,12 +68,6 @@ namespace Gauge.CSharp.Runner.Processors
                 .SetRecoverableError(false)
                 .SetExecutionTime(0);
             return WrapInMessage(builder.Build(), request);
-        }
-
-        [DebuggerHidden]
-        private ProtoExecutionResult ExecuteMethod(GaugeMethod method, params KeyValuePair<string, string>[] args)
-        {
-            return _methodExecutor.Execute(method, args);
         }
     }
 }

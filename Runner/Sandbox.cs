@@ -45,8 +45,6 @@ namespace Gauge.CSharp.Runner
 
         private dynamic _classInstanceManager;
         private readonly IHookRegistry _hookRegistry;
-        private Dictionary<string, IParamConverter> _paramConverters;
-
 
         public Sandbox(IAssemblyLocater locater)
         {
@@ -57,7 +55,6 @@ namespace Gauge.CSharp.Runner
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
-            InitializeConverter();
             _hookRegistry = new HookRegistry(_assemblyLoader);
         }
 
@@ -73,7 +70,7 @@ namespace Gauge.CSharp.Runner
             var executionResult = new ExecutionResult {Success = true};
             try
             {
-                var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey)o) : o).ToArray();
+                var parameters = args.Cast<KeyValuePair<object, string>>().Select(o => o.Key is TableDonkey ? ToTable((TableDonkey)o.Key) : o).ToArray();
                 Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
@@ -329,16 +326,6 @@ namespace Gauge.CSharp.Runner
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
         }
-
-        private void InitializeConverter()
-        {
-            _paramConverters = new Dictionary<string, IParamConverter>
-            {
-                {"String", new StringParamConverter()},
-                {"Table", new TableParamConverter()}
-            };
-        }
-
 
         public override object InitializeLifetimeService()
         {
