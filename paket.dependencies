@@ -27,3 +27,5 @@ group Test
   nuget Moq 4.2.1502.0911 framework: >= net45
   nuget NUnit ~> 2
   nuget NUnit.Runners ~> 2
+  nuget OpenCover
+  nuget ReportGenerator

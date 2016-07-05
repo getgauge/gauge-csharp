@@ -8,6 +8,7 @@ open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open Fake.UserInputHelper
+open Fake.OpenCoverHelper
 open System
 open System.IO
 #if MONO
@@ -82,6 +83,21 @@ let artifactsDir f =
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Runner.IntegrationTests") -> "gauge-csharp/itests"
     | _                           -> failwith (sprintf "Unknown project %s. Where should its artifacts be copied to?" f)
 
+let Run = fun (command, args, wd) ->
+    trace (sprintf "Running %s %s in WD: %s" command args wd)
+
+    let result = ExecProcess (fun info ->
+        info.FileName <- command
+        info.WorkingDirectory <- wd
+        info.Arguments <- args) (TimeSpan.FromMinutes 30.0)
+    if result <> 0 then failwithf "%s %s exited with error %d" command args result
+
+let InvokeMvn = fun (args) ->
+    if isMono then
+        Run("mvn", args, "gauge-tests")
+    else
+        Run("mvn.cmd", args, "gauge-tests")
+
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
 // - gauge-csharp-lib  - Gauge.CSharp.Lib with referenced core
@@ -92,6 +108,7 @@ Target "CopyBinaries" (fun _ ->
     -- "**/*.shproj"
     -- "**/IntegrationTestSample.csproj"
     -- "**/Gauge.Spec.csproj"
+    -- "**/packages/**/*.csproj"
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "artifacts" </> (artifactsDir f)))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
     // copy the IntegrationTestSample.dll with test suites
@@ -255,6 +272,27 @@ Target "RunTests-All" (fun _ ->
             OutputFile = "TestResults.xml" })
 )
 
+// --------------------------------------------------------------------------------------
+// Run the unit tests WITH COVERAGE using test runner
+
+Target "RunTests-Coverage" (fun _ ->
+    let assembliesToTest = (" ", (!!"artifacts/gauge-csharp/*tests/*Test*.dll" --"**/*IntegrationTestSample.dll")) |> System.String.Join
+    let coverageDir = "artifacts/coverage"
+    CreateDir coverageDir
+    OpenCover (fun p -> 
+        { p with 
+            ExePath = "./packages/test/OpenCover/tools/OpenCover.Console.exe"
+            TestRunnerExePath = "./packages/test/NUnit.Runners/tools/nunit-console.exe"
+            Output = coverageDir + "/results.xml"
+            Register = RegisterUser
+            Filter = "+[*]* -[*.*Tests*]* -[*IntegrationTestSample*]*"
+        })
+        ("/nologo /noshadow /framework=net-4.5.1 /result=" + coverageDir + "nunit-results.xml " + assembliesToTest)
+
+    trace "Generate OpenCover report"
+    Run("packages/test/ReportGenerator/tools/ReportGenerator.exe", (sprintf "%s/results.xml %s/html" coverageDir coverageDir), ".")
+)
+
 #if MONO
 #else
 // --------------------------------------------------------------------------------------
@@ -293,21 +331,6 @@ Target "NuGet-Lib" (fun _ ->
             Version = libRelease.NugetVersion
             ReleaseNotes = toLines libRelease.Notes})
 )
-
-let Run = fun (command, args, wd) ->
-    trace (sprintf "Running %s %s in WD: %s" command args wd)
-
-    let result = ExecProcess (fun info ->
-        info.FileName <- command
-        info.WorkingDirectory <- wd
-        info.Arguments <- args) (TimeSpan.FromMinutes 30.0)
-    if result <> 0 then failwithf "%s %s exited with error %d" command args result
-
-let InvokeMvn = fun (args) ->
-    if isMono then
-        Run("mvn", args, "gauge-tests")
-    else
-        Run("mvn.cmd", args, "gauge-tests")
 
 Target "Install" (fun _ ->
     Run("gauge", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
@@ -386,6 +409,9 @@ Target "BuildInstallFT" DoNothing
 "CopyBinaries"
   ==> "RunTests-All"
   ==> "RunTests"
+
+"CopyBinaries"
+  ==> "RunTests-Coverage"
 
 "Clean"
   ==> "CopyBinaries"
