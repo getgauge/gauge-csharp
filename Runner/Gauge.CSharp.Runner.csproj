@@ -156,7 +156,6 @@
     <Compile Include="Strategy\HooksStrategy.cs" />
     <Compile Include="Strategy\TaggedHooksFirstStrategy.cs" />
     <Compile Include="Strategy\UntaggedHooksFirstStrategy.cs" />
-    <Compile Include="TableDonkey.cs" />
     <Compile Include="Wrappers\AssemblyWrapper.cs" />
     <Compile Include="Wrappers\DirectoryWrapper.cs" />
     <Compile Include="Wrappers\FileWrapper.cs" />
