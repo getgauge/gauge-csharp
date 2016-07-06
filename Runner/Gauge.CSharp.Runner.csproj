@@ -152,7 +152,6 @@
     <Compile Include="StepRegistry.cs" />
     <Compile Include="Processors\StepValidationProcessor.cs" />
     <Compile Include="Converters\StringParamConverter.cs" />
-    <Compile Include="Converters\TableParamConverter.cs" />
     <Compile Include="MethodScanner.cs" />
     <Compile Include="Strategy\HooksStrategy.cs" />
     <Compile Include="Strategy\TaggedHooksFirstStrategy.cs" />

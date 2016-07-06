@@ -52,7 +52,6 @@
     <Compile Include="AssemblyLocaterTests.cs" />
     <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="Converter\StringParamConverterTests.cs" />
-    <Compile Include="Converter\TableParamConverterTests.cs" />
     <Compile Include="CSharpIdentifierTests.cs" />
     <Compile Include="HookRegistryTests.cs" />
     <Compile Include="ValidateProcessorTests.cs" />

@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -66,16 +65,15 @@ namespace Gauge.CSharp.Runner
         {
         }
 
-//        [DebuggerStepperBoundary]
-//        [DebuggerHidden]
+        [DebuggerStepperBoundary]
+        [DebuggerHidden]
         public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args)
         {
             var method = MethodMap[gaugeMethod.Name];
             var executionResult = new ExecutionResult {Success = true};
             try
             {
-                var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey) o) : o).ToArray();
-                Execute(method, StringParamConverter.TryConvertParams(method, parameters));
+                Execute(method, StringParamConverter.TryConvertParams(method, args));
             }
             catch (Exception ex)
             {
@@ -283,7 +281,6 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-
         private void SetAppConfigIfExists()
         {
             var targetAssembly = _assemblyLoader.AssembliesReferencingGaugeLib.FirstOrDefault();
@@ -308,20 +305,6 @@ namespace Gauge.CSharp.Runner
 //                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
-        }
-
-        private object ToTable(TableDonkey donkey)
-        {
-            var table = _libAssembly.CreateInstance(typeof(Table).FullName, true, BindingFlags.CreateInstance, null,
-                new object[] { donkey.Headers }, CultureInfo.CurrentCulture, null);
-            //            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
-            foreach (var row in donkey.Rows)
-            {
-                table.GetType()
-                    .InvokeMember("AddRow", BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
-                        null, table, new object[] { row });
-            }
-            return table;
         }
 
         private void Execute(MethodBase method, params object[] parameters)

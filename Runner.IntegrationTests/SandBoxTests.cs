@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Gauge.CSharp.Lib;
 using NUnit.Framework;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -143,18 +144,12 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var stepMethods = sandbox.GetStepMethods();
             var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
 
-            var tableDonkey = new TableDonkey
-            {
-                Headers = new List<string> {"foo", "bar"},
-                Rows =
-                    new List<List<string>>
-                    {
-                        new List<string> {"foorow1", "barrow1"},
-                        new List<string> {"foorow2", "barrow2"}
-                    }
-            };
-            var executionResult = sandbox.ExecuteMethod(methodInfo, tableDonkey);
-
+            var table = new Table(new List<string> {"foo", "bar"});
+            table.AddRow(new List<string> {"foorow1", "barrow1"});
+            table.AddRow(new List<string> {"foorow2", "barrow2"});
+            var executionResult = sandbox.ExecuteMethod(methodInfo, table);
+            Console.WriteLine("Success: {0},\nException: {1},\nStackTrace :{2},\nSource : {3}",
+                executionResult.Success, executionResult.ExceptionMessage, executionResult.StackTrace, executionResult.Source);
             Assert.True(executionResult.Success);
         }
 

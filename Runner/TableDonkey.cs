@@ -20,9 +20,15 @@ using System.Collections.Generic;
 
 namespace Gauge.CSharp.Runner
 {
-    public class TableDonkey : MarshalByRefObject
+    public class TableDonkey : ITableDonkey
     {
         public List<string> Headers { get; set; }
         public List<List<string>> Rows { get; set; }
+    }
+
+    public interface ITableDonkey
+    {
+        List<string> Headers { get; set; }
+        List<List<string>> Rows { get; set; }
     }
 }

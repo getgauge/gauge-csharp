@@ -15,9 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Diagnostics;
-using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -27,7 +25,7 @@ namespace Gauge.CSharp.Runner.Processors
         private readonly IStepRegistry _stepRegistry;
         private readonly IMethodExecutor _methodExecutor;
 
-        public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor, ISandbox sandbox)
+        public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor)
         {
             _stepRegistry = stepRegistry;
             _methodExecutor = methodExecutor;
@@ -52,11 +50,10 @@ namespace Gauge.CSharp.Runner.Processors
                     stepParameter.Count, parameters);
                 return ExecutionError(argumentMismatchError, request);
             }
-            var tableParamConverter = new TableParamConverter();
             for (var i = 0; i < parameters; i++)
             {
                 args[i] = stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
-                    ? tableParamConverter.Convert(stepParameter[i])
+                    ? (object) stepParameter[i].Table
                     : stepParameter[i].Value;
             }
             var protoExecutionResult = _methodExecutor.Execute(method, args);
