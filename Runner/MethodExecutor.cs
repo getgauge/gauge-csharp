@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult Execute(GaugeMethod method, params Tuple<object, string>[] args)
+        public ProtoExecutionResult Execute(GaugeMethod method, params object[] args)
         {
             Logger.Debug("Execution method: {0}", method.Name);
             var stopwatch = Stopwatch.StartNew();

@@ -21,6 +21,6 @@ namespace Gauge.CSharp.Runner.Converters
 {
     internal interface IParamConverter
     {
-        object Convert(Parameter parameter, ISandbox sandbox);
+        object Convert(Parameter parameter);
     }
 }

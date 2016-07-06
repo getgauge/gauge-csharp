@@ -28,6 +28,7 @@ using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
+
 //using NLog;
 
 namespace Gauge.CSharp.Runner
@@ -37,21 +38,24 @@ namespace Gauge.CSharp.Runner
     {
         private readonly IAssemblyLoader _assemblyLoader;
 
-		private readonly Assembly _libAssembly;
+        private readonly Assembly _libAssembly;
 
 //        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         private Type ScreenGrabberType { get; set; }
 
         private dynamic _classInstanceManager;
+
         private readonly IHookRegistry _hookRegistry;
+
+        private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
         public Sandbox(IAssemblyLocater locater)
         {
 //            LogConfiguration.Initialize();
             var assemblies = locater.GetAllAssemblies();
             _assemblyLoader = new AssemblyLoader(assemblies);
-			_libAssembly = _assemblyLoader.GetTargetLibAssembly();
+            _libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
@@ -62,64 +66,33 @@ namespace Gauge.CSharp.Runner
         {
         }
 
-        [DebuggerStepperBoundary]
-        [DebuggerHidden]
+//        [DebuggerStepperBoundary]
+//        [DebuggerHidden]
         public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args)
         {
             var method = MethodMap[gaugeMethod.Name];
             var executionResult = new ExecutionResult {Success = true};
             try
             {
-                var parameters = args.Cast<KeyValuePair<object, string>>().Select(o => o.Key is TableDonkey ? ToTable((TableDonkey)o.Key) : o).ToArray();
+                var parameters = args.Select(o => o is TableDonkey ? ToTable((TableDonkey) o) : o).ToArray();
                 Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
             {
-                var innerException = ex.InnerException;
+                var innerException = ex.InnerException ?? ex;
                 executionResult.ExceptionMessage = innerException.Message;
                 executionResult.StackTrace = innerException.StackTrace;
-                executionResult.Source= innerException.Source;
+                executionResult.Source = innerException.Source;
                 executionResult.Success = false;
             }
 
             return executionResult;
         }
 
-        private void Execute(MethodBase method, params object[] parameters)
+        public string TargetLibAssemblyVersion
         {
-            var typeToLoad = method.DeclaringType;
-            var instance = _classInstanceManager.Get(typeToLoad);
-            if (instance == null)
-            {
-                var error = "Could not load instance type: " + typeToLoad;
-//                Logger.Error(error);
-                throw new Exception(error);
-            }
-//            Logger.Info(instance.GetType().FullName);
-            method.Invoke(instance, parameters);
+            get { return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; }
         }
-
-        private object ToTable(TableDonkey donkey)
-        {
-            var table = _libAssembly.CreateInstance(typeof (Table).FullName, true, BindingFlags.CreateInstance,null,
-                new object[] {donkey.Headers}, CultureInfo.CurrentCulture, null);
-//            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
-            foreach (var row in donkey.Rows)
-            {
-                table.GetType().InvokeMember("AddRow", BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
-                        null, table, new object[] {row});
-            }
-            return table;
-        }
-
-
-        public string TargetLibAssemblyVersion {
-			get{ return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; } 
-		}
-
-        private Assembly TargetLibAssembly {
-			get{ return _libAssembly; } 
-		}
 
         public List<GaugeMethod> GetStepMethods()
         {
@@ -127,10 +100,11 @@ namespace Gauge.CSharp.Runner
             MethodMap = new Dictionary<string, MethodInfo>();
             foreach (var info in infos)
                 MethodMap.Add(string.Format("{0}.{1}", info.DeclaringType.FullName, info.Name), info);
-            return MethodMap.Keys.Select(s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
+            return
+                MethodMap.Keys.Select(
+                    s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
         }
 
-        private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
         public List<string> GetAllStepTexts()
         {
@@ -139,7 +113,7 @@ namespace Gauge.CSharp.Runner
 
         public void InitializeDataStore(string dataStoreType)
         {
-            var remoteDataStoreType = TargetLibAssembly.GetType(typeof(DataStoreFactory).ToString());
+            var remoteDataStoreType = _libAssembly.GetType(typeof(DataStoreFactory).ToString());
             var dataStoreGetter = remoteDataStoreType.GetMethod(string.Format("Initialize{0}DataStore", dataStoreType));
             if (dataStoreGetter != null)
                 dataStoreGetter.Invoke(null, null);
@@ -147,10 +121,10 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetStepTexts(GaugeMethod gaugeMethod)
         {
-			const string fullStepName = "Gauge.CSharp.Lib.Attribute.Step";
+            const string fullStepName = "Gauge.CSharp.Lib.Attribute.Step";
             var stepMethod = MethodMap[gaugeMethod.Name];
             dynamic step = stepMethod.GetCustomAttributes()
-                .FirstOrDefault(a => a.GetType ().FullName.Equals (fullStepName));
+                .FirstOrDefault(a => a.GetType().FullName.Equals(fullStepName));
             return step.Names;
         }
 
@@ -195,8 +169,9 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetAllPendingMessages()
         {
-            var targetMessageCollectorType = TargetLibAssembly.GetType(typeof(MessageCollector).ToString());
-            var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages", BindingFlags.Static | BindingFlags.Public);
+            var targetMessageCollectorType = _libAssembly.GetType(typeof(MessageCollector).ToString());
+            var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages",
+                BindingFlags.Static | BindingFlags.Public);
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
 
@@ -210,7 +185,8 @@ namespace Gauge.CSharp.Runner
             _classInstanceManager.CloseScope();
         }
 
-        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
+        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy,
+            IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var stopwatch = Stopwatch.StartNew();
@@ -220,7 +196,7 @@ namespace Gauge.CSharp.Runner
             {
                 try
                 {
-                    ExecuteHook(_hookRegistry.MethodFor(method), new object[] { executionInfo });
+                    ExecuteHook(_hookRegistry.MethodFor(method), new object[] {executionInfo});
                 }
                 catch (Exception ex)
                 {
@@ -239,17 +215,23 @@ namespace Gauge.CSharp.Runner
             return builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
         }
 
-        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue)
+        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions,
+            IList<string> parametersList, string newStepValue)
         {
             return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList, newStepValue);
+        }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
 
         [DebuggerHidden]
         private void ExecuteHook(MethodInfo method, object[] objects)
         {
-            if (HasArguments(method, objects)) 
+            if (HasArguments(method, objects))
                 Execute(method, objects);
-            else 
+            else
                 Execute(method);
         }
 
@@ -269,7 +251,8 @@ namespace Gauge.CSharp.Runner
             return true;
         }
 
-        private IEnumerable<string> GetHookMethods(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
+        private IEnumerable<string> GetHookMethods(string hookType, HooksStrategy strategy,
+            IEnumerable<string> applicableTags)
         {
             var hooksFromRegistry = GetHooksFromRegistry(hookType);
             return strategy.GetApplicableHooks(applicableTags, hooksFromRegistry);
@@ -302,7 +285,7 @@ namespace Gauge.CSharp.Runner
 
 
         private void SetAppConfigIfExists()
-        {            
+        {
             var targetAssembly = _assemblyLoader.AssembliesReferencingGaugeLib.FirstOrDefault();
             if (targetAssembly == null) return;
 
@@ -327,9 +310,32 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        public override object InitializeLifetimeService()
+        private object ToTable(TableDonkey donkey)
         {
-            return null;
+            var table = _libAssembly.CreateInstance(typeof(Table).FullName, true, BindingFlags.CreateInstance, null,
+                new object[] { donkey.Headers }, CultureInfo.CurrentCulture, null);
+            //            Logger.Debug("Got Table from {0} at {1}", table.GetType().Assembly.FullName, table.GetType().Assembly.CodeBase);
+            foreach (var row in donkey.Rows)
+            {
+                table.GetType()
+                    .InvokeMember("AddRow", BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
+                        null, table, new object[] { row });
+            }
+            return table;
+        }
+
+        private void Execute(MethodBase method, params object[] parameters)
+        {
+            var typeToLoad = method.DeclaringType;
+            var instance = _classInstanceManager.Get(typeToLoad);
+            if (instance == null)
+            {
+                var error = "Could not load instance type: " + typeToLoad;
+                //                Logger.Error(error);
+                throw new Exception(error);
+            }
+            //            Logger.Info(instance.GetType().FullName);
+            method.Invoke(instance, parameters);
         }
     }
 }

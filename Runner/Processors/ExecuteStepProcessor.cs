@@ -17,6 +17,7 @@
 
 using System;
 using System.Diagnostics;
+using Gauge.CSharp.Runner.Converters;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -42,7 +43,7 @@ namespace Gauge.CSharp.Runner.Processors
             var method = _stepRegistry.MethodFor(executeStepRequest.ParsedStepText);
 
             var parameters = method.ParameterCount;
-            var args = new Tuple<object, string>[parameters];
+            var args = new object[parameters];
             var stepParameter = executeStepRequest.ParametersList;
             if (parameters != stepParameter.Count)
             {
@@ -51,11 +52,12 @@ namespace Gauge.CSharp.Runner.Processors
                     stepParameter.Count, parameters);
                 return ExecutionError(argumentMismatchError, request);
             }
+            var tableParamConverter = new TableParamConverter();
             for (var i = 0; i < parameters; i++)
             {
                 args[i] = stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
-                    ? new Tuple<object, string>(stepParameter[i].Value, "Table")
-                    : new Tuple<object, string>(stepParameter[i].Value, "String");
+                    ? tableParamConverter.Convert(stepParameter[i])
+                    : stepParameter[i].Value;
             }
             var protoExecutionResult = _methodExecutor.Execute(method, args);
             return WrapInMessage(protoExecutionResult, request);

@@ -136,12 +136,12 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 			StringAssert.Contains("IntegrationTestSample.StepImplementation.ThrowSerializableException",executionResult.StackTrace);
         }
 
-        [Test, Ignore("Flaky on Mono, passes if this is first test to execute, else fails")]
+        [Test]
         public void ShouldCreateTableFromTargetType()
         {
             var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "ReadTable") == 0);
+            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
 
             var tableDonkey = new TableDonkey
             {

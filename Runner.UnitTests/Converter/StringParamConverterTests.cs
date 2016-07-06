@@ -51,7 +51,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
             const string expected = "Foo";
             var parameter = new Parameter.Builder().SetParameterType(Parameter.Types.ParameterType.Static).SetValue(expected).Build();
             
-            var actual = new StringParamConverter().Convert(parameter, null);
+            var actual = new StringParamConverter().Convert(parameter);
             
             Assert.AreEqual(expected, actual);
         }

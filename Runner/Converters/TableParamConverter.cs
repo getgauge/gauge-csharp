@@ -24,7 +24,7 @@ namespace Gauge.CSharp.Runner.Converters
 {
     public class TableParamConverter : IParamConverter
     {
-        public object Convert(Parameter parameter, ISandbox sandbox)
+        public object Convert(Parameter parameter)
         {
             var protoTable = parameter.Table;
             if (protoTable == null || protoTable.Headers == null)

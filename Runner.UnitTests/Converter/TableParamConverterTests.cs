@@ -38,7 +38,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
                 .SetTable(table).Build();
             var mockSandbox = new Mock<ISandbox>();
 
-            var actual = new TableParamConverter().Convert(parameter, mockSandbox.Object) as TableDonkey;
+            var actual = new TableParamConverter().Convert(parameter) as TableDonkey;
             
             Assert.NotNull(actual);
             Assert.That(actual.Headers, Contains.Item("header"));
