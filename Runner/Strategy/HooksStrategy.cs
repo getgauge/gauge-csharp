@@ -15,13 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 
 namespace Gauge.CSharp.Runner.Strategy
 {
+    [Serializable]
     public class HooksStrategy
     {
         public IEnumerable<string> GetTaggedHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)

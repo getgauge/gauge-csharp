@@ -26,7 +26,7 @@ using Gauge.CSharp.Lib.Attribute;
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
     [TestFixture]
-    public class SandBoxTests
+    public class SandboxTests
     {		
 		private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
 
@@ -152,6 +152,26 @@ namespace Gauge.CSharp.Runner.IntegrationTests
                 executionResult.Success, executionResult.ExceptionMessage, executionResult.StackTrace, executionResult.Source);
             Assert.True(executionResult.Success);
         }
+
+        [Test]
+        public void ShouldExecuteMethodFromRequest()
+        { }
+
+        [Test]
+        public void ShouldExecuteHooks() 
+        { }
+
+        [Test]
+        public void ShouldExecuteDatastoreInit() { }
+
+        [Test]
+        public void ShouldGetStepTextsForMethod() { }
+
+        [Test]
+        public void ShouldGetPendingMessages() { }
+
+        [Test]
+        public void ShouldCaptureScreenshotOnFailure() { }
 
         [TearDown]
         public void TearDown()

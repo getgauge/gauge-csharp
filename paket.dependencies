@@ -2,6 +2,7 @@ source https://www.nuget.org/api/v2
 source https://www.myget.org/F/gauge-csharp/api/v2
 
 nuget Gauge.CSharp.Core 0.0.7
+nuget Gauge.CSharp.Lib 0.5.5
 nuget NuGet.CommandLine
 nuget Google.ProtocolBuffers 2.4.1.555 framework: >= net45
 nuget Microsoft.CodeAnalysis.Analyzers 1.1.0 framework: >= net45

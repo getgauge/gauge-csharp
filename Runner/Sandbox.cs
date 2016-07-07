@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib;
@@ -46,22 +46,23 @@ namespace Gauge.CSharp.Runner
         private dynamic _classInstanceManager;
 
         private readonly IHookRegistry _hookRegistry;
+        private readonly IFileWrapper _fileWrapper;
 
         private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
-        public Sandbox(IAssemblyLocater locater)
+        public Sandbox(IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
 //            LogConfiguration.Initialize();
-            var assemblies = locater.GetAllAssemblies();
-            _assemblyLoader = new AssemblyLoader(assemblies);
+            _assemblyLoader = assemblyLoader;
+            _hookRegistry = hookRegistry;
+            _fileWrapper = fileWrapper;
             _libAssembly = _assemblyLoader.GetTargetLibAssembly();
             SetAppConfigIfExists();
             ScanCustomScreenGrabber();
             LoadClassInstanceManager();
-            _hookRegistry = new HookRegistry(_assemblyLoader);
         }
 
-        public Sandbox() : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()))
+        public Sandbox() : this(new AssemblyLoader(), new HookRegistry(new AssemblyLoader()), new FileWrapper())
         {
         }
 
@@ -124,19 +125,6 @@ namespace Gauge.CSharp.Runner
             dynamic step = stepMethod.GetCustomAttributes()
                 .FirstOrDefault(a => a.GetType().FullName.Equals(fullStepName));
             return step.Names;
-        }
-
-
-        public void LoadClassInstanceManager()
-        {
-            var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
-
-            _classInstanceManager = instanceManagerType == null
-                ? _libAssembly.CreateInstance("Gauge.CSharp.Lib.DefaultClassInstanceManager")
-                : Activator.CreateInstance(instanceManagerType);
-
-//            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
-            _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
 
         public bool TryScreenCapture(out byte[] screenShotBytes)
@@ -287,7 +275,7 @@ namespace Gauge.CSharp.Runner
             if (targetAssembly == null) return;
 
             var configFile = string.Format("{0}.config", targetAssembly.Location);
-            if (File.Exists(configFile))
+            if (_fileWrapper.Exists(configFile))
             {
                 AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
             }
@@ -305,6 +293,7 @@ namespace Gauge.CSharp.Runner
 //                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
+            ScreenGrabberType = ScreenGrabberType ?? typeof(DefaultScreenGrabber);
         }
 
         private void Execute(MethodBase method, params object[] parameters)
@@ -319,6 +308,31 @@ namespace Gauge.CSharp.Runner
             }
             //            Logger.Info(instance.GetType().FullName);
             method.Invoke(instance, parameters);
+        }
+
+        private void LoadClassInstanceManager()
+        {
+            var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
+
+            if (instanceManagerType == null)
+            {
+                Console.WriteLine("Loading default ClassInstanceManager");
+                _classInstanceManager = _libAssembly.CreateInstance("Gauge.CSharp.Lib.DefaultClassInstanceManager");
+            }
+            else
+            {
+                Console.WriteLine("Loading : {0}", instanceManagerType.FullName);
+                _classInstanceManager = _libAssembly.CreateInstance(instanceManagerType.FullName);
+                Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
+            }
+
+            _classInstanceManager = _classInstanceManager ?? new DefaultClassInstanceManager();
+            //            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
+//            var methodInfo = instanceManagerType.GetMethod("Initialize");
+//            methodInfo.Invoke(_classInstanceManager, BindingFlags.Instance | BindingFlags.Public, null,
+//                new[] {_assemblyLoader.AssembliesReferencingGaugeLib}, CultureInfo.CurrentCulture);
+
+            _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
     }
 }

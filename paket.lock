@@ -21,7 +21,7 @@ NUGET
     Gauge.CSharp.Core (0.0.7)
       Gauge.CSharp.Lib (>= 0.5.4)
       Google.ProtocolBuffers (>= 2.4.1.555)
-    Gauge.CSharp.Lib (0.5.4)
+    Gauge.CSharp.Lib (0.5.5)
 
 GROUP Build
 NUGET

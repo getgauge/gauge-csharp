@@ -54,6 +54,7 @@
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="CSharpIdentifierTests.cs" />
     <Compile Include="HookRegistryTests.cs" />
+    <Compile Include="SandboxTests.cs" />
     <Compile Include="ValidateProcessorTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />

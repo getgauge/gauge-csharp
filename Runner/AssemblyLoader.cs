@@ -57,6 +57,11 @@ namespace Gauge.CSharp.Runner
         {
         }
 
+        public AssemblyLoader()
+            : this(new AssemblyLocater(new DirectoryWrapper(), new FileWrapper()).GetAllAssemblies())
+        {
+        }
+
         public Assembly GetTargetLibAssembly()
         {
             return _targetLibAssembly;
