@@ -20,6 +20,7 @@ using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using System;
+using Gauge.CSharp.Runner.Models;
 
 namespace Gauge.CSharp.Runner
 {
@@ -54,7 +55,6 @@ namespace Gauge.CSharp.Runner
         {
             return _messageProcessorsDictionary.ContainsKey(messageType) ? _messageProcessorsDictionary[messageType] : new DefaultProcessor();
         }
-
 
         private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry)
         {

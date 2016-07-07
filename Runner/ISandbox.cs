@@ -17,14 +17,14 @@
 
 using System;
 using System.Collections.Generic;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
-using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner
 {
     public interface ISandbox
     {
-        ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args);
+        ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params string[] args);
         bool TryScreenCapture(out byte[] screenShotBytes);
         List<GaugeMethod> GetStepMethods();
         void InitializeDataStore(string dataStoreType);
@@ -39,7 +39,7 @@ namespace Gauge.CSharp.Runner
 		string TargetLibAssemblyVersion { get; }
         void StartExecutionScope(string tag);
         void CloseExectionScope();
-        ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags, ExecutionInfo executionInfo);
+        ExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags);
         IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue);
     }
 }

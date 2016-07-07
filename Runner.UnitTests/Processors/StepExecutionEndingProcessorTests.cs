@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
@@ -30,7 +31,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     {
         private Message _request;
         private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult.Builder _protoExecutionResultBuilder;
+        private ProtoExecutionResult _protoExecutionResult;
         private readonly IEnumerable<string> _pendingMessages = new List<string> { "Foo", "Bar" };
         private StepExecutionEndingProcessor _stepExecutionEndingProcessor;
 
@@ -54,12 +55,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                             .Build();
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder()
+            _protoExecutionResult = ProtoExecutionResult.CreateBuilder()
                                         .SetExecutionTime(0)
                                         .SetFailed(false)
-                                        .AddRangeMessage(_pendingMessages);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>(), stepExecutionEndingRequest.CurrentExecutionInfo))
-                .Returns(_protoExecutionResultBuilder);
+                                        .AddRangeMessage(_pendingMessages)
+                                        .Build();
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>()))
+                .Returns(_protoExecutionResult);
             _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(_mockMethodExecutor.Object);
         }
 

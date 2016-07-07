@@ -15,21 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Reflection;
+using System;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Models
 {
-    public interface IHookRegistry
+    public class ExecutionResult : MarshalByRefObject
     {
-        HashSet<HookMethod> BeforeSuiteHooks { get; }
-        HashSet<HookMethod> AfterSuiteHooks { get; }
-        HashSet<HookMethod> BeforeSpecHooks { get; }
-        HashSet<HookMethod> AfterSpecHooks { get; }
-        HashSet<HookMethod> BeforeScenarioHooks { get; }
-        HashSet<HookMethod> AfterScenarioHooks { get; }
-        HashSet<HookMethod> BeforeStepHooks { get; }
-        HashSet<HookMethod> AfterStepHooks { get; }
-        MethodInfo MethodFor(string method);
+        public bool Success { get; set; }
+
+        public string ExceptionMessage { get; set; }
+
+        public string Source { get; set; }
+
+        public string StackTrace { get; set; }
+
+        public byte[] ScreenShot { get; set; }
     }
 }

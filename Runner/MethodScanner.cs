@@ -18,8 +18,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Models;
 using NLog;
 
 namespace Gauge.CSharp.Runner

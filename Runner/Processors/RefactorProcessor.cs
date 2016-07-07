@@ -17,6 +17,7 @@
 
 using System;
 using System.Linq;
+using Gauge.CSharp.Runner.Models;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors

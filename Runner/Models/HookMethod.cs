@@ -21,7 +21,7 @@ using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Runner.Extensions;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Models
 {
     [Serializable]
     public class HookMethod

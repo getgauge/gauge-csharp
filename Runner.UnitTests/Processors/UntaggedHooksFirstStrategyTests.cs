@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Extensions;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Moq;
 using NUnit.Framework;

@@ -28,12 +28,11 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
-        protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
+        protected override ProtoExecutionResult ExecuteHooks(Message request)
         {
-            var protoExecutionResultBuilder = base.ExecuteHooks(request);
+            var protoExecutionResult = base.ExecuteHooks(request);
             var allPendingMessages = MethodExecutor.GetAllPendingMessages();
-            protoExecutionResultBuilder.AddRangeMessage(allPendingMessages);
-            return protoExecutionResultBuilder;
+            return protoExecutionResult.ToBuilder().AddRangeMessage(allPendingMessages).Build();
         }
 
         protected override string HookType
@@ -46,10 +45,10 @@ namespace Gauge.CSharp.Runner.Processors
             return request.StepExecutionEndingRequest.CurrentExecutionInfo;
         }
 
-        protected override IEnumerable<string> GetApplicableTags(Message request)
+        protected override List<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentScenario.TagsList
-                .Union(GetExecutionInfo(request).CurrentSpec.TagsList);
+                .Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
         }
     }
 }

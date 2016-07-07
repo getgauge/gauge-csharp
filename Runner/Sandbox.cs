@@ -18,15 +18,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
-using Gauge.Messages;
-using Google.ProtocolBuffers;
 
 //using NLog;
 
@@ -68,13 +69,24 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params object[] args)
+        public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params string[] args)
         {
             var method = MethodMap[gaugeMethod.Name];
             var executionResult = new ExecutionResult {Success = true};
             try
             {
-                Execute(method, StringParamConverter.TryConvertParams(method, args));
+                var parameters = args.Select(o =>
+                {
+                    try
+                    {
+                        return GetTable(o);
+                    }
+                    catch
+                    {
+                        return o;
+                    }
+                }).ToArray();
+                Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
             {
@@ -86,6 +98,15 @@ namespace Gauge.CSharp.Runner
             }
 
             return executionResult;
+        }
+
+        private object GetTable(string jsonString)
+        {
+            var serializer = new DataContractJsonSerializer(_libAssembly.GetType("Gauge.CSharp.Lib.Table"));
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
+            {
+                return serializer.ReadObject(ms);
+            }
         }
 
         public string TargetLibAssemblyVersion
@@ -171,34 +192,30 @@ namespace Gauge.CSharp.Runner
             _classInstanceManager.CloseScope();
         }
 
-        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy,
-            IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
+        public ExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
-            var stopwatch = Stopwatch.StartNew();
-            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
-
             foreach (var method in methods)
             {
                 try
                 {
-                    ExecuteHook(_hookRegistry.MethodFor(method), new object[] {executionInfo});
+                    ExecuteHook(_hookRegistry.MethodFor(method));
                 }
                 catch (Exception ex)
                 {
 //                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
-                    byte[] screenshot;
-                    TryScreenCapture(out screenshot);
-                    return builder
-                        .SetFailed(true)
-                        .SetRecoverableError(false)
-                        .SetErrorMessage(ex.Message)
-                        .SetScreenShot(ByteString.CopyFrom(screenshot))
-                        .SetStackTrace(ex.StackTrace)
-                        .SetExecutionTime(stopwatch.ElapsedMilliseconds);
+                    return new ExecutionResult
+                    {
+                        Success = false,
+                        ExceptionMessage = ex.Message,
+                        StackTrace = ex.StackTrace,
+                    };
                 }
             }
-            return builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+            return new ExecutionResult
+            {
+                Success = true
+            };
         }
 
         public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions,
@@ -213,7 +230,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        private void ExecuteHook(MethodInfo method, object[] objects)
+        private void ExecuteHook(MethodInfo method, params object[] objects)
         {
             if (HasArguments(method, objects))
                 Execute(method, objects);
@@ -293,7 +310,7 @@ namespace Gauge.CSharp.Runner
 //                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
-            ScreenGrabberType = ScreenGrabberType ?? typeof(DefaultScreenGrabber);
+            ScreenGrabberType = ScreenGrabberType ?? Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
         }
 
         private void Execute(MethodBase method, params object[] parameters)
@@ -326,11 +343,9 @@ namespace Gauge.CSharp.Runner
                 Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
             }
 
-            _classInstanceManager = _classInstanceManager ?? new DefaultClassInstanceManager();
+            _classInstanceManager = _classInstanceManager ?? 
+                Activator.CreateInstance(AppDomain.CurrentDomain, Assembly.GetExecutingAssembly().FullName, "Gauge.CSharp.Lib.DefaultClassInstanceManager");
             //            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
-//            var methodInfo = instanceManagerType.GetMethod("Initialize");
-//            methodInfo.Invoke(_classInstanceManager, BindingFlags.Instance | BindingFlags.Public, null,
-//                new[] {_assemblyLoader.AssembliesReferencingGaugeLib}, CultureInfo.CurrentCulture);
 
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }

@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
@@ -32,7 +33,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         private ExecutionEndingProcessor _executionEndingProcessor;
         private Message _request;
         private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult.Builder _protoExecutionResultBuilder;
+        private ProtoExecutionResult _protoExecutionResult;
         private readonly IEnumerable<string> _pendingMessages = new List<string> {"Foo" , "Bar"};
 
         public void Foo()
@@ -55,12 +56,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                             .Build();
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder()
+            _protoExecutionResult = ProtoExecutionResult.CreateBuilder()
                                         .SetExecutionTime(0)
                                         .SetFailed(false)
-                                        .AddRangeMessage(_pendingMessages);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IEnumerable<string>>(), executionEndingRequest.CurrentExecutionInfo))
-                .Returns(_protoExecutionResultBuilder);
+                                        .AddRangeMessage(_pendingMessages)
+                                        .Build();
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IEnumerable<string>>()))
+                .Returns(_protoExecutionResult);
             _executionEndingProcessor = new ExecutionEndingProcessor(_mockMethodExecutor.Object);
         }
         [Test]
@@ -77,7 +79,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             
             Assert.AreEqual(_request.MessageId, message.MessageId);
             Assert.AreEqual(Message.Types.MessageType.ExecutionStatusResponse, message.MessageType);
-            Assert.AreEqual(_protoExecutionResultBuilder.Build(), message.ExecutionStatusResponse.ExecutionResult);
+            Assert.AreEqual(_protoExecutionResult, message.ExecutionStatusResponse.ExecutionResult);
         }
 
         [Test]

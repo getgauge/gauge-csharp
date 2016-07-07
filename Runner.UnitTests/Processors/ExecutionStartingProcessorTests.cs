@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
@@ -32,7 +33,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         private ExecutionStartingProcessor _executionStartingProcessor;
         private Message _request;
         private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult.Builder _protoExecutionResultBuilder;
+        private ProtoExecutionResult _protoExecutionResult;
 
         public void Foo()
         {
@@ -53,9 +54,9 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                             .Build();
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResultBuilder = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", It.IsAny<HooksStrategy>(), new List<string>(), executionEndingRequest.CurrentExecutionInfo))
-                .Returns(_protoExecutionResultBuilder);
+            _protoExecutionResult = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false).Build();
+            _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", It.IsAny<HooksStrategy>(), new List<string>()))
+                .Returns(_protoExecutionResult);
             _executionStartingProcessor = new ExecutionStartingProcessor(_mockMethodExecutor.Object);
         }
         [Test]

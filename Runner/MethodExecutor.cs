@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Gauge.Messages;
 using Google.ProtocolBuffers;
 using NLog;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 
 namespace Gauge.CSharp.Runner
@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult Execute(GaugeMethod method, params object[] args)
+        public ProtoExecutionResult Execute(GaugeMethod method, params string[] args)
         {
             Logger.Debug("Execution method: {0}", method.Name);
             var stopwatch = Stopwatch.StartNew();
@@ -65,10 +65,29 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult.Builder ExecuteHooks(string hookType, HooksStrategy strategy,
-            IEnumerable<string> applicableTags, ExecutionInfo executionInfo)
+        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy,
+            IEnumerable<string> applicableTags)
         {
-            return _sandbox.ExecuteHooks(hookType, strategy, applicableTags, executionInfo);
+            var stopwatch = Stopwatch.StartNew();
+            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
+            var executionResult = _sandbox.ExecuteHooks(hookType, strategy, applicableTags);
+
+            builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+            if (!executionResult.Success)
+            {
+                var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+                builder.SetFailed(true);
+                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
+                if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
+                {
+                    builder.SetScreenShot(TakeScreenshot());
+                }
+                builder.SetErrorMessage(executionResult.ExceptionMessage);
+                builder.SetStackTrace(executionResult.StackTrace);
+                builder.SetRecoverableError(false);
+                builder.SetExecutionTime(elapsedMilliseconds);
+            }
+            return builder.Build();
         }
 
         public void ClearCache()

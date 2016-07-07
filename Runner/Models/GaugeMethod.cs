@@ -15,17 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using System;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Models
 {
-    public interface IStepRegistry
+    [Serializable]
+    public class GaugeMethod : MarshalByRefObject
     {
-        bool ContainsStep(string parsedStepText);
-        GaugeMethod MethodFor(string parsedStepText);
-        IEnumerable<string> AllSteps();
-        bool HasAlias(string stepText);
-        string GetStepText(string parameterizedStepText);
-        bool HasMultipleImplementations(string parsedStepText);
+        public string Name { get; set; }
+        public int ParameterCount { get; set; }
     }
 }

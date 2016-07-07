@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
 using Moq;
@@ -103,7 +104,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var fooMethodInfo = new GaugeMethod {Name = "Foo", ParameterCount = 1};
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
-            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<object[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
+            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<string[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
 
             var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
 

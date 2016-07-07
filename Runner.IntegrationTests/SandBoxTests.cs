@@ -18,10 +18,17 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using Gauge.CSharp.Lib;
 using NUnit.Framework;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Models;
+using Gauge.CSharp.Runner.Processors;
+using Gauge.Messages;
+using Google.ProtocolBuffers;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
@@ -147,15 +154,52 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var table = new Table(new List<string> {"foo", "bar"});
             table.AddRow(new List<string> {"foorow1", "barrow1"});
             table.AddRow(new List<string> {"foorow2", "barrow2"});
-            var executionResult = sandbox.ExecuteMethod(methodInfo, table);
+            
+            var executionResult = sandbox.ExecuteMethod(methodInfo, SerializeTable(table));
             Console.WriteLine("Success: {0},\nException: {1},\nStackTrace :{2},\nSource : {3}",
                 executionResult.Success, executionResult.ExceptionMessage, executionResult.StackTrace, executionResult.Source);
             Assert.True(executionResult.Success);
         }
 
-        [Test]
+        [Test, Ignore]
         public void ShouldExecuteMethodFromRequest()
-        { }
+        {
+            const string parameterizedStepText = "Step that takes a table {}";
+            const string stepText = "Step that takes a table <table>";
+            var gaugeMethod = new GaugeMethod {Name = "IntegrationTestSample.StepImplementation.ReadTable", ParameterCount = 1};
+            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> {new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod)};
+            var aliases = new Dictionary<string, bool> {{parameterizedStepText, false}};
+            var stepTextMap = new Dictionary<string, string> { {parameterizedStepText, stepText}};
+            var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
+
+            var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(SandboxFactory.Create()));
+
+            var builder = Message.CreateBuilder();
+            var protoTable = ProtoTable.CreateBuilder()
+                .SetHeaders(
+                    ProtoTableRow.CreateBuilder().AddRangeCells(new List<string> {"foo", "bar"}))
+                .AddRangeRows(new List<ProtoTableRow>
+                {
+                    ProtoTableRow.CreateBuilder()
+                        .AddRangeCells(new List<string> {"foorow1", "foorow2"})
+                        .Build()
+                }).Build();
+            var message = builder
+                .SetMessageId(1234)
+                .SetMessageType(Message.Types.MessageType.ExecuteStep)
+                .SetExecuteStepRequest(
+                    ExecuteStepRequest.CreateBuilder()
+                        .SetParsedStepText(parameterizedStepText)
+                        .SetActualStepText(stepText)
+                        .AddParameters(
+                            Parameter.CreateBuilder()
+                                .SetName("table")
+                                .SetParameterType(Parameter.Types.ParameterType.Table)
+                                .SetTable(protoTable).Build()
+                        ).Build()
+                ).Build();
+            var result = executeStepProcessor.Process(message);
+        }
 
         [Test]
         public void ShouldExecuteHooks() 
@@ -178,6 +222,16 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
 			AssertRunnerDomainDidNotLoadUsersAssembly ();
+        }
+
+        private string SerializeTable(Table table)
+        {
+            var serializer = new DataContractJsonSerializer(typeof(Table));
+            using (var memoryStream = new MemoryStream())
+            {
+                serializer.WriteObject(memoryStream, table);
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
+            }            
         }
     }
 }

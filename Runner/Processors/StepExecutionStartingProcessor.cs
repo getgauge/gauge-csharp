@@ -33,7 +33,7 @@ namespace Gauge.CSharp.Runner.Processors
             return request.StepExecutionStartingRequest.CurrentExecutionInfo;
         }
 
-        protected override ProtoExecutionResult.Builder ExecuteHooks(Message request)
+        protected override ProtoExecutionResult ExecuteHooks(Message request)
         {
             // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
             MethodExecutor.GetAllPendingMessages();
@@ -45,10 +45,10 @@ namespace Gauge.CSharp.Runner.Processors
             get { return "BeforeStep"; }
         }
 
-        protected override IEnumerable<string> GetApplicableTags(Message request)
+        protected override List<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentScenario.TagsList
-                .Union(GetExecutionInfo(request).CurrentSpec.TagsList);
+                .Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
         }
     }
 }

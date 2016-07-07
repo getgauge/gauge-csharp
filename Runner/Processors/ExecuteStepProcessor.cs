@@ -16,7 +16,15 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using Gauge.CSharp.Runner.Models;
 using Gauge.Messages;
+using Google.ProtocolBuffers;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using Gauge.CSharp.Lib;
 
 namespace Gauge.CSharp.Runner.Processors
 {
@@ -41,7 +49,7 @@ namespace Gauge.CSharp.Runner.Processors
             var method = _stepRegistry.MethodFor(executeStepRequest.ParsedStepText);
 
             var parameters = method.ParameterCount;
-            var args = new object[parameters];
+            var args = new string[parameters];
             var stepParameter = executeStepRequest.ParametersList;
             if (parameters != stepParameter.Count)
             {
@@ -53,11 +61,26 @@ namespace Gauge.CSharp.Runner.Processors
             for (var i = 0; i < parameters; i++)
             {
                 args[i] = stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
-                    ? (object) stepParameter[i].Table
+                    ? GetTableData(stepParameter[i].Table)
                     : stepParameter[i].Value;
             }
             var protoExecutionResult = _methodExecutor.Execute(method, args);
             return WrapInMessage(protoExecutionResult, request);
+        }
+
+        private string GetTableData(ProtoTable table)
+        {
+            var table1 = new Table(table.Headers.CellsList.ToList());
+            foreach (var protoTableRow in table.RowsList)
+            {
+                table1.AddRow(protoTableRow.CellsList.ToList());
+            }
+            var serializer = new DataContractJsonSerializer(typeof(Table));
+            using (var memoryStream = new MemoryStream())
+            {
+                serializer.WriteObject(memoryStream, table1);
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
+            }
         }
 
         private static Message ExecutionError(string errorMessage, Message request)

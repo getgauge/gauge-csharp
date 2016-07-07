@@ -17,9 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
-namespace Gauge.CSharp.Runner
+namespace Gauge.CSharp.Runner.Models
 {
     [Serializable]
     public class StepRegistry : IStepRegistry

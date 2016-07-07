@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Extensions;
+using Gauge.CSharp.Runner.Models;
 using Moq;
 using NUnit.Framework;
 

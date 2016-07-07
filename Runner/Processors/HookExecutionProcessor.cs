@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Gauge.CSharp.Runner.Strategy;
@@ -42,10 +43,10 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected abstract ExecutionInfo GetExecutionInfo(Message request);
 
-        protected virtual ProtoExecutionResult.Builder ExecuteHooks(Message request)
+        protected virtual ProtoExecutionResult ExecuteHooks(Message request)
         {
             var applicableTags = GetApplicableTags(request);
-            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, GetExecutionInfo(request));
+            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags);
         }
 
         protected abstract string HookType { get; }
@@ -58,9 +59,9 @@ namespace Gauge.CSharp.Runner.Processors
         [DebuggerHidden]
         public virtual Message Process(Message request)
         {
-            var protoExecutionResultBuilder = ExecuteHooks(request);
+            var protoExecutionResult = ExecuteHooks(request);
             ClearCacheForConfiguredLevel();
-            return WrapInMessage(protoExecutionResultBuilder.Build(), request);
+            return WrapInMessage(protoExecutionResult, request);
         }
 
         private void ClearCacheForConfiguredLevel()
@@ -70,9 +71,9 @@ namespace Gauge.CSharp.Runner.Processors
                 MethodExecutor.ClearCache();
         }
 
-        protected virtual IEnumerable<string> GetApplicableTags(Message request)
+        protected virtual List<string> GetApplicableTags(Message request)
         {
-            return Enumerable.Empty<string>();
+            return Enumerable.Empty<string>().ToList();
         }
     }
 }

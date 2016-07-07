@@ -72,6 +72,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,30 +93,30 @@
     <Compile Include="AssemblyLocater.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
-    <Compile Include="GaugeMethod.cs" />
+    <Compile Include="Models\GaugeMethod.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="ErrorCodeAggregator.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />
-    <Compile Include="ExecutionResult.cs" />
+    <Compile Include="Models\ExecutionResult.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GaugeProjectBuilder.cs" />
-    <Compile Include="HookMethod.cs" />
-    <Compile Include="HookRegistry.cs">
+    <Compile Include="Models\HookMethod.cs" />
+    <Compile Include="Models\HookRegistry.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IAssemblyLoader.cs" />
     <Compile Include="IAssemblyLocater.cs" />
     <Compile Include="IGaugeListener.cs" />
     <Compile Include="IGaugeProjectBuilder.cs" />
-    <Compile Include="IHookRegistry.cs" />
+    <Compile Include="Models\IHookRegistry.cs" />
     <Compile Include="IMethodExecutor.cs" />
     <Compile Include="IMethodScanner.cs" />
     <Compile Include="IGaugeCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISandbox.cs" />
-    <Compile Include="IStepRegistry.cs" />
+    <Compile Include="Models\IStepRegistry.cs" />
     <Compile Include="LogConfiguration.cs" />
     <Compile Include="GaugeListener.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="SandboxFactory.cs" />
     <Compile Include="SetupCommand.cs" />
     <Compile Include="StartCommand.cs" />
-    <Compile Include="StepRegistry.cs" />
+    <Compile Include="Models\StepRegistry.cs" />
     <Compile Include="Processors\StepValidationProcessor.cs" />
     <Compile Include="Converters\StringParamConverter.cs" />
     <Compile Include="MethodScanner.cs" />
