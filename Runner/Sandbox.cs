@@ -133,7 +133,7 @@ namespace Gauge.CSharp.Runner
 
         public void InitializeDataStore(string dataStoreType)
         {
-            var remoteDataStoreType = _libAssembly.GetType(typeof(DataStoreFactory).ToString());
+            var remoteDataStoreType = _libAssembly.GetType("Gauge.CSharp.Lib.DataStoreFactory");
             var dataStoreGetter = remoteDataStoreType.GetMethod(string.Format("Initialize{0}DataStore", dataStoreType));
             if (dataStoreGetter != null)
                 dataStoreGetter.Invoke(null, null);

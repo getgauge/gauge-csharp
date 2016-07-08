@@ -28,8 +28,6 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class AssemblyLoaderTests
     {
-        public class TestAssembly : Assembly { }
-
         [Step("Foo text")]
         public void DummyStepMethod() { }
 

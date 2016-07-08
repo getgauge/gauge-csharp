@@ -32,7 +32,6 @@ namespace Gauge.CSharp.Runner.Processors
         [DebuggerHidden]
         public Message Process(Message request)
         {
-//            GetDataStoreFor(request.MessageType).Initialize();
             _sandbox.InitializeDataStore(DataStoreType);
             return new DefaultProcessor().Process(request);
         }
