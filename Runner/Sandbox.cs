@@ -340,13 +340,17 @@ namespace Gauge.CSharp.Runner
             {
                 Console.WriteLine("Loading : {0}", instanceManagerType.FullName);
                 _classInstanceManager = _libAssembly.CreateInstance(instanceManagerType.FullName);
-                Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
             }
 
-            _classInstanceManager = _classInstanceManager ?? 
-                Activator.CreateInstance(AppDomain.CurrentDomain, Assembly.GetExecutingAssembly().FullName, "Gauge.CSharp.Lib.DefaultClassInstanceManager");
+            _classInstanceManager = _classInstanceManager ??
+                                    Activator.CreateInstance(AppDomain.CurrentDomain,
+                                        Assembly.GetExecutingAssembly()
+                                            .GetReferencedAssemblies()
+                                            .First(name => name.Name == "Gauge.CSharp.Lib")
+                                            .Name, "Gauge.CSharp.Lib.DefaultClassInstanceManager").Unwrap();
             //            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
 
+            Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
     }

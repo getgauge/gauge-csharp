@@ -28,12 +28,11 @@ using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
-//    [TestFixture]
     public class SandboxTests
     {
         public class TestAssembly : Assembly { }
 
-//        [Test]
+        [Test]
         public void ShouldLoadAppConfigFromTargetLocation()
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
@@ -54,7 +53,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.AreEqual(expectedConfigLocation, AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
 
-//        [Test]
+        [Test]
         public void ShouldLoadScreenGrabber()
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
@@ -74,7 +73,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.AreEqual("TestScreenGrabber", Encoding.UTF8.GetString(screenshot));
         }
 
-        [Test, Ignore]
+        [Test]
         public void ShouldLoadClassInstanceManager()
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
@@ -93,7 +92,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Assert.IsTrue(assemblyLoaded, "Mock Assembly was not initialized by TestClassInstanceManager");
         }
 
-        private class TestClassInstanceManager : IClassInstanceManager
+        public class TestClassInstanceManager : IClassInstanceManager
         {
             public void Initialize(List<Assembly> assemblies)
             {
