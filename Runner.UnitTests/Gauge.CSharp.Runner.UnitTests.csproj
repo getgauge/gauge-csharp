@@ -56,6 +56,7 @@
     <Compile Include="HookRegistryTests.cs" />
     <Compile Include="SandboxDatastoreInitTests.cs" />
     <Compile Include="SandboxHookExecutionTests.cs" />
+    <Compile Include="SandboxMessageCollectorTests.cs" />
     <Compile Include="SandboxTests.cs" />
     <Compile Include="ValidateProcessorTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />

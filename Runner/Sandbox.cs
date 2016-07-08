@@ -176,7 +176,7 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetAllPendingMessages()
         {
-            var targetMessageCollectorType = _libAssembly.GetType(typeof(MessageCollector).ToString());
+            var targetMessageCollectorType = _libAssembly.GetType("Gauge.CSharp.Lib.MessageCollector");
             var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingMessages",
                 BindingFlags.Static | BindingFlags.Public);
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
