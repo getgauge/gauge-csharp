@@ -109,6 +109,7 @@
     <Compile Include="IAssemblyLocater.cs" />
     <Compile Include="IGaugeListener.cs" />
     <Compile Include="IGaugeProjectBuilder.cs" />
+    <Compile Include="Models\IHookMethod.cs" />
     <Compile Include="Models\IHookRegistry.cs" />
     <Compile Include="IMethodExecutor.cs" />
     <Compile Include="IMethodScanner.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Converters\StringParamConverter.cs" />
     <Compile Include="MethodScanner.cs" />
     <Compile Include="Strategy\HooksStrategy.cs" />
+    <Compile Include="Strategy\IHooksStrategy.cs" />
     <Compile Include="Strategy\TaggedHooksFirstStrategy.cs" />
     <Compile Include="Strategy\UntaggedHooksFirstStrategy.cs" />
     <Compile Include="Wrappers\AssemblyWrapper.cs" />

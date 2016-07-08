@@ -24,9 +24,9 @@ using Gauge.CSharp.Runner.Models;
 namespace Gauge.CSharp.Runner.Strategy
 {
     [Serializable]
-    public class HooksStrategy
+    public class HooksStrategy : IHooksStrategy
     {
-        public IEnumerable<string> GetTaggedHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public IEnumerable<string> GetTaggedHooks(IEnumerable<string> applicableTags, IList<IHookMethod> hooks)
         {
             var tagsList = applicableTags.ToList();
             return from hookMethod in hooks.ToList()
@@ -38,14 +38,14 @@ namespace Gauge.CSharp.Runner.Strategy
                 select hookMethod.Method;
         }
 
-        protected IOrderedEnumerable<string> GetUntaggedHooks(IEnumerable<HookMethod> hookMethods)
+        protected IOrderedEnumerable<string> GetUntaggedHooks(IEnumerable<IHookMethod> hookMethods)
         {
             return hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any())
                     .Select(method => method.Method)
                     .OrderBy(info => info);
         }
 
-        public virtual IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<HookMethod> hooks)
+        public virtual IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<IHookMethod> hooks)
         {
             return GetUntaggedHooks(hooks);
         }

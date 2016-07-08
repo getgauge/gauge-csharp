@@ -28,22 +28,22 @@ namespace Gauge.CSharp.Runner.Models
     {
         private readonly Assembly _targetLibAssembly;
 
-		private readonly IDictionary<string, HashSet<HookMethod>> _hooks;
+		private readonly IDictionary<string, HashSet<IHookMethod>> _hooks;
 
         private readonly IDictionary<string, MethodInfo> _methodMap = new Dictionary<string, MethodInfo>();
 
         public HookRegistry(IAssemblyLoader assemblyLoader)
         {
-            _hooks = new Dictionary<string, HashSet<HookMethod>>
+            _hooks = new Dictionary<string, HashSet<IHookMethod>>
             {
-                {"BeforeSuite", new HashSet<HookMethod>()},
-                {"AfterSuite", new HashSet<HookMethod>()},
-                {"BeforeSpec", new HashSet<HookMethod>()},
-                {"AfterSpec", new HashSet<HookMethod>()},
-                {"BeforeScenario", new HashSet<HookMethod>()},
-                {"AfterScenario", new HashSet<HookMethod>()},
-                {"BeforeStep", new HashSet<HookMethod>()},
-                {"AfterStep", new HashSet<HookMethod>()}
+                {"BeforeSuite", new HashSet<IHookMethod>()},
+                {"AfterSuite", new HashSet<IHookMethod>()},
+                {"BeforeSpec", new HashSet<IHookMethod>()},
+                {"AfterSpec", new HashSet<IHookMethod>()},
+                {"BeforeScenario", new HashSet<IHookMethod>()},
+                {"AfterScenario", new HashSet<IHookMethod>()},
+                {"BeforeStep", new HashSet<IHookMethod>()},
+                {"AfterStep", new HashSet<IHookMethod>()}
             };
 
             _targetLibAssembly = assemblyLoader.GetTargetLibAssembly();
@@ -53,42 +53,42 @@ namespace Gauge.CSharp.Runner.Models
             }
         }
 
-        public HashSet<HookMethod> BeforeSuiteHooks
+        public HashSet<IHookMethod> BeforeSuiteHooks
         {
             get { return _hooks["BeforeSuite"]; }
         }
  
-        public HashSet<HookMethod> AfterSuiteHooks
+        public HashSet<IHookMethod> AfterSuiteHooks
         {
             get { return _hooks["AfterSuite"]; }
         }
 
-        public HashSet<HookMethod> BeforeSpecHooks
+        public HashSet<IHookMethod> BeforeSpecHooks
         {
             get { return _hooks["BeforeSpec"]; }
         }
 
-        public HashSet<HookMethod> AfterSpecHooks
+        public HashSet<IHookMethod> AfterSpecHooks
         {
             get { return _hooks["AfterSpec"]; }
         }
 
-        public HashSet<HookMethod> BeforeScenarioHooks
+        public HashSet<IHookMethod> BeforeScenarioHooks
         {
             get { return _hooks["BeforeScenario"]; }
         }
 
-        public HashSet<HookMethod> AfterScenarioHooks
+        public HashSet<IHookMethod> AfterScenarioHooks
         {
             get { return _hooks["AfterScenario"]; }
         }
 
-        public HashSet<HookMethod> BeforeStepHooks
+        public HashSet<IHookMethod> BeforeStepHooks
         {
             get { return _hooks["BeforeStep"]; }
         }
 
-        public HashSet<HookMethod> AfterStepHooks
+        public HashSet<IHookMethod> AfterStepHooks
         {
             get { return _hooks["AfterStep"]; }
         }

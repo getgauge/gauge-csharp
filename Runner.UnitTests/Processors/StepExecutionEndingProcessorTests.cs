@@ -45,7 +45,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockSandbox = new Mock<ISandbox>();
             mockSandbox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(_pendingMessages);
-            var hooks = new HashSet<HookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
+            var hooks = new HashSet<IHookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
             mockHookRegistry.Setup(x => x.AfterStepHooks).Returns(hooks);
             var stepExecutionEndingRequest = StepExecutionEndingRequest.DefaultInstance;
             _request = Message.CreateBuilder()

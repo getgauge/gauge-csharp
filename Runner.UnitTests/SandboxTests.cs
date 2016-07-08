@@ -16,12 +16,16 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
+using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
 using Moq;
 using NUnit.Framework;
@@ -127,6 +131,73 @@ namespace Gauge.CSharp.Runner.UnitTests
             public byte[] TakeScreenShot()
             {
                 return Encoding.UTF8.GetBytes("TestScreenGrabber");
+            }
+        }
+
+        public class HookExecutionTests
+        {
+            static Dictionary<string, Expression<Func<IHookRegistry, HashSet<IHookMethod>>>> Hooks
+            {
+                get
+                {
+                    return new Dictionary<string, Expression<Func<IHookRegistry, HashSet<IHookMethod>>>>
+                    {
+                        {"BeforeSuite", x => x.BeforeSuiteHooks},
+                        {"BeforeSpec", x => x.BeforeSpecHooks},
+                        {"BeforeScenario", x => x.BeforeScenarioHooks},
+                        {"BeforeStep", x => x.BeforeStepHooks},
+                        {"AfterStep", x => x.AfterStepHooks},
+                        {"AfterScenario", x => x.AfterScenarioHooks},
+                        {"AfterSpec", x => x.AfterSpecHooks},
+                        {"AfterSuite", x => x.AfterSuiteHooks},
+                    };
+                }
+            }
+
+            private static IEnumerable<string> HookTypes = Hooks.Keys;
+            private Mock<IFileWrapper> _mockFileWrapper;
+            private Mock<IHooksStrategy> _mockStrategy;
+            private Mock<IHookRegistry> _mockHookRegistry;
+            private Mock<IAssemblyLoader> _mockAssemblyLoader;
+            private IEnumerable<string> _applicableTags;
+            private HashSet<IHookMethod> _hookMethods;
+
+            [SetUp]
+            public void Setup()
+            {
+                _mockAssemblyLoader = new Mock<IAssemblyLoader>();
+                var mockAssembly = new Mock<TestAssembly>();
+                _mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
+                _mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type> { typeof(DefaultScreenGrabber) });
+                _mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type> { typeof(DefaultClassInstanceManager) });
+                _mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(GetType().Assembly);
+                _mockHookRegistry = new Mock<IHookRegistry>();
+                var mockHookMethod = new Mock<IHookMethod>();
+                mockHookMethod.Setup(method => method.Method).Returns("DummyHook");
+                _hookMethods = new HashSet<IHookMethod> { mockHookMethod.Object };
+                _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHook"));
+                _mockFileWrapper = new Mock<IFileWrapper>();
+                _mockStrategy = new Mock<IHooksStrategy>();
+                _applicableTags = Enumerable.Empty<string>();
+                _mockStrategy.Setup(strategy => strategy.GetApplicableHooks(_applicableTags, _hookMethods))
+                    .Returns(new[] { "DummyHook" });
+            }
+
+            [Test, TestCaseSource("HookTypes")]
+            public void ShouldExecuteHook(string hookType)
+            {
+                var expression = Hooks[hookType];
+                _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
+                
+                var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
+                var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
+
+                Assert.IsTrue(executionResult.Success);
+                _mockHookRegistry.VerifyAll();
+            }
+
+            public void DummyHook()
+            {
             }
         }
     }

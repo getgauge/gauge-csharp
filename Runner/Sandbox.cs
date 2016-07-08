@@ -192,7 +192,7 @@ namespace Gauge.CSharp.Runner
             _classInstanceManager.CloseScope();
         }
 
-        public ExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IEnumerable<string> applicableTags)
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IEnumerable<string> applicableTags)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             foreach (var method in methods)
@@ -254,14 +254,14 @@ namespace Gauge.CSharp.Runner
             return true;
         }
 
-        private IEnumerable<string> GetHookMethods(string hookType, HooksStrategy strategy,
+        private IEnumerable<string> GetHookMethods(string hookType, IHooksStrategy strategy,
             IEnumerable<string> applicableTags)
         {
             var hooksFromRegistry = GetHooksFromRegistry(hookType);
             return strategy.GetApplicableHooks(applicableTags, hooksFromRegistry);
         }
 
-        private IEnumerable<HookMethod> GetHooksFromRegistry(string hookType)
+        private IEnumerable<IHookMethod> GetHooksFromRegistry(string hookType)
         {
             switch (hookType)
             {

@@ -50,7 +50,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             methodExecutor.Setup( executor => executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(),It.IsAny<IEnumerable<string>>()))
                           .Returns(protoExecutionResult);
             var hookRegistry = new Mock<IHookRegistry>();
-            hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<HookMethod>());
+            hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<IHookMethod>());
 
             new StepExecutionStartingProcessor(methodExecutor.Object).Process(request);
 

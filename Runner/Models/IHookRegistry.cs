@@ -22,14 +22,14 @@ namespace Gauge.CSharp.Runner.Models
 {
     public interface IHookRegistry
     {
-        HashSet<HookMethod> BeforeSuiteHooks { get; }
-        HashSet<HookMethod> AfterSuiteHooks { get; }
-        HashSet<HookMethod> BeforeSpecHooks { get; }
-        HashSet<HookMethod> AfterSpecHooks { get; }
-        HashSet<HookMethod> BeforeScenarioHooks { get; }
-        HashSet<HookMethod> AfterScenarioHooks { get; }
-        HashSet<HookMethod> BeforeStepHooks { get; }
-        HashSet<HookMethod> AfterStepHooks { get; }
+        HashSet<IHookMethod> BeforeSuiteHooks { get; }
+        HashSet<IHookMethod> AfterSuiteHooks { get; }
+        HashSet<IHookMethod> BeforeSpecHooks { get; }
+        HashSet<IHookMethod> AfterSpecHooks { get; }
+        HashSet<IHookMethod> BeforeScenarioHooks { get; }
+        HashSet<IHookMethod> AfterScenarioHooks { get; }
+        HashSet<IHookMethod> BeforeStepHooks { get; }
+        HashSet<IHookMethod> AfterStepHooks { get; }
         MethodInfo MethodFor(string method);
     }
 }

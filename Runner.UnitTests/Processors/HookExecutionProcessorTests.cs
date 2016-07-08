@@ -61,12 +61,12 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
          * Foo, Baz | Baz
          */
 
-        private List<HookMethod> _hookMethods;
+        private IList<IHookMethod> _hookMethods;
 
         [SetUp]
         public void Setup()
         {
-            _hookMethods = new List<HookMethod>
+            _hookMethods = new List<IHookMethod>
             {
                 new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly),
                 new HookMethod(GetType().GetMethod("Bar"), typeof(Step).Assembly),

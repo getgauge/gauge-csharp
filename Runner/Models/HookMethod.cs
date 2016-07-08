@@ -24,15 +24,18 @@ using Gauge.CSharp.Runner.Extensions;
 namespace Gauge.CSharp.Runner.Models
 {
     [Serializable]
-    public class HookMethod
+    public class HookMethod : IHookMethod
     {
-        public readonly dynamic TagAggregation;
+        public dynamic TagAggregation { get; private set; }
 
-        public readonly IEnumerable<string> FilterTags = Enumerable.Empty<string>();
+        public IEnumerable<string> FilterTags { get; private set; }
 
+        public string Method { get; private set; }
+        
         public HookMethod(MethodInfo methodInfo, Assembly targetLibAssembly)
         {
             Method = methodInfo.FullyQuallifiedName();
+            FilterTags = Enumerable.Empty<string>();
             var targetHookType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.FilteredHookAttribute");
             dynamic filteredHookAttribute = methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
@@ -49,7 +52,5 @@ namespace Gauge.CSharp.Runner.Models
             }
             TagAggregation = setTagAggregation;
         }
-
-        public string Method { get; private set; }
     }
 }

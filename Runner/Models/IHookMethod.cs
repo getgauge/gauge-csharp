@@ -1,4 +1,4 @@
-// Copyright 2015 ThoughtWorks, Inc.
+﻿// Copyright 2015 ThoughtWorks, Inc.
 //
 // This file is part of Gauge-CSharp.
 //
@@ -15,23 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Gauge.CSharp.Runner.Models;
 
-namespace Gauge.CSharp.Runner.Strategy
+namespace Gauge.CSharp.Runner.Models
 {
-    [Serializable]
-    public class UntaggedHooksFirstStrategy : HooksStrategy
+    public interface IHookMethod
     {
-        public override IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<IHookMethod> hooks)
-        {
-            var hookMethods = hooks as IList<IHookMethod> ?? hooks.ToList();
-            var tags = applicableTags as IList<string> ?? applicableTags.ToList();
-            return tags.Any()
-                ? GetUntaggedHooks(hookMethods).Concat(GetTaggedHooks(tags, hookMethods))
-                : GetUntaggedHooks(hookMethods);
-        }
+        string Method { get; }
+        dynamic TagAggregation { get; }
+        IEnumerable<string> FilterTags { get; }
     }
 }
