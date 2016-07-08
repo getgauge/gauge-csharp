@@ -161,18 +161,20 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.True(executionResult.Success);
         }
 
-        [Test, Ignore]
+        [Test]
         public void ShouldExecuteMethodFromRequest()
         {
             const string parameterizedStepText = "Step that takes a table {}";
             const string stepText = "Step that takes a table <table>";
-            var gaugeMethod = new GaugeMethod {Name = "IntegrationTestSample.StepImplementation.ReadTable", ParameterCount = 1};
+            var sandbox = SandboxFactory.Create();
+            var gaugeMethod = sandbox.GetStepMethods()
+                .First(method => method.Name == "IntegrationTestSample.StepImplementation.ReadTable");
             var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> {new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod)};
             var aliases = new Dictionary<string, bool> {{parameterizedStepText, false}};
             var stepTextMap = new Dictionary<string, string> { {parameterizedStepText, stepText}};
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
 
-            var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(SandboxFactory.Create()));
+            var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
 
             var builder = Message.CreateBuilder();
             var protoTable = ProtoTable.CreateBuilder()
@@ -199,6 +201,11 @@ namespace Gauge.CSharp.Runner.IntegrationTests
                         ).Build()
                 ).Build();
             var result = executeStepProcessor.Process(message);
+
+            AssertRunnerDomainDidNotLoadUsersAssembly();
+            var protoExecutionResult = result.ExecutionStatusResponse.ExecutionResult;
+            Assert.IsNotNull(protoExecutionResult);
+            Assert.IsFalse(protoExecutionResult.Failed);
         }
 
         [Test]
@@ -224,7 +231,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 			AssertRunnerDomainDidNotLoadUsersAssembly ();
         }
 
-        private string SerializeTable(Table table)
+        private static string SerializeTable(Table table)
         {
             var serializer = new DataContractJsonSerializer(typeof(Table));
             using (var memoryStream = new MemoryStream())
