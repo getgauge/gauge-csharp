@@ -175,7 +175,6 @@ namespace Gauge.CSharp.Runner.UnitTests
                 var mockHookMethod = new Mock<IHookMethod>();
                 mockHookMethod.Setup(method => method.Method).Returns("DummyHook");
                 _hookMethods = new HashSet<IHookMethod> { mockHookMethod.Object };
-                _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHook"));
                 _mockFileWrapper = new Mock<IFileWrapper>();
                 _mockStrategy = new Mock<IHooksStrategy>();
                 _applicableTags = Enumerable.Empty<string>();
@@ -187,6 +186,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             public void ShouldExecuteHook(string hookType)
             {
                 var expression = Hooks[hookType];
+                _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHook"));
                 _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
                 
                 var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
@@ -196,8 +196,27 @@ namespace Gauge.CSharp.Runner.UnitTests
                 _mockHookRegistry.VerifyAll();
             }
 
+            [Test, TestCaseSource("HookTypes")]
+            public void ShouldExecuteHookAndReportFailureOnException(string hookType)
+            {
+                var expression = Hooks[hookType];
+                _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHookThrowsException"));
+                _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
+                
+                var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
+                var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
+
+                Assert.False(executionResult.Success);
+                Assert.AreEqual("foo", executionResult.ExceptionMessage);
+            }
+
             public void DummyHook()
             {
+            }
+
+            public void DummyHookThrowsException()
+            {
+                throw new Exception("foo");
             }
         }
     }

@@ -195,6 +195,10 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IEnumerable<string> applicableTags)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
+            var executionResult = new ExecutionResult
+            {
+                Success = true
+            };
             foreach (var method in methods)
             {
                 try
@@ -204,18 +208,14 @@ namespace Gauge.CSharp.Runner
                 catch (Exception ex)
                 {
 //                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
-                    return new ExecutionResult
-                    {
-                        Success = false,
-                        ExceptionMessage = ex.Message,
-                        StackTrace = ex.StackTrace,
-                    };
+                    var innerException = ex.InnerException ?? ex;
+                    executionResult.ExceptionMessage = innerException.Message;
+                    executionResult.StackTrace = innerException.StackTrace;
+                    executionResult.Source = innerException.Source;
+                    executionResult.Success = false;
                 }
             }
-            return new ExecutionResult
-            {
-                Success = true
-            };
+            return executionResult;
         }
 
         public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions,
