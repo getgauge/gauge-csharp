@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
@@ -72,6 +73,38 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var protoExecutionResult = result.ExecutionStatusResponse.ExecutionResult;
             Assert.IsNotNull(protoExecutionResult);
             Assert.IsFalse(protoExecutionResult.Failed);
+        }
+
+        [Test]
+        public void ShouldCaptureScreenshotOnFailure()
+        {
+            const string parameterizedStepText = "I throw a serializable exception";
+            const string stepText = "I throw a serializable exception";
+            var sandbox = SandboxFactory.Create();
+            var gaugeMethod = sandbox.GetStepMethods()
+                .First(method => method.Name == "IntegrationTestSample.StepImplementation.ThrowSerializableException");
+            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
+            var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
+            var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
+            var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
+
+            var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
+
+            var message = Message.CreateBuilder()
+                .SetMessageId(1234)
+                .SetMessageType(Message.Types.MessageType.ExecuteStep)
+                .SetExecuteStepRequest(
+                    ExecuteStepRequest.CreateBuilder()
+                        .SetParsedStepText(parameterizedStepText)
+                        .SetActualStepText(stepText).Build()
+                ).Build();
+
+            var result = executeStepProcessor.Process(message);
+            var protoExecutionResult = result.ExecutionStatusResponse.ExecutionResult;
+
+            Assert.IsNotNull(protoExecutionResult);
+            Assert.IsTrue(protoExecutionResult.Failed);
+            Assert.AreEqual(Encoding.UTF8.GetString(protoExecutionResult.ScreenShot.ToByteArray()), "ScreenShot");
         }
     }
 }

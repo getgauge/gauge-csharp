@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(9, stepMethods.Count);
+            Assert.AreEqual(10, stepMethods.Count);
         }
 
         [Test]
@@ -83,9 +83,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
             AssertRunnerDomainDidNotLoadUsersAssembly ();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.Context") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.Context") == 0);
 
-            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
             Assert.True(executionResult.Success);
         }
 
@@ -96,9 +96,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
             AssertRunnerDomainDidNotLoadUsersAssembly ();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowUnserializableException") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowUnserializableException") == 0);
 
-            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
             Assert.False(executionResult.Success);
             Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
 			StringAssert.Contains("IntegrationTestSample.StepImplementation.ThrowUnserializableException",executionResult.StackTrace);
@@ -110,9 +110,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             const string expectedMessage = "I am a custom serializable exception";
             var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowSerializableException") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowSerializableException") == 0);
 
-            var executionResult = sandbox.ExecuteMethod(methodInfo);
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
 
             Assert.False(executionResult.Success);
             Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
@@ -124,32 +124,42 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             var sandbox = SandboxFactory.Create();
             var stepMethods = sandbox.GetStepMethods();
-            var methodInfo = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
 
             var table = new Table(new List<string> {"foo", "bar"});
             table.AddRow(new List<string> {"foorow1", "barrow1"});
             table.AddRow(new List<string> {"foorow2", "barrow2"});
             
-            var executionResult = sandbox.ExecuteMethod(methodInfo, SerializeTable(table));
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod, SerializeTable(table));
             Console.WriteLine("Success: {0},\nException: {1},\nStackTrace :{2},\nSource : {3}",
                 executionResult.Success, executionResult.ExceptionMessage, executionResult.StackTrace, executionResult.Source);
             Assert.True(executionResult.Success);
         }
 
         [Test]
-        public void ShouldExecuteHooks() 
-        { }
+        public void ShouldGetStepTextsForMethod()
+        {
+            var sandbox = SandboxFactory.Create();
+            var stepMethods = sandbox.GetStepMethods();
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.StepWithAliases") == 0);
+
+            var stepTexts = sandbox.GetStepTexts(gaugeMethod).ToList();
+
+            Assert.Contains("Step with text", stepTexts);
+            Assert.Contains("and an alias", stepTexts);
+        }
 
         [Test]
-        public void ShouldExecuteDatastoreInit() { }
+        public void ShouldGetPendingMessages()
+        {
+            var sandbox = SandboxFactory.Create();
+            var stepMethods = sandbox.GetStepMethods();
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.SaySomething") == 0);
 
-        [Test]
-        public void ShouldGetStepTextsForMethod() { }
+            sandbox.ExecuteMethod(gaugeMethod, "hello", "world");
+            var pendingMessages = sandbox.GetAllPendingMessages().ToList();
 
-        [Test]
-        public void ShouldGetPendingMessages() { }
-
-        [Test]
-        public void ShouldCaptureScreenshotOnFailure() { }
+            Assert.Contains("hello, world!", pendingMessages);
+        }
     }
 }

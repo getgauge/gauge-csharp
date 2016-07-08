@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -35,6 +36,7 @@ namespace IntegrationTestSample
         public void SaySomething(string what, string who)
         {
             Console.WriteLine("{0}, {1}!", what, who);
+            GaugeMessages.WriteMessage("{0}, {1}!", what, who);
         }
 
 	    [Step("I throw an unserializable exception")]
@@ -47,6 +49,11 @@ namespace IntegrationTestSample
 	    public void ThrowSerializableException()
 	    {
 	        throw new CustomSerializableException("I am a custom serializable exception");
+	    }
+
+        [Step("Step with text", "and an alias")]
+	    public void StepWithAliases()
+	    {
 	    }
 
 	    [Step("Step that takes a table <table>")]
@@ -79,5 +86,13 @@ namespace IntegrationTestSample
             {
             }
         }
+
+	    public class StringScreenGrabber : IScreenGrabber
+	    {
+	        public byte[] TakeScreenShot()
+	        {
+	            return Encoding.UTF8.GetBytes("ScreenShot");
+	        }
+	    }
     }
 }
