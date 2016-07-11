@@ -55,7 +55,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockAssemblyWrapper.Setup(wrapper => wrapper.LoadFrom(libPath)).Returns(typeof(Step).Assembly).Verifiable();
             _mockAssemblyWrapper.Setup(wrapper => wrapper.ReflectionOnlyLoadFrom(assemblyLocation)).Returns(_mockAssembly.Object);
             _mockAssemblyWrapper.Setup(wrapper => wrapper.LoadFrom(assemblyLocation)).Returns(_mockAssembly.Object);
-            _assemblyLoader = new AssemblyLoader(_mockAssemblyWrapper.Object, fileWrapper.Object, new[] { assemblyLocation });
+            _assemblyLoader = new AssemblyLoader(string.Empty, _mockAssemblyWrapper.Object, fileWrapper.Object, new[] { assemblyLocation });
         }
 
         [TearDown]
@@ -71,7 +71,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockAssemblyWrapper = new Mock<IAssemblyWrapper>();
             var fileWrapper = new Mock<IFileWrapper>();
 
-            Assert.Throws<FileNotFoundException>(() => new AssemblyLoader(mockAssemblyWrapper.Object, fileWrapper.Object, new[] { TmpLocation }));
+            Assert.Throws<FileNotFoundException>(() => new AssemblyLoader(string.Empty, mockAssemblyWrapper.Object, fileWrapper.Object, new[] { TmpLocation }));
         }
 
         [Test]

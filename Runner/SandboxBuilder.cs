@@ -53,7 +53,7 @@ namespace Gauge.CSharp.Runner
             catch (Exception e)
             {
                 Logger.Info("Unable to create Sandbox in {0}", sandboxAppDomainSetup.ApplicationBase);
-                Logger.Fatal(e.ToString);
+                Logger.Fatal(e);
                 throw;
             }
         }

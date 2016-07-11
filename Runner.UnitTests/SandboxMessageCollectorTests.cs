@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Wrappers;
@@ -28,6 +29,14 @@ namespace Gauge.CSharp.Runner.UnitTests
     public class SandboxMessageCollectorTests
     {
         private static readonly string[] Messages = new[] {"Foo", "bar"};
+        private string _gaugeProjectRootEnv;
+
+        [SetUp]
+        public void Setup()
+        {
+            _gaugeProjectRootEnv = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
+        }
 
         [Test]
         public void ShouldInitializeDatastore()
@@ -47,6 +56,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             var pendingMessages = sandbox.GetAllPendingMessages();
 
             Assert.AreEqual(Messages, pendingMessages);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
 
         public static IEnumerable<string> GetAllPendingMessages()

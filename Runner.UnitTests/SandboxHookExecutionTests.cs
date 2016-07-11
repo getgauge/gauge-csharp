@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -56,10 +57,13 @@ namespace Gauge.CSharp.Runner.UnitTests
         private Mock<IAssemblyLoader> _mockAssemblyLoader;
         private IEnumerable<string> _applicableTags;
         private HashSet<IHookMethod> _hookMethods;
+        private string _gaugeProjectRootEnv;
 
         [SetUp]
         public void Setup()
         {
+            _gaugeProjectRootEnv = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
             _mockAssemblyLoader = new Mock<IAssemblyLoader>();
             var mockAssembly = new Mock<TestAssembly>();
             _mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
@@ -103,6 +107,12 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             Assert.False(executionResult.Success);
             Assert.AreEqual("foo", executionResult.ExceptionMessage);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
 
         public void DummyHook()

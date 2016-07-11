@@ -27,8 +27,7 @@ using Gauge.CSharp.Runner.Converters;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
-
-//using NLog;
+using NLog;
 
 namespace Gauge.CSharp.Runner
 {
@@ -38,8 +37,6 @@ namespace Gauge.CSharp.Runner
         private readonly IAssemblyLoader _assemblyLoader;
 
         private readonly Assembly _libAssembly;
-
-//        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
 
         private Type ScreenGrabberType { get; set; }
 
@@ -52,13 +49,7 @@ namespace Gauge.CSharp.Runner
 
         public Sandbox(string basePath, IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
-            {
-                var assemblyName = args.Name.Split(',').FirstOrDefault();
-                var probePath = Path.GetFullPath(Path.Combine(basePath, string.Format("{0}.dll", assemblyName)));
-                return File.Exists(probePath) ? Assembly.LoadFrom(probePath) : null;
-            };
-            //            LogConfiguration.Initialize();
+            LogConfiguration.Initialize();
             _assemblyLoader = assemblyLoader;
             _hookRegistry = hookRegistry;
             _fileWrapper = fileWrapper;
@@ -68,7 +59,7 @@ namespace Gauge.CSharp.Runner
             LoadClassInstanceManager();
         }
 
-        public Sandbox(string runnerBasePath) : this(runnerBasePath, new AssemblyLoader(), null, new FileWrapper())
+        public Sandbox(string runnerBasePath) : this(runnerBasePath, new AssemblyLoader(runnerBasePath), null, new FileWrapper())
         {
         }
 
@@ -206,13 +197,14 @@ namespace Gauge.CSharp.Runner
             };
             foreach (var method in methods)
             {
+                var methodInfo = _hookRegistry.MethodFor(method);
                 try
                 {
-                    ExecuteHook(_hookRegistry.MethodFor(method));
+                    ExecuteHook(methodInfo);
                 }
                 catch (Exception ex)
                 {
-//                    Logger.Debug("Hook execution failed : {0}.{1}", method.DeclaringType.FullName, method.Name);
+                    LogManager.GetLogger("Sandbox").Debug("{0} Hook execution failed : {1}.{2}", hookType, methodInfo.DeclaringType.FullName, methodInfo.Name);
                     var innerException = ex.InnerException ?? ex;
                     executionResult.ExceptionMessage = innerException.Message;
                     executionResult.StackTrace = innerException.StackTrace;
@@ -306,13 +298,14 @@ namespace Gauge.CSharp.Runner
         private void ScanCustomScreenGrabber()
         {
             ScreenGrabberType = _assemblyLoader.ScreengrabberTypes.FirstOrDefault();
+            var logger = LogManager.GetLogger("Sandbox");
             if (ScreenGrabberType != null)
             {
-//                Logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
+                logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
             }
             else
             {
-//                Logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
+                logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
             ScreenGrabberType = ScreenGrabberType ?? Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
@@ -322,13 +315,14 @@ namespace Gauge.CSharp.Runner
         {
             var typeToLoad = method.DeclaringType;
             var instance = _classInstanceManager.Get(typeToLoad);
+            var logger = LogManager.GetLogger("Sandbox");
             if (instance == null)
             {
                 var error = "Could not load instance type: " + typeToLoad;
-                //                Logger.Error(error);
+                logger.Error(error);
                 throw new Exception(error);
             }
-            //            Logger.Info(instance.GetType().FullName);
+            logger.Info(instance.GetType().FullName);
             method.Invoke(instance, parameters);
         }
 
@@ -336,14 +330,15 @@ namespace Gauge.CSharp.Runner
         {
             var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
 
+            var logger = LogManager.GetLogger("Sandbox");
             if (instanceManagerType == null)
             {
-                Console.WriteLine("Loading default ClassInstanceManager");
+                logger.Debug("Loading default ClassInstanceManager");
                 _classInstanceManager = _libAssembly.CreateInstance("Gauge.CSharp.Lib.DefaultClassInstanceManager");
             }
             else
             {
-                Console.WriteLine("Loading : {0}", instanceManagerType.FullName);
+                logger.Debug("Loading : {0}", instanceManagerType.FullName);
                 _classInstanceManager = _libAssembly.CreateInstance(instanceManagerType.FullName);
             }
 
@@ -353,7 +348,7 @@ namespace Gauge.CSharp.Runner
                                             .GetReferencedAssemblies()
                                             .First(name => name.Name == "Gauge.CSharp.Lib")
                                             .Name, "Gauge.CSharp.Lib.DefaultClassInstanceManager").Unwrap();
-            //            Logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
+            logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
 
             Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);

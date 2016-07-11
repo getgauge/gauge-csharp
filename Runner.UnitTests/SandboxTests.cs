@@ -32,6 +32,15 @@ namespace Gauge.CSharp.Runner.UnitTests
 
     public class SandboxTests
     {
+        private string _gaugeProjectRootEnv;
+
+        [SetUp]
+        public void Setup()
+        {
+            _gaugeProjectRootEnv = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
+        }
+
         [Test]
         public void ShouldLoadAppConfigFromTargetLocation()
         {
@@ -90,6 +99,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             new Sandbox(string.Empty, mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
 
             Assert.IsTrue(assemblyLoaded, "Mock Assembly was not initialized by TestClassInstanceManager");
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
 
         public class TestClassInstanceManager : IClassInstanceManager
