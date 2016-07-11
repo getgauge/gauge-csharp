@@ -16,13 +16,14 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using Gauge.CSharp.Lib.Attribute;
 
 namespace Gauge.CSharp.Runner.Models
 {
     public interface IHookMethod
     {
         string Method { get; }
-        dynamic TagAggregation { get; }
+        TagAggregation TagAggregation { get; }
         IEnumerable<string> FilterTags { get; }
     }
 }

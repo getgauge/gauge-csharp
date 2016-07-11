@@ -83,8 +83,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var expression = Hooks[hookType];
             _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHook"));
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
-                
-            var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
+
+            var sandbox = new Sandbox(string.Empty, _mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
             var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
 
             Assert.IsTrue(executionResult.Success);
@@ -97,8 +97,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var expression = Hooks[hookType];
             _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook")).Returns(GetType().GetMethod("DummyHookThrowsException"));
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
-                
-            var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
+
+            var sandbox = new Sandbox(string.Empty, _mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
             var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
 
             Assert.False(executionResult.Success);

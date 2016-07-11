@@ -23,7 +23,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
@@ -46,14 +45,20 @@ namespace Gauge.CSharp.Runner
 
         private dynamic _classInstanceManager;
 
-        private readonly IHookRegistry _hookRegistry;
+        private IHookRegistry _hookRegistry;
         private readonly IFileWrapper _fileWrapper;
 
         private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
-        public Sandbox(IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
+        public Sandbox(string basePath, IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
-//            LogConfiguration.Initialize();
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+            {
+                var assemblyName = args.Name.Split(',').FirstOrDefault();
+                var probePath = Path.GetFullPath(Path.Combine(basePath, string.Format("{0}.dll", assemblyName)));
+                return File.Exists(probePath) ? Assembly.LoadFrom(probePath) : null;
+            };
+            //            LogConfiguration.Initialize();
             _assemblyLoader = assemblyLoader;
             _hookRegistry = hookRegistry;
             _fileWrapper = fileWrapper;
@@ -63,7 +68,7 @@ namespace Gauge.CSharp.Runner
             LoadClassInstanceManager();
         }
 
-        public Sandbox() : this(new AssemblyLoader(), new HookRegistry(new AssemblyLoader()), new FileWrapper())
+        public Sandbox(string runnerBasePath) : this(runnerBasePath, new AssemblyLoader(), null, new FileWrapper())
         {
         }
 
@@ -218,8 +223,7 @@ namespace Gauge.CSharp.Runner
             return executionResult;
         }
 
-        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions,
-            IList<string> parametersList, string newStepValue)
+        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue)
         {
             return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList, newStepValue);
         }
@@ -263,6 +267,7 @@ namespace Gauge.CSharp.Runner
 
         private IEnumerable<IHookMethod> GetHooksFromRegistry(string hookType)
         {
+            _hookRegistry = _hookRegistry ?? new HookRegistry(_assemblyLoader);
             switch (hookType)
             {
                 case "BeforeSuite":

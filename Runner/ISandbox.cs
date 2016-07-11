@@ -40,6 +40,6 @@ namespace Gauge.CSharp.Runner
         void StartExecutionScope(string tag);
         void CloseExectionScope();
         ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IEnumerable<string> applicableTags);
-        IEnumerable<string> Refactor(GaugeMethod methodInfo, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue);
+        IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue);
     }
 }

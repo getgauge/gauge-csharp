@@ -16,6 +16,10 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Gauge.CSharp.Core;
@@ -37,10 +41,13 @@ namespace Gauge.CSharp.Runner
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
 
 				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                var first = new Uri(Path.GetDirectoryName(assemblies.First(assembly => assembly.GetName().Name == "Gauge.CSharp.Runner").CodeBase)).AbsolutePath;
                 var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
-                    typeof(Sandbox).FullName);
-
+                    typeof(Sandbox).FullName, false, BindingFlags.Default,
+                    null, new object[]{first}, CultureInfo.CurrentCulture, null
+                    );
                 return sandbox;
             }
             catch (Exception e)

@@ -20,7 +20,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
+using Gauge.CSharp.Runner.Models;
+using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
+using Google.ProtocolBuffers;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NUnit.Framework;
@@ -46,7 +49,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
 
-            sandbox.Refactor(gaugeMethod, Enumerable.Empty<Tuple<int,int>>(), new List<string>(), "foo");
+            sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo");
 
             AssertStepAttributeWithTextExists(gaugeMethod.Name, "foo");
         }
@@ -58,7 +61,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
             var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
 
-            var filesChanged = sandbox.Refactor(gaugeMethod, Enumerable.Empty<Tuple<int, int>>(), new List<string>(), "foo").ToList();
+            var filesChanged = sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo").ToList();
 
             Assert.AreEqual(1, filesChanged.Count);
             Assert.AreEqual(expectedPath, filesChanged.First());
@@ -72,7 +75,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
-            var parameterPositions = new[] { new Tuple<int, int>(1, 0), new Tuple<int, int>(0, 1) };
+            var parameterPositions = new[] { new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0) };
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"who", "what"}, newStepValue);
 
             AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
@@ -86,7 +89,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
-            var parameterPositions = new[] {new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(2, -1)};
+            var parameterPositions = new[] {new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
 
             AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
@@ -99,7 +102,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             const string newStepValue = "Refactoring this is a test step <foo>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
-            var parameterPositions = new [] { new Tuple<int, int>(0,-1) };
+            var parameterPositions = new [] { new Tuple<int, int>(-1,0) };
 
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"foo"}, newStepValue);
 
@@ -113,7 +116,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             const string newStepValue = "Refactoring this is a test step <class>";
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
-            var parameterPositions = new[] { new Tuple<int, int>(0, -1) };
+            var parameterPositions = new[] { new Tuple<int, int>(-1, 0) };
 
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"class"}, newStepValue);
 
@@ -140,7 +143,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
-            var parameterPositions = new[] { new Tuple<int, int>(0, 1) };
+            var parameterPositions = new[] { new Tuple<int, int>(1, 0) };
 
             sandbox.Refactor(gaugeMethod, parameterPositions , new List<string>(), "Refactoring Say something to <who>");
 
@@ -188,6 +191,71 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             for (var i = 0; i < parameters.Count; i++)
             {
                 Assert.AreEqual(parameters[i], methodParameters[i]);
+            }
+        }
+
+        public class RefactorProcessorTests
+        {
+            private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
+
+            [SetUp]
+            public void Setup()
+            {
+                Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _testProjectPath);
+
+                File.Copy(Path.Combine(_testProjectPath, "RefactoringSample.cs"), Path.Combine(_testProjectPath, "RefactoringSample_copy.cs"), true);
+            }
+
+            [Test]
+            public void ShouldAddParameters()
+            {
+                const string parameterizedStepText = "Refactoring Say {} to {}";
+                const string stepText = "Refactoring Say <what> to <who>";
+                var sandbox = SandboxFactory.Create();
+                var gaugeMethod = sandbox.GetStepMethods()
+                    .First(method => method.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
+                var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
+                var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
+                var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
+                var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
+
+                var message = Message.CreateBuilder()
+                    .SetMessageId(1234)
+                    .SetMessageType(Message.Types.MessageType.RefactorRequest)
+                    .SetRefactorRequest(
+                        RefactorRequest.CreateBuilder()
+                            .SetOldStepValue(
+                                ProtoStepValue.CreateBuilder()
+                                    .SetStepValue(stepText)
+                                    .SetParameterizedStepValue(parameterizedStepText)
+                                    .AddParameters("what")
+                                    .AddParameters("who")
+                                    .Build())
+                            .SetNewStepValue(
+                                ProtoStepValue.CreateBuilder()
+                                    .SetStepValue("Refactoring Say {} to {} at {}")
+                                    .SetParameterizedStepValue("Refactoring Say <what> to <who> at <when>")
+                                    .AddParameters("what")
+                                    .AddParameters("who")
+                                    .AddParameters("when")
+                                    .Build())
+                            .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(0).SetNewPosition(0))
+                            .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(1).SetNewPosition(1))
+                            .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(-1).SetNewPosition(2))
+                    ).Build();
+
+                var refactorProcessor = new RefactorProcessor(stepRegistry, sandbox);
+                var result = refactorProcessor.Process(message);
+                Console.WriteLine(result.RefactorResponse.ToJson());
+                Assert.IsTrue(result.RefactorResponse.Success);
+            }
+            [TearDown]
+            public void TearDown()
+            {
+                var sourceFileName = Path.Combine(_testProjectPath, "RefactoringSample_copy.cs");
+                File.Copy(sourceFileName, Path.Combine(_testProjectPath, "RefactoringSample.cs"), true);
+                File.Delete(sourceFileName);
+                Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
             }
         }
     }

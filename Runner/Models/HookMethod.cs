@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Extensions;
 
 namespace Gauge.CSharp.Runner.Models
@@ -26,7 +27,7 @@ namespace Gauge.CSharp.Runner.Models
     [Serializable]
     public class HookMethod : IHookMethod
     {
-        public dynamic TagAggregation { get; private set; }
+        public TagAggregation TagAggregation { get; private set; }
 
         public IEnumerable<string> FilterTags { get; private set; }
 
@@ -44,11 +45,10 @@ namespace Gauge.CSharp.Runner.Models
             var targetTagBehaviourType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregationBehaviourAttribute");
             dynamic tagAggregationBehaviourAttribute = methodInfo.GetCustomAttribute(targetTagBehaviourType);
 
-            var aggregationType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregation");
-            var setTagAggregation = Enum.Parse(aggregationType, "And");
+            var setTagAggregation = TagAggregation.And;
             if (!ReferenceEquals(tagAggregationBehaviourAttribute, null))
             {
-                setTagAggregation = Enum.Parse(aggregationType, tagAggregationBehaviourAttribute.TagAggregation.ToString());
+                setTagAggregation = Enum.Parse(typeof(TagAggregation), tagAggregationBehaviourAttribute.TagAggregation.ToString());
             }
             TagAggregation = setTagAggregation;
         }

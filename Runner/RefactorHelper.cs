@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner
 {
     public class RefactorHelper
     {
-        public static IEnumerable<string> Refactor(MethodInfo method, IEnumerable<Tuple<int, int>> parameterPositions, IList<string> parameters, string newStepValue)
+        public static IEnumerable<string> Refactor(MethodInfo method, IList<Tuple<int, int>> parameterPositions, IList<string> parameters, string newStepValue)
         {
             var projectFile = Directory.EnumerateFiles(Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT"), "*.csproj", SearchOption.AllDirectories).FirstOrDefault();
 
@@ -97,11 +97,11 @@ namespace Gauge.CSharp.Runner
         {
             var parameterListSyntax = methodDeclarationSyntax.ParameterList;
             var newParams = new SeparatedSyntaxList<ParameterSyntax>();
-            newParams = parameterPositions.OrderBy(position => position.Item1)
+            newParams = parameterPositions.OrderBy(position => position.Item2)
                 .Aggregate(newParams, (current, parameterPosition) =>
-                        current.Add(parameterPosition.Item2 == -1
-                            ? CreateParameter(parameters[parameterPosition.Item1])
-                            : parameterListSyntax.Parameters[parameterPosition.Item2]));
+                        current.Add(parameterPosition.Item1 == -1
+                            ? CreateParameter(parameters[parameterPosition.Item2])
+                            : parameterListSyntax.Parameters[parameterPosition.Item1]));
             return parameterListSyntax.WithParameters(newParams);
         }
 
