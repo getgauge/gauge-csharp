@@ -28,13 +28,13 @@ using NLog;
 namespace Gauge.CSharp.Runner
 {
     [Serializable]
-    public class SandboxFactory
+    public class SandboxBuilder
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static ISandbox Create(AppDomainSetup setup = null)
+        public static ISandbox Build()
         {
-            var sandboxAppDomainSetup = setup ?? new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
+            var sandboxAppDomainSetup = new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
             Logger.Info("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
             try
             {

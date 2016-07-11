@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string parameterizedStepText = "Step that takes a table {}";
             const string stepText = "Step that takes a table <table>";
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
                 .First(method => method.Name == "IntegrationTestSample.StepImplementation.ReadTable");
             var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
@@ -80,7 +80,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string parameterizedStepText = "I throw a serializable exception";
             const string stepText = "I throw a serializable exception";
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
                 .First(method => method.Name == "IntegrationTestSample.StepImplementation.ThrowSerializableException");
             var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };

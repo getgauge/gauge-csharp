@@ -148,7 +148,7 @@
     <Compile Include="Processors\StepExecutionStartingProcessor.cs" />
     <Compile Include="RefactorHelper.cs" />
     <Compile Include="Sandbox.cs" />
-    <Compile Include="SandboxFactory.cs" />
+    <Compile Include="SandboxBuilder.cs" />
     <Compile Include="SetupCommand.cs" />
     <Compile Include="StartCommand.cs" />
     <Compile Include="Models\StepRegistry.cs" />

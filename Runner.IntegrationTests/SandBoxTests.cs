@@ -29,7 +29,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldLoadTargetLibAssemblyInSandbox()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
 
             // The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
             // The actual Gauge CSharp runner uses a different version of Lib 
@@ -42,7 +42,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 		[Test]
 		public void ShouldNotLoadTargetLibAssemblyInRunnersDomain()
 		{
-			SandboxFactory.Create();
+			SandboxBuilder.Build();
 
 			// The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
 			// The actual Gauge CSharp runner uses a different version of Lib 
@@ -53,7 +53,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetAllStepMethods()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var stepMethods = sandbox.GetStepMethods();
 
@@ -63,7 +63,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetAllStepTexts()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepTexts = sandbox.GetAllStepTexts().ToList();
 
             new List<string>
@@ -80,7 +80,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldExecuteMethodAndReturnResult()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.Context") == 0);
@@ -93,7 +93,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void SuccessIsFalseOnUnserializableExceptionThrown()
         {
             const string expectedMessage = "I am a custom exception";
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowUnserializableException") == 0);
@@ -108,7 +108,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void SuccessIsFalseOnSerializableExceptionThrown()
         {
             const string expectedMessage = "I am a custom serializable exception";
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ThrowSerializableException") == 0);
 
@@ -122,7 +122,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldCreateTableFromTargetType()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
 
@@ -139,7 +139,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetStepTextsForMethod()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.StepWithAliases") == 0);
 
@@ -152,7 +152,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldGetPendingMessages()
         {
-            var sandbox = SandboxFactory.Create();
+            var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
             var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.SaySomething") == 0);
 

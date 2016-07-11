@@ -46,7 +46,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldRefactorAttributeText()
         {
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
 
             sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo");
@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldRefactorAndReturnFilesChanged()
         {
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
             var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
 
@@ -72,7 +72,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldReorderParameters()
         {
             const string newStepValue = "Refactoring Say <who> to <what>";
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPositions = new[] { new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0) };
@@ -86,7 +86,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldAddParameters()
         {
             const string newStepValue = "Refactoring Say <what> to <who> in <where>";
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPositions = new[] {new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
@@ -100,7 +100,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldAddParametersWhenNoneExisted()
         {
             const string newStepValue = "Refactoring this is a test step <foo>";
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new [] { new Tuple<int, int>(-1,0) };
 
@@ -114,7 +114,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldAddParametersWithReservedKeywordName()
         {
             const string newStepValue = "Refactoring this is a test step <class>";
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new[] { new Tuple<int, int>(-1, 0) };
 
@@ -127,7 +127,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldRemoveParameters()
         {
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPositions = new[] { new Tuple<int, int>(0, 0) };
@@ -140,7 +140,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldRemoveParametersInAnyOrder()
         {
-            var sandbox = SandboxFactory.Create(AppDomain.CurrentDomain.SetupInformation);
+            var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
 
             var parameterPositions = new[] { new Tuple<int, int>(1, 0) };
@@ -211,7 +211,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             {
                 const string parameterizedStepText = "Refactoring Say {} to {}";
                 const string stepText = "Refactoring Say <what> to <who>";
-                var sandbox = SandboxFactory.Create();
+                var sandbox = SandboxBuilder.Build();
                 var gaugeMethod = sandbox.GetStepMethods()
                     .First(method => method.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
                 var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
