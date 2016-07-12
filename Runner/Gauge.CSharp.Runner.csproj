@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="AssemblyLocater.cs" />
     <Compile Include="AssemblyLoader.cs" />
+    <Compile Include="Exceptions\GaugeLibVersionMismatchException.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Models\GaugeMethod.cs" />
     <Compile Include="Converters\IParamConverter.cs" />

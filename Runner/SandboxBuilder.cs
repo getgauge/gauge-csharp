@@ -40,20 +40,21 @@ namespace Gauge.CSharp.Runner
             {
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
 
-				var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence, sandboxAppDomainSetup, permSet);
+                var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence,
+                    sandboxAppDomainSetup, permSet);
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 var first = new Uri(Path.GetDirectoryName(assemblies.First(assembly => assembly.GetName().Name == "Gauge.CSharp.Runner").CodeBase)).AbsolutePath;
-                var sandbox = (Sandbox)sandboxDomain.CreateInstanceFromAndUnwrap(
+                var sandbox = (Sandbox) sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                     typeof(Sandbox).FullName, false, BindingFlags.Default,
-                    null, new object[]{first}, CultureInfo.CurrentCulture, null
+                    null, new object[] {first}, CultureInfo.CurrentCulture, null
                     );
                 return sandbox;
             }
             catch (Exception e)
             {
                 Logger.Info("Unable to create Sandbox in {0}", sandboxAppDomainSetup.ApplicationBase);
-                Logger.Fatal(e);
+                Logger.Debug(e);
                 throw;
             }
         }

@@ -18,6 +18,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
 using NLog;
@@ -47,7 +48,16 @@ namespace Gauge.CSharp.Runner
             {
                 return;
             }
-            _gaugeListener.Invoke().PollForMessages();
+            try
+            {
+                _gaugeListener.Invoke().PollForMessages();
+            }
+            catch (TargetInvocationException e)
+            {
+                if (!(e.InnerException is GaugeLibVersionMismatchException))
+                    throw;
+                Logger.Fatal(e.InnerException.Message);
+            }
         }
 
         private bool TryBuild()

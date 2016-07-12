@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
-using System;
 using Gauge.CSharp.Runner.Models;
 
 namespace Gauge.CSharp.Runner

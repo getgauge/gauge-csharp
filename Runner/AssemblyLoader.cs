@@ -22,6 +22,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Exceptions;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -37,6 +38,7 @@ namespace Gauge.CSharp.Runner
         private Assembly _targetLibAssembly;
         private readonly IAssemblyWrapper _assemblyWrapper;
         private readonly IFileWrapper _fileWrapper;
+        private readonly Version _minimumLibversion = new Version("0.6.0");
 
         public AssemblyLoader(string runnerBasePath, IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper, IEnumerable<string> assemblyLocations)
         {
@@ -171,6 +173,12 @@ namespace Gauge.CSharp.Runner
                 throw new FileNotFoundException(message);
             }
             _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
+            var targetLibVersion = _targetLibAssembly.GetName().Version;
+            if (targetLibVersion <= _minimumLibversion)
+            {
+                throw new GaugeLibVersionMismatchException(targetLibVersion, _minimumLibversion);
+            }
+
             logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }
     }
