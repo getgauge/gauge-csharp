@@ -124,7 +124,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
-            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ReadTable-Tabletable") == 0);
 
             var table = new Table(new List<string> {"foo", "bar"});
             table.AddRow(new List<string> {"foorow1", "barrow1"});
@@ -154,7 +154,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             var sandbox = SandboxBuilder.Build();
             var stepMethods = sandbox.GetStepMethods();
-            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.SaySomething") == 0);
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.SaySomething-StringwhatStringwho") == 0);
 
             sandbox.ExecuteMethod(gaugeMethod, "hello", "world");
             var pendingMessages = sandbox.GetAllPendingMessages().ToList();

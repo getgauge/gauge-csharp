@@ -44,9 +44,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldRefactorAttributeText()
         {
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
 
             sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo");
 
@@ -57,9 +55,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldRefactorAndReturnFilesChanged()
         {
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
             var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
 
             var filesChanged =
@@ -75,9 +71,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring Say <who> to <what>";
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
 
             var parameterPositions = new[] {new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0)};
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"who", "what"}, newStepValue);
@@ -91,12 +85,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring Say <what> to <who> in <where>";
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
 
-            var parameterPositions = new[]
-            {new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
+            var parameterPositions = new[]{new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
 
             AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
@@ -108,9 +99,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring this is a test step <foo>";
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
 
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"foo"}, newStepValue);
@@ -124,9 +113,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             const string newStepValue = "Refactoring this is a test step <class>";
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
             var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
 
             sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"class"}, newStepValue);
@@ -139,9 +126,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldRemoveParameters()
         {
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
 
             var parameterPositions = new[] {new Tuple<int, int>(0, 0)};
 
@@ -154,9 +139,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         public void ShouldRemoveParametersInAnyOrder()
         {
             var sandbox = SandboxBuilder.Build();
-            var gaugeMethod =
-                sandbox.GetStepMethods()
-                    .First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
+            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
 
             var parameterPositions = new[] {new Tuple<int, int>(1, 0)};
 
@@ -176,7 +159,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
         private void AssertStepAttributeWithTextExists(string methodName, string text)
         {
-            var name = methodName.Split('.').Last();
+            var name = methodName.Split('.').Last().Split('-').First();
             var tree =
                 CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(_testProjectPath, "RefactoringSample.cs")));
             var root = tree.GetRoot();
@@ -197,7 +180,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
         private void AssertParametersExist(string methodName, IReadOnlyList<string> parameters)
         {
-            var name = methodName.Split('.').Last();
+            var name = methodName.Split('.').Last().Split('-').First();
             var tree =
                 CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(_testProjectPath, "RefactoringSample.cs")));
             var root = tree.GetRoot();

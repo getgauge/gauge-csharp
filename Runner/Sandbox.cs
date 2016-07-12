@@ -69,6 +69,7 @@ namespace Gauge.CSharp.Runner
         {
             var method = MethodMap[gaugeMethod.Name];
             var executionResult = new ExecutionResult {Success = true};
+            var logger = LogManager.GetLogger("Sandbox");
             try
             {
                 var parameters = args.Select(o =>
@@ -82,11 +83,14 @@ namespace Gauge.CSharp.Runner
                         return o;
                     }
                 }).ToArray();
+                logger.Debug("Executing method: {0}", method.Name);
                 Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
             {
+                logger.Error("Error executing {0}", method.Name);
                 var innerException = ex.InnerException ?? ex;
+                logger.Error(innerException);
                 executionResult.ExceptionMessage = innerException.Message;
                 executionResult.StackTrace = innerException.StackTrace;
                 executionResult.Source = innerException.Source;
@@ -116,8 +120,12 @@ namespace Gauge.CSharp.Runner
             MethodMap = new Dictionary<string, MethodInfo>();
             foreach (var info in infos)
             {
-                var parameters = info.GetParameters().Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name)).Aggregate(string.Concat);
-                var methodId = string.Format("{0}.{1}-{2}", info.DeclaringType.FullName, info.Name, parameters);
+                var parameters = info.GetParameters();
+                var parameterText = parameters.Length > 0
+                    ? "-" + parameters.Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name))
+                        .Aggregate(string.Concat)
+                    : string.Empty;
+                var methodId = string.Format("{0}.{1}{2}", info.DeclaringType.FullName, info.Name, parameterText);
                 MethodMap.Add(methodId, info);
                 LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}", methodId);
             }

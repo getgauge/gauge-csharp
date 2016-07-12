@@ -43,7 +43,7 @@ namespace Gauge.CSharp.Runner
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 var assemblyName = args.Name.Split(',').FirstOrDefault();
-                var gaugeBinDir = Utils.GetGaugeBinDir();
+                var gaugeBinDir = AssemblyLocater.GetGaugeBinDir();
 
                 var probePath = Path.GetFullPath(Path.Combine(gaugeBinDir, string.Format("{0}.dll", assemblyName)));
                 if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);

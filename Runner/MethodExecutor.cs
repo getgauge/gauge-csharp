@@ -39,7 +39,6 @@ namespace Gauge.CSharp.Runner
         [DebuggerHidden]
         public ProtoExecutionResult Execute(GaugeMethod method, params string[] args)
         {
-            Logger.Debug("Execution method: {0}", method.Name);
             var stopwatch = Stopwatch.StartNew();
             var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
             var executionResult = _sandbox.ExecuteMethod(method, args);
@@ -47,8 +46,6 @@ namespace Gauge.CSharp.Runner
             builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
             if (!executionResult.Success)
             {
-                Logger.Error("Error executing {0}", method.Name);
-
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 builder.SetFailed(true);
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");

@@ -42,14 +42,14 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         [Test]
         public void ShouldAddParameters()
         {
-            const string parameterizedStepText = "Refactoring Say {} to {}";
-            const string stepText = "Refactoring Say <what> to <who>";
+            const string parameterizedStepText = "Refactoring Say <what> to <who>";
+            const string stepValue = "Refactoring Say {} to {}";
             var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
-                .First(method => method.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething");
-            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
-            var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
-            var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
+                .First(method => method.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(stepValue, gaugeMethod) };
+            var aliases = new Dictionary<string, bool> { { stepValue, false } };
+            var stepTextMap = new Dictionary<string, string> { { stepValue, parameterizedStepText } };
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
 
             var message = Message.CreateBuilder()
@@ -59,7 +59,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
                     RefactorRequest.CreateBuilder()
                         .SetOldStepValue(
                             ProtoStepValue.CreateBuilder()
-                                .SetStepValue(stepText)
+                                .SetStepValue(stepValue)
                                 .SetParameterizedStepValue(parameterizedStepText)
                                 .AddParameters("what")
                                 .AddParameters("who")
@@ -82,6 +82,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Console.WriteLine(result.RefactorResponse.ToJson());
             Assert.IsTrue(result.RefactorResponse.Success);
         }
+
         [TearDown]
         public void TearDown()
         {

@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             const string stepText = "Step that takes a table <table>";
             var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
-                .First(method => method.Name == "IntegrationTestSample.StepImplementation.ReadTable");
+                .First(method => method.Name == "IntegrationTestSample.StepImplementation.ReadTable-Tabletable");
             var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
             var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
             var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
