@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib
@@ -32,12 +31,6 @@ namespace Gauge.CSharp.Lib
             {DataStoreType.Spec, new DataStore()},
             {DataStoreType.Scenario, new DataStore()}
         };
-
-        [Obsolete("Use one of DataStoreFactory.SuiteDataStore, DataStoreFactory.SpecDataStore, DataStoreFactory.ScenarioDataStore instead.")]
-        public static DataStore GetDataStoreFor(DataStoreType dataStoreType)
-        {
-            return DataStores[dataStoreType];
-        }
 
         /// <summary>
         ///     Access the Suite level DataStore.

@@ -52,6 +52,7 @@
     <Compile Include="Attribute\FilteredHookAttribute.cs" />
     <Compile Include="Attribute\BeforeSpec.cs" />
     <Compile Include="Attribute\BeforeSuite.cs" />
+    <Compile Include="Attribute\ContinueOnFailure.cs" />
     <Compile Include="Attribute\TagAggregation.cs" />
     <Compile Include="Attribute\TagAggregationBehaviourAttribute.cs" />
     <Compile Include="DataStore.cs" />
