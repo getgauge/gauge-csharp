@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             // The sample project uses a special version of Gauge Lib, versioned 0.0.0 for testing.
             // The actual Gauge CSharp runner uses a different version of Lib 
 			// used by sample project
-			Assert.AreEqual("0.0.0",sandbox.TargetLibAssemblyVersion);
+			Assert.AreEqual("0.6.999",sandbox.TargetLibAssemblyVersion);
 			// used by runner
             AssertRunnerDomainDidNotLoadUsersAssembly();
         }
