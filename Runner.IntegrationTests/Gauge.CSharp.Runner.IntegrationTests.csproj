@@ -54,6 +54,7 @@
     <Compile Include="ExecuteStepProcessorTests.cs" />
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="RefactorHelperTests.cs" />
+    <Compile Include="RefactorProcessorTests.cs" />
     <Compile Include="SandboxTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtils.cs" />
