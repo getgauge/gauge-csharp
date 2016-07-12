@@ -65,8 +65,7 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy,
-            IEnumerable<string> applicableTags)
+        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags)
         {
             var stopwatch = Stopwatch.StartNew();
             var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);

@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -42,8 +43,17 @@ namespace Gauge.CSharp.Runner
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 var assemblyName = args.Name.Split(',').FirstOrDefault();
-                var probePath = Path.GetFullPath(Path.Combine(runnerBasePath, string.Format("{0}.dll", assemblyName)));
-                return File.Exists(probePath) ? Assembly.LoadFrom(probePath) : null;
+                var gaugeBinDir = Utils.GetGaugeBinDir();
+
+                var probePath = Path.GetFullPath(Path.Combine(gaugeBinDir, string.Format("{0}.dll", assemblyName)));
+                if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
+
+                probePath = Path.GetFullPath(Path.Combine(runnerBasePath, string.Format("{0}.dll", assemblyName)));
+
+                if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
+
+                var executingAssembly = Assembly.GetExecutingAssembly();
+                return executingAssembly.GetName().Name == assemblyName ? executingAssembly : null;
             };
             _assemblyWrapper = assemblyWrapper;
             _fileWrapper = fileWrapper;

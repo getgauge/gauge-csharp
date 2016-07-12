@@ -55,7 +55,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         private Mock<IHooksStrategy> _mockStrategy;
         private Mock<IHookRegistry> _mockHookRegistry;
         private Mock<IAssemblyLoader> _mockAssemblyLoader;
-        private IEnumerable<string> _applicableTags;
+        private IList<string> _applicableTags;
         private HashSet<IHookMethod> _hookMethods;
         private string _gaugeProjectRootEnv;
 
@@ -76,7 +76,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _hookMethods = new HashSet<IHookMethod> { mockHookMethod.Object };
             _mockFileWrapper = new Mock<IFileWrapper>();
             _mockStrategy = new Mock<IHooksStrategy>();
-            _applicableTags = Enumerable.Empty<string>();
+            _applicableTags = Enumerable.Empty<string>().ToList();
             _mockStrategy.Setup(strategy => strategy.GetApplicableHooks(_applicableTags, _hookMethods))
                 .Returns(new[] { "DummyHook" });
         }

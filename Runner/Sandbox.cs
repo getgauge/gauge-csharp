@@ -188,7 +188,9 @@ namespace Gauge.CSharp.Runner
             _classInstanceManager.CloseScope();
         }
 
-        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IEnumerable<string> applicableTags)
+        [DebuggerStepperBoundary]
+        [DebuggerHidden]
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var executionResult = new ExecutionResult
