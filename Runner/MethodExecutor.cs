@@ -55,7 +55,7 @@ namespace Gauge.CSharp.Runner
                 }
                 builder.SetErrorMessage(executionResult.ExceptionMessage);
                 builder.SetStackTrace(executionResult.StackTrace);
-                builder.SetRecoverableError(false);
+                builder.SetRecoverableError(executionResult.Recoverable);
                 builder.SetExecutionTime(elapsedMilliseconds);
             }
             return builder.Build();

@@ -30,5 +30,7 @@ namespace Gauge.CSharp.Runner.Models
         public string StackTrace { get; set; }
 
         public byte[] ScreenShot { get; set; }
+
+        public bool Recoverable { get; set; }
     }
 }

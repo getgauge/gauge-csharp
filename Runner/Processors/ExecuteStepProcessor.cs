@@ -20,8 +20,6 @@ using System.IO;
 using System.Linq;
 using Gauge.CSharp.Runner.Models;
 using Gauge.Messages;
-using Google.ProtocolBuffers;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using Gauge.CSharp.Lib;

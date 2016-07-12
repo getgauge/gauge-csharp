@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(10, stepMethods.Count);
+            Assert.AreEqual(11, stepMethods.Count);
         }
 
         [Test]
@@ -117,6 +117,19 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Assert.False(executionResult.Success);
             Assert.AreEqual(expectedMessage, executionResult.ExceptionMessage);
 			StringAssert.Contains("IntegrationTestSample.StepImplementation.ThrowSerializableException",executionResult.StackTrace);
+        }
+
+        [Test]
+        public void RecoverableIsTrueOnExceptionThrownWhenContinueOnFailure()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var stepMethods = sandbox.GetStepMethods();
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.ContinueOnFailure") == 0);
+
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
+
+            Assert.IsFalse(executionResult.Success);
+            Assert.IsTrue(executionResult.Recoverable);
         }
 
         [Test]

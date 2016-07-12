@@ -51,6 +51,13 @@ namespace IntegrationTestSample
 	        throw new CustomSerializableException("I am a custom serializable exception");
 	    }
 
+	    [Step("I throw a serializable exception")]
+        [ContinueOnFailure]
+	    public void ContinueOnFailure()
+	    {
+	        throw new CustomSerializableException("I am a custom serializable exception");
+	    }
+
         [Step("Step with text", "and an alias")]
 	    public void StepWithAliases()
 	    {

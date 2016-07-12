@@ -24,6 +24,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using Gauge.CSharp.Runner.Converters;
+using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
@@ -95,6 +96,7 @@ namespace Gauge.CSharp.Runner
                 executionResult.StackTrace = innerException.StackTrace;
                 executionResult.Source = innerException.Source;
                 executionResult.Success = false;
+                executionResult.Recoverable = gaugeMethod.ContinueOnFailure;
             }
 
             return executionResult;
@@ -120,18 +122,16 @@ namespace Gauge.CSharp.Runner
             MethodMap = new Dictionary<string, MethodInfo>();
             foreach (var info in infos)
             {
-                var parameters = info.GetParameters();
-                var parameterText = parameters.Length > 0
-                    ? "-" + parameters.Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name))
-                        .Aggregate(string.Concat)
-                    : string.Empty;
-                var methodId = string.Format("{0}.{1}{2}", info.DeclaringType.FullName, info.Name, parameterText);
+                var methodId = info.FullyQuallifiedName();
                 MethodMap.Add(methodId, info);
-                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}", methodId);
+                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}, Recoverable: {1}", methodId, info.IsRecoverableStep());
             }
-            return MethodMap.Keys.Select(s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
+            return MethodMap.Keys.Select(s =>
+            {
+                var method = MethodMap[s];
+                return new GaugeMethod {Name = s, ParameterCount = method.GetParameters().Length, ContinueOnFailure = method.IsRecoverableStep()};
+            }).ToList();
         }
-
 
         public List<string> GetAllStepTexts()
         {
@@ -362,8 +362,6 @@ namespace Gauge.CSharp.Runner
                                             .First(name => name.Name == "Gauge.CSharp.Lib")
                                             .Name, "Gauge.CSharp.Lib.DefaultClassInstanceManager").Unwrap();
             logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
-
-            Console.WriteLine("Loaded : {0}", _classInstanceManager.GetType());
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
     }

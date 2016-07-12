@@ -24,5 +24,6 @@ namespace Gauge.CSharp.Runner.Models
     {
         public string Name { get; set; }
         public int ParameterCount { get; set; }
+        public bool ContinueOnFailure { get; set; }
     }
 }

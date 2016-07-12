@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using System.Reflection;
 
 namespace Gauge.CSharp.Runner.Extensions
@@ -23,9 +24,22 @@ namespace Gauge.CSharp.Runner.Extensions
     {
         public static string FullyQuallifiedName(this MethodInfo info)
         {
+            var parameters = info.GetParameters();
+            var parameterText = parameters.Length > 0
+                ? "-" + parameters.Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name))
+                    .Aggregate(string.Concat)
+                : string.Empty;
+
             return info.DeclaringType == null
                 ? info.Name
-                : string.Format("{0}.{1}", info.DeclaringType.FullName, info.Name);
+                : string.Format("{0}.{1}{2}", info.DeclaringType.FullName, info.Name, parameterText);
+        }
+
+        public static bool IsRecoverableStep(this MethodInfo info)
+        {
+            var customAttributes = info.GetCustomAttributes().ToList();
+            return customAttributes.Any(attribute => attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.Step") &&
+            customAttributes.Any(attribute => attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.ContinueOnFailure");
         }
     }
 }
