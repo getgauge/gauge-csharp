@@ -115,10 +115,13 @@ namespace Gauge.CSharp.Runner
             var infos = _assemblyLoader.GetMethods("Gauge.CSharp.Lib.Attribute.Step");
             MethodMap = new Dictionary<string, MethodInfo>();
             foreach (var info in infos)
-                MethodMap.Add(string.Format("{0}.{1}", info.DeclaringType.FullName, info.Name), info);
-            return
-                MethodMap.Keys.Select(
-                    s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
+            {
+                var parameters = info.GetParameters().Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name)).Aggregate(string.Concat);
+                var methodId = string.Format("{0}.{1}-{2}", info.DeclaringType.FullName, info.Name, parameters);
+                MethodMap.Add(methodId, info);
+                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}", methodId);
+            }
+            return MethodMap.Keys.Select(s => new GaugeMethod {Name = s, ParameterCount = MethodMap[s].GetParameters().Length}).ToList();
         }
 
 
