@@ -69,11 +69,11 @@ namespace Gauge.CSharp.Runner.Processors
 
         private GaugeMethod GetGaugeMethod(ProtoStepValue stepValue)
         {
-            if (_stepRegistry.HasMultipleImplementations(stepValue.ParameterizedStepValue))
+            if (_stepRegistry.HasMultipleImplementations(stepValue.StepValue))
             {
                 throw new Exception(string.Format("Multiple step implementations found for : {0}", stepValue.ParameterizedStepValue));
             }
-            return _stepRegistry.MethodFor(stepValue.ParameterizedStepValue);
+            return _stepRegistry.MethodFor(stepValue.StepValue);
         }
     }
 }

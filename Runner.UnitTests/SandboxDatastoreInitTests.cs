@@ -54,7 +54,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(mockLibAssembly.Object);
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
-            var sandbox = new Sandbox(string.Empty, mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
+            var sandbox = new Sandbox(mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
             InitializedDataStore = string.Empty;
 
             sandbox.InitializeDataStore(dataStoreType);

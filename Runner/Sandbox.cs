@@ -47,7 +47,7 @@ namespace Gauge.CSharp.Runner
 
         private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
-        public Sandbox(string basePath, IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
+        public Sandbox(IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
             LogConfiguration.Initialize();
             _assemblyLoader = assemblyLoader;
@@ -59,7 +59,7 @@ namespace Gauge.CSharp.Runner
             LoadClassInstanceManager();
         }
 
-        public Sandbox(string runnerBasePath) : this(runnerBasePath, new AssemblyLoader(runnerBasePath), null, new FileWrapper())
+        public Sandbox(string runnerBasePath) : this(new AssemblyLoader(runnerBasePath), null, new FileWrapper())
         {
         }
 

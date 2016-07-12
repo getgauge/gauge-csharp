@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var expectedConfigLocation = string.Format("{0}.config", someTmpLocationDll);
             mockFileWrapper.Setup(wrapper => wrapper.Exists(expectedConfigLocation)).Returns(true);
 
-            new Sandbox(string.Empty, mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
+            new Sandbox(mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
 
             Assert.AreEqual(expectedConfigLocation, AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
@@ -74,7 +74,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
 
-            var sandbox = new Sandbox(string.Empty, mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
+            var sandbox = new Sandbox(mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
             byte[] screenshot;
             var tryScreenCapture = sandbox.TryScreenCapture(out screenshot);
 
@@ -96,7 +96,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
 
-            new Sandbox(string.Empty, mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
+            new Sandbox(mockAssemblyLoader.Object, mockHookRegistry.Object, mockFileWrapper.Object);
 
             Assert.IsTrue(assemblyLoaded, "Mock Assembly was not initialized by TestClassInstanceManager");
         }
