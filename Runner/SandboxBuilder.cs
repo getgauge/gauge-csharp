@@ -43,7 +43,8 @@ namespace Gauge.CSharp.Runner
                 var sandboxDomain = AppDomain.CreateDomain("Sandbox", AppDomain.CurrentDomain.Evidence,
                     sandboxAppDomainSetup, permSet);
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                var first = new Uri(Path.GetDirectoryName(assemblies.First(assembly => assembly.GetName().Name == "Gauge.CSharp.Runner").CodeBase)).AbsolutePath;
+                var codeBase = assemblies.First(assembly => assembly.GetName().Name == "Gauge.CSharp.Runner").CodeBase;
+                var first = Path.GetDirectoryName(new Uri(codeBase).LocalPath);
                 var sandbox = (Sandbox) sandboxDomain.CreateInstanceFromAndUnwrap(
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                     typeof(Sandbox).FullName, false, BindingFlags.Default,
