@@ -9,7 +9,6 @@ init:
     (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip', 'C:\maven-bin.zip')
     [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
     }
-- cmd: SET PATH=C:\maven\apache-maven-3.2.5\bin;%JAVA_HOME%\bin;%PATH:C:\Ruby193\bin;=%
 - cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx4g
 - cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
 - cmd: mvn --version
@@ -18,7 +17,7 @@ environment:
   GAUGE_PARALLEL: false
 build_script:
 - ps: >-
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = "C:\maven\apache-maven-3.2.5\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 
     .\build.cmd BuildInstallFT
