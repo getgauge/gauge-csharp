@@ -6,19 +6,19 @@ init:
 - ps: |
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     if (!(Test-Path -Path "C:\maven" )) {
-    (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip', 'C:\maven-bin.zip')
+    (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
     [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
     }
 - cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx4g
 - cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
-- cmd: mvn --version
 - cmd: java -version
 environment:
   GAUGE_PARALLEL: false
 build_script:
 - ps: >-
-    $env:Path = "C:\maven\apache-maven-3.2.5\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = "C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
+    mvn --version
 
     .\build.cmd BuildInstallFT
 test: off
