@@ -302,10 +302,14 @@ namespace Gauge.CSharp.Runner
             if (targetAssembly == null) return;
 
             var configFile = string.Format("{0}.config", targetAssembly.Location);
-            if (_fileWrapper.Exists(configFile))
+            if (!_fileWrapper.Exists(configFile)) return;
+
+            if (Type.GetType("Mono.Runtime") != null)
             {
-                AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
+                LogManager.GetLogger("Sandbox").Warn("Located {0}, but cannot load config dynamically in Mono. Skipping..", configFile);
+                return;
             }
+            AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
         }
 
         private void ScanCustomScreenGrabber()

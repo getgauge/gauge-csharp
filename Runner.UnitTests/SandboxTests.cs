@@ -41,7 +41,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
         }
 
-        [Test]
+        [Test, Platform(Exclude = "Mono", Reason = "Appdomain Config load is not supported in Mono")]
         public void ShouldLoadAppConfigFromTargetLocation()
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
