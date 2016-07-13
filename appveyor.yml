@@ -3,15 +3,24 @@ init:
 - ps: >-
     choco install gauge
 
-    choco install maven
+- ps: |
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    if (!(Test-Path -Path "C:\maven" )) {
+    (new-object System.Net.WebClient).DownloadFile(
+        'http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip',
+        'C:\maven-bin.zip'
+    )
+    [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
+    }
+- cmd: SET PATH=C:\maven\apache-maven-3.3.9\bin;%JAVA_HOME%\bin;%PATH%
+- cmd: SET M@_HOME=C:\maven\apache-maven-3.3.9\bin
+- cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx4g
+- cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
 environment:
   GAUGE_PARALLEL: false
 build_script:
 - ps: >-
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
-
-    $env:M2_HOME=(where.exe mvn.cmd | Get-item).Directory.parent.FullName
 
 
     cmd /c build.cmd BuildInstallFT
