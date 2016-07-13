@@ -17,11 +17,7 @@ init:
 environment:
   GAUGE_PARALLEL: false
 build_script:
-- ps: >-
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
-
-    cmd /c build.cmd BuildInstallFT
+- ps: .\build.cmd BuildInstallFT
 test: off
 artifacts:
 - path: .\gauge-tests\reports-csharp\html-report
