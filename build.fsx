@@ -93,10 +93,7 @@ let Run = fun (command, args, wd) ->
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
 let InvokeMvn = fun (args) ->
-    if isMono then
         Run("mvn", args, "gauge-tests")
-    else
-        Run("mvn.cmd", args, "gauge-tests")
 
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
