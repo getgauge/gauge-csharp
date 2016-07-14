@@ -44,18 +44,28 @@ namespace Gauge.CSharp.Runner
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
-                var assemblyName = args.Name.Split(',').FirstOrDefault();
-                var gaugeBinDir = AssemblyLocater.GetGaugeBinDir();
+                var logger = LogManager.GetLogger("AssemblyLoader");
+                logger.Info("Loading {0}", args.Name);
+                try
+                {
+                    var assemblyName = args.Name.Split(',').FirstOrDefault();
+                    var gaugeBinDir = AssemblyLocater.GetGaugeBinDir();
 
-                var probePath = Path.GetFullPath(Path.Combine(gaugeBinDir, string.Format("{0}.dll", assemblyName)));
-                if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
+                    var probePath = Path.GetFullPath(Path.Combine(gaugeBinDir, string.Format("{0}.dll", assemblyName)));
+                    if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
 
-                probePath = Path.GetFullPath(Path.Combine(runnerBasePath, string.Format("{0}.dll", assemblyName)));
+                    probePath = Path.GetFullPath(Path.Combine(runnerBasePath, string.Format("{0}.dll", assemblyName)));
 
-                if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
+                    if (File.Exists(probePath)) return Assembly.LoadFrom(probePath);
 
-                var executingAssembly = Assembly.GetExecutingAssembly();
-                return executingAssembly.GetName().Name == assemblyName ? executingAssembly : null;
+                    var executingAssembly = Assembly.GetExecutingAssembly();
+                    return executingAssembly.GetName().Name == assemblyName ? executingAssembly : null;
+                }
+                catch (System.Exception e)
+                {
+                    logger.Error(e);
+                    return null;
+                }
             };
             _assemblyWrapper = assemblyWrapper;
             _fileWrapper = fileWrapper;
