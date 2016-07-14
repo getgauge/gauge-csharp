@@ -1,8 +1,5 @@
 version: 1.0.{build}
 init:
-- ps: >-
-    choco install gauge
-
 - ps: |
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     if (!(Test-Path -Path "C:\maven" )) {
@@ -15,6 +12,9 @@ init:
 environment:
   GAUGE_PARALLEL: false
 build_script:
+- ps: >-
+    .\install_latest_gauge_nightly.ps1
+
 - ps: >-
     $env:Path = "C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
