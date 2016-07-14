@@ -1,5 +1,7 @@
 os:
   - osx
+env:
+  - GAUGE_HOME=./.gauge
 before_install:
   - mozroots --import --sync
   - brew update; brew install Caskroom/cask/java

@@ -45,7 +45,7 @@ namespace Gauge.CSharp.Runner
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 var logger = LogManager.GetLogger("AssemblyLoader");
-                logger.Info("Loading {0}", args.Name);
+                logger.Debug("Loading {0}", args.Name);
                 try
                 {
                     var assemblyName = args.Name.Split(',').FirstOrDefault();

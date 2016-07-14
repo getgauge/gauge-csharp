@@ -6,8 +6,6 @@ init:
     (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
     [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
     }
-- cmd: SET MAVEN_OPTS=-XX:MaxPermSize=2g -Xmx4g
-- cmd: SET JAVA_OPTS=-XX:MaxPermSize=2g -Xmx4g
 - cmd: java -version
 environment:
   GAUGE_PARALLEL: false
@@ -15,8 +13,9 @@ build_script:
 - ps: >-
     .\install_latest_gauge_nightly.ps1
 
-- ps: >-
-    $env:Path = "C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = "c:\Program Files\Gauge\bin;C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+    Write-Host "PATH : $($env:PATH)"
 
     $env:M2_HOME=(where.exe mvn.cmd | Get-item).Directory.parent.FullName
 
