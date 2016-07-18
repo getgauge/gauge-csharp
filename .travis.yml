@@ -10,7 +10,7 @@ install:
   - mkdir GoWorkspace
   - export GOPATH=$(cd $GoWorkspace ; pwd)
   - go get -u github.com/tools/godep
-  - go get -u github.com/getgauge/gauge
+  - go get -u -d github.com/getgauge/gauge
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec godep restore)
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go && exec go run build/make.go --install)
 language: csharp
