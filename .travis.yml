@@ -1,14 +1,16 @@
 os:
   - osx
-env:
-  - GAUGE_HOME=./.gauge
 before_install:
   - mozroots --import --sync
   - brew update; brew install Caskroom/cask/java
 install:
   - brew outdated maven || brew upgrade maven
   - mvn -version
-  - ./install_latest_gauge_nightly.sh
+  - brew outdated golang || brew install golang
+  - go get -u github.com/tools/godep
+  - go get -u github.com/getgauge/gauge
+  - (cd $GOPATH/src/github.com/getgauge/gauge && exec godep restore)
+  - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go && exec go run build/make.go --install)
 language: csharp
 script:
   - ./build.sh BuildInstallFT
