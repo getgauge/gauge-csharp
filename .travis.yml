@@ -6,7 +6,7 @@ before_install:
 install:
   - brew outdated maven || brew upgrade maven
   - mvn -version
-  - brew outdated golang || brew install golang
+  - brew outdated golang || brew upgrade golang
   - go get -u github.com/tools/godep
   - go get -u github.com/getgauge/gauge
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec godep restore)
