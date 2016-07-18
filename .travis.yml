@@ -7,10 +7,15 @@ install:
   - brew outdated maven || brew upgrade maven
   - mvn -version
   - brew outdated golang || brew upgrade golang
+  - mkdir GoWorkspace
+  - export GOPATH=$(cd $GoWorkspace ; pwd)
   - go get -u github.com/tools/godep
   - go get -u github.com/getgauge/gauge
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec godep restore)
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go && exec go run build/make.go --install)
 language: csharp
+cache:
+  directories:
+  - $HOME/.m2
 script:
   - ./build.sh BuildInstallFT
