@@ -56,9 +56,12 @@ namespace Gauge.CSharp.Runner.Processors
                     stepParameter.Count, parameters);
                 return ExecutionError(argumentMismatchError, request);
             }
+
+            var validTableParamTypes = new[] { Parameter.Types.ParameterType.Table, Parameter.Types.ParameterType.Special_Table };
+
             for (var i = 0; i < parameters; i++)
             {
-                args[i] = stepParameter[i].ParameterType == Parameter.Types.ParameterType.Table
+                args[i] = validTableParamTypes.Contains(stepParameter[i].ParameterType)  
                     ? GetTableData(stepParameter[i].Table)
                     : stepParameter[i].Value;
             }
