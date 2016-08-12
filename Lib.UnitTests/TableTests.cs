@@ -55,15 +55,15 @@ namespace Gauge.CSharp.Lib.UnitTests
         [Test]
         public void ShouldGetTableAsMarkdownString()
         {
-            var headers = new List<string> { "foo", "bar" };
+            var headers = new List<string> { "foo", "bar_with_big_header" };
             var table = new Table(headers);
             table.AddRow(new List<string> { "foo_val", "bar_val" });
             table.AddRow(new List<string> { "foo_val1", "bar_val1" });
 
-            const string expected = "|foo     |bar     |\n" +
-                                    "|--------|--------|\n" +
-                                    "|foo_val |bar_val |\n" +
-                                    "|foo_val1|bar_val1|";
+            const string expected = "|foo     |bar_with_big_header|\n" +
+                                    "|--------|-------------------|\n" +
+                                    "|foo_val |bar_val            |\n" +
+                                    "|foo_val1|bar_val1           |";
 
             Assert.AreEqual(expected, table.ToString());
         }
