@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitleAttribute("Gauge.CSharp.Lib")]
 [assembly: GuidAttribute("21677428-1b2a-4a9b-9865-f72209fb8f1c")]
 [assembly: AssemblyDescriptionAttribute("C# support for Gauge. http://getgauge.io")]
-[assembly: AssemblyVersionAttribute("0.6.0")]
-[assembly: AssemblyFileVersionAttribute("0.6.0")]
+[assembly: AssemblyVersionAttribute("0.6.1")]
+[assembly: AssemblyFileVersionAttribute("0.6.1")]
 [assembly: AssemblyConfigurationAttribute("")]
 [assembly: AssemblyCompanyAttribute("ThoughtWorks Inc.")]
 [assembly: AssemblyProductAttribute("Gauge.CSharp.Core")]
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisibleAttribute(true)]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.6.0";
-        internal const string InformationalVersion = "0.6.0";
+        internal const string Version = "0.6.1";
+        internal const string InformationalVersion = "0.6.1";
     }
 }
