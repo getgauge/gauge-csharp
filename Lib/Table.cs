@@ -100,5 +100,23 @@ namespace Gauge.CSharp.Lib
             var columnIndex = _headers.IndexOf(columnName);
             return columnIndex >= 0 ?_rows.Select(list => list[columnIndex]) : Enumerable.Empty<string>();
         }
+
+        /// <summary>
+        /// Converts the table to the Markdown equivalent string
+        /// </summary>
+        /// <returns>Markdown String of Table</returns>
+        public override string ToString()
+        {
+            IEnumerable<string> columnStrings = new string[_rows.Count + 2];
+            foreach (var header in GetColumnNames())
+            {
+                var columnValues = GetColumnValues(header).ToArray();
+                var columnWidth = columnValues.Max(s => s.Length);
+                Func<string, string> formatCellValue = s => string.Format("|{0}", s.PadRight(columnWidth, ' '));
+                var paddedColumn = new[] {header, new string('-', columnWidth)}.Concat(columnValues).Select(formatCellValue);
+                columnStrings = columnStrings.Zip(paddedColumn, string.Concat);
+            }
+            return string.Concat(columnStrings.Aggregate((s, s1) => string.Format("{0}|\n{1}", s, s1)), "|");
+        }
     }
 }

@@ -51,5 +51,21 @@ namespace Gauge.CSharp.Lib.UnitTests
             Assert.AreEqual("", table.GetTableRows()[1].GetCell("bar1"));
             Assert.AreEqual("TableRow: cells: [foo = foo_val, bar = bar_val] ", table.GetTableRows()[0].ToString());
         }
+
+        [Test]
+        public void ShouldGetTableAsMarkdownString()
+        {
+            var headers = new List<string> { "foo", "bar" };
+            var table = new Table(headers);
+            table.AddRow(new List<string> { "foo_val", "bar_val" });
+            table.AddRow(new List<string> { "foo_val1", "bar_val1" });
+
+            const string expected = "|foo     |bar     |\n" +
+                                    "|--------|--------|\n" +
+                                    "|foo_val |bar_val |\n" +
+                                    "|foo_val1|bar_val1|";
+
+            Assert.AreEqual(expected, table.ToString());
+        }
     }
 }
