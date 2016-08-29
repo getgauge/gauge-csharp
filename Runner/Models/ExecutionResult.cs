@@ -32,5 +32,10 @@ namespace Gauge.CSharp.Runner.Models
         public byte[] ScreenShot { get; set; }
 
         public bool Recoverable { get; set; }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
     }
 }
