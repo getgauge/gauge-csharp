@@ -15,13 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-//using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
@@ -61,7 +59,29 @@ namespace Gauge.CSharp.Runner
                     var executingAssembly = Assembly.GetExecutingAssembly();
                     return executingAssembly.GetName().Name == assemblyName ? executingAssembly : null;
                 }
-                catch (System.Exception e)
+                catch (Exception e)
+                {
+                    logger.Error(e);
+                    return null;
+                }
+            };
+            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += (sender, args) =>
+            {
+                var logger = LogManager.GetLogger("AssemblyLoader");
+                logger.Debug("Reflection only Loading {0}", args.Name);
+                try
+                {
+                    var assemblyName = args.Name.Split(',').FirstOrDefault();
+                    var gaugeBinDir = AssemblyLocater.GetGaugeBinDir();
+
+                    var probePath = Path.GetFullPath(Path.Combine(gaugeBinDir, string.Format("{0}.dll", assemblyName)));
+                    if (File.Exists(probePath)) return Assembly.ReflectionOnlyLoadFrom(probePath);
+
+                    probePath = Path.GetFullPath(Path.Combine(runnerBasePath, string.Format("{0}.dll", assemblyName)));
+
+                    return File.Exists(probePath) ? Assembly.ReflectionOnlyLoadFrom(probePath) : null;
+                }
+                catch (Exception e)
                 {
                     logger.Error(e);
                     return null;
