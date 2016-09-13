@@ -365,7 +365,7 @@ namespace Gauge.CSharp.Runner
                                             .GetReferencedAssemblies()
                                             .First(name => name.Name == "Gauge.CSharp.Lib")
                                             .Name, "Gauge.CSharp.Lib.DefaultClassInstanceManager").Unwrap();
-            logger.Info("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
+            logger.Debug("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
     }
