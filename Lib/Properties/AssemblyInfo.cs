@@ -16,7 +16,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisibleAttribute(true)]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.6.1";
-        internal const string InformationalVersion = "0.6.1";
+        internal const System.String AssemblyTitle = "Gauge.CSharp.Lib";
+        internal const System.String Guid = "21677428-1b2a-4a9b-9865-f72209fb8f1c";
+        internal const System.String AssemblyDescription = "C# support for Gauge. http://getgauge.io";
+        internal const System.String AssemblyVersion = "0.6.1";
+        internal const System.String AssemblyFileVersion = "0.6.1";
+        internal const System.String AssemblyConfiguration = "";
+        internal const System.String AssemblyCompany = "ThoughtWorks Inc.";
+        internal const System.String AssemblyProduct = "Gauge.CSharp.Core";
+        internal const System.String AssemblyCopyright = "Copyright ©  2016";
+        internal const System.String AssemblyTrademark = "";
+        internal const System.String AssemblyCulture = "";
+        internal const System.Boolean ComVisible = true;
     }
 }

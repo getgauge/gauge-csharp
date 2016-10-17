@@ -1,6 +1,10 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE.Lib (4.29.2)
+    FAKE.Lib (4.41.6)
+    Gauge.CSharp.Core (0.0.7)
+      Gauge.CSharp.Lib (>= 0.5.3)
+      Google.ProtocolBuffers (>= 2.4.1.555)
+    Gauge.CSharp.Lib (0.6)
     Google.ProtocolBuffers (2.4.1.555)
     Microsoft.CodeAnalysis.Analyzers (1.1) - framework: >= net45
     Microsoft.CodeAnalysis.Common (1.1) - framework: >= net45
@@ -18,15 +22,12 @@ NUGET
     System.Reflection.Metadata (1.1) - framework: >= net45
       System.Collections.Immutable (>= 1.1.37) - framework: >= net45, dnxcore50, portable-net45+win80
   remote: https://www.myget.org/F/gauge-csharp/api/v2
-    Gauge.CSharp.Core (0.0.7)
-      Gauge.CSharp.Lib (>= 0.5.4)
-      Google.ProtocolBuffers (>= 2.4.1.555)
-    Gauge.CSharp.Lib (0.6.0)
+    Gauge.CSharp.Proto (0.0.1)
 
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.29.2)
+    FAKE (4.41.6)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)

@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-$protogenEx=gci .\packages -Filter ProtoGen.exe -recurse
-$protogen="$($protogenEx.FullName)"
+$protocEx=gci .\packages\Gauge.CSharp.Proto -Filter protoc.exe -recurse
+$protoc="$($protocEx.FullName)"
 
 Write-Host "Generating Proto Classes.."
 
-$args = @('--proto_path=.\gauge-proto', '-output_directory=.\Core', '--include_imports', '.\gauge-proto\api.proto', '.\gauge-proto\messages.proto', '-namespace=Gauge.Messages')
-&$protogen $args
+$args = @('-I=.\gauge-proto', '--csharp_out=.\Core', '.\gauge-proto\*.proto')
+&$protoc $args
 
 Write-Host "Done!"
