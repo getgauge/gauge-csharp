@@ -17,7 +17,7 @@ build_script:
 
     Write-Host "PATH : $($env:PATH)"
 
-    $env:M2_HOME=(where.exe mvn.cmd | Get-item).Directory.parent.FullName
+    $env:M2_HOME="C:\maven\apache-maven-3.3.9"
 
     mvn --version
 
