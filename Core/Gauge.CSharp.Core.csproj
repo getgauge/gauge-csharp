@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AbstractGaugeConnection.cs" />
     <Compile Include="Api.cs" />
+    <Compile Include="ApiV2.cs" />
     <Compile Include="GaugeApiConnection.cs" />
     <Compile Include="GaugeConnection.cs" />
     <Compile Include="ITcpClientWrapper.cs" />
