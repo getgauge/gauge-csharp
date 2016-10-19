@@ -18,9 +18,14 @@
 $protocEx=gci .\packages\Gauge.CSharp.Proto -Filter protoc.exe -recurse
 $protoc="$($protocEx.FullName)"
 
+
+$grpcEx=gci .\packages\ -Filter grpc_csharp_plugin.exe -recurse
+$grpc="$($grpcEx.FullName[0])"
+
 Write-Host "Generating Proto Classes.."
 
-$args = @('-I=.\gauge-proto', '--csharp_out=.\Core', '.\gauge-proto\*.proto')
+$args = @('-I.\gauge-proto', '--csharp_out=.\Core', '--grpc_out=.\Core', '.\gauge-proto\*.proto', "--plugin=protoc-gen-grpc=$grpc")
+
 &$protoc $args
 
 Write-Host "Done!"

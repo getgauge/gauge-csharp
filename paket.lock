@@ -6,6 +6,9 @@ NUGET
       Google.ProtocolBuffers (>= 2.4.1.555)
     Gauge.CSharp.Lib (0.6)
     Google.ProtocolBuffers (2.4.1.555)
+    Grpc.Core (1.0)
+      System.Interactive.Async (>= 3.0)
+    Grpc.Tools (1.0)
     Microsoft.CodeAnalysis.Analyzers (1.1) - framework: >= net45
     Microsoft.CodeAnalysis.Common (1.1) - framework: >= net45
       Microsoft.CodeAnalysis.Analyzers (>= 1.0 < 1.2)
