@@ -15,12 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-$protocEx=gci .\packages\Gauge.CSharp.Proto -Filter protoc.exe -recurse
+$protocEx=gci .\packages\Grpc.Tools -Filter protoc.exe -recurse
 $protoc="$($protocEx.FullName)"
 
-
 $grpcEx=gci .\packages\ -Filter grpc_csharp_plugin.exe -recurse
-$grpc="$($grpcEx.FullName[0])"
+$grpc="$($grpcEx.FullName)"
 
 Write-Host "Generating Proto Classes.."
 

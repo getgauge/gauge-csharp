@@ -26,92 +26,65 @@ using System.Threading.Tasks;
 using Grpc.Core;
 
 namespace Gauge.Messages {
-  /// <summary>
-  ///  Define the gRPC service
-  /// </summary>
   public static class Execution
   {
     static readonly string __ServiceName = "gauge.messages.Execution";
 
-    static readonly Marshaller<global::Gauge.Messages.ExecutionRequest> __Marshaller_ExecutionRequest = Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gauge.Messages.ExecutionRequest.Parser.ParseFrom);
-    static readonly Marshaller<global::Gauge.Messages.ExecutionResponse> __Marshaller_ExecutionResponse = Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gauge.Messages.ExecutionResponse.Parser.ParseFrom);
+    static readonly Marshaller<global::Gauge.Messages.ExecutionRequest> __Marshaller_ExecutionRequest = Marshallers.Create((arg) => arg.ToByteArray(), global::Gauge.Messages.ExecutionRequest.ParseFrom);
+    static readonly Marshaller<global::Gauge.Messages.ExecutionResponse> __Marshaller_ExecutionResponse = Marshallers.Create((arg) => arg.ToByteArray(), global::Gauge.Messages.ExecutionResponse.ParseFrom);
 
     static readonly Method<global::Gauge.Messages.ExecutionRequest, global::Gauge.Messages.ExecutionResponse> __Method_execute = new Method<global::Gauge.Messages.ExecutionRequest, global::Gauge.Messages.ExecutionResponse>(
         MethodType.ServerStreaming,
-        __ServiceName,
         "execute",
         __Marshaller_ExecutionRequest,
         __Marshaller_ExecutionResponse);
 
-    /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
+    // client-side stub interface
+    public interface IExecutionClient
     {
-      get { return global::Gauge.Messages.ApiV2Reflection.Descriptor.Services[0]; }
+      AsyncServerStreamingCall<global::Gauge.Messages.ExecutionResponse> execute(global::Gauge.Messages.ExecutionRequest request, CancellationToken token = default(CancellationToken));
     }
 
-    /// <summary>Base class for server-side implementations of Execution</summary>
-    public abstract class ExecutionBase
+    // server-side interface
+    public interface IExecution
     {
-      /// <summary>
-      ///  Bind RPC method
-      /// </summary>
-      public virtual global::System.Threading.Tasks.Task execute(global::Gauge.Messages.ExecutionRequest request, IServerStreamWriter<global::Gauge.Messages.ExecutionResponse> responseStream, ServerCallContext context)
-      {
-        throw new RpcException(new Status(StatusCode.Unimplemented, ""));
-      }
-
+      Task execute(ServerCallContext context, global::Gauge.Messages.ExecutionRequest request, IServerStreamWriter<global::Gauge.Messages.ExecutionResponse> responseStream);
     }
 
-    /// <summary>Client for Execution</summary>
-    public class ExecutionClient : ClientBase<ExecutionClient>
+    // client stub
+    public class ExecutionClient : AbstractStub<ExecutionClient, StubConfiguration>, IExecutionClient
     {
-      /// <summary>Creates a new client for Execution</summary>
-      /// <param name="channel">The channel to use to make remote calls.</param>
-      public ExecutionClient(Channel channel) : base(channel)
+      public ExecutionClient(Channel channel) : this(channel, StubConfiguration.Default)
       {
       }
-      /// <summary>Creates a new client for Execution that uses a custom <c>CallInvoker</c>.</summary>
-      /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
-      public ExecutionClient(CallInvoker callInvoker) : base(callInvoker)
+      public ExecutionClient(Channel channel, StubConfiguration config) : base(channel, config)
       {
       }
-      /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
-      protected ExecutionClient() : base()
+      public AsyncServerStreamingCall<global::Gauge.Messages.ExecutionResponse> execute(global::Gauge.Messages.ExecutionRequest request, CancellationToken token = default(CancellationToken))
       {
-      }
-      /// <summary>Protected constructor to allow creation of configured clients.</summary>
-      /// <param name="configuration">The client configuration.</param>
-      protected ExecutionClient(ClientBaseConfiguration configuration) : base(configuration)
-      {
-      }
-
-      /// <summary>
-      ///  Bind RPC method
-      /// </summary>
-      public virtual AsyncServerStreamingCall<global::Gauge.Messages.ExecutionResponse> execute(global::Gauge.Messages.ExecutionRequest request, Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
-      {
-        return execute(request, new CallOptions(headers, deadline, cancellationToken));
-      }
-      /// <summary>
-      ///  Bind RPC method
-      /// </summary>
-      public virtual AsyncServerStreamingCall<global::Gauge.Messages.ExecutionResponse> execute(global::Gauge.Messages.ExecutionRequest request, CallOptions options)
-      {
-        return CallInvoker.AsyncServerStreamingCall(__Method_execute, null, options, request);
-      }
-      protected override ExecutionClient NewInstance(ClientBaseConfiguration configuration)
-      {
-        return new ExecutionClient(configuration);
+        var call = CreateCall(__ServiceName, __Method_execute);
+        return Calls.AsyncServerStreamingCall(call, request, token);
       }
     }
 
-    /// <summary>Creates service definition that can be registered with a server</summary>
-    public static ServerServiceDefinition BindService(ExecutionBase serviceImpl)
+    // creates service definition that can be registered with a server
+    public static ServerServiceDefinition BindService(IExecution serviceImpl)
     {
-      return ServerServiceDefinition.CreateBuilder()
+      return ServerServiceDefinition.CreateBuilder(__ServiceName)
           .AddMethod(__Method_execute, serviceImpl.execute).Build();
     }
 
+    // creates a new client stub
+    public static IExecutionClient NewStub(Channel channel)
+    {
+      return new ExecutionClient(channel);
+    }
+
+    // creates a new client stub
+    public static IExecutionClient NewStub(Channel channel, StubConfiguration config)
+    {
+      return new ExecutionClient(channel, config);
+    }
   }
 }
 #endregion
