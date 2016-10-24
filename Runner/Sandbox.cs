@@ -339,7 +339,6 @@ namespace Gauge.CSharp.Runner
                 logger.Error(error);
                 throw new Exception(error);
             }
-            logger.Info(instance.GetType().FullName);
             method.Invoke(instance, parameters);
         }
 
