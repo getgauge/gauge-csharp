@@ -1,6 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE.Lib (4.41.7)
+    FAKE.Lib (4.41.8)
     Gauge.CSharp.Core (0.0.7)
       Gauge.CSharp.Lib (>= 0.5.3)
       Google.ProtocolBuffers (>= 2.4.1.555)
@@ -23,10 +23,6 @@ NUGET
     Google.ProtocolBuffers (2.4.1.555)
     Grpc (0.6.1)
       Grpc.Core (>= 0.6.1)
-    Grpc.Core (0.6.1)
-      grpc.native.csharp_ext (>= 0.10.1)
-      Ix-Async (>= 1.2.3)
-      System.Collections.Immutable (>= 1.1.36)
     grpc.dependencies.openssl.redist (1.0.204.1)
     grpc.dependencies.zlib.redist (1.2.8.10)
     grpc.native.csharp_ext (0.10.1)
@@ -163,11 +159,16 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.0.1) - framework: dnxcore50, netstandard10, >= netstandard13
       Microsoft.NETCore.Targets (>= 1.0.1) - framework: dnxcore50, netstandard10, >= netstandard13
       System.Runtime (>= 4.1) - framework: dnxcore50, netstandard10, >= netstandard13
+  remote: https://www.myget.org/F/gauge-csharp/api/v2
+    Grpc.Core (0.6.1.1)
+      grpc.native.csharp_ext (>= 0.10.1)
+      Ix-Async (>= 1.2.3)
+      System.Collections.Immutable (>= 1.1.36)
 
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.41.7)
+    FAKE (4.41.8)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)

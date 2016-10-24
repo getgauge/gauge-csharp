@@ -15,7 +15,7 @@ nuget System.Collections.Immutable 1.1.37 framework: >= net45
 nuget System.Reflection.Metadata 1.1.0 framework: >= net45
 nuget FAKE.Lib
 nuget Grpc.Tools 0.6.1
-nuget Grpc.Core 0.6.1
+nuget Grpc.Core 0.6.1.1
 nuget Grpc 0.6.1
 nuget Google.Protobuf 3.1.0
 
