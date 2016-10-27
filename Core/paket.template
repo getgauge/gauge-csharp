@@ -4,6 +4,6 @@ dependencies
     Gauge.CSharp.Lib >= 0.5.3.0
     Google.ProtocolBuffers >= 2.4.1.555
     Grpc.Tools = 0.6.1
-	Grpc.Core = 0.6.1
+	Grpc.Core = 0.6.1.1
 	Grpc = 0.6.1
 	Google.Protobuf >= 3.1.0
