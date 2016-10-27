@@ -54,39 +54,39 @@ namespace Gauge.Messages {
     static ApiV2() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxhcGlfdjIucHJvdG8SDmdhdWdlLm1lc3NhZ2VzIvICChBFeGVjdXRpb25S", 
+            "CgxhcGlfdjIucHJvdG8SDmdhdWdlLm1lc3NhZ2VzIoEDChBFeGVjdXRpb25S", 
             "ZXF1ZXN0Eg0KBXNwZWNzGAEgAygJEgwKBHRhZ3MYAiABKAkSEgoKd29ya2lu", 
             "Z0RpchgDIAEoCRILCgNlbnYYBCABKAkSOwoIbG9nTGV2ZWwYBSABKA4yKS5n", 
             "YXVnZS5tZXNzYWdlcy5FeGVjdXRpb25SZXF1ZXN0LkxvZ0xldmVsEhIKCmlz", 
             "UGFyYWxsZWwYBiABKAgSFwoPcGFyYWxsZWxTdHJlYW1zGAcgASgFEgwKBHNv", 
             "cnQYCCABKAgSOwoIc3RyYXRlZ3kYCSABKA4yKS5nYXVnZS5tZXNzYWdlcy5F", 
-            "eGVjdXRpb25SZXF1ZXN0LlN0cmF0ZWd5EhEKCXRhYmxlUm93cxgKIAEoCSI3", 
-            "CghMb2dMZXZlbBIICgRJTkZPEAASCQoFREVCVUcQARILCgdXQVJOSU5HEAIS", 
-            "CQoFRVJST1IQAyIfCghTdHJhdGVneRIICgRMQVpZEAASCQoFRUFHRVIQASKv", 
-            "AwoGUmVzdWx0Ei0KBnN0YXR1cxgBIAEoDjIdLmdhdWdlLm1lc3NhZ2VzLlJl", 
-            "c3VsdC5TdGF0dXMSNQoGZXJyb3JzGAIgAygLMiUuZ2F1Z2UubWVzc2FnZXMu", 
-            "UmVzdWx0LkV4ZWN1dGlvbkVycm9yEhUKDWV4ZWN1dGlvblRpbWUYAyABKAMS", 
-            "DgoGc3Rkb3V0GAQgASgJEkAKEWJlZm9yZUhvb2tGYWlsdXJlGAUgASgLMiUu", 
-            "Z2F1Z2UubWVzc2FnZXMuUmVzdWx0LkV4ZWN1dGlvbkVycm9yEj8KEGFmdGVy", 
-            "SG9va0ZhaWx1cmUYBiABKAsyJS5nYXVnZS5tZXNzYWdlcy5SZXN1bHQuRXhl", 
-            "Y3V0aW9uRXJyb3ISFgoOdGFibGVSb3dOdW1iZXIYByABKAMaTgoORXhlY3V0", 
-            "aW9uRXJyb3ISFAoMZXJyb3JNZXNzYWdlGAEgASgJEhIKCnN0YWNrVHJhY2UY", 
-            "AiABKAkSEgoKc2NyZWVuc2hvdBgDIAEoDCItCgZTdGF0dXMSCgoGUEFTU0VE", 
-            "EAASCgoGRkFJTEVEEAESCwoHU0tJUFBFRBACIvQBChFFeGVjdXRpb25SZXNw", 
-            "b25zZRI0CgR0eXBlGAEgAigOMiYuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9u", 
-            "UmVzcG9uc2UuVHlwZRIKCgJJRBgCIAEoCRImCgZyZXN1bHQYAyABKAsyFi5n", 
-            "YXVnZS5tZXNzYWdlcy5SZXN1bHQidQoEVHlwZRIOCgpTdWl0ZVN0YXJ0EAAS", 
-            "DQoJU3BlY1N0YXJ0EAESEQoNU2NlbmFyaW9TdGFydBACEg8KC1NjZW5hcmlv", 
-            "RW5kEAMSCwoHU3BlY0VuZBAEEgwKCFN1aXRlRW5kEAUSDwoLRXJyb3JSZXN1", 
-            "bHQQBjJfCglFeGVjdXRpb24SUgoHZXhlY3V0ZRIgLmdhdWdlLm1lc3NhZ2Vz", 
-            "LkV4ZWN1dGlvblJlcXVlc3QaIS5nYXVnZS5tZXNzYWdlcy5FeGVjdXRpb25S", 
-          "ZXNwb25zZSIAMAFCEaoCDkdhdWdlLk1lc3NhZ2Vz"));
+            "eGVjdXRpb25SZXF1ZXN0LlN0cmF0ZWd5EhEKCXRhYmxlUm93cxgKIAEoCRIN", 
+            "CgVkZWJ1ZxgLIAEoCCI3CghMb2dMZXZlbBIICgRJTkZPEAASCQoFREVCVUcQ", 
+            "ARILCgdXQVJOSU5HEAISCQoFRVJST1IQAyIfCghTdHJhdGVneRIICgRMQVpZ", 
+            "EAASCQoFRUFHRVIQASKvAwoGUmVzdWx0Ei0KBnN0YXR1cxgBIAEoDjIdLmdh", 
+            "dWdlLm1lc3NhZ2VzLlJlc3VsdC5TdGF0dXMSNQoGZXJyb3JzGAIgAygLMiUu", 
+            "Z2F1Z2UubWVzc2FnZXMuUmVzdWx0LkV4ZWN1dGlvbkVycm9yEhUKDWV4ZWN1", 
+            "dGlvblRpbWUYAyABKAMSDgoGc3Rkb3V0GAQgASgJEkAKEWJlZm9yZUhvb2tG", 
+            "YWlsdXJlGAUgASgLMiUuZ2F1Z2UubWVzc2FnZXMuUmVzdWx0LkV4ZWN1dGlv", 
+            "bkVycm9yEj8KEGFmdGVySG9va0ZhaWx1cmUYBiABKAsyJS5nYXVnZS5tZXNz", 
+            "YWdlcy5SZXN1bHQuRXhlY3V0aW9uRXJyb3ISFgoOdGFibGVSb3dOdW1iZXIY", 
+            "ByABKAMaTgoORXhlY3V0aW9uRXJyb3ISFAoMZXJyb3JNZXNzYWdlGAEgASgJ", 
+            "EhIKCnN0YWNrVHJhY2UYAiABKAkSEgoKc2NyZWVuc2hvdBgDIAEoDCItCgZT", 
+            "dGF0dXMSCgoGUEFTU0VEEAASCgoGRkFJTEVEEAESCwoHU0tJUFBFRBACIvQB", 
+            "ChFFeGVjdXRpb25SZXNwb25zZRI0CgR0eXBlGAEgAigOMiYuZ2F1Z2UubWVz", 
+            "c2FnZXMuRXhlY3V0aW9uUmVzcG9uc2UuVHlwZRIKCgJJRBgCIAEoCRImCgZy", 
+            "ZXN1bHQYAyABKAsyFi5nYXVnZS5tZXNzYWdlcy5SZXN1bHQidQoEVHlwZRIO", 
+            "CgpTdWl0ZVN0YXJ0EAASDQoJU3BlY1N0YXJ0EAESEQoNU2NlbmFyaW9TdGFy", 
+            "dBACEg8KC1NjZW5hcmlvRW5kEAMSCwoHU3BlY0VuZBAEEgwKCFN1aXRlRW5k", 
+            "EAUSDwoLRXJyb3JSZXN1bHQQBjJfCglFeGVjdXRpb24SUgoHZXhlY3V0ZRIg", 
+            "LmdhdWdlLm1lc3NhZ2VzLkV4ZWN1dGlvblJlcXVlc3QaIS5nYXVnZS5tZXNz", 
+          "YWdlcy5FeGVjdXRpb25SZXNwb25zZSIAMAFCEaoCDkdhdWdlLk1lc3NhZ2Vz"));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_ExecutionRequest__Descriptor = Descriptor.MessageTypes[0];
         internal__static_gauge_messages_ExecutionRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionRequest, global::Gauge.Messages.ExecutionRequest.Builder>(internal__static_gauge_messages_ExecutionRequest__Descriptor,
-                new string[] { "Specs", "Tags", "WorkingDir", "Env", "LogLevel", "IsParallel", "ParallelStreams", "Sort", "Strategy", "TableRows", });
+                new string[] { "Specs", "Tags", "WorkingDir", "Env", "LogLevel", "IsParallel", "ParallelStreams", "Sort", "Strategy", "TableRows", "Debug", });
         internal__static_gauge_messages_Result__Descriptor = Descriptor.MessageTypes[1];
         internal__static_gauge_messages_Result__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Result, global::Gauge.Messages.Result.Builder>(internal__static_gauge_messages_Result__Descriptor,
@@ -115,8 +115,8 @@ namespace Gauge.Messages {
   public sealed partial class ExecutionRequest : pb::GeneratedMessage<ExecutionRequest, ExecutionRequest.Builder> {
     private ExecutionRequest() { }
     private static readonly ExecutionRequest defaultInstance = new ExecutionRequest().MakeReadOnly();
-    private static readonly string[] _executionRequestFieldNames = new string[] { "env", "isParallel", "logLevel", "parallelStreams", "sort", "specs", "strategy", "tableRows", "tags", "workingDir" };
-    private static readonly uint[] _executionRequestFieldTags = new uint[] { 34, 48, 40, 56, 64, 10, 72, 82, 18, 26 };
+    private static readonly string[] _executionRequestFieldNames = new string[] { "debug", "env", "isParallel", "logLevel", "parallelStreams", "sort", "specs", "strategy", "tableRows", "tags", "workingDir" };
+    private static readonly uint[] _executionRequestFieldTags = new uint[] { 88, 34, 48, 40, 56, 64, 10, 72, 82, 18, 26 };
     public static ExecutionRequest DefaultInstance {
       get { return defaultInstance; }
     }
@@ -257,6 +257,16 @@ namespace Gauge.Messages {
       get { return tableRows_; }
     }
 
+    public const int DebugFieldNumber = 11;
+    private bool hasDebug;
+    private bool debug_;
+    public bool HasDebug {
+      get { return hasDebug; }
+    }
+    public bool Debug {
+      get { return debug_; }
+    }
+
     public override bool IsInitialized {
       get {
         return true;
@@ -267,34 +277,37 @@ namespace Gauge.Messages {
       CalcSerializedSize();
       string[] field_names = _executionRequestFieldNames;
       if (specs_.Count > 0) {
-        output.WriteStringArray(1, field_names[5], specs_);
+        output.WriteStringArray(1, field_names[6], specs_);
       }
       if (hasTags) {
-        output.WriteString(2, field_names[8], Tags);
+        output.WriteString(2, field_names[9], Tags);
       }
       if (hasWorkingDir) {
-        output.WriteString(3, field_names[9], WorkingDir);
+        output.WriteString(3, field_names[10], WorkingDir);
       }
       if (hasEnv) {
-        output.WriteString(4, field_names[0], Env);
+        output.WriteString(4, field_names[1], Env);
       }
       if (hasLogLevel) {
-        output.WriteEnum(5, field_names[2], (int) LogLevel, LogLevel);
+        output.WriteEnum(5, field_names[3], (int) LogLevel, LogLevel);
       }
       if (hasIsParallel) {
-        output.WriteBool(6, field_names[1], IsParallel);
+        output.WriteBool(6, field_names[2], IsParallel);
       }
       if (hasParallelStreams) {
-        output.WriteInt32(7, field_names[3], ParallelStreams);
+        output.WriteInt32(7, field_names[4], ParallelStreams);
       }
       if (hasSort) {
-        output.WriteBool(8, field_names[4], Sort);
+        output.WriteBool(8, field_names[5], Sort);
       }
       if (hasStrategy) {
-        output.WriteEnum(9, field_names[6], (int) Strategy, Strategy);
+        output.WriteEnum(9, field_names[7], (int) Strategy, Strategy);
       }
       if (hasTableRows) {
-        output.WriteString(10, field_names[7], TableRows);
+        output.WriteString(10, field_names[8], TableRows);
+      }
+      if (hasDebug) {
+        output.WriteBool(11, field_names[0], Debug);
       }
       UnknownFields.WriteTo(output);
     }
@@ -347,6 +360,9 @@ namespace Gauge.Messages {
       }
       if (hasTableRows) {
         size += pb::CodedOutputStream.ComputeStringSize(10, TableRows);
+      }
+      if (hasDebug) {
+        size += pb::CodedOutputStream.ComputeBoolSize(11, Debug);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -501,6 +517,9 @@ namespace Gauge.Messages {
         if (other.HasTableRows) {
           TableRows = other.TableRows;
         }
+        if (other.HasDebug) {
+          Debug = other.Debug;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -598,6 +617,10 @@ namespace Gauge.Messages {
             }
             case 82: {
               result.hasTableRows = input.ReadString(ref result.tableRows_);
+              break;
+            }
+            case 88: {
+              result.hasDebug = input.ReadBool(ref result.debug_);
               break;
             }
           }
@@ -823,6 +846,26 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasTableRows = false;
         result.tableRows_ = "";
+        return this;
+      }
+
+      public bool HasDebug {
+        get { return result.hasDebug; }
+      }
+      public bool Debug {
+        get { return result.Debug; }
+        set { SetDebug(value); }
+      }
+      public Builder SetDebug(bool value) {
+        PrepareBuilder();
+        result.hasDebug = true;
+        result.debug_ = value;
+        return this;
+      }
+      public Builder ClearDebug() {
+        PrepareBuilder();
+        result.hasDebug = false;
+        result.debug_ = false;
         return this;
       }
     }

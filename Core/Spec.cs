@@ -99,71 +99,75 @@ namespace Gauge.Messages {
             "ZXMuUHJvdG9UYWJsZRInCgR0YWdzGAggASgLMhkuZ2F1Z2UubWVzc2FnZXMu", 
             "UHJvdG9UYWdzImoKCEl0ZW1UeXBlEggKBFN0ZXAQARILCgdDb21tZW50EAIS", 
             "CwoHQ29uY2VwdBADEgwKCFNjZW5hcmlvEAQSFwoTVGFibGVEcml2ZW5TY2Vu", 
-            "YXJpbxAFEgkKBVRhYmxlEAYSCAoEVGFncxAHIrgDCg1Qcm90b1NjZW5hcmlv", 
-            "EhcKD3NjZW5hcmlvSGVhZGluZxgBIAIoCRIOCgZmYWlsZWQYAiACKAgSKwoI", 
-            "Y29udGV4dHMYAyADKAsyGS5nYXVnZS5tZXNzYWdlcy5Qcm90b0l0ZW0SMAoN", 
-            "c2NlbmFyaW9JdGVtcxgEIAMoCzIZLmdhdWdlLm1lc3NhZ2VzLlByb3RvSXRl", 
-            "bRI4Cg5wcmVIb29rRmFpbHVyZRgFIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlBy", 
-            "b3RvSG9va0ZhaWx1cmUSOQoPcG9zdEhvb2tGYWlsdXJlGAYgASgLMiAuZ2F1", 
-            "Z2UubWVzc2FnZXMuUHJvdG9Ib29rRmFpbHVyZRIMCgR0YWdzGAcgAygJEhUK", 
-            "DWV4ZWN1dGlvblRpbWUYCCABKAMSDwoHc2tpcHBlZBgJIAIoCBISCgpza2lw", 
-            "RXJyb3JzGAogAygJEgoKAklEGAsgASgJEjAKDXRlYXJEb3duU3RlcHMYDCAD", 
-            "KAsyGS5nYXVnZS5tZXNzYWdlcy5Qcm90b0l0ZW0SIgoEc3BhbhgNIAEoCzIU", 
-            "LmdhdWdlLm1lc3NhZ2VzLlNwYW4iIgoEU3BhbhINCgVzdGFydBgBIAIoAxIL", 
-            "CgNlbmQYAiACKAMiTAoYUHJvdG9UYWJsZURyaXZlblNjZW5hcmlvEjAKCXNj", 
-            "ZW5hcmlvcxgBIAMoCzIdLmdhdWdlLm1lc3NhZ2VzLlByb3RvU2NlbmFyaW8i", 
-            "pwEKCVByb3RvU3RlcBISCgphY3R1YWxUZXh0GAEgAigJEhIKCnBhcnNlZFRl", 
-            "eHQYAiACKAkSKwoJZnJhZ21lbnRzGAMgAygLMhguZ2F1Z2UubWVzc2FnZXMu", 
-            "RnJhZ21lbnQSRQoTc3RlcEV4ZWN1dGlvblJlc3VsdBgEIAEoCzIoLmdhdWdl", 
-            "Lm1lc3NhZ2VzLlByb3RvU3RlcEV4ZWN1dGlvblJlc3VsdCKyAQoMUHJvdG9D", 
-            "b25jZXB0Ei4KC2NvbmNlcHRTdGVwGAEgAigLMhkuZ2F1Z2UubWVzc2FnZXMu", 
-            "UHJvdG9TdGVwEigKBXN0ZXBzGAIgAygLMhkuZ2F1Z2UubWVzc2FnZXMuUHJv", 
-            "dG9JdGVtEkgKFmNvbmNlcHRFeGVjdXRpb25SZXN1bHQYAyABKAsyKC5nYXVn", 
-            "ZS5tZXNzYWdlcy5Qcm90b1N0ZXBFeGVjdXRpb25SZXN1bHQiGQoJUHJvdG9U", 
-            "YWdzEgwKBHRhZ3MYASADKAkirAEKCEZyYWdtZW50EjsKDGZyYWdtZW50VHlw", 
-            "ZRgBIAIoDjIlLmdhdWdlLm1lc3NhZ2VzLkZyYWdtZW50LkZyYWdtZW50VHlw", 
-            "ZRIMCgR0ZXh0GAIgASgJEiwKCXBhcmFtZXRlchgDIAEoCzIZLmdhdWdlLm1l", 
-            "c3NhZ2VzLlBhcmFtZXRlciInCgxGcmFnbWVudFR5cGUSCAoEVGV4dBABEg0K", 
-            "CVBhcmFtZXRlchACIu8BCglQYXJhbWV0ZXISPgoNcGFyYW1ldGVyVHlwZRgB", 
-            "IAIoDjInLmdhdWdlLm1lc3NhZ2VzLlBhcmFtZXRlci5QYXJhbWV0ZXJUeXBl", 
-            "Eg0KBXZhbHVlGAIgASgJEgwKBG5hbWUYAyABKAkSKQoFdGFibGUYBCABKAsy", 
-            "Gi5nYXVnZS5tZXNzYWdlcy5Qcm90b1RhYmxlIloKDVBhcmFtZXRlclR5cGUS", 
-            "CgoGU3RhdGljEAESCwoHRHluYW1pYxACEhIKDlNwZWNpYWxfU3RyaW5nEAMS", 
-            "EQoNU3BlY2lhbF9UYWJsZRAEEgkKBVRhYmxlEAUiHAoMUHJvdG9Db21tZW50", 
-            "EgwKBHRleHQYASACKAkiaQoKUHJvdG9UYWJsZRIuCgdoZWFkZXJzGAEgAigL", 
-            "Mh0uZ2F1Z2UubWVzc2FnZXMuUHJvdG9UYWJsZVJvdxIrCgRyb3dzGAIgAygL", 
-            "Mh0uZ2F1Z2UubWVzc2FnZXMuUHJvdG9UYWJsZVJvdyIeCg1Qcm90b1RhYmxl", 
-            "Um93Eg0KBWNlbGxzGAEgAygJIvYBChhQcm90b1N0ZXBFeGVjdXRpb25SZXN1", 
-            "bHQSPQoPZXhlY3V0aW9uUmVzdWx0GAEgASgLMiQuZ2F1Z2UubWVzc2FnZXMu", 
-            "UHJvdG9FeGVjdXRpb25SZXN1bHQSOAoOcHJlSG9va0ZhaWx1cmUYAiABKAsy", 
-            "IC5nYXVnZS5tZXNzYWdlcy5Qcm90b0hvb2tGYWlsdXJlEjkKD3Bvc3RIb29r", 
-            "RmFpbHVyZRgDIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1", 
-            "cmUSDwoHc2tpcHBlZBgEIAIoCBIVCg1za2lwcGVkUmVhc29uGAUgASgJIqIC", 
-            "ChRQcm90b0V4ZWN1dGlvblJlc3VsdBIOCgZmYWlsZWQYASACKAgSGAoQcmVj", 
-            "b3ZlcmFibGVFcnJvchgCIAEoCBIUCgxlcnJvck1lc3NhZ2UYAyABKAkSEgoK", 
-            "c3RhY2tUcmFjZRgEIAEoCRISCgpzY3JlZW5TaG90GAUgASgMEhUKDWV4ZWN1", 
-            "dGlvblRpbWUYBiACKAMSDwoHbWVzc2FnZRgHIAMoCRJMCgllcnJvclR5cGUY", 
-            "CCABKA4yLi5nYXVnZS5tZXNzYWdlcy5Qcm90b0V4ZWN1dGlvblJlc3VsdC5F", 
-            "cnJvclR5cGU6CUFTU0VSVElPTiIsCglFcnJvclR5cGUSDQoJQVNTRVJUSU9O", 
-            "EAESEAoMVkVSSUZJQ0FUSU9OEAIiUAoQUHJvdG9Ib29rRmFpbHVyZRISCgpz", 
-            "dGFja1RyYWNlGAEgAigJEhQKDGVycm9yTWVzc2FnZRgCIAIoCRISCgpzY3Jl", 
-            "ZW5TaG90GAMgASgMIvkCChBQcm90b1N1aXRlUmVzdWx0EjQKC3NwZWNSZXN1", 
-            "bHRzGAEgAygLMh8uZ2F1Z2UubWVzc2FnZXMuUHJvdG9TcGVjUmVzdWx0EjgK", 
-            "DnByZUhvb2tGYWlsdXJlGAIgASgLMiAuZ2F1Z2UubWVzc2FnZXMuUHJvdG9I", 
-            "b29rRmFpbHVyZRI5Cg9wb3N0SG9va0ZhaWx1cmUYAyABKAsyIC5nYXVnZS5t", 
-            "ZXNzYWdlcy5Qcm90b0hvb2tGYWlsdXJlEg4KBmZhaWxlZBgEIAIoCBIYChBz", 
-            "cGVjc0ZhaWxlZENvdW50GAUgAigFEhUKDWV4ZWN1dGlvblRpbWUYBiABKAMS", 
-            "EwoLc3VjY2Vzc1JhdGUYByACKAISEwoLZW52aXJvbm1lbnQYCCABKAkSDAoE", 
-            "dGFncxgJIAEoCRITCgtwcm9qZWN0TmFtZRgKIAIoCRIRCgl0aW1lc3RhbXAY", 
-            "CyACKAkSGQoRc3BlY3NTa2lwcGVkQ291bnQYDCACKAUi5gEKD1Byb3RvU3Bl", 
-            "Y1Jlc3VsdBIsCglwcm90b1NwZWMYASACKAsyGS5nYXVnZS5tZXNzYWdlcy5Q", 
-            "cm90b1NwZWMSFQoNc2NlbmFyaW9Db3VudBgCIAIoBRIbChNzY2VuYXJpb0Zh", 
-            "aWxlZENvdW50GAMgAigFEg4KBmZhaWxlZBgEIAIoCBIbChNmYWlsZWREYXRh", 
-            "VGFibGVSb3dzGAUgAygFEhUKDWV4ZWN1dGlvblRpbWUYBiABKAMSDwoHc2tp", 
-            "cHBlZBgHIAIoCBIcChRzY2VuYXJpb1NraXBwZWRDb3VudBgJIAIoBSJXCg5Q", 
-            "cm90b1N0ZXBWYWx1ZRIRCglzdGVwVmFsdWUYASACKAkSHgoWcGFyYW1ldGVy", 
-            "aXplZFN0ZXBWYWx1ZRgCIAIoCRISCgpwYXJhbWV0ZXJzGAMgAygJQhGqAg5H", 
-          "YXVnZS5NZXNzYWdlcw=="));
+            "YXJpbxAFEgkKBVRhYmxlEAYSCAoEVGFncxAHIocECg1Qcm90b1NjZW5hcmlv", 
+            "EhcKD3NjZW5hcmlvSGVhZGluZxgBIAIoCRISCgZmYWlsZWQYAiACKAhCAhgB", 
+            "EisKCGNvbnRleHRzGAMgAygLMhkuZ2F1Z2UubWVzc2FnZXMuUHJvdG9JdGVt", 
+            "EjAKDXNjZW5hcmlvSXRlbXMYBCADKAsyGS5nYXVnZS5tZXNzYWdlcy5Qcm90", 
+            "b0l0ZW0SOAoOcHJlSG9va0ZhaWx1cmUYBSABKAsyIC5nYXVnZS5tZXNzYWdl", 
+            "cy5Qcm90b0hvb2tGYWlsdXJlEjkKD3Bvc3RIb29rRmFpbHVyZRgGIAEoCzIg", 
+            "LmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUSDAoEdGFncxgHIAMo", 
+            "CRIVCg1leGVjdXRpb25UaW1lGAggASgDEhMKB3NraXBwZWQYCSACKAhCAhgB", 
+            "EhIKCnNraXBFcnJvcnMYCiADKAkSCgoCSUQYCyABKAkSMAoNdGVhckRvd25T", 
+            "dGVwcxgMIAMoCzIZLmdhdWdlLm1lc3NhZ2VzLlByb3RvSXRlbRIiCgRzcGFu", 
+            "GA0gASgLMhQuZ2F1Z2UubWVzc2FnZXMuU3BhbhJFCg9leGVjdXRpb25TdGF0", 
+            "dXMYDiABKA4yHy5nYXVnZS5tZXNzYWdlcy5FeGVjdXRpb25TdGF0dXM6C05P", 
+            "VEVYRUNVVEVEIiIKBFNwYW4SDQoFc3RhcnQYASACKAMSCwoDZW5kGAIgAigD", 
+            "ImIKGFByb3RvVGFibGVEcml2ZW5TY2VuYXJpbxIvCghzY2VuYXJpbxgBIAEo", 
+            "CzIdLmdhdWdlLm1lc3NhZ2VzLlByb3RvU2NlbmFyaW8SFQoNdGFibGVSb3dJ", 
+            "bmRleBgCIAEoBSKnAQoJUHJvdG9TdGVwEhIKCmFjdHVhbFRleHQYASACKAkS", 
+            "EgoKcGFyc2VkVGV4dBgCIAIoCRIrCglmcmFnbWVudHMYAyADKAsyGC5nYXVn", 
+            "ZS5tZXNzYWdlcy5GcmFnbWVudBJFChNzdGVwRXhlY3V0aW9uUmVzdWx0GAQg", 
+            "ASgLMiguZ2F1Z2UubWVzc2FnZXMuUHJvdG9TdGVwRXhlY3V0aW9uUmVzdWx0", 
+            "IrIBCgxQcm90b0NvbmNlcHQSLgoLY29uY2VwdFN0ZXAYASACKAsyGS5nYXVn", 
+            "ZS5tZXNzYWdlcy5Qcm90b1N0ZXASKAoFc3RlcHMYAiADKAsyGS5nYXVnZS5t", 
+            "ZXNzYWdlcy5Qcm90b0l0ZW0SSAoWY29uY2VwdEV4ZWN1dGlvblJlc3VsdBgD", 
+            "IAEoCzIoLmdhdWdlLm1lc3NhZ2VzLlByb3RvU3RlcEV4ZWN1dGlvblJlc3Vs", 
+            "dCIZCglQcm90b1RhZ3MSDAoEdGFncxgBIAMoCSKsAQoIRnJhZ21lbnQSOwoM", 
+            "ZnJhZ21lbnRUeXBlGAEgAigOMiUuZ2F1Z2UubWVzc2FnZXMuRnJhZ21lbnQu", 
+            "RnJhZ21lbnRUeXBlEgwKBHRleHQYAiABKAkSLAoJcGFyYW1ldGVyGAMgASgL", 
+            "MhkuZ2F1Z2UubWVzc2FnZXMuUGFyYW1ldGVyIicKDEZyYWdtZW50VHlwZRII", 
+            "CgRUZXh0EAESDQoJUGFyYW1ldGVyEAIi7wEKCVBhcmFtZXRlchI+Cg1wYXJh", 
+            "bWV0ZXJUeXBlGAEgAigOMicuZ2F1Z2UubWVzc2FnZXMuUGFyYW1ldGVyLlBh", 
+            "cmFtZXRlclR5cGUSDQoFdmFsdWUYAiABKAkSDAoEbmFtZRgDIAEoCRIpCgV0", 
+            "YWJsZRgEIAEoCzIaLmdhdWdlLm1lc3NhZ2VzLlByb3RvVGFibGUiWgoNUGFy", 
+            "YW1ldGVyVHlwZRIKCgZTdGF0aWMQARILCgdEeW5hbWljEAISEgoOU3BlY2lh", 
+            "bF9TdHJpbmcQAxIRCg1TcGVjaWFsX1RhYmxlEAQSCQoFVGFibGUQBSIcCgxQ", 
+            "cm90b0NvbW1lbnQSDAoEdGV4dBgBIAIoCSJpCgpQcm90b1RhYmxlEi4KB2hl", 
+            "YWRlcnMYASACKAsyHS5nYXVnZS5tZXNzYWdlcy5Qcm90b1RhYmxlUm93EisK", 
+            "BHJvd3MYAiADKAsyHS5nYXVnZS5tZXNzYWdlcy5Qcm90b1RhYmxlUm93Ih4K", 
+            "DVByb3RvVGFibGVSb3cSDQoFY2VsbHMYASADKAki9gEKGFByb3RvU3RlcEV4", 
+            "ZWN1dGlvblJlc3VsdBI9Cg9leGVjdXRpb25SZXN1bHQYASABKAsyJC5nYXVn", 
+            "ZS5tZXNzYWdlcy5Qcm90b0V4ZWN1dGlvblJlc3VsdBI4Cg5wcmVIb29rRmFp", 
+            "bHVyZRgCIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUS", 
+            "OQoPcG9zdEhvb2tGYWlsdXJlGAMgASgLMiAuZ2F1Z2UubWVzc2FnZXMuUHJv", 
+            "dG9Ib29rRmFpbHVyZRIPCgdza2lwcGVkGAQgAigIEhUKDXNraXBwZWRSZWFz", 
+            "b24YBSABKAkiogIKFFByb3RvRXhlY3V0aW9uUmVzdWx0Eg4KBmZhaWxlZBgB", 
+            "IAIoCBIYChByZWNvdmVyYWJsZUVycm9yGAIgASgIEhQKDGVycm9yTWVzc2Fn", 
+            "ZRgDIAEoCRISCgpzdGFja1RyYWNlGAQgASgJEhIKCnNjcmVlblNob3QYBSAB", 
+            "KAwSFQoNZXhlY3V0aW9uVGltZRgGIAIoAxIPCgdtZXNzYWdlGAcgAygJEkwK", 
+            "CWVycm9yVHlwZRgIIAEoDjIuLmdhdWdlLm1lc3NhZ2VzLlByb3RvRXhlY3V0", 
+            "aW9uUmVzdWx0LkVycm9yVHlwZToJQVNTRVJUSU9OIiwKCUVycm9yVHlwZRIN", 
+            "CglBU1NFUlRJT04QARIQCgxWRVJJRklDQVRJT04QAiJQChBQcm90b0hvb2tG", 
+            "YWlsdXJlEhIKCnN0YWNrVHJhY2UYASACKAkSFAoMZXJyb3JNZXNzYWdlGAIg", 
+            "AigJEhIKCnNjcmVlblNob3QYAyABKAwi+QIKEFByb3RvU3VpdGVSZXN1bHQS", 
+            "NAoLc3BlY1Jlc3VsdHMYASADKAsyHy5nYXVnZS5tZXNzYWdlcy5Qcm90b1Nw", 
+            "ZWNSZXN1bHQSOAoOcHJlSG9va0ZhaWx1cmUYAiABKAsyIC5nYXVnZS5tZXNz", 
+            "YWdlcy5Qcm90b0hvb2tGYWlsdXJlEjkKD3Bvc3RIb29rRmFpbHVyZRgDIAEo", 
+            "CzIgLmdhdWdlLm1lc3NhZ2VzLlByb3RvSG9va0ZhaWx1cmUSDgoGZmFpbGVk", 
+            "GAQgAigIEhgKEHNwZWNzRmFpbGVkQ291bnQYBSACKAUSFQoNZXhlY3V0aW9u", 
+            "VGltZRgGIAEoAxITCgtzdWNjZXNzUmF0ZRgHIAIoAhITCgtlbnZpcm9ubWVu", 
+            "dBgIIAEoCRIMCgR0YWdzGAkgASgJEhMKC3Byb2plY3ROYW1lGAogAigJEhEK", 
+            "CXRpbWVzdGFtcBgLIAIoCRIZChFzcGVjc1NraXBwZWRDb3VudBgMIAIoBSKE", 
+            "AgoPUHJvdG9TcGVjUmVzdWx0EiwKCXByb3RvU3BlYxgBIAIoCzIZLmdhdWdl", 
+            "Lm1lc3NhZ2VzLlByb3RvU3BlYxIVCg1zY2VuYXJpb0NvdW50GAIgAigFEhsK", 
+            "E3NjZW5hcmlvRmFpbGVkQ291bnQYAyACKAUSDgoGZmFpbGVkGAQgAigIEhsK", 
+            "E2ZhaWxlZERhdGFUYWJsZVJvd3MYBSADKAUSFQoNZXhlY3V0aW9uVGltZRgG", 
+            "IAEoAxIPCgdza2lwcGVkGAcgAigIEhwKFHNjZW5hcmlvU2tpcHBlZENvdW50", 
+            "GAkgAigFEhwKFHNraXBwZWREYXRhVGFibGVSb3dzGAogAygFIlcKDlByb3Rv", 
+            "U3RlcFZhbHVlEhEKCXN0ZXBWYWx1ZRgBIAIoCRIeChZwYXJhbWV0ZXJpemVk", 
+            "U3RlcFZhbHVlGAIgAigJEhIKCnBhcmFtZXRlcnMYAyADKAkqRwoPRXhlY3V0", 
+            "aW9uU3RhdHVzEg8KC05PVEVYRUNVVEVEEAASCgoGUEFTU0VEEAESCgoGRkFJ", 
+          "TEVEEAISCwoHU0tJUFBFRBADQhGqAg5HYXVnZS5NZXNzYWdlcw=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_ProtoSpec__Descriptor = Descriptor.MessageTypes[0];
@@ -177,7 +181,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ProtoScenario__Descriptor = Descriptor.MessageTypes[2];
         internal__static_gauge_messages_ProtoScenario__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoScenario, global::Gauge.Messages.ProtoScenario.Builder>(internal__static_gauge_messages_ProtoScenario__Descriptor,
-                new string[] { "ScenarioHeading", "Failed", "Contexts", "ScenarioItems", "PreHookFailure", "PostHookFailure", "Tags", "ExecutionTime", "Skipped", "SkipErrors", "ID", "TearDownSteps", "Span", });
+                new string[] { "ScenarioHeading", "Failed", "Contexts", "ScenarioItems", "PreHookFailure", "PostHookFailure", "Tags", "ExecutionTime", "Skipped", "SkipErrors", "ID", "TearDownSteps", "Span", "ExecutionStatus", });
         internal__static_gauge_messages_Span__Descriptor = Descriptor.MessageTypes[3];
         internal__static_gauge_messages_Span__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.Span, global::Gauge.Messages.Span.Builder>(internal__static_gauge_messages_Span__Descriptor,
@@ -185,7 +189,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor = Descriptor.MessageTypes[4];
         internal__static_gauge_messages_ProtoTableDrivenScenario__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoTableDrivenScenario, global::Gauge.Messages.ProtoTableDrivenScenario.Builder>(internal__static_gauge_messages_ProtoTableDrivenScenario__Descriptor,
-                new string[] { "Scenarios", });
+                new string[] { "Scenario", "TableRowIndex", });
         internal__static_gauge_messages_ProtoStep__Descriptor = Descriptor.MessageTypes[5];
         internal__static_gauge_messages_ProtoStep__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStep, global::Gauge.Messages.ProtoStep.Builder>(internal__static_gauge_messages_ProtoStep__Descriptor,
@@ -237,7 +241,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ProtoSpecResult__Descriptor = Descriptor.MessageTypes[17];
         internal__static_gauge_messages_ProtoSpecResult__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoSpecResult, global::Gauge.Messages.ProtoSpecResult.Builder>(internal__static_gauge_messages_ProtoSpecResult__Descriptor,
-                new string[] { "ProtoSpec", "ScenarioCount", "ScenarioFailedCount", "Failed", "FailedDataTableRows", "ExecutionTime", "Skipped", "ScenarioSkippedCount", });
+                new string[] { "ProtoSpec", "ScenarioCount", "ScenarioFailedCount", "Failed", "FailedDataTableRows", "ExecutionTime", "Skipped", "ScenarioSkippedCount", "SkippedDataTableRows", });
         internal__static_gauge_messages_ProtoStepValue__Descriptor = Descriptor.MessageTypes[18];
         internal__static_gauge_messages_ProtoStepValue__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ProtoStepValue, global::Gauge.Messages.ProtoStepValue.Builder>(internal__static_gauge_messages_ProtoStepValue__Descriptor,
@@ -253,6 +257,16 @@ namespace Gauge.Messages {
     #endregion
 
   }
+  #region Enums
+  public enum ExecutionStatus {
+    NOTEXECUTED = 0,
+    PASSED = 1,
+    FAILED = 2,
+    SKIPPED = 3,
+  }
+
+  #endregion
+
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class ProtoSpec : pb::GeneratedMessage<ProtoSpec, ProtoSpec.Builder> {
@@ -1696,8 +1710,8 @@ namespace Gauge.Messages {
   public sealed partial class ProtoScenario : pb::GeneratedMessage<ProtoScenario, ProtoScenario.Builder> {
     private ProtoScenario() { }
     private static readonly ProtoScenario defaultInstance = new ProtoScenario().MakeReadOnly();
-    private static readonly string[] _protoScenarioFieldNames = new string[] { "ID", "contexts", "executionTime", "failed", "postHookFailure", "preHookFailure", "scenarioHeading", "scenarioItems", "skipErrors", "skipped", "span", "tags", "tearDownSteps" };
-    private static readonly uint[] _protoScenarioFieldTags = new uint[] { 90, 26, 64, 16, 50, 42, 10, 34, 82, 72, 106, 58, 98 };
+    private static readonly string[] _protoScenarioFieldNames = new string[] { "ID", "contexts", "executionStatus", "executionTime", "failed", "postHookFailure", "preHookFailure", "scenarioHeading", "scenarioItems", "skipErrors", "skipped", "span", "tags", "tearDownSteps" };
+    private static readonly uint[] _protoScenarioFieldTags = new uint[] { 90, 26, 112, 64, 16, 50, 42, 10, 34, 82, 72, 106, 58, 98 };
     public static ProtoScenario DefaultInstance {
       get { return defaultInstance; }
     }
@@ -1731,9 +1745,11 @@ namespace Gauge.Messages {
     public const int FailedFieldNumber = 2;
     private bool hasFailed;
     private bool failed_;
+    [global::System.ObsoleteAttribute()]
     public bool HasFailed {
       get { return hasFailed; }
     }
+    [global::System.ObsoleteAttribute()]
     public bool Failed {
       get { return failed_; }
     }
@@ -1807,9 +1823,11 @@ namespace Gauge.Messages {
     public const int SkippedFieldNumber = 9;
     private bool hasSkipped;
     private bool skipped_;
+    [global::System.ObsoleteAttribute()]
     public bool HasSkipped {
       get { return hasSkipped; }
     }
+    [global::System.ObsoleteAttribute()]
     public bool Skipped {
       get { return skipped_; }
     }
@@ -1858,6 +1876,16 @@ namespace Gauge.Messages {
       get { return span_ ?? global::Gauge.Messages.Span.DefaultInstance; }
     }
 
+    public const int ExecutionStatusFieldNumber = 14;
+    private bool hasExecutionStatus;
+    private global::Gauge.Messages.ExecutionStatus executionStatus_ = global::Gauge.Messages.ExecutionStatus.NOTEXECUTED;
+    public bool HasExecutionStatus {
+      get { return hasExecutionStatus; }
+    }
+    public global::Gauge.Messages.ExecutionStatus ExecutionStatus {
+      get { return executionStatus_; }
+    }
+
     public override bool IsInitialized {
       get {
         if (!hasScenarioHeading) return false;
@@ -1889,43 +1917,46 @@ namespace Gauge.Messages {
       CalcSerializedSize();
       string[] field_names = _protoScenarioFieldNames;
       if (hasScenarioHeading) {
-        output.WriteString(1, field_names[6], ScenarioHeading);
+        output.WriteString(1, field_names[7], ScenarioHeading);
       }
       if (hasFailed) {
-        output.WriteBool(2, field_names[3], Failed);
+        output.WriteBool(2, field_names[4], Failed);
       }
       if (contexts_.Count > 0) {
         output.WriteMessageArray(3, field_names[1], contexts_);
       }
       if (scenarioItems_.Count > 0) {
-        output.WriteMessageArray(4, field_names[7], scenarioItems_);
+        output.WriteMessageArray(4, field_names[8], scenarioItems_);
       }
       if (hasPreHookFailure) {
-        output.WriteMessage(5, field_names[5], PreHookFailure);
+        output.WriteMessage(5, field_names[6], PreHookFailure);
       }
       if (hasPostHookFailure) {
-        output.WriteMessage(6, field_names[4], PostHookFailure);
+        output.WriteMessage(6, field_names[5], PostHookFailure);
       }
       if (tags_.Count > 0) {
-        output.WriteStringArray(7, field_names[11], tags_);
+        output.WriteStringArray(7, field_names[12], tags_);
       }
       if (hasExecutionTime) {
-        output.WriteInt64(8, field_names[2], ExecutionTime);
+        output.WriteInt64(8, field_names[3], ExecutionTime);
       }
       if (hasSkipped) {
-        output.WriteBool(9, field_names[9], Skipped);
+        output.WriteBool(9, field_names[10], Skipped);
       }
       if (skipErrors_.Count > 0) {
-        output.WriteStringArray(10, field_names[8], skipErrors_);
+        output.WriteStringArray(10, field_names[9], skipErrors_);
       }
       if (hasID) {
         output.WriteString(11, field_names[0], ID);
       }
       if (tearDownSteps_.Count > 0) {
-        output.WriteMessageArray(12, field_names[12], tearDownSteps_);
+        output.WriteMessageArray(12, field_names[13], tearDownSteps_);
       }
       if (hasSpan) {
-        output.WriteMessage(13, field_names[10], Span);
+        output.WriteMessage(13, field_names[11], Span);
+      }
+      if (hasExecutionStatus) {
+        output.WriteEnum(14, field_names[2], (int) ExecutionStatus, ExecutionStatus);
       }
       UnknownFields.WriteTo(output);
     }
@@ -1992,6 +2023,9 @@ namespace Gauge.Messages {
       }
       if (hasSpan) {
         size += pb::CodedOutputStream.ComputeMessageSize(13, Span);
+      }
+      if (hasExecutionStatus) {
+        size += pb::CodedOutputStream.ComputeEnumSize(14, (int) ExecutionStatus);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -2159,6 +2193,9 @@ namespace Gauge.Messages {
         if (other.HasSpan) {
           MergeSpan(other.Span);
         }
+        if (other.HasExecutionStatus) {
+          ExecutionStatus = other.ExecutionStatus;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -2269,6 +2306,18 @@ namespace Gauge.Messages {
               Span = subBuilder.BuildPartial();
               break;
             }
+            case 112: {
+              object unknown;
+              if(input.ReadEnum(ref result.executionStatus_, out unknown)) {
+                result.hasExecutionStatus = true;
+              } else if(unknown is int) {
+                if (unknownFields == null) {
+                  unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+                }
+                unknownFields.MergeVarintField(14, (ulong)(int)unknown);
+              }
+              break;
+            }
           }
         }
 
@@ -2300,19 +2349,23 @@ namespace Gauge.Messages {
         return this;
       }
 
+      [global::System.ObsoleteAttribute()]
       public bool HasFailed {
         get { return result.hasFailed; }
       }
+      [global::System.ObsoleteAttribute()]
       public bool Failed {
         get { return result.Failed; }
         set { SetFailed(value); }
       }
+      [global::System.ObsoleteAttribute()]
       public Builder SetFailed(bool value) {
         PrepareBuilder();
         result.hasFailed = true;
         result.failed_ = value;
         return this;
       }
+      [global::System.ObsoleteAttribute()]
       public Builder ClearFailed() {
         PrepareBuilder();
         result.hasFailed = false;
@@ -2540,19 +2593,23 @@ namespace Gauge.Messages {
         return this;
       }
 
+      [global::System.ObsoleteAttribute()]
       public bool HasSkipped {
         get { return result.hasSkipped; }
       }
+      [global::System.ObsoleteAttribute()]
       public bool Skipped {
         get { return result.Skipped; }
         set { SetSkipped(value); }
       }
+      [global::System.ObsoleteAttribute()]
       public Builder SetSkipped(bool value) {
         PrepareBuilder();
         result.hasSkipped = true;
         result.skipped_ = value;
         return this;
       }
+      [global::System.ObsoleteAttribute()]
       public Builder ClearSkipped() {
         PrepareBuilder();
         result.hasSkipped = false;
@@ -2694,6 +2751,26 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasSpan = false;
         result.span_ = null;
+        return this;
+      }
+
+      public bool HasExecutionStatus {
+       get { return result.hasExecutionStatus; }
+      }
+      public global::Gauge.Messages.ExecutionStatus ExecutionStatus {
+        get { return result.ExecutionStatus; }
+        set { SetExecutionStatus(value); }
+      }
+      public Builder SetExecutionStatus(global::Gauge.Messages.ExecutionStatus value) {
+        PrepareBuilder();
+        result.hasExecutionStatus = true;
+        result.executionStatus_ = value;
+        return this;
+      }
+      public Builder ClearExecutionStatus() {
+        PrepareBuilder();
+        result.hasExecutionStatus = false;
+        result.executionStatus_ = global::Gauge.Messages.ExecutionStatus.NOTEXECUTED;
         return this;
       }
     }
@@ -3026,8 +3103,8 @@ namespace Gauge.Messages {
   public sealed partial class ProtoTableDrivenScenario : pb::GeneratedMessage<ProtoTableDrivenScenario, ProtoTableDrivenScenario.Builder> {
     private ProtoTableDrivenScenario() { }
     private static readonly ProtoTableDrivenScenario defaultInstance = new ProtoTableDrivenScenario().MakeReadOnly();
-    private static readonly string[] _protoTableDrivenScenarioFieldNames = new string[] { "scenarios" };
-    private static readonly uint[] _protoTableDrivenScenarioFieldTags = new uint[] { 10 };
+    private static readonly string[] _protoTableDrivenScenarioFieldNames = new string[] { "scenario", "tableRowIndex" };
+    private static readonly uint[] _protoTableDrivenScenarioFieldTags = new uint[] { 10, 16 };
     public static ProtoTableDrivenScenario DefaultInstance {
       get { return defaultInstance; }
     }
@@ -3048,22 +3125,30 @@ namespace Gauge.Messages {
       get { return global::Gauge.Messages.Spec.internal__static_gauge_messages_ProtoTableDrivenScenario__FieldAccessorTable; }
     }
 
-    public const int ScenariosFieldNumber = 1;
-    private pbc::PopsicleList<global::Gauge.Messages.ProtoScenario> scenarios_ = new pbc::PopsicleList<global::Gauge.Messages.ProtoScenario>();
-    public scg::IList<global::Gauge.Messages.ProtoScenario> ScenariosList {
-      get { return scenarios_; }
+    public const int ScenarioFieldNumber = 1;
+    private bool hasScenario;
+    private global::Gauge.Messages.ProtoScenario scenario_;
+    public bool HasScenario {
+      get { return hasScenario; }
     }
-    public int ScenariosCount {
-      get { return scenarios_.Count; }
+    public global::Gauge.Messages.ProtoScenario Scenario {
+      get { return scenario_ ?? global::Gauge.Messages.ProtoScenario.DefaultInstance; }
     }
-    public global::Gauge.Messages.ProtoScenario GetScenarios(int index) {
-      return scenarios_[index];
+
+    public const int TableRowIndexFieldNumber = 2;
+    private bool hasTableRowIndex;
+    private int tableRowIndex_;
+    public bool HasTableRowIndex {
+      get { return hasTableRowIndex; }
+    }
+    public int TableRowIndex {
+      get { return tableRowIndex_; }
     }
 
     public override bool IsInitialized {
       get {
-        foreach (global::Gauge.Messages.ProtoScenario element in ScenariosList) {
-          if (!element.IsInitialized) return false;
+        if (HasScenario) {
+          if (!Scenario.IsInitialized) return false;
         }
         return true;
       }
@@ -3072,8 +3157,11 @@ namespace Gauge.Messages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
       string[] field_names = _protoTableDrivenScenarioFieldNames;
-      if (scenarios_.Count > 0) {
-        output.WriteMessageArray(1, field_names[0], scenarios_);
+      if (hasScenario) {
+        output.WriteMessage(1, field_names[0], Scenario);
+      }
+      if (hasTableRowIndex) {
+        output.WriteInt32(2, field_names[1], TableRowIndex);
       }
       UnknownFields.WriteTo(output);
     }
@@ -3092,8 +3180,11 @@ namespace Gauge.Messages {
       if (size != -1) return size;
 
       size = 0;
-      foreach (global::Gauge.Messages.ProtoScenario element in ScenariosList) {
-        size += pb::CodedOutputStream.ComputeMessageSize(1, element);
+      if (hasScenario) {
+        size += pb::CodedOutputStream.ComputeMessageSize(1, Scenario);
+      }
+      if (hasTableRowIndex) {
+        size += pb::CodedOutputStream.ComputeInt32Size(2, TableRowIndex);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -3130,7 +3221,6 @@ namespace Gauge.Messages {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private ProtoTableDrivenScenario MakeReadOnly() {
-      scenarios_.MakeReadOnly();
       return this;
     }
 
@@ -3218,8 +3308,11 @@ namespace Gauge.Messages {
       public override Builder MergeFrom(ProtoTableDrivenScenario other) {
         if (other == global::Gauge.Messages.ProtoTableDrivenScenario.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.scenarios_.Count != 0) {
-          result.scenarios_.Add(other.scenarios_);
+        if (other.HasScenario) {
+          MergeScenario(other.Scenario);
+        }
+        if (other.HasTableRowIndex) {
+          TableRowIndex = other.TableRowIndex;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -3265,7 +3358,16 @@ namespace Gauge.Messages {
               break;
             }
             case 10: {
-              input.ReadMessageArray(tag, field_name, result.scenarios_, global::Gauge.Messages.ProtoScenario.DefaultInstance, extensionRegistry);
+              global::Gauge.Messages.ProtoScenario.Builder subBuilder = global::Gauge.Messages.ProtoScenario.CreateBuilder();
+              if (result.hasScenario) {
+                subBuilder.MergeFrom(Scenario);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              Scenario = subBuilder.BuildPartial();
+              break;
+            }
+            case 16: {
+              result.hasTableRowIndex = input.ReadInt32(ref result.tableRowIndex_);
               break;
             }
           }
@@ -3278,47 +3380,63 @@ namespace Gauge.Messages {
       }
 
 
-      public pbc::IPopsicleList<global::Gauge.Messages.ProtoScenario> ScenariosList {
-        get { return PrepareBuilder().scenarios_; }
+      public bool HasScenario {
+       get { return result.hasScenario; }
       }
-      public int ScenariosCount {
-        get { return result.ScenariosCount; }
+      public global::Gauge.Messages.ProtoScenario Scenario {
+        get { return result.Scenario; }
+        set { SetScenario(value); }
       }
-      public global::Gauge.Messages.ProtoScenario GetScenarios(int index) {
-        return result.GetScenarios(index);
-      }
-      public Builder SetScenarios(int index, global::Gauge.Messages.ProtoScenario value) {
+      public Builder SetScenario(global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.scenarios_[index] = value;
+        result.hasScenario = true;
+        result.scenario_ = value;
         return this;
       }
-      public Builder SetScenarios(int index, global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
+      public Builder SetScenario(global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.scenarios_[index] = builderForValue.Build();
+        result.hasScenario = true;
+        result.scenario_ = builderForValue.Build();
         return this;
       }
-      public Builder AddScenarios(global::Gauge.Messages.ProtoScenario value) {
+      public Builder MergeScenario(global::Gauge.Messages.ProtoScenario value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.scenarios_.Add(value);
+        if (result.hasScenario &&
+            result.scenario_ != global::Gauge.Messages.ProtoScenario.DefaultInstance) {
+            result.scenario_ = global::Gauge.Messages.ProtoScenario.CreateBuilder(result.scenario_).MergeFrom(value).BuildPartial();
+        } else {
+          result.scenario_ = value;
+        }
+        result.hasScenario = true;
         return this;
       }
-      public Builder AddScenarios(global::Gauge.Messages.ProtoScenario.Builder builderForValue) {
-        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+      public Builder ClearScenario() {
         PrepareBuilder();
-        result.scenarios_.Add(builderForValue.Build());
+        result.hasScenario = false;
+        result.scenario_ = null;
         return this;
       }
-      public Builder AddRangeScenarios(scg::IEnumerable<global::Gauge.Messages.ProtoScenario> values) {
+
+      public bool HasTableRowIndex {
+        get { return result.hasTableRowIndex; }
+      }
+      public int TableRowIndex {
+        get { return result.TableRowIndex; }
+        set { SetTableRowIndex(value); }
+      }
+      public Builder SetTableRowIndex(int value) {
         PrepareBuilder();
-        result.scenarios_.Add(values);
+        result.hasTableRowIndex = true;
+        result.tableRowIndex_ = value;
         return this;
       }
-      public Builder ClearScenarios() {
+      public Builder ClearTableRowIndex() {
         PrepareBuilder();
-        result.scenarios_.Clear();
+        result.hasTableRowIndex = false;
+        result.tableRowIndex_ = 0;
         return this;
       }
     }
@@ -8711,8 +8829,8 @@ namespace Gauge.Messages {
   public sealed partial class ProtoSpecResult : pb::GeneratedMessage<ProtoSpecResult, ProtoSpecResult.Builder> {
     private ProtoSpecResult() { }
     private static readonly ProtoSpecResult defaultInstance = new ProtoSpecResult().MakeReadOnly();
-    private static readonly string[] _protoSpecResultFieldNames = new string[] { "executionTime", "failed", "failedDataTableRows", "protoSpec", "scenarioCount", "scenarioFailedCount", "scenarioSkippedCount", "skipped" };
-    private static readonly uint[] _protoSpecResultFieldTags = new uint[] { 48, 32, 40, 10, 16, 24, 72, 56 };
+    private static readonly string[] _protoSpecResultFieldNames = new string[] { "executionTime", "failed", "failedDataTableRows", "protoSpec", "scenarioCount", "scenarioFailedCount", "scenarioSkippedCount", "skipped", "skippedDataTableRows" };
+    private static readonly uint[] _protoSpecResultFieldTags = new uint[] { 48, 32, 40, 10, 16, 24, 72, 56, 80 };
     public static ProtoSpecResult DefaultInstance {
       get { return defaultInstance; }
     }
@@ -8815,6 +8933,18 @@ namespace Gauge.Messages {
       get { return scenarioSkippedCount_; }
     }
 
+    public const int SkippedDataTableRowsFieldNumber = 10;
+    private pbc::PopsicleList<int> skippedDataTableRows_ = new pbc::PopsicleList<int>();
+    public scg::IList<int> SkippedDataTableRowsList {
+      get { return pbc::Lists.AsReadOnly(skippedDataTableRows_); }
+    }
+    public int SkippedDataTableRowsCount {
+      get { return skippedDataTableRows_.Count; }
+    }
+    public int GetSkippedDataTableRows(int index) {
+      return skippedDataTableRows_[index];
+    }
+
     public override bool IsInitialized {
       get {
         if (!hasProtoSpec) return false;
@@ -8854,6 +8984,9 @@ namespace Gauge.Messages {
       }
       if (hasScenarioSkippedCount) {
         output.WriteInt32(9, field_names[6], ScenarioSkippedCount);
+      }
+      if (skippedDataTableRows_.Count > 0) {
+        output.WriteInt32Array(10, field_names[8], skippedDataTableRows_);
       }
       UnknownFields.WriteTo(output);
     }
@@ -8901,6 +9034,14 @@ namespace Gauge.Messages {
       if (hasScenarioSkippedCount) {
         size += pb::CodedOutputStream.ComputeInt32Size(9, ScenarioSkippedCount);
       }
+      {
+        int dataSize = 0;
+        foreach (int element in SkippedDataTableRowsList) {
+          dataSize += pb::CodedOutputStream.ComputeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * skippedDataTableRows_.Count;
+      }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
       return size;
@@ -8937,6 +9078,7 @@ namespace Gauge.Messages {
     }
     private ProtoSpecResult MakeReadOnly() {
       failedDataTableRows_.MakeReadOnly();
+      skippedDataTableRows_.MakeReadOnly();
       return this;
     }
 
@@ -9048,6 +9190,9 @@ namespace Gauge.Messages {
         if (other.HasScenarioSkippedCount) {
           ScenarioSkippedCount = other.ScenarioSkippedCount;
         }
+        if (other.skippedDataTableRows_.Count != 0) {
+          result.skippedDataTableRows_.Add(other.skippedDataTableRows_);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -9127,6 +9272,11 @@ namespace Gauge.Messages {
             }
             case 72: {
               result.hasScenarioSkippedCount = input.ReadInt32(ref result.scenarioSkippedCount_);
+              break;
+            }
+            case 82:
+            case 80: {
+              input.ReadInt32Array(tag, field_name, result.skippedDataTableRows_);
               break;
             }
           }
@@ -9326,6 +9476,36 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasScenarioSkippedCount = false;
         result.scenarioSkippedCount_ = 0;
+        return this;
+      }
+
+      public pbc::IPopsicleList<int> SkippedDataTableRowsList {
+        get { return PrepareBuilder().skippedDataTableRows_; }
+      }
+      public int SkippedDataTableRowsCount {
+        get { return result.SkippedDataTableRowsCount; }
+      }
+      public int GetSkippedDataTableRows(int index) {
+        return result.GetSkippedDataTableRows(index);
+      }
+      public Builder SetSkippedDataTableRows(int index, int value) {
+        PrepareBuilder();
+        result.skippedDataTableRows_[index] = value;
+        return this;
+      }
+      public Builder AddSkippedDataTableRows(int value) {
+        PrepareBuilder();
+        result.skippedDataTableRows_.Add(value);
+        return this;
+      }
+      public Builder AddRangeSkippedDataTableRows(scg::IEnumerable<int> values) {
+        PrepareBuilder();
+        result.skippedDataTableRows_.Add(values);
+        return this;
+      }
+      public Builder ClearSkippedDataTableRows() {
+        PrepareBuilder();
+        result.skippedDataTableRows_.Clear();
         return this;
       }
     }
