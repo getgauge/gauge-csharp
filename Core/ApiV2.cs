@@ -72,15 +72,16 @@ namespace Gauge.Messages {
             "YWdlcy5SZXN1bHQuRXhlY3V0aW9uRXJyb3ISFgoOdGFibGVSb3dOdW1iZXIY", 
             "ByABKAMaTgoORXhlY3V0aW9uRXJyb3ISFAoMZXJyb3JNZXNzYWdlGAEgASgJ", 
             "EhIKCnN0YWNrVHJhY2UYAiABKAkSEgoKc2NyZWVuc2hvdBgDIAEoDCItCgZT", 
-            "dGF0dXMSCgoGUEFTU0VEEAASCgoGRkFJTEVEEAESCwoHU0tJUFBFRBACIvQB", 
+            "dGF0dXMSCgoGUEFTU0VEEAASCgoGRkFJTEVEEAESCwoHU0tJUFBFRBACIo0C", 
             "ChFFeGVjdXRpb25SZXNwb25zZRI0CgR0eXBlGAEgAigOMiYuZ2F1Z2UubWVz", 
             "c2FnZXMuRXhlY3V0aW9uUmVzcG9uc2UuVHlwZRIKCgJJRBgCIAEoCRImCgZy", 
-            "ZXN1bHQYAyABKAsyFi5nYXVnZS5tZXNzYWdlcy5SZXN1bHQidQoEVHlwZRIO", 
-            "CgpTdWl0ZVN0YXJ0EAASDQoJU3BlY1N0YXJ0EAESEQoNU2NlbmFyaW9TdGFy", 
-            "dBACEg8KC1NjZW5hcmlvRW5kEAMSCwoHU3BlY0VuZBAEEgwKCFN1aXRlRW5k", 
-            "EAUSDwoLRXJyb3JSZXN1bHQQBjJfCglFeGVjdXRpb24SUgoHZXhlY3V0ZRIg", 
-            "LmdhdWdlLm1lc3NhZ2VzLkV4ZWN1dGlvblJlcXVlc3QaIS5nYXVnZS5tZXNz", 
-          "YWdlcy5FeGVjdXRpb25SZXNwb25zZSIAMAFCEaoCDkdhdWdlLk1lc3NhZ2Vz"));
+            "ZXN1bHQYAyABKAsyFi5nYXVnZS5tZXNzYWdlcy5SZXN1bHQSFwoPUnVubmVy", 
+            "UHJvY2Vzc0lkGAQgASgFInUKBFR5cGUSDgoKU3VpdGVTdGFydBAAEg0KCVNw", 
+            "ZWNTdGFydBABEhEKDVNjZW5hcmlvU3RhcnQQAhIPCgtTY2VuYXJpb0VuZBAD", 
+            "EgsKB1NwZWNFbmQQBBIMCghTdWl0ZUVuZBAFEg8KC0Vycm9yUmVzdWx0EAYy", 
+            "XwoJRXhlY3V0aW9uElIKB2V4ZWN1dGUSIC5nYXVnZS5tZXNzYWdlcy5FeGVj", 
+            "dXRpb25SZXF1ZXN0GiEuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9uUmVzcG9u", 
+          "c2UiADABQhGqAg5HYXVnZS5NZXNzYWdlcw=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_gauge_messages_ExecutionRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -98,7 +99,7 @@ namespace Gauge.Messages {
         internal__static_gauge_messages_ExecutionResponse__Descriptor = Descriptor.MessageTypes[2];
         internal__static_gauge_messages_ExecutionResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Gauge.Messages.ExecutionResponse, global::Gauge.Messages.ExecutionResponse.Builder>(internal__static_gauge_messages_ExecutionResponse__Descriptor,
-                new string[] { "Type", "ID", "Result", });
+                new string[] { "Type", "ID", "Result", "RunnerProcessId", });
         pb::ExtensionRegistry registry = pb::ExtensionRegistry.CreateInstance();
         RegisterAllExtensions(registry);
         return registry;
@@ -1873,8 +1874,8 @@ namespace Gauge.Messages {
   public sealed partial class ExecutionResponse : pb::GeneratedMessage<ExecutionResponse, ExecutionResponse.Builder> {
     private ExecutionResponse() { }
     private static readonly ExecutionResponse defaultInstance = new ExecutionResponse().MakeReadOnly();
-    private static readonly string[] _executionResponseFieldNames = new string[] { "ID", "result", "type" };
-    private static readonly uint[] _executionResponseFieldTags = new uint[] { 18, 26, 8 };
+    private static readonly string[] _executionResponseFieldNames = new string[] { "ID", "RunnerProcessId", "result", "type" };
+    private static readonly uint[] _executionResponseFieldTags = new uint[] { 18, 32, 26, 8 };
     public static ExecutionResponse DefaultInstance {
       get { return defaultInstance; }
     }
@@ -1941,6 +1942,16 @@ namespace Gauge.Messages {
       get { return result_ ?? global::Gauge.Messages.Result.DefaultInstance; }
     }
 
+    public const int RunnerProcessIdFieldNumber = 4;
+    private bool hasRunnerProcessId;
+    private int runnerProcessId_;
+    public bool HasRunnerProcessId {
+      get { return hasRunnerProcessId; }
+    }
+    public int RunnerProcessId {
+      get { return runnerProcessId_; }
+    }
+
     public override bool IsInitialized {
       get {
         if (!hasType) return false;
@@ -1952,13 +1963,16 @@ namespace Gauge.Messages {
       CalcSerializedSize();
       string[] field_names = _executionResponseFieldNames;
       if (hasType) {
-        output.WriteEnum(1, field_names[2], (int) Type, Type);
+        output.WriteEnum(1, field_names[3], (int) Type, Type);
       }
       if (hasID) {
         output.WriteString(2, field_names[0], ID);
       }
       if (hasResult) {
-        output.WriteMessage(3, field_names[1], Result);
+        output.WriteMessage(3, field_names[2], Result);
+      }
+      if (hasRunnerProcessId) {
+        output.WriteInt32(4, field_names[1], RunnerProcessId);
       }
       UnknownFields.WriteTo(output);
     }
@@ -1985,6 +1999,9 @@ namespace Gauge.Messages {
       }
       if (hasResult) {
         size += pb::CodedOutputStream.ComputeMessageSize(3, Result);
+      }
+      if (hasRunnerProcessId) {
+        size += pb::CodedOutputStream.ComputeInt32Size(4, RunnerProcessId);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -2117,6 +2134,9 @@ namespace Gauge.Messages {
         if (other.HasResult) {
           MergeResult(other.Result);
         }
+        if (other.HasRunnerProcessId) {
+          RunnerProcessId = other.RunnerProcessId;
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -2183,6 +2203,10 @@ namespace Gauge.Messages {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               Result = subBuilder.BuildPartial();
+              break;
+            }
+            case 32: {
+              result.hasRunnerProcessId = input.ReadInt32(ref result.runnerProcessId_);
               break;
             }
           }
@@ -2273,6 +2297,26 @@ namespace Gauge.Messages {
         PrepareBuilder();
         result.hasResult = false;
         result.result_ = null;
+        return this;
+      }
+
+      public bool HasRunnerProcessId {
+        get { return result.hasRunnerProcessId; }
+      }
+      public int RunnerProcessId {
+        get { return result.RunnerProcessId; }
+        set { SetRunnerProcessId(value); }
+      }
+      public Builder SetRunnerProcessId(int value) {
+        PrepareBuilder();
+        result.hasRunnerProcessId = true;
+        result.runnerProcessId_ = value;
+        return this;
+      }
+      public Builder ClearRunnerProcessId() {
+        PrepareBuilder();
+        result.hasRunnerProcessId = false;
+        result.runnerProcessId_ = 0;
         return this;
       }
     }
