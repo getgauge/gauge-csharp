@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Diagnostics;
+using System.Threading;
+using Gauge.CSharp.Core;
 using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
@@ -33,6 +36,26 @@ namespace Gauge.CSharp.Runner.Processors
         protected override string HookType
         {
             get { return "BeforeSuite"; }
+        }
+
+        public override Message Process(Message request)
+        {
+            var debuggingEnv = Utils.TryReadEnvValue("DEBUGGING");
+            if (debuggingEnv != null && debuggingEnv.ToLower().Equals("true"))
+            {
+                // if the runner is launched in DEBUG mode, let the debugger attach.
+                var j = 0;
+                while (!Debugger.IsAttached)
+                {
+                    j++;
+                    //Trying to debug, wait for a debugger to attach
+                    Thread.Sleep(100);
+                    //Timeout, no debugger connected, break out into a normal execution.
+                    if (j == 300)
+                        break;
+                }
+            }
+            return base.Process(request);
         }
     }
 }

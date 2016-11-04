@@ -17,8 +17,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Threading;
-using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner
 {
@@ -33,21 +31,6 @@ namespace Gauge.CSharp.Runner
             {
                 Console.WriteLine("usage: {0} --<start|init>", AppDomain.CurrentDomain.FriendlyName);
                 Environment.Exit(1);
-            }
-			var debuggingEnv = Utils.TryReadEnvValue ("DEBUGGING");
-			if (debuggingEnv != null && debuggingEnv.ToLower().Equals("true"))
-            {
-                // if the runner is launched in DEBUG mode, let the debugger attach.
-                var j = 0;
-                while (!Debugger.IsAttached)
-                {
-                    j++;
-                    //Trying to debug, wait for a debugger to attach
-                    Thread.Sleep(100);
-                    //Timeout, no debugger connected, break out into a normal execution.
-                    if (j == 300)
-                        break;
-                }
             }
             var phase = args[0];
             var command = GaugeCommandFactory.GetExecutor(phase);
