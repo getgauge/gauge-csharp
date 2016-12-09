@@ -22,7 +22,7 @@ using Google.ProtocolBuffers;
 
 namespace Gauge.CSharp.Core
 {
-    public class GaugeApiConnection : AbstractGaugeConnection
+    public class GaugeApiConnection : AbstractGaugeConnection, IGaugeApiConnection
     {
         public GaugeApiConnection(ITcpClientWrapper clientWrapper) : base(clientWrapper)
         {
