@@ -17,9 +17,7 @@
 $protocEx
 $grpcEx
 
-$is_64_bit = (Get-WmiObject -Class Win32_ComputerSystem).SystemType -match "(x64)"
-
-if ($is_64_bit){
+if ((gci Env:PROCESSOR_ARCHITECTURE).value  -match 64){
     $protocEx = gci .\packages\Grpc.Tools\tools\windows_x64 -Filter protoc.exe -recurse
     $grpcEx=gci .\packages\Grpc.Tools\tools\windows_x64 -Filter grpc_csharp_plugin.exe -recurse
 }
@@ -34,8 +32,9 @@ $grpc="$($grpcEx.FullName)"
 
 Write-Host "Generating Proto Classes.."
 
-$args = @('-I.\gauge-proto', '--csharp_out=.\Core', '--grpc_out=.\Core', '*.proto', "--plugin=protoc-gen-grpc=$grpc")
-
-&$protoc $args
+gci ".\gauge-proto" -Filter "*.proto" | %{
+    Write-Host "Generating classes for $_"
+    &$protoc @('-I.\gauge-proto', '--csharp_out=.\Core', '--grpc_out=.\Core', ".\gauge-proto\$_", "--plugin=protoc-gen-grpc=$grpc")
+}
 
 Write-Host "Done!"
