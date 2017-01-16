@@ -14,16 +14,27 @@
 
 # You should have received a copy of the GNU General Public License
 # along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
+$protocEx
+$grpcEx
 
-$protocEx=gci .\packages\Grpc.Tools -Filter protoc.exe -recurse
+$is_64_bit = (Get-WmiObject -Class Win32_ComputerSystem).SystemType -match "(x64)"
+
+if ($is_64_bit){
+    $protocEx = gci .\packages\Grpc.Tools\tools\windows_x64 -Filter protoc.exe -recurse
+    $grpcEx=gci .\packages\Grpc.Tools\tools\windows_x64 -Filter grpc_csharp_plugin.exe -recurse
+}
+else {
+    $protocEx = gci .\packages\Grpc.Tools\tools\windows_x86 -Filter protoc.exe -recurse
+    $grpcEx=gci .\packages\Grpc.Tools\tools\windows_x86 -Filter grpc_csharp_plugin.exe -recurse        
+}
+
 $protoc="$($protocEx.FullName)"
 
-$grpcEx=gci .\packages\ -Filter grpc_csharp_plugin.exe -recurse
 $grpc="$($grpcEx.FullName)"
 
 Write-Host "Generating Proto Classes.."
 
-$args = @('-I.\gauge-proto', '--csharp_out=.\Core', '--grpc_out=.\Core', '.\gauge-proto\*.proto', "--plugin=protoc-gen-grpc=$grpc")
+$args = @('-I.\gauge-proto', '--csharp_out=.\Core', '--grpc_out=.\Core', '*.proto', "--plugin=protoc-gen-grpc=$grpc")
 
 &$protoc $args
 
