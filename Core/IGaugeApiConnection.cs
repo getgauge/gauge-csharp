@@ -27,7 +27,7 @@ namespace Gauge.CSharp.Core
         APIMessage WriteAndReadApiMessage(IMessage stepValueRequestMessage);
         bool Connected { get; }
         void WriteMessage(IMessage request);
-        IMessage ReadBytes(IMessage message);
+        IEnumerable<byte> ReadBytes();
         void Dispose();
     }
 }

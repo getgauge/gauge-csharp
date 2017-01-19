@@ -38,15 +38,22 @@ namespace Gauge.CSharp.Core
 
         public void WriteMessage(IMessage request)
         {
-            request.WriteTo(TcpClientWrapper.GetStream());
+            var bytes = request.ToByteArray();
+            var cos = new CodedOutputStream(TcpClientWrapper.GetStream());
+            cos.WriteUInt64((ulong)bytes.Length);
+            cos.Flush();
+            TcpClientWrapper.GetStream().Write(bytes, 0, bytes.Length);
             TcpClientWrapper.GetStream().Flush();
         }
 
-        public IMessage ReadBytes(IMessage message)
+        public IEnumerable<byte> ReadBytes()
         {
             var networkStream = TcpClientWrapper.GetStream();
-            new CodedInputStream(networkStream).ReadMessage(message);
-            return message;
+            var codedInputStream = new CodedInputStream(networkStream);
+            var messageLength = codedInputStream.ReadUInt64();
+            var bytes = new byte[messageLength];
+            networkStream.Read(bytes, 0, (int)messageLength);
+            return bytes;
         }
 
         protected static long GenerateMessageId()

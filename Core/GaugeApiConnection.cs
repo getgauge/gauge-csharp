@@ -59,7 +59,8 @@ namespace Gauge.CSharp.Core
 
         private APIMessage ReadMessage()
         {
-            return (APIMessage)ReadBytes(new APIMessage());
+            var responseBytes = ReadBytes();
+            return APIMessage.Parser.ParseFrom(responseBytes.ToArray());
         }
     }
 }
