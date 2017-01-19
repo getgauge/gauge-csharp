@@ -1,9 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
     FAKE.Lib (4.48)
-    Gauge.CSharp.Core (0.0.7)
-      Gauge.CSharp.Lib (>= 0.5.3)
-      Google.ProtocolBuffers (>= 2.4.1.555)
     Gauge.CSharp.Lib (0.6)
     Google.Protobuf (3.1)
       System.Collections (>= 4.0.11) - framework: >= netstandard10
@@ -543,6 +540,14 @@ NUGET
       System.Text.Encoding (>= 4.3) - framework: dnxcore50, >= netstandard13
       System.Threading (>= 4.3) - framework: dnxcore50, >= netstandard13
       System.Xml.ReaderWriter (>= 4.3) - framework: dnxcore50, netstandard10, >= netstandard13
+  remote: https://www.myget.org/F/gauge-csharp/api/v2
+    Gauge.CSharp.Core (0.0.11)
+      Gauge.CSharp.Lib (>= 0.5.3)
+      Google.Protobuf (>= 3.1)
+      Google.ProtocolBuffers (>= 2.4.1.555)
+      Grpc (1.0.1)
+      Grpc.Core (1.0.1)
+      Grpc.Tools (1.0.1)
 
 GROUP Build
 NUGET
