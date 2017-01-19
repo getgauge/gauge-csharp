@@ -45,8 +45,7 @@ namespace Gauge.CSharp.Runner
                 {
                     while (gaugeConnection.Connected)
                     {
-                        var message = (Message)gaugeConnection.ReadBytes(new Message());
-
+                        var message = Message.Parser.ParseFrom(gaugeConnection.ReadBytes().ToArray());
                         var processor = _messageProcessorFactory.GetProcessor(message.MessageType);
                         var response = processor.Process(message);
                         gaugeConnection.WriteMessage(response);

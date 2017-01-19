@@ -71,6 +71,8 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.InnerException);
                 Logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
