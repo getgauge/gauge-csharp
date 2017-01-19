@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.CSharp.Lib;
@@ -144,8 +143,6 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             table.AddRow(new List<string> {"foorow2", "barrow2"});
             
             var executionResult = sandbox.ExecuteMethod(gaugeMethod, SerializeTable(table));
-            Console.WriteLine("Success: {0},\nException: {1},\nStackTrace :{2},\nSource : {3}",
-                executionResult.Success, executionResult.ExceptionMessage, executionResult.StackTrace, executionResult.Source);
             Assert.True(executionResult.Success);
         }
 

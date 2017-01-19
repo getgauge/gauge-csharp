@@ -50,8 +50,8 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected override List<string> GetApplicableTags(Message request)
         {
-            return GetExecutionInfo(request).CurrentScenario.TagsList
-                .Union(GetExecutionInfo(request).CurrentSpec.TagsList).ToList();
+            return GetExecutionInfo(request).CurrentScenario.Tags
+                .Union(GetExecutionInfo(request).CurrentSpec.Tags).ToList();
         }
 
         protected override ExecutionInfo GetExecutionInfo(Message request)

@@ -42,31 +42,36 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
 
-            var builder = Message.CreateBuilder();
-            var protoTable = ProtoTable.CreateBuilder()
-                .SetHeaders(
-                    ProtoTableRow.CreateBuilder().AddRangeCells(new List<string> { "foo", "bar" }))
-                .AddRangeRows(new List<ProtoTableRow>
+            var protoTable = new ProtoTable()
+            {
+                Headers = new ProtoTableRow()
                 {
-                    ProtoTableRow.CreateBuilder()
-                        .AddRangeCells(new List<string> {"foorow1", "foorow2"})
-                        .Build()
-                }).Build();
-            var message = builder
-                .SetMessageId(1234)
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetParsedStepText(parameterizedStepText)
-                        .SetActualStepText(stepText)
-                        .AddParameters(
-                            Parameter.CreateBuilder()
-                                .SetName("table")
-                                .SetParameterType(Parameter.Types.ParameterType.Table)
-                                .SetTable(protoTable).Build()
-                        ).Build()
-                ).Build();
-
+                    Cells = {"foo", "bar"}
+                },
+                Rows =
+                {
+                    new ProtoTableRow()
+                    {
+                        Cells = {"foorow1", "foorow2"}
+                    }
+                }
+            };
+            var message = new Message()
+            {
+                MessageId = 1234,
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ParsedStepText = parameterizedStepText,
+                    ActualStepText = stepText,
+                    Parameters = { new Parameter()
+                    {
+                        Name = "table",
+                        ParameterType = Parameter.Types.ParameterType.Table,
+                        Table = protoTable
+                    } }
+                }
+            };
             var result = executeStepProcessor.Process(message);
 
             AssertRunnerDomainDidNotLoadUsersAssembly();
@@ -90,14 +95,15 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
 
-            var message = Message.CreateBuilder()
-                .SetMessageId(1234)
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetParsedStepText(parameterizedStepText)
-                        .SetActualStepText(stepText).Build()
-                ).Build();
+            var message = new Message()
+            {
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ParsedStepText = parameterizedStepText,
+                    ActualStepText = stepText
+                }
+            };
 
             var result = executeStepProcessor.Process(message);
             var protoExecutionResult = result.ExecutionStatusResponse.ExecutionResult;

@@ -33,29 +33,34 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromSpecAndScenario()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("bar")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = ScenarioExecutionEndingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetScenarioExecutionEndingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.ScenarioExecutionEnding)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo"},
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var scenarioInfo = new ScenarioInfo()
+            {
+                Tags = { "bar"},
+                Name = "",
+                IsFailed = false
+            };
+            var currentScenario = new ExecutionInfo()
+            {
+                CurrentSpec = specInfo,
+                CurrentScenario = scenarioInfo
+            };
+            var currentExecutionInfo = new ScenarioExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = currentScenario
+            };
+            var message = new Message()
+            {
+                ScenarioExecutionEndingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.ScenarioExecutionEnding,
+                MessageId = 0,
+            };
 
             var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
 
@@ -68,29 +73,34 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldNotGetDuplicateTags()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = ScenarioExecutionEndingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetScenarioExecutionEndingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.ScenarioExecutionEnding)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo" },
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var scenarioInfo = new ScenarioInfo()
+            {
+                Tags = { "foo" },
+                Name = "",
+                IsFailed = false
+            };
+            var currentScenario = new ExecutionInfo()
+            {
+                CurrentSpec = specInfo,
+                CurrentScenario = scenarioInfo
+            };
+            var currentExecutionInfo = new ScenarioExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = currentScenario
+            };
+            var message = new Message()
+            {
+                ScenarioExecutionEndingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.ScenarioExecutionEnding,
+                MessageId = 0,
+            };
 
             var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
 

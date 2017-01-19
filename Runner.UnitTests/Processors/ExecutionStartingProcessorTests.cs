@@ -46,15 +46,20 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             var hooks = new HashSet<IHookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
-            var executionEndingRequest = ExecutionStartingRequest.DefaultInstance;
-            _request = Message.CreateBuilder()
-                            .SetMessageId(20)
-                            .SetMessageType(Message.Types.MessageType.ExecutionEnding)
-                            .SetExecutionStartingRequest(executionEndingRequest)
-                            .Build();
+            var executionEndingRequest = new ExecutionStartingRequest();
+            _request = new Message()
+            {
+                MessageId = 20,
+                MessageType = Message.Types.MessageType.ExecutionEnding,
+                ExecutionStartingRequest = executionEndingRequest
+            };
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = ProtoExecutionResult.CreateBuilder().SetExecutionTime(0).SetFailed(false).Build();
+            _protoExecutionResult = new ProtoExecutionResult()
+            {
+                ExecutionTime = 0,
+                Failed = false
+            };
             _mockMethodExecutor.Setup(x => x.ExecuteHooks("BeforeSuite", It.IsAny<HooksStrategy>(), new List<string>()))
                 .Returns(_protoExecutionResult);
             _executionStartingProcessor = new ExecutionStartingProcessor(_mockMethodExecutor.Object);
@@ -77,29 +82,34 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetEmptyTagListByDefault()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("bar")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = ScenarioExecutionStartingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetScenarioExecutionStartingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.ScenarioExecutionStarting)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo"},
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var scenarioInfo = new ScenarioInfo()
+            {
+                Tags = { "bar"},
+                Name = "",
+                IsFailed = false
+            };
+            var currentScenario = new ExecutionInfo()
+            {
+                CurrentScenario = scenarioInfo,
+                CurrentSpec = specInfo,
+            };
+            var currentExecutionInfo = new ScenarioExecutionStartingRequest()
+            {
+                CurrentExecutionInfo = currentScenario
+            };
+            var message = new Message()
+            {
+                ScenarioExecutionStartingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
+                MessageId = 0
+            };
 
             var tags = AssertEx.ExecuteProtectedMethod<ExecutionStartingProcessor>("GetApplicableTags", message);
             Assert.IsEmpty(tags);

@@ -1,5 +1,5 @@
 Gauge.CSharp.Lib
-Google.ProtocolBuffers
+Google.Protobuf
 Microsoft.CodeAnalysis.Analyzers
 Microsoft.CodeAnalysis.Common
 Microsoft.CodeAnalysis.CSharp

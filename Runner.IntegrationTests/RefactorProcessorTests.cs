@@ -22,7 +22,6 @@ using System.Linq;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
-using Google.ProtocolBuffers;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
@@ -51,35 +50,36 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var aliases = new Dictionary<string, bool> { { stepValue, false } };
             var stepTextMap = new Dictionary<string, string> { { stepValue, parameterizedStepText } };
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
-
-            var message = Message.CreateBuilder()
-                .SetMessageId(1234)
-                .SetMessageType(Message.Types.MessageType.RefactorRequest)
-                .SetRefactorRequest(
-                    RefactorRequest.CreateBuilder()
-                        .SetOldStepValue(
-                            ProtoStepValue.CreateBuilder()
-                                .SetStepValue(stepValue)
-                                .SetParameterizedStepValue(parameterizedStepText)
-                                .AddParameters("what")
-                                .AddParameters("who")
-                                .Build())
-                        .SetNewStepValue(
-                            ProtoStepValue.CreateBuilder()
-                                .SetStepValue("Refactoring Say {} to {} at {}")
-                                .SetParameterizedStepValue("Refactoring Say <what> to <who> at <when>")
-                                .AddParameters("what")
-                                .AddParameters("who")
-                                .AddParameters("when")
-                                .Build())
-                        .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(0).SetNewPosition(0))
-                        .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(1).SetNewPosition(1))
-                        .AddParamPositions(ParameterPosition.CreateBuilder().SetOldPosition(-1).SetNewPosition(2))
-                ).Build();
-
+            var message = new Message()
+            {
+               MessageId = 1234,
+               MessageType = Message.Types.MessageType.RefactorRequest,
+               RefactorRequest = new RefactorRequest()
+               {
+                   OldStepValue = new ProtoStepValue()
+                   {
+                       StepValue = stepValue,
+                       ParameterizedStepValue = parameterizedStepText,
+                       Parameters = { "what", "who"}
+                   },
+                   NewStepValue = new ProtoStepValue()
+                   {
+                       StepValue = "Refactoring Say {} to {} at {}",
+                       ParameterizedStepValue = "Refactoring Say <what> to <who> at <when>",
+                       Parameters = { "who", "what", "when"}
+                   },
+                   ParamPositions =
+                   {
+                       new ParameterPosition() { OldPosition = 0, NewPosition = 0},
+                       new ParameterPosition() { OldPosition = 1, NewPosition = 1},
+                       new ParameterPosition() { OldPosition = -1, NewPosition = 2}
+                       
+                   }
+               }
+            };
+            
             var refactorProcessor = new RefactorProcessor(stepRegistry, sandbox);
             var result = refactorProcessor.Process(message);
-            Console.WriteLine(result.RefactorResponse.ToJson());
             Assert.IsTrue(result.RefactorResponse.Success);
         }
 

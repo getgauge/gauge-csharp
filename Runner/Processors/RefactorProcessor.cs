@@ -19,6 +19,7 @@ using System;
 using System.Linq;
 using Gauge.CSharp.Runner.Models;
 using Gauge.Messages;
+using Google.Protobuf.Collections;
 
 namespace Gauge.CSharp.Runner.Processors
 {
@@ -38,33 +39,34 @@ namespace Gauge.CSharp.Runner.Processors
             var newStep = request.RefactorRequest.NewStepValue;
 
             var newStepValue = newStep.ParameterizedStepValue;
-            var parameterPositions = request.RefactorRequest.ParamPositionsList.Select(position => new Tuple<int, int>(position.OldPosition, position.NewPosition)).ToList();
+            var parameterPositions = request.RefactorRequest.ParamPositions.Select(position => new Tuple<int, int>(position.OldPosition, position.NewPosition)).ToList();
 
-            var refactorResponseBuilder = RefactorResponse.CreateBuilder();
+            var response = new RefactorResponse();
             try
             {
                 var gaugeMethod = GetGaugeMethod(request.RefactorRequest.OldStepValue);
-                var filesChanged = _sandbox.Refactor(gaugeMethod, parameterPositions, newStep.ParametersList.ToList(), newStepValue);
-                refactorResponseBuilder.SetSuccess(true).AddFilesChanged(filesChanged.First());
+                var filesChanged = _sandbox.Refactor(gaugeMethod, parameterPositions, newStep.Parameters.ToList(), newStepValue);
+                response.Success = true;
+                response.FilesChanged.Add(filesChanged.First());
             }
             catch (AggregateException ex)
             {
-                refactorResponseBuilder.SetSuccess(false)
-                    .SetError(ex.InnerExceptions.Select(exception => exception.Message).Distinct().Aggregate((s, s1) => string.Concat(s, "; ", s1)));
+                response.Success = false;
+                response.Error = ex.InnerExceptions.Select(exception => exception.Message).Distinct().Aggregate((s, s1) => string.Concat(s, "; ", s1));
             }
             catch (Exception ex)
             {
-                refactorResponseBuilder.SetSuccess(false)
-                    .SetError(ex.Message);
+                response.Success=false;
+                response.Error = ex.Message;
             }
 
-            var refactorResponse =  refactorResponseBuilder.Build();
 
-            return Message.CreateBuilder()
-                .SetMessageId(request.MessageId)
-                .SetMessageType(Message.Types.MessageType.RefactorResponse)
-                .SetRefactorResponse(refactorResponse)
-                .Build();
+            return new Message()
+            {
+                MessageId = request.MessageId,
+                MessageType = Message.Types.MessageType.RefactorResponse,
+                RefactorResponse = response,
+            };
         }
 
         private GaugeMethod GetGaugeMethod(ProtoStepValue stepValue)

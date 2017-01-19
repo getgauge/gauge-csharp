@@ -40,15 +40,16 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void ShouldReportMissingStep()
         {
             const string parsedStepText = "Foo";
-            var request = Message.CreateBuilder()
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetActualStepText(parsedStepText)
-                        .SetParsedStepText(parsedStepText)
-                        .Build())
-                .SetMessageId(20)
-                .Build();
+            var request = new Message()
+            {
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ActualStepText = parsedStepText,
+                    ParsedStepText = parsedStepText,
+                },
+                MessageId = 20
+            };
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(false);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
@@ -64,15 +65,16 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void ShouldReportArgumentMismatch()
         {
             const string parsedStepText = "Foo";
-            var request = Message.CreateBuilder()
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetActualStepText(parsedStepText)
-                        .SetParsedStepText(parsedStepText)
-                        .Build())
-                .SetMessageId(20)
-                .Build();
+            var request = new Message()
+            {
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                MessageId = 20,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ActualStepText = parsedStepText,
+                    ParsedStepText = parsedStepText
+                }
+            };
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
             var fooMethod = new GaugeMethod {Name = "Foo", ParameterCount = 1};
@@ -90,27 +92,28 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         public void ShouldProcessExecuteStepRequest()
         {
             const string parsedStepText = "Foo";
-            var request = Message.CreateBuilder()
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetActualStepText(parsedStepText)
-                        .SetParsedStepText(parsedStepText)
-                        .AddParameters(
-                            Parameter.CreateBuilder()
-                                .SetParameterType(Parameter.Types.ParameterType.Static)
-                                .SetName("Foo")
-                                .SetValue("Bar")
-                                .Build())
-                        .Build())
-                .SetMessageId(20)
-                .Build();
+            var request = new Message()
+            {
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                MessageId = 20,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ActualStepText = parsedStepText,
+                    ParsedStepText = parsedStepText,
+                    Parameters = { new Parameter()
+                    {
+                        ParameterType = Parameter.Types.ParameterType.Static,
+                        Name = "Foo",
+                        Value = "Bar"
+                    } }
+                }
+            };
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
             var fooMethodInfo = new GaugeMethod {Name = "Foo", ParameterCount = 1};
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
-            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<string[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
+            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<string[]>())).Returns(() => new ProtoExecutionResult() {ExecutionTime = 1, Failed = false});
 
             var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
 
@@ -119,39 +122,47 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
         [Test]
         [TestCase(Parameter.Types.ParameterType.Table)]
-        [TestCase(Parameter.Types.ParameterType.Special_Table)]
+        [TestCase(Parameter.Types.ParameterType.SpecialTable)]
         public void ShouldProcessExecuteStepRequestForTableParam(Parameter.Types.ParameterType parameterType)
         {
             const string parsedStepText = "Foo";
-            var protoTable = ProtoTable.CreateBuilder()
-                .SetHeaders(ProtoTableRow.CreateBuilder().AddRangeCells(new List<string> { "foo", "bar" }))
-                .AddRangeRows(new List<ProtoTableRow>
-                {
-                    ProtoTableRow.CreateBuilder()
-                        .AddRangeCells(new List<string> {"foorow1", "foorow2"})
-                        .Build()
-                }).Build();
+            var protoTable =new  ProtoTable();
+            var headers = new ProtoTableRow();
+            headers.Cells.AddRange(new List<string> { "foo", "bar" });
+            protoTable.Headers = headers;
+            var row = new ProtoTableRow();
+            row.Cells.AddRange(new List<string> { "foorow1", "foorow2" });
+            protoTable.Rows.AddRange(new List<ProtoTableRow>() { row });
 
-            var request = Message.CreateBuilder()
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .SetExecuteStepRequest(
-                    ExecuteStepRequest.CreateBuilder()
-                        .SetActualStepText(parsedStepText)
-                        .SetParsedStepText(parsedStepText)
-                        .AddParameters(
-                            Parameter.CreateBuilder()
-                                .SetParameterType(parameterType)
-                                .SetTable(protoTable)
-                                .Build())
-                        .Build())
-                .SetMessageId(20)
-                .Build();
+            var request = new Message()
+            {
+                MessageType = Message.Types.MessageType.ExecuteStep,
+                ExecuteStepRequest = new ExecuteStepRequest()
+                {
+                    ActualStepText = parsedStepText,
+                    ParsedStepText = parsedStepText,
+                    Parameters =
+                    {
+                        new Parameter()
+                        {
+                            ParameterType = parameterType,
+                            Table = protoTable
+                        }
+                    },
+                },
+                MessageId = 20
+            };
+
             var mockStepRegistry = new Mock<IStepRegistry>();
             mockStepRegistry.Setup(x => x.ContainsStep(parsedStepText)).Returns(true);
             var fooMethodInfo = new GaugeMethod { Name = "Foo", ParameterCount = 1 };
             mockStepRegistry.Setup(x => x.MethodFor(parsedStepText)).Returns(fooMethodInfo);
             var mockMethodExecutor = new Mock<IMethodExecutor>();
-            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<string[]>())).Returns(() => ProtoExecutionResult.CreateBuilder().SetExecutionTime(1).SetFailed(false).Build());
+            mockMethodExecutor.Setup(e => e.Execute(fooMethodInfo, It.IsAny<string[]>())).Returns(() => new ProtoExecutionResult()
+            {
+                ExecutionTime = 1,
+                Failed = false
+            });
 
             var response = new ExecuteStepProcessor(mockStepRegistry.Object, mockMethodExecutor.Object).Process(request);
 

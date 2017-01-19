@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.Processors
             var stepToValidate = request.StepValidateRequest.StepText;
             var isValid = true;
             var errorMessage = "";
-            var errorType = StepValidateResponse.Types.ErrorType.STEP_IMPLEMENTATION_NOT_FOUND;
+            var errorType = StepValidateResponse.Types.ErrorType.StepImplementationNotFound;
             if (!_stepMethodTable.ContainsStep(stepToValidate))
             {
                 isValid = false;
@@ -43,7 +43,7 @@ namespace Gauge.CSharp.Runner.Processors
             else if (_stepMethodTable.HasMultipleImplementations(stepToValidate))
             {
                 isValid = false;
-                errorType = StepValidateResponse.Types.ErrorType.DUPLICATE_STEP_IMPLEMENTATION;
+                errorType = StepValidateResponse.Types.ErrorType.DuplicateStepImplementation;
                 errorMessage = string.Format("Multiple step implementations found for : {0}", stepToValidate);
             }
             return GetStepValidateResponseMessage(isValid, request, errorType,  errorMessage);
@@ -51,16 +51,18 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message GetStepValidateResponseMessage(bool isValid, Message request, StepValidateResponse.Types.ErrorType errorType, string errorMessage)
         {
-            var stepValidateResponse = StepValidateResponse.CreateBuilder()
-                                                    .SetErrorMessage(errorMessage)
-                                                    .SetIsValid(isValid)
-                                                    .SetErrorType(errorType)
-                                                    .Build();
-            return Message.CreateBuilder()
-                    .SetMessageId(request.MessageId)
-                    .SetMessageType(Message.Types.MessageType.StepValidateResponse)
-                    .SetStepValidateResponse(stepValidateResponse)
-                    .Build();
+            var stepValidateResponse = new StepValidateResponse()
+            {
+                ErrorMessage = errorMessage,
+                IsValid = isValid,
+                ErrorType = errorType,
+            };
+            return new Message()
+            {
+                MessageId = request.MessageId,
+                MessageType = Message.Types.MessageType.StepValidateResponse,
+                StepValidateResponse = stepValidateResponse
+            };
         }
     }
 }

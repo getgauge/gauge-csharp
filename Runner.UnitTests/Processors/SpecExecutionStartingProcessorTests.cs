@@ -33,23 +33,27 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromExecutionInfo()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var executionInfo = ExecutionInfo.CreateBuilder()
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = SpecExecutionStartingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(executionInfo)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetSpecExecutionStartingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.SpecExecutionStarting)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo" },
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var executionInfo = new ExecutionInfo()
+            {
+                CurrentSpec = specInfo
+            };
+            var currentExecutionInfo = new SpecExecutionStartingRequest()
+            {
+                CurrentExecutionInfo = executionInfo
+            };
+            var message = new Message()
+            {
+                SpecExecutionStartingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.SpecExecutionStarting,
+                MessageId = 0
+            };
 
             var tags = AssertEx.ExecuteProtectedMethod<SpecExecutionStartingProcessor>("GetApplicableTags", message).ToList();
 

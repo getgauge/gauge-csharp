@@ -37,11 +37,14 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message GetStepNamesResponseMessage(IEnumerable<string> allSteps, Message request)
         {
-            var stepNamesResponse = StepNamesResponse.CreateBuilder().AddRangeSteps(allSteps).Build();
-            return Message.CreateBuilder()
-                .SetMessageId(request.MessageId)
-                .SetMessageType(Message.Types.MessageType.StepNamesResponse)
-                .SetStepNamesResponse(stepNamesResponse).Build();
+            var stepNamesResponse = new StepNamesResponse();
+            stepNamesResponse.Steps.AddRange(allSteps);
+            return new Message()
+            {
+                MessageId = request.MessageId,
+                MessageType = Message.Types.MessageType.StepNamesResponse,
+                StepNamesResponse = stepNamesResponse,
+            };
         }
     }
 }

@@ -47,19 +47,28 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             mockSandbox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(_pendingMessages);
             var hooks = new HashSet<IHookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
             mockHookRegistry.Setup(x => x.AfterStepHooks).Returns(hooks);
-            var stepExecutionEndingRequest = StepExecutionEndingRequest.DefaultInstance;
-            _request = Message.CreateBuilder()
-                            .SetMessageId(20)
-                            .SetMessageType(Message.Types.MessageType.StepExecutionEnding)
-                            .SetStepExecutionEndingRequest(stepExecutionEndingRequest)
-                            .Build();
+            var stepExecutionEndingRequest = new StepExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = new ExecutionInfo()
+                {
+                    CurrentSpec = new SpecInfo(),
+                    CurrentScenario = new ScenarioInfo()
+                }
+            };
+            _request = new Message()
+            {
+                MessageType = Message.Types.MessageType.StepExecutionEnding,
+                MessageId = 20,
+                StepExecutionEndingRequest = stepExecutionEndingRequest
+            };
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = ProtoExecutionResult.CreateBuilder()
-                                        .SetExecutionTime(0)
-                                        .SetFailed(false)
-                                        .AddRangeMessage(_pendingMessages)
-                                        .Build();
+            _protoExecutionResult = new ProtoExecutionResult()
+            {
+                ExecutionTime = 0,
+                Failed = false,
+                Message = { _pendingMessages}
+            };
             _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>()))
                 .Returns(_protoExecutionResult);
             _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(_mockMethodExecutor.Object);
@@ -76,41 +85,46 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var response = _stepExecutionEndingProcessor.Process(_request);
 
-            Assert.True(response.HasExecutionStatusResponse);
-            Assert.True(response.ExecutionStatusResponse.HasExecutionResult);
-            Assert.AreEqual(2, response.ExecutionStatusResponse.ExecutionResult.MessageCount);
+            Assert.True(response.ExecutionStatusResponse != null);
+            Assert.True(response.ExecutionStatusResponse.ExecutionResult != null);
+            Assert.AreEqual(2, response.ExecutionStatusResponse.ExecutionResult.Message.Count);
             foreach (var pendingMessage in _pendingMessages)
             {
-                Assert.Contains(pendingMessage, response.ExecutionStatusResponse.ExecutionResult.MessageList.ToList());
+                Assert.Contains(pendingMessage, response.ExecutionStatusResponse.ExecutionResult.Message.ToList());
             }
         }
 
         [Test]
         public void ShouldGetTagListFromScenarioAndSpec()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("bar")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = StepExecutionEndingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetStepExecutionEndingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.StepExecutionEnding)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo"},
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var scenarioInfo = new ScenarioInfo()
+            {
+                Tags = { "bar"},
+                Name = "",
+                IsFailed = false
+            };
+            var currentScenario = new ExecutionInfo()
+            {
+                CurrentScenario = scenarioInfo,
+                CurrentSpec = specInfo
+            };
+            var currentExecutionInfo = new StepExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = currentScenario
+            };
+            var message = new Message()
+            {
+                StepExecutionEndingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.StepExecutionEnding,
+                MessageId = 0
+            };
             var tags = AssertEx.ExecuteProtectedMethod<StepExecutionEndingProcessor>("GetApplicableTags", message).ToList();
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(2, tags.Count);
@@ -121,29 +135,34 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromScenarioAndSpecAndIgnoreDuplicates()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = StepExecutionEndingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetStepExecutionEndingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.StepExecutionEnding)
-                .SetMessageId(0)
-                .Build();
+            var specInfo = new SpecInfo()
+            {
+                Tags = { "foo" },
+                Name = "",
+                FileName = "",
+                IsFailed = false
+            };
+            var scenarioInfo = new ScenarioInfo()
+            {
+                Tags = { "foo" },
+                Name = "",
+                IsFailed = false
+            };
+            var currentScenario = new ExecutionInfo()
+            {
+                CurrentScenario = scenarioInfo,
+                CurrentSpec = specInfo
+            };
+            var currentExecutionInfo = new StepExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = currentScenario
+            };
+            var message = new Message()
+            {
+                StepExecutionEndingRequest = currentExecutionInfo,
+                MessageType = Message.Types.MessageType.StepExecutionEnding,
+                MessageId = 0
+            };
             var tags = AssertEx.ExecuteProtectedMethod<StepExecutionEndingProcessor>("GetApplicableTags", message).ToList();
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(1, tags.Count);

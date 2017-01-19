@@ -28,15 +28,20 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message GetResponseMessage(Message request)
         {
-            var executionStatusResponseBuilder = ExecutionStatusResponse.CreateBuilder();
-            var executionStatusResponse =
-                executionStatusResponseBuilder.SetExecutionResult(
-                    ProtoExecutionResult.CreateBuilder().SetFailed(false).SetExecutionTime(0)).Build();
-            return Message.CreateBuilder()
-                .SetMessageId(request.MessageId)
-                .SetMessageType(Message.Types.MessageType.ExecutionStatusResponse)
-                .SetExecutionStatusResponse(executionStatusResponse)
-                .Build();
+            var response = new ExecutionStatusResponse()
+            {
+                ExecutionResult = new ProtoExecutionResult()
+                {
+                    Failed = false,
+                    ExecutionTime = 0
+                }
+            };
+            return new Message()
+            {
+                MessageId = request.MessageId,
+                MessageType = Message.Types.MessageType.ExecutionStatusResponse,
+                ExecutionStatusResponse = response
+            };
         }
     }
 }

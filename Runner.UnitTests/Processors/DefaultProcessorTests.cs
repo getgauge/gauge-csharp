@@ -27,10 +27,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldProcessMessage()
         {
-            var request = Message.CreateBuilder()
-                .SetMessageId(20)
-                .SetMessageType(Message.Types.MessageType.ExecuteStep)
-                .Build();
+            var request = new Message()
+            {
+                MessageId = 20,
+                MessageType = Message.Types.MessageType.ExecuteStep
+            };
             
             var response = new DefaultProcessor().Process(request);
             var executionStatusResponse = response.ExecutionStatusResponse;

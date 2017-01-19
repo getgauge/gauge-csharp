@@ -36,17 +36,18 @@ namespace Gauge.CSharp.Runner.Processors
             var stepText = _stepRegistry.GetStepText(parsedStepText);
             var hasAlias = _stepRegistry.HasAlias(stepText);
 
-            var stepNameResponse = StepNameResponse.CreateBuilder()
-                .SetHasAlias(hasAlias)
-                .SetIsStepPresent(isValidStep)
-                .AddStepName(stepText)
-                .Build();
-
-            return Message.CreateBuilder()
-                .SetMessageId(request.MessageId)
-                .SetMessageType(Message.Types.MessageType.StepNameResponse)
-                .SetStepNameResponse(stepNameResponse)
-                .Build();
+            var stepNameResponse = new StepNameResponse()
+            {
+                HasAlias = hasAlias,
+                IsStepPresent = isValidStep,
+                StepName = {stepText},
+            };
+            return new Message()
+            {
+                MessageId = request.MessageId,
+                MessageType = Message.Types.MessageType.StepNameResponse,
+                StepNameResponse = stepNameResponse,
+            };
         }
     }
 }

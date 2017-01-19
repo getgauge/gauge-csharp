@@ -48,7 +48,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected override List<string> GetApplicableTags(Message request)
         {
-            return GetExecutionInfo(request).CurrentSpec.TagsList.ToList();
+            return GetExecutionInfo(request).CurrentSpec.Tags.ToList();
         }
 
         public override Message Process(Message request)

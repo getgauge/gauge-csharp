@@ -48,19 +48,29 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             mockSandbox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(_pendingMessages);
             var hooks = new HashSet<IHookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
             mockHookRegistry.Setup(x => x.AfterSuiteHooks).Returns(hooks);
-            var executionEndingRequest = ExecutionEndingRequest.DefaultInstance;
-            _request = Message.CreateBuilder()
-                            .SetMessageId(20)
-                            .SetMessageType(Message.Types.MessageType.ExecutionEnding)
-                            .SetExecutionEndingRequest(executionEndingRequest)
-                            .Build();
+            var executionEndingRequest = new ExecutionEndingRequest()
+            {
+                CurrentExecutionInfo = new ExecutionInfo()
+                {
+                    CurrentSpec = new SpecInfo(),
+                    CurrentScenario = new ScenarioInfo()
+                }
+            };
+            _request = new Message()
+            {
+                MessageId = 20,
+                MessageType = Message.Types.MessageType.ExecutionEnding,
+                ExecutionEndingRequest = executionEndingRequest
+            };
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = ProtoExecutionResult.CreateBuilder()
-                                        .SetExecutionTime(0)
-                                        .SetFailed(false)
-                                        .AddRangeMessage(_pendingMessages)
-                                        .Build();
+            _protoExecutionResult = new ProtoExecutionResult()
+            {
+                ExecutionTime = 0,
+                Failed = false,
+
+            };
+            _protoExecutionResult.Message.AddRange(_pendingMessages);
             _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
                 .Returns(_protoExecutionResult);
             _executionEndingProcessor = new ExecutionEndingProcessor(_mockMethodExecutor.Object);
@@ -93,30 +103,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetEmptyTagListByDefault()
         {
-            var specInfo = SpecInfo.CreateBuilder()
-                .AddTags("foo")
-                .SetName("")
-                .SetFileName("")
-                .SetIsFailed(false)
-                .Build();
-            var scenarioInfo = ScenarioInfo.CreateBuilder()
-                .AddTags("bar")
-                .SetName("")
-                .SetIsFailed(false)
-                .Build();
-            var currentScenario = ExecutionInfo.CreateBuilder()
-                .SetCurrentScenario(scenarioInfo)
-                .SetCurrentSpec(specInfo)
-                .Build();
-            var currentExecutionInfo = ScenarioExecutionStartingRequest.CreateBuilder()
-                .SetCurrentExecutionInfo(currentScenario)
-                .Build();
-            var message = Message.CreateBuilder()
-                .SetScenarioExecutionStartingRequest(currentExecutionInfo)
-                .SetMessageType(Message.Types.MessageType.ScenarioExecutionStarting)
-                .SetMessageId(0)
-                .Build();
-            var tags = AssertEx.ExecuteProtectedMethod<ExecutionEndingProcessor>("GetApplicableTags", message);
+            var tags = AssertEx.ExecuteProtectedMethod<ExecutionEndingProcessor>("GetApplicableTags", _request);
             Assert.IsEmpty(tags);
         }
     }

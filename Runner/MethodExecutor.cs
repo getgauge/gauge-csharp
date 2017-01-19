@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Gauge.Messages;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 using NLog;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Models;
@@ -40,50 +40,56 @@ namespace Gauge.CSharp.Runner
         public ProtoExecutionResult Execute(GaugeMethod method, params string[] args)
         {
             var stopwatch = Stopwatch.StartNew();
-            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
+            var builder = new ProtoExecutionResult()
+            {
+                Failed = false,
+            };
             var executionResult = _sandbox.ExecuteMethod(method, args);
 
-            builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+            builder.ExecutionTime = stopwatch.ElapsedMilliseconds;
             if (!executionResult.Success)
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-                builder.SetFailed(true);
+                builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
-                    builder.SetScreenShot(TakeScreenshot());
+                    builder.ScreenShot = TakeScreenshot();
                 }
-                builder.SetErrorMessage(executionResult.ExceptionMessage);
-                builder.SetStackTrace(executionResult.StackTrace);
-                builder.SetRecoverableError(executionResult.Recoverable);
-                builder.SetExecutionTime(elapsedMilliseconds);
+                builder.ErrorMessage = executionResult.ExceptionMessage;
+                builder.StackTrace = executionResult.StackTrace;
+                builder.RecoverableError = executionResult.Recoverable;
+                builder.ExecutionTime = elapsedMilliseconds;
             }
-            return builder.Build();
+            return builder;
         }
 
         [DebuggerHidden]
         public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags)
         {
             var stopwatch = Stopwatch.StartNew();
-            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(false);
+            var builder = new ProtoExecutionResult()
+            {
+                Failed = false
+            };
             var executionResult = _sandbox.ExecuteHooks(hookType, strategy, applicableTags);
 
-            builder.SetExecutionTime(stopwatch.ElapsedMilliseconds);
+            builder.ExecutionTime = stopwatch.ElapsedMilliseconds;
             if (!executionResult.Success)
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-                builder.SetFailed(true);
+                builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
-                    builder.SetScreenShot(TakeScreenshot());
+                    builder.ScreenShot = TakeScreenshot();
                 }
-                builder.SetErrorMessage(executionResult.ExceptionMessage);
-                builder.SetStackTrace(executionResult.StackTrace);
-                builder.SetRecoverableError(false);
-                builder.SetExecutionTime(elapsedMilliseconds);
+                builder.ErrorMessage = executionResult.ExceptionMessage;
+                builder.StackTrace = executionResult.StackTrace;
+                builder.RecoverableError = executionResult.Recoverable;
+                builder.ExecutionTime = elapsedMilliseconds;
             }
-            return builder.Build();
+            return builder;
         }
 
         public void ClearCache()

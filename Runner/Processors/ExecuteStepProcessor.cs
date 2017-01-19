@@ -48,7 +48,7 @@ namespace Gauge.CSharp.Runner.Processors
 
             var parameters = method.ParameterCount;
             var args = new string[parameters];
-            var stepParameter = executeStepRequest.ParametersList;
+            var stepParameter = executeStepRequest.Parameters;
             if (parameters != stepParameter.Count)
             {
                 var argumentMismatchError = string.Format("Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
@@ -57,7 +57,7 @@ namespace Gauge.CSharp.Runner.Processors
                 return ExecutionError(argumentMismatchError, request);
             }
 
-            var validTableParamTypes = new[] { Parameter.Types.ParameterType.Table, Parameter.Types.ParameterType.Special_Table };
+            var validTableParamTypes = new[] { Parameter.Types.ParameterType.Table, Parameter.Types.ParameterType.SpecialTable };
 
             for (var i = 0; i < parameters; i++)
             {
@@ -71,10 +71,10 @@ namespace Gauge.CSharp.Runner.Processors
 
         private string GetTableData(ProtoTable table)
         {
-            var table1 = new Table(table.Headers.CellsList.ToList());
-            foreach (var protoTableRow in table.RowsList)
+            var table1 = new Table(table.Headers.Cells.ToList());
+            foreach (var protoTableRow in table.Rows)
             {
-                table1.AddRow(protoTableRow.CellsList.ToList());
+                table1.AddRow(protoTableRow.Cells.ToList());
             }
             var serializer = new DataContractJsonSerializer(typeof(Table));
             using (var memoryStream = new MemoryStream())
@@ -86,11 +86,14 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message ExecutionError(string errorMessage, Message request)
         {
-            var builder = ProtoExecutionResult.CreateBuilder().SetFailed(true)
-                .SetErrorMessage(errorMessage)
-                .SetRecoverableError(false)
-                .SetExecutionTime(0);
-            return WrapInMessage(builder.Build(), request);
+            var result = new ProtoExecutionResult()
+            {
+                Failed = true,
+                RecoverableError = false,
+                ExecutionTime = 0,
+                ErrorMessage = errorMessage
+            };
+            return WrapInMessage(result, request);
         }
     }
 }

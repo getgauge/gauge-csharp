@@ -71,7 +71,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
-            Assert.True(executionResult.HasScreenShot);
+            Assert.True(executionResult.ScreenShot != null);
             Assert.True(executionResult.ScreenShot.Length > 0);
         }
         
@@ -91,7 +91,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
-            Assert.True(executionResult.HasScreenShot);
+            Assert.True(executionResult.ScreenShot != null);
             Assert.AreEqual(2, executionResult.ScreenShot.Length);
         }
 
@@ -110,7 +110,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
             
             mockSandBox.VerifyAll();
-            Assert.False(executionResult.HasScreenShot);
+            Assert.False(executionResult.ScreenShot == null);
             Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", screenshotEnabled);
         }
 
@@ -145,7 +145,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var protoExecutionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>());
 
             mockSandBox.VerifyAll();
-            Assert.False(protoExecutionResult.HasScreenShot);
+            Assert.False(protoExecutionResult.ScreenShot == null);
             Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", screenshotEnabled);
         }
     }

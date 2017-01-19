@@ -49,7 +49,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Converter
         public void ShouldConvertFromParameterToString()
         {
             const string expected = "Foo";
-            var parameter = new Parameter.Builder().SetParameterType(Parameter.Types.ParameterType.Static).SetValue(expected).Build();
+            var parameter = new Parameter()
+            {
+                ParameterType = Parameter.Types.ParameterType.Static,
+                Value = expected
+            };
             
             var actual = new StringParamConverter().Convert(parameter);
             

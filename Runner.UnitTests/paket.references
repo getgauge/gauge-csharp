@@ -1,5 +1,5 @@
 Gauge.CSharp.Lib
-Google.ProtocolBuffers
+Google.Protobuf
 Microsoft.Web.Xdt
 NuGet.Core
 
