@@ -17,17 +17,17 @@
 
 using System.Collections.Generic;
 using Gauge.Messages;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 
 namespace Gauge.CSharp.Core
 {
     public interface IGaugeApiConnection
     {
         IEnumerable<string> GetStepValues(IEnumerable<string> stepTexts, bool hasInlineTable);
-        APIMessage WriteAndReadApiMessage(IMessageLite stepValueRequestMessage);
+        APIMessage WriteAndReadApiMessage(IMessage stepValueRequestMessage);
         bool Connected { get; }
-        void WriteMessage(IMessageLite request);
-        IEnumerable<byte> ReadBytes();
+        void WriteMessage(IMessage request);
+        IMessage ReadBytes(IMessage message);
         void Dispose();
     }
 }

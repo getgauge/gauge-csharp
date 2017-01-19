@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.Messages;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 
 namespace Gauge.CSharp.Core
 {
@@ -32,21 +32,23 @@ namespace Gauge.CSharp.Core
         {
             foreach (var stepText in stepTexts)
             {
-                var stepValueRequest = GetStepValueRequest.CreateBuilder()
-                    .SetStepText(stepText)
-                    .SetHasInlineTable(hasInlineTable)
-                    .Build();
-                var stepValueRequestMessage = APIMessage.CreateBuilder()
-                    .SetMessageId(GenerateMessageId())
-                    .SetMessageType(APIMessage.Types.APIMessageType.GetStepValueRequest)
-                    .SetStepValueRequest(stepValueRequest)
-                    .Build();
+                var stepValueRequest = new GetStepValueRequest()
+                {
+                    StepText = stepText,
+                    HasInlineTable = hasInlineTable
+                };
+                var stepValueRequestMessage = new APIMessage()
+                {
+                    MessageId = GenerateMessageId(),
+                    MessageType = APIMessage.Types.APIMessageType.GetStepValueRequest,
+                    StepValueRequest = stepValueRequest,
+                };
                 var apiMessage = WriteAndReadApiMessage(stepValueRequestMessage);
                 yield return apiMessage.StepValueResponse.StepValue.StepValue;
             }
         }
 
-        public APIMessage WriteAndReadApiMessage(IMessageLite stepValueRequestMessage)
+        public APIMessage WriteAndReadApiMessage(IMessage stepValueRequestMessage)
         {
             lock (TcpClientWrapper)
             {
@@ -57,8 +59,7 @@ namespace Gauge.CSharp.Core
 
         private APIMessage ReadMessage()
         {
-            var responseBytes = ReadBytes();
-            return APIMessage.ParseFrom(responseBytes.ToArray());
+            return (APIMessage)ReadBytes(new APIMessage());
         }
     }
 }

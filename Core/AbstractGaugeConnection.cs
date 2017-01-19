@@ -17,7 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using Google.ProtocolBuffers;
+using Gauge.Messages;
+using Google.Protobuf;
 
 namespace Gauge.CSharp.Core
 {
@@ -35,25 +36,17 @@ namespace Gauge.CSharp.Core
             get { return TcpClientWrapper.Connected; }
         }
 
-        public void WriteMessage(IMessageLite request)
+        public void WriteMessage(IMessage request)
         {
-            var bytes = request.ToByteArray();
-            var cos = CodedOutputStream.CreateInstance(TcpClientWrapper.GetStream());
-            cos.WriteRawVarint64((ulong) bytes.Length);
-            cos.Flush();
-            TcpClientWrapper.GetStream().Write(bytes, 0, bytes.Length);
+            request.WriteTo(TcpClientWrapper.GetStream());
             TcpClientWrapper.GetStream().Flush();
         }
 
-        public IEnumerable<byte> ReadBytes()
+        public IMessage ReadBytes(IMessage message)
         {
             var networkStream = TcpClientWrapper.GetStream();
-            var codedInputStream = CodedInputStream.CreateInstance(networkStream);
-            var messageLength = codedInputStream.ReadRawVarint64();
-            for (ulong i = 0; i < messageLength; i++)
-            {
-                yield return codedInputStream.ReadRawByte();
-            }
+            new CodedInputStream(networkStream).ReadMessage(message);
+            return message;
         }
 
         protected static long GenerateMessageId()
