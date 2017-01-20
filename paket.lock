@@ -1,6 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE.Lib (4.48)
+    FAKE.Lib (4.50)
     Gauge.CSharp.Lib (0.6)
     Google.Protobuf (3.1)
       System.Collections (>= 4.0.11) - framework: >= netstandard10
@@ -17,7 +17,6 @@ NUGET
       System.Text.Encoding (>= 4.0.11) - framework: >= netstandard10
       System.Text.RegularExpressions (>= 4.1) - framework: >= netstandard10
       System.Threading (>= 4.0.11) - framework: >= netstandard10
-    Google.ProtocolBuffers (2.4.1.555)
     Grpc (1.0.1)
       Grpc.Core (>= 1.0.1)
     Grpc.Core (1.0.1)
@@ -544,7 +543,6 @@ NUGET
     Gauge.CSharp.Core (0.0.11)
       Gauge.CSharp.Lib (>= 0.5.3)
       Google.Protobuf (>= 3.1)
-      Google.ProtocolBuffers (>= 2.4.1.555)
       Grpc (1.0.1)
       Grpc.Core (1.0.1)
       Grpc.Tools (1.0.1)
@@ -552,7 +550,7 @@ NUGET
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.48)
+    FAKE (4.50)
     FSharp.Compiler.Service (2.0.0.6)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)

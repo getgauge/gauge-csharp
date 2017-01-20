@@ -1,6 +1,6 @@
 | Dependency Name | Copyright Information | Description |	Repo URL | License Type	| License URL |
 |-----------------|-----------------------|-------------|----------|--------------|-------------|
-|Google.ProtocolBuffers|Copyright 2008-2010 Google Inc.|C# port of protocol buffers|https://code.google.com/p/protobuf-csharp-port/|BSD 3 clause|http://opensource.org/licenses/BSD-3-Clause|
+|Google.Protobuf |Copyright 2015, Google Inc.|C# port of protocol buffers|https://github.com/google/protobuf|BSD|https://github.com/google/protobuf/blob/master/LICENSE|
 |NLog|Copyright (c) 2004-2011 Jaroslaw Kowalski <jaak@jkowalski.net>|NLog - Advanced .NET and Silverlight Logging|http://nlog-project.org/|BSD 3 clause|http://opensource.org/licenses/BSD-3-Clause|
 |Nuget.Core|Copyright (c) .NET Foundation. All rights reserved.| Core client libraries for NuGet Services|https://github.com/NuGet/NuGet.Client|Apache 2.0|http://www.apache.org/licenses/LICENSE-2.0|
 |Roslyn|Copyright (c) Microsoft.  All Rights Reserved.|The .NET Compiler Platform ("Roslyn") provides open-source C# and Visual Basic compilers with rich code analysis APIs.|https://github.com/dotnet/roslyn|Apache 2.0|http://www.apache.org/licenses/LICENSE-2.0|

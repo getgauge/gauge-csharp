@@ -16,7 +16,6 @@
     <copyright>Copyright ThoughtWorks Inc.© 2015</copyright>
     <dependencies>
       <dependency id="Gauge.CSharp.Lib" version="[0.5.3.0,)"/>
-      <dependency id="Google.ProtocolBuffers" version="[2.4.1.555,)"/>
     </dependencies>
   </metadata>
   <files>
