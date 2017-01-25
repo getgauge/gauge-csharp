@@ -50,10 +50,7 @@ namespace Gauge.CSharp.Core
         {
             var networkStream = TcpClientWrapper.GetStream();
             var codedInputStream = new CodedInputStream(networkStream);
-            var messageLength = codedInputStream.ReadUInt64();
-            var bytes = new byte[messageLength];
-            networkStream.Read(bytes, 0, (int)messageLength);
-            return bytes;
+            return codedInputStream.ReadBytes();
         }
 
         protected static long GenerateMessageId()
