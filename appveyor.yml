@@ -17,6 +17,9 @@ build_script:
 
     Write-Host "PATH : $($env:PATH)"
 
+
+     Get-ChildItem -Path C:\ -Filter gauge.properties -Recurse
+
     $env:M2_HOME="C:\maven\apache-maven-3.3.9"
 
     mvn --version
