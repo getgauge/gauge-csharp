@@ -17,18 +17,11 @@ build_script:
 
     Write-Host "PATH : $($env:PATH)"
 
-
-    # echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
-
     $env:M2_HOME="C:\maven\apache-maven-3.3.9"
 
     mvn --version
 
-    ls $Env:ProgramFiles
-
-    where.exe gauge
-
-    gauge -v
+    echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
 
     .\build.cmd BuildInstallFT
 test: off
