@@ -17,9 +17,7 @@ build_script:
 
     Write-Host "PATH : $($env:PATH)"
 
-    gauge -v
-
-    ls c:\Program Files\Gauge\bin
+    Get-ChildItem -Path 'C:\Program Files' -Filter gauge.properties -Recurse
 
     # echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
 
