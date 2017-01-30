@@ -19,7 +19,7 @@ build_script:
 
     ls $Env:ProgramFiles
 
-    Tree $Env:ProgramFiles\gauge
+    where.exe gauge
 
     echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
 
