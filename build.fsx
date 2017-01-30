@@ -337,7 +337,6 @@ Target "Install" (fun _ ->
 )
 
 Target "Uninstall" (fun _ ->
-    Run("where.exe", (sprintf @"gauge %s" ""), ".") 
     Run("gauge", (sprintf @"--uninstall csharp --plugin-version %s" version), ".") 
 )
 
