@@ -17,7 +17,7 @@ build_script:
 
     Write-Host "PATH : $($env:PATH)"
 
-    Write-Output "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File "C:\Program Files\Gauge\share\gauge\gauge.properties" -Encoding utf8 -Append
+    echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
 
     $env:M2_HOME="C:\maven\apache-maven-3.3.9"
 
