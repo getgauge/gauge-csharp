@@ -31,7 +31,7 @@ namespace Gauge.CSharp.Runner.Processors
         protected override ProtoExecutionResult ExecuteHooks(Message request)
         {
             var protoExecutionResult = base.ExecuteHooks(request);
-            var allPendingMessages = MethodExecutor.GetAllPendingMessages();
+            var allPendingMessages = MethodExecutor.GetAllPendingMessages().Where(m => m != null);
             protoExecutionResult.Message.AddRange(allPendingMessages);
             return protoExecutionResult;
         }
