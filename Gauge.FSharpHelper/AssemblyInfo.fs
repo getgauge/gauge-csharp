@@ -6,8 +6,8 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyTitleAttribute("Gauge.FSharpHelper")>]
 [<assembly: GuidAttribute("6c5b61aa-27d6-11e6-b67b-9e71128cae77")>]
 [<assembly: AssemblyDescriptionAttribute("F# helper to build C# gauge spec projects using Fake.Lib")>]
-[<assembly: AssemblyVersionAttribute("0.9.3")>]
-[<assembly: AssemblyFileVersionAttribute("0.9.3")>]
+[<assembly: AssemblyVersionAttribute("0.10.0")>]
+[<assembly: AssemblyFileVersionAttribute("0.10.0")>]
 [<assembly: AssemblyConfigurationAttribute("")>]
 [<assembly: AssemblyCompanyAttribute("ThoughtWorks Inc.")>]
 [<assembly: AssemblyProductAttribute("Gauge.CSharp.Core")>]
@@ -21,8 +21,8 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Gauge.FSharpHelper"
     let [<Literal>] Guid = "6c5b61aa-27d6-11e6-b67b-9e71128cae77"
     let [<Literal>] AssemblyDescription = "F# helper to build C# gauge spec projects using Fake.Lib"
-    let [<Literal>] AssemblyVersion = "0.9.3"
-    let [<Literal>] AssemblyFileVersion = "0.9.3"
+    let [<Literal>] AssemblyVersion = "0.10.0"
+    let [<Literal>] AssemblyFileVersion = "0.10.0"
     let [<Literal>] AssemblyConfiguration = ""
     let [<Literal>] AssemblyCompany = "ThoughtWorks Inc."
     let [<Literal>] AssemblyProduct = "Gauge.CSharp.Core"
