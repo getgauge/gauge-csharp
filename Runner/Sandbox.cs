@@ -355,7 +355,7 @@ namespace Gauge.CSharp.Runner
             else
             {
                 logger.Debug("Loading : {0}", instanceManagerType.FullName);
-                _classInstanceManager = _libAssembly.CreateInstance(instanceManagerType.FullName);
+                _classInstanceManager = Activator.CreateInstance(instanceManagerType);
             }
 
             _classInstanceManager = _classInstanceManager ??
