@@ -171,13 +171,11 @@ namespace Gauge.CSharp.Runner
             ScreengrabberTypes.AddRange(implementingTypes);
         }
 
-
         private void ScanForInstanceManager(IEnumerable<Type> types)
         {
-            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.InstanceManagement.IClassInstanceManager"));
+            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IClassInstanceManager"));
             ClassInstanceManagerTypes.AddRange(implementingTypes);
         }
-
 
         private static IEnumerable<Type> GetLoadableTypes(Assembly assembly)
         {
