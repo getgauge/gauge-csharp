@@ -100,7 +100,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldGetClassInstanceManagerTypes()
         {
-            Assert.Contains(_mockInstanceManagerType, _assemblyLoader.ClassInstanceManagerTypes);
+            Assert.Contains(_mockInstanceManagerType.Object, _assemblyLoader.ClassInstanceManagerTypes);
         }
     }
 }
