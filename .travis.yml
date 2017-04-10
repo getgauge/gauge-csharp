@@ -18,7 +18,8 @@ install:
   - mvn -version
   - ./install_latest_gauge_nightly.sh
   - gauge -v
-  - echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> $HOME/.gauge/config/gauge.properties
+  # use nightly once html-report is stable
+  # - echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> $HOME/.gauge/config/gauge.properties
 language: csharp
 cache:
   directories:
