@@ -5,24 +5,20 @@ before_install:
   - mozroots --import --sync
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export JAVA_HOME="/usr/lib/jvm/java-8-oracle"; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install Caskroom/cask/java; fi
+
 addons:
   apt:
     sources:
-      - sourceline: 'ppa:longsleep/golang-backports'
+      - sourceline: 'deb https://dl.bintray.com/gauge/gauge-deb nightly main'
     packages:
       - oracle-java8-set-default
       - maven
-      - golang-go
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated maven || brew upgrade maven; fi
   - mvn -version
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated golang || brew upgrade golang; fi
-  - mkdir GoWorkspace
-  - export GOPATH=$(cd $GoWorkspace ; pwd)
-  - go version
-  - go get -u -d github.com/getgauge/gauge
-  - (cd $GOPATH/src/github.com/getgauge/gauge && echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> skel/gauge.properties && exec go run build/make.go)
-  - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go --install)
+  - ./install_latest_gauge_nightly.sh
+  - gauge -v
+  - echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> $HOME/.gauge/config/gauge.properties
 language: csharp
 cache:
   directories:

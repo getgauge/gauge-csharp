@@ -1,3 +1,4 @@
+set -e
 GAUGE_LATEST_NIGHTLY=`curl -w "%{url_effective}\n" -L -s -S https://bintray.com/gauge/Gauge/Nightly/_latestVersion -o /dev/null`
 
 GAUGE_LATEST_NIGHTLY_VERSION=`echo $GAUGE_LATEST_NIGHTLY | sed 's/.*\///'`
