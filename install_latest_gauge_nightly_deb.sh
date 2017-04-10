@@ -5,5 +5,7 @@ echo deb https://dl.bintray.com/gauge/gauge-deb nightly main | sudo tee -a /etc/
 sudo apt-get update
 sudo apt-get install gauge
 
+gauge_setup
+
 # Generate default config/skel
 gauge -v
