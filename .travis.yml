@@ -5,13 +5,12 @@ before_install:
   - mozroots --import --sync
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export JAVA_HOME="/usr/lib/jvm/java-8-oracle"; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install Caskroom/cask/java; fi
+go:
+  - 1.8
 addons:
   apt:
-    sources:
-      - sourceline: 'ppa:longsleep/golang-backports'
     packages:
       - oracle-java8-set-default
-      - golang-1.8-go
       - maven
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated maven || brew upgrade maven; fi
