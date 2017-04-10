@@ -23,7 +23,8 @@ build_script:
 
     gauge -v
 
-    echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:AppData'\Gauge\config\gauge.properties' -Encoding utf8 -Append
+    # use nightly once html-report is stable
+    # echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:AppData'\Gauge\config\gauge.properties' -Encoding utf8 -Append
 
     .\build.cmd BuildInstallFT
 test: off
