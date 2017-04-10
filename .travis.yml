@@ -7,6 +7,8 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; brew install Caskroom/cask/java; fi
 addons:
   apt:
+    sources:
+      - sourceline: 'ppa:longsleep/golang-backports'
     packages:
       - oracle-java8-set-default
       - maven
@@ -17,9 +19,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated golang || brew upgrade golang; fi
   - mkdir GoWorkspace
   - export GOPATH=$(cd $GoWorkspace ; pwd)
-  - go get -u github.com/tools/godep
   - go get -u -d github.com/getgauge/gauge
-  - (cd $GOPATH/src/github.com/getgauge/gauge && exec godep restore)
   - (cd $GOPATH/src/github.com/getgauge/gauge && echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> skel/gauge.properties && exec go run build/make.go)
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go --install)
 language: csharp
