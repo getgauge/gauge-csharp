@@ -3,7 +3,7 @@ init:
 - ps: |
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     if (!(Test-Path -Path "C:\maven" )) {
-    (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
+    (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip', 'C:\maven-bin.zip')
     [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
     }
 - cmd: java -version
@@ -13,15 +13,15 @@ build_script:
 - ps: >-
     .\install_latest_gauge_nightly.ps1
 
-    $env:Path = "c:\Program Files\Gauge\bin;C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = "c:\Program Files\Gauge\bin;C:\maven\apache-maven-3.5.0\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
     Write-Host "PATH : $($env:PATH)"
 
-    $env:M2_HOME="C:\maven\apache-maven-3.3.9"
+    $env:M2_HOME="C:\maven\apache-maven-3.5.0"
 
     mvn --version
 
-    echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:ProgramFiles'\Gauge\share\gauge\gauge.properties' -Encoding utf8 -Append
+    echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:AppData'\Gauge\config\gauge.properties' -Encoding utf8 -Append
 
     .\build.cmd BuildInstallFT
 test: off
