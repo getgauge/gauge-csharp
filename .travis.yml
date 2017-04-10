@@ -19,6 +19,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated golang || brew upgrade golang; fi
   - mkdir GoWorkspace
   - export GOPATH=$(cd $GoWorkspace ; pwd)
+  - go version
   - go get -u -d github.com/getgauge/gauge
   - (cd $GOPATH/src/github.com/getgauge/gauge && echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> skel/gauge.properties && exec go run build/make.go)
   - (cd $GOPATH/src/github.com/getgauge/gauge && exec go run build/make.go --install)
