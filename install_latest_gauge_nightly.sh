@@ -25,3 +25,4 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 gauge -v
+set +e

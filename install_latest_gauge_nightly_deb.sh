@@ -9,3 +9,4 @@ gauge_setup
 
 # Generate default config/skel
 gauge -v
+set +e
