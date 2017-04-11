@@ -15,13 +15,11 @@ if [[ "$unamestr" == 'Linux' ]]; then
 	cd $OUTPUT_DIR
 	GAUGE_PREFIX=/usr/local GAUGE_PLUGINS=html-report ./install.sh
 elif [[ "$unamestr" == 'Darwin' ]]; then
-	GAUGE_FILE_NAME="gauge-$GAUGE_LATEST_NIGHTLY_VERSION-darwin.$BIT.zip"
+	GAUGE_FILE_NAME="gauge-$GAUGE_LATEST_NIGHTLY_VERSION-darwin.$BIT.pkg"
 	GAUGE_DOWNLOAD_URL="https://bintray.com/gauge/Gauge/download_file?file_path=darwin%2F$GAUGE_FILE_NAME"
 	wget $GAUGE_DOWNLOAD_URL -O $GAUGE_FILE_NAME
-	OUTPUT_DIR="./gauge_$GAUGE_LATEST_NIGHTLY_VERSION"
-	unzip $GAUGE_FILE_NAME -d $OUTPUT_DIR
-	cd $OUTPUT_DIR
-	GAUGE_PREFIX=/usr/local GAUGE_PLUGINS=html-report ./install.sh
+	sudo installer -pkg $GAUGE_FILE_NAME -target /
+	sudo rm -rf $HOME/.gauge
 fi
 
 gauge -v
