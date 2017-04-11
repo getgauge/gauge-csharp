@@ -13,7 +13,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
 	OUTPUT_DIR="./gauge_$GAUGE_LATEST_NIGHTLY_VERSION"
 	unzip $GAUGE_FILE_NAME -d $OUTPUT_DIR
 	cd $OUTPUT_DIR
-	/bin/bash install.sh $1
+	/bin/bash install.sh --force
 elif [[ "$unamestr" == 'Darwin' ]]; then
 	GAUGE_FILE_NAME="gauge-$GAUGE_LATEST_NIGHTLY_VERSION-darwin.$BIT.zip"
 	GAUGE_DOWNLOAD_URL="https://bintray.com/gauge/Gauge/download_file?file_path=darwin%2F$GAUGE_FILE_NAME"
@@ -21,7 +21,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 	OUTPUT_DIR="./gauge_$GAUGE_LATEST_NIGHTLY_VERSION"
 	unzip $GAUGE_FILE_NAME -d $OUTPUT_DIR
 	cd $OUTPUT_DIR
-	/bin/bash install.sh $1
+	/bin/bash install.sh --force
 fi
 
 gauge -v
