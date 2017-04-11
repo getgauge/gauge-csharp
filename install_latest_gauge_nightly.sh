@@ -21,7 +21,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 	OUTPUT_DIR="./gauge_$GAUGE_LATEST_NIGHTLY_VERSION"
 	unzip $GAUGE_FILE_NAME -d $OUTPUT_DIR
 	cd $OUTPUT_DIR
-	GAUGE_PREFIX=/usr/local/bin GAUGE_PLUGINS=html-report ./install.sh
+	GAUGE_PREFIX=/usr/local GAUGE_PLUGINS=html-report ./install.sh
 fi
 
 gauge -v
