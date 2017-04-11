@@ -24,7 +24,4 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 gauge -v
-# hack - gauge generates example.spec to one level below expected.
-# fixed via c39e7f8
-cp $HOME/.gauge/config/skel/specs/example.spec $HOME/.gauge/config/skel/example.spec
 set +e
