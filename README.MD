@@ -1,8 +1,8 @@
 # C# support for Gauge
 
-|Windows|Linux (Mono)|OS X (Mono)|
-|-------|------------|-----------|
-|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)|[![Build Status](https://snap-ci.com/getgauge/gauge-csharp/branch/master/build_image)](https://snap-ci.com/getgauge/gauge-csharp/branch/master)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
+|Windows|Linux / OS X (Mono)|
+|-------|------------|
+|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
 
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 

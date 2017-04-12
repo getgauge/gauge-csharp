@@ -51,7 +51,7 @@ namespace Gauge.CSharp.Runner
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 builder.Failed = true;
-                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
+                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
                     builder.ScreenShot = TakeScreenshot();
@@ -79,7 +79,7 @@ namespace Gauge.CSharp.Runner
             {
                 var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
                 builder.Failed = true;
-                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
+                var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
                     builder.ScreenShot = TakeScreenshot();

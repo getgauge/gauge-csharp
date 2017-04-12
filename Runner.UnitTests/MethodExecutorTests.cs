@@ -104,14 +104,14 @@ namespace Gauge.CSharp.Runner.UnitTests
             var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>())).Returns(result);
 
-            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
-            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", "false");
+            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
             
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
             
             mockSandBox.VerifyAll();
             Assert.False(executionResult.ScreenShot == null);
-            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", screenshotEnabled);
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
         }
 
         [Test]
@@ -139,14 +139,14 @@ namespace Gauge.CSharp.Runner.UnitTests
                 sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>())
             ).Returns(result).Verifiable();
 
-            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ENABLED");
-            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", "false");
+            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
 
             var protoExecutionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>());
 
             mockSandBox.VerifyAll();
             Assert.False(protoExecutionResult.ScreenShot == null);
-            Environment.SetEnvironmentVariable("SCREENSHOT_ENABLED", screenshotEnabled);
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
         }
     }
 }
