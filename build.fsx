@@ -78,7 +78,6 @@ let artifactsDir f =
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Lib.UnitTests") -> "gauge-csharp-lib/tests"
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Core") -> "gauge-csharp-core/bin"
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Runner") -> "gauge-csharp/bin"
-    | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.FSharpHelper") -> "gauge-csharp/bin"
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Runner.UnitTests") -> "gauge-csharp/tests"
     | path when (System.IO.Path.GetFileNameWithoutExtension path).Equals("Gauge.CSharp.Runner.IntegrationTests") -> "gauge-csharp/itests"
     | _                           -> failwith (sprintf "Unknown project %s. Where should its artifacts be copied to?" f)
@@ -168,13 +167,6 @@ Target "AssemblyInfo-Runner" (fun _ ->
           Attribute.FileVersion releaseRunner.AssemblyVersion ] @ commonAttributes
 
     CreateCSharpAssemblyInfo (("Runner" </> "Properties") </> "AssemblyInfo.cs") runnerAttributes   
-    let fshAttributes =
-        [ Attribute.Title("Gauge.FSharpHelper")
-          Attribute.Guid("6c5b61aa-27d6-11e6-b67b-9e71128cae77")
-          Attribute.Description("F# helper to build C# gauge spec projects using Fake.Lib")
-          Attribute.Version releaseRunner.AssemblyVersion
-          Attribute.FileVersion releaseRunner.AssemblyVersion ] @ commonAttributes
-    CreateFSharpAssemblyInfo ("Gauge.FSharpHelper" </> "AssemblyInfo.fs") fshAttributes
 )
 
 // --------------------------------------------------------------------------------------

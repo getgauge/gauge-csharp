@@ -193,12 +193,6 @@
   <ItemGroup>
     <Folder Include="InstanceManagement\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Gauge.FSharpHelper\Gauge.FSharpHelper.fsproj">
-      <Project>{79B72F34-376A-4B21-8892-8C936421F8FA}</Project>
-      <Name>Gauge.FSharpHelper</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')">
       <ItemGroup>
