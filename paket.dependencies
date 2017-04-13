@@ -2,7 +2,7 @@ source https://www.nuget.org/api/v2
 source https://www.myget.org/F/gauge-csharp/api/v2
 
 nuget Gauge.CSharp.Core 0.1.0
-nuget Gauge.CSharp.Lib 0.6.0
+nuget Gauge.CSharp.Lib
 nuget NuGet.CommandLine
 nuget Microsoft.CodeAnalysis.Analyzers 1.1.0 framework: >= net45
 nuget Microsoft.CodeAnalysis.Common 1.1.0 framework: >= net45
@@ -29,7 +29,7 @@ group Test
   source https://nuget.org/api/v2
 
   nuget Moq 4.2.1502.0911 framework: >= net45
-  nuget NUnit ~> 2
-  nuget NUnit.Runners ~> 2
+  nuget NUnit
+  nuget NUnit.Runners
   nuget OpenCover
   nuget ReportGenerator

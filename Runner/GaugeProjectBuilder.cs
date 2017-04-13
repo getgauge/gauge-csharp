@@ -59,7 +59,6 @@ namespace Gauge.CSharp.Runner
                         input.Properties = properties;
                         return input;
                     }), projectFullPath);
-//					Gauge.FSharpHelper.Builder.buildProject(projectFullPath, gaugeBinDir);
 				} catch (Exception ex) {
 					Logger.Error (ex,"C# Project build failed {0}",ex.Message);
 					return false;

@@ -9,6 +9,7 @@ open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open Fake.UserInputHelper
 open Fake.OpenCoverHelper
+open Fake.Testing
 open System
 open System.IO
 #if MONO
@@ -229,39 +230,39 @@ Target "Zip" (fun _ ->
 
 Target "RunTests-Lib" (fun _ ->
     !! testAssembliesLib
-    |> NUnit (fun p ->
+    |> NUnit3 (fun p ->
         { p with
-            DisableShadowCopy = true
+            ShadowCopy = false
             TimeOut = TimeSpan.FromMinutes 5.
-            OutputFile = "TestResults-Lib.xml" })
+            ResultSpecs = ["TestResults-Lib.xml"] })
 )
 
 Target "RunTests-Runner" (fun _ ->
     !! testAssembliesRunner
-    |> NUnit (fun p ->
+    |> NUnit3 (fun p ->
         { p with
-            DisableShadowCopy = true
+            ShadowCopy = false
             TimeOut = TimeSpan.FromMinutes 5.
-            OutputFile = "TestResults-Runner.xml" })
+            ResultSpecs = ["TestResults-Runner.xml"] })
 )
 
 Target "RunITests-Runner" (fun _ ->
     !! itestAssembliesRunner
-    |> NUnit (fun p ->
+    |> NUnit3 (fun p ->
         { p with
-            DisableShadowCopy = true
+            ShadowCopy = false
             TimeOut = TimeSpan.FromMinutes 5.
-            OutputFile = "ITestResults-Runner.xml" })
+            ResultSpecs = ["ITestResults-Runner.xml"] })
 )
 
 Target "RunTests-All" (fun _ ->
     !! "artifacts/gauge-csharp/*tests/*Test*.dll"
     -- "**/*IntegrationTestSample.dll"
-    |> NUnit (fun p ->
+    |> NUnit3 (fun p ->
         { p with
-            DisableShadowCopy = true
+            ShadowCopy = false
             TimeOut = TimeSpan.FromMinutes 5.
-            OutputFile = "TestResults.xml" })
+            ResultSpecs = ["TestResults.xml"] })
 )
 
 // --------------------------------------------------------------------------------------
@@ -274,12 +275,12 @@ Target "RunTests-Coverage" (fun _ ->
     OpenCover (fun p -> 
         { p with 
             ExePath = "./packages/test/OpenCover/tools/OpenCover.Console.exe"
-            TestRunnerExePath = "./packages/test/NUnit.Runners/tools/nunit-console.exe"
+            TestRunnerExePath = "./packages/test/NUnit.ConsoleRunner/tools/nunit3-console.exe"
             Output = coverageDir + "/results.xml"
             Register = RegisterUser
             Filter = "+[*]* -[*.*Tests*]* -[*IntegrationTestSample*]*"
         })
-        ("/nologo /noshadow /framework=net-4.5.1 /result=" + coverageDir + "nunit-results.xml " + assembliesToTest)
+        ("--noheader --shadowcopy=false --timeout=300000 --framework=net-4.5 --result=" + coverageDir + "/nunit-results.xml " + assembliesToTest)
 
     trace "Generate OpenCover report"
     Run("packages/test/ReportGenerator/tools/ReportGenerator.exe", (sprintf "%s/results.xml %s/html" coverageDir coverageDir), ".")
