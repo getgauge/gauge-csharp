@@ -49,7 +49,17 @@ namespace Gauge.CSharp.Runner
 			if (IsRunningOnMono () || 
 				!string.IsNullOrEmpty(Utils.TryReadEnvValue("GAUGE_CSHARP_BUILD_FAKE"))) {
 				try {
-					Gauge.FSharpHelper.Builder.buildProject(projectFullPath, gaugeBinDir);
+				    var properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Configuration", "Release"), FSharpList<Tuple<string, string>>.Empty);
+                    properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Platform", "Any CPU"), properties);
+                    properties = new FSharpList<Tuple<string, string>>(Tuple.Create("OutputPath", gaugeBinDir), properties);
+				    MSBuildHelper.build(FuncConvert.ToFSharpFunc(delegate(MSBuildHelper.MSBuildParams input)
+                    {
+                        input.Verbosity = FSharpOption<MSBuildHelper.MSBuildVerbosity>.Some(MSBuildHelper.MSBuildVerbosity.Quiet);
+                        input.Targets = new FSharpList<string>("Build", FSharpList<string>.Empty);
+                        input.Properties = properties;
+                        return input;
+                    }), projectFullPath);
+//					Gauge.FSharpHelper.Builder.buildProject(projectFullPath, gaugeBinDir);
 				} catch (Exception ex) {
 					Logger.Error (ex,"C# Project build failed {0}",ex.Message);
 					return false;
