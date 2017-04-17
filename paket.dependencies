@@ -12,6 +12,7 @@ nuget NLog 4.2.2 framework: >= net45
 nuget NuGet.Core 2.10.1 framework: >= net45
 nuget System.Collections.Immutable 1.1.37 framework: >= net45
 nuget System.Reflection.Metadata 1.1.0 framework: >= net45
+nuget FSharp.Core 4.0.0.1
 nuget FAKE.Lib
 nuget Grpc.Tools 1.0.1
 nuget Grpc.Core 1.0.1

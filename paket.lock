@@ -1,6 +1,7 @@
 NUGET
   remote: https://www.nuget.org/api/v2
     FAKE.Lib (4.58.6)
+    FSharp.Core (4.0.0.1)
     Gauge.CSharp.Core (0.1)
       Gauge.CSharp.Lib (>= 0.5.3)
       Google.Protobuf (>= 3.1)

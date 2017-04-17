@@ -7,4 +7,5 @@ NLog
 NuGet.Core
 System.Collections.Immutable
 System.Reflection.Metadata
+FSharp.Core
 FAKE.Lib
