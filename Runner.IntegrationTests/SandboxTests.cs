@@ -56,7 +56,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             AssertRunnerDomainDidNotLoadUsersAssembly ();
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(11, stepMethods.Count);
+            Assert.AreEqual(12, stepMethods.Count);
         }
 
         [Test]
@@ -170,6 +170,19 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var pendingMessages = sandbox.GetAllPendingMessages().ToList();
 
             Assert.Contains("hello, world!", pendingMessages);
+        }
+
+        [Test]
+        public void ShouldGetStacktraceForAggregateException()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var stepMethods = sandbox.GetStepMethods();
+            var gaugeMethod = stepMethods.First(info => string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.AsyncExeption") == 0);
+
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
+
+            Assert.AreEqual(false, executionResult.Success);
+            Assert.AreEqual("", executionResult.StackTrace);
         }
     }
 }

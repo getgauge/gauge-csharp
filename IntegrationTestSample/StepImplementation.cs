@@ -16,9 +16,11 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 
@@ -56,6 +58,17 @@ namespace IntegrationTestSample
 	    public void ContinueOnFailure()
 	    {
 	        throw new CustomSerializableException("I am a custom serializable exception");
+	    }
+
+	    [Step("I throw an AggregateException")]
+	    public void AsyncExeption()
+	    {
+	        var tasks = new[]
+	        {
+	            Task.Run(() => { throw new CustomSerializableException("First Exception"); }),
+	            Task.Run(() => { throw new CustomSerializableException("Second Exception"); }),
+	        };
+	        Task.WaitAll(tasks);
 	    }
 
         [Step("Step with text", "and an alias")]

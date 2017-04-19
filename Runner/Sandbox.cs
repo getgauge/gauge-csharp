@@ -93,7 +93,8 @@ namespace Gauge.CSharp.Runner
                 var innerException = ex.InnerException ?? ex;
                 logger.Error(innerException);
                 executionResult.ExceptionMessage = innerException.Message;
-                executionResult.StackTrace = innerException.StackTrace;
+                executionResult.StackTrace = innerException is AggregateException ?
+                    innerException.ToString() : innerException.StackTrace;
                 executionResult.Source = innerException.Source;
                 executionResult.Success = false;
                 executionResult.Recoverable = gaugeMethod.ContinueOnFailure;

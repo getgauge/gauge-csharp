@@ -15,12 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
@@ -40,10 +36,9 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 			var found = dir.GetDirectories ().FirstOrDefault (d => d.Name.Equals ("IntegrationTestSample"));
 			if (found != null)
 				return found;
-			else if (dir.Parent != null)// not on system boundry
-				return FindIntegrationTestDirectory(dir.Parent);
-			else
-				throw new DirectoryNotFoundException ("Failed to find IntegrationTestSample directory");
+		    if (dir.Parent != null)// not on system boundry
+		        return FindIntegrationTestDirectory(dir.Parent);
+		    throw new DirectoryNotFoundException ("Failed to find IntegrationTestSample directory");
 		}
 
 	}
