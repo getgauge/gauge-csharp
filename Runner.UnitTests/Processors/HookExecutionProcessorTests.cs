@@ -22,7 +22,6 @@ using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.UnitTests.Processors.Stubs;
-using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
@@ -51,6 +50,12 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
         }
 
+        [BeforeSpec]
+        [BeforeScenario]
+        public void MultiHook()
+        {
+        }
+
         /*
          * untagged hooks are executed for all.
          * Tags     | Methods
@@ -68,10 +73,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             _hookMethods = new List<IHookMethod>
             {
-                new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Bar"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Baz"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Blah"), typeof(Step).Assembly)
+                new HookMethod("BeforeScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly)
             };
         }
 
@@ -168,6 +173,17 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             var hooksStrategy = new TestTaggedHooksFirstExecutionProcessor().GetHooksStrategy();
 
             Assert.IsInstanceOf<TaggedHooksFirstStrategy>(hooksStrategy);
+        }
+
+        [Test]
+        public void ShouldAllowMultipleHooksInaMethod()
+        {
+            var expected = GetType().GetMethod("MultiHook").FullyQuallifiedName();
+            var beforeScenarioHook = new HookMethod("BeforeScenario", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
+            Assert.AreEqual(expected, beforeScenarioHook.Method);
+
+            var beforeSpecHook = new HookMethod("BeforeSpec", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
+            Assert.AreEqual(expected, beforeSpecHook.Method);
         }
     }
 }

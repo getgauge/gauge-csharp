@@ -21,6 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Runner.Exceptions;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 

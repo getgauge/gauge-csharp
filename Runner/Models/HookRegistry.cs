@@ -97,9 +97,13 @@ namespace Gauge.CSharp.Runner.Models
         {
             foreach (var methodInfo in hooks)
             {
-                _methodMap.Add(methodInfo.FullyQuallifiedName(), methodInfo);
+                var fullyQuallifiedName = methodInfo.FullyQuallifiedName();
+                if (!_methodMap.ContainsKey(fullyQuallifiedName))
+                {
+                    _methodMap.Add(fullyQuallifiedName, methodInfo);
+                }
             }
-            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(info, _targetLibAssembly)));
+            _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(hookType, info, _targetLibAssembly)));
         }
 
         public MethodInfo MethodFor(string method)

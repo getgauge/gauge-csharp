@@ -44,7 +44,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var mockHookRegistry = new Mock<IHookRegistry>();
 
-            var hooks = new HashSet<IHookMethod> { new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly) };
+            var hooks = new HashSet<IHookMethod> { new HookMethod("BeforeSpec", GetType().GetMethod("Foo"), typeof(Step).Assembly) };
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
             var executionEndingRequest = new ExecutionStartingRequest();
             _request = new Message()

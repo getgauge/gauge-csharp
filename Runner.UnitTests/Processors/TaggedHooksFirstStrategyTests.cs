@@ -73,11 +73,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             _hookMethods = new HashSet<HookMethod>
             {
-                new HookMethod(GetType().GetMethod("Foo"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Bar"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Zed"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Blah"), typeof(Step).Assembly),
-                new HookMethod(GetType().GetMethod("Baz"), typeof(Step).Assembly)
+                new HookMethod("AfterScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Zed"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly)
             };
         }
 
