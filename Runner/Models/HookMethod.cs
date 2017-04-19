@@ -38,6 +38,13 @@ namespace Gauge.CSharp.Runner.Models
             Method = methodInfo.FullyQuallifiedName();
             FilterTags = Enumerable.Empty<string>();
             var targetHookType = targetLibAssembly.GetType(string.Format("Gauge.CSharp.Lib.Attribute.{0}", hookType));
+            var filteredHookType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.FilteredHookAttribute");
+
+            if (!targetHookType.IsSubclassOf(filteredHookType))
+            {
+                return;
+            }
+
             dynamic filteredHookAttribute = methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
 
