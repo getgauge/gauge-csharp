@@ -182,7 +182,8 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var executionResult = sandbox.ExecuteMethod(gaugeMethod);
 
             Assert.AreEqual(false, executionResult.Success);
-            Assert.AreEqual("", executionResult.StackTrace);
+            Assert.True(executionResult.StackTrace.Contains("First Exception"));
+            Assert.True(executionResult.StackTrace.Contains("Second Exception"));
         }
     }
 }
