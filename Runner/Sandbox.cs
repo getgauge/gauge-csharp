@@ -89,9 +89,8 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                logger.Error("Error executing {0}", method.Name);
+                logger.Debug("Error executing {0}", method.Name);
                 var innerException = ex.InnerException ?? ex;
-                logger.Error(innerException);
                 executionResult.ExceptionMessage = innerException.Message;
                 executionResult.StackTrace = innerException is AggregateException ?
                     innerException.ToString() : innerException.StackTrace;
