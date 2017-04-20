@@ -77,7 +77,7 @@ namespace Gauge.CSharp.Runner
 	                throw;
 	            }
 
-	            Logger.Info("Building Project: {0}", projectFullPath);
+	            Logger.Debug("Building Project: {0}", projectFullPath);
 	            var pc = new ProjectCollection();
 	            var globalProperty = new Dictionary<string, string>
 	            {
@@ -99,7 +99,7 @@ namespace Gauge.CSharp.Runner
 	                Logger.Error("Please choose a project name that complies with C# Project naming conventions.");
 	            }
 
-	            Logger.Info(buildResult.OverallResult);
+	            Logger.Debug(buildResult.OverallResult);
 	            return buildResult.OverallResult == BuildResultCode.Success;
 			}
         }

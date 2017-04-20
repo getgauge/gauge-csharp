@@ -35,7 +35,7 @@ namespace Gauge.CSharp.Runner
         public static ISandbox Build()
         {
             var sandboxAppDomainSetup = new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
-            Logger.Info("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
+            Logger.Debug("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
             try
             {
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
