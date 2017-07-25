@@ -2,7 +2,7 @@
 
 |Windows|Linux / OS X (Mono)|
 |-------|------------|
-|[![Build status](https://ci.appveyor.com/api/projects/status/0kwmhvao15qlmiic?svg=true)](https://ci.appveyor.com/project/sriv/gauge-csharp)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/0ydasrwa2t2jh6fy?svg=true)](https://ci.appveyor.com/project/getgauge/gauge-csharp)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
 
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 
