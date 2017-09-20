@@ -20,6 +20,8 @@ install:
   # use nightly once html-report is stable
   # - echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> $HOME/.gauge/config/gauge.properties
 language: csharp
+mono:
+  - 5.0.1
 cache:
   directories:
   - $HOME/.m2
