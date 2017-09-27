@@ -9,6 +9,7 @@ init:
 - cmd: java -version
 environment:
   GAUGE_PARALLEL: false
+  GAUGE_TELEMETRY_ENABLED: false
 build_script:
 - ps: >-
     .\install_latest_gauge_nightly.ps1
@@ -21,7 +22,7 @@ build_script:
 
     mvn --version
 
-    gauge -v
+    gauge version
 
     # use nightly once html-report is stable
     # echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:AppData'\Gauge\config\gauge.properties' -Encoding utf8 -Append
