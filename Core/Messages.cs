@@ -49,88 +49,90 @@ namespace Gauge.Messages {
             "SgoIU3BlY0luZm8SDAoEbmFtZRgBIAEoCRIQCghmaWxlTmFtZRgCIAEoCRIQ",
             "Cghpc0ZhaWxlZBgDIAEoCBIMCgR0YWdzGAQgAygJIjwKDFNjZW5hcmlvSW5m",
             "bxIMCgRuYW1lGAEgASgJEhAKCGlzRmFpbGVkGAIgASgIEgwKBHRhZ3MYAyAD",
-            "KAkiTgoIU3RlcEluZm8SMAoEc3RlcBgBIAEoCzIiLmdhdWdlLm1lc3NhZ2Vz",
-            "LkV4ZWN1dGVTdGVwUmVxdWVzdBIQCghpc0ZhaWxlZBgCIAEoCCKMAQoSRXhl",
-            "Y3V0ZVN0ZXBSZXF1ZXN0EhYKDmFjdHVhbFN0ZXBUZXh0GAEgASgJEhYKDnBh",
-            "cnNlZFN0ZXBUZXh0GAIgASgJEhcKD3NjZW5hcmlvRmFpbGluZxgDIAEoCBIt",
-            "CgpwYXJhbWV0ZXJzGAQgAygLMhkuZ2F1Z2UubWVzc2FnZXMuUGFyYW1ldGVy",
-            "IkMKE1N0ZXBWYWxpZGF0ZVJlcXVlc3QSEAoIc3RlcFRleHQYASABKAkSGgoS",
-            "bnVtYmVyT2ZQYXJhbWV0ZXJzGAIgASgFItMBChRTdGVwVmFsaWRhdGVSZXNw",
-            "b25zZRIPCgdpc1ZhbGlkGAEgASgIEhQKDGVycm9yTWVzc2FnZRgCIAEoCRJB",
-            "CgllcnJvclR5cGUYAyABKA4yLi5nYXVnZS5tZXNzYWdlcy5TdGVwVmFsaWRh",
-            "dGVSZXNwb25zZS5FcnJvclR5cGUiUQoJRXJyb3JUeXBlEiEKHVNURVBfSU1Q",
-            "TEVNRU5UQVRJT05fTk9UX0ZPVU5EEAASIQodRFVQTElDQVRFX1NURVBfSU1Q",
-            "TEVNRU5UQVRJT04QASJNChRTdWl0ZUV4ZWN1dGlvblJlc3VsdBI1CgtzdWl0",
-            "ZVJlc3VsdBgBIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlByb3RvU3VpdGVSZXN1",
-            "bHQiEgoQU3RlcE5hbWVzUmVxdWVzdCIiChFTdGVwTmFtZXNSZXNwb25zZRIN",
-            "CgVzdGVwcxgBIAMoCSIeChxTY2VuYXJpb0RhdGFTdG9yZUluaXRSZXF1ZXN0",
-            "IhoKGFNwZWNEYXRhU3RvcmVJbml0UmVxdWVzdCIbChlTdWl0ZURhdGFTdG9y",
-            "ZUluaXRSZXF1ZXN0Ij0KEVBhcmFtZXRlclBvc2l0aW9uEhMKC29sZFBvc2l0",
-            "aW9uGAEgASgFEhMKC25ld1Bvc2l0aW9uGAIgASgFIrgBCg9SZWZhY3RvclJl",
-            "cXVlc3QSNAoMb2xkU3RlcFZhbHVlGAEgASgLMh4uZ2F1Z2UubWVzc2FnZXMu",
-            "UHJvdG9TdGVwVmFsdWUSNAoMbmV3U3RlcFZhbHVlGAIgASgLMh4uZ2F1Z2Uu",
-            "bWVzc2FnZXMuUHJvdG9TdGVwVmFsdWUSOQoOcGFyYW1Qb3NpdGlvbnMYAyAD",
-            "KAsyIS5nYXVnZS5tZXNzYWdlcy5QYXJhbWV0ZXJQb3NpdGlvbiJIChBSZWZh",
-            "Y3RvclJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgSDQoFZXJyb3IYAiABKAkS",
-            "FAoMZmlsZXNDaGFuZ2VkGAMgAygJIiQKD1N0ZXBOYW1lUmVxdWVzdBIRCglz",
-            "dGVwVmFsdWUYASABKAkiTQoQU3RlcE5hbWVSZXNwb25zZRIVCg1pc1N0ZXBQ",
-            "cmVzZW50GAEgASgIEhAKCHN0ZXBOYW1lGAIgAygJEhAKCGhhc0FsaWFzGAMg",
-            "ASgIIi0KGlVuc3VwcG9ydGVkTWVzc2FnZVJlc3BvbnNlEg8KB21lc3NhZ2UY",
-            "ASABKAki/hIKB01lc3NhZ2USOAoLbWVzc2FnZVR5cGUYASABKA4yIy5nYXVn",
-            "ZS5tZXNzYWdlcy5NZXNzYWdlLk1lc3NhZ2VUeXBlEhEKCW1lc3NhZ2VJZBgC",
-            "IAEoAxJKChhleGVjdXRpb25TdGFydGluZ1JlcXVlc3QYAyABKAsyKC5nYXVn",
-            "ZS5tZXNzYWdlcy5FeGVjdXRpb25TdGFydGluZ1JlcXVlc3QSUgocc3BlY0V4",
-            "ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBgEIAEoCzIsLmdhdWdlLm1lc3NhZ2Vz",
-            "LlNwZWNFeGVjdXRpb25TdGFydGluZ1JlcXVlc3QSTgoac3BlY0V4ZWN1dGlv",
-            "bkVuZGluZ1JlcXVlc3QYBSABKAsyKi5nYXVnZS5tZXNzYWdlcy5TcGVjRXhl",
-            "Y3V0aW9uRW5kaW5nUmVxdWVzdBJaCiBzY2VuYXJpb0V4ZWN1dGlvblN0YXJ0",
-            "aW5nUmVxdWVzdBgGIAEoCzIwLmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhl",
-            "Y3V0aW9uU3RhcnRpbmdSZXF1ZXN0ElYKHnNjZW5hcmlvRXhlY3V0aW9uRW5k",
-            "aW5nUmVxdWVzdBgHIAEoCzIuLmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRXhl",
-            "Y3V0aW9uRW5kaW5nUmVxdWVzdBJSChxzdGVwRXhlY3V0aW9uU3RhcnRpbmdS",
-            "ZXF1ZXN0GAggASgLMiwuZ2F1Z2UubWVzc2FnZXMuU3RlcEV4ZWN1dGlvblN0",
-            "YXJ0aW5nUmVxdWVzdBJOChpzdGVwRXhlY3V0aW9uRW5kaW5nUmVxdWVzdBgJ",
-            "IAEoCzIqLmdhdWdlLm1lc3NhZ2VzLlN0ZXBFeGVjdXRpb25FbmRpbmdSZXF1",
-            "ZXN0Ej4KEmV4ZWN1dGVTdGVwUmVxdWVzdBgKIAEoCzIiLmdhdWdlLm1lc3Nh",
-            "Z2VzLkV4ZWN1dGVTdGVwUmVxdWVzdBJGChZleGVjdXRpb25FbmRpbmdSZXF1",
-            "ZXN0GAsgASgLMiYuZ2F1Z2UubWVzc2FnZXMuRXhlY3V0aW9uRW5kaW5nUmVx",
-            "dWVzdBJAChNzdGVwVmFsaWRhdGVSZXF1ZXN0GAwgASgLMiMuZ2F1Z2UubWVz",
-            "c2FnZXMuU3RlcFZhbGlkYXRlUmVxdWVzdBJCChRzdGVwVmFsaWRhdGVSZXNw",
-            "b25zZRgNIAEoCzIkLmdhdWdlLm1lc3NhZ2VzLlN0ZXBWYWxpZGF0ZVJlc3Bv",
-            "bnNlEkgKF2V4ZWN1dGlvblN0YXR1c1Jlc3BvbnNlGA4gASgLMicuZ2F1Z2Uu",
-            "bWVzc2FnZXMuRXhlY3V0aW9uU3RhdHVzUmVzcG9uc2USOgoQc3RlcE5hbWVz",
-            "UmVxdWVzdBgPIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlN0ZXBOYW1lc1JlcXVl",
-            "c3QSPAoRc3RlcE5hbWVzUmVzcG9uc2UYECABKAsyIS5nYXVnZS5tZXNzYWdl",
-            "cy5TdGVwTmFtZXNSZXNwb25zZRJCChRzdWl0ZUV4ZWN1dGlvblJlc3VsdBgR",
-            "IAEoCzIkLmdhdWdlLm1lc3NhZ2VzLlN1aXRlRXhlY3V0aW9uUmVzdWx0Ej4K",
-            "EmtpbGxQcm9jZXNzUmVxdWVzdBgSIAEoCzIiLmdhdWdlLm1lc3NhZ2VzLktp",
-            "bGxQcm9jZXNzUmVxdWVzdBJSChxzY2VuYXJpb0RhdGFTdG9yZUluaXRSZXF1",
-            "ZXN0GBMgASgLMiwuZ2F1Z2UubWVzc2FnZXMuU2NlbmFyaW9EYXRhU3RvcmVJ",
-            "bml0UmVxdWVzdBJKChhzcGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QYFCABKAsy",
-            "KC5nYXVnZS5tZXNzYWdlcy5TcGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QSTAoZ",
-            "c3VpdGVEYXRhU3RvcmVJbml0UmVxdWVzdBgVIAEoCzIpLmdhdWdlLm1lc3Nh",
-            "Z2VzLlN1aXRlRGF0YVN0b3JlSW5pdFJlcXVlc3QSOAoPc3RlcE5hbWVSZXF1",
-            "ZXN0GBYgASgLMh8uZ2F1Z2UubWVzc2FnZXMuU3RlcE5hbWVSZXF1ZXN0EjoK",
-            "EHN0ZXBOYW1lUmVzcG9uc2UYFyABKAsyIC5nYXVnZS5tZXNzYWdlcy5TdGVw",
-            "TmFtZVJlc3BvbnNlEjgKD3JlZmFjdG9yUmVxdWVzdBgYIAEoCzIfLmdhdWdl",
-            "Lm1lc3NhZ2VzLlJlZmFjdG9yUmVxdWVzdBI6ChByZWZhY3RvclJlc3BvbnNl",
-            "GBkgASgLMiAuZ2F1Z2UubWVzc2FnZXMuUmVmYWN0b3JSZXNwb25zZRJOChp1",
-            "bnN1cHBvcnRlZE1lc3NhZ2VSZXNwb25zZRgaIAEoCzIqLmdhdWdlLm1lc3Nh",
-            "Z2VzLlVuc3VwcG9ydGVkTWVzc2FnZVJlc3BvbnNlIt0ECgtNZXNzYWdlVHlw",
-            "ZRIVChFFeGVjdXRpb25TdGFydGluZxAAEhkKFVNwZWNFeGVjdXRpb25TdGFy",
-            "dGluZxABEhcKE1NwZWNFeGVjdXRpb25FbmRpbmcQAhIdChlTY2VuYXJpb0V4",
-            "ZWN1dGlvblN0YXJ0aW5nEAMSGwoXU2NlbmFyaW9FeGVjdXRpb25FbmRpbmcQ",
-            "BBIZChVTdGVwRXhlY3V0aW9uU3RhcnRpbmcQBRIXChNTdGVwRXhlY3V0aW9u",
-            "RW5kaW5nEAYSDwoLRXhlY3V0ZVN0ZXAQBxITCg9FeGVjdXRpb25FbmRpbmcQ",
-            "CBIXChNTdGVwVmFsaWRhdGVSZXF1ZXN0EAkSGAoUU3RlcFZhbGlkYXRlUmVz",
-            "cG9uc2UQChIbChdFeGVjdXRpb25TdGF0dXNSZXNwb25zZRALEhQKEFN0ZXBO",
-            "YW1lc1JlcXVlc3QQDBIVChFTdGVwTmFtZXNSZXNwb25zZRANEhYKEktpbGxQ",
-            "cm9jZXNzUmVxdWVzdBAOEhgKFFN1aXRlRXhlY3V0aW9uUmVzdWx0EA8SGQoV",
-            "U2NlbmFyaW9EYXRhU3RvcmVJbml0EBASFQoRU3BlY0RhdGFTdG9yZUluaXQQ",
-            "ERIWChJTdWl0ZURhdGFTdG9yZUluaXQQEhITCg9TdGVwTmFtZVJlcXVlc3QQ",
-            "ExIUChBTdGVwTmFtZVJlc3BvbnNlEBQSEwoPUmVmYWN0b3JSZXF1ZXN0EBUS",
-            "FAoQUmVmYWN0b3JSZXNwb25zZRAWEh4KGlVuc3VwcG9ydGVkTWVzc2FnZVJl",
-            "c3BvbnNlEBdCEaoCDkdhdWdlLk1lc3NhZ2VzYgZwcm90bzM="));
+            "KAkiYgoIU3RlcEluZm8SMAoEc3RlcBgBIAEoCzIiLmdhdWdlLm1lc3NhZ2Vz",
+            "LkV4ZWN1dGVTdGVwUmVxdWVzdBIQCghpc0ZhaWxlZBgCIAEoCBISCgpzdGFj",
+            "a1RyYWNlGAMgASgJIowBChJFeGVjdXRlU3RlcFJlcXVlc3QSFgoOYWN0dWFs",
+            "U3RlcFRleHQYASABKAkSFgoOcGFyc2VkU3RlcFRleHQYAiABKAkSFwoPc2Nl",
+            "bmFyaW9GYWlsaW5nGAMgASgIEi0KCnBhcmFtZXRlcnMYBCADKAsyGS5nYXVn",
+            "ZS5tZXNzYWdlcy5QYXJhbWV0ZXIidgoTU3RlcFZhbGlkYXRlUmVxdWVzdBIQ",
+            "CghzdGVwVGV4dBgBIAEoCRIaChJudW1iZXJPZlBhcmFtZXRlcnMYAiABKAUS",
+            "MQoJc3RlcFZhbHVlGAMgASgLMh4uZ2F1Z2UubWVzc2FnZXMuUHJvdG9TdGVw",
+            "VmFsdWUi5wEKFFN0ZXBWYWxpZGF0ZVJlc3BvbnNlEg8KB2lzVmFsaWQYASAB",
+            "KAgSFAoMZXJyb3JNZXNzYWdlGAIgASgJEkEKCWVycm9yVHlwZRgDIAEoDjIu",
+            "LmdhdWdlLm1lc3NhZ2VzLlN0ZXBWYWxpZGF0ZVJlc3BvbnNlLkVycm9yVHlw",
+            "ZRISCgpzdWdnZXN0aW9uGAQgASgJIlEKCUVycm9yVHlwZRIhCh1TVEVQX0lN",
+            "UExFTUVOVEFUSU9OX05PVF9GT1VORBAAEiEKHURVUExJQ0FURV9TVEVQX0lN",
+            "UExFTUVOVEFUSU9OEAEiTQoUU3VpdGVFeGVjdXRpb25SZXN1bHQSNQoLc3Vp",
+            "dGVSZXN1bHQYASABKAsyIC5nYXVnZS5tZXNzYWdlcy5Qcm90b1N1aXRlUmVz",
+            "dWx0IhIKEFN0ZXBOYW1lc1JlcXVlc3QiIgoRU3RlcE5hbWVzUmVzcG9uc2US",
+            "DQoFc3RlcHMYASADKAkiHgocU2NlbmFyaW9EYXRhU3RvcmVJbml0UmVxdWVz",
+            "dCIaChhTcGVjRGF0YVN0b3JlSW5pdFJlcXVlc3QiGwoZU3VpdGVEYXRhU3Rv",
+            "cmVJbml0UmVxdWVzdCI9ChFQYXJhbWV0ZXJQb3NpdGlvbhITCgtvbGRQb3Np",
+            "dGlvbhgBIAEoBRITCgtuZXdQb3NpdGlvbhgCIAEoBSK4AQoPUmVmYWN0b3JS",
+            "ZXF1ZXN0EjQKDG9sZFN0ZXBWYWx1ZRgBIAEoCzIeLmdhdWdlLm1lc3NhZ2Vz",
+            "LlByb3RvU3RlcFZhbHVlEjQKDG5ld1N0ZXBWYWx1ZRgCIAEoCzIeLmdhdWdl",
+            "Lm1lc3NhZ2VzLlByb3RvU3RlcFZhbHVlEjkKDnBhcmFtUG9zaXRpb25zGAMg",
+            "AygLMiEuZ2F1Z2UubWVzc2FnZXMuUGFyYW1ldGVyUG9zaXRpb24iSAoQUmVm",
+            "YWN0b3JSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg0KBWVycm9yGAIgASgJ",
+            "EhQKDGZpbGVzQ2hhbmdlZBgDIAMoCSIkCg9TdGVwTmFtZVJlcXVlc3QSEQoJ",
+            "c3RlcFZhbHVlGAEgASgJIk0KEFN0ZXBOYW1lUmVzcG9uc2USFQoNaXNTdGVw",
+            "UHJlc2VudBgBIAEoCBIQCghzdGVwTmFtZRgCIAMoCRIQCghoYXNBbGlhcxgD",
+            "IAEoCCItChpVbnN1cHBvcnRlZE1lc3NhZ2VSZXNwb25zZRIPCgdtZXNzYWdl",
+            "GAEgASgJIv4SCgdNZXNzYWdlEjgKC21lc3NhZ2VUeXBlGAEgASgOMiMuZ2F1",
+            "Z2UubWVzc2FnZXMuTWVzc2FnZS5NZXNzYWdlVHlwZRIRCgltZXNzYWdlSWQY",
+            "AiABKAMSSgoYZXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0GAMgASgLMiguZ2F1",
+            "Z2UubWVzc2FnZXMuRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0ElIKHHNwZWNF",
+            "eGVjdXRpb25TdGFydGluZ1JlcXVlc3QYBCABKAsyLC5nYXVnZS5tZXNzYWdl",
+            "cy5TcGVjRXhlY3V0aW9uU3RhcnRpbmdSZXF1ZXN0Ek4KGnNwZWNFeGVjdXRp",
+            "b25FbmRpbmdSZXF1ZXN0GAUgASgLMiouZ2F1Z2UubWVzc2FnZXMuU3BlY0V4",
+            "ZWN1dGlvbkVuZGluZ1JlcXVlc3QSWgogc2NlbmFyaW9FeGVjdXRpb25TdGFy",
+            "dGluZ1JlcXVlc3QYBiABKAsyMC5nYXVnZS5tZXNzYWdlcy5TY2VuYXJpb0V4",
+            "ZWN1dGlvblN0YXJ0aW5nUmVxdWVzdBJWCh5zY2VuYXJpb0V4ZWN1dGlvbkVu",
+            "ZGluZ1JlcXVlc3QYByABKAsyLi5nYXVnZS5tZXNzYWdlcy5TY2VuYXJpb0V4",
+            "ZWN1dGlvbkVuZGluZ1JlcXVlc3QSUgocc3RlcEV4ZWN1dGlvblN0YXJ0aW5n",
+            "UmVxdWVzdBgIIAEoCzIsLmdhdWdlLm1lc3NhZ2VzLlN0ZXBFeGVjdXRpb25T",
+            "dGFydGluZ1JlcXVlc3QSTgoac3RlcEV4ZWN1dGlvbkVuZGluZ1JlcXVlc3QY",
+            "CSABKAsyKi5nYXVnZS5tZXNzYWdlcy5TdGVwRXhlY3V0aW9uRW5kaW5nUmVx",
+            "dWVzdBI+ChJleGVjdXRlU3RlcFJlcXVlc3QYCiABKAsyIi5nYXVnZS5tZXNz",
+            "YWdlcy5FeGVjdXRlU3RlcFJlcXVlc3QSRgoWZXhlY3V0aW9uRW5kaW5nUmVx",
+            "dWVzdBgLIAEoCzImLmdhdWdlLm1lc3NhZ2VzLkV4ZWN1dGlvbkVuZGluZ1Jl",
+            "cXVlc3QSQAoTc3RlcFZhbGlkYXRlUmVxdWVzdBgMIAEoCzIjLmdhdWdlLm1l",
+            "c3NhZ2VzLlN0ZXBWYWxpZGF0ZVJlcXVlc3QSQgoUc3RlcFZhbGlkYXRlUmVz",
+            "cG9uc2UYDSABKAsyJC5nYXVnZS5tZXNzYWdlcy5TdGVwVmFsaWRhdGVSZXNw",
+            "b25zZRJIChdleGVjdXRpb25TdGF0dXNSZXNwb25zZRgOIAEoCzInLmdhdWdl",
+            "Lm1lc3NhZ2VzLkV4ZWN1dGlvblN0YXR1c1Jlc3BvbnNlEjoKEHN0ZXBOYW1l",
+            "c1JlcXVlc3QYDyABKAsyIC5nYXVnZS5tZXNzYWdlcy5TdGVwTmFtZXNSZXF1",
+            "ZXN0EjwKEXN0ZXBOYW1lc1Jlc3BvbnNlGBAgASgLMiEuZ2F1Z2UubWVzc2Fn",
+            "ZXMuU3RlcE5hbWVzUmVzcG9uc2USQgoUc3VpdGVFeGVjdXRpb25SZXN1bHQY",
+            "ESABKAsyJC5nYXVnZS5tZXNzYWdlcy5TdWl0ZUV4ZWN1dGlvblJlc3VsdBI+",
+            "ChJraWxsUHJvY2Vzc1JlcXVlc3QYEiABKAsyIi5nYXVnZS5tZXNzYWdlcy5L",
+            "aWxsUHJvY2Vzc1JlcXVlc3QSUgocc2NlbmFyaW9EYXRhU3RvcmVJbml0UmVx",
+            "dWVzdBgTIAEoCzIsLmdhdWdlLm1lc3NhZ2VzLlNjZW5hcmlvRGF0YVN0b3Jl",
+            "SW5pdFJlcXVlc3QSSgoYc3BlY0RhdGFTdG9yZUluaXRSZXF1ZXN0GBQgASgL",
+            "MiguZ2F1Z2UubWVzc2FnZXMuU3BlY0RhdGFTdG9yZUluaXRSZXF1ZXN0EkwK",
+            "GXN1aXRlRGF0YVN0b3JlSW5pdFJlcXVlc3QYFSABKAsyKS5nYXVnZS5tZXNz",
+            "YWdlcy5TdWl0ZURhdGFTdG9yZUluaXRSZXF1ZXN0EjgKD3N0ZXBOYW1lUmVx",
+            "dWVzdBgWIAEoCzIfLmdhdWdlLm1lc3NhZ2VzLlN0ZXBOYW1lUmVxdWVzdBI6",
+            "ChBzdGVwTmFtZVJlc3BvbnNlGBcgASgLMiAuZ2F1Z2UubWVzc2FnZXMuU3Rl",
+            "cE5hbWVSZXNwb25zZRI4Cg9yZWZhY3RvclJlcXVlc3QYGCABKAsyHy5nYXVn",
+            "ZS5tZXNzYWdlcy5SZWZhY3RvclJlcXVlc3QSOgoQcmVmYWN0b3JSZXNwb25z",
+            "ZRgZIAEoCzIgLmdhdWdlLm1lc3NhZ2VzLlJlZmFjdG9yUmVzcG9uc2USTgoa",
+            "dW5zdXBwb3J0ZWRNZXNzYWdlUmVzcG9uc2UYGiABKAsyKi5nYXVnZS5tZXNz",
+            "YWdlcy5VbnN1cHBvcnRlZE1lc3NhZ2VSZXNwb25zZSLdBAoLTWVzc2FnZVR5",
+            "cGUSFQoRRXhlY3V0aW9uU3RhcnRpbmcQABIZChVTcGVjRXhlY3V0aW9uU3Rh",
+            "cnRpbmcQARIXChNTcGVjRXhlY3V0aW9uRW5kaW5nEAISHQoZU2NlbmFyaW9F",
+            "eGVjdXRpb25TdGFydGluZxADEhsKF1NjZW5hcmlvRXhlY3V0aW9uRW5kaW5n",
+            "EAQSGQoVU3RlcEV4ZWN1dGlvblN0YXJ0aW5nEAUSFwoTU3RlcEV4ZWN1dGlv",
+            "bkVuZGluZxAGEg8KC0V4ZWN1dGVTdGVwEAcSEwoPRXhlY3V0aW9uRW5kaW5n",
+            "EAgSFwoTU3RlcFZhbGlkYXRlUmVxdWVzdBAJEhgKFFN0ZXBWYWxpZGF0ZVJl",
+            "c3BvbnNlEAoSGwoXRXhlY3V0aW9uU3RhdHVzUmVzcG9uc2UQCxIUChBTdGVw",
+            "TmFtZXNSZXF1ZXN0EAwSFQoRU3RlcE5hbWVzUmVzcG9uc2UQDRIWChJLaWxs",
+            "UHJvY2Vzc1JlcXVlc3QQDhIYChRTdWl0ZUV4ZWN1dGlvblJlc3VsdBAPEhkK",
+            "FVNjZW5hcmlvRGF0YVN0b3JlSW5pdBAQEhUKEVNwZWNEYXRhU3RvcmVJbml0",
+            "EBESFgoSU3VpdGVEYXRhU3RvcmVJbml0EBISEwoPU3RlcE5hbWVSZXF1ZXN0",
+            "EBMSFAoQU3RlcE5hbWVSZXNwb25zZRAUEhMKD1JlZmFjdG9yUmVxdWVzdBAV",
+            "EhQKEFJlZmFjdG9yUmVzcG9uc2UQFhIeChpVbnN1cHBvcnRlZE1lc3NhZ2VS",
+            "ZXNwb25zZRAXQhGqAg5HYXVnZS5NZXNzYWdlc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Gauge.Messages.SpecReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -147,10 +149,10 @@ namespace Gauge.Messages {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.ExecutionInfo), global::Gauge.Messages.ExecutionInfo.Parser, new[]{ "CurrentSpec", "CurrentScenario", "CurrentStep", "Stacktrace" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.SpecInfo), global::Gauge.Messages.SpecInfo.Parser, new[]{ "Name", "FileName", "IsFailed", "Tags" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.ScenarioInfo), global::Gauge.Messages.ScenarioInfo.Parser, new[]{ "Name", "IsFailed", "Tags" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepInfo), global::Gauge.Messages.StepInfo.Parser, new[]{ "Step", "IsFailed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepInfo), global::Gauge.Messages.StepInfo.Parser, new[]{ "Step", "IsFailed", "StackTrace" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.ExecuteStepRequest), global::Gauge.Messages.ExecuteStepRequest.Parser, new[]{ "ActualStepText", "ParsedStepText", "ScenarioFailing", "Parameters" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepValidateRequest), global::Gauge.Messages.StepValidateRequest.Parser, new[]{ "StepText", "NumberOfParameters" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepValidateResponse), global::Gauge.Messages.StepValidateResponse.Parser, new[]{ "IsValid", "ErrorMessage", "ErrorType" }, null, new[]{ typeof(global::Gauge.Messages.StepValidateResponse.Types.ErrorType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepValidateRequest), global::Gauge.Messages.StepValidateRequest.Parser, new[]{ "StepText", "NumberOfParameters", "StepValue" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepValidateResponse), global::Gauge.Messages.StepValidateResponse.Parser, new[]{ "IsValid", "ErrorMessage", "ErrorType", "Suggestion" }, null, new[]{ typeof(global::Gauge.Messages.StepValidateResponse.Types.ErrorType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.SuiteExecutionResult), global::Gauge.Messages.SuiteExecutionResult.Parser, new[]{ "SuiteResult" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepNamesRequest), global::Gauge.Messages.StepNamesRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gauge.Messages.StepNamesResponse), global::Gauge.Messages.StepNamesResponse.Parser, new[]{ "Steps" }, null, null, null),
@@ -2046,6 +2048,7 @@ namespace Gauge.Messages {
     public StepInfo(StepInfo other) : this() {
       Step = other.step_ != null ? other.Step.Clone() : null;
       isFailed_ = other.isFailed_;
+      stackTrace_ = other.stackTrace_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2081,6 +2084,20 @@ namespace Gauge.Messages {
       }
     }
 
+    /// <summary>Field number for the "stackTrace" field.</summary>
+    public const int StackTraceFieldNumber = 3;
+    private string stackTrace_ = "";
+    /// <summary>
+    /// / The current stack trace in case of failure
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string StackTrace {
+      get { return stackTrace_; }
+      set {
+        stackTrace_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as StepInfo);
@@ -2096,6 +2113,7 @@ namespace Gauge.Messages {
       }
       if (!object.Equals(Step, other.Step)) return false;
       if (IsFailed != other.IsFailed) return false;
+      if (StackTrace != other.StackTrace) return false;
       return true;
     }
 
@@ -2104,6 +2122,7 @@ namespace Gauge.Messages {
       int hash = 1;
       if (step_ != null) hash ^= Step.GetHashCode();
       if (IsFailed != false) hash ^= IsFailed.GetHashCode();
+      if (StackTrace.Length != 0) hash ^= StackTrace.GetHashCode();
       return hash;
     }
 
@@ -2122,6 +2141,10 @@ namespace Gauge.Messages {
         output.WriteRawTag(16);
         output.WriteBool(IsFailed);
       }
+      if (StackTrace.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(StackTrace);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2132,6 +2155,9 @@ namespace Gauge.Messages {
       }
       if (IsFailed != false) {
         size += 1 + 1;
+      }
+      if (StackTrace.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(StackTrace);
       }
       return size;
     }
@@ -2149,6 +2175,9 @@ namespace Gauge.Messages {
       }
       if (other.IsFailed != false) {
         IsFailed = other.IsFailed;
+      }
+      if (other.StackTrace.Length != 0) {
+        StackTrace = other.StackTrace;
       }
     }
 
@@ -2169,6 +2198,10 @@ namespace Gauge.Messages {
           }
           case 16: {
             IsFailed = input.ReadBool();
+            break;
+          }
+          case 26: {
+            StackTrace = input.ReadString();
             break;
           }
         }
@@ -2417,6 +2450,7 @@ namespace Gauge.Messages {
     public StepValidateRequest(StepValidateRequest other) : this() {
       stepText_ = other.stepText_;
       numberOfParameters_ = other.numberOfParameters_;
+      StepValue = other.stepValue_ != null ? other.StepValue.Clone() : null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2452,6 +2486,20 @@ namespace Gauge.Messages {
       }
     }
 
+    /// <summary>Field number for the "stepValue" field.</summary>
+    public const int StepValueFieldNumber = 3;
+    private global::Gauge.Messages.ProtoStepValue stepValue_;
+    /// <summary>
+    /// /This is use to generate step implementation template
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Gauge.Messages.ProtoStepValue StepValue {
+      get { return stepValue_; }
+      set {
+        stepValue_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as StepValidateRequest);
@@ -2467,6 +2515,7 @@ namespace Gauge.Messages {
       }
       if (StepText != other.StepText) return false;
       if (NumberOfParameters != other.NumberOfParameters) return false;
+      if (!object.Equals(StepValue, other.StepValue)) return false;
       return true;
     }
 
@@ -2475,6 +2524,7 @@ namespace Gauge.Messages {
       int hash = 1;
       if (StepText.Length != 0) hash ^= StepText.GetHashCode();
       if (NumberOfParameters != 0) hash ^= NumberOfParameters.GetHashCode();
+      if (stepValue_ != null) hash ^= StepValue.GetHashCode();
       return hash;
     }
 
@@ -2493,6 +2543,10 @@ namespace Gauge.Messages {
         output.WriteRawTag(16);
         output.WriteInt32(NumberOfParameters);
       }
+      if (stepValue_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(StepValue);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2503,6 +2557,9 @@ namespace Gauge.Messages {
       }
       if (NumberOfParameters != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(NumberOfParameters);
+      }
+      if (stepValue_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(StepValue);
       }
       return size;
     }
@@ -2517,6 +2574,12 @@ namespace Gauge.Messages {
       }
       if (other.NumberOfParameters != 0) {
         NumberOfParameters = other.NumberOfParameters;
+      }
+      if (other.stepValue_ != null) {
+        if (stepValue_ == null) {
+          stepValue_ = new global::Gauge.Messages.ProtoStepValue();
+        }
+        StepValue.MergeFrom(other.StepValue);
       }
     }
 
@@ -2534,6 +2597,13 @@ namespace Gauge.Messages {
           }
           case 16: {
             NumberOfParameters = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            if (stepValue_ == null) {
+              stepValue_ = new global::Gauge.Messages.ProtoStepValue();
+            }
+            input.ReadMessage(stepValue_);
             break;
           }
         }
@@ -2575,6 +2645,7 @@ namespace Gauge.Messages {
       isValid_ = other.isValid_;
       errorMessage_ = other.errorMessage_;
       errorType_ = other.errorType_;
+      suggestion_ = other.suggestion_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2615,6 +2686,17 @@ namespace Gauge.Messages {
       }
     }
 
+    /// <summary>Field number for the "suggestion" field.</summary>
+    public const int SuggestionFieldNumber = 4;
+    private string suggestion_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Suggestion {
+      get { return suggestion_; }
+      set {
+        suggestion_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as StepValidateResponse);
@@ -2631,6 +2713,7 @@ namespace Gauge.Messages {
       if (IsValid != other.IsValid) return false;
       if (ErrorMessage != other.ErrorMessage) return false;
       if (ErrorType != other.ErrorType) return false;
+      if (Suggestion != other.Suggestion) return false;
       return true;
     }
 
@@ -2640,6 +2723,7 @@ namespace Gauge.Messages {
       if (IsValid != false) hash ^= IsValid.GetHashCode();
       if (ErrorMessage.Length != 0) hash ^= ErrorMessage.GetHashCode();
       if (ErrorType != 0) hash ^= ErrorType.GetHashCode();
+      if (Suggestion.Length != 0) hash ^= Suggestion.GetHashCode();
       return hash;
     }
 
@@ -2662,6 +2746,10 @@ namespace Gauge.Messages {
         output.WriteRawTag(24);
         output.WriteEnum((int) ErrorType);
       }
+      if (Suggestion.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Suggestion);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2675,6 +2763,9 @@ namespace Gauge.Messages {
       }
       if (ErrorType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ErrorType);
+      }
+      if (Suggestion.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Suggestion);
       }
       return size;
     }
@@ -2692,6 +2783,9 @@ namespace Gauge.Messages {
       }
       if (other.ErrorType != 0) {
         ErrorType = other.ErrorType;
+      }
+      if (other.Suggestion.Length != 0) {
+        Suggestion = other.Suggestion;
       }
     }
 
@@ -2713,6 +2807,10 @@ namespace Gauge.Messages {
           }
           case 24: {
             errorType_ = (global::Gauge.Messages.StepValidateResponse.Types.ErrorType) input.ReadEnum();
+            break;
+          }
+          case 34: {
+            Suggestion = input.ReadString();
             break;
           }
         }
