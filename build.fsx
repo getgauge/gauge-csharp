@@ -330,7 +330,7 @@ Target "Install" (fun _ ->
 )
 
 Target "Uninstall" (fun _ ->
-    Run("gauge", (sprintf @"uninstall csharp --plugin-version %s" version), ".") 
+    Run("gauge", (sprintf @"uninstall csharp --version %s" version), ".") 
 )
 
 Target "RemoveTests" (fun _ ->
