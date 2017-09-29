@@ -326,11 +326,11 @@ Target "NuGet-Lib" (fun _ ->
 )
 
 Target "Install" (fun _ ->
-    Run("gauge", "--install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
+    Run("gauge", "install csharp -f " + (sprintf @"artifacts/gauge-csharp/gauge-csharp-%s.zip" version), ".") 
 )
 
 Target "Uninstall" (fun _ ->
-    Run("gauge", (sprintf @"--uninstall csharp --plugin-version %s" version), ".") 
+    Run("gauge", (sprintf @"uninstall csharp --plugin-version %s" version), ".") 
 )
 
 Target "RemoveTests" (fun _ ->
@@ -360,7 +360,7 @@ Target "FunctionalTestsPUnimplemented" (fun _ ->
 )
 
 Target "GaugePluginInstall" (fun _ ->
-    Run("gauge", "--install-all", "gauge-tests")
+    Run("gauge", "install", "gauge-tests")
 )
 
 Target "ForceInstall" DoNothing
