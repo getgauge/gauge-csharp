@@ -343,11 +343,13 @@ Target "FetchTests" (fun _ ->
 )
 
 Target "FunctionalTests" (fun _ ->
+    Run("gauge", "install", ".") 
     InvokeMvn "test-compile gauge:execute -Denv=ci-csharp -Dtags=\"csharp\""
 )
 
 Target "FunctionalTestsP" (fun _ ->
     let tags = environVarOrDefault "GAUGE_TEST_TAGS" "csharp"
+    Run("gauge", "install", ".") 
     InvokeMvn (sprintf "test -Denv=ci-csharp -Dtags=\"%s\" -Dflags=\"--simple-console\"" tags)
 )
 

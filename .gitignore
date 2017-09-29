@@ -21,4 +21,4 @@ IntegrationTestSample/logs
 IntegrationTestSample/reports
 .fake
 TestResults.xml
-paket-files
+paket-files 
