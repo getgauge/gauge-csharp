@@ -13,6 +13,6 @@ Invoke-WebRequest -Uri "https://bintray.com/gauge/Gauge/download_file?file_path=
 
 Write-Host "Installing $($gauge_latest_nightly_version) from $($gauge_file_name)..."
 
-& ".\$($gauge_file_name)" /S
+Start-Process ".\$($gauge_file_name)" "/S" | Wait-Process
 
 Write-Host "Done."
