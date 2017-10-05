@@ -1,18 +1,15 @@
 version: 1.0.{build}
-init:
-- ps: |
-    Add-Type -AssemblyName System.IO.Compression.FileSystem
-    if (!(Test-Path -Path "C:\maven" )) {
-    (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
-    [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
-    }
-- cmd: java -version
 environment:
   GAUGE_PARALLEL: false
   GAUGE_TELEMETRY_ENABLED: false
 build_script:
 - ps: |
     .\install_latest_gauge_nightly.ps1
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    if (!(Test-Path -Path "C:\maven" )) {
+      (new-object System.Net.WebClient).DownloadFile('http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip', 'C:\maven-bin.zip')
+      [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
+    }
     $env:Path = "c:\Program Files\Gauge\bin;C:\maven\apache-maven-3.3.9\bin;" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
     Write-Host "PATH : $($env:PATH)"
     $env:M2_HOME="C:\maven\apache-maven-3.3.9"
