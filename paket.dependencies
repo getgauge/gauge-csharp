@@ -1,32 +1,33 @@
 source https://www.nuget.org/api/v2
+framework net46
 
-nuget Gauge.CSharp.Core 0.1.0
+nuget Gauge.CSharp.Core
 nuget Gauge.CSharp.Lib
-nuget NuGet.CommandLine
 nuget Microsoft.CodeAnalysis.Analyzers 1.1.0 framework: >= net45
 nuget Microsoft.CodeAnalysis.Common 1.1.0 framework: >= net45
 nuget Microsoft.CodeAnalysis.CSharp 1.1.0 framework: >= net45
-nuget Microsoft.Web.Xdt 2.1.1 framework: >= net45
 nuget NLog 4.2.2 framework: >= net45
 nuget NuGet.Core 2.10.1 framework: >= net45
 nuget System.Collections.Immutable 1.1.37 framework: >= net45
 nuget System.Reflection.Metadata 1.1.0 framework: >= net45
 nuget FSharp.Core
-nuget FAKE.Lib 4.62.5
+nuget FAKE.Lib
 nuget Google.Protobuf 3.1.0
 nuget Google.Protobuf.Tools 3.1.0
 
 group Build
   source https://nuget.org/api/v2
+  framework net46
 
   nuget SourceLink.Fake
-  nuget FAKE 4.62.5
+  nuget FAKE
   nuget FSharp.Formatting
 
 group Test
   source https://nuget.org/api/v2
+  framework net46
 
-  nuget Moq 4.2.1502.0911 framework: >= net45
+  nuget Moq
   nuget NUnit
   nuget NUnit.Runners
   nuget OpenCover
