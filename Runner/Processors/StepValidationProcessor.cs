@@ -46,18 +46,19 @@ namespace Gauge.CSharp.Runner.Processors
                 errorType = StepValidateResponse.Types.ErrorType.DuplicateStepImplementation;
                 errorMessage = string.Format("Multiple step implementations found for : {0}", stepToValidate);
             }
-            return GetStepValidateResponseMessage(isValid, request, errorType,  errorMessage);
+            return GetStepValidateResponseMessage(isValid, request, errorType, errorMessage);
         }
 
-        private static Message GetStepValidateResponseMessage(bool isValid, Message request, StepValidateResponse.Types.ErrorType errorType, string errorMessage)
+        private static Message GetStepValidateResponseMessage(bool isValid, Message request,
+            StepValidateResponse.Types.ErrorType errorType, string errorMessage)
         {
-            var stepValidateResponse = new StepValidateResponse()
+            var stepValidateResponse = new StepValidateResponse
             {
                 ErrorMessage = errorMessage,
                 IsValid = isValid,
-                ErrorType = errorType,
+                ErrorType = errorType
             };
-            return new Message()
+            return new Message
             {
                 MessageId = request.MessageId,
                 MessageType = Message.Types.MessageType.StepValidateResponse,

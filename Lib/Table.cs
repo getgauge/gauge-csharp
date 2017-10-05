@@ -22,17 +22,18 @@ using System.Linq;
 namespace Gauge.CSharp.Lib
 {
     /// <summary>
-    /// Holds a matrix of data, that is equivalent to Markdown representation of a table, or tablular data defined in a csv file.
+    ///     Holds a matrix of data, that is equivalent to Markdown representation of a table, or tablular data defined in a csv
+    ///     file.
     /// </summary>
     [Serializable]
     public class Table
     {
         private readonly List<string> _headers;
         private readonly List<List<string>> _rows;
-        private readonly List<TableRow> _tableRows; 
+        private readonly List<TableRow> _tableRows;
 
         /// <summary>
-        /// Creates a new Table type
+        ///     Creates a new Table type
         /// </summary>
         /// <param name="headers">A List of string representing the headers, in order.</param>
         public Table(List<string> headers)
@@ -43,27 +44,24 @@ namespace Gauge.CSharp.Lib
         }
 
         /// <summary>
-        /// Add a row of data to the table.
+        ///     Add a row of data to the table.
         /// </summary>
         /// <param name="row">List of string representing the tuple of a table.</param>
         /// <exception cref="RowSizeMismatchException">Throws RowSizeMismatchException if column size doesn't match row size.</exception>
         public void AddRow(List<string> row)
         {
             if (row.Count != _headers.Count)
-            {
-                throw new RowSizeMismatchException(string.Format("Row size mismatch. Expected row size: {0}, Obtained row size: {1}", _headers.Count, row.Count));
-            }
+                throw new RowSizeMismatchException(string.Format(
+                    "Row size mismatch. Expected row size: {0}, Obtained row size: {1}", _headers.Count, row.Count));
             _rows.Add(row);
             var tableRow = new TableRow();
             foreach (var columnValue in _headers)
-            {
                 tableRow.AddCell(columnValue, row[_headers.IndexOf(columnValue)]);
-            }
             _tableRows.Add(tableRow);
         }
 
         /// <summary>
-        /// Fetch all column headers of a table.
+        ///     Fetch all column headers of a table.
         /// </summary>
         /// <returns>List of string representing the column headers of table.</returns>
         public List<string> GetColumnNames()
@@ -72,7 +70,7 @@ namespace Gauge.CSharp.Lib
         }
 
         /// <summary>
-        /// Fetch all the rows of a table, in order.
+        ///     Fetch all the rows of a table, in order.
         /// </summary>
         /// <returns>List of string representing the tuples of a table.</returns>
         [Obsolete("Method GetRows is deprecated, please use GetTableRows instead.")]
@@ -82,7 +80,7 @@ namespace Gauge.CSharp.Lib
         }
 
         /// <summary>
-        /// Fetch all the rows of a table represented as TableRow. 
+        ///     Fetch all the rows of a table represented as TableRow.
         /// </summary>
         /// <returns>List of TableRow representing the tuples of a table.</returns>
         public List<TableRow> GetTableRows()
@@ -91,18 +89,18 @@ namespace Gauge.CSharp.Lib
         }
 
         /// <summary>
-        /// Fetches all the column values defined under the given column name
+        ///     Fetches all the column values defined under the given column name
         /// </summary>
         /// <param name="columnName">Name of the Column to fetch</param>
         /// <returns>IEnumerable of string containing the given column's values</returns>
         public IEnumerable<string> GetColumnValues(string columnName)
         {
             var columnIndex = _headers.IndexOf(columnName);
-            return columnIndex >= 0 ?_rows.Select(list => list[columnIndex]) : Enumerable.Empty<string>();
+            return columnIndex >= 0 ? _rows.Select(list => list[columnIndex]) : Enumerable.Empty<string>();
         }
 
         /// <summary>
-        /// Converts the table to the Markdown equivalent string
+        ///     Converts the table to the Markdown equivalent string
         /// </summary>
         /// <returns>Markdown String of Table</returns>
         public override string ToString()
@@ -111,9 +109,10 @@ namespace Gauge.CSharp.Lib
             foreach (var header in GetColumnNames())
             {
                 var columnValues = GetColumnValues(header).ToList();
-                var columnWidth = columnValues.Concat(new [] {header}).Max(s => s.Length);
+                var columnWidth = columnValues.Concat(new[] {header}).Max(s => s.Length);
                 Func<string, string> formatCellValue = s => string.Format("|{0}", s.PadRight(columnWidth, ' '));
-                var paddedColumn = new[] {header, new string('-', columnWidth)}.Concat(columnValues).Select(formatCellValue);
+                var paddedColumn = new[] {header, new string('-', columnWidth)}.Concat(columnValues)
+                    .Select(formatCellValue);
                 columnStrings = columnStrings.Zip(paddedColumn, string.Concat);
             }
             return string.Concat(columnStrings.Aggregate((s, s1) => string.Format("{0}|\n{1}", s, s1)), "|");

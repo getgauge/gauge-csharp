@@ -42,6 +42,5 @@ namespace Gauge.CSharp.Runner.Converters
                 }
             }).ToArray();
         }
-
     }
 }

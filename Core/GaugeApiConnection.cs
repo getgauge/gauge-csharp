@@ -32,16 +32,16 @@ namespace Gauge.CSharp.Core
         {
             foreach (var stepText in stepTexts)
             {
-                var stepValueRequest = new GetStepValueRequest()
+                var stepValueRequest = new GetStepValueRequest
                 {
                     StepText = stepText,
                     HasInlineTable = hasInlineTable
                 };
-                var stepValueRequestMessage = new APIMessage()
+                var stepValueRequestMessage = new APIMessage
                 {
                     MessageId = GenerateMessageId(),
                     MessageType = APIMessage.Types.APIMessageType.GetStepValueRequest,
-                    StepValueRequest = stepValueRequest,
+                    StepValueRequest = stepValueRequest
                 };
                 var apiMessage = WriteAndReadApiMessage(stepValueRequestMessage);
                 yield return apiMessage.StepValueResponse.StepValue.StepValue;

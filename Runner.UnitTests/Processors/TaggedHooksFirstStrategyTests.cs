@@ -22,7 +22,6 @@ using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
-using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
@@ -30,6 +29,19 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class TaggedHooksFirstStrategyTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _hookMethods = new HashSet<HookMethod>
+            {
+                new HookMethod("AfterScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Zed"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly)
+            };
+        }
+
         [AfterScenario("Foo")]
         public void Foo()
         {
@@ -68,48 +80,38 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
          */
         private HashSet<HookMethod> _hookMethods;
 
-        [SetUp]
-        public void Setup()
+
+        [Test]
+        public void ShouldFetchTaggedHooksInSortedOrder()
         {
-            _hookMethods = new HashSet<HookMethod>
-            {
-                new HookMethod("AfterScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Zed"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly)
-            };
+            var untaggedHooks = new[] {"Blah", "Zed"}.Select(s => GetType().GetMethod(s).FullyQuallifiedName());
+
+            var applicableHooks = new TaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToArray();
+            var actual = new ArraySegment<string>(applicableHooks, 2, untaggedHooks.Count());
+
+            Assert.AreEqual(untaggedHooks, actual);
         }
 
         [Test]
         public void ShouldFetchUntaggedHooksAfterTaggedHooks()
         {
-            var taggedHooks = new [] {"Baz", "Foo"} ;
-            var untaggedHooks = new [] {"Blah", "Zed"} ;
+            var taggedHooks = new[] {"Baz", "Foo"};
+            var untaggedHooks = new[] {"Blah", "Zed"};
             var expected = taggedHooks.Concat(untaggedHooks).Select(s => GetType().GetMethod(s).FullyQuallifiedName());
 
-            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
+            var applicableHooks = new TaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.AreEqual(expected, applicableHooks);
         }
 
 
         [Test]
-        public void ShouldFetchTaggedHooksInSortedOrder()
-        {
-            var untaggedHooks = new[] { "Blah", "Zed" }.Select(s => GetType().GetMethod(s).FullyQuallifiedName());
-
-            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToArray();
-            var actual = new ArraySegment<string>(applicableHooks, 2, untaggedHooks.Count());
-
-            Assert.AreEqual(untaggedHooks, actual);
-        }
-
-
-        [Test]
         public void ShouldFetchUntaggedHooksInSortedOrder()
         {
-            var applicableHooks = new TaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
+            var applicableHooks = new TaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Baz").FullyQuallifiedName()));
             Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Foo").FullyQuallifiedName()));

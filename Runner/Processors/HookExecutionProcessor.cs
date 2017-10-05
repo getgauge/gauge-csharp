@@ -16,29 +16,40 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
-using Gauge.CSharp.Core;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public abstract class HookExecutionProcessor : ExecutionProcessor, IMessageProcessor
     {
         private const string ClearStateFlag = "gauge_clear_state_level";
-        protected readonly IMethodExecutor MethodExecutor;
         protected const string SuiteLevel = "suite";
         protected const string SpecLevel = "spec";
         protected const string ScenarioLevel = "scenario";
-
-        protected HooksStrategy Strategy { get; set; }
+        protected readonly IMethodExecutor MethodExecutor;
 
         protected HookExecutionProcessor(IMethodExecutor methodExecutor)
         {
             MethodExecutor = methodExecutor;
             Strategy = new HooksStrategy();
+        }
+
+        protected HooksStrategy Strategy { get; set; }
+
+        protected abstract string HookType { get; }
+
+        protected virtual string CacheClearLevel => null;
+
+        [DebuggerHidden]
+        public virtual Message Process(Message request)
+        {
+            var protoExecutionResult = ExecuteHooks(request);
+            ClearCacheForConfiguredLevel();
+            return WrapInMessage(protoExecutionResult, request);
         }
 
         protected abstract ExecutionInfo GetExecutionInfo(Message request);
@@ -47,21 +58,6 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var applicableTags = GetApplicableTags(request);
             return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags);
-        }
-
-        protected abstract string HookType { get; }
-
-        protected virtual string CacheClearLevel
-        {
-            get { return null; }
-        }
-
-        [DebuggerHidden]
-        public virtual Message Process(Message request)
-        {
-            var protoExecutionResult = ExecuteHooks(request);
-            ClearCacheForConfiguredLevel();
-            return WrapInMessage(protoExecutionResult, request);
         }
 
         private void ClearCacheForConfiguredLevel()

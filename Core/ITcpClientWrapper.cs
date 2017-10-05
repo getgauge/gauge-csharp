@@ -21,7 +21,7 @@ namespace Gauge.CSharp.Core
 {
     public interface ITcpClientWrapper
     {
-        bool Connected { get;}
+        bool Connected { get; }
         Stream GetStream();
         void Close();
     }

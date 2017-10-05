@@ -28,10 +28,9 @@ namespace Gauge.CSharp.Runner
 {
     public class SetupCommand : IGaugeCommand
     {
-        private readonly IPackageRepositoryFactory _packageRepositoryFactory;
+        public const string PackageId = "Gauge.CSharp.Lib";
         private static readonly string ProjectName = new DirectoryInfo(Utils.GaugeProjectRoot).Name;
         private static readonly string ProjectRootDir = Utils.GaugeProjectRoot;
-        public const string PackageId = "Gauge.CSharp.Lib";
 
         public static readonly string NugetEndpoint = string.IsNullOrEmpty(Utils.TryReadEnvValue("NUGET_ENDPOINT"))
             ? @"https://packages.nuget.org/api/v2"
@@ -39,6 +38,7 @@ namespace Gauge.CSharp.Runner
 
         private static SemanticVersion _maxLibVersion;
         private static readonly Logger Logger = LogManager.GetLogger(string.Empty);
+        private readonly IPackageRepositoryFactory _packageRepositoryFactory;
         private IPackageRepository _packageRepository;
 
         public SetupCommand() : this(PackageRepositoryFactory.Default)
@@ -51,11 +51,24 @@ namespace Gauge.CSharp.Runner
             SafeProjectName = ProjectName.ToValidCSharpIdentifier();
         }
 
-        public string SafeProjectName { get; private set; }
+        public string SafeProjectName { get; }
 
         public SemanticVersion MaxLibVersion
         {
             get { return _maxLibVersion = _maxLibVersion ?? GetMaxNugetVersion(); }
+        }
+
+        private string ProjectFilePath => Path
+            .GetFullPath(Path.Combine(ProjectRootDir, string.Concat(SafeProjectName, ".csproj")))
+            .Replace(@"\", "/");
+
+        private IPackageRepository PackageRepository
+        {
+            get
+            {
+                return _packageRepository =
+                    _packageRepository ?? _packageRepositoryFactory.CreateRepository(NugetEndpoint);
+            }
         }
 
         public void Execute()
@@ -63,15 +76,15 @@ namespace Gauge.CSharp.Runner
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "env"));
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "env", "default"));
             CheckAndCreateDirectory(Path.Combine(ProjectRootDir, "Properties"));
-            
+
             new List<string>
             {
                 Path.Combine("Properties", "AssemblyInfo.cs"),
                 Path.Combine("env", "default", "csharp.properties"),
                 "StepImplementation.cs",
                 "packages.config"
-            }.ForEach(CopyFile); 
-            
+            }.ForEach(CopyFile);
+
             CopyFile("Gauge.Spec.csproj", string.Format("{0}.csproj", SafeProjectName));
             CopyFile("Gauge.Spec.sln", string.Format("{0}.sln", SafeProjectName));
             InstallDependencies();
@@ -124,15 +137,6 @@ namespace Gauge.CSharp.Runner
             }
         }
 
-        private string ProjectFilePath
-        {
-            get
-            {
-                return Path.GetFullPath(Path.Combine(ProjectRootDir, string.Concat(SafeProjectName, ".csproj")))
-                        .Replace(@"\", "/");
-            }
-        }
-
         private void InstallDependencies()
         {
             var packagePath = Path.Combine(Utils.GaugeProjectRoot, "packages");
@@ -143,7 +147,8 @@ namespace Gauge.CSharp.Runner
 
             foreach (var packageReference in packageReferences)
             {
-                Logger.Info("Installing Nuget Package : {0}, version: {1}", packageReference.Id, packageReference.Version);
+                Logger.Info("Installing Nuget Package : {0}, version: {1}", packageReference.Id,
+                    packageReference.Version);
                 var package = PackageRepository.FindPackage(packageReference.Id, packageReference.Version);
                 packageManager.InstallPackage(package, false, false);
             }
@@ -151,20 +156,12 @@ namespace Gauge.CSharp.Runner
             Logger.Info("Done Installing Nuget Package!");
         }
 
-        private IPackageRepository PackageRepository
-        {
-            get
-            {
-                return _packageRepository = _packageRepository ?? _packageRepositoryFactory.CreateRepository(NugetEndpoint);
-            }
-        }
-
         private SemanticVersion GetMaxNugetVersion()
         {
             return PackageRepository
                 .GetPackages()
                 .Where(package => package.Id == PackageId)
-                .Max((Func<IPackage, SemanticVersion>)(p => p.Version));
+                .Max((Func<IPackage, SemanticVersion>) (p => p.Version));
         }
     }
 }

@@ -27,10 +27,8 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
     [TestFixture]
-    class RefactorHelperTests
+    internal class RefactorHelperTests
     {
-        private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
-
         [SetUp]
         public void Setup()
         {
@@ -38,114 +36,6 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             File.Copy(Path.Combine(_testProjectPath, "RefactoringSample.cs"),
                 Path.Combine(_testProjectPath, "RefactoringSample_copy.cs"), true);
-        }
-
-        [Test]
-        public void ShouldRefactorAttributeText()
-        {
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
-
-            sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo");
-
-            AssertStepAttributeWithTextExists(gaugeMethod.Name, "foo");
-        }
-
-        [Test]
-        public void ShouldRefactorAndReturnFilesChanged()
-        {
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
-            var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
-
-            var filesChanged =
-                sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo").ToList();
-
-            Assert.AreEqual(1, filesChanged.Count);
-            Assert.AreEqual(expectedPath, filesChanged.First());
-        }
-
-
-        [Test]
-        public void ShouldReorderParameters()
-        {
-            const string newStepValue = "Refactoring Say <who> to <what>";
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
-
-            var parameterPositions = new[] {new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0)};
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"who", "what"}, newStepValue);
-
-            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
-            AssertParametersExist(gaugeMethod.Name, new[] {"who", "what"});
-        }
-
-        [Test]
-        public void ShouldAddParameters()
-        {
-            const string newStepValue = "Refactoring Say <what> to <who> in <where>";
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
-
-            var parameterPositions = new[]{new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
-
-            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
-            AssertParametersExist(gaugeMethod.Name, new[] {"what", "who", "where"});
-        }
-
-        [Test]
-        public void ShouldAddParametersWhenNoneExisted()
-        {
-            const string newStepValue = "Refactoring this is a test step <foo>";
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
-            var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
-
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"foo"}, newStepValue);
-
-            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
-            AssertParametersExist(gaugeMethod.Name, new[] {"foo"});
-        }
-
-        [Test]
-        public void ShouldAddParametersWithReservedKeywordName()
-        {
-            const string newStepValue = "Refactoring this is a test step <class>";
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
-            var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
-
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"class"}, newStepValue);
-
-            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
-            AssertParametersExist(gaugeMethod.Name, new[] {"@class"});
-        }
-
-        [Test]
-        public void ShouldRemoveParameters()
-        {
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
-
-            var parameterPositions = new[] {new Tuple<int, int>(0, 0)};
-
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string>(), "Refactoring Say <what> to someone");
-
-            AssertParametersExist(gaugeMethod.Name, new[] {"what"});
-        }
-
-        [Test]
-        public void ShouldRemoveParametersInAnyOrder()
-        {
-            var sandbox = SandboxBuilder.Build();
-            var gaugeMethod = sandbox.GetStepMethods().First(info => info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
-
-            var parameterPositions = new[] {new Tuple<int, int>(1, 0)};
-
-            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string>(), "Refactoring Say something to <who>");
-
-            AssertParametersExist(gaugeMethod.Name, new[] {"who"});
         }
 
         [TearDown]
@@ -157,6 +47,8 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
         }
 
+        private readonly string _testProjectPath = TestUtils.GetIntegrationTestSampleDirectory();
+
         private void AssertStepAttributeWithTextExists(string methodName, string text)
         {
             var name = methodName.Split('.').Last().Split('-').First();
@@ -167,11 +59,11 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var stepTexts = root.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .Select(
                     node => new {node, attributeSyntaxes = node.AttributeLists.SelectMany(syntax => syntax.Attributes)})
-                .Where(@t => string.CompareOrdinal(@t.node.Identifier.ValueText, name) == 0
-                             &&
-                             @t.attributeSyntaxes.Any(
-                                 syntax => string.CompareOrdinal(syntax.ToFullString(), typeof(Step).ToString()) > 0))
-                .SelectMany(@t => @t.node.AttributeLists.SelectMany(syntax => syntax.Attributes))
+                .Where(t => string.CompareOrdinal(t.node.Identifier.ValueText, name) == 0
+                            &&
+                            t.attributeSyntaxes.Any(
+                                syntax => string.CompareOrdinal(syntax.ToFullString(), typeof(Step).ToString()) > 0))
+                .SelectMany(t => t.node.AttributeLists.SelectMany(syntax => syntax.Attributes))
                 .SelectMany(syntax => syntax.ArgumentList.Arguments)
                 .Select(syntax => syntax.GetText().ToString().Trim('"'));
 
@@ -192,9 +84,124 @@ namespace Gauge.CSharp.Runner.IntegrationTests
                 .ToArray();
 
             for (var i = 0; i < parameters.Count; i++)
-            {
                 Assert.AreEqual(parameters[i], methodParameters[i]);
-            }
+        }
+
+        [Test]
+        public void ShouldAddParameters()
+        {
+            const string newStepValue = "Refactoring Say <what> to <who> in <where>";
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+
+            var parameterPositions = new[]
+                {new Tuple<int, int>(0, 0), new Tuple<int, int>(1, 1), new Tuple<int, int>(-1, 2)};
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"what", "who", "where"}, newStepValue);
+
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"what", "who", "where"});
+        }
+
+        [Test]
+        public void ShouldAddParametersWhenNoneExisted()
+        {
+            const string newStepValue = "Refactoring this is a test step <foo>";
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
+            var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
+
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"foo"}, newStepValue);
+
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"foo"});
+        }
+
+        [Test]
+        public void ShouldAddParametersWithReservedKeywordName()
+        {
+            const string newStepValue = "Refactoring this is a test step <class>";
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSampleTest");
+            var parameterPositions = new[] {new Tuple<int, int>(-1, 0)};
+
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"class"}, newStepValue);
+
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"@class"});
+        }
+
+        [Test]
+        public void ShouldRefactorAndReturnFilesChanged()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
+            var expectedPath = Path.GetFullPath(Path.Combine(_testProjectPath, "RefactoringSample.cs"));
+
+            var filesChanged =
+                sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo").ToList();
+
+            Assert.AreEqual(1, filesChanged.Count);
+            Assert.AreEqual(expectedPath, filesChanged.First());
+        }
+
+        [Test]
+        public void ShouldRefactorAttributeText()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringContext");
+
+            sandbox.Refactor(gaugeMethod, new List<Tuple<int, int>>(), new List<string>(), "foo");
+
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, "foo");
+        }
+
+        [Test]
+        public void ShouldRemoveParameters()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+
+            var parameterPositions = new[] {new Tuple<int, int>(0, 0)};
+
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string>(), "Refactoring Say <what> to someone");
+
+            AssertParametersExist(gaugeMethod.Name, new[] {"what"});
+        }
+
+        [Test]
+        public void ShouldRemoveParametersInAnyOrder()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+
+            var parameterPositions = new[] {new Tuple<int, int>(1, 0)};
+
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string>(), "Refactoring Say something to <who>");
+
+            AssertParametersExist(gaugeMethod.Name, new[] {"who"});
+        }
+
+
+        [Test]
+        public void ShouldReorderParameters()
+        {
+            const string newStepValue = "Refactoring Say <who> to <what>";
+            var sandbox = SandboxBuilder.Build();
+            var gaugeMethod = sandbox.GetStepMethods().First(info =>
+                info.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+
+            var parameterPositions = new[] {new Tuple<int, int>(0, 1), new Tuple<int, int>(1, 0)};
+            sandbox.Refactor(gaugeMethod, parameterPositions, new List<string> {"who", "what"}, newStepValue);
+
+            AssertStepAttributeWithTextExists(gaugeMethod.Name, newStepValue);
+            AssertParametersExist(gaugeMethod.Name, new[] {"who", "what"});
         }
     }
 }

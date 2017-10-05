@@ -21,27 +21,19 @@ namespace Gauge.CSharp.Lib.Attribute
 {
     public abstract class FilteredHookAttribute : System.Attribute
     {
-        private readonly IEnumerable<string> _filterTags;
-
         protected FilteredHookAttribute()
         {
         }
 
-        protected FilteredHookAttribute(string filterTag) : this(new []{filterTag})
+        protected FilteredHookAttribute(string filterTag) : this(new[] {filterTag})
         {
-        }
-        
-        protected FilteredHookAttribute(params string[] filterTags)
-        {
-            _filterTags = filterTags;
         }
 
-        public IEnumerable<string> FilterTags
+        protected FilteredHookAttribute(params string[] filterTags)
         {
-            get
-            {
-                return _filterTags;
-            }
+            FilterTags = filterTags;
         }
+
+        public IEnumerable<string> FilterTags { get; }
     }
 }

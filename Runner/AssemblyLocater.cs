@@ -27,6 +27,7 @@ namespace Gauge.CSharp.Runner
     {
 //        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IDirectoryWrapper _directoryWrapper;
+
         private readonly IFileWrapper _fileWrapper;
 
         public AssemblyLocater(IDirectoryWrapper directoryWrapper, IFileWrapper fileWrapper)
@@ -37,7 +38,8 @@ namespace Gauge.CSharp.Runner
 
         public IEnumerable<string> GetAllAssemblies()
         {
-            var assemblies = _directoryWrapper.EnumerateFiles(GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly).ToList();
+            var assemblies = _directoryWrapper.EnumerateFiles(GetGaugeBinDir(), "*.dll", SearchOption.TopDirectoryOnly)
+                .ToList();
             var gaugeAdditionalLibsPath = Environment.GetEnvironmentVariable("GAUGE_ADDITIONAL_LIBS");
             if (string.IsNullOrEmpty(gaugeAdditionalLibsPath))
                 return assemblies;
@@ -60,13 +62,13 @@ namespace Gauge.CSharp.Runner
             var customBuildPath = Environment.GetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH");
             var GaugeProjectRoot = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
             if (string.IsNullOrEmpty(customBuildPath))
-            {
                 return Path.Combine(GaugeProjectRoot, "gauge-bin");
-            }
             try
             {
                 Uri result;
-                return Uri.TryCreate(customBuildPath, UriKind.Absolute, out result) ? customBuildPath : Path.Combine(GaugeProjectRoot, customBuildPath);
+                return Uri.TryCreate(customBuildPath, UriKind.Absolute, out result)
+                    ? customBuildPath
+                    : Path.Combine(GaugeProjectRoot, customBuildPath);
             }
             catch (Exception)
             {
@@ -77,20 +79,14 @@ namespace Gauge.CSharp.Runner
         private void AddFilesFromDirectory(string path, List<string> assemblies)
         {
             if (!_directoryWrapper.Exists(path))
-            {
-//                Logger.Warn("Path does not exist: {0}", path);
                 return;
-            }
             assemblies.AddRange(_directoryWrapper.EnumerateFiles(path, "*.dll", SearchOption.TopDirectoryOnly));
         }
 
         private void AddFile(string path, List<string> assemblies)
         {
             if (!_fileWrapper.Exists(path))
-            {
-//                Logger.Warn("Path does not exist: {0}", path);
                 return;
-            }
             assemblies.Add(path);
         }
     }

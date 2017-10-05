@@ -15,11 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace Gauge.CSharp.Runner.Exceptions
 {
-    public class NotAValidGaugeProjectException : System.Exception
+    public class NotAValidGaugeProjectException : Exception
     {
         private const string InvalidProjectMessage = "This is not a valid Gauge Project";
+
         public NotAValidGaugeProjectException()
             : base(InvalidProjectMessage)
         {

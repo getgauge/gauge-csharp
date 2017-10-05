@@ -25,36 +25,28 @@ namespace Gauge.CSharp.Lib
     /// </summary>
     public class DataStoreFactory
     {
-        private static readonly Dictionary<DataStoreType , DataStore> DataStores = new Dictionary<DataStoreType, DataStore>
-        {
-            {DataStoreType.Suite, new DataStore()},
-            {DataStoreType.Spec, new DataStore()},
-            {DataStoreType.Scenario, new DataStore()}
-        };
+        private static readonly Dictionary<DataStoreType, DataStore> DataStores =
+            new Dictionary<DataStoreType, DataStore>
+            {
+                {DataStoreType.Suite, new DataStore()},
+                {DataStoreType.Spec, new DataStore()},
+                {DataStoreType.Scenario, new DataStore()}
+            };
 
         /// <summary>
         ///     Access the Suite level DataStore.
         /// </summary>
-        public static DataStore SuiteDataStore
-        {
-            get { return DataStores[DataStoreType.Suite]; }
-        }
+        public static DataStore SuiteDataStore => DataStores[DataStoreType.Suite];
 
         /// <summary>
         ///     Access the Specification level DataStore.
         /// </summary>
-        public static DataStore SpecDataStore
-        {
-            get { return DataStores[DataStoreType.Spec]; }
-        }
+        public static DataStore SpecDataStore => DataStores[DataStoreType.Spec];
 
         /// <summary>
         ///     Access the Scenario level DataStore.
         /// </summary>
-        public static DataStore ScenarioDataStore
-        {
-            get { return DataStores[DataStoreType.Scenario]; }
-        }
+        public static DataStore ScenarioDataStore => DataStores[DataStoreType.Scenario];
 
         /// <summary>
         ///     <remarks>

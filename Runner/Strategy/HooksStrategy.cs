@@ -38,16 +38,17 @@ namespace Gauge.CSharp.Runner.Strategy
                 select hookMethod.Method;
         }
 
+        public virtual IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags,
+            IEnumerable<IHookMethod> hooks)
+        {
+            return GetUntaggedHooks(hooks);
+        }
+
         protected IOrderedEnumerable<string> GetUntaggedHooks(IEnumerable<IHookMethod> hookMethods)
         {
             return hookMethods.Where(method => method.FilterTags == null || !method.FilterTags.Any())
-                    .Select(method => method.Method)
-                    .OrderBy(info => info);
-        }
-
-        public virtual IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<IHookMethod> hooks)
-        {
-            return GetUntaggedHooks(hooks);
+                .Select(method => method.Method)
+                .OrderBy(info => info);
         }
     }
 }

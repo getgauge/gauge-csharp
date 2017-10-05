@@ -28,14 +28,11 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
+        protected override string HookType => "BeforeSuite";
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ExecutionStartingRequest.CurrentExecutionInfo;
-        }
-
-        protected override string HookType
-        {
-            get { return "BeforeSuite"; }
         }
 
         public override Message Process(Message request)

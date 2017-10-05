@@ -28,7 +28,7 @@ namespace Gauge.CSharp.Runner.UnitTests
 {
     public class SandboxMessageCollectorTests
     {
-        private static readonly string[] Messages = new[] {"Foo", "bar"};
+        private static readonly string[] Messages = {"Foo", "bar"};
         private string _gaugeProjectRootEnv;
 
         [SetUp]
@@ -44,7 +44,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
             var mockAssembly = new Mock<TestAssembly>();
             var mockLibAssembly = new Mock<TestAssembly>();
-            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
+            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib)
+                .Returns(new List<Assembly> {mockAssembly.Object});
             mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type>());
             mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type>());
             mockLibAssembly.Setup(assembly => assembly.GetType("Gauge.CSharp.Lib.MessageCollector")).Returns(GetType());

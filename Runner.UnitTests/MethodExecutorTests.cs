@@ -20,11 +20,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Moq;
-using NUnit.Framework;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
+using Moq;
+using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
@@ -34,84 +34,14 @@ namespace Gauge.CSharp.Runner.UnitTests
         [SetUp]
         public void Setup()
         {
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetDirectoryRoot(Assembly.GetExecutingAssembly().Location));
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT",
+                Directory.GetDirectoryRoot(Assembly.GetExecutingAssembly().Location));
         }
 
         [TearDown]
         public void TearDown()
         {
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
-        }
-
-        [Test]
-        public void ShouldExecuteMethod()
-        {
-            var mockSandBox = new Mock<ISandbox>();
-            var gaugeMethod = new GaugeMethod { Name = "ShouldExecuteMethod", ParameterCount = 1};
-            var args = new [] {"Bar", "String"};
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>()))
-                .Returns(() => new ExecutionResult {Success = true})
-                .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
-
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, args);
-            
-            mockSandBox.VerifyAll();
-            Assert.False(executionResult.Failed);
-            Assert.True(executionResult.ExecutionTime > 0);
-        }
-
-        [Test, Ignore("Screenshots are not available in CI - to use Gauge_screenshot instead")]
-        public void ShouldTakeScreenShotOnFailedExecution()
-        {
-            var mockSandBox = new Mock<ISandbox>();
-            var gaugeMethod = new GaugeMethod { Name = "ShouldExecuteMethod", ParameterCount = 1 };
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, "Bar")).Throws<Exception>();
-
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
-            
-            mockSandBox.VerifyAll();
-            Assert.True(executionResult.Failed);
-            Assert.True(executionResult.ScreenShot != null);
-            Assert.True(executionResult.ScreenShot.Length > 0);
-        }
-        
-        [Test]
-        public void ShouldTakeScreenShotUsingCustomScreenShotMethod()
-        {
-            var mockSandBox = new Mock<ISandbox>();
-            var gaugeMethod = new GaugeMethod { Name = "ShouldTakeScreenShotUsingCustomScreenShotMethod", ParameterCount = 1 };
-
-            var result = new ExecutionResult {Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace"};
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>())).Returns(result);
-
-            byte[] bytes = {0x20, 0x20};
-            mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
-
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
-            
-            mockSandBox.VerifyAll();
-            Assert.True(executionResult.Failed);
-            Assert.True(executionResult.ScreenShot != null);
-            Assert.AreEqual(2, executionResult.ScreenShot.Length);
-        }
-
-        [Test]
-        public void ShouldNotTakeScreenShotWhenDisabled()
-        {
-            var mockSandBox = new Mock<ISandbox>();
-            var gaugeMethod = new GaugeMethod { Name = "ShouldNotTakeScreenShotWhenDisabled", ParameterCount = 1 };
-
-            var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
-            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>())).Returns(result);
-
-            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
-            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
-            
-            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
-            
-            mockSandBox.VerifyAll();
-            Assert.False(executionResult.ScreenShot == null);
-            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
         }
 
         [Test]
@@ -134,7 +64,12 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockSandBox = new Mock<ISandbox>();
             var hooksStrategy = new HooksStrategy();
-            var result = new ExecutionResult { Success = false, ExceptionMessage = "Some Error", StackTrace = "StackTrace" };
+            var result = new ExecutionResult
+            {
+                Success = false,
+                ExceptionMessage = "Some Error",
+                StackTrace = "StackTrace"
+            };
             mockSandBox.Setup(sandbox =>
                 sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>())
             ).Returns(result).Verifiable();
@@ -142,11 +77,98 @@ namespace Gauge.CSharp.Runner.UnitTests
             var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
             Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
 
-            var protoExecutionResult = new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>());
+            var protoExecutionResult =
+                new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>());
 
             mockSandBox.VerifyAll();
             Assert.False(protoExecutionResult.ScreenShot == null);
             Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
+        }
+
+        [Test]
+        public void ShouldExecuteMethod()
+        {
+            var mockSandBox = new Mock<ISandbox>();
+            var gaugeMethod = new GaugeMethod {Name = "ShouldExecuteMethod", ParameterCount = 1};
+            var args = new[] {"Bar", "String"};
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>()))
+                .Returns(() => new ExecutionResult {Success = true})
+                .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
+
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, args);
+
+            mockSandBox.VerifyAll();
+            Assert.False(executionResult.Failed);
+            Assert.True(executionResult.ExecutionTime > 0);
+        }
+
+        [Test]
+        public void ShouldNotTakeScreenShotWhenDisabled()
+        {
+            var mockSandBox = new Mock<ISandbox>();
+            var gaugeMethod = new GaugeMethod {Name = "ShouldNotTakeScreenShotWhenDisabled", ParameterCount = 1};
+
+            var result = new ExecutionResult
+            {
+                Success = false,
+                ExceptionMessage = "Some Error",
+                StackTrace = "StackTrace"
+            };
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>())).Returns(result);
+
+            var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
+
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
+
+            mockSandBox.VerifyAll();
+            Assert.False(executionResult.ScreenShot == null);
+            Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
+        }
+
+        [Test]
+        [Ignore("Screenshots are not available in CI - to use Gauge_screenshot instead")]
+        public void ShouldTakeScreenShotOnFailedExecution()
+        {
+            var mockSandBox = new Mock<ISandbox>();
+            var gaugeMethod = new GaugeMethod {Name = "ShouldExecuteMethod", ParameterCount = 1};
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, "Bar")).Throws<Exception>();
+
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
+
+            mockSandBox.VerifyAll();
+            Assert.True(executionResult.Failed);
+            Assert.True(executionResult.ScreenShot != null);
+            Assert.True(executionResult.ScreenShot.Length > 0);
+        }
+
+        [Test]
+        public void ShouldTakeScreenShotUsingCustomScreenShotMethod()
+        {
+            var mockSandBox = new Mock<ISandbox>();
+            var gaugeMethod = new GaugeMethod
+            {
+                Name = "ShouldTakeScreenShotUsingCustomScreenShotMethod",
+                ParameterCount = 1
+            };
+
+            var result = new ExecutionResult
+            {
+                Success = false,
+                ExceptionMessage = "Some Error",
+                StackTrace = "StackTrace"
+            };
+            mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>())).Returns(result);
+
+            byte[] bytes = {0x20, 0x20};
+            mockSandBox.Setup(sandbox => sandbox.TryScreenCapture(out bytes)).Returns(true);
+
+            var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
+
+            mockSandBox.VerifyAll();
+            Assert.True(executionResult.Failed);
+            Assert.True(executionResult.ScreenShot != null);
+            Assert.AreEqual(2, executionResult.ScreenShot.Length);
         }
     }
 }

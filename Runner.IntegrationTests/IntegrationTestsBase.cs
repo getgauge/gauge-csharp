@@ -38,7 +38,8 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
         public static void AssertRunnerDomainDidNotLoadUsersAssembly()
         {
-            Assert.AreNotEqual ("0.6.999", FileVersionInfo.GetVersionInfo (typeof(AfterScenario).Assembly.Location).ProductVersion,
+            Assert.AreNotEqual("0.6.999",
+                FileVersionInfo.GetVersionInfo(typeof(AfterScenario).Assembly.Location).ProductVersion,
                 "Runner's test domain should not load the Gauge.CSharp.Lib assembly with 0.6.999 version");
             // 0.6.999 version should be only loaded in sandbox. 
             // Runner should have its own version, the one we just built in this project
@@ -51,7 +52,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             {
                 serializer.WriteObject(memoryStream, table);
                 return Encoding.UTF8.GetString(memoryStream.ToArray());
-            }            
+            }
         }
 
         [TearDown]

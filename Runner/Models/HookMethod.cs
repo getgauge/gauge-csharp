@@ -27,12 +27,6 @@ namespace Gauge.CSharp.Runner.Models
     [Serializable]
     public class HookMethod : IHookMethod
     {
-        public TagAggregation TagAggregation { get; private set; }
-
-        public IEnumerable<string> FilterTags { get; private set; }
-
-        public string Method { get; private set; }
-        
         public HookMethod(string hookType, MethodInfo methodInfo, Assembly targetLibAssembly)
         {
             Method = methodInfo.FullyQuallifiedName();
@@ -41,23 +35,27 @@ namespace Gauge.CSharp.Runner.Models
             var filteredHookType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.FilteredHookAttribute");
 
             if (!targetHookType.IsSubclassOf(filteredHookType))
-            {
                 return;
-            }
 
             dynamic filteredHookAttribute = methodInfo.GetCustomAttribute(targetHookType);
             if (filteredHookAttribute == null) return;
 
             FilterTags = filteredHookAttribute.FilterTags;
-            var targetTagBehaviourType = targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregationBehaviourAttribute");
+            var targetTagBehaviourType =
+                targetLibAssembly.GetType("Gauge.CSharp.Lib.Attribute.TagAggregationBehaviourAttribute");
             dynamic tagAggregationBehaviourAttribute = methodInfo.GetCustomAttribute(targetTagBehaviourType);
 
             var setTagAggregation = TagAggregation.And;
             if (!ReferenceEquals(tagAggregationBehaviourAttribute, null))
-            {
-                setTagAggregation = Enum.Parse(typeof(TagAggregation), tagAggregationBehaviourAttribute.TagAggregation.ToString());
-            }
+                setTagAggregation = Enum.Parse(typeof(TagAggregation),
+                    tagAggregationBehaviourAttribute.TagAggregation.ToString());
             TagAggregation = setTagAggregation;
         }
+
+        public TagAggregation TagAggregation { get; }
+
+        public IEnumerable<string> FilterTags { get; }
+
+        public string Method { get; }
     }
 }

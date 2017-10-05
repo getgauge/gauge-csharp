@@ -25,9 +25,6 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class ValidateProcessorTests
     {
-        private MessageProcessorFactory _messageProcessorFactory;
-        private Mock<IStepRegistry> _mockStepRegistry;
-
         [SetUp]
         public void Setup()
         {
@@ -38,63 +35,19 @@ namespace Gauge.CSharp.Runner.UnitTests
             _messageProcessorFactory = new MessageProcessorFactory(mockMethodScanner.Object, mockSandBox.Object);
         }
 
- 
-        [Test]
-        public void ShouldGetVaildResponseForStepValidateRequest()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepValidateRequest);
-            var request = new StepValidateRequest()
-            {
-                StepText = "step_text_1",
-                NumberOfParameters = 0,
-            };
-            var message = new Message()
-            {
-                MessageId = 1,
-                MessageType = Message.Types.MessageType.StepValidateRequest,
-                StepValidateRequest = request
-            };
-            _mockStepRegistry.Setup(registry => registry.ContainsStep("step_text_1")).Returns(true);
-            _mockStepRegistry.Setup(registry => registry.HasMultipleImplementations("step_text_1")).Returns(false);
-            
-            var response = messageProcessor.Process(message);
-
-            Assert.AreEqual(true, response.StepValidateResponse.IsValid);
-        }
-
-        [Test]
-        public void ShouldGetErrorResponseForStepValidateRequestWhennNoImplFound()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepValidateRequest);
-            var request = new StepValidateRequest()
-            {
-                StepText = "step_text_1",
-                NumberOfParameters = 0,
-            };
-            var message = new Message()
-            {
-                MessageId = 1,
-                MessageType = Message.Types.MessageType.StepValidateRequest,
-                StepValidateRequest = request
-            };
-
-            var response = messageProcessor.Process(message);
-
-            Assert.AreEqual(false, response.StepValidateResponse.IsValid);
-            Assert.AreEqual(StepValidateResponse.Types.ErrorType.StepImplementationNotFound, response.StepValidateResponse.ErrorType);
-            StringAssert.Contains("No implementation found for : step_text_1.", response.StepValidateResponse.ErrorMessage);
-        }
+        private MessageProcessorFactory _messageProcessorFactory;
+        private Mock<IStepRegistry> _mockStepRegistry;
 
         [Test]
         public void ShouldGetErrorResponseForStepValidateRequestWhenMultipleStepImplFound()
         {
             var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepValidateRequest);
-            var request = new StepValidateRequest()
+            var request = new StepValidateRequest
             {
                 StepText = "step_text_1",
-                NumberOfParameters = 0,
+                NumberOfParameters = 0
             };
-            var message = new Message()
+            var message = new Message
             {
                 MessageId = 1,
                 MessageType = Message.Types.MessageType.StepValidateRequest,
@@ -106,8 +59,59 @@ namespace Gauge.CSharp.Runner.UnitTests
             var response = messageProcessor.Process(message);
 
             Assert.AreEqual(false, response.StepValidateResponse.IsValid);
-            Assert.AreEqual(StepValidateResponse.Types.ErrorType.DuplicateStepImplementation, response.StepValidateResponse.ErrorType);
-            Assert.AreEqual("Multiple step implementations found for : step_text_1", response.StepValidateResponse.ErrorMessage);
+            Assert.AreEqual(StepValidateResponse.Types.ErrorType.DuplicateStepImplementation,
+                response.StepValidateResponse.ErrorType);
+            Assert.AreEqual("Multiple step implementations found for : step_text_1",
+                response.StepValidateResponse.ErrorMessage);
+        }
+
+        [Test]
+        public void ShouldGetErrorResponseForStepValidateRequestWhennNoImplFound()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepValidateRequest);
+            var request = new StepValidateRequest
+            {
+                StepText = "step_text_1",
+                NumberOfParameters = 0
+            };
+            var message = new Message
+            {
+                MessageId = 1,
+                MessageType = Message.Types.MessageType.StepValidateRequest,
+                StepValidateRequest = request
+            };
+
+            var response = messageProcessor.Process(message);
+
+            Assert.AreEqual(false, response.StepValidateResponse.IsValid);
+            Assert.AreEqual(StepValidateResponse.Types.ErrorType.StepImplementationNotFound,
+                response.StepValidateResponse.ErrorType);
+            StringAssert.Contains("No implementation found for : step_text_1.",
+                response.StepValidateResponse.ErrorMessage);
+        }
+
+
+        [Test]
+        public void ShouldGetVaildResponseForStepValidateRequest()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepValidateRequest);
+            var request = new StepValidateRequest
+            {
+                StepText = "step_text_1",
+                NumberOfParameters = 0
+            };
+            var message = new Message
+            {
+                MessageId = 1,
+                MessageType = Message.Types.MessageType.StepValidateRequest,
+                StepValidateRequest = request
+            };
+            _mockStepRegistry.Setup(registry => registry.ContainsStep("step_text_1")).Returns(true);
+            _mockStepRegistry.Setup(registry => registry.HasMultipleImplementations("step_text_1")).Returns(false);
+
+            var response = messageProcessor.Process(message);
+
+            Assert.AreEqual(true, response.StepValidateResponse.IsValid);
         }
     }
 }

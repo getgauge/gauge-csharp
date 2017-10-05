@@ -28,7 +28,9 @@ using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
-    public class TestAssembly : Assembly { }
+    public class TestAssembly : Assembly
+    {
+    }
 
     public class SandboxTests
     {
@@ -41,16 +43,19 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
         }
 
-        [Test, Platform(Exclude = "Mono", Reason = "Appdomain Config load is not supported in Mono")]
+        [Test]
+        [Platform(Exclude = "Mono", Reason = "Appdomain Config load is not supported in Mono")]
         public void ShouldLoadAppConfigFromTargetLocation()
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
             var mockAssembly = new Mock<TestAssembly>();
             var someTmpLocationDll = Path.GetFullPath("/some/tmp/location.dll");
             mockAssembly.Setup(assembly => assembly.Location).Returns(someTmpLocationDll);
-            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
+            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib)
+                .Returns(new List<Assembly> {mockAssembly.Object});
             mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type>());
-            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type> {typeof(DefaultClassInstanceManager)});
+            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes)
+                .Returns(new List<Type> {typeof(DefaultClassInstanceManager)});
             mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(GetType().Assembly);
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
@@ -67,9 +72,12 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
             var mockAssembly = new Mock<TestAssembly>();
-            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
-            mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type> { typeof(TestScreenGrabber)});
-            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type> { typeof(DefaultClassInstanceManager) });
+            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib)
+                .Returns(new List<Assembly> {mockAssembly.Object});
+            mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes)
+                .Returns(new List<Type> {typeof(TestScreenGrabber)});
+            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes)
+                .Returns(new List<Type> {typeof(DefaultClassInstanceManager)});
             mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(GetType().Assembly);
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
@@ -89,9 +97,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             var assemblyLoaded = false;
             var mockAssembly = new Mock<TestAssembly>();
             mockAssembly.Setup(assembly => assembly.FullName).Callback(() => assemblyLoaded = true);
-            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
-            mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type> { typeof(DefaultScreenGrabber)});
-            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type> { typeof(TestClassInstanceManager) });
+            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib)
+                .Returns(new List<Assembly> {mockAssembly.Object});
+            mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes)
+                .Returns(new List<Type> {typeof(DefaultScreenGrabber)});
+            mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes)
+                .Returns(new List<Type> {typeof(TestClassInstanceManager)});
             mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(GetType().Assembly);
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockFileWrapper = new Mock<IFileWrapper>();
@@ -138,7 +149,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             }
         }
 
-        private class TestScreenGrabber : IScreenGrabber {
+        private class TestScreenGrabber : IScreenGrabber
+        {
             public byte[] TakeScreenShot()
             {
                 return Encoding.UTF8.GetBytes("TestScreenGrabber");

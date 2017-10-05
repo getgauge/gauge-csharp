@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -28,23 +27,23 @@ namespace Gauge.CSharp.Runner.UnitTests
     {
         public static void InheritsFrom<TBase, TDerived>()
         {
-            Assert.True(typeof (TDerived).IsSubclassOf(typeof (TBase)),
-                String.Format("Expected {0} to be a subclass of {1}", typeof (TDerived).FullName, typeof (TBase).FullName));
+            Assert.True(typeof(TDerived).IsSubclassOf(typeof(TBase)),
+                string.Format("Expected {0} to be a subclass of {1}", typeof(TDerived).FullName,
+                    typeof(TBase).FullName));
         }
 
         public static void DoesNotInheritsFrom<TBase, TDerived>()
         {
-            Assert.False(typeof (TDerived).IsSubclassOf(typeof (TBase)),
-                String.Format("Expected {0} to NOT be a subclass of {1}", typeof (TDerived).FullName, typeof (TBase).FullName));
+            Assert.False(typeof(TDerived).IsSubclassOf(typeof(TBase)),
+                string.Format("Expected {0} to NOT be a subclass of {1}", typeof(TDerived).FullName,
+                    typeof(TBase).FullName));
         }
 
         public static void ContainsMethods(IEnumerable<MethodInfo> methodInfos, params string[] methodNames)
         {
             var existingMethodNames = methodInfos.Select(info => info.Name).ToArray();
             foreach (var methodName in methodNames)
-            {
                 Assert.Contains(methodName, existingMethodNames);
-            }
         }
 
         public static IEnumerable<string> ExecuteProtectedMethod<T>(string methodName, params object[] methodParams)

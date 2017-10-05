@@ -29,6 +29,18 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class HookExecutionProcessorTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _hookMethods = new List<IHookMethod>
+            {
+                new HookMethod("BeforeScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly),
+                new HookMethod("BeforeScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly)
+            };
+        }
+
         [BeforeScenario("Foo")]
         public void Foo()
         {
@@ -68,16 +80,40 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
         private IList<IHookMethod> _hookMethods;
 
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void ShouldAllowMultipleHooksInaMethod()
         {
-            _hookMethods = new List<IHookMethod>
-            {
-                new HookMethod("BeforeScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
-                new HookMethod("BeforeScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
-                new HookMethod("BeforeScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly),
-                new HookMethod("BeforeScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly)
-            };
+            var expected = GetType().GetMethod("MultiHook").FullyQuallifiedName();
+            var beforeScenarioHook =
+                new HookMethod("BeforeScenario", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
+            Assert.AreEqual(expected, beforeScenarioHook.Method);
+
+            var beforeSpecHook = new HookMethod("BeforeSpec", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
+            Assert.AreEqual(expected, beforeSpecHook.Method);
+        }
+
+        [Test]
+        public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
+        {
+            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Bar"}, _hookMethods)
+                .ToList();
+
+            Assert.IsNotNull(applicableHooks);
+            Assert.AreEqual(2, applicableHooks.Count);
+            Assert.Contains(GetType().GetMethod("Bar").FullyQuallifiedName(), applicableHooks);
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
+        }
+
+        [Test]
+        public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingOr()
+        {
+            var applicableHooks =
+                new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Foo"}, _hookMethods).ToList();
+
+            Assert.IsNotNull(applicableHooks);
+            Assert.AreEqual(2, applicableHooks.Count);
+            Assert.Contains(GetType().GetMethod("Foo").FullyQuallifiedName(), applicableHooks);
+            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
         }
 
         [Test]
@@ -120,29 +156,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingAnd()
-        {
-            var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Bar"}, _hookMethods).ToList();
-
-            Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count);
-            Assert.Contains(GetType().GetMethod("Bar").FullyQuallifiedName(), applicableHooks);
-            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
-        }
-
-        [Test]
-        public void ShouldFetchAHooksWithSpecifiedTagsWhenDoingOr()
-        {
-            var applicableHooks =
-                new HooksStrategy().GetTaggedHooks(new List<string> {"Baz", "Foo"}, _hookMethods).ToList();
-
-            Assert.IsNotNull(applicableHooks);
-            Assert.AreEqual(2, applicableHooks.Count);
-            Assert.Contains(GetType().GetMethod("Foo").FullyQuallifiedName(), applicableHooks);
-            Assert.Contains(GetType().GetMethod("Baz").FullyQuallifiedName(), applicableHooks);
-        }
-
-        [Test]
         public void ShouldNotFetchAnyTaggedHooksWhenTagsAreASuperSet()
         {
             var applicableHooks = new HooksStrategy().GetTaggedHooks(new List<string> {"Bar", "Blah"}, _hookMethods);
@@ -160,14 +173,6 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldUseUntaggedHooksFirstStrategy()
-        {
-            var hooksStrategy = new TestUntaggedHooksFirstExecutionProcessor().GetHooksStrategy();
-
-            Assert.IsInstanceOf<UntaggedHooksFirstStrategy>(hooksStrategy);
-        }
-
-        [Test]
         public void ShouldUseTaggedHooksFirstStrategy()
         {
             var hooksStrategy = new TestTaggedHooksFirstExecutionProcessor().GetHooksStrategy();
@@ -176,14 +181,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldAllowMultipleHooksInaMethod()
+        public void ShouldUseUntaggedHooksFirstStrategy()
         {
-            var expected = GetType().GetMethod("MultiHook").FullyQuallifiedName();
-            var beforeScenarioHook = new HookMethod("BeforeScenario", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
-            Assert.AreEqual(expected, beforeScenarioHook.Method);
+            var hooksStrategy = new TestUntaggedHooksFirstExecutionProcessor().GetHooksStrategy();
 
-            var beforeSpecHook = new HookMethod("BeforeSpec", GetType().GetMethod("MultiHook"), typeof(Step).Assembly);
-            Assert.AreEqual(expected, beforeSpecHook.Method);
+            Assert.IsInstanceOf<UntaggedHooksFirstStrategy>(hooksStrategy);
         }
     }
 }

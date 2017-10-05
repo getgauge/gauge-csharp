@@ -27,9 +27,9 @@ namespace Gauge.CSharp.Runner
 {
     public class StartCommand : IGaugeCommand
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly Func<IGaugeListener> _gaugeListener;
         private readonly Func<IGaugeProjectBuilder> _projectBuilder;
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public StartCommand() : this(() => new GaugeListener(), () => new GaugeProjectBuilder())
         {
@@ -45,9 +45,7 @@ namespace Gauge.CSharp.Runner
         public void Execute()
         {
             if (!TryBuild())
-            {
                 return;
-            }
             try
             {
                 _gaugeListener.Invoke().PollForMessages();

@@ -24,10 +24,6 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     internal class StartCommandTests
     {
-        private Mock<IGaugeListener> _mockGaugeListener;
-        private Mock<IGaugeProjectBuilder> _mockGaugeProjectBuilder;
-        private StartCommand _startCommand;
-
         [SetUp]
         public void Setup()
         {
@@ -42,14 +38,9 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", null);
         }
 
-        [Test]
-        public void ShouldNotBuildWhenCustomBuildPathIsSet()
-        {
-            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", "GAUGE_CUSTOM_BUILD_PATH");
-            _startCommand.Execute();
-
-            _mockGaugeProjectBuilder.Verify(builder => builder.BuildTargetGaugeProject(), Times.Never);
-        }
+        private Mock<IGaugeListener> _mockGaugeListener;
+        private Mock<IGaugeProjectBuilder> _mockGaugeProjectBuilder;
+        private StartCommand _startCommand;
 
         [Test]
         public void ShouldInvokeProjectBuild()
@@ -60,15 +51,24 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         [Test]
+        public void ShouldNotBuildWhenCustomBuildPathIsSet()
+        {
+            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", "GAUGE_CUSTOM_BUILD_PATH");
+            _startCommand.Execute();
+
+            _mockGaugeProjectBuilder.Verify(builder => builder.BuildTargetGaugeProject(), Times.Never);
+        }
+
+        [Test]
         public void ShouldNotPollForMessagesWhenBuildFails()
         {
             _mockGaugeProjectBuilder.Setup(builder => builder.BuildTargetGaugeProject()).Returns(false);
-            
+
             _startCommand.Execute();
 
             _mockGaugeListener.Verify(listener => listener.PollForMessages(), Times.Never);
         }
-        
+
         [Test]
         public void ShouldPollForMessagesWhenBuildPasses()
         {

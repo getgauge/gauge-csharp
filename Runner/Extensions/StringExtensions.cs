@@ -24,34 +24,28 @@ namespace Gauge.CSharp.Runner.Extensions
 {
     public static class StringExtensions
     {
-        public static string ToValidCSharpIdentifier(this string str, bool camelCase=true)
+        public static string ToValidCSharpIdentifier(this string str, bool camelCase = true)
         {
             str = str.Trim();
 
             if (!IsCSharpKeyword(str) && SyntaxFacts.IsValidIdentifier(str))
-            {
                 return str;
-            }
 
-            str = camelCase ? str.Split(' ').Select(s => s.Capitalize()).Aggregate(string.Concat) : str.Replace(" ", "");
+            str = camelCase
+                ? str.Split(' ').Select(s => s.Capitalize()).Aggregate(string.Concat)
+                : str.Replace(" ", "");
             var result = new StringBuilder();
 
             if (!SyntaxFacts.IsIdentifierStartCharacter(str[0]))
-            {
                 result.Append('_');
-            }
 
             foreach (var c in str.Where(SyntaxFacts.IsIdentifierPartCharacter))
-            {
                 result.Append(c);
-            }
 
             var retval = result.ToString();
 
             if (IsCSharpKeyword(retval))
-            {
                 retval = string.Concat('@', retval);
-            }
 
             return retval;
         }

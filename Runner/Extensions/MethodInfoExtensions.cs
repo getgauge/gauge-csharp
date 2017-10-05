@@ -26,8 +26,9 @@ namespace Gauge.CSharp.Runner.Extensions
         {
             var parameters = info.GetParameters();
             var parameterText = parameters.Length > 0
-                ? "-" + parameters.Select(parameterInfo => string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name))
-                    .Aggregate(string.Concat)
+                ? "-" + parameters.Select(parameterInfo =>
+                          string.Concat(parameterInfo.ParameterType.Name, parameterInfo.Name))
+                      .Aggregate(string.Concat)
                 : string.Empty;
 
             return info.DeclaringType == null
@@ -38,8 +39,10 @@ namespace Gauge.CSharp.Runner.Extensions
         public static bool IsRecoverableStep(this MethodInfo info)
         {
             var customAttributes = info.GetCustomAttributes().ToList();
-            return customAttributes.Any(attribute => attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.Step") &&
-            customAttributes.Any(attribute => attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.ContinueOnFailure");
+            return customAttributes.Any(attribute =>
+                       attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.Step") &&
+                   customAttributes.Any(attribute =>
+                       attribute.GetType().FullName == "Gauge.CSharp.Lib.Attribute.ContinueOnFailure");
         }
     }
 }

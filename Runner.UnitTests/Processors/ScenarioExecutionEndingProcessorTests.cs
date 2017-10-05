@@ -33,36 +33,37 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromSpecAndScenario()
         {
-            var specInfo = new SpecInfo()
+            var specInfo = new SpecInfo
             {
-                Tags = { "foo"},
+                Tags = {"foo"},
                 Name = "",
                 FileName = "",
                 IsFailed = false
             };
-            var scenarioInfo = new ScenarioInfo()
+            var scenarioInfo = new ScenarioInfo
             {
-                Tags = { "bar"},
+                Tags = {"bar"},
                 Name = "",
                 IsFailed = false
             };
-            var currentScenario = new ExecutionInfo()
+            var currentScenario = new ExecutionInfo
             {
                 CurrentSpec = specInfo,
                 CurrentScenario = scenarioInfo
             };
-            var currentExecutionInfo = new ScenarioExecutionEndingRequest()
+            var currentExecutionInfo = new ScenarioExecutionEndingRequest
             {
                 CurrentExecutionInfo = currentScenario
             };
-            var message = new Message()
+            var message = new Message
             {
                 ScenarioExecutionEndingRequest = currentExecutionInfo,
                 MessageType = Message.Types.MessageType.ScenarioExecutionEnding,
-                MessageId = 0,
+                MessageId = 0
             };
 
-            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message)
+                .ToList();
 
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(2, tags.Count);
@@ -73,36 +74,37 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldNotGetDuplicateTags()
         {
-            var specInfo = new SpecInfo()
+            var specInfo = new SpecInfo
             {
-                Tags = { "foo" },
+                Tags = {"foo"},
                 Name = "",
                 FileName = "",
                 IsFailed = false
             };
-            var scenarioInfo = new ScenarioInfo()
+            var scenarioInfo = new ScenarioInfo
             {
-                Tags = { "foo" },
+                Tags = {"foo"},
                 Name = "",
                 IsFailed = false
             };
-            var currentScenario = new ExecutionInfo()
+            var currentScenario = new ExecutionInfo
             {
                 CurrentSpec = specInfo,
                 CurrentScenario = scenarioInfo
             };
-            var currentExecutionInfo = new ScenarioExecutionEndingRequest()
+            var currentExecutionInfo = new ScenarioExecutionEndingRequest
             {
                 CurrentExecutionInfo = currentScenario
             };
-            var message = new Message()
+            var message = new Message
             {
                 ScenarioExecutionEndingRequest = currentExecutionInfo,
                 MessageType = Message.Types.MessageType.ScenarioExecutionEnding,
-                MessageId = 0,
+                MessageId = 0
             };
 
-            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message).ToList();
+            var tags = AssertEx.ExecuteProtectedMethod<ScenarioExecutionEndingProcessor>("GetApplicableTags", message)
+                .ToList();
 
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(1, tags.Count);

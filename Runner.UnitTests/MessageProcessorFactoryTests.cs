@@ -26,8 +26,6 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class MessageProcessorFactoryTests
     {
-        private MessageProcessorFactory _messageProcessorFactory;
-
         [SetUp]
         public void Setup()
         {
@@ -38,12 +36,14 @@ namespace Gauge.CSharp.Runner.UnitTests
             _messageProcessorFactory = new MessageProcessorFactory(mockMethodScanner.Object, mockSandBox.Object);
         }
 
-        [Test]
-        public void ShouldGetProcessorForExecutionStarting()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ExecutionStarting);
+        private MessageProcessorFactory _messageProcessorFactory;
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(ExecutionStartingProcessor));
+        [Test]
+        public void ShouldGetProcessorForExecuteStep()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ExecuteStep);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ExecuteStepProcessor));
         }
 
         [Test]
@@ -55,27 +55,54 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         [Test]
-        public void ShouldGetProcessorForStepExecutionStarting()
+        public void ShouldGetProcessorForExecutionStarting()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepExecutionStarting);
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ExecutionStarting);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(StepExecutionStartingProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ExecutionStartingProcessor));
         }
 
         [Test]
-        public void ShouldGetProcessorForStepExecutionEnding()
+        public void ShouldGetProcessorForKillProcessRequest()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepExecutionEnding);
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.KillProcessRequest);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(StepExecutionEndingProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(KillProcessProcessor));
         }
 
         [Test]
-        public void ShouldGetProcessorForSpecExecutionStarting()
+        public void ShouldGetProcessorForScenarioDataStoreInitRequest()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecExecutionStarting);
+            var messageProcessor =
+                _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioDataStoreInit);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(SpecExecutionStartingProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioDataStoreInitProcessor));
+        }
+
+        [Test]
+        public void ShouldGetProcessorForScenarioExecutionEnding()
+        {
+            var messageProcessor =
+                _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioExecutionEnding);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioExecutionEndingProcessor));
+        }
+
+        [Test]
+        public void ShouldGetProcessorForScenarioExecutionStarting()
+        {
+            var messageProcessor =
+                _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioExecutionStarting);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioExecutionStartingProcessor));
+        }
+
+        [Test]
+        public void ShouldGetProcessorForSpecDataStoreInitRequest()
+        {
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecDataStoreInit);
+
+            Assert.AreEqual(messageProcessor.GetType(), typeof(SpecDataStoreInitProcessor));
         }
 
         [Test]
@@ -87,35 +114,29 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         [Test]
-        public void ShouldGetProcessorForScenarioExecutionStarting()
+        public void ShouldGetProcessorForSpecExecutionStarting()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioExecutionStarting);
+            var messageProcessor =
+                _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecExecutionStarting);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioExecutionStartingProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(SpecExecutionStartingProcessor));
         }
 
         [Test]
-        public void ShouldGetProcessorForScenarioExecutionEnding()
+        public void ShouldGetProcessorForStepExecutionEnding()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioExecutionEnding);
+            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepExecutionEnding);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioExecutionEndingProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(StepExecutionEndingProcessor));
         }
 
         [Test]
-        public void ShouldGetProcessorForExecuteStep()
+        public void ShouldGetProcessorForStepExecutionStarting()
         {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ExecuteStep);
+            var messageProcessor =
+                _messageProcessorFactory.GetProcessor(Message.Types.MessageType.StepExecutionStarting);
 
-            Assert.AreEqual(messageProcessor.GetType(), typeof(ExecuteStepProcessor));
-        }
-
-        [Test]
-        public void ShouldGetProcessorForKillProcessRequest()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.KillProcessRequest);
-
-            Assert.AreEqual(messageProcessor.GetType(), typeof(KillProcessProcessor));
+            Assert.AreEqual(messageProcessor.GetType(), typeof(StepExecutionStartingProcessor));
         }
 
         [Test]
@@ -135,27 +156,11 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         [Test]
-        public void ShouldGetProcessorForSpecDataStoreInitRequest()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SpecDataStoreInit);
-
-            Assert.AreEqual(messageProcessor.GetType(), typeof(SpecDataStoreInitProcessor));
-        }
-
-        [Test]
         public void ShouldGetProcessorForSuiteDataStoreInitRequest()
         {
             var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.SuiteDataStoreInit);
 
             Assert.AreEqual(messageProcessor.GetType(), typeof(SuiteDataStoreInitProcessor));
-        }
-
-        [Test]
-        public void ShouldGetProcessorForScenarioDataStoreInitRequest()
-        {
-            var messageProcessor = _messageProcessorFactory.GetProcessor(Message.Types.MessageType.ScenarioDataStoreInit);
-
-            Assert.AreEqual(messageProcessor.GetType(), typeof(ScenarioDataStoreInitProcessor));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Gauge.CSharp.Lib.Attribute
     [AttributeUsage(AttributeTargets.Method)]
     public class Step : System.Attribute
     {
-        private readonly string[] _stepText ;
+        private readonly string[] _stepText;
 
         public Step(string stepText)
         {
@@ -35,12 +35,6 @@ namespace Gauge.CSharp.Lib.Attribute
             _stepText = stepText;
         }
 
-        public IEnumerable<string> Names
-        {
-            get
-            {
-                return _stepText;
-            }
-        }
+        public IEnumerable<string> Names => _stepText;
     }
 }

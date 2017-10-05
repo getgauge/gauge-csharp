@@ -22,7 +22,7 @@ using System.Linq;
 namespace Gauge.CSharp.Lib
 {
     /// <summary>
-    /// Holds data of a row in Table. 
+    ///     Holds data of a row in Table.
     /// </summary>
     [Serializable]
     public class TableRow
@@ -46,8 +46,9 @@ namespace Gauge.CSharp.Lib
 
         public override string ToString()
         {
-            var allCells = _cells.Aggregate("", (current, pair) => current + (pair.Key + " = " + pair.Value + ", ")).Trim();
-            return string.Format("TableRow: cells: [{0}] ", allCells.Substring(0, allCells.Length-1).Trim());
+            var allCells = _cells.Aggregate("", (current, pair) => current + pair.Key + " = " + pair.Value + ", ")
+                .Trim();
+            return string.Format("TableRow: cells: [{0}] ", allCells.Substring(0, allCells.Length - 1).Trim());
         }
     }
 }

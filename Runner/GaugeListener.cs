@@ -25,8 +25,8 @@ namespace Gauge.CSharp.Runner
 {
     public class GaugeListener : IGaugeListener
     {
-        private readonly MessageProcessorFactory _messageProcessorFactory;
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly MessageProcessorFactory _messageProcessorFactory;
 
         public GaugeListener() : this(new MessageProcessorFactory())
         {
@@ -50,9 +50,7 @@ namespace Gauge.CSharp.Runner
                         var response = processor.Process(message);
                         gaugeConnection.WriteMessage(response);
                         if (message.MessageType == Message.Types.MessageType.KillProcessRequest)
-                        {
                             return;
-                        }
                     }
                 }
             }

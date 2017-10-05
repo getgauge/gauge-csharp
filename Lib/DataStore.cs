@@ -34,6 +34,11 @@ namespace Gauge.CSharp.Lib
         private Dictionary<object, object> Dictionary { get; set; }
 
         /// <summary>
+        ///     Gets the number of entries in the datastore.
+        /// </summary>
+        public int Count => Dictionary.Count;
+
+        /// <summary>
         ///     Initializes a datastore, with a new dictionary.
         /// </summary>
         public void Initialize()
@@ -80,14 +85,6 @@ namespace Gauge.CSharp.Lib
         public void Clear()
         {
             Dictionary.Clear();
-        }
-
-        /// <summary>
-        ///     Gets the number of entries in the datastore.
-        /// </summary>
-        public int Count
-        {
-            get { return Dictionary.Count; }
         }
     }
 }

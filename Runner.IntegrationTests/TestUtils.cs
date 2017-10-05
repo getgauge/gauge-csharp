@@ -20,27 +20,25 @@ using System.Linq;
 
 namespace Gauge.CSharp.Runner.IntegrationTests
 {
-	class TestUtils
-	{
-		public static string GetIntegrationTestSampleDirectory ()
-		{
-			/* Rather than assuming what directory integration tests are executing from
-			 * We will discover 'up' the IntegrationTestSample project
-			*/
-			var dir = new DirectoryInfo(Directory.GetCurrentDirectory ());
-			return FindIntegrationTestDirectory (dir).FullName;
-		}
+    internal class TestUtils
+    {
+        public static string GetIntegrationTestSampleDirectory()
+        {
+            /* Rather than assuming what directory integration tests are executing from
+             * We will discover 'up' the IntegrationTestSample project
+            */
+            var dir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            return FindIntegrationTestDirectory(dir).FullName;
+        }
 
-		static DirectoryInfo FindIntegrationTestDirectory (DirectoryInfo dir)
-		{
-			var found = dir.GetDirectories ().FirstOrDefault (d => d.Name.Equals ("IntegrationTestSample"));
-			if (found != null)
-				return found;
-		    if (dir.Parent != null)// not on system boundry
-		        return FindIntegrationTestDirectory(dir.Parent);
-		    throw new DirectoryNotFoundException ("Failed to find IntegrationTestSample directory");
-		}
-
-	}
-
+        private static DirectoryInfo FindIntegrationTestDirectory(DirectoryInfo dir)
+        {
+            var found = dir.GetDirectories().FirstOrDefault(d => d.Name.Equals("IntegrationTestSample"));
+            if (found != null)
+                return found;
+            if (dir.Parent != null) // not on system boundry
+                return FindIntegrationTestDirectory(dir.Parent);
+            throw new DirectoryNotFoundException("Failed to find IntegrationTestSample directory");
+        }
+    }
 }

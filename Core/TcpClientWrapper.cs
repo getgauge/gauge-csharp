@@ -24,7 +24,8 @@ namespace Gauge.CSharp.Core
 {
     public class TcpClientWrapper : ITcpClientWrapper
     {
-        readonly TcpClient _tcpClient = new TcpClient();
+        private readonly TcpClient _tcpClient = new TcpClient();
+
         public TcpClientWrapper(int port)
         {
             try
@@ -37,10 +38,7 @@ namespace Gauge.CSharp.Core
             }
         }
 
-        public bool Connected
-        {
-            get { return _tcpClient.Connected; }
-        }
+        public bool Connected => _tcpClient.Connected;
 
         public Stream GetStream()
         {

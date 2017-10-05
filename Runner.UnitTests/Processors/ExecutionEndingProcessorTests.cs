@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
@@ -30,33 +29,26 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class ExecutionEndingProcessorTests
     {
-        private ExecutionEndingProcessor _executionEndingProcessor;
-        private Message _request;
-        private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult _protoExecutionResult;
-        private readonly IEnumerable<string> _pendingMessages = new List<string> {"Foo" , "Bar"};
-
-        public void Foo()
-        {
-        }
-
         [SetUp]
         public void Setup()
         {
             var mockHookRegistry = new Mock<IHookRegistry>();
             var mockSandbox = new Mock<ISandbox>();
             mockSandbox.Setup(sandbox => sandbox.GetAllPendingMessages()).Returns(_pendingMessages);
-            var hooks = new HashSet<IHookMethod> { new HookMethod("BeforeSpec", GetType().GetMethod("Foo"), typeof(Step).Assembly) };
-            mockHookRegistry.Setup(x => x.AfterSuiteHooks).Returns(hooks);
-            var executionEndingRequest = new ExecutionEndingRequest()
+            var hooks = new HashSet<IHookMethod>
             {
-                CurrentExecutionInfo = new ExecutionInfo()
+                new HookMethod("BeforeSpec", GetType().GetMethod("Foo"), typeof(Step).Assembly)
+            };
+            mockHookRegistry.Setup(x => x.AfterSuiteHooks).Returns(hooks);
+            var executionEndingRequest = new ExecutionEndingRequest
+            {
+                CurrentExecutionInfo = new ExecutionInfo
                 {
                     CurrentSpec = new SpecInfo(),
                     CurrentScenario = new ScenarioInfo()
                 }
             };
-            _request = new Message()
+            _request = new Message
             {
                 MessageId = 20,
                 MessageType = Message.Types.MessageType.ExecutionEnding,
@@ -64,32 +56,26 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             };
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = new ProtoExecutionResult()
+            _protoExecutionResult = new ProtoExecutionResult
             {
                 ExecutionTime = 0,
-                Failed = false,
-
+                Failed = false
             };
             _protoExecutionResult.Message.AddRange(_pendingMessages);
-            _mockMethodExecutor.Setup(x => x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
+            _mockMethodExecutor.Setup(x =>
+                    x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
                 .Returns(_protoExecutionResult);
             _executionEndingProcessor = new ExecutionEndingProcessor(_mockMethodExecutor.Object);
         }
-        [Test]
-        public void ShouldProcessHooks()
-        {
-            _executionEndingProcessor.Process(_request);
-            _mockMethodExecutor.VerifyAll();
-        }
 
-        [Test]
-        public void ShouldWrapInMessage()
+        private ExecutionEndingProcessor _executionEndingProcessor;
+        private Message _request;
+        private Mock<IMethodExecutor> _mockMethodExecutor;
+        private ProtoExecutionResult _protoExecutionResult;
+        private readonly IEnumerable<string> _pendingMessages = new List<string> {"Foo", "Bar"};
+
+        public void Foo()
         {
-            var message = _executionEndingProcessor.Process(_request);
-            
-            Assert.AreEqual(_request.MessageId, message.MessageId);
-            Assert.AreEqual(Message.Types.MessageType.ExecutionStatusResponse, message.MessageType);
-            Assert.AreEqual(_protoExecutionResult, message.ExecutionStatusResponse.ExecutionResult);
         }
 
         [Test]
@@ -105,6 +91,23 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var tags = AssertEx.ExecuteProtectedMethod<ExecutionEndingProcessor>("GetApplicableTags", _request);
             Assert.IsEmpty(tags);
+        }
+
+        [Test]
+        public void ShouldProcessHooks()
+        {
+            _executionEndingProcessor.Process(_request);
+            _mockMethodExecutor.VerifyAll();
+        }
+
+        [Test]
+        public void ShouldWrapInMessage()
+        {
+            var message = _executionEndingProcessor.Process(_request);
+
+            Assert.AreEqual(_request.MessageId, message.MessageId);
+            Assert.AreEqual(Message.Types.MessageType.ExecutionStatusResponse, message.MessageType);
+            Assert.AreEqual(_protoExecutionResult, message.ExecutionStatusResponse.ExecutionResult);
         }
     }
 }

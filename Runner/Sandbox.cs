@@ -36,17 +36,13 @@ namespace Gauge.CSharp.Runner
     public class Sandbox : MarshalByRefObject, ISandbox
     {
         private readonly IAssemblyLoader _assemblyLoader;
+        private readonly IFileWrapper _fileWrapper;
 
         private readonly Assembly _libAssembly;
-
-        private Type ScreenGrabberType { get; set; }
 
         private dynamic _classInstanceManager;
 
         private IHookRegistry _hookRegistry;
-        private readonly IFileWrapper _fileWrapper;
-
-        private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
         public Sandbox(IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
@@ -63,6 +59,10 @@ namespace Gauge.CSharp.Runner
         public Sandbox(string runnerBasePath) : this(new AssemblyLoader(runnerBasePath), null, new FileWrapper())
         {
         }
+
+        private Type ScreenGrabberType { get; set; }
+
+        private IDictionary<string, MethodInfo> MethodMap { get; set; }
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
@@ -92,8 +92,9 @@ namespace Gauge.CSharp.Runner
                 logger.Debug("Error executing {0}", method.Name);
                 var innerException = ex.InnerException ?? ex;
                 executionResult.ExceptionMessage = innerException.Message;
-                executionResult.StackTrace = innerException is AggregateException ?
-                    innerException.ToString() : innerException.StackTrace;
+                executionResult.StackTrace = innerException is AggregateException
+                    ? innerException.ToString()
+                    : innerException.StackTrace;
                 executionResult.Source = innerException.Source;
                 executionResult.Success = false;
                 executionResult.Recoverable = gaugeMethod.ContinueOnFailure;
@@ -102,19 +103,7 @@ namespace Gauge.CSharp.Runner
             return executionResult;
         }
 
-        private object GetTable(string jsonString)
-        {
-            var serializer = new DataContractJsonSerializer(_libAssembly.GetType("Gauge.CSharp.Lib.Table"));
-            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
-            {
-                return serializer.ReadObject(ms);
-            }
-        }
-
-        public string TargetLibAssemblyVersion
-        {
-            get { return FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion; }
-        }
+        public string TargetLibAssemblyVersion => FileVersionInfo.GetVersionInfo(_libAssembly.Location).ProductVersion;
 
         public List<GaugeMethod> GetStepMethods()
         {
@@ -124,12 +113,18 @@ namespace Gauge.CSharp.Runner
             {
                 var methodId = info.FullyQuallifiedName();
                 MethodMap.Add(methodId, info);
-                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}, Recoverable: {1}", methodId, info.IsRecoverableStep());
+                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}, Recoverable: {1}", methodId,
+                    info.IsRecoverableStep());
             }
             return MethodMap.Keys.Select(s =>
             {
                 var method = MethodMap[s];
-                return new GaugeMethod {Name = s, ParameterCount = method.GetParameters().Length, ContinueOnFailure = method.IsRecoverableStep()};
+                return new GaugeMethod
+                {
+                    Name = s,
+                    ParameterCount = method.GetParameters().Length,
+                    ContinueOnFailure = method.IsRecoverableStep()
+                };
             }).ToList();
         }
 
@@ -217,7 +212,8 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (Exception ex)
                 {
-                    LogManager.GetLogger("Sandbox").Debug("{0} Hook execution failed : {1}.{2}", hookType, methodInfo.DeclaringType.FullName, methodInfo.Name);
+                    LogManager.GetLogger("Sandbox").Debug("{0} Hook execution failed : {1}.{2}", hookType,
+                        methodInfo.DeclaringType.FullName, methodInfo.Name);
                     var innerException = ex.InnerException ?? ex;
                     executionResult.ExceptionMessage = innerException.Message;
                     executionResult.StackTrace = innerException.StackTrace;
@@ -228,9 +224,20 @@ namespace Gauge.CSharp.Runner
             return executionResult;
         }
 
-        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions, IList<string> parametersList, string newStepValue)
+        public IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions,
+            IList<string> parametersList, string newStepValue)
         {
-            return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList, newStepValue);
+            return RefactorHelper.Refactor(MethodMap[methodInfo.Name], parameterPositions, parametersList,
+                newStepValue);
+        }
+
+        private object GetTable(string jsonString)
+        {
+            var serializer = new DataContractJsonSerializer(_libAssembly.GetType("Gauge.CSharp.Lib.Table"));
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
+            {
+                return serializer.ReadObject(ms);
+            }
         }
 
         public override object InitializeLifetimeService()
@@ -250,16 +257,10 @@ namespace Gauge.CSharp.Runner
         private static bool HasArguments(MethodInfo method, object[] args)
         {
             if (method.GetParameters().Length != args.Length)
-            {
                 return false;
-            }
             for (var i = 0; i < args.Length; i++)
-            {
                 if (args[i].GetType() != method.GetParameters()[i].ParameterType)
-                {
                     return false;
-                }
-            }
             return true;
         }
 
@@ -306,7 +307,8 @@ namespace Gauge.CSharp.Runner
 
             if (Type.GetType("Mono.Runtime") != null)
             {
-                LogManager.GetLogger("Sandbox").Warn("Located {0}, but cannot load config dynamically in Mono. Skipping..", configFile);
+                LogManager.GetLogger("Sandbox")
+                    .Warn("Located {0}, but cannot load config dynamically in Mono. Skipping..", configFile);
                 return;
             }
             AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
@@ -325,7 +327,8 @@ namespace Gauge.CSharp.Runner
                 logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
-            ScreenGrabberType = ScreenGrabberType ?? Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
+            ScreenGrabberType = ScreenGrabberType ??
+                                Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
         }
 
         private void Execute(MethodBase method, params object[] parameters)

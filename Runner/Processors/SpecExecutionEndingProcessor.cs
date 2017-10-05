@@ -31,15 +31,9 @@ namespace Gauge.CSharp.Runner.Processors
             _sandbox = sandbox;
         }
 
-        protected override string HookType
-        {
-            get { return "AfterSpec"; }
-        }
+        protected override string HookType => "AfterSpec";
 
-        protected override string CacheClearLevel
-        {
-            get { return SpecLevel; }
-        }
+        protected override string CacheClearLevel => SpecLevel;
 
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {

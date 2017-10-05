@@ -11,9 +11,6 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     internal class SetupCommandTests
     {
-        private const string Version = "0.5.2";
-        private Mock<IPackageRepositoryFactory> _packageRepositoryFactory;
-
         [SetUp]
         public void Setup()
         {
@@ -35,6 +32,9 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
         }
 
+        private const string Version = "0.5.2";
+        private Mock<IPackageRepositoryFactory> _packageRepositoryFactory;
+
         [Test]
         public void ShouldFetchMaxLibVersionOnlyOnce()
         {
@@ -44,7 +44,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             maxLibVersion = setupCommand.MaxLibVersion; // call again, just for fun!
 
             Assert.AreEqual(Version, maxLibVersion.ToString());
-            _packageRepositoryFactory.Verify(factory => factory.CreateRepository(SetupCommand.NugetEndpoint), Times.Once);
+            _packageRepositoryFactory.Verify(factory => factory.CreateRepository(SetupCommand.NugetEndpoint),
+                Times.Once);
         }
     }
 }

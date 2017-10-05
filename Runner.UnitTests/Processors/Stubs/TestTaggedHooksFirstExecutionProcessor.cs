@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
@@ -23,24 +24,23 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors.Stubs
 {
     public class TestTaggedHooksFirstExecutionProcessor : TaggedHooksFirstExecutionProcessor
     {
+        public TestTaggedHooksFirstExecutionProcessor() : base(null)
+        {
+        }
+
+        protected override string HookType
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public HooksStrategy GetHooksStrategy()
         {
             return Strategy;
         }
 
-        public TestTaggedHooksFirstExecutionProcessor() : base(null)
-        {
-        }
-
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
-            throw new System.NotImplementedException();
-        }
-
-        protected override string HookType
-        {
-            get { throw new System.NotImplementedException(); }
+            throw new NotImplementedException();
         }
     }
 }

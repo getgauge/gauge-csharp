@@ -17,19 +17,19 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using Gauge.Messages;
-using Google.Protobuf;
-using NLog;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
+using Gauge.Messages;
+using Google.Protobuf;
+using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class MethodExecutor : IMethodExecutor
     {
-        private readonly ISandbox _sandbox;
         private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
+        private readonly ISandbox _sandbox;
 
         public MethodExecutor(ISandbox sandbox)
         {
@@ -40,9 +40,9 @@ namespace Gauge.CSharp.Runner
         public ProtoExecutionResult Execute(GaugeMethod method, params string[] args)
         {
             var stopwatch = Stopwatch.StartNew();
-            var builder = new ProtoExecutionResult()
+            var builder = new ProtoExecutionResult
             {
-                Failed = false,
+                Failed = false
             };
             var executionResult = _sandbox.ExecuteMethod(method, args);
 
@@ -53,9 +53,7 @@ namespace Gauge.CSharp.Runner
                 builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
-                {
                     builder.ScreenShot = TakeScreenshot();
-                }
                 builder.ErrorMessage = executionResult.ExceptionMessage;
                 builder.StackTrace = executionResult.StackTrace;
                 builder.RecoverableError = executionResult.Recoverable;
@@ -68,7 +66,7 @@ namespace Gauge.CSharp.Runner
         public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags)
         {
             var stopwatch = Stopwatch.StartNew();
-            var builder = new ProtoExecutionResult()
+            var builder = new ProtoExecutionResult
             {
                 Failed = false
             };
@@ -81,9 +79,7 @@ namespace Gauge.CSharp.Runner
                 builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
-                {
                     builder.ScreenShot = TakeScreenshot();
-                }
                 builder.ErrorMessage = executionResult.ExceptionMessage;
                 builder.StackTrace = executionResult.StackTrace;
                 builder.RecoverableError = executionResult.Recoverable;

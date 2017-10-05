@@ -28,15 +28,15 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message GetResponseMessage(Message request)
         {
-            var response = new ExecutionStatusResponse()
+            var response = new ExecutionStatusResponse
             {
-                ExecutionResult = new ProtoExecutionResult()
+                ExecutionResult = new ProtoExecutionResult
                 {
                     Failed = false,
                     ExecutionTime = 0
                 }
             };
-            return new Message()
+            return new Message
             {
                 MessageId = request.MessageId,
                 MessageType = Message.Types.MessageType.ExecutionStatusResponse,

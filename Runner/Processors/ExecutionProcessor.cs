@@ -23,11 +23,11 @@ namespace Gauge.CSharp.Runner.Processors
     {
         protected static Message WrapInMessage(ProtoExecutionResult executionResult, Message request)
         {
-            var executionStatusResponse = new ExecutionStatusResponse()
+            var executionStatusResponse = new ExecutionStatusResponse
             {
                 ExecutionResult = executionResult
             };
-            return new Message()
+            return new Message
             {
                 MessageId = request.MessageId,
                 MessageType = Message.Types.MessageType.ExecutionStatusResponse,

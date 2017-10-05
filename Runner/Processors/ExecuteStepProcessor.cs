@@ -18,18 +18,18 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Gauge.CSharp.Runner.Models;
-using Gauge.Messages;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using Gauge.CSharp.Lib;
+using Gauge.CSharp.Runner.Models;
+using Gauge.Messages;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class ExecuteStepProcessor : ExecutionProcessor, IMessageProcessor
     {
-        private readonly IStepRegistry _stepRegistry;
         private readonly IMethodExecutor _methodExecutor;
+        private readonly IStepRegistry _stepRegistry;
 
         public ExecuteStepProcessor(IStepRegistry stepRegistry, IMethodExecutor methodExecutor)
         {
@@ -51,20 +51,20 @@ namespace Gauge.CSharp.Runner.Processors
             var stepParameter = executeStepRequest.Parameters;
             if (parameters != stepParameter.Count)
             {
-                var argumentMismatchError = string.Format("Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
+                var argumentMismatchError = string.Format(
+                    "Argument length mismatch for {0}. Actual Count: {1}, Expected Count: {2}",
                     executeStepRequest.ActualStepText,
                     stepParameter.Count, parameters);
                 return ExecutionError(argumentMismatchError, request);
             }
 
-            var validTableParamTypes = new[] { Parameter.Types.ParameterType.Table, Parameter.Types.ParameterType.SpecialTable };
+            var validTableParamTypes = new[]
+                {Parameter.Types.ParameterType.Table, Parameter.Types.ParameterType.SpecialTable};
 
             for (var i = 0; i < parameters; i++)
-            {
-                args[i] = validTableParamTypes.Contains(stepParameter[i].ParameterType)  
+                args[i] = validTableParamTypes.Contains(stepParameter[i].ParameterType)
                     ? GetTableData(stepParameter[i].Table)
                     : stepParameter[i].Value;
-            }
             var protoExecutionResult = _methodExecutor.Execute(method, args);
             return WrapInMessage(protoExecutionResult, request);
         }
@@ -73,9 +73,7 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var table1 = new Table(table.Headers.Cells.ToList());
             foreach (var protoTableRow in table.Rows)
-            {
                 table1.AddRow(protoTableRow.Cells.ToList());
-            }
             var serializer = new DataContractJsonSerializer(typeof(Table));
             using (var memoryStream = new MemoryStream())
             {
@@ -86,7 +84,7 @@ namespace Gauge.CSharp.Runner.Processors
 
         private static Message ExecutionError(string errorMessage, Message request)
         {
-            var result = new ProtoExecutionResult()
+            var result = new ProtoExecutionResult
             {
                 Failed = true,
                 RecoverableError = false,

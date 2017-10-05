@@ -27,15 +27,9 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
-        protected override string HookType
-        {
-            get { return "AfterSuite"; }
-        }
+        protected override string HookType => "AfterSuite";
 
-        protected override string CacheClearLevel
-        {
-            get { return SuiteLevel; }
-        }
+        protected override string CacheClearLevel => SuiteLevel;
 
         protected override List<string> GetApplicableTags(Message request)
         {

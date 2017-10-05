@@ -19,30 +19,46 @@ using Gauge.CSharp.Lib.Attribute;
 
 namespace IntegrationTestSample
 {
-    class ExecutionHooks
+    internal class ExecutionHooks
     {
         [BeforeSuite]
-        public void BeforeSuite() { }
+        public void BeforeSuite()
+        {
+        }
 
         [AfterSuite]
-        public void AfterSuite() { }
+        public void AfterSuite()
+        {
+        }
 
         [BeforeStep]
-        public void BeforeStep() { }
+        public void BeforeStep()
+        {
+        }
 
         [AfterStep]
-        public void AfterStep() { }
+        public void AfterStep()
+        {
+        }
 
         [BeforeSpec]
-        public void BeforeSpec() { }
+        public void BeforeSpec()
+        {
+        }
 
         [AfterSpec]
-        public void AfterSpec() { }
+        public void AfterSpec()
+        {
+        }
 
         [BeforeScenario]
-        public void BeforeScenario() { }
+        public void BeforeScenario()
+        {
+        }
 
         [AfterScenario]
-        public void AfterScenario() { }
+        public void AfterScenario()
+        {
+        }
     }
 }

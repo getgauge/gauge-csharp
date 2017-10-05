@@ -25,37 +25,12 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class StepRegistryTests
     {
-        public void Foo(){ }
-        public void Bar(){ }
-
-        [Test]
-        public void ShouldGetAllSteps()
+        public void Foo()
         {
-            var methods = new[]
-            {
-                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
-                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
-            };
-            var stepRegistry = new StepRegistry(methods, null, null);
-            var allSteps = stepRegistry.AllSteps().ToList();
-
-            Assert.AreEqual(allSteps.Count, 2);
-            Assert.True(allSteps.Contains("Foo"));
-            Assert.True(allSteps.Contains("Bar"));
         }
 
-        [Test]
-        public void ShouldGetMethodForStep()
+        public void Bar()
         {
-            var methods = new[]
-            {
-                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
-                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
-            };
-            var stepRegistry = new StepRegistry(methods, null, null);
-            var method = stepRegistry.MethodFor("Foo");
-
-            Assert.AreEqual(method.Name, "Foo");
         }
 
         [Test]
@@ -81,10 +56,71 @@ namespace Gauge.CSharp.Runner.UnitTests
                 new KeyValuePair<string, GaugeMethod>("FooAlias", new GaugeMethod {Name = "Foo"}),
                 new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
             };
-            var stepRegistry = new StepRegistry(methods, null, new Dictionary<string, bool> { { "Foo", true}, {"FooAlias", true} });
+            var stepRegistry = new StepRegistry(methods, null,
+                new Dictionary<string, bool> {{"Foo", true}, {"FooAlias", true}});
 
             Assert.True(stepRegistry.HasAlias("Foo"));
             Assert.True(stepRegistry.HasAlias("FooAlias"));
+        }
+
+        [Test]
+        public void ShouldGetAllSteps()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
+            };
+            var stepRegistry = new StepRegistry(methods, null, null);
+            var allSteps = stepRegistry.AllSteps().ToList();
+
+            Assert.AreEqual(allSteps.Count, 2);
+            Assert.True(allSteps.Contains("Foo"));
+            Assert.True(allSteps.Contains("Bar"));
+        }
+
+        [Test]
+        public void ShouldGetEmptyStepTextForInvalidParameterizedStepText()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
+            };
+            var stepTextMap = new Dictionary<string, string> {{"foo_parameterized", "Foo"}};
+
+            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
+
+            Assert.AreEqual(stepRegistry.GetStepText("random"), string.Empty);
+        }
+
+        [Test]
+        public void ShouldGetMethodForStep()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
+            };
+            var stepRegistry = new StepRegistry(methods, null, null);
+            var method = stepRegistry.MethodFor("Foo");
+
+            Assert.AreEqual(method.Name, "Foo");
+        }
+
+        [Test]
+        public void ShouldGetStepTextFromParameterizedStepText()
+        {
+            var methods = new[]
+            {
+                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
+                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
+            };
+            var stepTextMap = new Dictionary<string, string> {{"foo_parameterized", "Foo"}};
+
+            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
+
+            Assert.AreEqual(stepRegistry.GetStepText("foo_parameterized"), "Foo");
         }
 
         [Test]
@@ -99,36 +135,6 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             Assert.False(stepRegistry.HasAlias("Foo"));
             Assert.False(stepRegistry.HasAlias("Bar"));
-        }
-
-        [Test]
-        public void ShouldGetStepTextFromParameterizedStepText()
-        {
-            var methods = new[]
-            {
-                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
-                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
-            };
-            var stepTextMap = new Dictionary<string, string> { { "foo_parameterized", "Foo" } };
-
-            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
-
-            Assert.AreEqual(stepRegistry.GetStepText("foo_parameterized"), "Foo");
-        }
-
-        [Test]
-        public void ShouldGetEmptyStepTextForInvalidParameterizedStepText()
-        {
-            var methods = new[]
-            {
-                new KeyValuePair<string, GaugeMethod>("Foo", new GaugeMethod {Name = "Foo"}),
-                new KeyValuePair<string, GaugeMethod>("Bar", new GaugeMethod {Name = "Bar"})
-            };
-            var stepTextMap = new Dictionary<string, string> { { "foo_parameterized", "Foo" } };
-
-            var stepRegistry = new StepRegistry(methods, stepTextMap, null);
-
-            Assert.AreEqual(stepRegistry.GetStepText("random"), string.Empty);
         }
     }
 }

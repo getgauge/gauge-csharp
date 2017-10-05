@@ -31,14 +31,11 @@ namespace Gauge.CSharp.Runner.Processors
             _sandbox = sandbox;
         }
 
+        protected override string HookType => "BeforeSpec";
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.SpecExecutionStartingRequest.CurrentExecutionInfo;
-        }
-
-        protected override string HookType
-        {
-            get { return "BeforeSpec"; }
         }
 
         protected override List<string> GetApplicableTags(Message request)

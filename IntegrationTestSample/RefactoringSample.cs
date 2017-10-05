@@ -22,8 +22,8 @@ using Gauge.CSharp.Lib.Attribute;
 
 namespace IntegrationTestSample
 {
-	public class RefactoringSample
-	{
+    public class RefactoringSample
+    {
         [Step("Refactoring A context step which gets executed before every scenario")]
         public void RefactoringContext()
         {
@@ -50,7 +50,7 @@ namespace IntegrationTestSample
             var rows = table.GetTableRows();
             rows.ForEach(
                 row => Console.WriteLine(columnNames.Select(row.GetCell)
-                        .Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
+                    .Aggregate((a, b) => string.Format("{0}|{1}", a, b))));
         }
     }
 }

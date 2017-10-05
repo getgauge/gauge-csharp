@@ -35,7 +35,8 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         {
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _testProjectPath);
 
-            File.Copy(Path.Combine(_testProjectPath, "RefactoringSample.cs"), Path.Combine(_testProjectPath, "RefactoringSample_copy.cs"), true);
+            File.Copy(Path.Combine(_testProjectPath, "RefactoringSample.cs"),
+                Path.Combine(_testProjectPath, "RefactoringSample_copy.cs"), true);
         }
 
         [Test]
@@ -45,39 +46,44 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             const string stepValue = "Refactoring Say {} to {}";
             var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
-                .First(method => method.Name == "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
-            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(stepValue, gaugeMethod) };
-            var aliases = new Dictionary<string, bool> { { stepValue, false } };
-            var stepTextMap = new Dictionary<string, string> { { stepValue, parameterizedStepText } };
+                .First(method =>
+                    method.Name ==
+                    "IntegrationTestSample.RefactoringSample.RefactoringSaySomething-StringwhatStringwho");
+            var scannedSteps =
+                new List<KeyValuePair<string, GaugeMethod>>
+                {
+                    new KeyValuePair<string, GaugeMethod>(stepValue, gaugeMethod)
+                };
+            var aliases = new Dictionary<string, bool> {{stepValue, false}};
+            var stepTextMap = new Dictionary<string, string> {{stepValue, parameterizedStepText}};
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
-            var message = new Message()
+            var message = new Message
             {
-               MessageId = 1234,
-               MessageType = Message.Types.MessageType.RefactorRequest,
-               RefactorRequest = new RefactorRequest()
-               {
-                   OldStepValue = new ProtoStepValue()
-                   {
-                       StepValue = stepValue,
-                       ParameterizedStepValue = parameterizedStepText,
-                       Parameters = { "what", "who"}
-                   },
-                   NewStepValue = new ProtoStepValue()
-                   {
-                       StepValue = "Refactoring Say {} to {} at {}",
-                       ParameterizedStepValue = "Refactoring Say <what> to <who> at <when>",
-                       Parameters = { "who", "what", "when"}
-                   },
-                   ParamPositions =
-                   {
-                       new ParameterPosition() { OldPosition = 0, NewPosition = 0},
-                       new ParameterPosition() { OldPosition = 1, NewPosition = 1},
-                       new ParameterPosition() { OldPosition = -1, NewPosition = 2}
-                       
-                   }
-               }
+                MessageId = 1234,
+                MessageType = Message.Types.MessageType.RefactorRequest,
+                RefactorRequest = new RefactorRequest
+                {
+                    OldStepValue = new ProtoStepValue
+                    {
+                        StepValue = stepValue,
+                        ParameterizedStepValue = parameterizedStepText,
+                        Parameters = {"what", "who"}
+                    },
+                    NewStepValue = new ProtoStepValue
+                    {
+                        StepValue = "Refactoring Say {} to {} at {}",
+                        ParameterizedStepValue = "Refactoring Say <what> to <who> at <when>",
+                        Parameters = {"who", "what", "when"}
+                    },
+                    ParamPositions =
+                    {
+                        new ParameterPosition {OldPosition = 0, NewPosition = 0},
+                        new ParameterPosition {OldPosition = 1, NewPosition = 1},
+                        new ParameterPosition {OldPosition = -1, NewPosition = 2}
+                    }
+                }
             };
-            
+
             var refactorProcessor = new RefactorProcessor(stepRegistry, sandbox);
             var result = refactorProcessor.Process(message);
             Assert.IsTrue(result.RefactorResponse.Success);

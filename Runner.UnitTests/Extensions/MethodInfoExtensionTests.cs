@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Extensions
         {
         }
 
-        
+
         [ContinueOnFailure]
         public void Baz(string bar)
         {

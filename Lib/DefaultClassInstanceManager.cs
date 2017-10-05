@@ -34,9 +34,7 @@ namespace Gauge.CSharp.Lib
         public object Get(Type declaringType)
         {
             if (ClassInstanceMap.ContainsKey(declaringType))
-            {
                 return ClassInstanceMap[declaringType];
-            }
             var instance = Activator.CreateInstance(declaringType);
             ClassInstanceMap.Add(declaringType, instance);
             return instance;

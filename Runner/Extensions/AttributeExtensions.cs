@@ -26,12 +26,12 @@ namespace Gauge.CSharp.Runner.Extensions
     {
         public static AttributeListSyntax WithStepAttribute(this SyntaxList<AttributeListSyntax> list)
         {
-            return list.First( syntax => GetStepAttribute(syntax.Attributes)!=null);
+            return list.First(syntax => GetStepAttribute(syntax.Attributes) != null);
         }
 
         public static AttributeSyntax GetStepAttribute(this SeparatedSyntaxList<AttributeSyntax> list)
         {
-            return list.FirstOrDefault(argumentSyntax => 
+            return list.FirstOrDefault(argumentSyntax =>
                 string.CompareOrdinal(argumentSyntax.ToFullString(), typeof(Step).ToString()) > 0);
         }
     }

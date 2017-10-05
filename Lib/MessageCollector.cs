@@ -26,6 +26,6 @@ namespace Gauge.CSharp.Lib
             var pendingMessages = new List<string>(GaugeMessages.Messages);
             GaugeMessages.Messages.Clear();
             return pendingMessages;
-        } 
+        }
     }
 }

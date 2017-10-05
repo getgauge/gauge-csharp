@@ -28,6 +28,8 @@ namespace Gauge.CSharp.Runner.Processors
         {
         }
 
+        protected override string HookType => "BeforeStep";
+
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.StepExecutionStartingRequest.CurrentExecutionInfo;
@@ -38,11 +40,6 @@ namespace Gauge.CSharp.Runner.Processors
             // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
             MethodExecutor.GetAllPendingMessages();
             return base.ExecuteHooks(request);
-        }
-
-        protected override string HookType
-        {
-            get { return "BeforeStep"; }
         }
 
         protected override List<string> GetApplicableTags(Message request)

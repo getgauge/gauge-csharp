@@ -34,7 +34,7 @@ namespace Gauge.CSharp.Runner
 
         public static ISandbox Build()
         {
-            var sandboxAppDomainSetup = new AppDomainSetup { ApplicationBase = Utils.GetGaugeBinDir() };
+            var sandboxAppDomainSetup = new AppDomainSetup {ApplicationBase = Utils.GetGaugeBinDir()};
             Logger.Debug("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
             try
             {
@@ -49,7 +49,7 @@ namespace Gauge.CSharp.Runner
                     typeof(Sandbox).Assembly.ManifestModule.FullyQualifiedName,
                     typeof(Sandbox).FullName, false, BindingFlags.Default,
                     null, new object[] {first}, CultureInfo.CurrentCulture, null
-                    );
+                );
                 return sandbox;
             }
             catch (Exception e)

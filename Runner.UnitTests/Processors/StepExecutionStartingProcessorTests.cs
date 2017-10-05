@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
@@ -40,13 +39,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         {
             var methodExecutor = new Mock<IMethodExecutor>();
 
-            var request = new Message()
+            var request = new Message
             {
                 MessageId = 20,
                 MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
-                StepExecutionStartingRequest = new StepExecutionStartingRequest()
+                StepExecutionStartingRequest = new StepExecutionStartingRequest
                 {
-                    CurrentExecutionInfo = new ExecutionInfo()
+                    CurrentExecutionInfo = new ExecutionInfo
                     {
                         CurrentSpec = new SpecInfo(),
                         CurrentScenario = new ScenarioInfo()
@@ -54,9 +53,10 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 }
             };
 
-            var protoExecutionResult = new ProtoExecutionResult() { ExecutionTime = 0, Failed = false };
-            methodExecutor.Setup( executor => executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(),It.IsAny<IList<string>>()))
-                          .Returns(protoExecutionResult);
+            var protoExecutionResult = new ProtoExecutionResult {ExecutionTime = 0, Failed = false};
+            methodExecutor.Setup(executor =>
+                    executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
+                .Returns(protoExecutionResult);
             var hookRegistry = new Mock<IHookRegistry>();
             hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<IHookMethod>());
 
@@ -68,36 +68,37 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromScenarioAndSpec()
         {
-            var specInfo = new SpecInfo()
+            var specInfo = new SpecInfo
             {
-                Tags = { "foo" },
+                Tags = {"foo"},
                 Name = "",
                 FileName = "",
                 IsFailed = false
             };
-            var scenarioInfo = new ScenarioInfo()
+            var scenarioInfo = new ScenarioInfo
             {
-                Tags = { "bar" },
+                Tags = {"bar"},
                 Name = "",
                 IsFailed = false
             };
-            var currentScenario = new ExecutionInfo()
+            var currentScenario = new ExecutionInfo
             {
                 CurrentScenario = scenarioInfo,
                 CurrentSpec = specInfo
             };
-            var currentExecutionInfo = new StepExecutionStartingRequest()
+            var currentExecutionInfo = new StepExecutionStartingRequest
             {
                 CurrentExecutionInfo = currentScenario
             };
-            
-            var message = new Message()
+
+            var message = new Message
             {
                 StepExecutionStartingRequest = currentExecutionInfo,
                 MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
                 MessageId = 0
             };
-            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionStartingProcessor>("GetApplicableTags", message).ToList();
+            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionStartingProcessor>("GetApplicableTags", message)
+                .ToList();
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(2, tags.Count);
             Assert.Contains("foo", tags);
@@ -107,36 +108,37 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetTagListFromScenarioAndSpecAndIgnoreDuplicates()
         {
-            var specInfo = new SpecInfo()
+            var specInfo = new SpecInfo
             {
-                Tags = { "foo" },
+                Tags = {"foo"},
                 Name = "",
                 FileName = "",
                 IsFailed = false
             };
-            var scenarioInfo = new ScenarioInfo()
+            var scenarioInfo = new ScenarioInfo
             {
-                Tags = { "foo" },
+                Tags = {"foo"},
                 Name = "",
                 IsFailed = false
             };
-            var currentScenario = new ExecutionInfo()
+            var currentScenario = new ExecutionInfo
             {
                 CurrentScenario = scenarioInfo,
                 CurrentSpec = specInfo
             };
-            var currentExecutionInfo = new StepExecutionStartingRequest()
+            var currentExecutionInfo = new StepExecutionStartingRequest
             {
                 CurrentExecutionInfo = currentScenario
             };
 
-            var message = new Message()
+            var message = new Message
             {
                 StepExecutionStartingRequest = currentExecutionInfo,
                 MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
                 MessageId = 0
             };
-            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionStartingProcessor>("GetApplicableTags", message).ToList();
+            var tags = AssertEx.ExecuteProtectedMethod<StepExecutionStartingProcessor>("GetApplicableTags", message)
+                .ToList();
             Assert.IsNotEmpty(tags);
             Assert.AreEqual(1, tags.Count);
             Assert.Contains("foo", tags);

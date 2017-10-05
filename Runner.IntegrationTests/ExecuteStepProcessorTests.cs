@@ -35,41 +35,47 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
                 .First(method => method.Name == "IntegrationTestSample.StepImplementation.ReadTable-Tabletable");
-            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
-            var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
-            var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
+            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>>
+            {
+                new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod)
+            };
+            var aliases = new Dictionary<string, bool> {{parameterizedStepText, false}};
+            var stepTextMap = new Dictionary<string, string> {{parameterizedStepText, stepText}};
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
 
             var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
 
-            var protoTable = new ProtoTable()
+            var protoTable = new ProtoTable
             {
-                Headers = new ProtoTableRow()
+                Headers = new ProtoTableRow
                 {
                     Cells = {"foo", "bar"}
                 },
                 Rows =
                 {
-                    new ProtoTableRow()
+                    new ProtoTableRow
                     {
                         Cells = {"foorow1", "foorow2"}
                     }
                 }
             };
-            var message = new Message()
+            var message = new Message
             {
                 MessageId = 1234,
                 MessageType = Message.Types.MessageType.ExecuteStep,
-                ExecuteStepRequest = new ExecuteStepRequest()
+                ExecuteStepRequest = new ExecuteStepRequest
                 {
                     ParsedStepText = parameterizedStepText,
                     ActualStepText = stepText,
-                    Parameters = { new Parameter()
+                    Parameters =
                     {
-                        Name = "table",
-                        ParameterType = Parameter.Types.ParameterType.Table,
-                        Table = protoTable
-                    } }
+                        new Parameter
+                        {
+                            Name = "table",
+                            ParameterType = Parameter.Types.ParameterType.Table,
+                            Table = protoTable
+                        }
+                    }
                 }
             };
             var result = executeStepProcessor.Process(message);
@@ -88,17 +94,20 @@ namespace Gauge.CSharp.Runner.IntegrationTests
             var sandbox = SandboxBuilder.Build();
             var gaugeMethod = sandbox.GetStepMethods()
                 .First(method => method.Name == "IntegrationTestSample.StepImplementation.ThrowSerializableException");
-            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>> { new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod) };
-            var aliases = new Dictionary<string, bool> { { parameterizedStepText, false } };
-            var stepTextMap = new Dictionary<string, string> { { parameterizedStepText, stepText } };
+            var scannedSteps = new List<KeyValuePair<string, GaugeMethod>>
+            {
+                new KeyValuePair<string, GaugeMethod>(parameterizedStepText, gaugeMethod)
+            };
+            var aliases = new Dictionary<string, bool> {{parameterizedStepText, false}};
+            var stepTextMap = new Dictionary<string, string> {{parameterizedStepText, stepText}};
             var stepRegistry = new StepRegistry(scannedSteps, stepTextMap, aliases);
 
             var executeStepProcessor = new ExecuteStepProcessor(stepRegistry, new MethodExecutor(sandbox));
 
-            var message = new Message()
+            var message = new Message
             {
                 MessageType = Message.Types.MessageType.ExecuteStep,
-                ExecuteStepRequest = new ExecuteStepRequest()
+                ExecuteStepRequest = new ExecuteStepRequest
                 {
                     ParsedStepText = parameterizedStepText,
                     ActualStepText = stepText

@@ -16,7 +16,6 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Linq;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
@@ -30,24 +29,18 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class ExecutionStartingProcessorTests
     {
-        private ExecutionStartingProcessor _executionStartingProcessor;
-        private Message _request;
-        private Mock<IMethodExecutor> _mockMethodExecutor;
-        private ProtoExecutionResult _protoExecutionResult;
-
-        public void Foo()
-        {
-        }
-
         [SetUp]
         public void Setup()
         {
             var mockHookRegistry = new Mock<IHookRegistry>();
 
-            var hooks = new HashSet<IHookMethod> { new HookMethod("BeforeSpec", GetType().GetMethod("Foo"), typeof(Step).Assembly) };
+            var hooks = new HashSet<IHookMethod>
+            {
+                new HookMethod("BeforeSpec", GetType().GetMethod("Foo"), typeof(Step).Assembly)
+            };
             mockHookRegistry.Setup(x => x.BeforeSuiteHooks).Returns(hooks);
             var executionEndingRequest = new ExecutionStartingRequest();
-            _request = new Message()
+            _request = new Message
             {
                 MessageId = 20,
                 MessageType = Message.Types.MessageType.ExecutionEnding,
@@ -55,7 +48,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             };
 
             _mockMethodExecutor = new Mock<IMethodExecutor>();
-            _protoExecutionResult = new ProtoExecutionResult()
+            _protoExecutionResult = new ProtoExecutionResult
             {
                 ExecutionTime = 0,
                 Failed = false
@@ -64,11 +57,14 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 .Returns(_protoExecutionResult);
             _executionStartingProcessor = new ExecutionStartingProcessor(_mockMethodExecutor.Object);
         }
-        [Test]
-        public void ShouldProcessHooks()
+
+        private ExecutionStartingProcessor _executionStartingProcessor;
+        private Message _request;
+        private Mock<IMethodExecutor> _mockMethodExecutor;
+        private ProtoExecutionResult _protoExecutionResult;
+
+        public void Foo()
         {
-            _executionStartingProcessor.Process(_request);
-            _mockMethodExecutor.VerifyAll();
         }
 
         [Test]
@@ -82,29 +78,29 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldGetEmptyTagListByDefault()
         {
-            var specInfo = new SpecInfo()
+            var specInfo = new SpecInfo
             {
-                Tags = { "foo"},
+                Tags = {"foo"},
                 Name = "",
                 FileName = "",
                 IsFailed = false
             };
-            var scenarioInfo = new ScenarioInfo()
+            var scenarioInfo = new ScenarioInfo
             {
-                Tags = { "bar"},
+                Tags = {"bar"},
                 Name = "",
                 IsFailed = false
             };
-            var currentScenario = new ExecutionInfo()
+            var currentScenario = new ExecutionInfo
             {
                 CurrentScenario = scenarioInfo,
-                CurrentSpec = specInfo,
+                CurrentSpec = specInfo
             };
-            var currentExecutionInfo = new ScenarioExecutionStartingRequest()
+            var currentExecutionInfo = new ScenarioExecutionStartingRequest
             {
                 CurrentExecutionInfo = currentScenario
             };
-            var message = new Message()
+            var message = new Message
             {
                 ScenarioExecutionStartingRequest = currentExecutionInfo,
                 MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
@@ -113,6 +109,13 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             var tags = AssertEx.ExecuteProtectedMethod<ExecutionStartingProcessor>("GetApplicableTags", message);
             Assert.IsEmpty(tags);
+        }
+
+        [Test]
+        public void ShouldProcessHooks()
+        {
+            _executionStartingProcessor.Process(_request);
+            _mockMethodExecutor.VerifyAll();
         }
     }
 }

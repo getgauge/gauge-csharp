@@ -28,11 +28,18 @@ namespace Gauge.CSharp.Runner.UnitTests
 {
     public class SandboxDatastoreInitTests
     {
-        private static string[] DataStores
-        {
-            get { return new[] {"Scenario", "Suite", "Spec"}; }
-        }
         private string _gaugeProjectRootEnv;
+
+        private static string[] DataStores => new[] {"Scenario", "Suite", "Spec"};
+
+        // Can't mock Type using Moq.
+        // Something like this does not work"
+        //    var mockDataStoreType = new Mock<Type>();
+        //    mockDataStoreType.Setup(type => type.GetMethod(string.Format("Initialize{0}DataStore", "Scenario")))
+        // Throws System.NotSupportedException : Invalid setup on a non-virtual (overridable in VB) member: type => type.GetMethod(String.Format("Initialize{0}DataStore", "Scenario"))
+        // HACK: simulate the methods in test type. InitDataStore methods are Static.
+        // Everymethod invoke sets a global value, that can be asserted on.
+        private static string InitializedDataStore { get; set; }
 
         [SetUp]
         public void Setup()
@@ -41,13 +48,15 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Directory.GetCurrentDirectory());
         }
 
-        [Test, TestCaseSource("DataStores")]
+        [Test]
+        [TestCaseSource("DataStores")]
         public void ShouldInitializeDatastore(string dataStoreType)
         {
             var mockAssemblyLoader = new Mock<IAssemblyLoader>();
             var mockAssembly = new Mock<TestAssembly>();
             var mockLibAssembly = new Mock<TestAssembly>();
-            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib).Returns(new List<Assembly> { mockAssembly.Object });
+            mockAssemblyLoader.Setup(loader => loader.AssembliesReferencingGaugeLib)
+                .Returns(new List<Assembly> {mockAssembly.Object});
             mockAssemblyLoader.Setup(loader => loader.ScreengrabberTypes).Returns(new List<Type>());
             mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes).Returns(new List<Type>());
             mockLibAssembly.Setup(assembly => assembly.GetType("Gauge.CSharp.Lib.DataStoreFactory")).Returns(GetType());
@@ -67,15 +76,6 @@ namespace Gauge.CSharp.Runner.UnitTests
         {
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
-
-        // Can't mock Type using Moq.
-        // Something like this does not work"
-        //    var mockDataStoreType = new Mock<Type>();
-        //    mockDataStoreType.Setup(type => type.GetMethod(string.Format("Initialize{0}DataStore", "Scenario")))
-        // Throws System.NotSupportedException : Invalid setup on a non-virtual (overridable in VB) member: type => type.GetMethod(String.Format("Initialize{0}DataStore", "Scenario"))
-        // HACK: simulate the methods in test type. InitDataStore methods are Static.
-        // Everymethod invoke sets a global value, that can be asserted on.
-        private static string InitializedDataStore { get; set; }
 
         public static void InitializeScenarioDataStore()
         {

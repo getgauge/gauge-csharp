@@ -21,7 +21,6 @@ using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
-using Moq;
 using NUnit.Framework;
 
 namespace Gauge.CSharp.Runner.UnitTests.Processors
@@ -29,6 +28,19 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
     [TestFixture]
     public class UntaggedHooksFirstStrategyTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _hookMethods = new HashSet<HookMethod>
+            {
+                new HookMethod("AfterScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Zed"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly),
+                new HookMethod("AfterScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly)
+            };
+        }
+
         [AfterScenario("Foo")]
         public void Foo()
         {
@@ -67,23 +79,11 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
          */
         private HashSet<HookMethod> _hookMethods;
 
-        [SetUp]
-        public void Setup()
-        {
-            _hookMethods = new HashSet<HookMethod>
-            {
-                new HookMethod("AfterScenario", GetType().GetMethod("Foo"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Bar"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Zed"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Blah"), typeof(Step).Assembly),
-                new HookMethod("AfterScenario", GetType().GetMethod("Baz"), typeof(Step).Assembly)
-            };
-        }
-
         [Test]
         public void ShouldFetchTaggedHooksAfterUntaggedHooks()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
             Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
@@ -92,7 +92,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchTaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.That(applicableHooks[0], Is.EqualTo(GetType().GetMethod("Blah").FullyQuallifiedName()));
             Assert.That(applicableHooks[1], Is.EqualTo(GetType().GetMethod("Zed").FullyQuallifiedName()));
@@ -101,7 +102,8 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldFetchUntaggedHooksInSortedOrder()
         {
-            var applicableHooks = new UntaggedHooksFirstStrategy().GetApplicableHooks(new List<string> { "Foo" }, _hookMethods).ToList();
+            var applicableHooks = new UntaggedHooksFirstStrategy()
+                .GetApplicableHooks(new List<string> {"Foo"}, _hookMethods).ToList();
 
             Assert.That(applicableHooks[2], Is.EqualTo(GetType().GetMethod("Baz").FullyQuallifiedName()));
             Assert.That(applicableHooks[3], Is.EqualTo(GetType().GetMethod("Foo").FullyQuallifiedName()));

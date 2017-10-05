@@ -27,7 +27,7 @@ namespace Gauge.CSharp.Lib.UnitTests
         {
             var type = typeof(object);
             var instance = new DefaultClassInstanceManager().Get(type);
-            
+
             Assert.NotNull(instance);
             Assert.AreEqual(instance.GetType(), type);
         }
@@ -39,7 +39,7 @@ namespace Gauge.CSharp.Lib.UnitTests
             var type = typeof(object);
             var instance = instanceManager.Get(type);
             var anotherInstance = instanceManager.Get(type);
-            
+
             Assert.AreSame(instance, anotherInstance);
         }
     }

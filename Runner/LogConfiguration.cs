@@ -23,7 +23,7 @@ using NLog.Targets;
 
 namespace Gauge.CSharp.Runner
 {
-    class LogConfiguration
+    internal class LogConfiguration
     {
         internal static void Initialize()
         {
@@ -42,9 +42,7 @@ namespace Gauge.CSharp.Runner
             var logLevel = Utils.TryReadEnvValue("GAUGE_LOG_LEVEL");
 
             if (string.IsNullOrEmpty(logLevel))
-            {
                 logLevel = "INFO";
-            }
             var level = LogLevel.FromString(logLevel.Trim());
             var consoleRule = new LoggingRule("*", level, consoleTarget);
             config.LoggingRules.Add(consoleRule);
@@ -65,9 +63,7 @@ namespace Gauge.CSharp.Runner
             else
             {
                 if (!Path.IsPathRooted(logDir))
-                {
                     logDir = Path.Combine(Utils.GaugeProjectRoot, logDir);
-                }
             }
             return Path.GetFullPath(Path.Combine(logDir, "gauge.log"));
         }

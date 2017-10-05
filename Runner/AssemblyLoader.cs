@@ -21,7 +21,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Runner.Exceptions;
-using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Wrappers;
 using NLog;
 
@@ -30,16 +29,13 @@ namespace Gauge.CSharp.Runner
     public class AssemblyLoader : IAssemblyLoader
     {
         private const string GaugeLibAssembleName = "Gauge.CSharp.Lib";
-
-        public List<Assembly> AssembliesReferencingGaugeLib { get; private set; }
-        public List<Type> ScreengrabberTypes { get; private set; }
-        public List<Type> ClassInstanceManagerTypes { get; private set; }
-        private Assembly _targetLibAssembly;
         private readonly IAssemblyWrapper _assemblyWrapper;
         private readonly IFileWrapper _fileWrapper;
         private readonly Version _minimumLibversion = new Version("0.6.0");
+        private Assembly _targetLibAssembly;
 
-        public AssemblyLoader(string runnerBasePath, IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper, IEnumerable<string> assemblyLocations)
+        public AssemblyLoader(string runnerBasePath, IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper,
+            IEnumerable<string> assemblyLocations)
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
@@ -91,13 +87,11 @@ namespace Gauge.CSharp.Runner
             _assemblyWrapper = assemblyWrapper;
             _fileWrapper = fileWrapper;
             LoadTargetLibAssembly();
-            AssembliesReferencingGaugeLib= new List<Assembly>();
+            AssembliesReferencingGaugeLib = new List<Assembly>();
             ScreengrabberTypes = new List<Type>();
             ClassInstanceManagerTypes = new List<Type>();
             foreach (var location in assemblyLocations)
-            {
                 ScanAndLoad(location);
-            }
         }
 
         public AssemblyLoader(string runnerBasePath, IEnumerable<string> assemblyLocations)
@@ -110,6 +104,10 @@ namespace Gauge.CSharp.Runner
         {
         }
 
+        public List<Assembly> AssembliesReferencingGaugeLib { get; }
+        public List<Type> ScreengrabberTypes { get; }
+        public List<Type> ClassInstanceManagerTypes { get; }
+
         public Assembly GetTargetLibAssembly()
         {
             return _targetLibAssembly;
@@ -118,9 +116,10 @@ namespace Gauge.CSharp.Runner
         public List<MethodInfo> GetMethods(string annotation)
         {
             Func<MethodInfo, bool> methodFilter = info => info.GetCustomAttributes()
-				.Any(a => a.GetType().FullName.Equals(annotation));
+                .Any(a => a.GetType().FullName.Equals(annotation));
             Func<Type, IEnumerable<MethodInfo>> methodSelector = t => t.GetMethods().Where(methodFilter);
-            return AssembliesReferencingGaugeLib.SelectMany(assembly => assembly.GetTypes().SelectMany(methodSelector)).ToList();
+            return AssembliesReferencingGaugeLib.SelectMany(assembly => assembly.GetTypes().SelectMany(methodSelector))
+                .ToList();
         }
 
         private void ScanAndLoad(string path)
@@ -143,7 +142,7 @@ namespace Gauge.CSharp.Runner
                 .Select(name => name.Name)
                 .Contains(GaugeLibAssembleName);
 
-            var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[]{});
+            var loadableTypes = new HashSet<Type>(isReferencingGaugeLib ? GetLoadableTypes(assembly) : new Type[] { });
 
             // Load assembly so that code can be executed
             var fullyLoadedAssembly = _assemblyWrapper.LoadFrom(path);
@@ -168,13 +167,15 @@ namespace Gauge.CSharp.Runner
 
         private void ScanForScreengrabber(IEnumerable<Type> types)
         {
-            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IScreenGrabber"));
+            var implementingTypes = types.Where(type =>
+                type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IScreenGrabber"));
             ScreengrabberTypes.AddRange(implementingTypes);
         }
 
         private void ScanForInstanceManager(IEnumerable<Type> types)
         {
-            var implementingTypes = types.Where(type => type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IClassInstanceManager"));
+            var implementingTypes = types.Where(type =>
+                type.GetInterfaces().Any(t => t.FullName == "Gauge.CSharp.Lib.IClassInstanceManager"));
             ClassInstanceManagerTypes.AddRange(implementingTypes);
         }
 
@@ -186,14 +187,16 @@ namespace Gauge.CSharp.Runner
             }
             catch (ReflectionTypeLoadException e)
             {
-                LogManager.GetLogger("AssemblyLoader").Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
+                LogManager.GetLogger("AssemblyLoader")
+                    .Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
                 return e.Types.Where(type => type != null);
             }
         }
 
         private void LoadTargetLibAssembly()
         {
-            var targetLibLocation = Path.GetFullPath(Path.Combine(AssemblyLocater.GetGaugeBinDir(), string.Concat(GaugeLibAssembleName, ".dll")));
+            var targetLibLocation = Path.GetFullPath(Path.Combine(AssemblyLocater.GetGaugeBinDir(),
+                string.Concat(GaugeLibAssembleName, ".dll")));
             var logger = LogManager.GetLogger("AssemblyLoader");
             if (!_fileWrapper.Exists(targetLibLocation))
             {
@@ -204,9 +207,7 @@ namespace Gauge.CSharp.Runner
             _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
             var targetLibVersion = _targetLibAssembly.GetName().Version;
             if (targetLibVersion <= _minimumLibversion)
-            {
                 throw new GaugeLibVersionMismatchException(targetLibVersion, _minimumLibversion);
-            }
 
             logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
         }

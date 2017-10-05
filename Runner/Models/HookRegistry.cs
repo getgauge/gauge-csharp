@@ -26,11 +26,10 @@ namespace Gauge.CSharp.Runner.Models
     [Serializable]
     public class HookRegistry : IHookRegistry
     {
-        private readonly Assembly _targetLibAssembly;
-
-		private readonly IDictionary<string, HashSet<IHookMethod>> _hooks;
+        private readonly IDictionary<string, HashSet<IHookMethod>> _hooks;
 
         private readonly IDictionary<string, MethodInfo> _methodMap = new Dictionary<string, MethodInfo>();
+        private readonly Assembly _targetLibAssembly;
 
         public HookRegistry(IAssemblyLoader assemblyLoader)
         {
@@ -48,49 +47,28 @@ namespace Gauge.CSharp.Runner.Models
 
             _targetLibAssembly = assemblyLoader.GetTargetLibAssembly();
             foreach (var type in _hooks.Keys)
-            {
                 AddHookOfType(type, assemblyLoader.GetMethods(string.Format("Gauge.CSharp.Lib.Attribute.{0}", type)));
-            }
         }
 
-        public HashSet<IHookMethod> BeforeSuiteHooks
-        {
-            get { return _hooks["BeforeSuite"]; }
-        }
- 
-        public HashSet<IHookMethod> AfterSuiteHooks
-        {
-            get { return _hooks["AfterSuite"]; }
-        }
+        public HashSet<IHookMethod> BeforeSuiteHooks => _hooks["BeforeSuite"];
 
-        public HashSet<IHookMethod> BeforeSpecHooks
-        {
-            get { return _hooks["BeforeSpec"]; }
-        }
+        public HashSet<IHookMethod> AfterSuiteHooks => _hooks["AfterSuite"];
 
-        public HashSet<IHookMethod> AfterSpecHooks
-        {
-            get { return _hooks["AfterSpec"]; }
-        }
+        public HashSet<IHookMethod> BeforeSpecHooks => _hooks["BeforeSpec"];
 
-        public HashSet<IHookMethod> BeforeScenarioHooks
-        {
-            get { return _hooks["BeforeScenario"]; }
-        }
+        public HashSet<IHookMethod> AfterSpecHooks => _hooks["AfterSpec"];
 
-        public HashSet<IHookMethod> AfterScenarioHooks
-        {
-            get { return _hooks["AfterScenario"]; }
-        }
+        public HashSet<IHookMethod> BeforeScenarioHooks => _hooks["BeforeScenario"];
 
-        public HashSet<IHookMethod> BeforeStepHooks
-        {
-            get { return _hooks["BeforeStep"]; }
-        }
+        public HashSet<IHookMethod> AfterScenarioHooks => _hooks["AfterScenario"];
 
-        public HashSet<IHookMethod> AfterStepHooks
+        public HashSet<IHookMethod> BeforeStepHooks => _hooks["BeforeStep"];
+
+        public HashSet<IHookMethod> AfterStepHooks => _hooks["AfterStep"];
+
+        public MethodInfo MethodFor(string method)
         {
-            get { return _hooks["AfterStep"]; }
+            return _methodMap[method];
         }
 
         private void AddHookOfType(string hookType, IEnumerable<MethodInfo> hooks)
@@ -99,16 +77,9 @@ namespace Gauge.CSharp.Runner.Models
             {
                 var fullyQuallifiedName = methodInfo.FullyQuallifiedName();
                 if (!_methodMap.ContainsKey(fullyQuallifiedName))
-                {
                     _methodMap.Add(fullyQuallifiedName, methodInfo);
-                }
             }
             _hooks[hookType].UnionWith(hooks.Select(info => new HookMethod(hookType, info, _targetLibAssembly)));
-        }
-
-        public MethodInfo MethodFor(string method)
-        {
-            return _methodMap[method];
         }
     }
 }

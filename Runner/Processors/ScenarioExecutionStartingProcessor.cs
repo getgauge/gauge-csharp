@@ -32,6 +32,8 @@ namespace Gauge.CSharp.Runner.Processors
             _sandbox = sandbox;
         }
 
+        protected override string HookType => "BeforeScenario";
+
         public override Message Process(Message request)
         {
             _sandbox.StartExecutionScope("scenario");
@@ -41,11 +43,6 @@ namespace Gauge.CSharp.Runner.Processors
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.ScenarioExecutionStartingRequest.CurrentExecutionInfo;
-        }
-
-        protected override string HookType
-        {
-            get { return "BeforeScenario"; }
         }
 
         protected override List<string> GetApplicableTags(Message request)

@@ -23,52 +23,19 @@ namespace Gauge.CSharp.Lib.UnitTests
     [TestFixture]
     public class DataStoreTests
     {
-        public class Fruit
-        {
-            public string Name { get; set; }
-        }
-
-        private DataStore _dataStore;
         [SetUp]
         public void Setup()
         {
             _dataStore = new DataStore();
             _dataStore.Initialize();
         }
-        [Test]
-        public void ShouldInitializeDataStore()
+
+        public class Fruit
         {
-            Assert.AreEqual(_dataStore.Count, 0);
+            public string Name { get; set; }
         }
 
-        [Test]
-        public void ShouldInsertValueIntoDataStore()
-        {
-            _dataStore.Add("foo", 23);
-
-            Assert.AreEqual(_dataStore.Count, 1);
-            Assert.AreEqual(_dataStore.Get("foo"), 23);
-        }
-
-        [Test]
-        public void ShouldInsertComplexTypeIntoDataStore()
-        {
-            _dataStore.Add("bar", new {Name = "Hello", Country = "India"});
-            var value = _dataStore.Get("bar") as dynamic;
-
-            Assert.AreEqual(value.Name, "Hello");
-        }
-
-        [Test]
-        public void ShouldUpdateDataForGivenKey()
-        {
-            _dataStore.Add("foo", "bar");
-            _dataStore.Add("foo", "rumpelstiltskin");
-
-            var value = _dataStore.Get("foo");
-
-            Assert.AreEqual(value, "rumpelstiltskin");
-        }
+        private DataStore _dataStore;
 
         [Test]
         public void ShouldClearDataStore()
@@ -77,16 +44,6 @@ namespace Gauge.CSharp.Lib.UnitTests
             _dataStore.Clear();
 
             Assert.AreEqual(_dataStore.Count, 0);
-        }
-
-        [Test]
-        public void ShouldGetStrongTypedValue()
-        {
-            _dataStore.Add("banana", new Fruit { Name = "Banana" });
-            var fruit = _dataStore.Get<Fruit>("banana");
-
-            Assert.IsInstanceOf<Fruit>(fruit);
-            Assert.AreEqual("Banana", fruit.Name);
         }
 
         [Test]
@@ -99,27 +56,72 @@ namespace Gauge.CSharp.Lib.UnitTests
         }
 
         [Test]
+        public void ShouldGetStrongTypedValue()
+        {
+            _dataStore.Add("banana", new Fruit {Name = "Banana"});
+            var fruit = _dataStore.Get<Fruit>("banana");
+
+            Assert.IsInstanceOf<Fruit>(fruit);
+            Assert.AreEqual("Banana", fruit.Name);
+        }
+
+        [Test]
+        public void ShouldInitializeDataStore()
+        {
+            Assert.AreEqual(_dataStore.Count, 0);
+        }
+
+        [Test]
+        public void ShouldInsertComplexTypeIntoDataStore()
+        {
+            _dataStore.Add("bar", new {Name = "Hello", Country = "India"});
+            var value = _dataStore.Get("bar") as dynamic;
+
+            Assert.AreEqual(value.Name, "Hello");
+        }
+
+        [Test]
+        public void ShouldInsertValueIntoDataStore()
+        {
+            _dataStore.Add("foo", 23);
+
+            Assert.AreEqual(_dataStore.Count, 1);
+            Assert.AreEqual(_dataStore.Get("foo"), 23);
+        }
+
+        [Test]
         public void ShouldRaiseInvalidCastExceptionWhenAskingForInvalidCast()
         {
-            _dataStore.Add("banana", new Fruit { Name = "Banana" });
+            _dataStore.Add("banana", new Fruit {Name = "Banana"});
 
-            Assert.Throws<InvalidCastException>(() => { _dataStore.Get<String>("banana"); });
+            Assert.Throws<InvalidCastException>(() => { _dataStore.Get<string>("banana"); });
         }
 
         [Test]
         public void ShouldReturnNullWhenAskingForInvalidKeyWithStrongType()
         {
-            _dataStore.Add("banana", new Fruit { Name = "Banana" });
+            _dataStore.Add("banana", new Fruit {Name = "Banana"});
 
             var fruit = _dataStore.Get<Fruit>("random");
 
             Assert.IsNull(fruit);
         }
-        
+
         [Test]
         public void ShouldThrowArgumentNullExceptionWhenKeyIsNull()
         {
             Assert.Throws<ArgumentNullException>(() => { _dataStore.Get(null); });
+        }
+
+        [Test]
+        public void ShouldUpdateDataForGivenKey()
+        {
+            _dataStore.Add("foo", "bar");
+            _dataStore.Add("foo", "rumpelstiltskin");
+
+            var value = _dataStore.Get("foo");
+
+            Assert.AreEqual(value, "rumpelstiltskin");
         }
     }
 }

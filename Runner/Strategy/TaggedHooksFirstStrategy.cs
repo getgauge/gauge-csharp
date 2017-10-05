@@ -25,7 +25,8 @@ namespace Gauge.CSharp.Runner.Strategy
     [Serializable]
     public class TaggedHooksFirstStrategy : HooksStrategy
     {
-        public override IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags, IEnumerable<IHookMethod> hooks)
+        public override IEnumerable<string> GetApplicableHooks(IEnumerable<string> applicableTags,
+            IEnumerable<IHookMethod> hooks)
         {
             var hookMethods = hooks as IList<IHookMethod> ?? hooks.ToList();
             var tags = applicableTags as IList<string> ?? applicableTags.ToList();

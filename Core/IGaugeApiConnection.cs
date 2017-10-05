@@ -23,9 +23,9 @@ namespace Gauge.CSharp.Core
 {
     public interface IGaugeApiConnection
     {
+        bool Connected { get; }
         IEnumerable<string> GetStepValues(IEnumerable<string> stepTexts, bool hasInlineTable);
         APIMessage WriteAndReadApiMessage(IMessage stepValueRequestMessage);
-        bool Connected { get; }
         void WriteMessage(IMessage request);
         IEnumerable<byte> ReadBytes();
         void Dispose();

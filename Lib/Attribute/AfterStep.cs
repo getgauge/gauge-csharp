@@ -51,7 +51,10 @@ namespace Gauge.CSharp.Lib.Attribute
         ///     <para>
         ///         <code>[AfterStep("tag1", "tag2")]</code>
         ///     </para>
-        ///     <para> You can control the filtering logic by adding another attribute <see cref="TagAggregationBehaviourAttribute" />. </para>
+        ///     <para>
+        ///         You can control the filtering logic by adding another attribute
+        ///         <see cref="TagAggregationBehaviourAttribute" />.
+        ///     </para>
         ///     <para>
         ///         By default the hooks are executed only if all the tags specified match the tags of the target
         ///         Spec/Scenario/Step.

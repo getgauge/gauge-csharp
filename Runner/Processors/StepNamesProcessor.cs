@@ -39,11 +39,11 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var stepNamesResponse = new StepNamesResponse();
             stepNamesResponse.Steps.AddRange(allSteps);
-            return new Message()
+            return new Message
             {
                 MessageId = request.MessageId,
                 MessageType = Message.Types.MessageType.StepNamesResponse,
-                StepNamesResponse = stepNamesResponse,
+                StepNamesResponse = stepNamesResponse
             };
         }
     }

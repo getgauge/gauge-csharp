@@ -19,14 +19,13 @@ using System;
 using System.Linq;
 using Gauge.CSharp.Runner.Models;
 using Gauge.Messages;
-using Google.Protobuf.Collections;
 
 namespace Gauge.CSharp.Runner.Processors
 {
     public class RefactorProcessor : IMessageProcessor
     {
-        private readonly IStepRegistry _stepRegistry;
         private readonly ISandbox _sandbox;
+        private readonly IStepRegistry _stepRegistry;
 
         public RefactorProcessor(IStepRegistry stepRegistry, ISandbox sandbox)
         {
@@ -39,42 +38,44 @@ namespace Gauge.CSharp.Runner.Processors
             var newStep = request.RefactorRequest.NewStepValue;
 
             var newStepValue = newStep.ParameterizedStepValue;
-            var parameterPositions = request.RefactorRequest.ParamPositions.Select(position => new Tuple<int, int>(position.OldPosition, position.NewPosition)).ToList();
+            var parameterPositions = request.RefactorRequest.ParamPositions
+                .Select(position => new Tuple<int, int>(position.OldPosition, position.NewPosition)).ToList();
 
             var response = new RefactorResponse();
             try
             {
                 var gaugeMethod = GetGaugeMethod(request.RefactorRequest.OldStepValue);
-                var filesChanged = _sandbox.Refactor(gaugeMethod, parameterPositions, newStep.Parameters.ToList(), newStepValue);
+                var filesChanged = _sandbox.Refactor(gaugeMethod, parameterPositions, newStep.Parameters.ToList(),
+                    newStepValue);
                 response.Success = true;
                 response.FilesChanged.Add(filesChanged.First());
             }
             catch (AggregateException ex)
             {
                 response.Success = false;
-                response.Error = ex.InnerExceptions.Select(exception => exception.Message).Distinct().Aggregate((s, s1) => string.Concat(s, "; ", s1));
+                response.Error = ex.InnerExceptions.Select(exception => exception.Message).Distinct()
+                    .Aggregate((s, s1) => string.Concat(s, "; ", s1));
             }
             catch (Exception ex)
             {
-                response.Success=false;
+                response.Success = false;
                 response.Error = ex.Message;
             }
 
 
-            return new Message()
+            return new Message
             {
                 MessageId = request.MessageId,
                 MessageType = Message.Types.MessageType.RefactorResponse,
-                RefactorResponse = response,
+                RefactorResponse = response
             };
         }
 
         private GaugeMethod GetGaugeMethod(ProtoStepValue stepValue)
         {
             if (_stepRegistry.HasMultipleImplementations(stepValue.StepValue))
-            {
-                throw new Exception(string.Format("Multiple step implementations found for : {0}", stepValue.ParameterizedStepValue));
-            }
+                throw new Exception(string.Format("Multiple step implementations found for : {0}",
+                    stepValue.ParameterizedStepValue));
             return _stepRegistry.MethodFor(stepValue.StepValue);
         }
     }

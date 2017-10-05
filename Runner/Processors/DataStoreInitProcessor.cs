@@ -24,6 +24,8 @@ namespace Gauge.CSharp.Runner.Processors
     {
         private readonly ISandbox _sandbox;
 
+        protected string DataStoreType;
+
         public DataStoreInitProcessor(ISandbox sandbox)
         {
             _sandbox = sandbox;
@@ -35,7 +37,5 @@ namespace Gauge.CSharp.Runner.Processors
             _sandbox.InitializeDataStore(DataStoreType);
             return new DefaultProcessor().Process(request);
         }
-
-        protected string DataStoreType; 
     }
 }

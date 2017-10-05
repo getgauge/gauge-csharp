@@ -27,15 +27,15 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         [Test]
         public void ShouldProcessMessage()
         {
-            var request = new Message()
+            var request = new Message
             {
                 MessageId = 20,
                 MessageType = Message.Types.MessageType.ExecuteStep
             };
-            
+
             var response = new DefaultProcessor().Process(request);
             var executionStatusResponse = response.ExecutionStatusResponse;
-            
+
             Assert.AreEqual(response.MessageId, 20);
             Assert.AreEqual(response.MessageType, Message.Types.MessageType.ExecutionStatusResponse);
             Assert.AreEqual(executionStatusResponse.ExecutionResult.ExecutionTime, 0);

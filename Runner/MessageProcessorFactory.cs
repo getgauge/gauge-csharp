@@ -17,19 +17,19 @@
 
 using System.Collections.Generic;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.Messages;
-using Gauge.CSharp.Runner.Models;
 
 namespace Gauge.CSharp.Runner
 {
     public class MessageProcessorFactory
     {
-        private readonly IMethodScanner _stepScanner;
         private readonly ISandbox _sandbox;
+        private readonly IMethodScanner _stepScanner;
         private Dictionary<Message.Types.MessageType, IMessageProcessor> _messageProcessorsDictionary;
 
-		public MessageProcessorFactory() : this(SandboxBuilder.Build())
+        public MessageProcessorFactory() : this(SandboxBuilder.Build())
         {
         }
 
@@ -52,20 +52,35 @@ namespace Gauge.CSharp.Runner
 
         public IMessageProcessor GetProcessor(Message.Types.MessageType messageType)
         {
-            return _messageProcessorsDictionary.ContainsKey(messageType) ? _messageProcessorsDictionary[messageType] : new DefaultProcessor();
+            return _messageProcessorsDictionary.ContainsKey(messageType)
+                ? _messageProcessorsDictionary[messageType]
+                : new DefaultProcessor();
         }
 
-        private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(IStepRegistry stepRegistry)
+        private Dictionary<Message.Types.MessageType, IMessageProcessor> InitializeMessageHandlers(
+            IStepRegistry stepRegistry)
         {
             var methodExecutor = new MethodExecutor(_sandbox);
             var messageHandlers = new Dictionary<Message.Types.MessageType, IMessageProcessor>
             {
                 {Message.Types.MessageType.ExecutionStarting, new ExecutionStartingProcessor(methodExecutor)},
                 {Message.Types.MessageType.ExecutionEnding, new ExecutionEndingProcessor(methodExecutor)},
-                {Message.Types.MessageType.SpecExecutionStarting, new SpecExecutionStartingProcessor(methodExecutor, _sandbox)},
-                {Message.Types.MessageType.SpecExecutionEnding, new SpecExecutionEndingProcessor(methodExecutor, _sandbox)},
-                {Message.Types.MessageType.ScenarioExecutionStarting, new ScenarioExecutionStartingProcessor(methodExecutor, _sandbox)},
-                {Message.Types.MessageType.ScenarioExecutionEnding, new ScenarioExecutionEndingProcessor(methodExecutor, _sandbox)},
+                {
+                    Message.Types.MessageType.SpecExecutionStarting,
+                    new SpecExecutionStartingProcessor(methodExecutor, _sandbox)
+                },
+                {
+                    Message.Types.MessageType.SpecExecutionEnding,
+                    new SpecExecutionEndingProcessor(methodExecutor, _sandbox)
+                },
+                {
+                    Message.Types.MessageType.ScenarioExecutionStarting,
+                    new ScenarioExecutionStartingProcessor(methodExecutor, _sandbox)
+                },
+                {
+                    Message.Types.MessageType.ScenarioExecutionEnding,
+                    new ScenarioExecutionEndingProcessor(methodExecutor, _sandbox)
+                },
                 {Message.Types.MessageType.StepExecutionStarting, new StepExecutionStartingProcessor(methodExecutor)},
                 {Message.Types.MessageType.StepExecutionEnding, new StepExecutionEndingProcessor(methodExecutor)},
                 {Message.Types.MessageType.ExecuteStep, new ExecuteStepProcessor(stepRegistry, methodExecutor)},
@@ -75,8 +90,8 @@ namespace Gauge.CSharp.Runner
                 {Message.Types.MessageType.ScenarioDataStoreInit, new ScenarioDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SpecDataStoreInit, new SpecDataStoreInitProcessor(_sandbox)},
                 {Message.Types.MessageType.SuiteDataStoreInit, new SuiteDataStoreInitProcessor(_sandbox)},
-                {Message.Types.MessageType.StepNameRequest, new StepNameProcessor(stepRegistry) },
-                {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry, _sandbox)},
+                {Message.Types.MessageType.StepNameRequest, new StepNameProcessor(stepRegistry)},
+                {Message.Types.MessageType.RefactorRequest, new RefactorProcessor(stepRegistry, _sandbox)}
             };
             return messageHandlers;
         }

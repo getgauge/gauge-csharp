@@ -23,15 +23,30 @@ using NUnit.Framework;
 namespace Gauge.CSharp.Runner.UnitTests
 {
     [TestFixture]
-    class UtilsTest
+    internal class UtilsTest
     {
+        [Test]
+        public void ShouldGetCustomBuildPathFromEnvWhenLowerCase()
+        {
+            Environment.SetEnvironmentVariable("gauge_project_root", @"C:\Blah");
+
+            var imaginaryPath = string.Format("Foo{0}Bar", Path.DirectorySeparatorChar);
+            Environment.SetEnvironmentVariable("gauge_custom_build_path", imaginaryPath);
+            var gaugeBinDir = Utils.GetGaugeBinDir();
+            Assert.AreEqual(string.Format(@"C:\Blah{0}Foo{0}Bar", Path.DirectorySeparatorChar), gaugeBinDir);
+
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", string.Empty);
+            Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", string.Empty);
+        }
+
         [Test]
         public void ShouldGetCustomBuildPathFromEnvWhenUpperCase()
         {
             var driveRoot = Path.GetPathRoot(Directory.GetCurrentDirectory());
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", Path.Combine(driveRoot, "Blah"));
 
-            var imaginaryPath = Path.Combine("Foo", "Bar");;
+            var imaginaryPath = Path.Combine("Foo", "Bar");
+            ;
             Environment.SetEnvironmentVariable("gauge_custom_build_path", imaginaryPath);
             var gaugeBinDir = Utils.GetGaugeBinDir();
             Assert.AreEqual(Path.Combine(driveRoot, "Blah", "Foo", "Bar"), gaugeBinDir);
@@ -39,19 +54,5 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", string.Empty);
             Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", string.Empty);
         }
-
-		[Test]
-		public void ShouldGetCustomBuildPathFromEnvWhenLowerCase()
-		{
-			Environment.SetEnvironmentVariable("gauge_project_root", @"C:\Blah");
-
-			var imaginaryPath = string.Format("Foo{0}Bar", Path.DirectorySeparatorChar);
-			Environment.SetEnvironmentVariable("gauge_custom_build_path", imaginaryPath);
-			var gaugeBinDir = Utils.GetGaugeBinDir();
-			Assert.AreEqual(string.Format(@"C:\Blah{0}Foo{0}Bar",Path.DirectorySeparatorChar), gaugeBinDir);
-
-			Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", string.Empty);
-			Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", string.Empty);
-		}
     }
 }

@@ -26,11 +26,10 @@ namespace Gauge.CSharp.Runner
 {
     public class MethodScanner : IMethodScanner
     {
+        private static readonly Logger Logger = LogManager.GetLogger("MethodScanner");
         private readonly GaugeApiConnection _apiConnection;
 
         private readonly ISandbox _sandbox;
-
-        private static readonly Logger Logger = LogManager.GetLogger("MethodScanner");
 
         public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
         {
@@ -53,20 +52,17 @@ namespace Gauge.CSharp.Runner
                     var stepValues = _apiConnection.GetStepValues(stepTexts, false).ToList();
 
                     for (var i = 0; i < stepTexts.Count; i++)
-                    {
-                        if(!stepTextMap.ContainsKey(stepValues[i]))
+                        if (!stepTextMap.ContainsKey(stepValues[i]))
                             stepTextMap.Add(stepValues[i], stepTexts[i]);
-                    }
 
-                    stepImplementations.AddRange(stepValues.Select(stepValue => new KeyValuePair<string, GaugeMethod>(stepValue, stepMethod)));
+                    stepImplementations.AddRange(stepValues.Select(stepValue =>
+                        new KeyValuePair<string, GaugeMethod>(stepValue, stepMethod)));
 
                     if (stepValues.Count <= 1) continue;
 
                     foreach (var stepValue in stepValues)
-                    {
-                        if(!aliases.ContainsKey(stepValue))
+                        if (!aliases.ContainsKey(stepValue))
                             aliases.Add(stepValue, true);
-                    }
                 }
             }
             catch (Exception ex)

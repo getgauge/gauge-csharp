@@ -23,6 +23,16 @@ namespace Gauge.CSharp.Lib.UnitTests.Attribute
         }
 
         [Test]
+        public void ShouldCreateAttributeWithMultipleTags()
+        {
+            var filterTags = new[] {"foo", "bar"};
+            var filteredHookAttribute = new TestHookAttribute(filterTags);
+
+            foreach (var filterTag in filterTags)
+                Assert.IsTrue(filteredHookAttribute.FilterTags.Contains(filterTag));
+        }
+
+        [Test]
         public void ShouldCreateAttributeWithNoParameters()
         {
             var filteredHookAttribute = new TestHookAttribute();
@@ -35,18 +45,6 @@ namespace Gauge.CSharp.Lib.UnitTests.Attribute
             var filterTag = "foo";
             var filteredHookAttribute = new TestHookAttribute(filterTag);
             Assert.IsTrue(filteredHookAttribute.FilterTags.Contains(filterTag));
-        }
-
-        [Test]
-        public void ShouldCreateAttributeWithMultipleTags()
-        {
-            var filterTags = new[] {"foo", "bar"};
-            var filteredHookAttribute = new TestHookAttribute(filterTags);
-
-            foreach (var filterTag in filterTags)
-            {
-                Assert.IsTrue(filteredHookAttribute.FilterTags.Contains(filterTag));
-            }
         }
     }
 }

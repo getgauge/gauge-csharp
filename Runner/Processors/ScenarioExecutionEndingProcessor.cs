@@ -31,21 +31,15 @@ namespace Gauge.CSharp.Runner.Processors
             _sandbox = sandbox;
         }
 
+        protected override string HookType => "AfterScenario";
+
+        protected override string CacheClearLevel => ScenarioLevel;
+
 
         public override Message Process(Message request)
         {
             _sandbox.CloseExectionScope();
             return base.Process(request);
-        }
-
-        protected override string HookType
-        {
-            get { return "AfterScenario"; }
-        }
-
-        protected override string CacheClearLevel
-        {
-            get { return ScenarioLevel; }
         }
 
         protected override List<string> GetApplicableTags(Message request)
