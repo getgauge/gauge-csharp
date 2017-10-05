@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using Gauge.Messages;
 using Google.Protobuf;
 
 namespace Gauge.CSharp.Core
@@ -31,16 +30,18 @@ namespace Gauge.CSharp.Core
             TcpClientWrapper = tcpClientWrapper;
         }
 
-        public bool Connected
+        public bool Connected => TcpClientWrapper.Connected;
+
+        public void Dispose()
         {
-            get { return TcpClientWrapper.Connected; }
+            TcpClientWrapper.Close();
         }
 
         public void WriteMessage(IMessage request)
         {
             var bytes = request.ToByteArray();
             var cos = new CodedOutputStream(TcpClientWrapper.GetStream());
-            cos.WriteUInt64((ulong)bytes.Length);
+            cos.WriteUInt64((ulong) bytes.Length);
             cos.Flush();
             TcpClientWrapper.GetStream().Write(bytes, 0, bytes.Length);
             TcpClientWrapper.GetStream().Flush();
@@ -55,12 +56,7 @@ namespace Gauge.CSharp.Core
 
         protected static long GenerateMessageId()
         {
-            return DateTime.Now.Ticks/TimeSpan.TicksPerMillisecond;
-        }
-
-        public void Dispose()
-        {
-            TcpClientWrapper.Close();
+            return DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
     }
 }
