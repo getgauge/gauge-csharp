@@ -23,5 +23,5 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 	sudo rm -rf $HOME/.gauge
 fi
 
-gauge -v
+gauge version
 set +e
