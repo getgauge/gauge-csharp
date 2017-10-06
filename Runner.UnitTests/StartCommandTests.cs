@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using Moq;
 using NUnit.Framework;
 
@@ -24,14 +25,14 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     internal class StartCommandTests
     {
-        private const string SomeFakePath = "/some/fake/path";
+        private readonly string TempPath = Path.GetTempPath();
 
         [SetUp]
         public void Setup()
         {
             _mockGaugeListener = new Mock<IGaugeListener>();
             _mockGaugeProjectBuilder = new Mock<IGaugeProjectBuilder>();
-            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", SomeFakePath);
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", TempPath);
             _startCommand = new StartCommand(() => _mockGaugeListener.Object, () => _mockGaugeProjectBuilder.Object);
         }
 
@@ -95,7 +96,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldRunProcessInProjectRoot()
         {
-            Assert.AreEqual(Environment.CurrentDirectory, SomeFakePath);
+            Assert.That(Environment.CurrentDirectory, Is.SamePath(TempPath));
         }
     }
 }
