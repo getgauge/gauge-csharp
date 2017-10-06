@@ -96,7 +96,10 @@ namespace Gauge.CSharp.Runner.UnitTests
         [Test]
         public void ShouldRunProcessInProjectRoot()
         {
-            Assert.That(Environment.CurrentDirectory, Is.SamePath(TempPath));
+            var actual = Environment.CurrentDirectory.TrimEnd(Path.DirectorySeparatorChar);
+            var expected = TempPath.TrimEnd(Path.DirectorySeparatorChar);
+
+            Assert.That(actual, Is.SamePath(expected));
         }
     }
 }
