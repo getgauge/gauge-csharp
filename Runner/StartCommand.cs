@@ -37,6 +37,7 @@ namespace Gauge.CSharp.Runner
 
         public StartCommand(Func<IGaugeListener> gaugeListener, Func<IGaugeProjectBuilder> projectBuilder)
         {
+            Environment.CurrentDirectory = Utils.GaugeProjectRoot;
             _gaugeListener = gaugeListener;
             _projectBuilder = projectBuilder;
         }

@@ -24,17 +24,21 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     internal class StartCommandTests
     {
+        private const string SomeFakePath = "/some/fake/path";
+
         [SetUp]
         public void Setup()
         {
             _mockGaugeListener = new Mock<IGaugeListener>();
             _mockGaugeProjectBuilder = new Mock<IGaugeProjectBuilder>();
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", SomeFakePath);
             _startCommand = new StartCommand(() => _mockGaugeListener.Object, () => _mockGaugeProjectBuilder.Object);
         }
 
         [TearDown]
         public void TearDown()
         {
+            Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", null);
             Environment.SetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH", null);
         }
 
@@ -86,6 +90,12 @@ namespace Gauge.CSharp.Runner.UnitTests
             _startCommand.Execute();
 
             _mockGaugeListener.Verify(listener => listener.PollForMessages(), Times.Once);
+        }
+
+        [Test]
+        public void ShouldRunProcessInProjectRoot()
+        {
+            Assert.AreEqual(Environment.CurrentDirectory, SomeFakePath);
         }
     }
 }
