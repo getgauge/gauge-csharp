@@ -41,7 +41,7 @@ Installing the runner is done via Gauge Core. This means that you need Gauge ins
 
 Once you have Gauge installed, add the csharp plugin using:
 
-    gauge --install csharp
+    gauge install csharp
 
 #### Lib
 The Lib is a reference that you can add to your test project, as you would do with any Nuget package.
