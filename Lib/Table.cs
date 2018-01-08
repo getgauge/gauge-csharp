@@ -110,7 +110,7 @@ namespace Gauge.CSharp.Lib
             {
                 var columnValues = GetColumnValues(header).ToList();
                 var columnWidth = columnValues.Concat(new[] {header}).Max(s => s.Length);
-                Func<string, string> formatCellValue = s => string.Format("|{0}", s.PadRight(columnWidth, ' '));
+                string formatCellValue(string s) => string.Format("|{0}", s.PadRight(columnWidth, ' '));
                 var paddedColumn = new[] {header, new string('-', columnWidth)}.Concat(columnValues)
                     .Select(formatCellValue);
                 columnStrings = columnStrings.Zip(paddedColumn, string.Concat);
