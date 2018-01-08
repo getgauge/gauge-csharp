@@ -20,7 +20,7 @@ using System.IO;
 
 namespace Gauge.CSharp.Lib
 {
-    public class DefaultScreenGrabber : IScreenGrabber
+    public class DefaultScreenGrabber : IScreenGrabber, ICustomScreenshotGrabber
     {
         public byte[] TakeScreenShot()
         {
