@@ -1,88 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{98C96CA5-84EE-4E47-B0C1-7FF7591EE12A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gauge.CSharp.Lib</RootNamespace>
-    <AssemblyName>Gauge.CSharp.Lib</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>CSharp bindings for Gauge. Write CSharp step implementation for Gauge specs. https://getgauge.io</Description>
+    <Version>0.7.0</Version>
+    <Authors>Gauge Team</Authors>
+    <Company>ThoughtWorks Inc.</Company>
+    <Copyright>Copyright © ThoughtWorks Inc. 2018</Copyright>
+    <PackageLicenseUrl>http://www.gnu.org/licenses/gpl-3.0.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/getgauge/gauge-csharp</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/getgauge/gauge-csharp/master/logo-64x64.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/getgauge/gauge-csharp</RepositoryUrl>
+    <RepositoryType />
+    <PackageTags>Gauge CSharp Testing</PackageTags>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>gauge_lib.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Attribute\AfterScenario.cs" />
-    <Compile Include="Attribute\AfterStep.cs" />
-    <Compile Include="Attribute\AfterSpec.cs" />
-    <Compile Include="Attribute\AfterSuite.cs" />
-    <Compile Include="Attribute\BeforeScenario.cs" />
-    <Compile Include="Attribute\BeforeStep.cs" />
-    <Compile Include="Attribute\FilteredHookAttribute.cs" />
-    <Compile Include="Attribute\BeforeSpec.cs" />
-    <Compile Include="Attribute\BeforeSuite.cs" />
-    <Compile Include="Attribute\ContinueOnFailure.cs" />
-    <Compile Include="Attribute\TagAggregation.cs" />
-    <Compile Include="Attribute\TagAggregationBehaviourAttribute.cs" />
-    <Compile Include="DataStore.cs" />
-    <Compile Include="DataStoreFactory.cs" />
-    <Compile Include="DataStoreType.cs" />
-    <Compile Include="DefaultClassInstanceManager.cs" />
-    <Compile Include="DefaultScreenGrabber.cs" />
-    <Compile Include="GaugeMessages.cs" />
-    <Compile Include="IClassInstanceManager.cs" />
-    <Compile Include="IScreenGrabber.cs" />
-    <Compile Include="MessageCollector.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Attribute\Step.cs" />
-    <Compile Include="RowSizeMismatchException.cs" />
-    <Compile Include="Table.cs" />
-    <Compile Include="TableRow.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Gauge.CSharp.Lib.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="gauge_lib.snk" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
