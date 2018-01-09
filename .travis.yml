@@ -25,6 +25,7 @@ install:
 language: csharp
 mono:
   - 5.0.1
+dotnet: 2.0
 cache:
   directories:
   - $HOME/.m2
