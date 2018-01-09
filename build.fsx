@@ -280,7 +280,7 @@ Target "SourceLink" (fun _ ->
 Target "NuGet-Core" (fun _ ->
     DotNetCli.Pack(fun p ->
         { p with
-            OutputPath = "artifacts/gauge-csharp-core"
+            OutputPath = "../artifacts/gauge-csharp-core"
             Project = "Core/Gauge.CSharp.Core.csproj"
         })
 )
@@ -288,7 +288,7 @@ Target "NuGet-Core" (fun _ ->
 Target "NuGet-Lib" (fun _ ->
     DotNetCli.Pack(fun p ->
         { p with
-            OutputPath = "artifacts/gauge-csharp-lib"
+            OutputPath = "../artifacts/gauge-csharp-lib"
             Project = "Lib/Gauge.CSharp.Lib.csproj"
         })
 )
