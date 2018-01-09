@@ -150,7 +150,6 @@ let buildSln solutionFile =
     solutionFile
         |> build (fun defaults ->
         { defaults with
-            ToolsVersion = Some "14.0"
             Verbosity = Some Minimal
             Targets = [ "Rebuild" ]
             Properties = [ ("Configuration", "Release")
