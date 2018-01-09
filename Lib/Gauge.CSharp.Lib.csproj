@@ -14,7 +14,8 @@
     <RepositoryUrl>https://github.com/getgauge/gauge-csharp</RepositoryUrl>
     <RepositoryType />
     <PackageTags>Gauge CSharp Testing</PackageTags>
-    <SignAssembly>true</SignAssembly>
+    <!-- Assembly signing is not supported in non-Windows as of dotnet sdk 2.1.3 -->
+    <SignAssembly Condition=" '$(OS)' == 'Windows_NT' ">true</SignAssembly>
     <AssemblyOriginatorKeyFile>gauge_lib.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
