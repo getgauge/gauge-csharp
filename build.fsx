@@ -7,11 +7,9 @@ open Fake
 open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
-open Fake.UserInputHelper
 open Fake.OpenCoverHelper
 open Fake.Testing
 open System
-open System.IO
 #if MONO
 #else
 #load "packages/build/SourceLink.Fake/tools/Fake.fsx"
@@ -44,14 +42,10 @@ let tags = ""
 
 // Read additional information from the release notes document
 let releaseRunner = LoadReleaseNotes "CHANGELOG.md"
-let libRelease = LoadReleaseNotes "Lib/CHANGELOG.md"
-let coreRelease = LoadReleaseNotes "Core/CHANGELOG.md"
 
 // Pattern specifying assemblies to be tested using NUnit
-let testAssembliesLib = "artifacts/gauge-csharp-lib/tests/*Test*.dll"
 let testAssembliesRunner = "artifacts/gauge-csharp/tests/*Test*.dll"
 let itestAssembliesRunner = "artifacts/gauge-csharp/itests/*IntegrationTest*.dll"
-let testReportOutput = "artifacts/gauge-csharp/bin/gauge.csharp.runner.unittests.xml"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
@@ -127,45 +121,17 @@ Target "ITest-Setup" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Generate AssemblyInfo.cs
 
-let commonAttributes = [          
-          Attribute.Configuration("")
-          Attribute.Company("ThoughtWorks Inc.")
-          Attribute.Product("Gauge.CSharp.Core")
-          Attribute.Copyright("Copyright ©  2016")
-          Attribute.Trademark("")
-          Attribute.Culture("")
-          Attribute.ComVisible(true) ]
-
 // Generate assembly info files with the right version & up-to-date information
-Target "AssemblyInfo-Core" (fun _ ->
-    let coreAttributes =
-        [ Attribute.Title("Gauge.CSharp.Core")
-          Attribute.Guid("db098a05-ce23-4b6d-a124-4d125bc89f57")
-          Attribute.Description("[INTERNAL GAUGE USE ONLY] Communicate with Gauge Core")
-          Attribute.Version coreRelease.AssemblyVersion
-          Attribute.FileVersion coreRelease.AssemblyVersion ] @ commonAttributes
-
-    CreateCSharpAssemblyInfo (("Core" </> "Properties") </> "AssemblyInfo.cs") coreAttributes
-)
-
-Target "AssemblyInfo-Lib" (fun _ ->
-    let libAttributes =
-        [ Attribute.Title("Gauge.CSharp.Lib")
-          Attribute.Guid("21677428-1b2a-4a9b-9865-f72209fb8f1c")
-          Attribute.Description("C# support for Gauge. http://getgauge.io")
-          Attribute.Version libRelease.AssemblyVersion
-          Attribute.FileVersion libRelease.AssemblyVersion ] @ commonAttributes
-
-    CreateCSharpAssemblyInfo (("Lib" </> "Properties") </> "AssemblyInfo.cs") libAttributes
-)
-
 Target "AssemblyInfo-Runner" (fun _ ->
     let runnerAttributes =
         [ Attribute.Title("Gauge.CSharp.Runner")
           Attribute.Guid("b80cc90b-dd04-445b-825e-51a42f3cadaf")
+          Attribute.Company("ThoughtWorks Inc.")
+          Attribute.Product("Gauge.CSharp.Core")
+          Attribute.Copyright("Copyright © ThoughtWorks Inc. 2016")
           Attribute.Description("C# spec for Gauge. http://getgauge.io")
           Attribute.Version releaseRunner.AssemblyVersion
-          Attribute.FileVersion releaseRunner.AssemblyVersion ] @ commonAttributes
+          Attribute.FileVersion releaseRunner.AssemblyVersion ]
 
     CreateCSharpAssemblyInfo (("Runner" </> "Properties") </> "AssemblyInfo.cs") runnerAttributes   
 )
@@ -184,6 +150,7 @@ let buildSln solutionFile =
     solutionFile
         |> build (fun defaults ->
         { defaults with
+            ToolsVersion = Some "14.0"
             Verbosity = Some Minimal
             Targets = [ "Rebuild" ]
             Properties = [ ("Configuration", "Release")
@@ -194,11 +161,17 @@ let buildSln solutionFile =
         |> ignore
 
 Target "Build-Lib" (fun _ ->
-    buildSln "Gauge.CSharp.Lib.sln"
+    DotNetCli.Build(fun p ->
+        { p with
+            Project = "Gauge.CSharp.Lib.sln"
+        })
 )
 
 Target "Build-Core" (fun _ ->
-    buildSln "Gauge.CSharp.Core.sln"
+    DotNetCli.Build(fun p ->
+        { p with
+            Project = "Gauge.CSharp.Core.sln"
+        })
 )
 
 Target "Build-Runner" (fun _ ->
@@ -229,12 +202,10 @@ Target "Zip" (fun _ ->
 // Run the unit tests using test runner
 
 Target "RunTests-Lib" (fun _ ->
-    !! testAssembliesLib
-    |> NUnit3 (fun p ->
+    DotNetCli.Test(fun p ->
         { p with
-            ShadowCopy = false
-            TimeOut = TimeSpan.FromMinutes 5.
-            ResultSpecs = ["TestResults-Lib.xml"] })
+            WorkingDir = "./Lib.UnitTests"
+        })
 )
 
 Target "RunTests-Runner" (fun _ ->
@@ -308,21 +279,17 @@ Target "SourceLink" (fun _ ->
 // Build a NuGet package
 
 Target "NuGet-Core" (fun _ ->
-    Paket.Pack(fun p ->
+    DotNetCli.Pack(fun p ->
         { p with
-            TemplateFile = "Core/paket.template"
             OutputPath = "artifacts/gauge-csharp-core"
-            Version = coreRelease.NugetVersion
-            ReleaseNotes = toLines coreRelease.Notes})
+        })
 )
 
 Target "NuGet-Lib" (fun _ ->
-    Paket.Pack(fun p ->
+    DotNetCli.Pack(fun p ->
         { p with
-            TemplateFile = "Lib/paket.template"
             OutputPath = "artifacts/gauge-csharp-lib"
-            Version = libRelease.NugetVersion
-            ReleaseNotes = toLines libRelease.Notes})
+        })
 )
 
 Target "Install" (fun _ ->
@@ -378,12 +345,6 @@ Target "All" DoNothing
 Target "BuildAndPackage" DoNothing
 
 Target "BuildInstallFT" DoNothing
-
-"AssemblyInfo-Core"
-  ==> "Build-Core"
-
-"AssemblyInfo-Lib"
-  ==> "Build-Lib"
 
 "AssemblyInfo-Runner"
   ==> "Build-Runner"

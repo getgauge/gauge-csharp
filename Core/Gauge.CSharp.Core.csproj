@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0;net40;net45;net46</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45;net46</TargetFrameworks>
     <Description>[INTERNAL GAUGE USE ONLY] Library to be used to communicate with Gauge Core.</Description>
     <PackageLicenseUrl>http://www.gnu.org/licenses/gpl-3.0.txt</PackageLicenseUrl>
     <Authors>getgauge</Authors>

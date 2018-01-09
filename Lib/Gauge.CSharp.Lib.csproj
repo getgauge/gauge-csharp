@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0;net40;net45;net46</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45;net46</TargetFrameworks>
     <Description>CSharp bindings for Gauge. Write CSharp step implementation for Gauge specs. https://getgauge.io</Description>
     <Version>0.7.0</Version>
     <Authors>getgauge</Authors>

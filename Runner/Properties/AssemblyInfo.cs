@@ -4,29 +4,21 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitleAttribute("Gauge.CSharp.Runner")]
 [assembly: GuidAttribute("b80cc90b-dd04-445b-825e-51a42f3cadaf")]
+[assembly: AssemblyCompanyAttribute("ThoughtWorks Inc.")]
+[assembly: AssemblyProductAttribute("Gauge.CSharp.Core")]
+[assembly: AssemblyCopyrightAttribute("Copyright © ThoughtWorks Inc. 2016")]
 [assembly: AssemblyDescriptionAttribute("C# spec for Gauge. http://getgauge.io")]
 [assembly: AssemblyVersionAttribute("0.10.2")]
 [assembly: AssemblyFileVersionAttribute("0.10.2")]
-[assembly: AssemblyConfigurationAttribute("")]
-[assembly: AssemblyCompanyAttribute("ThoughtWorks Inc.")]
-[assembly: AssemblyProductAttribute("Gauge.CSharp.Core")]
-[assembly: AssemblyCopyrightAttribute("Copyright ©  2016")]
-[assembly: AssemblyTrademarkAttribute("")]
-[assembly: AssemblyCultureAttribute("")]
-[assembly: ComVisibleAttribute(true)]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyTitle = "Gauge.CSharp.Runner";
         internal const System.String Guid = "b80cc90b-dd04-445b-825e-51a42f3cadaf";
+        internal const System.String AssemblyCompany = "ThoughtWorks Inc.";
+        internal const System.String AssemblyProduct = "Gauge.CSharp.Core";
+        internal const System.String AssemblyCopyright = "Copyright © ThoughtWorks Inc. 2016";
         internal const System.String AssemblyDescription = "C# spec for Gauge. http://getgauge.io";
         internal const System.String AssemblyVersion = "0.10.2";
         internal const System.String AssemblyFileVersion = "0.10.2";
-        internal const System.String AssemblyConfiguration = "";
-        internal const System.String AssemblyCompany = "ThoughtWorks Inc.";
-        internal const System.String AssemblyProduct = "Gauge.CSharp.Core";
-        internal const System.String AssemblyCopyright = "Copyright ©  2016";
-        internal const System.String AssemblyTrademark = "";
-        internal const System.String AssemblyCulture = "";
-        internal const System.Boolean ComVisible = true;
     }
 }
