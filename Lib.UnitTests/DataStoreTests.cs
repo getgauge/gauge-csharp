@@ -71,11 +71,18 @@ namespace Gauge.CSharp.Lib.UnitTests
             Assert.AreEqual(_dataStore.Count, 0);
         }
 
+        public class Sample
+        {
+            public string Name { get; set; }
+            public string Country { get; set; }
+        }
+
         [Test]
         public void ShouldInsertComplexTypeIntoDataStore()
         {
-            _dataStore.Add("bar", new {Name = "Hello", Country = "India"});
-            var value = _dataStore.Get("bar") as dynamic;
+
+            _dataStore.Add("bar", new Sample {Name = "Hello", Country = "India"});
+            var value = _dataStore.Get("bar") as Sample;
 
             Assert.AreEqual(value.Name, "Hello");
         }

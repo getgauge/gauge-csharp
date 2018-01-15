@@ -15,28 +15,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
 
 namespace Gauge.CSharp.Lib
 {
-    public class DefaultScreenGrabber : IScreenGrabber
+    public class DefaultScreenGrabber : IScreenGrabber, ICustomScreenshotGrabber
     {
         public byte[] TakeScreenShot()
         {
-            var bounds = Screen.GetBounds(Point.Empty);
-            using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+            var tmpFile = Path.GetTempFileName();
+            var screenshotProcess = new Process
             {
-                using (var g = Graphics.FromImage(bitmap))
+                StartInfo = new ProcessStartInfo
                 {
-                    g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                    FileName = "gauge_screenshot",
+                    Arguments = tmpFile
                 }
-                var memoryStream = new MemoryStream();
-                bitmap.Save(memoryStream, ImageFormat.Png);
-                return memoryStream.ToArray();
-            }
+            };
+            screenshotProcess.Start();
+            screenshotProcess.WaitForExit();
+            var bytes = File.ReadAllBytes(tmpFile);
+            File.Delete(tmpFile);
+            return bytes;
         }
     }
 }

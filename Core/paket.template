@@ -1,5 +1,0 @@
-type project
-licenseUrl http://www.gnu.org/licenses/gpl-3.0.txt
-dependencies
-    Gauge.CSharp.Lib >= 0.6.1.0
-	Google.Protobuf >= 3.1.0

@@ -24,8 +24,13 @@ namespace Gauge.CSharp.Lib
         public static List<string> GetAllPendingMessages()
         {
             var pendingMessages = new List<string>(GaugeMessages.Messages);
-            GaugeMessages.Messages.Clear();
+            Clear();
             return pendingMessages;
+        }
+
+        public static void Clear()
+        {
+            GaugeMessages.Messages.Clear();
         }
     }
 }
