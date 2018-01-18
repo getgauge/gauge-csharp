@@ -19,7 +19,7 @@ namespace Gauge.CSharp.Lib.Attribute
 {
     public enum TagAggregation
     {
-        And,
-        Or
+        And = 0,
+        Or = 1
     }
 }
