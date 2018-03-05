@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
@@ -73,7 +74,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 Message = {_pendingMessages}
             };
             _mockMethodExecutor.Setup(x =>
-                    x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>()))
+                    x.ExecuteHooks("AfterStep", It.IsAny<TaggedHooksFirstStrategy>(), new List<string>(), It.IsAny<ExecutionContext>()))
                 .Returns(_protoExecutionResult);
             _stepExecutionEndingProcessor = new StepExecutionEndingProcessor(_mockMethodExecutor.Object);
         }

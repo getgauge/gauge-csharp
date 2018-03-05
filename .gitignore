@@ -4,6 +4,9 @@
 /Gauge.CSharp.userprefs
 /Gauge.CSharp.Core.userprefs
 /.paket
+/.vscode
+/.nugetlocal
+/Backup
 bin
 obj
 *.suo
@@ -24,3 +27,5 @@ TestResults.xml
 paket-files 
 gauge-tests
 .vs
+UpgradeLog.htm
+paket.local

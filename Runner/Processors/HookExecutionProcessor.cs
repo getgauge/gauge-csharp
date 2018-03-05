@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Lib;
+using Gauge.CSharp.Runner;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 
@@ -57,8 +59,9 @@ namespace Gauge.CSharp.Runner.Processors
         protected virtual ProtoExecutionResult ExecuteHooks(Message request)
         {
             var applicableTags = GetApplicableTags(request);
-            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags);
-        }
+            var mapper = new ExecutionInfoMapper();
+            var executionInfo = mapper.executionInfoFrom(GetExecutionInfo(request));
+            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, executionInfo);        }
 
         private void ClearCacheForConfiguredLevel()
         {

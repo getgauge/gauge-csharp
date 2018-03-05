@@ -40,6 +40,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         private Mock<IFileWrapper> _mockFileWrapper;
         private Mock<IHookRegistry> _mockHookRegistry;
         private Mock<IHooksStrategy> _mockStrategy;
+        private ExecutionContext _executionInfo = new ExecutionContext();
 
         private static Dictionary<string, Expression<Func<IHookRegistry, HashSet<IHookMethod>>>> Hooks
         {
@@ -94,7 +95,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
 
             var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
-            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
+            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, _executionInfo);
 
             Assert.IsTrue(executionResult.Success);
             _mockHookRegistry.VerifyAll();
@@ -110,7 +111,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
 
             var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
-            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags);
+            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, _executionInfo);
 
             Assert.False(executionResult.Success);
             Assert.AreEqual("foo", executionResult.ExceptionMessage);

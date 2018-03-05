@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 
@@ -39,7 +40,7 @@ namespace Gauge.CSharp.Runner
         IEnumerable<string> GetAllPendingMessages();
         void StartExecutionScope(string tag);
         void CloseExectionScope();
-        ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags);
+        ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo);
 
         IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions,
             IList<string> parametersList, string newStepValue);

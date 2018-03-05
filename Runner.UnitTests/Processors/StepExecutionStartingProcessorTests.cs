@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
 using Gauge.CSharp.Runner.Strategy;
@@ -55,7 +56,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
 
             var protoExecutionResult = new ProtoExecutionResult {ExecutionTime = 0, Failed = false};
             methodExecutor.Setup(executor =>
-                    executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
+                    executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>(), new ExecutionContext()))
                 .Returns(protoExecutionResult);
             var hookRegistry = new Mock<IHookRegistry>();
             hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<IHookMethod>());

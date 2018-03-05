@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
@@ -25,7 +26,7 @@ namespace Gauge.CSharp.Runner
     public interface IMethodExecutor
     {
         ProtoExecutionResult Execute(GaugeMethod method, params string[] args);
-        ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags);
+        ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo);
         void ClearCache();
         IEnumerable<string> GetAllPendingMessages();
     }

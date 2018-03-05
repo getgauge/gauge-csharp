@@ -23,6 +23,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
 using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
@@ -196,7 +197,7 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags)
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var executionResult = new ExecutionResult
@@ -208,7 +209,7 @@ namespace Gauge.CSharp.Runner
                 var methodInfo = _hookRegistry.MethodFor(method);
                 try
                 {
-                    ExecuteHook(methodInfo);
+                    ExecuteHook(methodInfo, executionInfo);
                 }
                 catch (Exception ex)
                 {

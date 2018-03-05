@@ -16,6 +16,7 @@
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Lib.Attribute;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Processors;
@@ -63,7 +64,7 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
             };
             _protoExecutionResult.Message.AddRange(_pendingMessages);
             _mockMethodExecutor.Setup(x =>
-                    x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>()))
+                    x.ExecuteHooks("AfterSuite", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>(), It.IsAny<ExecutionContext>()))
                 .Returns(_protoExecutionResult);
             _executionEndingProcessor = new ExecutionEndingProcessor(_mockMethodExecutor.Object);
         }
