@@ -64,14 +64,14 @@ namespace Gauge.CSharp.Runner
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo)
+        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext)
         {
             var stopwatch = Stopwatch.StartNew();
             var builder = new ProtoExecutionResult
             {
                 Failed = false
             };
-            var executionResult = _sandbox.ExecuteHooks(hookType, strategy, applicableTags, executionInfo);
+            var executionResult = _sandbox.ExecuteHooks(hookType, strategy, applicableTags, executionContext);
 
             builder.ExecutionTime = stopwatch.ElapsedMilliseconds;
             if (!executionResult.Success)

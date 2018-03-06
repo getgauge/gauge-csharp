@@ -197,7 +197,7 @@ namespace Gauge.CSharp.Runner
 
         //[DebuggerStepperBoundary]
         //[DebuggerHidden]
-        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo)
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var executionResult = new ExecutionResult
@@ -209,7 +209,7 @@ namespace Gauge.CSharp.Runner
                 var methodInfo = _hookRegistry.MethodFor(method);
                 try
                 {
-                    ExecuteHook(methodInfo, executionInfo);
+                    ExecuteHook(methodInfo, executionContext);
                 }
                 catch (Exception ex)
                 {

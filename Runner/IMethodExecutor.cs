@@ -26,7 +26,7 @@ namespace Gauge.CSharp.Runner
     public interface IMethodExecutor
     {
         ProtoExecutionResult Execute(GaugeMethod method, params string[] args);
-        ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionInfo);
+        ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext);
         void ClearCache();
         IEnumerable<string> GetAllPendingMessages();
     }

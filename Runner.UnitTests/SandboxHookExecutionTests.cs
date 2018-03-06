@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         private Mock<IFileWrapper> _mockFileWrapper;
         private Mock<IHookRegistry> _mockHookRegistry;
         private Mock<IHooksStrategy> _mockStrategy;
-        private ExecutionContext _executionInfo;
+        private ExecutionContext _executionContext;
 
         private static Dictionary<string, Expression<Func<IHookRegistry, HashSet<IHookMethod>>>> Hooks
         {
@@ -142,9 +142,9 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
 
-        public void DummyHook(ExecutionContext executionInfo)
+        public void DummyHook(ExecutionContext executionContext)
         {
-            _executionInfo = executionInfo;
+            _executionContext = executionContext;
         }
 
         public void DummyHookThrowsException()
@@ -152,8 +152,8 @@ namespace Gauge.CSharp.Runner.UnitTests
             throw new Exception("foo");
         }
 
-        public void DummyHookTakesExecutionContext(ExecutionContext executionInfo){
-            if (executionInfo.getCurrentSpecification().getName() != "TestSpec")
+        public void DummyHookTakesExecutionContext(ExecutionContext executionContext){
+            if (executionContext.getCurrentSpecification().getName() != "TestSpec")
                 throw new Exception("TestSpec does not exist in ExecutionContext");
         }
     }
