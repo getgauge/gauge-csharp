@@ -40,7 +40,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         private Mock<IFileWrapper> _mockFileWrapper;
         private Mock<IHookRegistry> _mockHookRegistry;
         private Mock<IHooksStrategy> _mockStrategy;
-        private ExecutionContext _executionInfo = new ExecutionContext();
+        private ExecutionContext _executionInfo;
 
         private static Dictionary<string, Expression<Func<IHookRegistry, HashSet<IHookMethod>>>> Hooks
         {
@@ -95,7 +95,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
 
             var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
-            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, _executionInfo);
+            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, new ExecutionContext());
 
             Assert.IsTrue(executionResult.Success);
             _mockHookRegistry.VerifyAll();
@@ -111,10 +111,29 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
 
             var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
-            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, _executionInfo);
+            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, new ExecutionContext());
 
             Assert.False(executionResult.Success);
             Assert.AreEqual("foo", executionResult.ExceptionMessage);
+        }
+
+        [Test]
+        [TestCaseSource("HookTypes")]
+        public void ShouldExecuteHookWithExecutionContext(string hookType)
+        {
+            var expression = Hooks[hookType];
+            _mockHookRegistry.Setup(registry => registry.MethodFor("DummyHook"))
+                .Returns(GetType().GetMethod("DummyHook"));
+            _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
+
+            var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
+            var expected = new ExecutionContext(new ExecutionContext.Specification("TestSpec", "TestFileName", false, new List<string>()), null, null )
+            {
+               
+            };
+            var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, expected);
+
+            Assert.True(executionResult.Success);
         }
 
         [TearDown]
@@ -123,13 +142,19 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", _gaugeProjectRootEnv);
         }
 
-        public void DummyHook()
+        public void DummyHook(ExecutionContext executionInfo)
         {
+            _executionInfo = executionInfo;
         }
 
         public void DummyHookThrowsException()
         {
             throw new Exception("foo");
+        }
+
+        public void DummyHookTakesExecutionContext(ExecutionContext executionInfo){
+            if (executionInfo.getCurrentSpecification().getName() != "TestSpec")
+                throw new Exception("TestSpec does not exist in ExecutionContext");
         }
     }
 }
