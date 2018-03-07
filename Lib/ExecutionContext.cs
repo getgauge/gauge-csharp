@@ -22,110 +22,88 @@ using System.Collections.Generic;
 
 namespace Gauge.CSharp.Lib {
 
+    [Serializable()]
     public class ExecutionContext {
-        private Specification currentSpecification;
-        private Scenario currentScenario;
-        private StepDetails currentStep;
-
         public ExecutionContext(Specification specification, Scenario scenario, StepDetails stepDetails) {
-            this.currentSpecification = specification;
-            this.currentScenario = scenario;
-            this.currentStep = stepDetails;
+            this.CurrentSpecification = specification;
+            this.CurrentScenario = scenario;
+            this.CurrentStep = stepDetails;
         }
 
         public ExecutionContext() {
-            this.currentSpecification = new Specification();
-            this.currentScenario = new Scenario();
-            this.currentStep = new StepDetails();
+            this.CurrentSpecification = new Specification();
+            this.CurrentScenario = new Scenario();
+            this.CurrentStep = new StepDetails();
         }
 
         /**
         * @return - The Current Specification that is executing.
         * Returns null in BeforeSuite and AfterSuite levels as no spec is executing then.
         */
-        public Specification getCurrentSpecification() {
-            return currentSpecification;
-        }
+        public Specification CurrentSpecification { get; }
 
         /**
         * @return - The Current Scenario that is executing.
         * Returns null in BeforeSuite, AfterSuite, BeforeSpec levels as no scenario is executing then.
         */
-        public Scenario getCurrentScenario() {
-            return currentScenario;
-        }
+        public Scenario CurrentScenario { get; }
 
         /**
         * @return - The Current Step that is executing.
         * Returns null in BeforeSuite, AfterSuite, BeforeSpec, AfterSpec, BeforeScenario levels as no step is executing then.
         */
-        public StepDetails getCurrentStep() {
-            return currentStep;
-        }
+        public StepDetails CurrentStep { get; }
 
         /**
         * @return - All the valid tags (including scenario and spec tags) at the execution level.
         */
-        public List<String> getAllTags() {
-            HashSet<String> specTags = new HashSet<String>(currentSpecification.getTags());
-            foreach (var tag in currentScenario.getTags()){
+        public List<String> GetAllTags() {
+            HashSet<String> specTags = new HashSet<String>(CurrentSpecification.Tags);
+            foreach (var tag in CurrentScenario.Tags){
                 specTags.Add(tag);    
             }
             return new List<String>(specTags);
         }
 
+        [Serializable()]
         public class Specification {
-            private String name = "";
-            private String fileName = "";
-            private Boolean isFailing = false;
-            private IEnumerable<String> tags;
-
             public Specification(String name, String fileName, bool isFailing, IEnumerable<String> tags) {
-                this.name = name;
-                this.fileName = fileName;
-                this.isFailing = isFailing;
-                this.tags = tags;
+                this.Name = name;
+                this.FileName = fileName;
+                this.IsFailing = isFailing;
+                this.Tags = tags;
             }
 
             public Specification() {
-                tags = new List<String>();
+                Tags = new List<String>();
             }
 
             /**
             * @return List of all the tags in the Spec
             */
-            public IEnumerable<String> getTags() {
-                return tags;
-            }
+            public IEnumerable<String> Tags { get; }
 
             /**
             * @return True if the current spec is failing.
             */
-            public Boolean getIsFailing() {
-                return isFailing;
-            }
+            public Boolean IsFailing { get; }
 
             /**
             * @return Full path to the Spec
             */
-            public String getFileName() {
-                return fileName;
-            }
+            public String FileName { get; } = "";
 
             /**
             * @return The name of the Specification as mentioned in the Spec heading
             */
-            public String getName() {
-                return name;
-            }
+            public String Name { get; } = "";
         }
+        
+        [Serializable()]
         public class StepDetails {
-            private String text = "";
-            private Boolean isFailing = false;
-
             public StepDetails(String text, bool isFailing) {
-                this.text = text;
-                this.isFailing = isFailing;
+                this.Text = text;
+                this.IsFailing = isFailing;
             }
 
             public StepDetails() {
@@ -134,55 +112,40 @@ namespace Gauge.CSharp.Lib {
             /**
             * @return True if the current spec or scenario or step is failing due to error.
             */
-            public Boolean getIsFailing() {
-                return isFailing;
-            }
+            public Boolean IsFailing { get; }
 
             /**
             * @return The name of the step as given in the spec file.
             */
-            public String getText() {
-                return text;
-            }
-
+            public String Text { get; } = "";
         }
 
+        [Serializable]
         public class Scenario {
-            private String name = "";
-            private Boolean isFailing = false;
-            private IEnumerable<String> tags;
-
             public Scenario(String name, bool isFailing, IEnumerable<String> tags) {
-                this.name = name;
-                this.isFailing = isFailing;
-                this.tags = tags;
+                this.Name = name;
+                this.IsFailing = isFailing;
+                this.Tags = tags;
             }
 
             public Scenario() {
-                tags = new List<String>();
+                Tags = new List<String>();
             }
 
             /**
             * @return List of all tags in just the scenario
             */
-            public IEnumerable<String> getTags() {
-                return tags;
-            }
+            public IEnumerable<String> Tags { get; }
 
             /**
             * @return True if the scenario or spec is failing
             */
-            public Boolean getIsFailing() {
-                return isFailing;
-            }
+            public Boolean IsFailing { get; }
 
             /**
             * @return Name of the Scenario as mentioned in the scenario heading
             */
-            public String getName() {
-                return name;
-            }
-
+            public String Name { get; } = "";
         }
     }
 }

@@ -153,7 +153,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         }
 
         public void DummyHookTakesExecutionContext(ExecutionContext executionContext){
-            if (executionContext.getCurrentSpecification().getName() != "TestSpec")
+            if (executionContext.CurrentSpecification.Name != "TestSpec")
                 throw new Exception("TestSpec does not exist in ExecutionContext");
         }
     }
