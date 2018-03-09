@@ -41,7 +41,7 @@ gauge run specs
 gauge install csharp --version 0.10.1
 ```
 
-### Offline installation
+#### Offline installation
 * Download the plugin from [Releases](https://github.com/getgauge/gauge-csharp/releases)
 ```
 gauge install csharp --file gauge-csharp-0.10.1.zip
@@ -108,16 +108,15 @@ On Windows
 build.cmd CopyBinaries
 ```
 
-####### Regenerate the API messages (protocol buffer api changes)
+###### Regenerate the API messages (protocol buffer api changes)
 
 Update the submodule and run the `gen-proto` command:
 
     git submodule update
     run.bat gen-proto
 
-###### Tests
-
-####### Unit/Integration
+##### Tests
+###### Unit/Integration Tests
 
 On mono:
 ```
@@ -129,7 +128,7 @@ On Windows
 build.cmd RunTests
 ```
 
-####### Functional Tests
+###### Functional Tests
 
 For running functional tests
  * gauge
