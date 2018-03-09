@@ -43,6 +43,14 @@ Once you have Gauge installed, add the csharp plugin using:
 
     gauge install csharp
 
+##### Nightly
+
+To install csharp nightly, download the latest nightly from [here](https://bintray.com/gauge/gauge-csharp/Nightly).
+
+Once you have the downloaded nightly gauge-csharp-version.nightly-yyyy-mm-dd.zip, install using:
+
+    gauge install csharp -f gauge-csharp-version.nightly-yyyy-mm-dd.zip
+    
 #### Lib
 The Lib is a reference that you can add to your test project, as you would do with any Nuget package.
 
