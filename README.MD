@@ -9,14 +9,12 @@
 
 This project adds C# [language plugin](https://docs.gauge.org/plugins.html#language-reporting-plugins) for [gauge](http://getgauge.io).
 
-The plugin is authored in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
-
 ## Getting started
 
 ### Pre-requisite
 
 - [Install Gauge](https://docs.gauge.org/installing.html#installation)
-
+- [.NET Framework](https://www.microsoft.com/net/download/dotnet-framework-runtime) - 4.5 and above
 ### Installation
 
 ```
@@ -56,8 +54,15 @@ Once you have the downloaded nightly gauge-csharp-version.nightly-yyyy-mm-dd.zip
     gauge install csharp -f gauge-csharp-version.nightly-yyyy-mm-dd.zip
 
 #### Build from Source
+The plugin is authored in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
+Gauge is authored in golang. These are independent processes talking to each other over TCP on port GAUGE_INTERNAL_PORT (env variable) using [Protobuf](https://github.com/getgauge/gauge-proto).
 
 ##### Development Environment Setup
+
+##### Additional Requirements
+Apart from [Gauge](https://gauge.org/index.html) and [.NET Framework], you will need
+
+* [Golang](http://golang.org/)
 
 ###### Windows
 
