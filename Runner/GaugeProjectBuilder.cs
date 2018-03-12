@@ -37,7 +37,7 @@ namespace Gauge.CSharp.Runner
             var gaugeBinDir = Utils.GetGaugeBinDir();
             try
             {
-                var properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Configuration", "Release"),
+                var properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Configuration", "Debug"),
                     FSharpList<Tuple<string, string>>.Empty);
                 properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Platform", "Any CPU"), properties);
                 properties = new FSharpList<Tuple<string, string>>(Tuple.Create("OutputPath", gaugeBinDir), properties);
