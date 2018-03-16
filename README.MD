@@ -1,4 +1,4 @@
-# C# support for Gauge
+# Gauge-csharp
 
 |Windows|Linux / OS X (Mono)|
 |-------|------------|
@@ -6,49 +6,102 @@
 
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 
-This project adds C# support for [Gauge](https://github.com/getgauge/gauge) testing. Read more about Gauge [here](http://getgauge.io/documentation/user/current/index.html).
 
-You can download Gauge [here](http://getgauge.io)
+This project adds C# [language plugin](https://docs.gauge.org/plugins.html#language-reporting-plugins) for [gauge](http://getgauge.io).
 
-This repository hosts three projects, `Core`, `Lib` and `Runner`.
+## Getting started
 
-## Gauge Core
+### Pre-requisite
 
-### *Internal Gauge Use Only*
-`Core` is a dll that brings in Gauge's API and connection to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Core/), and is not listed in the search results. This package is used by `Lib` and `Runner` only.
+- [Install Gauge](https://docs.gauge.org/installing.html#installation)
+- [.NET Framework](https://www.microsoft.com/net/download/dotnet-framework-runtime) - 4.5 and above
+### Installation
 
-Read more about `Core` [here](https://github.com/getgauge/gauge-csharp/tree/master/Core).
+```
+gauge install csharp
+```
 
-## Gauge Lib
+### Create a gauge-csharp project
+```
+gauge init csharp
+```
+
+### Run tests
+```
+gauge run specs
+```
+
+### Alternate Installation options
+
+#### Install specific version
+* Installing specific version
+```
+gauge install csharp --version 0.10.1
+```
+
+#### Offline installation
+* Download the plugin from [Releases](https://github.com/getgauge/gauge-csharp/releases)
+```
+gauge install csharp --file gauge-csharp-0.10.1.zip
+```
+
+#### Nightly installation
+
+To install csharp nightly, download the latest nightly from [here](https://bintray.com/gauge/gauge-csharp/Nightly).
+
+Once you have the downloaded nightly gauge-csharp-version.nightly-yyyy-mm-dd.zip, install using:
+
+    gauge install csharp -f gauge-csharp-version.nightly-yyyy-mm-dd.zip
+
+#### Build from Source
+The plugin is authored in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
+Gauge is authored in golang. These are independent processes talking to each other over TCP on port GAUGE_INTERNAL_PORT (env variable) using [Protobuf](https://github.com/getgauge/gauge-proto).
+
+##### Development Environment Setup
+
+##### Additional Requirements
+Apart from [Gauge](https://gauge.org/index.html) and [.NET Framework], you will need
+
+* [Golang](http://golang.org/)
+
+###### Windows
+
+- Use [BoxStarter](http://boxstarter.org/) to setup Windows box.
+  - Install Windows
+  - Hit http://bit.ly/20pMrXY from Internet Explorer/Edge.
+  - Install Visual Studio and Resharper separately (You could consider installing from an ISO).
+
+###### Linux
+
+For building and unit testing you only need mono.
+
+##### Terminologies
+###### Gauge Lib
 `Lib` is a dll that brings in Gauge's data types to C#. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
 
 Read more about `Lib` [here](https://github.com/getgauge/gauge-csharp/tree/master/Lib).
 
-## Gauge CSharp Runner
+###### Gauge Core
+`Core` is a dll that brings in Gauge's API and connection to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Core/), and is not listed in the search results. This package is used by `Lib` and `Runner` only.
+
+Read more about `Core` [here](https://github.com/getgauge/gauge-csharp/tree/master/Core).
+
+###### Gauge CSharp Runner
 `Runner` is an executable that is invoked by Gauge Core. The `Runner` acts a bridge between C# test code and Gauge's API.
 
 Read more about `Runner` [here](https://github.com/getgauge/gauge-csharp/tree/master/Runner).
 
-## Gauge-Proto
+###### Gauge-Proto
 This is a submodule of the repository `https://github.com/getgauge/gauge-proto`. This repository holds the `.proto` files that act as contracts between Gauge and the plugins. This submodule needs to be fetched to generate the protobuf classes.
 
-## Developer notes
+##### Setup
 
-### Install
-
-#### Runner
-Installing the runner is done via Gauge Core. This means that you need Gauge installed as a pre-requisite. You can download Gauge [here](http://getgauge.io/download.html).
-
-Once you have Gauge installed, add the csharp plugin using:
-
-    gauge install csharp
-
-#### Lib
+###### Lib
 The Lib is a reference that you can add to your test project, as you would do with any Nuget package.
 
 You will need Gauge and Gauge-csharp plugin installed before installing `Lib`.
 
-### Build
+###### Build
 
 On mono:
 ```
@@ -60,9 +113,15 @@ On Windows
 build.cmd CopyBinaries
 ```
 
-### Tests
+###### Regenerate the API messages (protocol buffer api changes)
 
-#### Unit/Integration
+Update the submodule and run the `gen-proto` command:
+
+    git submodule update
+    run.bat gen-proto
+
+##### Tests
+###### Unit/Integration Tests
 
 On mono:
 ```
@@ -74,7 +133,7 @@ On Windows
 build.cmd RunTests
 ```
 
-#### Functional Tests
+###### Functional Tests
 
 For running functional tests
  * gauge
@@ -101,8 +160,7 @@ On Windows:
 build.cmd <target>
 ```
 
-
-### Package
+###### Package
 
 On mono:
 ```
@@ -123,7 +181,7 @@ All artifacts are genereated in `.\artifacts` folder.
  * The Core Nuget package is put at `artifacts/gauge-csharp-core/Gauge.CSharp.Core.<core-version>.nupkg`,
  where `<core-version>` is from top of `Core/CHANGELOG.md` file.
 
-#### Zip
+###### Zip
 
 Zip distribution in `artifacts/gauge-csharp/gauge-csharp-<runner-version>.zip` can be created with
 On mono:
@@ -136,7 +194,7 @@ On Windows
 build.cmd Zip
 ```
 
-### Install the plugin
+###### Install the plugin
 
 To install a local version of the plugin, choose from the below targets (whichever is applicable)
 
@@ -155,26 +213,6 @@ On Windows:
 ```
 build.cmd <target>
 ```
-
-### Regenerate the API messages (protocol buffer api changes)
-
-Update the submodule and run the `gen-proto` command:
-
-    git submodule update
-    run.bat gen-proto
-
-## Development Environment Setup
-
-### Windows
-
-- Use [BoxStarter](http://boxstarter.org/) to setup Windows box.
-  - Install Windows
-  - Hit http://bit.ly/20pMrXY from Internet Explorer/Edge.
-  - Install Visual Studio and Resharper separately (You could consider installing from an ISO).
-
-### Linux
-
-For building and unit testing you only need mono.
 
 ## License
 
