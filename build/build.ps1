@@ -57,7 +57,7 @@ $sln = "Gauge.CSharp.NoTests.sln"
 if ($buildWithTest) {
     $sln="Gauge.CSharp.sln"
     $sampleProj = resolve-path "IntegrationTestSample\IntegrationTestSample.sln"
-    $sampleProjOutputPath = "$($pwd)\IntegrationTestSample\gauge-bin"
+    $sampleProjOutputPath = "$($pwd)\IntegrationTestSample\gauge_bin"
     RestoreNugetAndBuild $sampleProj $sampleProjOutputPath
 }
 RestoreNugetAndBuild $sln $outputPath
