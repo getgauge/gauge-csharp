@@ -18,6 +18,7 @@ packages
 artifacts/
 *.Sln.ide
 IntegrationTestSample/gauge_bin
+IntegrationTestSample/.gauge
 IntegrationTestSample/logs
 IntegrationTestSample/reports
 .fake

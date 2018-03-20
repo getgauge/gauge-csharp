@@ -27,7 +27,7 @@ group Test
   source https://nuget.org/api/v2
   framework net46
 
-  nuget Moq
+  nuget Moq 4.7
   nuget NUnit
   nuget NUnit.Runners
   nuget OpenCover
