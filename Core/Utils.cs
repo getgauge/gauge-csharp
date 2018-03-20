@@ -60,7 +60,7 @@ namespace Gauge.CSharp.Core
         {
             var customBuildPath = TryReadEnvValue(GaugeCustomBuildPath);
             if (string.IsNullOrEmpty(customBuildPath))
-                return Path.Combine(GaugeProjectRoot, "gauge_bin");
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
             try
             {
                 return IsAbsoluteUrl(customBuildPath)
@@ -69,7 +69,7 @@ namespace Gauge.CSharp.Core
             }
             catch (Exception)
             {
-                return Path.Combine(GaugeProjectRoot, "gauge_bin");
+                return Path.Combine(GaugeProjectRoot, "gauge-bin");
             }
         }
 

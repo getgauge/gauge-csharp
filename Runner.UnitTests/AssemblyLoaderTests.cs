@@ -32,7 +32,7 @@ namespace Gauge.CSharp.Runner.UnitTests
         [SetUp]
         public void Setup()
         {
-            var libPath = Path.GetFullPath(Path.Combine(TmpLocation, "gauge_bin", "Gauge.CSharp.Lib.dll"));
+            var libPath = Path.GetFullPath(Path.Combine(TmpLocation, "gauge-bin", "Gauge.CSharp.Lib.dll"));
             Environment.SetEnvironmentVariable("GAUGE_PROJECT_ROOT", TmpLocation);
             var thisType = GetType();
             var assemblyLocation = thisType.Assembly.Location;
