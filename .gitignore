@@ -17,7 +17,7 @@ packages
 *.userprefs
 artifacts/
 *.Sln.ide
-IntegrationTestSample/gauge-bin
+IntegrationTestSample/gauge_bin
 IntegrationTestSample/logs
 IntegrationTestSample/reports
 .fake

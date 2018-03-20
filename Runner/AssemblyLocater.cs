@@ -62,7 +62,7 @@ namespace Gauge.CSharp.Runner
             var customBuildPath = Environment.GetEnvironmentVariable("GAUGE_CUSTOM_BUILD_PATH");
             var GaugeProjectRoot = Environment.GetEnvironmentVariable("GAUGE_PROJECT_ROOT");
             if (string.IsNullOrEmpty(customBuildPath))
-                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+                return Path.Combine(GaugeProjectRoot, "gauge_bin");
             try
             {
                 Uri result;
@@ -72,7 +72,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception)
             {
-                return Path.Combine(GaugeProjectRoot, "gauge-bin");
+                return Path.Combine(GaugeProjectRoot, "gauge_bin");
             }
         }
 
