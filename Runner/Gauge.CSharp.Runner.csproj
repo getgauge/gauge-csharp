@@ -215,6 +215,17 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
       <ItemGroup>
+        <Reference Include="Gauge.CSharp.Lib">
+          <HintPath>..\packages\Gauge.CSharp.Lib\lib\net46\Gauge.CSharp.Lib.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
+      <ItemGroup>
         <Reference Include="Google.Protobuf">
           <HintPath>..\packages\Google.Protobuf\lib\net45\Google.Protobuf.dll</HintPath>
           <Private>True</Private>
