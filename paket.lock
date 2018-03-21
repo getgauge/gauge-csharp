@@ -2,7 +2,7 @@ RESTRICTION: == net46
 NUGET
   remote: https://www.nuget.org/api/v2
     FAKE.Lib (4.64.11)
-    FSharp.Core (4.3.4)
+    FSharp.Core (4.2.3)
     Gauge.CSharp.Core (0.3.1)
       Google.Protobuf (>= 3.5.1)
     Gauge.CSharp.Lib (0.7.1)
@@ -15,7 +15,7 @@ NUGET
       System.Reflection.Metadata (>= 1.1)
     Microsoft.CodeAnalysis.CSharp (1.1)
       Microsoft.CodeAnalysis.Common (1.1)
-    Microsoft.Web.Xdt (2.1.2)
+    Microsoft.Web.Xdt (2.1.1)
     NLog (4.2.2)
     NuGet.Core (2.10.1)
       Microsoft.Web.Xdt (>= 2.1)
