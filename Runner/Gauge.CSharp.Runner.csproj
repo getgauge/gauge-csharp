@@ -28,6 +28,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -179,7 +180,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
       <ItemGroup>
@@ -206,7 +206,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
       <ItemGroup>
         <Reference Include="Gauge.CSharp.Core">
-          <HintPath>..\packages\Gauge.CSharp.Core\lib\net45\Gauge.CSharp.Core.dll</HintPath>
+          <HintPath>..\packages\Gauge.CSharp.Core\lib\net46\Gauge.CSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -217,7 +217,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
       <ItemGroup>
         <Reference Include="Gauge.CSharp.Lib">
-          <HintPath>..\packages\Gauge.CSharp.Lib\lib\net45\Gauge.CSharp.Lib.dll</HintPath>
+          <HintPath>..\packages\Gauge.CSharp.Lib\lib\net46\Gauge.CSharp.Lib.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -315,6 +315,15 @@
         <Reference Include="System.Reflection.Metadata">
           <HintPath>..\packages\System.Reflection.Metadata\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
           <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
+      <ItemGroup>
+        <Reference Include="System.ComponentModel.Composition">
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>

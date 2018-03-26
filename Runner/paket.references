@@ -1,4 +1,5 @@
 Gauge.CSharp.Core
+Gauge.CSharp.Lib
 Microsoft.CodeAnalysis.Analyzers
 Microsoft.CodeAnalysis.Common
 Microsoft.CodeAnalysis.CSharp

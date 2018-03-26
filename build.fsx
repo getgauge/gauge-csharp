@@ -106,16 +106,16 @@ Target "CopyBinaries" (fun _ ->
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "artifacts" </> (artifactsDir f)))
     |>  Seq.iter (fun (fromDir, toDir) -> CopyDir toDir fromDir (fun _ -> true))
     // copy the IntegrationTestSample.dll with test suites
-    CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll"
+    CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge_bin/IntegrationTestSample.dll"
     // and do NOT copy its old Lib reference, it must be loaded by sandbox
-    // CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll"
+    // CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge_bin/Gauge.CSharp.Lib.dll"
 )
 
-// In CI agent, with clean workspace, we need to fetch previosuly built assemblies to gauge-bin
+// In CI agent, with clean workspace, we need to fetch previosuly built assemblies to gauge_bin
 Target "ITest-Setup" (fun _ ->
-    CopyFile "IntegrationTestSample/gauge-bin/IntegrationTestSample.dll" "artifacts/gauge-csharp/itests/IntegrationTestSample.dll" 
+    CopyFile "IntegrationTestSample/gauge_bin/IntegrationTestSample.dll" "artifacts/gauge-csharp/itests/IntegrationTestSample.dll" 
     // And the old Lib
-    CopyFile "IntegrationTestSample/gauge-bin/Gauge.CSharp.Lib.dll" "IntegrationTestSample/Lib/Gauge.CSharp.Lib.dll"
+    CopyFile "IntegrationTestSample/gauge_bin/Gauge.CSharp.Lib.dll" "IntegrationTestSample/Lib/Gauge.CSharp.Lib.dll"
 )
 
 // --------------------------------------------------------------------------------------

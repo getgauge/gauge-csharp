@@ -10,10 +10,11 @@ nuget NLog 4.2.2 framework: >= net45
 nuget NuGet.Core 2.10.1 framework: >= net45
 nuget System.Collections.Immutable 1.1.37 framework: >= net45
 nuget System.Reflection.Metadata 1.1.0 framework: >= net45
-nuget FSharp.Core
+nuget FSharp.Core 4.2.3
 nuget FAKE.Lib
-nuget Google.Protobuf 3.5.1
-nuget Google.Protobuf.Tools 3.5.1
+nuget Microsoft.Web.Xdt 2.1.1
+nuget Google.Protobuf
+nuget Google.Protobuf.Tools
 
 group Build
   source https://nuget.org/api/v2
@@ -27,7 +28,7 @@ group Test
   source https://nuget.org/api/v2
   framework net46
 
-  nuget Moq
+  nuget Moq 4.7
   nuget NUnit
   nuget NUnit.Runners
   nuget OpenCover
