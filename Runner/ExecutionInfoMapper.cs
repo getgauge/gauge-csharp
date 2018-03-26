@@ -41,7 +41,10 @@ namespace Gauge.CSharp.Runner {
 
         public ExecutionContext.StepDetails StepFrom(Messages.StepInfo currentStep)
         {
-            return currentStep?.Step != null ? new ExecutionContext.StepDetails(currentStep.Step.ActualStepText, currentStep.IsFailed) : new ExecutionContext.StepDetails();
+            if (currentStep == null || currentStep.Step == null)
+                return new ExecutionContext.StepDetails();
+
+            return new ExecutionContext.StepDetails(currentStep.Step.ActualStepText, currentStep.IsFailed);
         }
     }
 }
