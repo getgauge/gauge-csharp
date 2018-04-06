@@ -31,7 +31,7 @@ namespace Gauge.CSharp.Runner
         private const string GaugeLibAssembleName = "Gauge.CSharp.Lib";
         private readonly IAssemblyWrapper _assemblyWrapper;
         private readonly IFileWrapper _fileWrapper;
-        private readonly Version _minimumLibversion = new Version("0.6.0");
+        private readonly Version _minimumLibversion = new Version("0.7.1");
         private Assembly _targetLibAssembly;
 
         public AssemblyLoader(string runnerBasePath, IAssemblyWrapper assemblyWrapper, IFileWrapper fileWrapper,

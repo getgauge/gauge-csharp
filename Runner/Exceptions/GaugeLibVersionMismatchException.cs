@@ -24,7 +24,8 @@ namespace Gauge.CSharp.Runner.Exceptions
     public class GaugeLibVersionMismatchException : Exception
     {
         private const string ExceptionMessageFormat =
-                "The version of Gauge.CSharp.Lib in the project is inconpatible with the version of Gauge CSharp plugin.\n Expecting minimum version: {0}, found {1}"
+                "The version of Gauge.CSharp.Lib in the project is incompatible with the version of Gauge CSharp plugin.\n Expecting minimum version: {0}, found {1}.\n" +
+                "Ensure latest version is used in your project. If you are using Nuget, try updating your dependencies."
             ;
 
         public GaugeLibVersionMismatchException(Version targetLibVersion, Version expectedLibVersion)
