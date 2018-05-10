@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProductAttribute("Gauge.CSharp.Core")]
 [assembly: AssemblyCopyrightAttribute("Copyright © ThoughtWorks Inc. 2016")]
 [assembly: AssemblyDescriptionAttribute("C# spec for Gauge. http://getgauge.io")]
-[assembly: AssemblyVersionAttribute("0.10.2")]
-[assembly: AssemblyFileVersionAttribute("0.10.2")]
+[assembly: AssemblyVersionAttribute("0.10.4")]
+[assembly: AssemblyFileVersionAttribute("0.10.4")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyTitle = "Gauge.CSharp.Runner";
@@ -18,7 +18,7 @@ namespace System {
         internal const System.String AssemblyProduct = "Gauge.CSharp.Core";
         internal const System.String AssemblyCopyright = "Copyright © ThoughtWorks Inc. 2016";
         internal const System.String AssemblyDescription = "C# spec for Gauge. http://getgauge.io";
-        internal const System.String AssemblyVersion = "0.10.2";
-        internal const System.String AssemblyFileVersion = "0.10.2";
+        internal const System.String AssemblyVersion = "0.10.4";
+        internal const System.String AssemblyFileVersion = "0.10.4";
     }
 }
