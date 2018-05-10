@@ -42,11 +42,22 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockAssembly = new Mock<TestAssembly>();
             _mockInstanceManagerType = new Mock<Type>();
             _mockInstanceManagerType.Setup(type => type.GetInterfaces()).Returns(new[] {typeof(IClassInstanceManager)});
+            _mockInstanceManagerType.Setup(x => x.FullName).Returns("MockInstanceManager");
+            _mockScreenGrabberType = new Mock<Type>();
+            _mockScreenGrabberType.Setup(type => type.GetInterfaces()).Returns(new[] { typeof(IScreenGrabber) });
+            _mockScreenGrabberType.Setup(type => type.FullName).Returns("MockScreenGrabber");
+            _mockCustomScreenGrabberType = new Mock<Type>();
+            _mockCustomScreenGrabberType.Setup(type => type.GetInterfaces()).Returns(new[] { typeof(ICustomScreenshotGrabber) });
+            _mockCustomScreenGrabberType.Setup(type => type.FullName).Returns("MockCustomScreenhotGrabber");
             _mockAssembly.Setup(assembly => assembly.GetTypes())
-                .Returns(new[] {thisType, _mockInstanceManagerType.Object});
+                .Returns(new[] {thisType, _mockInstanceManagerType.Object, _mockScreenGrabberType.Object, _mockCustomScreenGrabberType.Object });
             _mockAssembly.Setup(assembly => assembly.GetType(thisType.FullName)).Returns(thisType);
             _mockAssembly.Setup(assembly => assembly.GetType(_mockInstanceManagerType.Object.FullName))
                 .Returns(_mockInstanceManagerType.Object);
+            _mockAssembly.Setup(assembly => assembly.GetType(_mockScreenGrabberType.Object.FullName))
+                .Returns(_mockScreenGrabberType.Object);
+            _mockAssembly.Setup(assembly => assembly.GetType(_mockCustomScreenGrabberType.Object.FullName))
+                .Returns(_mockCustomScreenGrabberType.Object);
             _mockAssembly.Setup(assembly => assembly.GetReferencedAssemblies())
                 .Returns(new[] {new AssemblyName("Gauge.CSharp.Lib")});
             fileWrapper.Setup(wrapper => wrapper.Exists(libPath)).Returns(true);
@@ -75,6 +86,8 @@ namespace Gauge.CSharp.Runner.UnitTests
         private AssemblyLoader _assemblyLoader;
         private Mock<IAssemblyWrapper> _mockAssemblyWrapper;
         private Mock<Type> _mockInstanceManagerType;
+        private Mock<Type> _mockScreenGrabberType;
+        private Mock<Type> _mockCustomScreenGrabberType;
         private const string TmpLocation = "/tmp/location";
 
         [Test]
@@ -87,6 +100,18 @@ namespace Gauge.CSharp.Runner.UnitTests
         public void ShouldGetClassInstanceManagerTypes()
         {
             Assert.Contains(_mockInstanceManagerType.Object, _assemblyLoader.ClassInstanceManagerTypes);
+        }
+
+        [Test]
+        public void ShouldGetScreenGrabberForIScreenGrabber()
+        {
+            Assert.Contains(_mockScreenGrabberType.Object, _assemblyLoader.ScreengrabberTypes);
+        }
+
+        [Test]
+        public void ShouldGetScreenGrabberForICustomScreenGrabber()
+        {
+            Assert.Contains(_mockCustomScreenGrabberType.Object, _assemblyLoader.ScreengrabberTypes);
         }
 
         [Test]
