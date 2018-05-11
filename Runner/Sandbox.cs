@@ -325,7 +325,7 @@ namespace Gauge.CSharp.Runner
             }
             else
             {
-                logger.Debug("No implementation of IScreenGrabber found. Using DefaultScreenGrabber");
+                logger.Debug("No Custom ScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
             ScreenGrabberType = ScreenGrabberType ??
