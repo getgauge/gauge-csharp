@@ -34,12 +34,14 @@ namespace Gauge.CSharp.Runner
         public bool BuildTargetGaugeProject()
         {
             var projectFullPath = GetProjectFullPath();
+            var projectConfig = GetProjectConfiguration();
+            var projectPlatform = GetProjectPlatform();
             var gaugeBinDir = Utils.GetGaugeBinDir();
             try
             {
-                var properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Configuration", "Debug"),
+                var properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Configuration", projectConfig),
                     FSharpList<Tuple<string, string>>.Empty);
-                properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Platform", "Any CPU"), properties);
+                properties = new FSharpList<Tuple<string, string>>(Tuple.Create("Platform", projectPlatform), properties);
                 properties = new FSharpList<Tuple<string, string>>(Tuple.Create("OutputPath", gaugeBinDir), properties);
                 MSBuildHelper.build(FuncConvert.ToFSharpFunc(delegate(MSBuildHelper.MSBuildParams input)
                 {
@@ -70,6 +72,24 @@ namespace Gauge.CSharp.Runner
                 throw new NotAValidGaugeProjectException();
             var projectFullPath = projectFileList.First();
             return projectFullPath;
+        }
+
+        private static string GetProjectConfiguration()
+        {
+            var csprojEnvVariable = Utils.TryReadEnvValue("GAUGE_CSHARP_PROJECT_CONFIG");
+            if (!string.IsNullOrEmpty(csprojEnvVariable))
+                return csprojEnvVariable;
+
+            return "Debug";
+        }
+
+        private static string GetProjectPlatform()
+        {
+            var csprojEnvVariable = Utils.TryReadEnvValue("GAUGE_CSHARP_PROJECT_PLATFORM");
+            if (!string.IsNullOrEmpty(csprojEnvVariable))
+                return csprojEnvVariable;
+
+            return "Any CPU";
         }
     }
 }
