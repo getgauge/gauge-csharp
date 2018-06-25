@@ -38,6 +38,7 @@ namespace Gauge.CSharp.Runner
         List<string> GetAllStepTexts();
         void ClearObjectCache();
         IEnumerable<string> GetAllPendingMessages();
+        IEnumerable<byte[]> GetAllPendingScreenshots();
         void StartExecutionScope(string tag);
         void CloseExectionScope();
         ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext);

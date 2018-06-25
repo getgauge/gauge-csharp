@@ -39,6 +39,7 @@ namespace Gauge.CSharp.Runner.Processors
         {
             // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
             MethodExecutor.GetAllPendingMessages();
+            MethodExecutor.GetAllPendingScreenshots();
             return base.ExecuteHooks(request);
         }
 
