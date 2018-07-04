@@ -1,6 +1,6 @@
 {
 	"id": "csharp",
-	"version": "0.10.3",
+	"version": "0.10.5",
 	"description": "C# support for gauge",
 	"PostInstall": {
 		"windows": [],
@@ -18,7 +18,7 @@
 		"darwin": ["./run.sh", "--init"]
 	},
 	"gaugeVersionSupport": {
-		"minimum": "0.9.7",
+		"minimum": "1.0.0",
 		"maximum": ""
 	}
 }

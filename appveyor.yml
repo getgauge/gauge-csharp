@@ -18,7 +18,7 @@ build_script:
     mvn --version
     gauge version
     echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" | Out-File $Env:AppData'\Gauge\config\gauge.properties' -Encoding utf8 -Append
-    .\build.cmd BuildInstallFT
+    .\build.cmd -t BuildInstallFT
 test: off
 artifacts:
 - path: .\gauge-tests\reports-csharp\html-report
