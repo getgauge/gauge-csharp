@@ -140,7 +140,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
             Assert.True(executionResult.ScreenShot != null);
-            Assert.True(executionResult.ScreenShot[0].Length > 0);
+            Assert.True(executionResult.ScreenShot.Length > 0);
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
             Assert.True(executionResult.ScreenShot != null);
-            Assert.AreEqual(2, executionResult.ScreenShot[0].Length);
+            Assert.AreEqual(2, executionResult.ScreenShot.Length);
         }
     }
 }

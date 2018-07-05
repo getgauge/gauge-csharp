@@ -119,7 +119,7 @@ namespace Gauge.CSharp.Runner.IntegrationTests
 
             Assert.IsNotNull(protoExecutionResult);
             Assert.IsTrue(protoExecutionResult.Failed);
-            Assert.AreEqual(Encoding.UTF8.GetString(protoExecutionResult.ScreenShot[0].ToByteArray()), "ScreenShot");
+            Assert.AreEqual(Encoding.UTF8.GetString(protoExecutionResult.ScreenShot.ToByteArray()), "ScreenShot");
         }
     }
 }

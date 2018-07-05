@@ -19,11 +19,11 @@ using System;
 using System.IO;
 using System.Linq;
 using Fake;
+using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
 using Microsoft.FSharp.Collections;
 using Microsoft.FSharp.Core;
 using NLog;
-using Utils = Gauge.CSharp.Core.Utils;
 
 namespace Gauge.CSharp.Runner
 {
