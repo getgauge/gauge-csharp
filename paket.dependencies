@@ -16,21 +16,13 @@ nuget Microsoft.Web.Xdt 2.1.1
 nuget Google.Protobuf
 nuget Google.Protobuf.Tools
 
-// [ FAKE GROUP ]
 group Build
-    source https://api.nuget.org/v3/index.json
-    nuget SourceLink.Fake
-    nuget Fake.DotNet.Cli
-    nuget Fake.DotNet.Testing.NUnit
-    nuget Fake.DotNet.Testing.OpenCover
-    nuget Fake.IO.FileSystem
-    nuget Fake.Core.Target
-    nuget Fake.Core.ReleaseNotes
-    nuget Fake.Runtime
-    nuget Fake.DotNet.AssemblyInfoFile
-    nuget Fake.DotNet.MSBuild
-    nuget Fake.IO.Zip
-    nuget Fake.Tools.Git
+  source https://nuget.org/api/v2
+  framework net46
+
+  nuget SourceLink.Fake
+  nuget FAKE
+  nuget FSharp.Formatting
 
 group Test
   source https://nuget.org/api/v2
