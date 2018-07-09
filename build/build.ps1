@@ -41,17 +41,6 @@ if (Test-Path "$($pwd)\artifacts") {
     Remove-Item "$($pwd)\artifacts" -Force -Recurse
 }
 
-# Build the package CSharp-lib
-$outputPath= "$($pwd)\artifacts\gauge-csharp-lib"
-$sln = "Gauge.CSharp.Lib.sln"
-RestoreNugetAndBuild $sln $outputPath
-
-# Build the package CSharp-Core
-$outputPath= "$($pwd)\artifacts\gauge-csharp-core"
-$sln = "Gauge.CSharp.Core.sln"
-RestoreNugetAndBuild $sln $outputPath
-
-# Build the runner
 $outputPath= "$($pwd)\artifacts\gauge-csharp\bin"
 $sln = "Gauge.CSharp.NoTests.sln"
 if ($buildWithTest) {
