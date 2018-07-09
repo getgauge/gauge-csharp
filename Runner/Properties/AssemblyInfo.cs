@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Gauge.CSharp.Runner")]
 [assembly: Guid("b80cc90b-dd04-445b-825e-51a42f3cadaf")]
 [assembly: AssemblyCompany("ThoughtWorks Inc.")]
-[assembly: AssemblyProduct("Gauge.CSharp.Core")]
+[assembly: AssemblyProduct("Gauge.CSharp.Runner")]
 [assembly: AssemblyCopyright("Copyright © ThoughtWorks Inc. 2016")]
 [assembly: AssemblyDescription("C# spec for Gauge. http://getgauge.io")]
 [assembly: AssemblyVersion("0.10.5")]
@@ -16,7 +16,7 @@ namespace System {
         internal const System.String AssemblyTitle = "Gauge.CSharp.Runner";
         internal const System.String Guid = "b80cc90b-dd04-445b-825e-51a42f3cadaf";
         internal const System.String AssemblyCompany = "ThoughtWorks Inc.";
-        internal const System.String AssemblyProduct = "Gauge.CSharp.Core";
+        internal const System.String AssemblyProduct = "Gauge.CSharp.Runner";
         internal const System.String AssemblyCopyright = "Copyright © ThoughtWorks Inc. 2016";
         internal const System.String AssemblyDescription = "C# spec for Gauge. http://getgauge.io";
         internal const System.String AssemblyVersion = "0.10.5";

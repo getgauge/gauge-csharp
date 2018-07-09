@@ -71,7 +71,7 @@ Target.create "AssemblyInfo" (fun _ ->
         [ AssemblyInfo.Title("Gauge.CSharp.Runner")
           AssemblyInfo.Guid("b80cc90b-dd04-445b-825e-51a42f3cadaf")
           AssemblyInfo.Company("ThoughtWorks Inc.")
-          AssemblyInfo.Product("Gauge.CSharp.Core")
+          AssemblyInfo.Product("Gauge.CSharp.Runner")
           AssemblyInfo.Copyright("Copyright © ThoughtWorks Inc. 2016")
           AssemblyInfo.Description("C# spec for Gauge. http://getgauge.io")
           AssemblyInfo.Version releaseRunner.AssemblyVersion
