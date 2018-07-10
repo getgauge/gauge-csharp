@@ -185,6 +185,14 @@ namespace Gauge.CSharp.Runner
             return targetMethod.Invoke(null, null) as IEnumerable<string>;
         }
 
+        public IEnumerable<byte[]> GetAllPendingScreenshots()
+        {
+            var targetMessageCollectorType = _libAssembly.GetType("Gauge.CSharp.Lib.ScreenshotCollector");
+            var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingScreenshots",
+                BindingFlags.Static | BindingFlags.Public);
+            return targetMethod.Invoke(null, null) as IEnumerable<byte[]>;
+        }
+
         public void StartExecutionScope(string tag)
         {
             _classInstanceManager.StartScope(tag);

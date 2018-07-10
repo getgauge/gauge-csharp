@@ -99,6 +99,11 @@ namespace Gauge.CSharp.Runner
             return _sandbox.GetAllPendingMessages();
         }
 
+        public IEnumerable<byte[]> GetAllPendingScreenshots()
+        {
+            return _sandbox.GetAllPendingScreenshots();
+        }
+
         private ByteString TakeScreenshot()
         {
             byte[] screenShotBytes;

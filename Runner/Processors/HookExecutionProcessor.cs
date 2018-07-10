@@ -19,8 +19,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Gauge.CSharp.Core;
-using Gauge.CSharp.Lib;
-using Gauge.CSharp.Runner;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 

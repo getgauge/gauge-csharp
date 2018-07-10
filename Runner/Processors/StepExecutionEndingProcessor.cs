@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gauge.Messages;
+using Google.Protobuf;
 
 namespace Gauge.CSharp.Runner.Processors
 {
@@ -34,7 +35,9 @@ namespace Gauge.CSharp.Runner.Processors
         {
             var protoExecutionResult = base.ExecuteHooks(request);
             var allPendingMessages = MethodExecutor.GetAllPendingMessages().Where(m => m != null);
+            var allPendingScreenshots = MethodExecutor.GetAllPendingScreenshots().Select(x => ByteString.CopyFrom(x));
             protoExecutionResult.Message.AddRange(allPendingMessages);
+            protoExecutionResult.ScreenShot.AddRange(allPendingScreenshots);
             return protoExecutionResult;
         }
 
