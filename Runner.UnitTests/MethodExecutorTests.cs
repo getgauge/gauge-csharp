@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
@@ -52,7 +51,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var hooksStrategy = new HooksStrategy();
             var executionResult = new ExecutionResult {Success = true};
             mockSandBox.Setup(sandbox =>
-                sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>(), It.IsAny<Gauge.CSharp.Lib.ExecutionContext>())
+                sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>(), It.IsAny<ExecutionContext>())
             ).Returns(executionResult).Verifiable();
 
             new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(), new Gauge.CSharp.Lib.ExecutionContext());
@@ -72,7 +71,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 StackTrace = "StackTrace"
             };
             mockSandBox.Setup(sandbox =>
-                sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>(), It.IsAny<Gauge.CSharp.Lib.ExecutionContext>())
+                sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>(), It.IsAny<ExecutionContext>())
             ).Returns(result).Verifiable();
 
             var screenshotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
@@ -94,7 +93,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var args = new[] {"Bar", "String"};
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>()))
                 .Returns(() => new ExecutionResult {Success = true})
-                .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
+                .Callback(() => System.Threading.Thread.Sleep(1)); // Simulate a delay in method execution
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, args);
 

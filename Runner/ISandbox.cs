@@ -41,7 +41,7 @@ namespace Gauge.CSharp.Runner
         IEnumerable<byte[]> GetAllPendingScreenshots();
         void StartExecutionScope(string tag);
         void CloseExectionScope();
-        ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext);
+        ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, object executionContext);
 
         IEnumerable<string> Refactor(GaugeMethod methodInfo, IList<Tuple<int, int>> parameterPositions,
             IList<string> parametersList, string newStepValue);

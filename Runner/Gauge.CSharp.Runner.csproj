@@ -174,6 +174,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
+      <PropertyGroup>
+        <__paket__Grpc_Core_targets>net45\Grpc.Core</__paket__Grpc_Core_targets>
+      </PropertyGroup>
+    </When>
+  </Choose>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -236,6 +243,18 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
+      <ItemGroup>
+        <Reference Include="Grpc.Core">
+          <HintPath>..\packages\Grpc.Core\lib\net45\Grpc.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="..\packages\Grpc.Core\build\$(__paket__Grpc_Core_targets).targets" Condition="Exists('..\packages\Grpc.Core\build\$(__paket__Grpc_Core_targets).targets')" Label="Paket" />
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll">
       <Paket>True</Paket>
@@ -304,6 +323,17 @@
       <ItemGroup>
         <Reference Include="System.Collections.Immutable">
           <HintPath>..\packages\System.Collections.Immutable\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
+      <ItemGroup>
+        <Reference Include="System.Interactive.Async">
+          <HintPath>..\packages\System.Interactive.Async\lib\net46\System.Interactive.Async.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

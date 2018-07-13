@@ -72,7 +72,7 @@ namespace Gauge.CSharp.Runner.UnitTests
                 .Returns(new List<Type> {typeof(DefaultScreenGrabber)});
             _mockAssemblyLoader.Setup(loader => loader.ClassInstanceManagerTypes)
                 .Returns(new List<Type> {typeof(DefaultClassInstanceManager)});
-            _mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(GetType().Assembly);
+            _mockAssemblyLoader.Setup(loader => loader.GetTargetLibAssembly()).Returns(typeof(ExecutionContext).Assembly);
             _mockHookRegistry = new Mock<IHookRegistry>();
             var mockHookMethod = new Mock<IHookMethod>();
             mockHookMethod.Setup(method => method.Method).Returns("DummyHook");
@@ -126,7 +126,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             _mockHookRegistry.Setup(expression).Returns(_hookMethods).Verifiable();
 
             var sandbox = new Sandbox(_mockAssemblyLoader.Object, _mockHookRegistry.Object, _mockFileWrapper.Object);
-            var expected = new ExecutionContext(new ExecutionContext.Specification("TestSpec", "TestFileName", false, new List<string>()), null, null );
+            var expected = new ExecutionContext(new ExecutionContext.Specification("TestSpec", "TestFileName", false, new List<string>()), null, null);
             var executionResult = sandbox.ExecuteHooks(hookType, _mockStrategy.Object, _applicableTags, expected);
 
             Assert.True(executionResult.Success);

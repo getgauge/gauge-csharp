@@ -29,17 +29,17 @@ namespace Gauge.CSharp.Runner {
                     StepFrom(currentExecutionInfo.CurrentStep));
         }
 
-        public ExecutionContext.Specification SpecificationFrom(Messages.SpecInfo currentSpec)
+        private ExecutionContext.Specification SpecificationFrom(Messages.SpecInfo currentSpec)
         {
             return currentSpec != null ? new ExecutionContext.Specification(currentSpec.Name, currentSpec.FileName, currentSpec.IsFailed, currentSpec.Tags.ToArray()) : new ExecutionContext.Specification();
         }
 
-        public ExecutionContext.Scenario ScenarioFrom(Messages.ScenarioInfo currentScenario)
+        private ExecutionContext.Scenario ScenarioFrom(Messages.ScenarioInfo currentScenario)
         {
             return currentScenario != null ? new ExecutionContext.Scenario(currentScenario.Name, currentScenario.IsFailed, currentScenario.Tags.ToArray()) : new ExecutionContext.Scenario();
         }
 
-        public ExecutionContext.StepDetails StepFrom(Messages.StepInfo currentStep)
+        private ExecutionContext.StepDetails StepFrom(Messages.StepInfo currentStep)
         {
             if (currentStep == null || currentStep.Step == null)
                 return new ExecutionContext.StepDetails();
