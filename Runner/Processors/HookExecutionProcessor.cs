@@ -59,7 +59,8 @@ namespace Gauge.CSharp.Runner.Processors
             var applicableTags = GetApplicableTags(request);
             var mapper = new ExecutionInfoMapper();
             var executionContext = mapper.ExecutionInfoFrom(GetExecutionInfo(request));
-            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, executionContext);        }
+            return MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, executionContext);
+        }
 
         private void ClearCacheForConfiguredLevel()
         {

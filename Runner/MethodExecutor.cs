@@ -24,6 +24,9 @@ using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Google.Protobuf;
 using NLog;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Text;
 
 namespace Gauge.CSharp.Runner
 {

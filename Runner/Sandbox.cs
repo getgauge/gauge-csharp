@@ -188,9 +188,9 @@ namespace Gauge.CSharp.Runner
         public IEnumerable<byte[]> GetAllPendingScreenshots()
         {
             var targetMessageCollectorType = _libAssembly.GetType("Gauge.CSharp.Lib.ScreenshotCollector");
-            var targetMethod = targetMessageCollectorType.GetMethod("GetAllPendingScreenshots",
+            var targetMethod = targetMessageCollectorType?.GetMethod("GetAllPendingScreenshots",
                 BindingFlags.Static | BindingFlags.Public);
-            return targetMethod.Invoke(null, null) as IEnumerable<byte[]>;
+            return targetMethod?.Invoke(null, null) as IEnumerable<byte[]>;
         }
 
         public void StartExecutionScope(string tag)
@@ -205,7 +205,7 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext)
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, object executionContext)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var executionResult = new ExecutionResult
@@ -257,20 +257,40 @@ namespace Gauge.CSharp.Runner
         [DebuggerHidden]
         private void ExecuteHook(MethodInfo method, params object[] objects)
         {
-            if (HasArguments(method, objects))
-                Execute(method, objects);
-            else
-                Execute(method);
+            var args = GetArguments(method, objects);
+            Execute(method, args);
         }
 
-        private static bool HasArguments(MethodInfo method, object[] args)
+        private object[] GetArguments(MethodInfo method, object[] args)
         {
+            var executionInfoType = "Gauge.CSharp.Lib.ExecutionInfo";
             if (method.GetParameters().Length != args.Length)
-                return false;
+                return null;
+            var methodParams = method.GetParameters();
+            var argList = new List<object>();
             for (var i = 0; i < args.Length; i++)
-                if (args[i].GetType() != method.GetParameters()[i].ParameterType)
-                    return false;
-            return true;
+            {
+                var methodParamType = methodParams[i].ParameterType.FullName;
+                var argType = args[i].GetType().FullName;
+                if (argType != methodParamType)
+                    throw new ArgumentException($"Invalid argument type, expected {methodParamType}, got {argType}");
+                if (methodParamType == executionInfoType)
+                {
+                    var targetExecutionInfoType = _libAssembly.GetType(executionInfoType);
+                    using (var ms = new MemoryStream())
+                    {
+                        var serializer = new DataContractJsonSerializer(typeof(ExecutionContext));
+                        var targetExecutionInfoTypee = _libAssembly.GetType(executionInfoType);
+                        var targetSerializer = new DataContractJsonSerializer(targetExecutionInfoType);
+                        serializer.WriteObject(ms, args[i]);
+                        ms.Position = 0;
+                        argList.Add(targetSerializer.ReadObject(ms));
+                    }
+                }
+                else
+                    argList.Add(args[i]);
+            }
+            return args;
         }
 
         private IEnumerable<string> GetHookMethods(string hookType, IHooksStrategy strategy,

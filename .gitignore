@@ -22,7 +22,7 @@ IntegrationTestSample/.gauge
 IntegrationTestSample/logs
 IntegrationTestSample/reports
 .fake
-TestResults.xml
+*TestResults.xml
 paket-files 
 gauge-tests
 .vs

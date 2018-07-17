@@ -50,7 +50,6 @@ Target.create "CopyBinaries" (fun _ ->
     |>  Seq.iter (fun (fromDir, toDir) -> Shell.copyDir toDir fromDir (fun _ -> true))
     // copy the IntegrationTestSample.dll with test suites
     Shell.copyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge_bin/IntegrationTestSample.dll"
-    Run("ls", "", "artifacts/gauge-csharp")
     // and do NOT copy its old Lib reference, it must be loaded by sandbox
     // CopyFile "artifacts/gauge-csharp/itests" "IntegrationTestSample/gauge_bin/Gauge.CSharp.Lib.dll"
 )
