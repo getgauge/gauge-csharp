@@ -225,8 +225,7 @@ Target.create "Default" ignore
 "Coverage"
   <== ["CopyBinaries"]
 
-"CopyBinaries"
-  ==> "Skel"
+"Skel"
   ==> "Package"
 
 "CopyBinaries"
