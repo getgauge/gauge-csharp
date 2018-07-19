@@ -259,7 +259,8 @@ Target.create "Default" ignore
 "Package"
   ==> "ForceInstall"
 
-"Package"
+"CopyBinaries"
+  ==> "Package"
   ==> "ForceInstall"
   ==> "SetupFT"
   ==> "FunctionalTestsP"
