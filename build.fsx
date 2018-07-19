@@ -256,6 +256,9 @@ Target.create "Default" ignore
 "SetupFT"
   ==> "FunctionalTests"
 
+"Package"
+  ==> "ForceInstall"
+
 "ForceInstall"
   ==> "SetupFT"
   ==> "FunctionalTestsP"
