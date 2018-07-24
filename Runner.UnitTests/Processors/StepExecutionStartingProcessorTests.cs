@@ -36,14 +36,14 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
         }
 
         [Test]
-        public void ShouldClearExistingGaugeMessages()
+        public void ShouldProcessBeforeStepHooks()
         {
             var methodExecutor = new Mock<IMethodExecutor>();
 
             var request = new Message
             {
                 MessageId = 20,
-                MessageType = Message.Types.MessageType.ScenarioExecutionStarting,
+                MessageType = Message.Types.MessageType.StepExecutionStarting,
                 StepExecutionStartingRequest = new StepExecutionStartingRequest
                 {
                     CurrentExecutionInfo = new ExecutionInfo
@@ -54,16 +54,17 @@ namespace Gauge.CSharp.Runner.UnitTests.Processors
                 }
             };
 
-            var protoExecutionResult = new ProtoExecutionResult {ExecutionTime = 0, Failed = false};
+            var protoExecutionResult = new ProtoExecutionResult {ExecutionTime = 0, Failed = false,Message = { "one", "two"}};
             methodExecutor.Setup(executor =>
-                    executor.ExecuteHooks(It.IsAny<string>(), It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>(), new ExecutionContext()))
+                    executor.ExecuteHooks("BeforeStep", It.IsAny<HooksStrategy>(), It.IsAny<IList<string>>(), It.IsAny<ExecutionContext>()))
                 .Returns(protoExecutionResult);
             var hookRegistry = new Mock<IHookRegistry>();
             hookRegistry.Setup(registry => registry.BeforeStepHooks).Returns(new HashSet<IHookMethod>());
 
-            new StepExecutionStartingProcessor(methodExecutor.Object).Process(request);
-
-            methodExecutor.Verify(executor => executor.GetAllPendingMessages(), Times.Once);
+            var result = new StepExecutionStartingProcessor(methodExecutor.Object).Process(request);
+            
+            Assert.False(result.ExecutionStatusResponse.ExecutionResult.Failed);
+            Assert.AreEqual(result.ExecutionStatusResponse.ExecutionResult.Message, new List<string>(){"one", "two"});
         }
 
         [Test]

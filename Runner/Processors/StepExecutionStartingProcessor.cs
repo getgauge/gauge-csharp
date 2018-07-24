@@ -35,14 +35,6 @@ namespace Gauge.CSharp.Runner.Processors
             return request.StepExecutionStartingRequest.CurrentExecutionInfo;
         }
 
-        protected override ProtoExecutionResult ExecuteHooks(Message request)
-        {
-            // Just need to clear the messages, but Gauge.CSharp.Lib v0.5.2 does not have MessageCollector.Clear()
-            MethodExecutor.GetAllPendingMessages();
-            MethodExecutor.GetAllPendingScreenshots();
-            return base.ExecuteHooks(request);
-        }
-
         protected override List<string> GetApplicableTags(Message request)
         {
             return GetExecutionInfo(request).CurrentScenario.Tags

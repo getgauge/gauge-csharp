@@ -31,16 +31,6 @@ namespace Gauge.CSharp.Runner.Processors
 
         protected override string HookType => "AfterStep";
 
-        protected override ProtoExecutionResult ExecuteHooks(Message request)
-        {
-            var protoExecutionResult = base.ExecuteHooks(request);
-            var allPendingMessages = MethodExecutor.GetAllPendingMessages().Where(m => m != null);
-            var allPendingScreenshots = MethodExecutor.GetAllPendingScreenshots().Select(x => ByteString.CopyFrom(x));
-            protoExecutionResult.Message.AddRange(allPendingMessages);
-            protoExecutionResult.ScreenShot.AddRange(allPendingScreenshots);
-            return protoExecutionResult;
-        }
-
         protected override ExecutionInfo GetExecutionInfo(Message request)
         {
             return request.StepExecutionEndingRequest.CurrentExecutionInfo;
