@@ -9,4 +9,4 @@ If the IntegrationTestSample's `Gauge.CSharp.Lib` needs update that has to be do
 by building the lib with version `0.7.999`.
 
 The version is `0.7.999` is because the runner has a constraint of minimum lib version as `0.7.*`.
-If runner upgrades the minum required version, this special lib version has to be updated accordinglly.
+If runner upgrades the minum required version, this special lib version has to be updated accordingly.
