@@ -107,7 +107,7 @@ Target.create "Skel" (fun _ ->
 // version from runner's changelog
 let version = releaseRunner.AssemblyVersion
 
-Target.create "Package" (fun _ ->
+let zip = fun _ ->
     if Environment.isWindows then
         !! ("artifacts/gauge-csharp/**/*")
         -- ("artifacts/gauge-csharp/tests/**/*")
@@ -117,8 +117,10 @@ Target.create "Package" (fun _ ->
     else
         // Zip.zip messes up file permmissions in the archive. https://github.com/fsharp/FAKE/issues/2019
         Run("zip", (sprintf @"-r gauge-csharp-%s.zip . -x tests/**/* itests/**/* **/*.zip" version), "artifacts/gauge-csharp")
-)
 
+
+Target.create "Package" (zip)
+Target.create "Zip" (zip)
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
@@ -228,6 +230,9 @@ Target.create "Default" ignore
 "Skel"
   ==> "Package"
 
+"Skel"
+  ==> "Zip"
+
 "CopyBinaries"
   ==> "Test"
 
@@ -260,6 +265,7 @@ Target.create "Default" ignore
   ==> "ForceInstall"
 
 "CopyBinaries"
+  ==> "Package"
   ==> "ForceInstall"
   ==> "SetupFT"
   ==> "FunctionalTestsP"
