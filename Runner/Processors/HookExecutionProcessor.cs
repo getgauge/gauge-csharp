@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Gauge-CSharp.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -61,11 +60,11 @@ namespace Gauge.CSharp.Runner.Processors
             var applicableTags = GetApplicableTags(request);
             var mapper = new ExecutionInfoMapper();
             var executionContext = mapper.ExecutionInfoFrom(GetExecutionInfo(request));
-            var res =  MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, executionContext);
+            var res = MethodExecutor.ExecuteHooks(HookType, Strategy, applicableTags, executionContext);
             var allPendingMessages = MethodExecutor.GetAllPendingMessages().Where(m => m != null);
             var allPendingScreenshots = MethodExecutor.GetAllPendingScreenshots().Select(ByteString.CopyFrom);
             res.Message.AddRange(allPendingMessages);
-            res.ScreenShot.AddRange(allPendingScreenshots);
+            res.Screenshots.AddRange(allPendingScreenshots);
             return res;
         }
 

@@ -17,16 +17,14 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using Gauge.CSharp.Lib;
+using System.Linq;
 using Gauge.CSharp.Core;
+using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Google.Protobuf;
 using NLog;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
 
 namespace Gauge.CSharp.Runner
 {
@@ -57,17 +55,28 @@ namespace Gauge.CSharp.Runner
                 builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
-                    builder.ScreenShot.Add(TakeScreenshot());
+                {
+                    builder.ScreenShot = TakeScreenshot();
+                    builder.FailureScreenshot = TakeScreenshot();
+                }
+
                 builder.ErrorMessage = executionResult.ExceptionMessage;
                 builder.StackTrace = executionResult.StackTrace;
                 builder.RecoverableError = executionResult.Recoverable;
                 builder.ExecutionTime = elapsedMilliseconds;
             }
+
+            var allPendingMessages = GetAllPendingMessages().Where(m => m != null);
+            builder.Message.AddRange(allPendingMessages);
+            var allPendingScreenshots = GetAllPendingScreenshots().Select(ByteString.CopyFrom);
+            builder.Screenshots.AddRange(allPendingScreenshots);
+
             return builder;
         }
 
         [DebuggerHidden]
-        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags, ExecutionContext executionContext)
+        public ProtoExecutionResult ExecuteHooks(string hookType, HooksStrategy strategy, IList<string> applicableTags,
+            ExecutionContext executionContext)
         {
             var stopwatch = Stopwatch.StartNew();
             var builder = new ProtoExecutionResult
@@ -83,12 +92,22 @@ namespace Gauge.CSharp.Runner
                 builder.Failed = true;
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
-                    builder.ScreenShot.Add(TakeScreenshot());
+                {
+                    builder.ScreenShot = TakeScreenshot();
+                    builder.FailureScreenshot = TakeScreenshot();
+                }
+
                 builder.ErrorMessage = executionResult.ExceptionMessage;
                 builder.StackTrace = executionResult.StackTrace;
                 builder.RecoverableError = executionResult.Recoverable;
                 builder.ExecutionTime = elapsedMilliseconds;
             }
+
+            var allPendingMessages = GetAllPendingMessages().Where(m => m != null);
+            builder.Message.AddRange(allPendingMessages);
+            var allPendingScreenshots = GetAllPendingScreenshots().Select(ByteString.CopyFrom);
+            builder.Screenshots.AddRange(allPendingScreenshots);
+
             return builder;
         }
 
@@ -109,8 +128,7 @@ namespace Gauge.CSharp.Runner
 
         private ByteString TakeScreenshot()
         {
-            byte[] screenShotBytes;
-            return _sandbox.TryScreenCapture(out screenShotBytes)
+            return _sandbox.TryScreenCapture(out var screenShotBytes)
                 ? ByteString.CopyFrom(screenShotBytes)
                 : ByteString.Empty;
         }
