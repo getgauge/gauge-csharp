@@ -19,12 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using Gauge.CSharp.Core;
-using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Moq;
 using NUnit.Framework;
+using ExecutionContext = Gauge.CSharp.Lib.ExecutionContext;
 
 namespace Gauge.CSharp.Runner.UnitTests
 {
@@ -54,7 +55,8 @@ namespace Gauge.CSharp.Runner.UnitTests
                 sandbox.ExecuteHooks("hooks", hooksStrategy, new List<string>(), It.IsAny<ExecutionContext>())
             ).Returns(executionResult).Verifiable();
 
-            new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(), new Gauge.CSharp.Lib.ExecutionContext());
+            new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(),
+                new ExecutionContext());
 
             mockSandBox.VerifyAll();
         }
@@ -78,10 +80,11 @@ namespace Gauge.CSharp.Runner.UnitTests
             Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", "false");
 
             var protoExecutionResult =
-                new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(), new Gauge.CSharp.Lib.ExecutionContext());
+                new MethodExecutor(mockSandBox.Object).ExecuteHooks("hooks", hooksStrategy, new List<string>(),
+                    new ExecutionContext());
 
             mockSandBox.VerifyAll();
-            Assert.False(protoExecutionResult.ScreenShot == null);
+            Assert.False(protoExecutionResult.FailureScreenshot == null);
             Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
         }
 
@@ -93,7 +96,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var args = new[] {"Bar", "String"};
             mockSandBox.Setup(sandbox => sandbox.ExecuteMethod(gaugeMethod, It.IsAny<string[]>()))
                 .Returns(() => new ExecutionResult {Success = true})
-                .Callback(() => System.Threading.Thread.Sleep(1)); // Simulate a delay in method execution
+                .Callback(() => Thread.Sleep(1)); // Simulate a delay in method execution
 
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, args);
 
@@ -122,7 +125,7 @@ namespace Gauge.CSharp.Runner.UnitTests
             var executionResult = new MethodExecutor(mockSandBox.Object).Execute(gaugeMethod, "Bar", "String");
 
             mockSandBox.VerifyAll();
-            Assert.False(executionResult.ScreenShot == null);
+            Assert.False(executionResult.FailureScreenshot == null);
             Environment.SetEnvironmentVariable("SCREENSHOT_ON_FAILURE", screenshotEnabled);
         }
 
@@ -138,8 +141,8 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
-            Assert.True(executionResult.ScreenShot != null);
-            Assert.True(executionResult.ScreenShot[0].Length > 0);
+            Assert.True(executionResult.FailureScreenshot != null);
+            Assert.True(executionResult.FailureScreenshot.Length > 0);
         }
 
         [Test]
@@ -167,8 +170,8 @@ namespace Gauge.CSharp.Runner.UnitTests
 
             mockSandBox.VerifyAll();
             Assert.True(executionResult.Failed);
-            Assert.True(executionResult.ScreenShot != null);
-            Assert.AreEqual(2, executionResult.ScreenShot[0].Length);
+            Assert.IsNotEmpty(executionResult.FailureScreenshot);
+            Assert.True(executionResult.FailureScreenshot.Length > 0);
         }
     }
 }

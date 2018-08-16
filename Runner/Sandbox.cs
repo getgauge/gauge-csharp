@@ -117,6 +117,7 @@ namespace Gauge.CSharp.Runner
                 LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}, Recoverable: {1}", methodId,
                     info.IsRecoverableStep());
             }
+
             return MethodMap.Keys.Select(s =>
             {
                 var method = MethodMap[s];
@@ -205,7 +206,8 @@ namespace Gauge.CSharp.Runner
 
         [DebuggerStepperBoundary]
         [DebuggerHidden]
-        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags, object executionContext)
+        public ExecutionResult ExecuteHooks(string hookType, IHooksStrategy strategy, IList<string> applicableTags,
+            object executionContext)
         {
             var methods = GetHookMethods(hookType, strategy, applicableTags);
             var executionResult = new ExecutionResult
@@ -230,6 +232,7 @@ namespace Gauge.CSharp.Runner
                     executionResult.Success = false;
                 }
             }
+
             return executionResult;
         }
 
@@ -288,8 +291,11 @@ namespace Gauge.CSharp.Runner
                     }
                 }
                 else
+                {
                     argList.Add(args[i]);
+                }
             }
+
             return args;
         }
 
@@ -340,6 +346,7 @@ namespace Gauge.CSharp.Runner
                     .Warn("Located {0}, but cannot load config dynamically in Mono. Skipping..", configFile);
                 return;
             }
+
             AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configFile);
         }
 
@@ -356,6 +363,7 @@ namespace Gauge.CSharp.Runner
                 logger.Debug("No Custom ScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
+
             ScreenGrabberType = ScreenGrabberType ??
                                 Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
         }
@@ -371,6 +379,7 @@ namespace Gauge.CSharp.Runner
                 logger.Error(error);
                 throw new Exception(error);
             }
+
             method.Invoke(instance, parameters);
         }
 
