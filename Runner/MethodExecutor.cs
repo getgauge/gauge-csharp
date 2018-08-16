@@ -95,7 +95,7 @@ namespace Gauge.CSharp.Runner
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
                     var screenshot = TakeScreenshot();
-                    builder.ScreenShot = screenshot
+                    builder.ScreenShot = screenshot;
                     builder.FailureScreenshot = screenshot;
                 }
 
