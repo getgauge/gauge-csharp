@@ -56,8 +56,9 @@ namespace Gauge.CSharp.Runner
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
-                    builder.ScreenShot = TakeScreenshot();
-                    builder.FailureScreenshot = TakeScreenshot();
+                    var screenshot = TakeScreenshot();
+                    builder.ScreenShot = screenshot;
+                    builder.FailureScreenshot = screenshot;
                 }
 
                 builder.ErrorMessage = executionResult.ExceptionMessage;
@@ -93,8 +94,9 @@ namespace Gauge.CSharp.Runner
                 var isScreenShotEnabled = Utils.TryReadEnvValue("SCREENSHOT_ON_FAILURE");
                 if (isScreenShotEnabled == null || isScreenShotEnabled.ToLower() != "false")
                 {
-                    builder.ScreenShot = TakeScreenshot();
-                    builder.FailureScreenshot = TakeScreenshot();
+                    var screenshot = TakeScreenshot();
+                    builder.ScreenShot = screenshot
+                    builder.FailureScreenshot = screenshot;
                 }
 
                 builder.ErrorMessage = executionResult.ExceptionMessage;
