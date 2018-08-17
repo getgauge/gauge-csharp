@@ -92,7 +92,7 @@ namespace Gauge.CSharp.Runner
                     filesChanged.Add(f);
                 }
             });
-            return filesChanged;
+            return filesChanged.ToArray();
         }
 
         private static ParameterListSyntax ReplaceParameters(MethodDeclarationSyntax methodDeclarationSyntax,
