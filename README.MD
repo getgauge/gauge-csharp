@@ -79,12 +79,12 @@ For building and unit testing you only need mono.
 ###### Gauge Lib
 `Lib` is a dll that brings in Gauge's data types to C#. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Lib/).
 
-Read more about `Lib` [here](https://github.com/getgauge/gauge-csharp/tree/master/Lib).
+Read more about `Lib` [here](https://github.com/getgauge/gauge-csharp-lib).
 
 ###### Gauge Core
 `Core` is a dll that brings in Gauge's API and connection to C#, and also holds the protobuf communication code. It is hosted in [Nuget](https://www.nuget.org/packages/Gauge.CSharp.Core/), and is not listed in the search results. This package is used by `Lib` and `Runner` only.
 
-Read more about `Core` [here](https://github.com/getgauge/gauge-csharp/tree/master/Core).
+Read more about `Core` [here](https://github.com/getgauge/gauge-csharp-core).
 
 ###### Gauge CSharp Runner
 `Runner` is an executable that is invoked by Gauge Core. The `Runner` acts a bridge between C# test code and Gauge's API.
