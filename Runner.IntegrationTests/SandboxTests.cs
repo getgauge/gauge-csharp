@@ -69,13 +69,25 @@ namespace Gauge.CSharp.Runner.IntegrationTests
         }
 
         [Test]
+        public void ShouldExecuteMethodThatReturnsTaskAndReturnResult()
+        {
+            var sandbox = SandboxBuilder.Build();
+            var stepMethods = sandbox.GetStepMethods();
+            AssertRunnerDomainDidNotLoadUsersAssembly();
+            var gaugeMethod = stepMethods.First(info =>
+                string.CompareOrdinal(info.Name, "IntegrationTestSample.StepImplementation.AsyncStep") == 0);
+            var executionResult = sandbox.ExecuteMethod(gaugeMethod);
+            Assert.False(executionResult.Success);
+        }
+
+        [Test]
         public void ShouldGetAllStepMethods()
         {
             var sandbox = SandboxBuilder.Build();
             AssertRunnerDomainDidNotLoadUsersAssembly();
             var stepMethods = sandbox.GetStepMethods();
 
-            Assert.AreEqual(12, stepMethods.Count);
+            Assert.AreEqual(13, stepMethods.Count);
         }
 
         [Test]

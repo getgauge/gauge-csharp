@@ -146,6 +146,7 @@ Target.create "Test-Integration" (fun _ ->
 Target.create "Test" (fun _ ->
     !! "artifacts/gauge-csharp/*tests/*Test*.dll"
     -- "**/*IntegrationTestSample.dll"
+    -- "**/*NUnit*.dll"
     |> Testing.NUnit3.run (fun p ->
         { p with
             ShadowCopy = false

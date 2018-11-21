@@ -33,6 +33,13 @@ namespace IntegrationTestSample
             Console.WriteLine("This is a sample context");
         }
 
+        [Step("A step that returns Task")]
+        public async Task AsyncStep()
+        {
+            await Task.Delay(15);
+            throw new CustomSerializableException("Step failed");
+        }
+
         [Step("Say <what> to <who>")]
         public void SaySomething(string what, string who)
         {
