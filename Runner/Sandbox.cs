@@ -23,6 +23,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading.Tasks;
 using Gauge.CSharp.Lib;
 using Gauge.CSharp.Runner.Converters;
 using Gauge.CSharp.Runner.Extensions;
@@ -368,7 +369,7 @@ namespace Gauge.CSharp.Runner
                                 Assembly.GetExecutingAssembly().GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
         }
 
-        private void Execute(MethodBase method, params object[] parameters)
+        private void Execute(MethodInfo method, params object[] parameters)
         {
             var typeToLoad = method.DeclaringType;
             var instance = _classInstanceManager.Get(typeToLoad);
@@ -380,6 +381,11 @@ namespace Gauge.CSharp.Runner
                 throw new Exception(error);
             }
 
+            if (typeof(Task).IsAssignableFrom(method.ReturnType))
+            {
+                Task.Run(async () => await (Task)method.Invoke(instance, parameters)).Wait();
+                return;
+            }
             method.Invoke(instance, parameters);
         }
 
