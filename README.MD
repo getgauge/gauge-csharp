@@ -13,7 +13,7 @@ This project adds C# [language plugin](https://docs.gauge.org/plugins.html#langu
 
 ### Pre-requisite
 
-- [Install Gauge](https://docs.gauge.org/installing.html#installation)
+- [Install Gauge](https://docs.gauge.org/latest/installation.html)
 - [.NET Framework](https://www.microsoft.com/net/download/dotnet-framework-runtime) - 4.5 and above
 ### Installation
 
@@ -221,4 +221,4 @@ Gauge-csharp is released under [GNU Public License version 3.0](http://www.gnu.o
 
 ## Copyright
 
-Copyright 2015 ThoughtWorks, Inc.
+Copyright 2019 ThoughtWorks, Inc.
