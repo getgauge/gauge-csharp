@@ -129,7 +129,7 @@ namespace Gauge.CSharp.Runner
                     .Replace("$guid1$", Guid.NewGuid().ToString())
                     .Replace("$guid2$", Guid.NewGuid().ToString())
                     .Replace("$nugetLibVersion$", version)
-                    .Replace("$gaugeprojectfile$", ProjectFilePath)
+                    .Replace("$gaugeprojectfile$", Path.GetFileName(ProjectFilePath))
                     .Replace("$nugetLibNormalizedVersion$", normalizedVersion);
 
                 File.WriteAllText(destFileNameFull, fileContent);
