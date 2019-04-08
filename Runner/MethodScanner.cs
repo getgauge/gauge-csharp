@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Models;
 using NLog;
@@ -27,13 +28,11 @@ namespace Gauge.CSharp.Runner
     public class MethodScanner : IMethodScanner
     {
         private static readonly Logger Logger = LogManager.GetLogger("MethodScanner");
-        private readonly GaugeApiConnection _apiConnection;
 
         private readonly ISandbox _sandbox;
 
-        public MethodScanner(GaugeApiConnection apiConnection, ISandbox sandbox)
+        public MethodScanner(ISandbox sandbox)
         {
-            _apiConnection = apiConnection;
             _sandbox = sandbox;
         }
 
@@ -49,12 +48,11 @@ namespace Gauge.CSharp.Runner
                 {
                     // HasTable is set to false here, table parameter is interpreted using the Step text.
                     var stepTexts = _sandbox.GetStepTexts(stepMethod).ToList();
-                    var stepValues = _apiConnection.GetStepValues(stepTexts, false).ToList();
 
+                    var stepValues = GetStepValues(stepTexts);
                     for (var i = 0; i < stepTexts.Count; i++)
                         if (!stepTextMap.ContainsKey(stepValues[i]))
                             stepTextMap.Add(stepValues[i], stepTexts[i]);
-
                     stepImplementations.AddRange(stepValues.Select(stepValue =>
                         new KeyValuePair<string, GaugeMethod>(stepValue, stepMethod)));
 
@@ -72,6 +70,16 @@ namespace Gauge.CSharp.Runner
                 Logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
+        }
+
+        private List<string> GetStepValues(List<string> stepTexts)
+        {
+            var stepValues = new List<string>();
+            foreach (var stepText in stepTexts)
+            {
+                stepValues.Add(Regex.Replace(stepText, @"<.*?>", "{}"));
+            }
+            return stepValues;
         }
 
         public IEnumerable<string> GetStepTexts()
