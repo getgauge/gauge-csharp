@@ -41,6 +41,7 @@ namespace Gauge.CSharp.Runner
             var stepImplementations = new List<KeyValuePair<string, GaugeMethod>>();
             var aliases = new Dictionary<string, bool>();
             var stepTextMap = new Dictionary<string, string>();
+            var stepValueExtractor = new StepValueExtractor();
             try
             {
                 var stepMethods = _sandbox.GetStepMethods();
@@ -49,7 +50,7 @@ namespace Gauge.CSharp.Runner
                     // HasTable is set to false here, table parameter is interpreted using the Step text.
                     var stepTexts = _sandbox.GetStepTexts(stepMethod).ToList();
 
-                    var stepValues = GetStepValues(stepTexts);
+                    var stepValues = stepValueExtractor.ExtractFrom(stepTexts).ToList();
                     for (var i = 0; i < stepTexts.Count; i++)
                         if (!stepTextMap.ContainsKey(stepValues[i]))
                             stepTextMap.Add(stepValues[i], stepTexts[i]);
@@ -70,16 +71,6 @@ namespace Gauge.CSharp.Runner
                 Logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
-        }
-
-        private List<string> GetStepValues(List<string> stepTexts)
-        {
-            var stepValues = new List<string>();
-            foreach (var stepText in stepTexts)
-            {
-                stepValues.Add(Regex.Replace(stepText, @"<.*?>", "{}"));
-            }
-            return stepValues;
         }
 
         public IEnumerable<string> GetStepTexts()
