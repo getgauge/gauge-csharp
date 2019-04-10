@@ -27,26 +27,45 @@ namespace Gauge.CSharp.Runner.UnitTests
     [TestFixture]
     public class StepValueExtractorTests
     {
+        StepValueExtractor stepValueExtractor;
+        [SetUp]
+        public void Setup()
+        {
+            stepValueExtractor = new StepValueExtractor();
+        }
 
         [Test]
-        public void ShouldGetEmptyStepTextForInvalidParameterizedStepText()
+        public void ShoulReplaceSingleStepParameterWithThePlaceHolder()
         {
-            var expectedStepValues = new List<string>
-            {
-                "Invoke method with {}",
-                "Invoke another method with {} and {}"
-            };
-
             var stepTexts = new List<string>
             {
                 "Invoke method with <some values>",
-                "Invoke another method with <some values> and <another value>"
+                "Invoke another method with <some values>"
             };
 
-            var stepValueExtractor =  new StepValueExtractor();
+            var expectedStepValues = new List<string>
+            {
+                "Invoke method with {}",
+                "Invoke another method with {}"
+            };
 
             Assert.AreEqual(stepValueExtractor.ExtractFrom(stepTexts), expectedStepValues);
         }
 
+        [Test]
+        public void ShoulReplaceMultipleStepParametersWithThePlaceHolders()
+        {
+            var stepTexts = new List<string>
+            {
+                "Step with multiple <first parameter> parameters <second parameter>",
+            };
+
+            var expectedStepValues = new List<string>
+            {
+                "Step with multiple {} parameters {}"
+            };
+
+            Assert.AreEqual(stepValueExtractor.ExtractFrom(stepTexts), expectedStepValues);
+        }
     }
 }
