@@ -72,6 +72,7 @@
     <Compile Include="Exceptions\GaugeLibVersionMismatchException.cs" />
     <Compile Include="ExecutionInfoMapper.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
+    <Compile Include="StepValueExtractor.cs" />
     <Compile Include="Models\GaugeMethod.cs" />
     <Compile Include="Converters\IParamConverter.cs" />
     <Compile Include="Exceptions\NotAValidGaugeProjectException.cs" />

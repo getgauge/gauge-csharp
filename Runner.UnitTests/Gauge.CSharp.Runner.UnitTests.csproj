@@ -60,6 +60,7 @@
     <Compile Include="SandboxHookExecutionTests.cs" />
     <Compile Include="SandboxMessageCollectorTests.cs" />
     <Compile Include="SandboxTests.cs" />
+    <Compile Include="StepValueExtractorTests.cs" />
     <Compile Include="ValidateProcessorTests.cs" />
     <Compile Include="MessageProcessorFactoryTests.cs" />
     <Compile Include="MethodExecutorTests.cs" />
