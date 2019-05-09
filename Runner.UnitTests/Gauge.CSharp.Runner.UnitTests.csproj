@@ -55,6 +55,7 @@
     <Compile Include="Converter\StringParamConverterTests.cs" />
     <Compile Include="CSharpIdentifierTests.cs" />
     <Compile Include="Extensions\MethodInfoExtensionTests.cs" />
+    <Compile Include="GaugeProjectBuilderTest.cs" />
     <Compile Include="HookRegistryTests.cs" />
     <Compile Include="SandboxDatastoreInitTests.cs" />
     <Compile Include="SandboxHookExecutionTests.cs" />
