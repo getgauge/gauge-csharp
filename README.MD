@@ -5,7 +5,7 @@
 |[![Build status](https://ci.appveyor.com/api/projects/status/0ydasrwa2t2jh6fy?svg=true)](https://ci.appveyor.com/project/getgauge/gauge-csharp)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
 
  [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
-
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 This project adds C# [language plugin](https://docs.gauge.org/plugins.html#language-reporting-plugins) for [gauge](http://getgauge.io).
 
