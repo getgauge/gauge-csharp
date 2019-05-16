@@ -34,6 +34,13 @@ namespace Gauge.CSharp.Runner
         public bool BuildTargetGaugeProject()
         {
             var projectFullPath = GetProjectFullPath();
+            if (!File.Exists(projectFullPath))
+            {
+                Logger.Error("Error: Project file path {0} doesn't exist. " +
+                    "Check GAUGE_CSHARP_PROJECT_FILE in environment properties.", projectFullPath);
+                return false;
+            }
+
             var projectConfig = GetProjectConfiguration();
             var projectPlatform = GetProjectPlatform();
             var gaugeBinDir = Utils.GetGaugeBinDir();
