@@ -32,11 +32,11 @@ let Run = fun (command, args, wd) ->
             Arguments = args}) (System.TimeSpan.FromMinutes 30.0)
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
-let InvokeMvn = fun (args) ->
+let InvokeGradle = fun (args) ->
     if Environment.isWindows then
-        Run("mvn.cmd", args, "gauge-tests")
+        Run("gradlew.bat", args, "gauge-tests")
     else
-        Run("mvn", args, "gauge-tests")
+        Run("./gradlew", args, "gauge-tests")
 
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
@@ -194,13 +194,13 @@ Target.create "FetchTests" (fun _ ->
 
 Target.create "FunctionalTests" (fun _ ->
     Run("gauge", "install", "gauge-tests") 
-    InvokeMvn "test-compile gauge:execute -Denv=ci-csharp -Dtags=\"csharp\""
+    InvokeGradle "clean csharpFT"
 )
 
 Target.create "FunctionalTestsP" (fun _ ->
     let tags = Environment.environVarOrDefault "GAUGE_TEST_TAGS" "csharp"
     Run("gauge", "install", "gauge-tests") 
-    InvokeMvn (sprintf "test -Denv=ci-csharp -Dtags=\"%s\" -Dflags=\"--simple-console\"" tags)
+    InvokeGradle "clean csharpFT -PadditionalFlage=\"--simple-console\""
 )
 
 Target.create "GaugePluginInstall" (fun _ ->

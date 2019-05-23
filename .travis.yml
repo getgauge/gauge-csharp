@@ -11,22 +11,16 @@ addons:
   apt:
     packages:
       - oracle-java8-set-default
-      - maven
 install:
   - dotnet -h
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated maven || brew upgrade maven; fi
   - curl -sSfL https://raw.githubusercontent.com/getgauge/infrastructure/master/nightly_scripts/install_latest_gauge_nightly.sh | bash
   - export PATH=/tmp/bin:/home/travis/.dotnet/tools:$PATH
-  - mvn -version
+  - gauge config gauge_repository_url  https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/
   - gauge version
-  - echo "gauge_repository_url = https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/" >> $HOME/.gauge/config/gauge.properties
 
 language: csharp
 mono:
   - 5.0.1
 dotnet: 2.1.301
-cache:
-  directories:
-  - $HOME/.m2
 script:
   - ./build.sh -t BuildInstallFT
