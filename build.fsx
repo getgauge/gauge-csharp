@@ -36,7 +36,7 @@ let InvokeGradle = fun (args) ->
     if Environment.isWindows then
         Run("gradlew.bat", args, "gauge-tests")
     else
-        Run("./gradlew", args, "gauge-tests")
+        Run("gradlew", args, "gauge-tests")
 
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
