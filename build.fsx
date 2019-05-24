@@ -33,10 +33,12 @@ let Run = fun (command, args, wd) ->
     if result <> 0 then failwithf "%s %s exited with error %d" command args result
 
 let InvokeGradle = fun (args) ->
+    let pwd = Shell.pwd()
+    let directorySeparator = System.IO.Path.directorySeparator
     if Environment.isWindows then
-        Run(sprintf @"%s%sgradlew.bat" Shell.pwd() System.IO.Path.directorySeparator, args, "gauge-tests")
+        Run(sprintf @"%s%sgradlew.bat" pwd directorySeparator, args, "gauge-tests")
     else
-        Run(sprintf @"%s%sgradlew" Shell.pwd() System.IO.Path.directorySeparator, args, "gauge-tests")
+        Run(sprintf @"%s%sgradlew" pwd directorySeparator, args, "gauge-tests")
 
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
