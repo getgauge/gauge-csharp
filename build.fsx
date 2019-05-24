@@ -34,11 +34,10 @@ let Run = fun (command, args, wd) ->
 
 let InvokeGradle = fun (args) ->
     let pwd = Shell.pwd()
-    let directorySeparator = System.IO.Path.directorySeparator
     if Environment.isWindows then
-        Run(sprintf @"%s%sgradlew.bat" pwd directorySeparator, args, "gauge-tests")
+        Run(Path.combineTrimEnd(pwd, "gradlew.bat"), args, "gauge-tests")
     else
-        Run(sprintf @"%s%sgradlew" pwd directorySeparator, args, "gauge-tests")
+        Run(Path.combineTrimEnd(pwd, "gradlew"), args, "gauge-tests")
 
 // Copies binaries from default VS location to artifacts/ folder
 // But keeps a subdirectory structure
