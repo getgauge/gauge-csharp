@@ -102,6 +102,9 @@ Target.create "Skel" (fun _ ->
     Shell.copyDir "artifacts/gauge-csharp/skel" "Gauge.Project.Skel/" (fun _ -> true)
     Shell.copyFile "artifacts/gauge-csharp/csharp.json" "Runner/csharp.json"
     Shell.copyFile "artifacts/gauge-csharp/run.sh" "Runner/run.sh"
+    Shell.copyFile "artifacts/gauge-csharp/deprecation.txt" "deprecation.txt"
+    Shell.copyFile "artifacts/gauge-csharp/deprecation.bat" "deprecation.bat"
+    Shell.copyFile "artifacts/gauge-csharp/setup.sh" "setup.sh"
 )
 
 // version from runner's changelog

@@ -3,9 +3,9 @@
 	"version": "0.10.6",
 	"description": "C# support for gauge",
 	"PostInstall": {
-		"windows": [],
-		"linux": ["chmod", "+x", "run.sh"],
-		"darwin": ["chmod", "+x", "run.sh"]
+		"windows": [".\\deprecation.bat"],
+		"linux": ["bash", "setup.sh"],
+		"darwin": ["bash", "setup.sh"]
 	},
 	"run": {
 		"windows": ["bin\\Gauge.Csharp.Runner.exe", "--start"],
