@@ -12,7 +12,9 @@ build_script:
     Write-Host "PATH : $($env:PATH)"
     gauge version
     gauge config gauge_repository_url  https://raw.githubusercontent.com/getgauge/gauge-nightly-repository/master/
+
 - .\build.cmd -t BuildInstallFT
+
 test: off
 artifacts:
 - path: .\gauge-tests\reports-csharp\html-report
