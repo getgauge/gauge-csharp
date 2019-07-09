@@ -19,13 +19,11 @@ using System;
 using System.Linq;
 using Gauge.CSharp.Core;
 using Gauge.Messages;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class GaugeListener : IGaugeListener
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly MessageProcessorFactory _messageProcessorFactory;
 
         public GaugeListener() : this(new MessageProcessorFactory())
@@ -56,7 +54,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.Error(ex.ToString());
             }
         }
     }

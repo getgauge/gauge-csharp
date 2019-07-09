@@ -18,16 +18,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Models;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class MethodScanner : IMethodScanner
     {
-        private static readonly Logger Logger = LogManager.GetLogger("MethodScanner");
 
         private readonly ISandbox _sandbox;
 
@@ -68,7 +64,7 @@ namespace Gauge.CSharp.Runner
             {
                 Console.WriteLine(ex.StackTrace);
                 Console.WriteLine(ex.InnerException);
-                Logger.Warn(ex, "Steps Fetch failed, Failed to connect to Gauge API");
+                Logger.Warning($"Steps Fetch failed, Failed to connect to Gauge API.\n {ex.ToString()}");
             }
             return new StepRegistry(stepImplementations, stepTextMap, aliases);
         }

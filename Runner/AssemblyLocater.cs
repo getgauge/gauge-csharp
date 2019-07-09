@@ -25,7 +25,6 @@ namespace Gauge.CSharp.Runner
 {
     public class AssemblyLocater : IAssemblyLocater
     {
-//        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IDirectoryWrapper _directoryWrapper;
 
         private readonly IFileWrapper _fileWrapper;

@@ -24,13 +24,12 @@ using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.Messages;
 using Google.Protobuf;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class MethodExecutor : IMethodExecutor
     {
-        private static readonly Logger Logger = LogManager.GetLogger("Sandbox");
+
         private readonly ISandbox _sandbox;
 
         public MethodExecutor(ISandbox sandbox)

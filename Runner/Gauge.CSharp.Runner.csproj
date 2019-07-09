@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="ISandbox.cs" />
     <Compile Include="Models\IStepRegistry.cs" />
-    <Compile Include="LogConfiguration.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="GaugeListener.cs" />
     <Compile Include="MessageProcessorFactory.cs" />
     <Compile Include="GaugeCommandFactory.cs" />
@@ -291,17 +291,6 @@
       <ItemGroup>
         <Reference Include="Microsoft.Web.XmlTransform">
           <HintPath>..\packages\Microsoft.Web.Xdt\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
-      <ItemGroup>
-        <Reference Include="NLog">
-          <HintPath>..\packages\NLog\lib\net45\NLog.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

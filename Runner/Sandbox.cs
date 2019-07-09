@@ -30,7 +30,6 @@ using Gauge.CSharp.Runner.Extensions;
 using Gauge.CSharp.Runner.Models;
 using Gauge.CSharp.Runner.Strategy;
 using Gauge.CSharp.Runner.Wrappers;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
@@ -48,7 +47,6 @@ namespace Gauge.CSharp.Runner
 
         public Sandbox(IAssemblyLoader assemblyLoader, IHookRegistry hookRegistry, IFileWrapper fileWrapper)
         {
-            LogConfiguration.Initialize();
             _assemblyLoader = assemblyLoader;
             _hookRegistry = hookRegistry;
             _fileWrapper = fileWrapper;
@@ -71,8 +69,7 @@ namespace Gauge.CSharp.Runner
         public ExecutionResult ExecuteMethod(GaugeMethod gaugeMethod, params string[] args)
         {
             var method = MethodMap[gaugeMethod.Name];
-            var executionResult = new ExecutionResult {Success = true};
-            var logger = LogManager.GetLogger("Sandbox");
+            var executionResult = new ExecutionResult { Success = true };
             try
             {
                 var parameters = args.Select(o =>
@@ -86,12 +83,12 @@ namespace Gauge.CSharp.Runner
                         return o;
                     }
                 }).ToArray();
-                logger.Debug("Executing method: {0}", method.Name);
+                Logger.Debug($"Executing method: {method.Name}");
                 Execute(method, StringParamConverter.TryConvertParams(method, parameters));
             }
             catch (Exception ex)
             {
-                logger.Debug("Error executing {0}", method.Name);
+                Logger.Debug($"Error executing {method.Name}");
                 var innerException = ex.InnerException ?? ex;
                 executionResult.ExceptionMessage = innerException.Message;
                 executionResult.StackTrace = innerException is AggregateException
@@ -115,8 +112,7 @@ namespace Gauge.CSharp.Runner
             {
                 var methodId = info.FullyQuallifiedName();
                 MethodMap.Add(methodId, info);
-                LogManager.GetLogger("Sandbox").Debug("Scanned and caching Gauge Step: {0}, Recoverable: {1}", methodId,
-                    info.IsRecoverableStep());
+                Logger.Debug($"Scanned and caching Gauge Step: {methodId}, Recoverable: {info.IsRecoverableStep()}");
             }
 
             return MethodMap.Keys.Select(s =>
@@ -224,8 +220,7 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (Exception ex)
                 {
-                    LogManager.GetLogger("Sandbox").Debug("{0} Hook execution failed : {1}.{2}", hookType,
-                        methodInfo.DeclaringType.FullName, methodInfo.Name);
+                    Logger.Debug($"{hookType} Hook execution failed : {methodInfo.DeclaringType.FullName}.{methodInfo.Name}");
                     var innerException = ex.InnerException ?? ex;
                     executionResult.ExceptionMessage = innerException.Message;
                     executionResult.StackTrace = innerException.StackTrace;
@@ -343,8 +338,7 @@ namespace Gauge.CSharp.Runner
 
             if (Type.GetType("Mono.Runtime") != null)
             {
-                LogManager.GetLogger("Sandbox")
-                    .Warn("Located {0}, but cannot load config dynamically in Mono. Skipping..", configFile);
+                Logger.Warning($"Located {configFile}, but cannot load config dynamically in Mono. Skipping..");
                 return;
             }
 
@@ -354,14 +348,13 @@ namespace Gauge.CSharp.Runner
         private void ScanCustomScreenGrabber()
         {
             ScreenGrabberType = _assemblyLoader.ScreengrabberTypes.FirstOrDefault();
-            var logger = LogManager.GetLogger("Sandbox");
             if (ScreenGrabberType != null)
             {
-                logger.Debug("Custom ScreenGrabber found : {0}", ScreenGrabberType.FullName);
+                Logger.Debug($"Custom ScreenGrabber found : {ScreenGrabberType.FullName}");
             }
             else
             {
-                logger.Debug("No Custom ScreenGrabber found. Using DefaultScreenGrabber");
+                Logger.Debug("No Custom ScreenGrabber found. Using DefaultScreenGrabber");
                 ScreenGrabberType = _libAssembly.GetType("Gauge.CSharp.Lib.DefaultScreenGrabber");
             }
 
@@ -373,11 +366,10 @@ namespace Gauge.CSharp.Runner
         {
             var typeToLoad = method.DeclaringType;
             var instance = _classInstanceManager.Get(typeToLoad);
-            var logger = LogManager.GetLogger("Sandbox");
             if (instance == null)
             {
                 var error = "Could not load instance type: " + typeToLoad;
-                logger.Error(error);
+                Logger.Error(error);
                 throw new Exception(error);
             }
 
@@ -393,15 +385,14 @@ namespace Gauge.CSharp.Runner
         {
             var instanceManagerType = _assemblyLoader.ClassInstanceManagerTypes.FirstOrDefault();
 
-            var logger = LogManager.GetLogger("Sandbox");
             if (instanceManagerType == null)
             {
-                logger.Debug("Loading default ClassInstanceManager");
+                Logger.Debug("Loading default ClassInstanceManager");
                 _classInstanceManager = _libAssembly.CreateInstance("Gauge.CSharp.Lib.DefaultClassInstanceManager");
             }
             else
             {
-                logger.Debug("Loading : {0}", instanceManagerType.FullName);
+                Logger.Debug($"Loading : {instanceManagerType.FullName}");
                 _classInstanceManager = Activator.CreateInstance(instanceManagerType);
             }
 
@@ -411,7 +402,7 @@ namespace Gauge.CSharp.Runner
                                             .GetReferencedAssemblies()
                                             .First(name => name.Name == "Gauge.CSharp.Lib")
                                             .Name, "Gauge.CSharp.Lib.DefaultClassInstanceManager").Unwrap();
-            logger.Debug("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
+            Logger.Debug("Loaded Instance Manager of Type:" + _classInstanceManager.GetType().FullName);
             _classInstanceManager.Initialize(_assemblyLoader.AssembliesReferencingGaugeLib);
         }
     }

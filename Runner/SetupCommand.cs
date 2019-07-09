@@ -21,7 +21,6 @@ using System.IO;
 using System.Linq;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Extensions;
-using NLog;
 using NuGet;
 
 namespace Gauge.CSharp.Runner
@@ -37,7 +36,6 @@ namespace Gauge.CSharp.Runner
             : Utils.TryReadEnvValue("NUGET_ENDPOINT");
 
         private static SemanticVersion _maxLibVersion;
-        private static readonly Logger Logger = LogManager.GetLogger(string.Empty);
         private readonly IPackageRepositoryFactory _packageRepositoryFactory;
         private IPackageRepository _packageRepository;
 
@@ -94,11 +92,11 @@ namespace Gauge.CSharp.Runner
         {
             if (Directory.Exists(directory))
             {
-                Logger.Info("skip  {0}", ProjectName);
+                Logger.Info($"skip  {ProjectName}");
             }
             else
             {
-                Logger.Info("create  {0}", ProjectName);
+                Logger.Info($"create  {ProjectName}");
                 Directory.CreateDirectory(directory);
             }
         }
@@ -116,7 +114,7 @@ namespace Gauge.CSharp.Runner
 
             if (File.Exists(destFileNameFull))
             {
-                Logger.Info("skip  {0}", destFileName);
+                Logger.Info($"skip  {destFileName}");
             }
             else
             {
@@ -133,7 +131,7 @@ namespace Gauge.CSharp.Runner
                     .Replace("$nugetLibNormalizedVersion$", normalizedVersion);
 
                 File.WriteAllText(destFileNameFull, fileContent);
-                Logger.Info("create  {0}", destFileName);
+                Logger.Info($"create  {destFileName}");
             }
         }
 
@@ -147,8 +145,7 @@ namespace Gauge.CSharp.Runner
 
             foreach (var packageReference in packageReferences)
             {
-                Logger.Info("Installing Nuget Package : {0}, version: {1}", packageReference.Id,
-                    packageReference.Version);
+                Logger.Info($"Installing Nuget Package : {packageReference.Id}, version: {packageReference.Version}");
                 var package = PackageRepository.FindPackage(packageReference.Id, packageReference.Version);
                 packageManager.InstallPackage(package, false, false);
             }
@@ -161,7 +158,7 @@ namespace Gauge.CSharp.Runner
             return PackageRepository
                 .GetPackages()
                 .Where(package => package.Id == PackageId)
-                .Max((Func<IPackage, SemanticVersion>) (p => p.Version));
+                .Max((Func<IPackage, SemanticVersion>)(p => p.Version));
         }
     }
 }

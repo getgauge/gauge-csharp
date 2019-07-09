@@ -21,13 +21,11 @@ using System.IO;
 using System.Reflection;
 using Gauge.CSharp.Core;
 using Gauge.CSharp.Runner.Exceptions;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
     public class StartCommand : IGaugeCommand
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly Func<IGaugeListener> _gaugeListener;
         private readonly Func<IGaugeProjectBuilder> _projectBuilder;
 
@@ -71,7 +69,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (NotAValidGaugeProjectException)
             {
-                Logger.Fatal("Cannot locate a Project File in {0}", Utils.GaugeProjectRoot);
+                Logger.Fatal($"Cannot locate a Project File in {Utils.GaugeProjectRoot}" );
                 return false;
             }
             catch (IOException)

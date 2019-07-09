@@ -22,22 +22,20 @@ using Fake;
 using Gauge.CSharp.Runner.Exceptions;
 using Microsoft.FSharp.Collections;
 using Microsoft.FSharp.Core;
-using NLog;
 using Utils = Gauge.CSharp.Core.Utils;
 
 namespace Gauge.CSharp.Runner
 {
     public class GaugeProjectBuilder : IGaugeProjectBuilder
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public bool BuildTargetGaugeProject()
         {
             var projectFullPath = GetProjectFullPath();
             if (!File.Exists(projectFullPath))
             {
-                Logger.Error("Error: Project file path {0} doesn't exist. " +
-                    "Check GAUGE_CSHARP_PROJECT_FILE in environment properties.", projectFullPath);
+                Logger.Error($"Error: Project file path {projectFullPath} doesn't exist. " +
+                    "Check GAUGE_CSHARP_PROJECT_FILE in environment properties.");
                 return false;
             }
 
@@ -61,7 +59,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception ex)
             {
-                Logger.Error(ex, "C# Project build failed {0}", ex.Message);
+                Logger.Error($"C# Project build failed {ex.ToString()}");
                 return false;
             }
             return true;

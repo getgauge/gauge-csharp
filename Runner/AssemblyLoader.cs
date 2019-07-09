@@ -22,7 +22,6 @@ using System.Linq;
 using System.Reflection;
 using Gauge.CSharp.Runner.Exceptions;
 using Gauge.CSharp.Runner.Wrappers;
-using NLog;
 
 namespace Gauge.CSharp.Runner
 {
@@ -39,8 +38,7 @@ namespace Gauge.CSharp.Runner
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
-                var logger = LogManager.GetLogger("AssemblyLoader");
-                logger.Debug("Loading {0}", args.Name);
+                Logger.Debug("Loading {args.Name}");
                 try
                 {
                     var assemblyName = args.Name.Split(',').FirstOrDefault();
@@ -58,14 +56,13 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e);
+                    Logger.Error(e.ToString());
                     return null;
                 }
             };
             AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += (sender, args) =>
             {
-                var logger = LogManager.GetLogger("AssemblyLoader");
-                logger.Debug("Reflection only Loading {0}", args.Name);
+                Logger.Debug($"Reflection only Loading {args.Name}");
                 try
                 {
                     var assemblyName = args.Name.Split(',').FirstOrDefault();
@@ -80,7 +77,7 @@ namespace Gauge.CSharp.Runner
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e);
+                    Logger.Error(e.ToString());
                     return null;
                 }
             };
@@ -124,8 +121,7 @@ namespace Gauge.CSharp.Runner
 
         private void ScanAndLoad(string path)
         {
-            var logger = LogManager.GetLogger("AssemblyLoader");
-            logger.Debug("Loading assembly from : {0}", path);
+            Logger.Debug($"Loading assembly from : {path}");
             Assembly assembly;
             try
             {
@@ -134,7 +130,7 @@ namespace Gauge.CSharp.Runner
             }
             catch
             {
-                logger.Warn("Failed to scan assembly {0}", path);
+                Logger.Warning($"Failed to scan assembly {path}");
                 return;
             }
 
@@ -188,8 +184,7 @@ namespace Gauge.CSharp.Runner
             }
             catch (ReflectionTypeLoadException e)
             {
-                LogManager.GetLogger("AssemblyLoader")
-                    .Warn("Could not scan all types in assembly {0}", assembly.CodeBase);
+                Logger.Warning($"Could not scan all types in assembly {assembly.CodeBase}");
                 return e.Types.Where(type => type != null);
             }
         }
@@ -198,11 +193,10 @@ namespace Gauge.CSharp.Runner
         {
             var targetLibLocation = Path.GetFullPath(Path.Combine(AssemblyLocater.GetGaugeBinDir(),
                 string.Concat(GaugeLibAssembleName, ".dll")));
-            var logger = LogManager.GetLogger("AssemblyLoader");
             if (!_fileWrapper.Exists(targetLibLocation))
             {
                 var message = string.Format("Unable to locate Gauge Lib at: {0}", targetLibLocation);
-                logger.Error(message);
+                Logger.Error(message);
                 throw new FileNotFoundException(message);
             }
             _targetLibAssembly = _assemblyWrapper.LoadFrom(targetLibLocation);
@@ -210,7 +204,7 @@ namespace Gauge.CSharp.Runner
             if (targetLibVersion <= _minimumLibversion)
                 throw new GaugeLibVersionMismatchException(targetLibVersion, _minimumLibversion);
 
-            logger.Debug("Target Lib loaded : {0}, from {1}", _targetLibAssembly.FullName, _targetLibAssembly.Location);
+            Logger.Debug($"Target Lib loaded : {_targetLibAssembly.FullName}, from { _targetLibAssembly.Location}");
         }
     }
 }

@@ -23,19 +23,18 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Gauge.CSharp.Core;
-using NLog;
+
 
 namespace Gauge.CSharp.Runner
 {
     [Serializable]
     public class SandboxBuilder
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public static ISandbox Build()
         {
             var sandboxAppDomainSetup = new AppDomainSetup {ApplicationBase = Utils.GetGaugeBinDir()};
-            Logger.Debug("Creating a Sandbox in: {0}", sandboxAppDomainSetup.ApplicationBase);
+            Logger.Debug($"Creating a Sandbox in: {sandboxAppDomainSetup.ApplicationBase}");
             try
             {
                 var permSet = new PermissionSet(PermissionState.Unrestricted);
@@ -54,8 +53,8 @@ namespace Gauge.CSharp.Runner
             }
             catch (Exception e)
             {
-                Logger.Info("Unable to create Sandbox in {0}", sandboxAppDomainSetup.ApplicationBase);
-                Logger.Debug(e);
+                Logger.Info($"Unable to create Sandbox in {sandboxAppDomainSetup.ApplicationBase}");
+                Logger.Debug(e.ToString());
                 throw;
             }
         }
