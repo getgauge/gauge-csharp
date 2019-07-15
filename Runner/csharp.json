@@ -18,7 +18,7 @@
 		"darwin": ["./run.sh", "--init"]
 	},
 	"gaugeVersionSupport": {
-		"minimum": "1.0.0",
+		"minimum": "1.0.6",
 		"maximum": ""
 	}
 }
