@@ -12,7 +12,7 @@ This project adds C# [language plugin](https://docs.gauge.org/plugins.html#langu
 ## Deprecation Notice
 
 This plugin is deprecated in favour of the [Gauge Dotnet plugin](https://github.com/getgauge/gauge-dotnet/blob/master/README.MD), since this requires .NET Framewort.
-Microsoft has announded end of .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
+Microsoft has announced end of .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
 
 ## Getting started
 
