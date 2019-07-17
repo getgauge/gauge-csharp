@@ -10,9 +10,10 @@
 This project adds C# [language plugin](https://docs.gauge.org/plugins.html#language-reporting-plugins) for [gauge](http://getgauge.io).
 
 ## Deprecation Notice
+his plugin is deprecated because Microsoft is ending support for .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
+Microsoft has announded end of .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net	
+Please use the [Gauge Dotnet plugin](https://github.com/getgauge/gauge-dotnet/blob/master/README.MD) instead.
 
-This plugin is deprecated in favour of the [Gauge Dotnet plugin](https://github.com/getgauge/gauge-dotnet/blob/master/README.MD), since this requires .NET Framewort.
-Microsoft has announced end of .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
 
 ## Getting started
 
