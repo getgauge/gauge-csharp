@@ -1,4 +1,5 @@
 [Deprecation Notice]
 
-This plugin is deprecated in favour of the Gauge Dotnet plugin, since this requires .NET Framewort.
-Microsoft has announded end of .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
+This plugin is deprecated because Microsoft is ending support for .NET Framework. Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net
+
+Please use the Gauge dotnet plugin instead.
