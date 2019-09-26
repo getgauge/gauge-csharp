@@ -1,6 +1,6 @@
 {
 	"id": "csharp",
-	"version": "0.10.6",
+	"version": "0.10.7",
 	"description": "C# support for gauge",
 	"PostInstall": {
 		"windows": [".\\deprecation.bat"],
