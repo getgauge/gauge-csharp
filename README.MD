@@ -4,7 +4,6 @@
 |-------|------------|
 |[![Build status](https://ci.appveyor.com/api/projects/status/0ydasrwa2t2jh6fy?svg=true)](https://ci.appveyor.com/project/getgauge/gauge-csharp)|[![Build Status](https://travis-ci.org/getgauge/gauge-csharp.svg?branch=master)](https://travis-ci.org/getgauge/gauge-csharp)|
 
- [ ![Download Nightly](https://api.bintray.com/packages/gauge/gauge-csharp/Nightly/images/download.svg) ](https://bintray.com/gauge/gauge-csharp/Nightly/_latestVersion)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
 This project adds C# [language plugin](https://docs.gauge.org/plugins.html#language-reporting-plugins) for [gauge](http://getgauge.io).
@@ -52,14 +51,6 @@ gauge install csharp --version 0.10.1
 ```
 gauge install csharp --file gauge-csharp-0.10.1.zip
 ```
-
-#### Nightly installation
-
-To install csharp nightly, download the latest nightly from [here](https://bintray.com/gauge/gauge-csharp/Nightly).
-
-Once you have the downloaded nightly gauge-csharp-version.nightly-yyyy-mm-dd.zip, install using:
-
-    gauge install csharp -f gauge-csharp-version.nightly-yyyy-mm-dd.zip
 
 #### Build from Source
 The plugin is authored in [C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)).
