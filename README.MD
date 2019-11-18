@@ -15,6 +15,24 @@ Refer https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net.
 
 Please use the [Gauge Dotnet plugin](https://github.com/getgauge/gauge-dotnet/blob/master/README.MD) instead.
 
+### Porting Gauge-CSharp projects to Gauge-Dotnet
+
+Gauge-CSharp plugin uses and relies on Microsoft .NET framework for execution. Gauge-Dotnet plugin relies on .NET Core.
+
+In order to port your .NET Framework project to .NET Core, please refer to this guide: https://docs.microsoft.com/en-us/dotnet/core/porting/
+
+Additionally, you'll need to point your gauge project to use gauge-dotnet runner. 
+
+This can be done by editing the `manifest.json` file located in the project root location.
+
+- Open `manifest.json` in any text editor.
+- Locate the line with text: `"Language": "csharp",`
+- Change the located line to `"Language": "dotnet",`
+- Save the file
+
+Now you should be able to run your project using `gauge-dotnet` plugin.
+
+Note that you'll have to ensure that the project file (.csproj) and it's structure meet the recommendations of .NET Core.
 
 ## Getting started
 
